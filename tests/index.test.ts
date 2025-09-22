@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'clear-street/core/api-promise';
+import { APIPromise } from '@clearstreet/clear-street-sdk/core/api-promise';
 
 import util from 'node:util';
-import ClearStreet from 'clear-street';
-import { APIUserAbortError } from 'clear-street';
+import ClearStreet from '@clearstreet/clear-street-sdk';
+import { APIUserAbortError } from '@clearstreet/clear-street-sdk';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
