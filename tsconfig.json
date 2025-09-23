@@ -9,8 +9,8 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "clear-street/*": ["src/*"],
-      "clear-street": ["src/index.ts"]
+      "@clearstreet/clear-street-sdk/*": ["src/*"],
+      "@clearstreet/clear-street-sdk": ["src/index.ts"]
     },
     "noEmit": true,
 

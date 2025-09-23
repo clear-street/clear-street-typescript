@@ -1,50 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../core/resource';
-import { APIPromise } from '../../core/api-promise';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
+import { APIResource } from '../core/resource';
+import * as CommonAPI from './common';
+import { APIPromise } from '../core/api-promise';
+import { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils/path';
 
-export class V1 extends APIResource {
-  /**
-   * Responds with the API version.
-   */
-  getVersion(options?: RequestOptions): APIPromise<V1GetVersionResponse> {
-    return this._client.get('/trade/v1/version', options);
-  }
-
+export class Orders extends APIResource {
   /**
    * Retrieve an order by its ID.
    */
-  retrieveOrder(
+  retrieve(
     id: string,
-    query: V1RetrieveOrderParams,
+    query: OrderRetrieveParams,
     options?: RequestOptions,
-  ): APIPromise<V1RetrieveOrderResponse> {
+  ): APIPromise<OrderRetrieveResponse> {
     return this._client.get(path`/trade/v1/orders/${id}`, { query, ...options });
   }
-}
-
-/**
- * A direct mapping of tonic::Status, for use in HTTP responses.
- */
-export interface APIError {
-  /**
-   * The error code is used to identify the nature of the error. It corresponds to a
-   * gRPC status code.
-   */
-  code: number;
-
-  /**
-   * A human-readable message providing more details about the error.
-   */
-  message: string;
-
-  /**
-   * Additional error details, if any. This can include structured information such
-   * as field violations or error metadata.
-   */
-  details?: Array<{ [key: string]: unknown }>;
 }
 
 /**
@@ -85,47 +57,11 @@ export interface ResponseMetadata {
  * An HTTP response, with data, an optional error for partial successes, and
  * metadata including the request ID and optional pagination info.
  */
-export interface V1GetVersionResponse {
-  /**
-   * An HTTP response for the `GET /version` endpoint.
-   */
-  data: V1GetVersionResponse.Data;
-
-  /**
-   * Response metadata, including the request ID and optional pagination info.
-   */
-  metadata: ResponseMetadata;
-
-  /**
-   * If the request partially succeeded but there was an issue with a portion, the
-   * error will be populated with details describing the failure.
-   */
-  error?: APIError | null;
-}
-
-export namespace V1GetVersionResponse {
-  /**
-   * An HTTP response for the `GET /version` endpoint.
-   */
-  export interface Data {
-    /**
-     * The date-based version of the API which handled the request. This is a
-     * sub-versioning under the major version found in the path parameter after the API
-     * name.
-     */
-    version: string;
-  }
-}
-
-/**
- * An HTTP response, with data, an optional error for partial successes, and
- * metadata including the request ID and optional pagination info.
- */
-export interface V1RetrieveOrderResponse {
+export interface OrderRetrieveResponse {
   /**
    * HTTP response for the `GET /orders/{id}` endpoint.
    */
-  data: V1RetrieveOrderResponse.Data;
+  data: OrderRetrieveResponse.Data;
 
   /**
    * Response metadata, including the request ID and optional pagination info.
@@ -136,10 +72,10 @@ export interface V1RetrieveOrderResponse {
    * If the request partially succeeded but there was an issue with a portion, the
    * error will be populated with details describing the failure.
    */
-  error?: APIError | null;
+  error?: CommonAPI.APIProblem | null;
 }
 
-export namespace V1RetrieveOrderResponse {
+export namespace OrderRetrieveResponse {
   /**
    * HTTP response for the `GET /orders/{id}` endpoint.
    */
@@ -219,7 +155,7 @@ export namespace V1RetrieveOrderResponse {
   }
 }
 
-export interface V1RetrieveOrderParams {
+export interface OrderRetrieveParams {
   /**
    * A temporary extra layer of security. This account must be enabled in the gateway
    * application at runtime.
@@ -227,12 +163,10 @@ export interface V1RetrieveOrderParams {
   account_id: string;
 }
 
-export declare namespace V1 {
+export declare namespace Orders {
   export {
-    type APIError as APIError,
     type ResponseMetadata as ResponseMetadata,
-    type V1GetVersionResponse as V1GetVersionResponse,
-    type V1RetrieveOrderResponse as V1RetrieveOrderResponse,
-    type V1RetrieveOrderParams as V1RetrieveOrderParams,
+    type OrderRetrieveResponse as OrderRetrieveResponse,
+    type OrderRetrieveParams as OrderRetrieveParams,
   };
 }
