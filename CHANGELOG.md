@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.0 (2025-09-23)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/clear-street/clear-street-typescript/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** fix paths ([b97aa75](https://github.com/clear-street/clear-street-typescript/commit/b97aa758a9c22ccb66b55337414d49b3852e8c0a))
+
+
+### Chores
+
+* update SDK settings ([f29262c](https://github.com/clear-street/clear-street-typescript/commit/f29262cc99916f712c6f69131059aa6193cff3da))
+
 ## 0.2.0 (2025-09-23)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/clear-street/clear-street-typescript/compare/v0.1.0...v0.2.0)
