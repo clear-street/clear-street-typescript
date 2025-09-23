@@ -1,26 +1,15 @@
-# Common
+# Trade
+
+## V1
 
 Types:
 
-- <code><a href="./src/resources/common.ts">APIProblem</a></code>
-
-# Orders
-
-Types:
-
-- <code><a href="./src/resources/orders.ts">ResponseMetadata</a></code>
-- <code><a href="./src/resources/orders.ts">OrderRetrieveResponse</a></code>
+- <code><a href="./src/resources/trade/v1.ts">APIError</a></code>
+- <code><a href="./src/resources/trade/v1.ts">ResponseMetadata</a></code>
+- <code><a href="./src/resources/trade/v1.ts">V1GetVersionResponse</a></code>
+- <code><a href="./src/resources/trade/v1.ts">V1RetrieveOrderResponse</a></code>
 
 Methods:
 
-- <code title="get /orders/{id}">client.orders.<a href="./src/resources/orders.ts">retrieve</a>(id, { ...params }) -> OrderRetrieveResponse</code>
-
-# Version
-
-Types:
-
-- <code><a href="./src/resources/version.ts">VersionRetrieveResponse</a></code>
-
-Methods:
-
-- <code title="get /version">client.version.<a href="./src/resources/version.ts">retrieve</a>() -> VersionRetrieveResponse</code>
+- <code title="get /trade/v1/version">client.trade.v1.<a href="./src/resources/trade/v1.ts">getVersion</a>() -> V1GetVersionResponse</code>
+- <code title="get /trade/v1/orders/{id}">client.trade.v1.<a href="./src/resources/trade/v1.ts">retrieveOrder</a>(id, { ...params }) -> V1RetrieveOrderResponse</code>

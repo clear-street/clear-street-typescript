@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from '@clearstreet/clear-street-sdk/internal/uploads';
-import { toFile } from '@clearstreet/clear-street-sdk/core/uploads';
+import { multipartFormRequestOptions, createForm } from 'clear-street/internal/uploads';
+import { toFile } from 'clear-street/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {
