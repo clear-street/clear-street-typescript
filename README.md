@@ -24,6 +24,7 @@ import ClearStreet from '@clearstreet/clear-street-sdk';
 
 const client = new ClearStreet({
   apiKey: process.env['CLEAR_STREET_API_KEY'], // This is the default and can be omitted
+  environment: 'staging', // defaults to 'production'
 });
 
 const order = await client.orders.retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' });
@@ -41,6 +42,7 @@ import ClearStreet from '@clearstreet/clear-street-sdk';
 
 const client = new ClearStreet({
   apiKey: process.env['CLEAR_STREET_API_KEY'], // This is the default and can be omitted
+  environment: 'staging', // defaults to 'production'
 });
 
 const params: ClearStreet.OrderRetrieveParams = { account_id: 'REPLACE_ME' };
