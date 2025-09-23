@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as CommonAPI from './common';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -16,28 +17,6 @@ export class Orders extends APIResource {
   ): APIPromise<OrderRetrieveResponse> {
     return this._client.get(path`/orders/${id}`, { query, ...options });
   }
-}
-
-/**
- * A direct mapping of tonic::Status, for use in HTTP responses.
- */
-export interface APIError {
-  /**
-   * The error code is used to identify the nature of the error. It corresponds to a
-   * gRPC status code.
-   */
-  code: number;
-
-  /**
-   * A human-readable message providing more details about the error.
-   */
-  message: string;
-
-  /**
-   * Additional error details, if any. This can include structured information such
-   * as field violations or error metadata.
-   */
-  details?: Array<{ [key: string]: unknown }>;
 }
 
 /**
@@ -93,7 +72,7 @@ export interface OrderRetrieveResponse {
    * If the request partially succeeded but there was an issue with a portion, the
    * error will be populated with details describing the failure.
    */
-  error?: APIError | null;
+  error?: CommonAPI.APIProblem | null;
 }
 
 export namespace OrderRetrieveResponse {
@@ -186,7 +165,6 @@ export interface OrderRetrieveParams {
 
 export declare namespace Orders {
   export {
-    type APIError as APIError,
     type ResponseMetadata as ResponseMetadata,
     type OrderRetrieveResponse as OrderRetrieveResponse,
     type OrderRetrieveParams as OrderRetrieveParams,

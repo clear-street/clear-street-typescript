@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIError } from './core/error';
 import type { RequestInit, RequestInfo, BodyInit } from './internal/builtin-types';
 import type { HTTPMethod, PromiseOrValue, MergedRequestInit, FinalizedRequestInit } from './internal/types';
 import { uuid4 } from './internal/utils/uuid';
@@ -17,13 +16,8 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import {
-  APIError,
-  OrderRetrieveParams,
-  OrderRetrieveResponse,
-  Orders,
-  ResponseMetadata,
-} from './resources/orders';
+import { APIProblem, Common } from './resources/common';
+import { OrderRetrieveParams, OrderRetrieveResponse, Orders, ResponseMetadata } from './resources/orders';
 import { Version, VersionRetrieveResponse } from './resources/version';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -722,19 +716,22 @@ export class ClearStreet {
 
   static toFile = Uploads.toFile;
 
+  common: API.Common = new API.Common(this);
   orders: API.Orders = new API.Orders(this);
   version: API.Version = new API.Version(this);
 }
 
+ClearStreet.Common = Common;
 ClearStreet.Orders = Orders;
 ClearStreet.Version = Version;
 
 export declare namespace ClearStreet {
   export type RequestOptions = Opts.RequestOptions;
 
+  export { Common as Common, type APIProblem as APIProblem };
+
   export {
     Orders as Orders,
-    type APIError as APIError,
     type ResponseMetadata as ResponseMetadata,
     type OrderRetrieveResponse as OrderRetrieveResponse,
     type OrderRetrieveParams as OrderRetrieveParams,
