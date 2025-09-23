@@ -1,12 +1,12 @@
 {
-  "name": "clear-street",
-  "version": "0.0.1",
+  "name": "@clearstreet/clear-street-sdk",
+  "version": "0.0.2",
   "description": "The official TypeScript library for the Clear Street API",
   "author": "Clear Street <active@clearstreet.io>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:stainless-sdks/clear-street-typescript",
+  "repository": "github:clear-street/clear-street-typescript",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "files": [
