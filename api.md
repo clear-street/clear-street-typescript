@@ -13,7 +13,7 @@ Types:
 
 Methods:
 
-- <code title="get /orders/{id}">client.orders.<a href="./src/resources/orders.ts">retrieve</a>(id, { ...params }) -> OrderRetrieveResponse</code>
+- <code title="get /trade/v1/orders/{id}">client.orders.<a href="./src/resources/orders.ts">retrieve</a>(id, { ...params }) -> OrderRetrieveResponse</code>
 
 # Version
 
@@ -23,4 +23,4 @@ Types:
 
 Methods:
 
-- <code title="get /version">client.version.<a href="./src/resources/version.ts">retrieve</a>() -> VersionRetrieveResponse</code>
+- <code title="get /trade/v1/version">client.version.<a href="./src/resources/version.ts">retrieve</a>() -> VersionRetrieveResponse</code>

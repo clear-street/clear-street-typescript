@@ -11,7 +11,7 @@ export class Version extends APIResource {
    * Responds with the API version.
    */
   retrieve(options?: RequestOptions): APIPromise<VersionRetrieveResponse> {
-    return this._client.get('/version', options);
+    return this._client.get('/trade/v1/version', options);
   }
 }
 

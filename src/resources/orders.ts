@@ -15,7 +15,7 @@ export class Orders extends APIResource {
     query: OrderRetrieveParams,
     options?: RequestOptions,
   ): APIPromise<OrderRetrieveResponse> {
-    return this._client.get(path`/orders/${id}`, { query, ...options });
+    return this._client.get(path`/trade/v1/orders/${id}`, { query, ...options });
   }
 }
 
