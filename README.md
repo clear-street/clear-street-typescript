@@ -1,6 +1,6 @@
 # Clear Street TypeScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/clear-street.svg?label=npm%20(stable)>)](https://npmjs.org/package/clear-street) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/clear-street)
+[![NPM version](<https://img.shields.io/npm/v/@clearstreet/clear-street-sdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/@clearstreet/clear-street-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@clearstreet/clear-street-sdk)
 
 This library provides convenient access to the Clear Street REST API from server-side TypeScript or JavaScript.
 
@@ -11,11 +11,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:clear-street/clear-street-typescript.git
+npm install @clearstreet/clear-street-sdk
 ```
-
-> [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install clear-street`
 
 ## Usage
 
@@ -23,15 +20,16 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import ClearStreet from 'clear-street';
+import ClearStreet from '@clearstreet/clear-street-sdk';
 
 const client = new ClearStreet({
   apiKey: process.env['CLEAR_STREET_API_KEY'], // This is the default and can be omitted
+  environment: 'staging', // defaults to 'production'
 });
 
-const response = await client.trade.v1.retrieveOrder('REPLACE_ME', { account_id: 'REPLACE_ME' });
+const order = await client.orders.retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' });
 
-console.log(response.data);
+console.log(order.data);
 ```
 
 ### Request & Response types
@@ -40,17 +38,15 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import ClearStreet from 'clear-street';
+import ClearStreet from '@clearstreet/clear-street-sdk';
 
 const client = new ClearStreet({
   apiKey: process.env['CLEAR_STREET_API_KEY'], // This is the default and can be omitted
+  environment: 'staging', // defaults to 'production'
 });
 
-const params: ClearStreet.Trade.V1RetrieveOrderParams = { account_id: 'REPLACE_ME' };
-const response: ClearStreet.Trade.V1RetrieveOrderResponse = await client.trade.v1.retrieveOrder(
-  'REPLACE_ME',
-  params,
-);
+const params: ClearStreet.OrderRetrieveParams = { account_id: 'REPLACE_ME' };
+const order: ClearStreet.OrderRetrieveResponse = await client.orders.retrieve('REPLACE_ME', params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -63,17 +59,15 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const response = await client.trade.v1
-  .retrieveOrder('REPLACE_ME', { account_id: 'REPLACE_ME' })
-  .catch(async (err) => {
-    if (err instanceof ClearStreet.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
+const order = await client.orders.retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' }).catch(async (err) => {
+  if (err instanceof ClearStreet.APIError) {
+    console.log(err.status); // 400
+    console.log(err.name); // BadRequestError
+    console.log(err.headers); // {server: 'nginx', ...}
+  } else {
+    throw err;
+  }
+});
 ```
 
 Error codes are as follows:
@@ -105,7 +99,7 @@ const client = new ClearStreet({
 });
 
 // Or, configure per-request:
-await client.trade.v1.retrieveOrder('REPLACE_ME', { account_id: 'REPLACE_ME' }, {
+await client.orders.retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' }, {
   maxRetries: 5,
 });
 ```
@@ -122,7 +116,7 @@ const client = new ClearStreet({
 });
 
 // Override per-request:
-await client.trade.v1.retrieveOrder('REPLACE_ME', { account_id: 'REPLACE_ME' }, {
+await client.orders.retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -145,15 +139,15 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new ClearStreet();
 
-const response = await client.trade.v1.retrieveOrder('REPLACE_ME', { account_id: 'REPLACE_ME' }).asResponse();
+const response = await client.orders.retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.trade.v1
-  .retrieveOrder('REPLACE_ME', { account_id: 'REPLACE_ME' })
+const { data: order, response: raw } = await client.orders
+  .retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response.data);
+console.log(order.data);
 ```
 
 ### Logging
@@ -170,7 +164,7 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import ClearStreet from 'clear-street';
+import ClearStreet from '@clearstreet/clear-street-sdk';
 
 const client = new ClearStreet({
   logLevel: 'debug', // Show all log messages
@@ -198,7 +192,7 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import ClearStreet from 'clear-street';
+import ClearStreet from '@clearstreet/clear-street-sdk';
 import pino from 'pino';
 
 const logger = pino();
@@ -233,7 +227,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.trade.v1.retrieveOrder({
+client.orders.retrieve({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
@@ -267,7 +261,7 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import ClearStreet from 'clear-street';
+import ClearStreet from '@clearstreet/clear-street-sdk';
 import fetch from 'my-fetch';
 
 const client = new ClearStreet({ fetch });
@@ -278,7 +272,7 @@ const client = new ClearStreet({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import ClearStreet from 'clear-street';
+import ClearStreet from '@clearstreet/clear-street-sdk';
 
 const client = new ClearStreet({
   fetchOptions: {
@@ -295,7 +289,7 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import ClearStreet from 'clear-street';
+import ClearStreet from '@clearstreet/clear-street-sdk';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
@@ -309,7 +303,7 @@ const client = new ClearStreet({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import ClearStreet from 'clear-street';
+import ClearStreet from '@clearstreet/clear-street-sdk';
 
 const client = new ClearStreet({
   fetchOptions: {
@@ -321,7 +315,7 @@ const client = new ClearStreet({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import ClearStreet from 'npm:clear-street';
+import ClearStreet from 'npm:@clearstreet/clear-street-sdk';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const client = new ClearStreet({
