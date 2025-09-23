@@ -1,22 +1,50 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../core/resource';
-import * as CommonAPI from './common';
-import { APIPromise } from '../core/api-promise';
-import { RequestOptions } from '../internal/request-options';
-import { path } from '../internal/utils/path';
+import { APIResource } from '../../core/resource';
+import { APIPromise } from '../../core/api-promise';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
 
-export class Orders extends APIResource {
+export class V1 extends APIResource {
+  /**
+   * Responds with the API version.
+   */
+  getVersion(options?: RequestOptions): APIPromise<V1GetVersionResponse> {
+    return this._client.get('/trade/v1/version', options);
+  }
+
   /**
    * Retrieve an order by its ID.
    */
-  retrieve(
+  retrieveOrder(
     id: string,
-    query: OrderRetrieveParams,
+    query: V1RetrieveOrderParams,
     options?: RequestOptions,
-  ): APIPromise<OrderRetrieveResponse> {
-    return this._client.get(path`/orders/${id}`, { query, ...options });
+  ): APIPromise<V1RetrieveOrderResponse> {
+    return this._client.get(path`/trade/v1/orders/${id}`, { query, ...options });
   }
+}
+
+/**
+ * A direct mapping of tonic::Status, for use in HTTP responses.
+ */
+export interface APIError {
+  /**
+   * The error code is used to identify the nature of the error. It corresponds to a
+   * gRPC status code.
+   */
+  code: number;
+
+  /**
+   * A human-readable message providing more details about the error.
+   */
+  message: string;
+
+  /**
+   * Additional error details, if any. This can include structured information such
+   * as field violations or error metadata.
+   */
+  details?: Array<{ [key: string]: unknown }>;
 }
 
 /**
@@ -57,11 +85,11 @@ export interface ResponseMetadata {
  * An HTTP response, with data, an optional error for partial successes, and
  * metadata including the request ID and optional pagination info.
  */
-export interface OrderRetrieveResponse {
+export interface V1GetVersionResponse {
   /**
-   * HTTP response for the `GET /orders/{id}` endpoint.
+   * An HTTP response for the `GET /version` endpoint.
    */
-  data: OrderRetrieveResponse.Data;
+  data: V1GetVersionResponse.Data;
 
   /**
    * Response metadata, including the request ID and optional pagination info.
@@ -72,10 +100,46 @@ export interface OrderRetrieveResponse {
    * If the request partially succeeded but there was an issue with a portion, the
    * error will be populated with details describing the failure.
    */
-  error?: CommonAPI.APIProblem | null;
+  error?: APIError | null;
 }
 
-export namespace OrderRetrieveResponse {
+export namespace V1GetVersionResponse {
+  /**
+   * An HTTP response for the `GET /version` endpoint.
+   */
+  export interface Data {
+    /**
+     * The date-based version of the API which handled the request. This is a
+     * sub-versioning under the major version found in the path parameter after the API
+     * name.
+     */
+    version: string;
+  }
+}
+
+/**
+ * An HTTP response, with data, an optional error for partial successes, and
+ * metadata including the request ID and optional pagination info.
+ */
+export interface V1RetrieveOrderResponse {
+  /**
+   * HTTP response for the `GET /orders/{id}` endpoint.
+   */
+  data: V1RetrieveOrderResponse.Data;
+
+  /**
+   * Response metadata, including the request ID and optional pagination info.
+   */
+  metadata: ResponseMetadata;
+
+  /**
+   * If the request partially succeeded but there was an issue with a portion, the
+   * error will be populated with details describing the failure.
+   */
+  error?: APIError | null;
+}
+
+export namespace V1RetrieveOrderResponse {
   /**
    * HTTP response for the `GET /orders/{id}` endpoint.
    */
@@ -155,7 +219,7 @@ export namespace OrderRetrieveResponse {
   }
 }
 
-export interface OrderRetrieveParams {
+export interface V1RetrieveOrderParams {
   /**
    * A temporary extra layer of security. This account must be enabled in the gateway
    * application at runtime.
@@ -163,10 +227,12 @@ export interface OrderRetrieveParams {
   account_id: string;
 }
 
-export declare namespace Orders {
+export declare namespace V1 {
   export {
+    type APIError as APIError,
     type ResponseMetadata as ResponseMetadata,
-    type OrderRetrieveResponse as OrderRetrieveResponse,
-    type OrderRetrieveParams as OrderRetrieveParams,
+    type V1GetVersionResponse as V1GetVersionResponse,
+    type V1RetrieveOrderResponse as V1RetrieveOrderResponse,
+    type V1RetrieveOrderParams as V1RetrieveOrderParams,
   };
 }

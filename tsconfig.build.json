@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "@clearstreet/clear-street-sdk/*": ["dist/src/*"],
-      "@clearstreet/clear-street-sdk": ["dist/src/index.ts"]
+      "clear-street/*": ["dist/src/*"],
+      "clear-street": ["dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,
