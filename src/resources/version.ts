@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as CommonAPI from './common';
 import * as OrdersAPI from './orders';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
@@ -33,7 +34,7 @@ export interface VersionRetrieveResponse {
    * If the request partially succeeded but there was an issue with a portion, the
    * error will be populated with details describing the failure.
    */
-  error?: OrdersAPI.APIError | null;
+  error?: CommonAPI.APIProblem | null;
 }
 
 export namespace VersionRetrieveResponse {
