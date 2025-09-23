@@ -1,8 +1,13 @@
+# Common
+
+Types:
+
+- <code><a href="./src/resources/common.ts">APIProblem</a></code>
+
 # Orders
 
 Types:
 
-- <code><a href="./src/resources/orders.ts">APIError</a></code>
 - <code><a href="./src/resources/orders.ts">ResponseMetadata</a></code>
 - <code><a href="./src/resources/orders.ts">OrderRetrieveResponse</a></code>
 
