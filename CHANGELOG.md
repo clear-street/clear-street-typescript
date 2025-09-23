@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2025-09-23)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/clear-street/clear-street-typescript/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** Add environments ([589a5b5](https://github.com/clear-street/clear-street-typescript/commit/589a5b5e401d3a6e686a2a7b0394d2618c7c915a))
+
 ## 0.1.0 (2025-09-23)
 
 Full Changelog: [v0.0.2...v0.1.0](https://github.com/clear-street/clear-street-typescript/compare/v0.0.2...v0.1.0)
