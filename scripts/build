@@ -29,17 +29,24 @@ fi
 # this converts the export map paths for the dist directory
 # and does a few other minor things
 node scripts/utils/make-dist-package-json.cjs > dist/package.json
+cat dist/package.json
 
 # build to .js/.mjs/.d.ts files
+tsc -v
+tsc --showConfig
+
+pwd
+env | sort
+yarn list > $GITHUB_WORKSPACE/.yarndeps
 ./node_modules/.bin/tsc-multi
 # we need to patch index.js so that `new module.exports()` works for cjs backwards
 # compat. No way to get that from index.ts because it would cause compile errors
 # when building .mjs
+cat dist/index.mjs
 node scripts/utils/fix-index-exports.cjs
 cp tsconfig.dist-src.json dist/src/tsconfig.json
 
 node scripts/utils/postprocess-files.cjs
-
 # make sure that nothing crashes when we require the output CJS or
 # import the output ESM
 (cd dist && node -e 'require("@clear-street/sdk")')
