@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1 (2025-09-24)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/clear-street/clear-street-typescript/compare/v0.4.0...v0.4.1)
+
+### Chores
+
+* update SDK settings ([9fc2988](https://github.com/clear-street/clear-street-typescript/commit/9fc29881dcff9907742258542b36977fde981bdd))
+
 ## 0.4.0 (2025-09-24)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/clear-street/clear-street-typescript/compare/v0.3.0...v0.4.0)
