@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 (2025-09-24)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/clear-street/clear-street-typescript/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** Temp change package name ([5b43a9e](https://github.com/clear-street/clear-street-typescript/commit/5b43a9e9a8383869e6b08dff938c19212d2f1862))
+
 ## 0.3.0 (2025-09-23)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/clear-street/clear-street-typescript/compare/v0.2.0...v0.3.0)
