@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 (2025-09-24)
+
+Full Changelog: [v0.4.1...v0.5.0](https://github.com/clear-street/clear-street-typescript/compare/v0.4.1...v0.5.0)
+
+### Features
+
+* **api:** No longer publish to NPM (for now) ([9dbd89c](https://github.com/clear-street/clear-street-typescript/commit/9dbd89cd90b7a621588294d48d9457b512db0425))
+
 ## 0.4.1 (2025-09-24)
 
 Full Changelog: [v0.4.0...v0.4.1](https://github.com/clear-street/clear-street-typescript/compare/v0.4.0...v0.4.1)
