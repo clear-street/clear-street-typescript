@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^@clearstreet/clear-street-sdk(/.*)?',
+              regex: '^clear-street-sdk(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

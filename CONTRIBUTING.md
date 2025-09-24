@@ -55,12 +55,12 @@ $ cd clear-street-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link @clearstreet/clear-street-sdk
+$ yarn link clear-street-sdk
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @clearstreet/clear-street-sdk
+$ pnpm link -—global clear-street-sdk
 ```
 
 ## Running tests
