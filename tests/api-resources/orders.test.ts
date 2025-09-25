@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import ClearStreet from '@clear-street/sdk';
+import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
   apiKey: 'My API Key',

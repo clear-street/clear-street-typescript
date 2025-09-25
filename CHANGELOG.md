@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.0 (2025-09-25)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/clear-street/clear-street-typescript/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** match npm package scope to FE monorepo GH org ([3890eb6](https://github.com/clear-street/clear-street-typescript/commit/3890eb683fce616bf763b38d262f64da6f908bd0))
+
+
+### Build System
+
+* **npm:** Point package.json#publishConfig#registry to GH packages ([fbe3e0b](https://github.com/clear-street/clear-street-typescript/commit/fbe3e0bc7158430b6d8e2daa8eae274f5a15a4b2))
+
 ## 0.5.0 (2025-09-24)
 
 Full Changelog: [v0.4.1...v0.5.0](https://github.com/clear-street/clear-street-typescript/compare/v0.4.1...v0.5.0)
