@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0 (2025-09-25)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/clear-street/clear-street-typescript/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **ci:** Auth with GH Packages. ([7697dca](https://github.com/clear-street/clear-street-typescript/commit/7697dcadfe8a403785057c2f06ad89f75691449f))
+
 ## 0.7.0 (2025-09-25)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/clear-street/clear-street-typescript/compare/v0.6.0...v0.7.0)
