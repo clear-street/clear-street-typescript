@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.1 (2025-09-25)
+
+Full Changelog: [v0.8.0...v0.8.1](https://github.com/clear-street/clear-street-typescript/compare/v0.8.0...v0.8.1)
+
+### Chores
+
+* **ci:** Make sure to set NODE_AUTH_TOKEN ([408949e](https://github.com/clear-street/clear-street-typescript/commit/408949e012f5b08f0e2f6f4f52b255287c2102be))
+
 ## 0.8.0 (2025-09-25)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/clear-street/clear-street-typescript/compare/v0.7.0...v0.8.0)
