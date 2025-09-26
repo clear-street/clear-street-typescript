@@ -7,10 +7,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "./",
     "paths": {
-      "@clear-street-internal/sdk/*": ["src/*"],
-      "@clear-street-internal/sdk": ["src/index.ts"]
+      "@clear-street-internal/sdk/*": ["./src/*"],
+      "@clear-street-internal/sdk": ["./src/index.ts"]
     },
     "noEmit": true,
 
