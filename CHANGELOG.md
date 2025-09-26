@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.8.2 (2025-09-26)
+
+Full Changelog: [v0.8.1...v0.8.2](https://github.com/clear-street/clear-street-typescript/compare/v0.8.1...v0.8.2)
+
+### Performance Improvements
+
+* faster formatting ([f8eae02](https://github.com/clear-street/clear-street-typescript/commit/f8eae02e6f22fa273a5c21f9acc30d0b6c091ce0))
+
+
+### Chores
+
+* **internal:** remove deprecated `compilerOptions.baseUrl` from tsconfig.json ([d6c8769](https://github.com/clear-street/clear-street-typescript/commit/d6c87695c59736e863ea4cac6450a760e15b5641))
+
 ## 0.8.1 (2025-09-25)
 
 Full Changelog: [v0.8.0...v0.8.1](https://github.com/clear-street/clear-street-typescript/compare/v0.8.0...v0.8.1)
