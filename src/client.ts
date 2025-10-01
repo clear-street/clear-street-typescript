@@ -17,6 +17,13 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { APIProblem, Common } from './resources/common';
+import {
+  M2mApp,
+  M2mAppCreateResponse,
+  M2mAppDeleteResponse,
+  M2mAppListResponse,
+  M2mApps,
+} from './resources/m2m-apps';
 import { OrderRetrieveParams, OrderRetrieveResponse, Orders, ResponseMetadata } from './resources/orders';
 import { Version, VersionRetrieveResponse } from './resources/version';
 import { type Fetch } from './internal/builtin-types';
@@ -742,11 +749,13 @@ export class ClearStreet {
 
   common: API.Common = new API.Common(this);
   orders: API.Orders = new API.Orders(this);
+  m2mApps: API.M2mApps = new API.M2mApps(this);
   version: API.Version = new API.Version(this);
 }
 
 ClearStreet.Common = Common;
 ClearStreet.Orders = Orders;
+ClearStreet.M2mApps = M2mApps;
 ClearStreet.Version = Version;
 
 export declare namespace ClearStreet {
@@ -759,6 +768,14 @@ export declare namespace ClearStreet {
     type ResponseMetadata as ResponseMetadata,
     type OrderRetrieveResponse as OrderRetrieveResponse,
     type OrderRetrieveParams as OrderRetrieveParams,
+  };
+
+  export {
+    M2mApps as M2mApps,
+    type M2mApp as M2mApp,
+    type M2mAppCreateResponse as M2mAppCreateResponse,
+    type M2mAppListResponse as M2mAppListResponse,
+    type M2mAppDeleteResponse as M2mAppDeleteResponse,
   };
 
   export { Version as Version, type VersionRetrieveResponse as VersionRetrieveResponse };

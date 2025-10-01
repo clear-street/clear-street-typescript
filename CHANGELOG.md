@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.0 (2025-10-01)
+
+Full Changelog: [v0.8.3...v0.9.0](https://github.com/clear-street/clear-street-typescript/compare/v0.8.3...v0.9.0)
+
+### Features
+
+* **api:** Add M2M App API endpoints ([0ad4d24](https://github.com/clear-street/clear-street-typescript/commit/0ad4d2481ea57f1c5c8cd3d95789356fbd057bdb))
+
 ## 0.8.3 (2025-10-01)
 
 Full Changelog: [v0.8.2...v0.8.3](https://github.com/clear-street/clear-street-typescript/compare/v0.8.2...v0.8.3)
