@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.8.3 (2025-10-01)
+
+Full Changelog: [v0.8.2...v0.8.3](https://github.com/clear-street/clear-street-typescript/compare/v0.8.2...v0.8.3)
+
+### Chores
+
+* **internal:** codegen related update ([920ccfd](https://github.com/clear-street/clear-street-typescript/commit/920ccfde9fc88f25290886f1d2eba3ca2a48dcce))
+* **internal:** fix incremental formatting in some cases ([fe2bcbe](https://github.com/clear-street/clear-street-typescript/commit/fe2bcbef42081c32116ad2864725f0e2c41ffa29))
+* **internal:** ignore .eslintcache ([db1ac82](https://github.com/clear-street/clear-street-typescript/commit/db1ac8286e51e24aa4320bfeb6560a6e62fe75df))
+
 ## 0.8.2 (2025-09-26)
 
 Full Changelog: [v0.8.1...v0.8.2](https://github.com/clear-street/clear-street-typescript/compare/v0.8.1...v0.8.2)
