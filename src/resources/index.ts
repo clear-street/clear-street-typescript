@@ -2,6 +2,13 @@
 
 export { Common, type APIProblem } from './common';
 export {
+  M2mApps,
+  type M2mApp,
+  type M2mAppCreateResponse,
+  type M2mAppListResponse,
+  type M2mAppDeleteResponse,
+} from './m2m-apps';
+export {
   Orders,
   type ResponseMetadata,
   type OrderRetrieveResponse,
