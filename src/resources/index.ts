@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Accounts, type ResponseMetadata, type AccountRetrieveResponse } from './accounts';
-export { Common, type APIProblem } from './common';
+export { Accounts, type AccountRetrieveResponse } from './accounts';
+export { Common, type APIProblem, type ResponseMetadata } from './common';
 export {
   M2mApps,
   type M2mApp,
@@ -9,10 +9,5 @@ export {
   type M2mAppListResponse,
   type M2mAppDeleteResponse,
 } from './m2m-apps';
-export {
-  Orders,
-  type ResponseMetadata,
-  type OrderRetrieveResponse,
-  type OrderRetrieveParams,
-} from './orders';
+export { Orders, type OrderRetrieveResponse, type OrderRetrieveParams } from './orders';
 export { Version, type VersionRetrieveResponse } from './version';

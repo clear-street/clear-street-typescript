@@ -26,6 +26,40 @@ export interface APIProblem {
   details?: Array<{ [key: string]: unknown }>;
 }
 
+/**
+ * Metadata for the response. This will always contain a request ID which can be
+ * used to identify the request to Clear Street for tracing, and optionally may
+ * include pagination data.
+ */
+export interface ResponseMetadata {
+  /**
+   * A unique ID for this request, generated upon ingestion of the request.
+   */
+  request_id: string;
+
+  /**
+   * A token that can be used to retrieve the next page of results, if any. The
+   * filtering and sorting information is embedded within the token, so no additional
+   * parameters are needed to retrieve the next page.
+   */
+  next_page_token?: string | null;
+
+  /**
+   * Pagination. Included if this was a GET (list) response
+   */
+  page_number?: number | null;
+
+  /**
+   * Total number of items available (not just in this page).
+   */
+  total_items?: number | null;
+
+  /**
+   * Total number of pages available.
+   */
+  total_pages?: number | null;
+}
+
 export declare namespace Common {
-  export { type APIProblem as APIProblem };
+  export { type APIProblem as APIProblem, type ResponseMetadata as ResponseMetadata };
 }
