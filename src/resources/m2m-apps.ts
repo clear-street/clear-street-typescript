@@ -2,7 +2,6 @@
 
 import { APIResource } from '../core/resource';
 import * as CommonAPI from './common';
-import * as OrdersAPI from './orders';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -61,7 +60,7 @@ export interface M2mAppCreateResponse {
   /**
    * Response metadata, including the request ID and optional pagination info.
    */
-  metadata: OrdersAPI.ResponseMetadata;
+  metadata: CommonAPI.ResponseMetadata;
 
   /**
    * If the request partially succeeded but there was an issue with a portion, the
@@ -98,7 +97,7 @@ export interface M2mAppListResponse {
   /**
    * Response metadata, including the request ID and optional pagination info.
    */
-  metadata: OrdersAPI.ResponseMetadata;
+  metadata: CommonAPI.ResponseMetadata;
 
   /**
    * If the request partially succeeded but there was an issue with a portion, the
@@ -120,7 +119,7 @@ export interface M2mAppDeleteResponse {
   /**
    * Response metadata, including the request ID and optional pagination info.
    */
-  metadata: OrdersAPI.ResponseMetadata;
+  metadata: CommonAPI.ResponseMetadata;
 
   /**
    * If the request partially succeeded but there was an issue with a portion, the

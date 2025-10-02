@@ -16,8 +16,8 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { AccountRetrieveResponse, Accounts, ResponseMetadata } from './resources/accounts';
-import { APIProblem, Common } from './resources/common';
+import { AccountRetrieveResponse, Accounts } from './resources/accounts';
+import { APIProblem, Common, ResponseMetadata } from './resources/common';
 import {
   M2mApp,
   M2mAppCreateResponse,
@@ -25,12 +25,7 @@ import {
   M2mAppListResponse,
   M2mApps,
 } from './resources/m2m-apps';
-import {
-  OrderRetrieveParams,
-  OrderRetrieveResponse,
-  Orders,
-  ResponseMetadata as OrdersAPIResponseMetadata,
-} from './resources/orders';
+import { OrderRetrieveParams, OrderRetrieveResponse, Orders } from './resources/orders';
 import { Version, VersionRetrieveResponse } from './resources/version';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -769,13 +764,9 @@ ClearStreet.Version = Version;
 export declare namespace ClearStreet {
   export type RequestOptions = Opts.RequestOptions;
 
-  export { Common as Common, type APIProblem as APIProblem };
+  export { Common as Common, type APIProblem as APIProblem, type ResponseMetadata as ResponseMetadata };
 
-  export {
-    Accounts as Accounts,
-    type ResponseMetadata as ResponseMetadata,
-    type AccountRetrieveResponse as AccountRetrieveResponse,
-  };
+  export { Accounts as Accounts, type AccountRetrieveResponse as AccountRetrieveResponse };
 
   export {
     M2mApps as M2mApps,
@@ -787,7 +778,6 @@ export declare namespace ClearStreet {
 
   export {
     Orders as Orders,
-    type OrdersAPIResponseMetadata as ResponseMetadata,
     type OrderRetrieveResponse as OrderRetrieveResponse,
     type OrderRetrieveParams as OrderRetrieveParams,
   };
