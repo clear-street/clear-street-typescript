@@ -16,6 +16,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import { AccountRetrieveResponse, Accounts, ResponseMetadata } from './resources/accounts';
 import { APIProblem, Common } from './resources/common';
 import {
   M2mApp,
@@ -24,7 +25,12 @@ import {
   M2mAppListResponse,
   M2mApps,
 } from './resources/m2m-apps';
-import { OrderRetrieveParams, OrderRetrieveResponse, Orders, ResponseMetadata } from './resources/orders';
+import {
+  OrderRetrieveParams,
+  OrderRetrieveResponse,
+  Orders,
+  ResponseMetadata as OrdersAPIResponseMetadata,
+} from './resources/orders';
 import { Version, VersionRetrieveResponse } from './resources/version';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -748,14 +754,16 @@ export class ClearStreet {
   static toFile = Uploads.toFile;
 
   common: API.Common = new API.Common(this);
-  orders: API.Orders = new API.Orders(this);
+  accounts: API.Accounts = new API.Accounts(this);
   m2mApps: API.M2mApps = new API.M2mApps(this);
+  orders: API.Orders = new API.Orders(this);
   version: API.Version = new API.Version(this);
 }
 
 ClearStreet.Common = Common;
-ClearStreet.Orders = Orders;
+ClearStreet.Accounts = Accounts;
 ClearStreet.M2mApps = M2mApps;
+ClearStreet.Orders = Orders;
 ClearStreet.Version = Version;
 
 export declare namespace ClearStreet {
@@ -764,10 +772,9 @@ export declare namespace ClearStreet {
   export { Common as Common, type APIProblem as APIProblem };
 
   export {
-    Orders as Orders,
+    Accounts as Accounts,
     type ResponseMetadata as ResponseMetadata,
-    type OrderRetrieveResponse as OrderRetrieveResponse,
-    type OrderRetrieveParams as OrderRetrieveParams,
+    type AccountRetrieveResponse as AccountRetrieveResponse,
   };
 
   export {
@@ -776,6 +783,13 @@ export declare namespace ClearStreet {
     type M2mAppCreateResponse as M2mAppCreateResponse,
     type M2mAppListResponse as M2mAppListResponse,
     type M2mAppDeleteResponse as M2mAppDeleteResponse,
+  };
+
+  export {
+    Orders as Orders,
+    type OrdersAPIResponseMetadata as ResponseMetadata,
+    type OrderRetrieveResponse as OrderRetrieveResponse,
+    type OrderRetrieveParams as OrderRetrieveParams,
   };
 
   export { Version as Version, type VersionRetrieveResponse as VersionRetrieveResponse };
