@@ -3,12 +3,12 @@
 Types:
 
 - <code><a href="./src/resources/common.ts">APIProblem</a></code>
+- <code><a href="./src/resources/common.ts">ResponseMetadata</a></code>
 
 # Accounts
 
 Types:
 
-- <code><a href="./src/resources/accounts.ts">ResponseMetadata</a></code>
 - <code><a href="./src/resources/accounts.ts">AccountRetrieveResponse</a></code>
 
 Methods:
@@ -34,7 +34,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/orders.ts">ResponseMetadata</a></code>
 - <code><a href="./src/resources/orders.ts">OrderRetrieveResponse</a></code>
 
 Methods:
