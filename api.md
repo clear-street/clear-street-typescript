@@ -1,3 +1,10 @@
+# Shared
+
+Types:
+
+- <code><a href="./src/resources/shared.ts">MantissaExponent</a></code>
+- <code><a href="./src/resources/shared.ts">NanoSeconds</a></code>
+
 # Common
 
 Types:
@@ -45,10 +52,17 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/orders.ts">Order</a></code>
+- <code><a href="./src/resources/orders.ts">Side</a></code>
+- <code><a href="./src/resources/orders.ts">Status</a></code>
+- <code><a href="./src/resources/orders.ts">TimeInForce</a></code>
+- <code><a href="./src/resources/orders.ts">Type</a></code>
+- <code><a href="./src/resources/orders.ts">OrderCreateResponse</a></code>
 - <code><a href="./src/resources/orders.ts">OrderRetrieveResponse</a></code>
 
 Methods:
 
+- <code title="post /trade/v1/orders">client.orders.<a href="./src/resources/orders.ts">create</a>({ ...params }) -> OrderCreateResponse</code>
 - <code title="get /trade/v1/orders/{id}">client.orders.<a href="./src/resources/orders.ts">retrieve</a>(id, { ...params }) -> OrderRetrieveResponse</code>
 
 # Version
