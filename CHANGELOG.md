@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.12.0 (2025-10-06)
+
+Full Changelog: [v0.11.1...v0.12.0](https://github.com/clear-street/clear-street-typescript/compare/v0.11.1...v0.12.0)
+
+### Features
+
+* **api:** Add order creation endpoint ([7babca6](https://github.com/clear-street/clear-street-typescript/commit/7babca6bcabf84fde3b06584a7ee30258ac12bad))
+
 ## 0.11.1 (2025-10-06)
 
 Full Changelog: [v0.11.0...v0.11.1](https://github.com/clear-street/clear-street-typescript/compare/v0.11.0...v0.11.1)
