@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.11.0 (2025-10-06)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/clear-street/clear-street-typescript/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **api:** Add account positions API ([811ced4](https://github.com/clear-street/clear-street-typescript/commit/811ced4d142511507ff2499b924e4bad0daa60d6))
+
+
+### Chores
+
+* **jsdoc:** fix [@link](https://github.com/link) annotations to refer only to parts of the package‘s public interface ([07c04c6](https://github.com/clear-street/clear-street-typescript/commit/07c04c62b8e4bb3f0e4f7666ee0f2a453751dac5))
+
 ## 0.10.0 (2025-10-02)
 
 Full Changelog: [v0.9.0...v0.10.0](https://github.com/clear-street/clear-street-typescript/compare/v0.9.0...v0.10.0)
