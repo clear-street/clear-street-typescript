@@ -24,7 +24,18 @@ import {
   M2mAppListResponse,
   M2mApps,
 } from './resources/m2m-apps';
-import { OrderRetrieveParams, OrderRetrieveResponse, Orders } from './resources/orders';
+import {
+  Order,
+  OrderCreateParams,
+  OrderCreateResponse,
+  OrderRetrieveParams,
+  OrderRetrieveResponse,
+  Orders,
+  Side,
+  Status,
+  TimeInForce,
+  Type,
+} from './resources/orders';
 import { Version, VersionRetrieveResponse } from './resources/version';
 import { AccountRetrieveResponse, Accounts } from './resources/accounts/accounts';
 import { type Fetch } from './internal/builtin-types';
@@ -778,9 +789,19 @@ export declare namespace ClearStreet {
 
   export {
     Orders as Orders,
+    type Order as Order,
+    type Side as Side,
+    type Status as Status,
+    type TimeInForce as TimeInForce,
+    type Type as Type,
+    type OrderCreateResponse as OrderCreateResponse,
     type OrderRetrieveResponse as OrderRetrieveResponse,
+    type OrderCreateParams as OrderCreateParams,
     type OrderRetrieveParams as OrderRetrieveParams,
   };
 
   export { Version as Version, type VersionRetrieveResponse as VersionRetrieveResponse };
+
+  export type MantissaExponent = API.MantissaExponent;
+  export type NanoSeconds = API.NanoSeconds;
 }
