@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Accounts, type AccountRetrieveResponse } from './accounts';
+export { Accounts, type AccountRetrieveResponse } from './accounts/accounts';
 export { Common, type APIProblem, type ResponseMetadata } from './common';
 export {
   M2mApps,

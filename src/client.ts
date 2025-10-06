@@ -16,7 +16,6 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { AccountRetrieveResponse, Accounts } from './resources/accounts';
 import { APIProblem, Common, ResponseMetadata } from './resources/common';
 import {
   M2mApp,
@@ -27,6 +26,7 @@ import {
 } from './resources/m2m-apps';
 import { OrderRetrieveParams, OrderRetrieveResponse, Orders } from './resources/orders';
 import { Version, VersionRetrieveResponse } from './resources/version';
+import { AccountRetrieveResponse, Accounts } from './resources/accounts/accounts';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
