@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.1 (2025-10-06)
+
+Full Changelog: [v0.11.0...v0.11.1](https://github.com/clear-street/clear-street-typescript/compare/v0.11.0...v0.11.1)
+
+### Bug Fixes
+
+* **api:** Update Response_GetAccountPositionsResponse ([f9a7648](https://github.com/clear-street/clear-street-typescript/commit/f9a7648d45e12b4eb771ba69bf6ae6e77a82df37))
+
 ## 0.11.0 (2025-10-06)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/clear-street/clear-street-typescript/compare/v0.10.0...v0.11.0)
