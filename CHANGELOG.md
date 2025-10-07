@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.13.1 (2025-10-07)
+
+Full Changelog: [v0.13.0...v0.13.1](https://github.com/clear-street/clear-street-typescript/compare/v0.13.0...v0.13.1)
+
+### Bug Fixes
+
+* **api:** Fix Add AnyValue recursive schema type ([2cdb05f](https://github.com/clear-street/clear-street-typescript/commit/2cdb05fa41b0fbd6fb3d56819d0214c0a163e1cb))
+* **api:** Fix BaseResponse type ([7a18acc](https://github.com/clear-street/clear-street-typescript/commit/7a18accc50fd4a9549dace4dff904b99e58034ad))
+* **api:** Fix BaseResponse type ([1c73e77](https://github.com/clear-street/clear-street-typescript/commit/1c73e779af2123fe1918803f0e0c492a09e811df))
+* **api:** Refactor BaseResponse more ([a1c837e](https://github.com/clear-street/clear-street-typescript/commit/a1c837eecba7c6388c731765c679b88ac723c9e1))
+
 ## 0.13.0 (2025-10-07)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/clear-street/clear-street-typescript/compare/v0.12.0...v0.13.0)

@@ -32,7 +32,10 @@ export interface AccountRetrieveResponse {
    */
   data?: unknown;
 
-  error?: unknown;
+  /**
+   * A direct mapping of tonic::Status, for use in HTTP responses.
+   */
+  error?: CommonAPI.APIProblem | null;
 }
 
 Accounts.Positions = Positions;
