@@ -292,32 +292,32 @@ export namespace OrderRetrieveResponse {
       /**
        * The cumulative quantity of the order.
        */
-      cum_qty?: string | null;
+      cum_qty?: Shared.APIDecimal64 | null;
 
       /**
        * The last price at which the order was filled.
        */
-      last_px?: string | null;
+      last_px?: Shared.APIDecimal64 | null;
 
       /**
        * The quantity of the order that has been filled.
        */
-      last_qty?: string | null;
+      last_qty?: Shared.APIDecimal64 | null;
 
       /**
        * The quantity of the order that is still open.
        */
-      leaves_qty?: string | null;
+      leaves_qty?: Shared.APIDecimal64 | null;
 
       /**
        * The quantity of the order.
        */
-      order_qty?: string | null;
+      order_qty?: Shared.APIDecimal64 | null;
 
       /**
        * The average price per share of the order.
        */
-      price?: string | null;
+      price?: Shared.APIDecimal64 | null;
 
       /**
        * The time at which the order was last updated. ISO 8601/RFC 3339
