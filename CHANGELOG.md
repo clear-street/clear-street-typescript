@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.13.0 (2025-10-07)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/clear-street/clear-street-typescript/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** Add instruments APIs ([68c4daf](https://github.com/clear-street/clear-street-typescript/commit/68c4daf022904269e89c59cbd26ebb9f377bf461))
+
+
+### Chores
+
+* **internal:** use npm pack for build uploads ([662a535](https://github.com/clear-street/clear-street-typescript/commit/662a5357a2af8b59e7b6d4e721e3c5f87fd59e27))
+
 ## 0.12.0 (2025-10-06)
 
 Full Changelog: [v0.11.1...v0.12.0](https://github.com/clear-street/clear-street-typescript/compare/v0.11.1...v0.12.0)
