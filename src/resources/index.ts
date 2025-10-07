@@ -4,6 +4,13 @@ export * from './shared';
 export { Accounts, type AccountRetrieveResponse } from './accounts/accounts';
 export { Common, type APIProblem, type ResponseMetadata } from './common';
 export {
+  Instruments,
+  type Instrument,
+  type InstrumentRetrieveResponse,
+  type InstrumentListResponse,
+  type InstrumentListParams,
+} from './instruments';
+export {
   M2mApps,
   type M2mApp,
   type M2mAppCreateResponse,

@@ -2,6 +2,7 @@
 
 Types:
 
+- <code><a href="./src/resources/shared.ts">APIDecimal64</a></code>
 - <code><a href="./src/resources/shared.ts">MantissaExponent</a></code>
 - <code><a href="./src/resources/shared.ts">NanoSeconds</a></code>
 
@@ -32,6 +33,19 @@ Types:
 Methods:
 
 - <code title="get /trade/v1/accounts/{account_id}/positions">client.accounts.positions.<a href="./src/resources/accounts/positions.ts">list</a>(accountID) -> PositionListResponse</code>
+
+# Instruments
+
+Types:
+
+- <code><a href="./src/resources/instruments.ts">Instrument</a></code>
+- <code><a href="./src/resources/instruments.ts">InstrumentRetrieveResponse</a></code>
+- <code><a href="./src/resources/instruments.ts">InstrumentListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/instruments/{instrument_id}">client.instruments.<a href="./src/resources/instruments.ts">retrieve</a>(instrumentID) -> InstrumentRetrieveResponse</code>
+- <code title="get /active/v1/instruments">client.instruments.<a href="./src/resources/instruments.ts">list</a>({ ...params }) -> InstrumentListResponse</code>
 
 # M2mApps
 

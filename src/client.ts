@@ -18,6 +18,13 @@ import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { APIProblem, Common, ResponseMetadata } from './resources/common';
 import {
+  Instrument,
+  InstrumentListParams,
+  InstrumentListResponse,
+  InstrumentRetrieveResponse,
+  Instruments,
+} from './resources/instruments';
+import {
   M2mApp,
   M2mAppCreateResponse,
   M2mAppDeleteResponse,
@@ -761,6 +768,7 @@ export class ClearStreet {
 
   common: API.Common = new API.Common(this);
   accounts: API.Accounts = new API.Accounts(this);
+  instruments: API.Instruments = new API.Instruments(this);
   m2mApps: API.M2mApps = new API.M2mApps(this);
   orders: API.Orders = new API.Orders(this);
   version: API.Version = new API.Version(this);
@@ -768,6 +776,7 @@ export class ClearStreet {
 
 ClearStreet.Common = Common;
 ClearStreet.Accounts = Accounts;
+ClearStreet.Instruments = Instruments;
 ClearStreet.M2mApps = M2mApps;
 ClearStreet.Orders = Orders;
 ClearStreet.Version = Version;
@@ -778,6 +787,14 @@ export declare namespace ClearStreet {
   export { Common as Common, type APIProblem as APIProblem, type ResponseMetadata as ResponseMetadata };
 
   export { Accounts as Accounts, type AccountRetrieveResponse as AccountRetrieveResponse };
+
+  export {
+    Instruments as Instruments,
+    type Instrument as Instrument,
+    type InstrumentRetrieveResponse as InstrumentRetrieveResponse,
+    type InstrumentListResponse as InstrumentListResponse,
+    type InstrumentListParams as InstrumentListParams,
+  };
 
   export {
     M2mApps as M2mApps,
@@ -802,6 +819,7 @@ export declare namespace ClearStreet {
 
   export { Version as Version, type VersionRetrieveResponse as VersionRetrieveResponse };
 
+  export type APIDecimal64 = API.APIDecimal64;
   export type MantissaExponent = API.MantissaExponent;
   export type NanoSeconds = API.NanoSeconds;
 }
