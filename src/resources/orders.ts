@@ -341,38 +341,44 @@ export namespace OrderRetrieveResponse {
 }
 
 export interface OrderListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<OrderListResponse.Data>;
+  data?: OrderListResponse.Data;
 }
 
 export namespace OrderListResponse {
   export interface Data {
-    cum_qty?: Shared.MantissaExponent;
+    orders?: Array<Data.Order>;
+  }
 
-    last_px?: Shared.MantissaExponent;
+  export namespace Data {
+    export interface Order {
+      cum_qty?: Shared.MantissaExponent;
 
-    last_qty?: Shared.MantissaExponent;
+      last_px?: Shared.MantissaExponent;
 
-    leaves_qty?: Shared.MantissaExponent;
+      last_qty?: Shared.MantissaExponent;
 
-    ord_type?: string;
+      leaves_qty?: Shared.MantissaExponent;
 
-    order_qty?: Shared.MantissaExponent;
+      ord_type?: string;
 
-    order_status?: string;
+      order_qty?: Shared.MantissaExponent;
 
-    price?: Shared.MantissaExponent;
+      order_status?: string;
 
-    side?: string;
+      price?: Shared.MantissaExponent;
 
-    symbol?: string;
+      side?: string;
 
-    time_in_force?: string;
+      symbol?: string;
 
-    /**
-     * The time at which the order was last updated. ISO 8601/RFC 3339
-     * (YYYY-MM-DDTHH:MM:SS.SSSSSSSSS) format
-     */
-    transact_time?: string | null;
+      time_in_force?: string;
+
+      /**
+       * The time at which the order was last updated. ISO 8601/RFC 3339
+       * (YYYY-MM-DDTHH:MM:SS.SSSSSSSSS) format
+       */
+      transact_time?: string | null;
+    }
   }
 }
 
