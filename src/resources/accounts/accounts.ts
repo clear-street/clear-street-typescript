@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as CommonAPI from '../common';
+import * as Shared from '../shared';
 import * as PositionsAPI from './positions';
 import { Position, PositionListResponse, Positions } from './positions';
 import { APIPromise } from '../../core/api-promise';
@@ -19,23 +19,58 @@ export class Accounts extends APIResource {
   }
 }
 
-export interface AccountRetrieveResponse {
-  /**
-   * Metadata for the response. This will always contain a request ID which can be
-   * used to identify the request to Clear Street for tracing, and optionally may
-   * include pagination data.
-   */
-  metadata: CommonAPI.ResponseMetadata;
-
+export interface AccountRetrieveResponse extends Omit<Shared.BaseResponse, 'data'> {
   /**
    * Represents a trading account.
    */
-  data?: unknown;
+  data?: AccountRetrieveResponse.Data;
+}
 
+export namespace AccountRetrieveResponse {
   /**
-   * A direct mapping of tonic::Status, for use in HTTP responses.
+   * Represents a trading account.
    */
-  error?: CommonAPI.APIProblem | null;
+  export interface Data {
+    /**
+     * The unique identifier for the account.
+     */
+    id: string;
+
+    /**
+     * The full legal name of the account.
+     */
+    full_name: string;
+
+    /**
+     * The type of account.
+     */
+    kind: 'HOUSE' | 'PAB' | 'CUSTOMER' | 'COUNTERPARTY' | 'OTHER';
+
+    /**
+     * The date the account was opened.
+     */
+    open_date: string;
+
+    /**
+     * The short name of the account.
+     */
+    short_name: string;
+
+    /**
+     * The current status of the account.
+     */
+    status: 'ACTIVE' | 'INACTIVE' | 'CLOSED';
+
+    /**
+     * The sub-type of account.
+     */
+    subkind: 'CASH' | 'MARGIN' | 'DVP' | 'OTHER';
+
+    /**
+     * The date the account was closed, if applicable.
+     */
+    close_date?: string | null;
+  }
 }
 
 Accounts.Positions = Positions;
