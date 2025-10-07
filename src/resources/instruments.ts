@@ -146,7 +146,10 @@ export interface InstrumentRetrieveResponse {
    */
   data?: Instrument;
 
-  error?: unknown;
+  /**
+   * A direct mapping of tonic::Status, for use in HTTP responses.
+   */
+  error?: CommonAPI.APIProblem | null;
 }
 
 export interface InstrumentListResponse {
@@ -157,9 +160,12 @@ export interface InstrumentListResponse {
    */
   metadata: CommonAPI.ResponseMetadata;
 
-  data?: unknown;
+  data?: Array<Instrument>;
 
-  error?: unknown;
+  /**
+   * A direct mapping of tonic::Status, for use in HTTP responses.
+   */
+  error?: CommonAPI.APIProblem | null;
 }
 
 export interface InstrumentListParams {
