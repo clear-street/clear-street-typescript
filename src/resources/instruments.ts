@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as CommonAPI from './common';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
@@ -133,39 +132,15 @@ export interface Instrument {
   security_type?: string | null;
 }
 
-export interface InstrumentRetrieveResponse {
-  /**
-   * Metadata for the response. This will always contain a request ID which can be
-   * used to identify the request to Clear Street for tracing, and optionally may
-   * include pagination data.
-   */
-  metadata: CommonAPI.ResponseMetadata;
-
+export interface InstrumentRetrieveResponse extends Omit<Shared.BaseResponse, 'data'> {
   /**
    * Represents a tradable financial instrument.
    */
   data?: Instrument;
-
-  /**
-   * A direct mapping of tonic::Status, for use in HTTP responses.
-   */
-  error?: CommonAPI.APIProblem | null;
 }
 
-export interface InstrumentListResponse {
-  /**
-   * Metadata for the response. This will always contain a request ID which can be
-   * used to identify the request to Clear Street for tracing, and optionally may
-   * include pagination data.
-   */
-  metadata: CommonAPI.ResponseMetadata;
-
-  data?: unknown;
-
-  /**
-   * A direct mapping of tonic::Status, for use in HTTP responses.
-   */
-  error?: CommonAPI.APIProblem | null;
+export interface InstrumentListResponse extends Omit<Shared.BaseResponse, 'data'> {
+  data?: Array<Instrument>;
 }
 
 export interface InstrumentListParams {

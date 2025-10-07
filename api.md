@@ -6,6 +6,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">AnyObject</a></code>
 - <code><a href="./src/resources/shared.ts">AnyValue</a></code>
 - <code><a href="./src/resources/shared.ts">APIDecimal64</a></code>
+- <code><a href="./src/resources/shared.ts">BaseResponse</a></code>
 - <code><a href="./src/resources/shared.ts">MantissaExponent</a></code>
 - <code><a href="./src/resources/shared.ts">NanoSeconds</a></code>
 
