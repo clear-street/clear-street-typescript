@@ -144,7 +144,7 @@ export interface InstrumentRetrieveResponse {
   /**
    * Represents a tradable financial instrument.
    */
-  data?: Instrument | null;
+  data?: Instrument;
 
   /**
    * A direct mapping of tonic::Status, for use in HTTP responses.
@@ -160,7 +160,7 @@ export interface InstrumentListResponse {
    */
   metadata: CommonAPI.ResponseMetadata;
 
-  data?: { [key: string]: unknown } | Array<{ [key: string]: unknown }> | Array<Instrument> | null;
+  data?: Array<Instrument>;
 
   /**
    * A direct mapping of tonic::Status, for use in HTTP responses.
