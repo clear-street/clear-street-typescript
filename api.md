@@ -77,11 +77,13 @@ Types:
 - <code><a href="./src/resources/orders.ts">Type</a></code>
 - <code><a href="./src/resources/orders.ts">OrderCreateResponse</a></code>
 - <code><a href="./src/resources/orders.ts">OrderRetrieveResponse</a></code>
+- <code><a href="./src/resources/orders.ts">OrderListResponse</a></code>
 
 Methods:
 
 - <code title="post /trade/v1/orders">client.orders.<a href="./src/resources/orders.ts">create</a>({ ...params }) -> OrderCreateResponse</code>
 - <code title="get /trade/v1/orders/{id}">client.orders.<a href="./src/resources/orders.ts">retrieve</a>(id, { ...params }) -> OrderRetrieveResponse</code>
+- <code title="get /trade/v1/accounts/{account_id}/orders">client.orders.<a href="./src/resources/orders.ts">list</a>(accountID, { ...params }) -> OrderListResponse</code>
 
 # Version
 
