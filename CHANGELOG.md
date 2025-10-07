@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.2 (2025-10-07)
+
+Full Changelog: [v0.13.1...v0.13.2](https://github.com/clear-street/clear-street-typescript/compare/v0.13.1...v0.13.2)
+
+### Chores
+
+* **api:** Expose BaseResponse type. ([6210763](https://github.com/clear-street/clear-street-typescript/commit/6210763b93c75d88666ce50e807a74618e0748b3))
+
 ## 0.13.1 (2025-10-07)
 
 Full Changelog: [v0.13.0...v0.13.1](https://github.com/clear-street/clear-street-typescript/compare/v0.13.0...v0.13.1)
