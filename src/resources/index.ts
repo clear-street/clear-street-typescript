@@ -26,7 +26,9 @@ export {
   type Type,
   type OrderCreateResponse,
   type OrderRetrieveResponse,
+  type OrderListResponse,
   type OrderCreateParams,
   type OrderRetrieveParams,
+  type OrderListParams,
 } from './orders';
 export { Version, type VersionRetrieveResponse } from './version';
