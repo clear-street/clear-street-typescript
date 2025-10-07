@@ -819,6 +819,9 @@ export declare namespace ClearStreet {
 
   export { Version as Version, type VersionRetrieveResponse as VersionRetrieveResponse };
 
+  export type AnyArray = API.AnyArray;
+  export type AnyObject = API.AnyObject;
+  export type AnyValue = API.AnyValue;
   export type APIDecimal64 = API.APIDecimal64;
   export type MantissaExponent = API.MantissaExponent;
   export type NanoSeconds = API.NanoSeconds;

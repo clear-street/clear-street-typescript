@@ -160,7 +160,7 @@ export interface InstrumentListResponse {
    */
   metadata: CommonAPI.ResponseMetadata;
 
-  data?: Array<Instrument>;
+  data?: unknown;
 
   /**
    * A direct mapping of tonic::Status, for use in HTTP responses.
