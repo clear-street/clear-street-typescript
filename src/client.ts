@@ -35,6 +35,8 @@ import {
   Order,
   OrderCreateParams,
   OrderCreateResponse,
+  OrderListParams,
+  OrderListResponse,
   OrderRetrieveParams,
   OrderRetrieveResponse,
   Orders,
@@ -813,8 +815,10 @@ export declare namespace ClearStreet {
     type Type as Type,
     type OrderCreateResponse as OrderCreateResponse,
     type OrderRetrieveResponse as OrderRetrieveResponse,
+    type OrderListResponse as OrderListResponse,
     type OrderCreateParams as OrderCreateParams,
     type OrderRetrieveParams as OrderRetrieveParams,
+    type OrderListParams as OrderListParams,
   };
 
   export { Version as Version, type VersionRetrieveResponse as VersionRetrieveResponse };

@@ -26,6 +26,18 @@ export class Orders extends APIResource {
   ): APIPromise<OrderRetrieveResponse> {
     return this._client.get(path`/trade/v1/orders/${id}`, { query, ...options });
   }
+
+  /**
+   * Retrieves a list of all open (non-terminal) orders for a given account for the
+   * current trading day.
+   */
+  list(
+    accountID: string,
+    query: OrderListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OrderListResponse> {
+    return this._client.get(path`/trade/v1/accounts/${accountID}/orders`, { query, ...options });
+  }
 }
 
 export interface Order {
@@ -328,6 +340,10 @@ export namespace OrderRetrieveResponse {
   }
 }
 
+export interface OrderListResponse extends Omit<Shared.BaseResponse, 'data'> {
+  data?: Array<unknown>;
+}
+
 export interface OrderCreateParams {
   orders: Array<Order>;
 }
@@ -340,6 +356,18 @@ export interface OrderRetrieveParams {
   account_id: string;
 }
 
+export interface OrderListParams {
+  /**
+   * The number of items to return per page.
+   */
+  page_size?: number;
+
+  /**
+   * The token for the next page of results.
+   */
+  page_token?: string;
+}
+
 export declare namespace Orders {
   export {
     type Order as Order,
@@ -349,7 +377,9 @@ export declare namespace Orders {
     type Type as Type,
     type OrderCreateResponse as OrderCreateResponse,
     type OrderRetrieveResponse as OrderRetrieveResponse,
+    type OrderListResponse as OrderListResponse,
     type OrderCreateParams as OrderCreateParams,
     type OrderRetrieveParams as OrderRetrieveParams,
+    type OrderListParams as OrderListParams,
   };
 }
