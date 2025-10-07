@@ -30,7 +30,7 @@ export interface AccountRetrieveResponse {
   /**
    * Represents a trading account.
    */
-  data?: AccountRetrieveResponse.Data;
+  data?: AccountRetrieveResponse.UnionMember0 | AccountRetrieveResponse.UnionMember1 | unknown | null;
 
   /**
    * A direct mapping of tonic::Status, for use in HTTP responses.
@@ -39,49 +39,90 @@ export interface AccountRetrieveResponse {
 }
 
 export namespace AccountRetrieveResponse {
-  /**
-   * Represents a trading account.
-   */
-  export interface Data {
+  export interface UnionMember0 {
     /**
      * The unique identifier for the account.
      */
-    id: string;
-
-    /**
-     * The full legal name of the account.
-     */
-    full_name: string;
-
-    /**
-     * The type of account.
-     */
-    kind: 'HOUSE' | 'PAB' | 'CUSTOMER' | 'COUNTERPARTY' | 'OTHER';
-
-    /**
-     * The date the account was opened.
-     */
-    open_date: string;
-
-    /**
-     * The short name of the account.
-     */
-    short_name: string;
-
-    /**
-     * The current status of the account.
-     */
-    status: 'ACTIVE' | 'INACTIVE' | 'CLOSED';
-
-    /**
-     * The sub-type of account.
-     */
-    subkind: 'CASH' | 'MARGIN' | 'DVP' | 'OTHER';
+    id?: string;
 
     /**
      * The date the account was closed, if applicable.
      */
     close_date?: string | null;
+
+    /**
+     * The full legal name of the account.
+     */
+    full_name?: string;
+
+    /**
+     * The type of account.
+     */
+    kind?: 'HOUSE' | 'PAB' | 'CUSTOMER' | 'COUNTERPARTY' | 'OTHER';
+
+    /**
+     * The date the account was opened.
+     */
+    open_date?: string;
+
+    /**
+     * The short name of the account.
+     */
+    short_name?: string;
+
+    /**
+     * The current status of the account.
+     */
+    status?: 'ACTIVE' | 'INACTIVE' | 'CLOSED';
+
+    /**
+     * The sub-type of account.
+     */
+    subkind?: 'CASH' | 'MARGIN' | 'DVP' | 'OTHER';
+
+    [k: string]: unknown;
+  }
+
+  export interface UnionMember1 {
+    /**
+     * The unique identifier for the account.
+     */
+    id?: string;
+
+    /**
+     * The date the account was closed, if applicable.
+     */
+    close_date?: string | null;
+
+    /**
+     * The full legal name of the account.
+     */
+    full_name?: string;
+
+    /**
+     * The type of account.
+     */
+    kind?: 'HOUSE' | 'PAB' | 'CUSTOMER' | 'COUNTERPARTY' | 'OTHER';
+
+    /**
+     * The date the account was opened.
+     */
+    open_date?: string;
+
+    /**
+     * The short name of the account.
+     */
+    short_name?: string;
+
+    /**
+     * The current status of the account.
+     */
+    status?: 'ACTIVE' | 'INACTIVE' | 'CLOSED';
+
+    /**
+     * The sub-type of account.
+     */
+    subkind?: 'CASH' | 'MARGIN' | 'DVP' | 'OTHER';
   }
 }
 
