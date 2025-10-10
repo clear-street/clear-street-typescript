@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../core/resource';
+import { APIResource } from '../core/resource';
 import * as PositionsAPI from './positions';
-import { APIPromise } from '../../core/api-promise';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
+import { APIPromise } from '../core/api-promise';
+import { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils/path';
 
 export class Positions extends APIResource {
   /**

@@ -21,22 +21,23 @@ Types:
 
 Types:
 
-- <code><a href="./src/resources/accounts/accounts.ts">AccountRetrieveResponse</a></code>
+- <code><a href="./src/resources/accounts.ts">Account</a></code>
+- <code><a href="./src/resources/accounts.ts">AccountRetrieveResponse</a></code>
 
 Methods:
 
-- <code title="get /trade/v1/accounts/{account_id}">client.accounts.<a href="./src/resources/accounts/accounts.ts">retrieve</a>(accountID) -> AccountRetrieveResponse</code>
+- <code title="get /trade/v1/accounts/{account_id}">client.accounts.<a href="./src/resources/accounts.ts">retrieve</a>(accountID) -> AccountRetrieveResponse</code>
 
-## Positions
+# Positions
 
 Types:
 
-- <code><a href="./src/resources/accounts/positions.ts">Position</a></code>
-- <code><a href="./src/resources/accounts/positions.ts">PositionListResponse</a></code>
+- <code><a href="./src/resources/positions.ts">Position</a></code>
+- <code><a href="./src/resources/positions.ts">PositionListResponse</a></code>
 
 Methods:
 
-- <code title="get /trade/v1/accounts/{account_id}/positions">client.accounts.positions.<a href="./src/resources/accounts/positions.ts">list</a>(accountID) -> PositionListResponse</code>
+- <code title="get /trade/v1/accounts/{account_id}/positions">client.positions.<a href="./src/resources/positions.ts">list</a>(accountID) -> PositionListResponse</code>
 
 # Instruments
 
