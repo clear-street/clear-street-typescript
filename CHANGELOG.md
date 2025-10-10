@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.16.0 (2025-10-10)
+
+Full Changelog: [v0.15.0...v0.16.0](https://github.com/clear-street/clear-street-typescript/compare/v0.15.0...v0.16.0)
+
+### Features
+
+* **api:** Move request bodies into components.requestBodies ([bfd30d2](https://github.com/clear-street/clear-street-typescript/commit/bfd30d2619a1a7a7c1070a44d4f265e49396b060))
+
 ## 0.15.0 (2025-10-07)
 
 Full Changelog: [v0.14.0...v0.15.0](https://github.com/clear-street/clear-street-typescript/compare/v0.14.0...v0.15.0)
