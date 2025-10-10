@@ -16,6 +16,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import { Account, AccountRetrieveResponse, Accounts } from './resources/accounts';
 import { APIProblem, Common, ResponseMetadata } from './resources/common';
 import {
   Instrument,
@@ -46,8 +47,8 @@ import {
   TimeInForce,
   Type,
 } from './resources/orders';
+import { Position, PositionListResponse, Positions } from './resources/positions';
 import { Version, VersionRetrieveResponse } from './resources/version';
-import { AccountRetrieveResponse, Accounts } from './resources/accounts/accounts';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -771,6 +772,7 @@ export class ClearStreet {
 
   common: API.Common = new API.Common(this);
   accounts: API.Accounts = new API.Accounts(this);
+  positions: API.Positions = new API.Positions(this);
   instruments: API.Instruments = new API.Instruments(this);
   m2mApps: API.M2mApps = new API.M2mApps(this);
   orders: API.Orders = new API.Orders(this);
@@ -779,6 +781,7 @@ export class ClearStreet {
 
 ClearStreet.Common = Common;
 ClearStreet.Accounts = Accounts;
+ClearStreet.Positions = Positions;
 ClearStreet.Instruments = Instruments;
 ClearStreet.M2mApps = M2mApps;
 ClearStreet.Orders = Orders;
@@ -789,7 +792,17 @@ export declare namespace ClearStreet {
 
   export { Common as Common, type APIProblem as APIProblem, type ResponseMetadata as ResponseMetadata };
 
-  export { Accounts as Accounts, type AccountRetrieveResponse as AccountRetrieveResponse };
+  export {
+    Accounts as Accounts,
+    type Account as Account,
+    type AccountRetrieveResponse as AccountRetrieveResponse,
+  };
+
+  export {
+    Positions as Positions,
+    type Position as Position,
+    type PositionListResponse as PositionListResponse,
+  };
 
   export {
     Instruments as Instruments,

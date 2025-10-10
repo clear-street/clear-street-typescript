@@ -10,7 +10,7 @@ const client = new ClearStreet({
 describe('resource positions', () => {
   // Prism tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.accounts.positions.list('19816');
+    const responsePromise = client.positions.list('19816');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
