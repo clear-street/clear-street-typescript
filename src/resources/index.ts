@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export * from './shared';
-export { Accounts, type AccountRetrieveResponse } from './accounts/accounts';
+export { Accounts, type Account, type AccountRetrieveResponse } from './accounts';
 export { Common, type APIProblem, type ResponseMetadata } from './common';
 export {
   Instruments,
@@ -32,4 +32,5 @@ export {
   type OrderRetrieveParams,
   type OrderListParams,
 } from './orders';
+export { Positions, type Position, type PositionListResponse } from './positions';
 export { Version, type VersionRetrieveResponse } from './version';
