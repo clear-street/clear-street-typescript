@@ -10,8 +10,8 @@ export class M2mApps extends APIResource {
   /**
    * Create M2M app
    */
-  create(options?: RequestOptions): APIPromise<M2mAppCreateResponse> {
-    return this._client.post('/admin/v1/m2m_apps', options);
+  create(body: M2mAppCreateParams, options?: RequestOptions): APIPromise<M2mAppCreateResponse> {
+    return this._client.post('/admin/v1/m2m_apps', { body, ...options });
   }
 
   /**
@@ -137,11 +137,16 @@ export namespace M2mAppDeleteResponse {
   }
 }
 
+export interface M2mAppCreateParams {
+  description: string;
+}
+
 export declare namespace M2mApps {
   export {
     type M2mApp as M2mApp,
     type M2mAppCreateResponse as M2mAppCreateResponse,
     type M2mAppListResponse as M2mAppListResponse,
     type M2mAppDeleteResponse as M2mAppDeleteResponse,
+    type M2mAppCreateParams as M2mAppCreateParams,
   };
 }
