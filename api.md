@@ -28,6 +28,20 @@ Methods:
 
 - <code title="get /trade/v1/accounts/{account_id}">client.accounts.<a href="./src/resources/accounts.ts">retrieve</a>(accountID) -> AccountRetrieveResponse</code>
 
+# Locates
+
+Types:
+
+- <code><a href="./src/resources/locates.ts">LocateOrder</a></code>
+- <code><a href="./src/resources/locates.ts">LocateCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /trade/v1/accounts/{account_id}/locates">client.locates.<a href="./src/resources/locates.ts">create</a>(accountID, { ...params }) -> LocateCreateResponse</code>
+- <code title="put /trade/v1/accounts/{account_id}/locates/{locate_order_id}/accept">client.locates.<a href="./src/resources/locates.ts">accept</a>(locateOrderID, { ...params }) -> void</code>
+- <code title="put /trade/v1/accounts/{account_id}/locates/{locate_order_id}/decline">client.locates.<a href="./src/resources/locates.ts">decline</a>(locateOrderID, { ...params }) -> void</code>
+- <code title="get /trade/v1/accounts/{account_id}/locates/inventory/{symbol}">client.locates.<a href="./src/resources/locates.ts">inventory</a>(symbol, { ...params }) -> void</code>
+
 # Positions
 
 Types:

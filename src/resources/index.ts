@@ -11,6 +11,15 @@ export {
   type InstrumentListParams,
 } from './instruments';
 export {
+  Locates,
+  type LocateOrder,
+  type LocateCreateResponse,
+  type LocateCreateParams,
+  type LocateAcceptParams,
+  type LocateDeclineParams,
+  type LocateInventoryParams,
+} from './locates';
+export {
   M2mApps,
   type M2mApp,
   type M2mAppCreateResponse,
