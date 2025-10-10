@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource locates', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.locates.create('19816', { body: {} });
+  test.skip('create', async () => {
+    const responsePromise = client.locates.create('19816', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,11 +18,6 @@ describe('resource locates', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.locates.create('19816', { body: {} });
   });
 
   // Prism tests are disabled
