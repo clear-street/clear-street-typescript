@@ -10,18 +10,30 @@ import { path } from '../internal/utils/path';
 export class Locates extends APIResource {
   /**
    * Submits a batch of locate requests to locate shares for short selling.
+   *
+   * @example
+   * ```ts
+   * const locate = await client.locates.create('19816');
+   * ```
    */
   create(
     accountID: string,
-    params: LocateCreateParams,
+    body: LocateCreateParams,
     options?: RequestOptions,
   ): APIPromise<LocateCreateResponse> {
-    const { body } = params;
-    return this._client.post(path`/trade/v1/accounts/${accountID}/locates`, { body: body, ...options });
+    return this._client.post(path`/trade/v1/accounts/${accountID}/locates`, { body, ...options });
   }
 
   /**
    * Accepts a previously offered locate.
+   *
+   * @example
+   * ```ts
+   * await client.locates.accept(
+   *   'loc_2af0305ffa5b4c91ba4e7ab45e2d8e4e',
+   *   { account_id: '19816' },
+   * );
+   * ```
    */
   accept(locateOrderID: string, params: LocateAcceptParams, options?: RequestOptions): APIPromise<void> {
     const { account_id } = params;
@@ -33,6 +45,14 @@ export class Locates extends APIResource {
 
   /**
    * Declines a previously offered locate.
+   *
+   * @example
+   * ```ts
+   * await client.locates.decline(
+   *   'loc_2af0305ffa5b4c91ba4e7ab45e2d8e4e',
+   *   { account_id: '19816' },
+   * );
+   * ```
    */
   decline(locateOrderID: string, params: LocateDeclineParams, options?: RequestOptions): APIPromise<void> {
     const { account_id } = params;
@@ -45,6 +65,13 @@ export class Locates extends APIResource {
   /**
    * Retrieves the available locate inventory for a specific symbol. This endpoint is
    * not yet implemented.
+   *
+   * @example
+   * ```ts
+   * await client.locates.inventory('AAPL', {
+   *   account_id: '19816',
+   * });
+   * ```
    */
   inventory(symbol: string, params: LocateInventoryParams, options?: RequestOptions): APIPromise<void> {
     const { account_id } = params;
@@ -126,7 +153,35 @@ export interface LocateCreateResponse extends Omit<Shared.BaseResponse, 'data'> 
 }
 
 export interface LocateCreateParams {
-  body: unknown;
+  /**
+   * Optional client reference ID that can be used to identify the locate order
+   * batch.
+   */
+  client_reference_id?: string;
+
+  /**
+   * Optional comments to associate with the batch.
+   */
+  comment?: string;
+
+  /**
+   * List of securities and quantities to locate.
+   */
+  orders?: Array<LocateCreateParams.Order>;
+}
+
+export namespace LocateCreateParams {
+  export interface Order {
+    /**
+     * The quantity of shares to locate.
+     */
+    quantity: number;
+
+    /**
+     * The symbol of the security to locate.
+     */
+    symbol: string;
+  }
 }
 
 export interface LocateAcceptParams {
