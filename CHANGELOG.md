@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.17.0 (2025-10-10)
+
+Full Changelog: [v0.16.0...v0.17.0](https://github.com/clear-street/clear-street-typescript/compare/v0.16.0...v0.17.0)
+
+### Features
+
+* **api:** Move positions from accounts sub-resource to top-level resource. ([a47cb53](https://github.com/clear-street/clear-street-typescript/commit/a47cb5318471070bc3386a33dce1487f8ae27cd0))
+
 ## 0.16.0 (2025-10-10)
 
 Full Changelog: [v0.15.0...v0.16.0](https://github.com/clear-street/clear-street-typescript/compare/v0.15.0...v0.16.0)
