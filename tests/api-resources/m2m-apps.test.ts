@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource m2mApps', () => {
   // Prism tests are disabled
-  test.skip('create', async () => {
-    const responsePromise = client.m2mApps.create();
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.m2mApps.create({ description: 'description' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,6 +18,11 @@ describe('resource m2mApps', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.m2mApps.create({ description: 'description' });
   });
 
   // Prism tests are disabled

@@ -62,7 +62,7 @@ Types:
 
 Methods:
 
-- <code title="post /admin/v1/m2m_apps">client.m2mApps.<a href="./src/resources/m2m-apps.ts">create</a>() -> M2mAppCreateResponse</code>
+- <code title="post /admin/v1/m2m_apps">client.m2mApps.<a href="./src/resources/m2m-apps.ts">create</a>({ ...params }) -> M2mAppCreateResponse</code>
 - <code title="get /admin/v1/m2m_apps">client.m2mApps.<a href="./src/resources/m2m-apps.ts">list</a>() -> M2mAppListResponse</code>
 - <code title="delete /admin/v1/m2m_apps/{id}">client.m2mApps.<a href="./src/resources/m2m-apps.ts">delete</a>(id) -> M2mAppDeleteResponse</code>
 

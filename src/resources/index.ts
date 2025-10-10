@@ -16,6 +16,7 @@ export {
   type M2mAppCreateResponse,
   type M2mAppListResponse,
   type M2mAppDeleteResponse,
+  type M2mAppCreateParams,
 } from './m2m-apps';
 export {
   Orders,

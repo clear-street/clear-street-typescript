@@ -26,6 +26,7 @@ import {
 } from './resources/instruments';
 import {
   M2mApp,
+  M2mAppCreateParams,
   M2mAppCreateResponse,
   M2mAppDeleteResponse,
   M2mAppListResponse,
@@ -804,6 +805,7 @@ export declare namespace ClearStreet {
     type M2mAppCreateResponse as M2mAppCreateResponse,
     type M2mAppListResponse as M2mAppListResponse,
     type M2mAppDeleteResponse as M2mAppDeleteResponse,
+    type M2mAppCreateParams as M2mAppCreateParams,
   };
 
   export {
