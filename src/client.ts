@@ -26,6 +26,15 @@ import {
   Instruments,
 } from './resources/instruments';
 import {
+  LocateAcceptParams,
+  LocateCreateParams,
+  LocateCreateResponse,
+  LocateDeclineParams,
+  LocateInventoryParams,
+  LocateOrder,
+  Locates,
+} from './resources/locates';
+import {
   M2mApp,
   M2mAppCreateParams,
   M2mAppCreateResponse,
@@ -772,6 +781,7 @@ export class ClearStreet {
 
   common: API.Common = new API.Common(this);
   accounts: API.Accounts = new API.Accounts(this);
+  locates: API.Locates = new API.Locates(this);
   positions: API.Positions = new API.Positions(this);
   instruments: API.Instruments = new API.Instruments(this);
   m2mApps: API.M2mApps = new API.M2mApps(this);
@@ -781,6 +791,7 @@ export class ClearStreet {
 
 ClearStreet.Common = Common;
 ClearStreet.Accounts = Accounts;
+ClearStreet.Locates = Locates;
 ClearStreet.Positions = Positions;
 ClearStreet.Instruments = Instruments;
 ClearStreet.M2mApps = M2mApps;
@@ -796,6 +807,16 @@ export declare namespace ClearStreet {
     Accounts as Accounts,
     type Account as Account,
     type AccountRetrieveResponse as AccountRetrieveResponse,
+  };
+
+  export {
+    Locates as Locates,
+    type LocateOrder as LocateOrder,
+    type LocateCreateResponse as LocateCreateResponse,
+    type LocateCreateParams as LocateCreateParams,
+    type LocateAcceptParams as LocateAcceptParams,
+    type LocateDeclineParams as LocateDeclineParams,
+    type LocateInventoryParams as LocateInventoryParams,
   };
 
   export {
