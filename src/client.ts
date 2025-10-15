@@ -16,48 +16,8 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Account, AccountRetrieveResponse, Accounts } from './resources/accounts';
-import { APIProblem, Common, ResponseMetadata } from './resources/common';
-import {
-  Instrument,
-  InstrumentListParams,
-  InstrumentListResponse,
-  InstrumentRetrieveResponse,
-  Instruments,
-} from './resources/instruments';
-import {
-  LocateAcceptParams,
-  LocateCreateParams,
-  LocateCreateResponse,
-  LocateDeclineParams,
-  LocateInventoryParams,
-  LocateOrder,
-  Locates,
-} from './resources/locates';
-import {
-  M2mApp,
-  M2mAppCreateParams,
-  M2mAppCreateResponse,
-  M2mAppDeleteResponse,
-  M2mAppListResponse,
-  M2mApps,
-} from './resources/m2m-apps';
-import {
-  Order,
-  OrderCreateParams,
-  OrderCreateResponse,
-  OrderListParams,
-  OrderListResponse,
-  OrderRetrieveParams,
-  OrderRetrieveResponse,
-  Orders,
-  Side,
-  Status,
-  TimeInForce,
-  Type,
-} from './resources/orders';
-import { Position, PositionListResponse, Positions } from './resources/positions';
-import { Version, VersionRetrieveResponse } from './resources/version';
+import { Polygon } from './resources/polygon';
+import { Active } from './resources/active/active';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -72,22 +32,22 @@ import {
 import { isEmptyObj } from './internal/utils/values';
 
 const environments = {
-  production: 'https://api-active.clearstreet.io',
+  production: 'https://api.clearstreet.io',
   staging: 'https://oems-api-gw.dev-public.clst.co',
 };
 type Environment = keyof typeof environments;
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['CLEAR_STREET_API_KEY'].
+   * A JWT issued by the authentication service.
    */
-  apiKey?: string | undefined;
+  apiKey?: string | null | undefined;
 
   /**
    * Specifies the environment to use for the API.
    *
    * Each environment maps to a different base URL:
-   * - `production` corresponds to `https://api-active.clearstreet.io`
+   * - `production` corresponds to `https://api.clearstreet.io`
    * - `staging` corresponds to `https://oems-api-gw.dev-public.clst.co`
    */
   environment?: Environment | undefined;
@@ -165,7 +125,7 @@ export interface ClientOptions {
  * API Client for interfacing with the Clear Street API.
  */
 export class ClearStreet {
-  apiKey: string;
+  apiKey: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -182,9 +142,9 @@ export class ClearStreet {
   /**
    * API Client for interfacing with the Clear Street API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['CLEAR_STREET_API_KEY'] ?? undefined]
+   * @param {string | null | undefined} [opts.apiKey]
    * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
-   * @param {string} [opts.baseURL=process.env['CLEAR_STREET_BASE_URL'] ?? https://api-active.clearstreet.io] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['CLEAR_STREET_BASE_URL'] ?? https://api.clearstreet.io] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -192,17 +152,7 @@ export class ClearStreet {
    * @param {HeadersLike} opts.defaultHeaders - Default headers to include with every request to the API.
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
-  constructor({
-    baseURL = readEnv('CLEAR_STREET_BASE_URL'),
-    apiKey = readEnv('CLEAR_STREET_API_KEY'),
-    ...opts
-  }: ClientOptions = {}) {
-    if (apiKey === undefined) {
-      throw new Errors.ClearStreetError(
-        "The CLEAR_STREET_API_KEY environment variable is missing or empty; either provide it, or instantiate the ClearStreet client with an apiKey option, like new ClearStreet({ apiKey: 'My API Key' }).",
-      );
-    }
-
+  constructor({ baseURL = readEnv('CLEAR_STREET_BASE_URL'), apiKey = null, ...opts }: ClientOptions = {}) {
     const options: ClientOptions = {
       apiKey,
       ...opts,
@@ -268,10 +218,22 @@ export class ClearStreet {
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
-    return;
+    if (this.apiKey && values.get('authorization')) {
+      return;
+    }
+    if (nulls.has('authorization')) {
+      return;
+    }
+
+    throw new Error(
+      'Could not resolve authentication method. Expected the apiKey to be set. Or for the "Authorization" headers to be explicitly omitted',
+    );
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    if (this.apiKey == null) {
+      return undefined;
+    }
     return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
@@ -779,91 +741,24 @@ export class ClearStreet {
 
   static toFile = Uploads.toFile;
 
-  common: API.Common = new API.Common(this);
-  accounts: API.Accounts = new API.Accounts(this);
-  locates: API.Locates = new API.Locates(this);
-  positions: API.Positions = new API.Positions(this);
-  instruments: API.Instruments = new API.Instruments(this);
-  m2mApps: API.M2mApps = new API.M2mApps(this);
-  orders: API.Orders = new API.Orders(this);
-  version: API.Version = new API.Version(this);
+  active: API.Active = new API.Active(this);
+  polygon: API.Polygon = new API.Polygon(this);
 }
 
-ClearStreet.Common = Common;
-ClearStreet.Accounts = Accounts;
-ClearStreet.Locates = Locates;
-ClearStreet.Positions = Positions;
-ClearStreet.Instruments = Instruments;
-ClearStreet.M2mApps = M2mApps;
-ClearStreet.Orders = Orders;
-ClearStreet.Version = Version;
+ClearStreet.Active = Active;
+ClearStreet.Polygon = Polygon;
 
 export declare namespace ClearStreet {
   export type RequestOptions = Opts.RequestOptions;
 
-  export { Common as Common, type APIProblem as APIProblem, type ResponseMetadata as ResponseMetadata };
+  export { Active as Active };
 
-  export {
-    Accounts as Accounts,
-    type Account as Account,
-    type AccountRetrieveResponse as AccountRetrieveResponse,
-  };
-
-  export {
-    Locates as Locates,
-    type LocateOrder as LocateOrder,
-    type LocateCreateResponse as LocateCreateResponse,
-    type LocateCreateParams as LocateCreateParams,
-    type LocateAcceptParams as LocateAcceptParams,
-    type LocateDeclineParams as LocateDeclineParams,
-    type LocateInventoryParams as LocateInventoryParams,
-  };
-
-  export {
-    Positions as Positions,
-    type Position as Position,
-    type PositionListResponse as PositionListResponse,
-  };
-
-  export {
-    Instruments as Instruments,
-    type Instrument as Instrument,
-    type InstrumentRetrieveResponse as InstrumentRetrieveResponse,
-    type InstrumentListResponse as InstrumentListResponse,
-    type InstrumentListParams as InstrumentListParams,
-  };
-
-  export {
-    M2mApps as M2mApps,
-    type M2mApp as M2mApp,
-    type M2mAppCreateResponse as M2mAppCreateResponse,
-    type M2mAppListResponse as M2mAppListResponse,
-    type M2mAppDeleteResponse as M2mAppDeleteResponse,
-    type M2mAppCreateParams as M2mAppCreateParams,
-  };
-
-  export {
-    Orders as Orders,
-    type Order as Order,
-    type Side as Side,
-    type Status as Status,
-    type TimeInForce as TimeInForce,
-    type Type as Type,
-    type OrderCreateResponse as OrderCreateResponse,
-    type OrderRetrieveResponse as OrderRetrieveResponse,
-    type OrderListResponse as OrderListResponse,
-    type OrderCreateParams as OrderCreateParams,
-    type OrderRetrieveParams as OrderRetrieveParams,
-    type OrderListParams as OrderListParams,
-  };
-
-  export { Version as Version, type VersionRetrieveResponse as VersionRetrieveResponse };
+  export { Polygon as Polygon };
 
   export type AnyArray = API.AnyArray;
   export type AnyObject = API.AnyObject;
   export type AnyValue = API.AnyValue;
-  export type APIDecimal64 = API.APIDecimal64;
+  export type APIError = API.APIError;
   export type BaseResponse = API.BaseResponse;
-  export type MantissaExponent = API.MantissaExponent;
-  export type NanoSeconds = API.NanoSeconds;
+  export type ErrorResponse = API.ErrorResponse;
 }

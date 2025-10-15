@@ -23,13 +23,11 @@ The full API of this library can be found in [api.md](api.md).
 import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
-  apiKey: process.env['CLEAR_STREET_API_KEY'], // This is the default and can be omitted
+  apiKey: 'My API Key',
   environment: 'staging', // defaults to 'production'
 });
 
-const order = await client.orders.retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' });
-
-console.log(order.data);
+const accounts = await client.active.v1.accounts.list();
 ```
 
 ### Request & Response types
@@ -41,12 +39,11 @@ This library includes TypeScript definitions for all request params and response
 import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
-  apiKey: process.env['CLEAR_STREET_API_KEY'], // This is the default and can be omitted
+  apiKey: 'My API Key',
   environment: 'staging', // defaults to 'production'
 });
 
-const params: ClearStreet.OrderRetrieveParams = { account_id: 'REPLACE_ME' };
-const order: ClearStreet.OrderRetrieveResponse = await client.orders.retrieve('REPLACE_ME', params);
+const accounts: ClearStreet.Active.V1.AccountListResponse = await client.active.v1.accounts.list();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -59,7 +56,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const order = await client.orders.retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' }).catch(async (err) => {
+const accounts = await client.active.v1.accounts.list().catch(async (err) => {
   if (err instanceof ClearStreet.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -99,7 +96,7 @@ const client = new ClearStreet({
 });
 
 // Or, configure per-request:
-await client.orders.retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' }, {
+await client.active.v1.accounts.list({
   maxRetries: 5,
 });
 ```
@@ -116,7 +113,7 @@ const client = new ClearStreet({
 });
 
 // Override per-request:
-await client.orders.retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' }, {
+await client.active.v1.accounts.list({
   timeout: 5 * 1000,
 });
 ```
@@ -139,15 +136,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new ClearStreet();
 
-const response = await client.orders.retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' }).asResponse();
+const response = await client.active.v1.accounts.list().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: order, response: raw } = await client.orders
-  .retrieve('REPLACE_ME', { account_id: 'REPLACE_ME' })
-  .withResponse();
+const { data: accounts, response: raw } = await client.active.v1.accounts.list().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(order.data);
+console.log(accounts);
 ```
 
 ### Logging
@@ -227,7 +222,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.orders.retrieve({
+client.active.v1.accounts.list({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
