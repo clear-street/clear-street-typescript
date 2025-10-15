@@ -306,13 +306,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['CLEAR_STREET_BASE_URL'] = ''; // empty
       const client = new ClearStreet({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api-active.clearstreet.io');
+      expect(client.baseURL).toEqual('https://api.clearstreet.io');
     });
 
     test('blank env variable', () => {
       process.env['CLEAR_STREET_BASE_URL'] = '  '; // blank
       const client = new ClearStreet({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api-active.clearstreet.io');
+      expect(client.baseURL).toEqual('https://api.clearstreet.io');
     });
 
     test('env variable with environment', () => {
@@ -325,7 +325,7 @@ describe('instantiate client', () => {
       );
 
       const client = new ClearStreet({ apiKey: 'My API Key', baseURL: null, environment: 'production' });
-      expect(client.baseURL).toEqual('https://api-active.clearstreet.io');
+      expect(client.baseURL).toEqual('https://api.clearstreet.io');
     });
 
     test('in request options', () => {
@@ -434,20 +434,6 @@ describe('instantiate client', () => {
       // Verify URL building uses the updated baseURL
       expect(newClient.buildURL('/bar', null)).toEqual('http://localhost:6000/bar');
     });
-  });
-
-  test('with environment variable arguments', () => {
-    // set options via env var
-    process.env['CLEAR_STREET_API_KEY'] = 'My API Key';
-    const client = new ClearStreet();
-    expect(client.apiKey).toBe('My API Key');
-  });
-
-  test('with overridden environment variable arguments', () => {
-    // set options via env var
-    process.env['CLEAR_STREET_API_KEY'] = 'another My API Key';
-    const client = new ClearStreet({ apiKey: 'My API Key' });
-    expect(client.apiKey).toBe('My API Key');
   });
 });
 
