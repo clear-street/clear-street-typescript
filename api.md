@@ -2,24 +2,16 @@
 
 Types:
 
-- <code><a href="./src/resources/shared.ts">AnyArray</a></code>
-- <code><a href="./src/resources/shared.ts">AnyObject</a></code>
-- <code><a href="./src/resources/shared.ts">AnyValue</a></code>
 - <code><a href="./src/resources/shared.ts">APIError</a></code>
 - <code><a href="./src/resources/shared.ts">BaseResponse</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorResponse</a></code>
+- <code><a href="./src/resources/shared.ts">ResponseMetadata</a></code>
+- <code><a href="./src/resources/shared.ts">SecurityIDSource</a></code>
+- <code><a href="./src/resources/shared.ts">SecurityType</a></code>
 
 # Active
 
 ## V1
-
-Types:
-
-- <code><a href="./src/resources/active/v1/v1.ts">V1RetrieveScreenerResponse</a></code>
-
-Methods:
-
-- <code title="get /active/v1/screener">client.active.v1.<a href="./src/resources/active/v1/v1.ts">retrieveScreener</a>({ ...params }) -> V1RetrieveScreenerResponse</code>
 
 ### Accounts
 
@@ -28,31 +20,64 @@ Types:
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">Account</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountRetrieveResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountListResponse</a></code>
-- <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountRetrieveBalancesResponse</a></code>
-- <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountRetrievePositionsResponse</a></code>
-- <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountUpdateSettingsResponse</a></code>
 
 Methods:
 
 - <code title="get /active/v1/accounts/{account_id}">client.active.v1.accounts.<a href="./src/resources/active/v1/accounts/accounts.ts">retrieve</a>(accountID) -> AccountRetrieveResponse</code>
 - <code title="get /active/v1/accounts">client.active.v1.accounts.<a href="./src/resources/active/v1/accounts/accounts.ts">list</a>({ ...params }) -> AccountListResponse</code>
-- <code title="get /active/v1/accounts/{account_id}/balances">client.active.v1.accounts.<a href="./src/resources/active/v1/accounts/accounts.ts">retrieveBalances</a>(accountID) -> AccountRetrieveBalancesResponse</code>
-- <code title="get /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.<a href="./src/resources/active/v1/accounts/accounts.ts">retrievePositions</a>(accountID, { ...params }) -> AccountRetrievePositionsResponse</code>
-- <code title="patch /active/v1/accounts/{account_id}/settings">client.active.v1.accounts.<a href="./src/resources/active/v1/accounts/accounts.ts">updateSettings</a>(accountID, { ...params }) -> AccountUpdateSettingsResponse</code>
+
+#### Settings
+
+Types:
+
+- <code><a href="./src/resources/active/v1/accounts/settings.ts">SettingUpdateResponse</a></code>
+
+Methods:
+
+- <code title="patch /active/v1/accounts/{account_id}/settings">client.active.v1.accounts.settings.<a href="./src/resources/active/v1/accounts/settings.ts">update</a>(accountID, { ...params }) -> SettingUpdateResponse</code>
+
+#### Positions
+
+Types:
+
+- <code><a href="./src/resources/active/v1/accounts/positions.ts">Position</a></code>
+- <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">list</a>(accountID, { ...params }) -> PositionListResponse</code>
+
+#### Balances
+
+Types:
+
+- <code><a href="./src/resources/active/v1/accounts/balances.ts">AccountBalances</a></code>
+- <code><a href="./src/resources/active/v1/accounts/balances.ts">BalanceListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/accounts/{account_id}/balances">client.active.v1.accounts.balances.<a href="./src/resources/active/v1/accounts/balances.ts">list</a>(accountID) -> BalanceListResponse</code>
 
 #### Orders
 
 Types:
 
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">ApStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">BaseStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">DarkStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">DmaStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">Order</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderSide</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderStatus</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderType</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">SecurityIDSource</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">SecurityType</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">PovStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">SorStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">StrategyType</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">TimeInForce</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">TwapStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">Urgency</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">VwapStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderCreateResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderRetrieveResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderUpdateResponse</a></code>
@@ -73,78 +98,198 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/accounts/locates.ts">LocateOrder</a></code>
-- <code><a href="./src/resources/active/v1/accounts/locates.ts">LocateCreateResponse</a></code>
-- <code><a href="./src/resources/active/v1/accounts/locates.ts">LocateUpdateResponse</a></code>
-- <code><a href="./src/resources/active/v1/accounts/locates.ts">LocateListResponse</a></code>
-- <code><a href="./src/resources/active/v1/accounts/locates.ts">LocateRetrieveInventoryResponse</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/locates.ts">LocateOrder</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/locates.ts">LocateOrderStatus</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/locates.ts">LocateCreateResponse</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/locates.ts">LocateUpdateResponse</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/locates.ts">LocateListResponse</a></code>
 
 Methods:
 
-- <code title="post /active/v1/accounts/{account_id}/locates">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates.ts">create</a>(accountID, { ...params }) -> LocateCreateResponse</code>
-- <code title="patch /active/v1/accounts/{account_id}/locates/{locate_order_id}">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates.ts">update</a>(locateOrderID, { ...params }) -> LocateUpdateResponse</code>
-- <code title="get /active/v1/accounts/{account_id}/locates">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates.ts">list</a>(accountID, { ...params }) -> LocateListResponse</code>
-- <code title="get /active/v1/accounts/{account_id}/locates/inventory">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates.ts">retrieveInventory</a>(accountID, { ...params }) -> LocateRetrieveInventoryResponse</code>
+- <code title="post /active/v1/accounts/{account_id}/locates">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates/locates.ts">create</a>(accountID, { ...params }) -> LocateCreateResponse</code>
+- <code title="patch /active/v1/accounts/{account_id}/locates/{locate_order_id}">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates/locates.ts">update</a>(locateOrderID, { ...params }) -> LocateUpdateResponse</code>
+- <code title="get /active/v1/accounts/{account_id}/locates">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates/locates.ts">list</a>(accountID, { ...params }) -> LocateListResponse</code>
+
+##### LocateInventory
+
+Types:
+
+- <code><a href="./src/resources/active/v1/accounts/locates/locate-inventory.ts">InventoryItem</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/locate-inventory.ts">LocateInventoryRetrieveResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/accounts/{account_id}/locates/inventory">client.active.v1.accounts.locates.locateInventory.<a href="./src/resources/active/v1/accounts/locates/locate-inventory.ts">retrieve</a>(accountID, { ...params }) -> LocateInventoryRetrieveResponse</code>
 
 ### Instruments
 
 Types:
 
-- <code><a href="./src/resources/active/v1/instruments.ts">AnalystRating</a></code>
-- <code><a href="./src/resources/active/v1/instruments.ts">FiscalPeriodType</a></code>
-- <code><a href="./src/resources/active/v1/instruments.ts">Instrument</a></code>
-- <code><a href="./src/resources/active/v1/instruments.ts">InstrumentRetrieveResponse</a></code>
-- <code><a href="./src/resources/active/v1/instruments.ts">InstrumentListResponse</a></code>
-- <code><a href="./src/resources/active/v1/instruments.ts">InstrumentRetrieveAnalystReportingResponse</a></code>
-- <code><a href="./src/resources/active/v1/instruments.ts">InstrumentRetrieveEventsResponse</a></code>
-- <code><a href="./src/resources/active/v1/instruments.ts">InstrumentRetrieveNewsResponse</a></code>
-- <code><a href="./src/resources/active/v1/instruments.ts">InstrumentRetrieveReportingResponse</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">Instrument</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentQuote</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentRetrieveResponse</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentListResponse</a></code>
 
 Methods:
 
-- <code title="get /active/v1/instruments/{instrument_id}">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments.ts">retrieve</a>(instrumentID, { ...params }) -> InstrumentRetrieveResponse</code>
-- <code title="get /active/v1/instruments">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments.ts">list</a>({ ...params }) -> InstrumentListResponse</code>
-- <code title="get /active/v1/instruments/{instrument_id}/analyst-reporting">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments.ts">retrieveAnalystReporting</a>(instrumentID, { ...params }) -> InstrumentRetrieveAnalystReportingResponse</code>
-- <code title="get /active/v1/instruments/{instrument_id}/events">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments.ts">retrieveEvents</a>(instrumentID, { ...params }) -> InstrumentRetrieveEventsResponse</code>
-- <code title="get /active/v1/instruments/{instrument_id}/news">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments.ts">retrieveNews</a>(instrumentID, { ...params }) -> InstrumentRetrieveNewsResponse</code>
-- <code title="get /active/v1/instruments/{instrument_id}/reporting">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments.ts">retrieveReporting</a>(instrumentID, { ...params }) -> InstrumentRetrieveReportingResponse</code>
+- <code title="get /active/v1/instruments/{instrument_id}">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">retrieve</a>(instrumentID, { ...params }) -> InstrumentRetrieveResponse</code>
+- <code title="get /active/v1/instruments">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">list</a>({ ...params }) -> InstrumentListResponse</code>
 
-### Calendars
+#### Events
 
 Types:
 
-- <code><a href="./src/resources/active/v1/calendars.ts">CalendarRetrieveDividendsResponse</a></code>
-- <code><a href="./src/resources/active/v1/calendars.ts">CalendarRetrieveEarningsResponse</a></code>
-- <code><a href="./src/resources/active/v1/calendars.ts">CalendarRetrieveEconomicResponse</a></code>
-- <code><a href="./src/resources/active/v1/calendars.ts">CalendarRetrieveMarketHoursResponse</a></code>
-- <code><a href="./src/resources/active/v1/calendars.ts">CalendarRetrieveMergersAcquisitionsResponse</a></code>
-- <code><a href="./src/resources/active/v1/calendars.ts">CalendarRetrieveSplitsResponse</a></code>
-- <code><a href="./src/resources/active/v1/calendars.ts">CalendarRetrieveSummaryResponse</a></code>
+- <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentEvent</a></code>
+- <code><a href="./src/resources/active/v1/instruments/events.ts">EventListResponse</a></code>
 
 Methods:
 
-- <code title="get /active/v1/calendars/dividends">client.active.v1.calendars.<a href="./src/resources/active/v1/calendars.ts">retrieveDividends</a>({ ...params }) -> CalendarRetrieveDividendsResponse</code>
-- <code title="get /active/v1/calendars/earnings">client.active.v1.calendars.<a href="./src/resources/active/v1/calendars.ts">retrieveEarnings</a>({ ...params }) -> CalendarRetrieveEarningsResponse</code>
-- <code title="get /active/v1/calendars/economic">client.active.v1.calendars.<a href="./src/resources/active/v1/calendars.ts">retrieveEconomic</a>({ ...params }) -> CalendarRetrieveEconomicResponse</code>
-- <code title="get /active/v1/calendars/market-hours">client.active.v1.calendars.<a href="./src/resources/active/v1/calendars.ts">retrieveMarketHours</a>({ ...params }) -> CalendarRetrieveMarketHoursResponse</code>
-- <code title="get /active/v1/calendars/mergers-acquisitions">client.active.v1.calendars.<a href="./src/resources/active/v1/calendars.ts">retrieveMergersAcquisitions</a>({ ...params }) -> CalendarRetrieveMergersAcquisitionsResponse</code>
-- <code title="get /active/v1/calendars/splits">client.active.v1.calendars.<a href="./src/resources/active/v1/calendars.ts">retrieveSplits</a>({ ...params }) -> CalendarRetrieveSplitsResponse</code>
-- <code title="get /active/v1/calendars/summary">client.active.v1.calendars.<a href="./src/resources/active/v1/calendars.ts">retrieveSummary</a>({ ...params }) -> CalendarRetrieveSummaryResponse</code>
+- <code title="get /active/v1/instruments/{instrument_id}/events">client.active.v1.instruments.events.<a href="./src/resources/active/v1/instruments/events.ts">list</a>(instrumentID, { ...params }) -> EventListResponse</code>
+
+#### Reporting
+
+Types:
+
+- <code><a href="./src/resources/active/v1/instruments/reporting.ts">FiscalPeriodType</a></code>
+- <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentBalanceSheet</a></code>
+- <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentCashFlow</a></code>
+- <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentDividendReport</a></code>
+- <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentEarnings</a></code>
+- <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentIncome</a></code>
+- <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentReport</a></code>
+- <code><a href="./src/resources/active/v1/instruments/reporting.ts">ReportingListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/instruments/{instrument_id}/reporting">client.active.v1.instruments.reporting.<a href="./src/resources/active/v1/instruments/reporting.ts">list</a>(instrumentID, { ...params }) -> ReportingListResponse</code>
+
+#### AnalystReporting
+
+Types:
+
+- <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">AnalystRating</a></code>
+- <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">AnalystReport</a></code>
+- <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">AnalystReportingListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/instruments/{instrument_id}/analyst-reporting">client.active.v1.instruments.analystReporting.<a href="./src/resources/active/v1/instruments/analyst-reporting.ts">list</a>(instrumentID, { ...params }) -> AnalystReportingListResponse</code>
+
+#### News
+
+Types:
+
+- <code><a href="./src/resources/active/v1/instruments/news.ts">News</a></code>
+- <code><a href="./src/resources/active/v1/instruments/news.ts">NewsListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/instruments/{instrument_id}/news">client.active.v1.instruments.news.<a href="./src/resources/active/v1/instruments/news.ts">list</a>(instrumentID, { ...params }) -> NewsListResponse</code>
+
+### Calendars
+
+#### Economic
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicCalendarEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/economic">client.active.v1.calendars.economic.<a href="./src/resources/active/v1/calendars/economic.ts">list</a>({ ...params }) -> EconomicListResponse</code>
+
+#### Earnings
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/earnings.ts">EarningsCalendarEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/earnings.ts">EarningListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/earnings">client.active.v1.calendars.earnings.<a href="./src/resources/active/v1/calendars/earnings.ts">list</a>({ ...params }) -> EarningListResponse</code>
+
+#### Dividends
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendCalendarEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/dividends">client.active.v1.calendars.dividends.<a href="./src/resources/active/v1/calendars/dividends.ts">list</a>({ ...params }) -> DividendListResponse</code>
+
+#### Splits
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/splits.ts">StockSplitEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/splits.ts">SplitListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/splits">client.active.v1.calendars.splits.<a href="./src/resources/active/v1/calendars/splits.ts">list</a>({ ...params }) -> SplitListResponse</code>
+
+#### MergersAcquisitions
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/mergers-acquisitions.ts">MergersAcqusitionsEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/mergers-acquisitions.ts">MergersAcquisitionListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/mergers-acquisitions">client.active.v1.calendars.mergersAcquisitions.<a href="./src/resources/active/v1/calendars/mergers-acquisitions.ts">list</a>({ ...params }) -> MergersAcquisitionListResponse</code>
+
+#### MarketHours
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketHours</a></code>
+- <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketHourRetrieveResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/market-hours">client.active.v1.calendars.marketHours.<a href="./src/resources/active/v1/calendars/market-hours.ts">retrieve</a>({ ...params }) -> MarketHourRetrieveResponse</code>
+
+#### Summary
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/summary.ts">CalendarDateSummary</a></code>
+- <code><a href="./src/resources/active/v1/calendars/summary.ts">SummaryListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/summary">client.active.v1.calendars.summary.<a href="./src/resources/active/v1/calendars/summary.ts">list</a>({ ...params }) -> SummaryListResponse</code>
 
 ### Version
 
 Types:
 
-- <code><a href="./src/resources/active/v1/version.ts">VersionListResponse</a></code>
-- <code><a href="./src/resources/active/v1/version.ts">VersionPatchAllResponse</a></code>
+- <code><a href="./src/resources/active/v1/version.ts">VersionRetrieveResponse</a></code>
+- <code><a href="./src/resources/active/v1/version.ts">VersionUpdateResponse</a></code>
 
 Methods:
 
-- <code title="get /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">list</a>() -> VersionListResponse</code>
-- <code title="patch /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">patchAll</a>({ ...params }) -> VersionPatchAllResponse</code>
+- <code title="get /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">retrieve</a>() -> VersionRetrieveResponse</code>
+- <code title="patch /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">update</a>({ ...params }) -> VersionUpdateResponse</code>
+
+### Screener
+
+Types:
+
+- <code><a href="./src/resources/active/v1/screener.ts">ScreenerItem</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">ScreenerListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/screener">client.active.v1.screener.<a href="./src/resources/active/v1/screener.ts">list</a>({ ...params }) -> ScreenerListResponse</code>
 
 # Polygon
 
 Methods:
 
-- <code title="get /polygon/v1/{polygon_path}">client.polygon.<a href="./src/resources/polygon.ts">retrieve</a>(polygonPath) -> void</code>
+- <code title="get /polygon/v1/{polygon_path}">client.polygon.<a href="./src/resources/polygon.ts">retrieve</a>(polygonPath) -> BaseResponse</code>

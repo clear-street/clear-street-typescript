@@ -141,6 +141,20 @@ export class Orders extends APIResource {
   }
 }
 
+export interface ApStrategy extends BaseStrategy {
+  /**
+   * The maximum percentage of market volume to participate in. Must be between 0
+   * and 100.
+   */
+  max_percent?: number;
+
+  /**
+   * The minimum percentage of market volume to participate in. Must be between 0
+   * and 100.
+   */
+  min_percent?: number;
+}
+
 export interface BaseStrategy {
   /**
    * Strategy type used for execution.
@@ -175,7 +189,59 @@ export interface BaseStrategy {
    * The urgency level for algorithmic execution strategies, influencing how
    * aggressively the strategy will try to execute the order.
    */
-  urgency?: 'SUPER_PASSIVE' | 'PASSIVE' | 'MODERATE' | 'AGGRESSIVE' | 'SUPER_AGGRESSIVE';
+  urgency?: Urgency;
+}
+
+export interface DarkStrategy extends BaseStrategy {
+  /**
+   * The maximum percentage of market volume to participate in. Must be between 0
+   * and 100.
+   */
+  max_percent?: number;
+}
+
+export interface DmaStrategy {
+  /**
+   * The destination exchange for a Direct Market Access (DMA) order, specified by
+   * its Market Identifier Code (MIC). | MIC | Exchange |
+   * |------|-------------------------| | ARCX | NYSE ARCA | | BATS | Cboe BZX
+   * Exchange | | BATY | Cboe BYX Exchange | | EDGA | Cboe EDGA Exchange | | EDGX |
+   * Cboe EDGX Exchange | | EPRL | MIAX Pearl Equities | | IEXG | Investors' Exchange
+   * | | MEMX | Members' Exchange | | XASE | NYSE American | | XBOS | Nasdaq BX
+   * Exchange | | XCIS | NYSE National | | XNMS | Nasdaq | | XNYS | New York Stock
+   * Exchange |
+   */
+  destination:
+    | 'ARCX'
+    | 'BATS'
+    | 'BATY'
+    | 'EDGA'
+    | 'EDGX'
+    | 'EPRL'
+    | 'IEXG'
+    | 'MEMX'
+    | 'XASE'
+    | 'XBOS'
+    | 'XCIS'
+    | 'XNMS'
+    | 'XNYS';
+
+  /**
+   * Strategy type used for execution.
+   *
+   * - `SOR`: Smart Order Router (default). Routes the order to the best available
+   *   venue.
+   * - `DARK`: Dark Pool. Routes the order to a dark pool venue.
+   * - `AP`: Arrival Price. Aims to match the price at the time the order was placed.
+   * - `POV`: Percentage of Volume. Aims to participate as a percentage of the total
+   *   market volume.
+   * - `TWAP`: Time Weighted Average Price. Spreads the order execution evenly over a
+   *   specified time period.
+   * - `VWAP`: Volume Weighted Average Price. Aims to match the volume-weighted
+   *   average price over a specified period.
+   * - `DMA`: Direct Market Access. Sends the order directly to a specified exchange.
+   */
+  type: StrategyType;
 }
 
 /**
@@ -224,21 +290,7 @@ export interface Order {
   /**
    * The current status of the order.
    */
-  status:
-    | 'NEW'
-    | 'PARTIALLY_FILLED'
-    | 'FILLED'
-    | 'DONE_FOR_DAY'
-    | 'CANCELED'
-    | 'REPLACED'
-    | 'PENDING_CANCEL'
-    | 'STOPPED'
-    | 'REJECTED'
-    | 'SUSPENDED'
-    | 'PENDING_NEW'
-    | 'CALCULATED'
-    | 'EXPIRED'
-    | 'PENDING_REPLACE';
+  status: OrderStatus;
 
   /**
    * The symbol of the instrument being traded.
@@ -286,10 +338,37 @@ export interface Order {
   /**
    * The execution strategy used for this order.
    */
-  strategy?: OrderStrategy | null;
+  strategy?:
+    | SorStrategy
+    | VwapStrategy
+    | TwapStrategy
+    | ApStrategy
+    | PovStrategy
+    | DarkStrategy
+    | DmaStrategy
+    | unknown;
 }
 
 export type OrderSide = 'BUY' | 'SELL' | 'SELL_SHORT';
+
+/**
+ * The current status of the order.
+ */
+export type OrderStatus =
+  | 'NEW'
+  | 'PARTIALLY_FILLED'
+  | 'FILLED'
+  | 'DONE_FOR_DAY'
+  | 'CANCELED'
+  | 'REPLACED'
+  | 'PENDING_CANCEL'
+  | 'STOPPED'
+  | 'REJECTED'
+  | 'SUSPENDED'
+  | 'PENDING_NEW'
+  | 'CALCULATED'
+  | 'EXPIRED'
+  | 'PENDING_REPLACE';
 
 /**
  * Defines the execution strategy for an order, allowing for advanced routing and
@@ -297,123 +376,60 @@ export type OrderSide = 'BUY' | 'SELL' | 'SELL_SHORT';
  * strategy is being used and which corresponding parameters are required.
  */
 export type OrderStrategy =
-  | BaseStrategy
-  | OrderStrategy.VwapStrategy
-  | OrderStrategy.TwapStrategy
-  | OrderStrategy.ApStrategy
-  | OrderStrategy.PovStrategy
-  | OrderStrategy.DarkStrategy
-  | OrderStrategy.DmaStrategy;
-
-export namespace OrderStrategy {
-  export interface VwapStrategy extends OrdersAPI.BaseStrategy {
-    /**
-     * The maximum percentage of market volume to participate in. Must be between 0
-     * and 50.
-     */
-    max_percent?: number;
-
-    /**
-     * The minimum percentage of market volume to participate in. Must be between 0
-     * and 100.
-     */
-    min_percent?: number;
-  }
-
-  export interface TwapStrategy extends OrdersAPI.BaseStrategy {
-    /**
-     * The maximum percentage of market volume to participate in. Must be between 0
-     * and 50.
-     */
-    max_percent?: number;
-
-    /**
-     * The minimum percentage of market volume to participate in. Must be between 0
-     * and 100.
-     */
-    min_percent?: number;
-  }
-
-  export interface ApStrategy extends OrdersAPI.BaseStrategy {
-    /**
-     * The maximum percentage of market volume to participate in. Must be between 0
-     * and 100.
-     */
-    max_percent?: number;
-
-    /**
-     * The minimum percentage of market volume to participate in. Must be between 0
-     * and 100.
-     */
-    min_percent?: number;
-  }
-
-  export interface PovStrategy extends OrdersAPI.BaseStrategy {
-    /**
-     * The target percentage of market volume to participate in. Must be between 0
-     * and 100.
-     */
-    target_percent: number;
-  }
-
-  export interface DarkStrategy extends OrdersAPI.BaseStrategy {
-    /**
-     * The maximum percentage of market volume to participate in. Must be between 0
-     * and 100.
-     */
-    max_percent?: number;
-  }
-
-  export interface DmaStrategy {
-    /**
-     * The destination exchange for a Direct Market Access (DMA) order, specified by
-     * its Market Identifier Code (MIC). | MIC | Exchange |
-     * |------|-------------------------| | ARCX | NYSE ARCA | | BATS | Cboe BZX
-     * Exchange | | BATY | Cboe BYX Exchange | | EDGA | Cboe EDGA Exchange | | EDGX |
-     * Cboe EDGX Exchange | | EPRL | MIAX Pearl Equities | | IEXG | Investors' Exchange
-     * | | MEMX | Members' Exchange | | XASE | NYSE American | | XBOS | Nasdaq BX
-     * Exchange | | XCIS | NYSE National | | XNMS | Nasdaq | | XNYS | New York Stock
-     * Exchange |
-     */
-    destination:
-      | 'ARCX'
-      | 'BATS'
-      | 'BATY'
-      | 'EDGA'
-      | 'EDGX'
-      | 'EPRL'
-      | 'IEXG'
-      | 'MEMX'
-      | 'XASE'
-      | 'XBOS'
-      | 'XCIS'
-      | 'XNMS'
-      | 'XNYS';
-
-    /**
-     * Strategy type used for execution.
-     *
-     * - `SOR`: Smart Order Router (default). Routes the order to the best available
-     *   venue.
-     * - `DARK`: Dark Pool. Routes the order to a dark pool venue.
-     * - `AP`: Arrival Price. Aims to match the price at the time the order was placed.
-     * - `POV`: Percentage of Volume. Aims to participate as a percentage of the total
-     *   market volume.
-     * - `TWAP`: Time Weighted Average Price. Spreads the order execution evenly over a
-     *   specified time period.
-     * - `VWAP`: Volume Weighted Average Price. Aims to match the volume-weighted
-     *   average price over a specified period.
-     * - `DMA`: Direct Market Access. Sends the order directly to a specified exchange.
-     */
-    type: OrdersAPI.StrategyType;
-  }
-}
+  | SorStrategy
+  | VwapStrategy
+  | TwapStrategy
+  | ApStrategy
+  | PovStrategy
+  | DarkStrategy
+  | DmaStrategy;
 
 export type OrderType = 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT';
 
-export type SecurityIDSource = 'CMS' | 'CLST' | 'OPRA' | 'FIGI';
+export interface PovStrategy extends BaseStrategy {
+  /**
+   * The target percentage of market volume to participate in. Must be between 0
+   * and 100.
+   */
+  target_percent: number;
+}
 
-export type SecurityType = 'COMMON_STOCK' | 'OPTION';
+export interface SorStrategy {
+  /**
+   * Strategy type used for execution.
+   *
+   * - `SOR`: Smart Order Router (default). Routes the order to the best available
+   *   venue.
+   * - `DARK`: Dark Pool. Routes the order to a dark pool venue.
+   * - `AP`: Arrival Price. Aims to match the price at the time the order was placed.
+   * - `POV`: Percentage of Volume. Aims to participate as a percentage of the total
+   *   market volume.
+   * - `TWAP`: Time Weighted Average Price. Spreads the order execution evenly over a
+   *   specified time period.
+   * - `VWAP`: Volume Weighted Average Price. Aims to match the volume-weighted
+   *   average price over a specified period.
+   * - `DMA`: Direct Market Access. Sends the order directly to a specified exchange.
+   */
+  type: StrategyType;
+
+  /**
+   * The UTC timestamp at which to end the execution strategy. Defaults to the market
+   * close.
+   */
+  end_at?: string | null;
+
+  /**
+   * The UTC timestamp at which to start the execution strategy. Defaults to the time
+   * of order placement.
+   */
+  start_at?: string | null;
+
+  /**
+   * The urgency level for algorithmic execution strategies, influencing how
+   * aggressively the strategy will try to execute the order.
+   */
+  urgency?: Urgency;
+}
 
 /**
  * Strategy type used for execution.
@@ -451,6 +467,40 @@ export type TimeInForce =
   | 'AT_THE_OPENING'
   | 'AT_THE_CLOSE';
 
+export interface TwapStrategy extends BaseStrategy {
+  /**
+   * The maximum percentage of market volume to participate in. Must be between 0
+   * and 50.
+   */
+  max_percent?: number;
+
+  /**
+   * The minimum percentage of market volume to participate in. Must be between 0
+   * and 100.
+   */
+  min_percent?: number;
+}
+
+/**
+ * The urgency level for algorithmic execution strategies, influencing how
+ * aggressively the strategy will try to execute the order.
+ */
+export type Urgency = 'SUPER_PASSIVE' | 'PASSIVE' | 'MODERATE' | 'AGGRESSIVE' | 'SUPER_AGGRESSIVE';
+
+export interface VwapStrategy extends BaseStrategy {
+  /**
+   * The maximum percentage of market volume to participate in. Must be between 0
+   * and 50.
+   */
+  max_percent?: number;
+
+  /**
+   * The minimum percentage of market volume to participate in. Must be between 0
+   * and 100.
+   */
+  min_percent?: number;
+}
+
 export interface OrderCreateResponse extends Omit<Shared.BaseResponse, 'data'> {
   data?: Array<OrderCreateResponse.Data>;
 }
@@ -466,14 +516,14 @@ export namespace OrderCreateResponse {
     client_order_id?: string;
 
     /**
-     * A structured error response following the gRPC status spec.
+     * Error details when the order placement fails.
      */
-    error?: Shared.APIError | null;
+    error?: Shared.APIError | unknown;
 
     /**
-     * Represents a single trading order.
+     * The accepted order when placement succeeds.
      */
-    order?: OrdersAPI.Order | null;
+    order?: OrdersAPI.Order | unknown;
   }
 }
 
@@ -539,7 +589,7 @@ export namespace OrderCreateParams {
      */
     security_id: string;
 
-    security_type: OrdersAPI.SecurityType;
+    security_type: Shared.SecurityType;
 
     side: OrdersAPI.OrderSide;
 
@@ -572,7 +622,7 @@ export namespace OrderCreateParams {
      * For `security_type: COMMON_STOCK` defaults to `CMS`, for `OPTION` defaults to
      * `OPRA`.
      */
-    security_id_source?: OrdersAPI.SecurityIDSource;
+    security_id_source?: Shared.SecurityIDSource;
 
     /**
      * The stop price for STOP or STOP_LIMIT orders. Required if `order_type` is `STOP`
@@ -639,21 +689,7 @@ export interface OrderListParams {
   /**
    * The current status of the order.
    */
-  status?:
-    | 'NEW'
-    | 'PARTIALLY_FILLED'
-    | 'FILLED'
-    | 'DONE_FOR_DAY'
-    | 'CANCELED'
-    | 'REPLACED'
-    | 'PENDING_CANCEL'
-    | 'STOPPED'
-    | 'REJECTED'
-    | 'SUSPENDED'
-    | 'PENDING_NEW'
-    | 'CALCULATED'
-    | 'EXPIRED'
-    | 'PENDING_REPLACE';
+  status?: OrderStatus;
 
   /**
    * The end date and time for the query range, inclusive (ISO 8601 format).
@@ -670,15 +706,22 @@ export interface OrderDeleteParams {
 
 export declare namespace Orders {
   export {
+    type ApStrategy as ApStrategy,
     type BaseStrategy as BaseStrategy,
+    type DarkStrategy as DarkStrategy,
+    type DmaStrategy as DmaStrategy,
     type Order as Order,
     type OrderSide as OrderSide,
+    type OrderStatus as OrderStatus,
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
-    type SecurityIDSource as SecurityIDSource,
-    type SecurityType as SecurityType,
+    type PovStrategy as PovStrategy,
+    type SorStrategy as SorStrategy,
     type StrategyType as StrategyType,
     type TimeInForce as TimeInForce,
+    type TwapStrategy as TwapStrategy,
+    type Urgency as Urgency,
+    type VwapStrategy as VwapStrategy,
     type OrderCreateResponse as OrderCreateResponse,
     type OrderRetrieveResponse as OrderRetrieveResponse,
     type OrderUpdateResponse as OrderUpdateResponse,

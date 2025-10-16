@@ -5,36 +5,38 @@ export {
   type Account,
   type AccountRetrieveResponse,
   type AccountListResponse,
-  type AccountRetrieveBalancesResponse,
-  type AccountRetrievePositionsResponse,
-  type AccountUpdateSettingsResponse,
   type AccountListParams,
-  type AccountRetrievePositionsParams,
-  type AccountUpdateSettingsParams,
 } from './accounts';
+export { Balances, type AccountBalances, type BalanceListResponse } from './balances';
 export {
   Locates,
   type LocateOrder,
+  type LocateOrderStatus,
   type LocateCreateResponse,
   type LocateUpdateResponse,
   type LocateListResponse,
-  type LocateRetrieveInventoryResponse,
   type LocateCreateParams,
   type LocateUpdateParams,
   type LocateListParams,
-  type LocateRetrieveInventoryParams,
-} from './locates';
+} from './locates/index';
 export {
   Orders,
+  type ApStrategy,
   type BaseStrategy,
+  type DarkStrategy,
+  type DmaStrategy,
   type Order,
   type OrderSide,
+  type OrderStatus,
   type OrderStrategy,
   type OrderType,
-  type SecurityIDSource,
-  type SecurityType,
+  type PovStrategy,
+  type SorStrategy,
   type StrategyType,
   type TimeInForce,
+  type TwapStrategy,
+  type Urgency,
+  type VwapStrategy,
   type OrderCreateResponse,
   type OrderRetrieveResponse,
   type OrderUpdateResponse,
@@ -47,3 +49,5 @@ export {
   type OrderListParams,
   type OrderDeleteParams,
 } from './orders';
+export { Positions, type Position, type PositionListResponse, type PositionListParams } from './positions';
+export { Settings, type SettingUpdateResponse, type SettingUpdateParams } from './settings';

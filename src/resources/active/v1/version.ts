@@ -11,10 +11,10 @@ export class Version extends APIResource {
    *
    * @example
    * ```ts
-   * const versions = await client.active.v1.version.list();
+   * const version = await client.active.v1.version.retrieve();
    * ```
    */
-  list(options?: RequestOptions): APIPromise<VersionListResponse> {
+  retrieve(options?: RequestOptions): APIPromise<VersionRetrieveResponse> {
     return this._client.get('/active/v1/version', options);
   }
 
@@ -25,37 +25,37 @@ export class Version extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.active.v1.version.patchAll({
+   * const version = await client.active.v1.version.update({
    *   version: '2025-10-10',
    * });
    * ```
    */
-  patchAll(body: VersionPatchAllParams, options?: RequestOptions): APIPromise<VersionPatchAllResponse> {
+  update(body: VersionUpdateParams, options?: RequestOptions): APIPromise<VersionUpdateResponse> {
     return this._client.patch('/active/v1/version', { body, ...options });
   }
 }
 
-export interface VersionListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: VersionListResponse.Data;
+export interface VersionRetrieveResponse extends Omit<Shared.BaseResponse, 'data'> {
+  data?: VersionRetrieveResponse.Data;
 }
 
-export namespace VersionListResponse {
+export namespace VersionRetrieveResponse {
   export interface Data {
     version?: string;
   }
 }
 
-export interface VersionPatchAllResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: VersionPatchAllResponse.Data;
+export interface VersionUpdateResponse extends Omit<Shared.BaseResponse, 'data'> {
+  data?: VersionUpdateResponse.Data;
 }
 
-export namespace VersionPatchAllResponse {
+export namespace VersionUpdateResponse {
   export interface Data {
     version?: string;
   }
 }
 
-export interface VersionPatchAllParams {
+export interface VersionUpdateParams {
   /**
    * The new API version identifier (date-based string).
    */
@@ -64,8 +64,8 @@ export interface VersionPatchAllParams {
 
 export declare namespace Version {
   export {
-    type VersionListResponse as VersionListResponse,
-    type VersionPatchAllResponse as VersionPatchAllResponse,
-    type VersionPatchAllParams as VersionPatchAllParams,
+    type VersionRetrieveResponse as VersionRetrieveResponse,
+    type VersionUpdateResponse as VersionUpdateResponse,
+    type VersionUpdateParams as VersionUpdateParams,
   };
 }

@@ -1,14 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export type AnyArray = Array<AnyValue>;
-
-export type AnyObject = { [key: string]: AnyValue };
-
-/**
- * Any valid JSON value (object, array, string, number, boolean, or null).
- */
-export type AnyValue = AnyObject | AnyArray | string | number | boolean;
-
 /**
  * A structured error response following the gRPC status spec.
  */
@@ -47,47 +38,14 @@ export interface APIError {
 }
 
 export interface BaseResponse {
-  metadata: BaseResponse.Metadata;
+  data: { [key: string]: unknown } | null;
+
+  metadata: ResponseMetadata;
 
   /**
-   * Any valid JSON value (object, array, string, number, boolean, or null).
+   * Structured error details when the request is unsuccessful.
    */
-  data?: AnyValue;
-
-  /**
-   * A structured error response following the gRPC status spec.
-   */
-  error?: APIError | null;
-}
-
-export namespace BaseResponse {
-  export interface Metadata {
-    /**
-     * A unique identifier for the request, useful for troubleshooting.
-     */
-    request_id: string;
-
-    /**
-     * A token that can be sent as `page_token` to retrieve the next page. If this
-     * field is omitted or null, there are no subsequent pages.
-     */
-    next_page_token?: string | null;
-
-    /**
-     * The current page number (1-indexed).
-     */
-    page_number?: number;
-
-    /**
-     * The total number of items across all pages.
-     */
-    total_items?: number;
-
-    /**
-     * The total number of pages available.
-     */
-    total_pages?: number;
-  }
+  error?: APIError | unknown;
 }
 
 export interface ErrorResponse {
@@ -96,35 +54,37 @@ export interface ErrorResponse {
    */
   error: APIError;
 
-  metadata: ErrorResponse.Metadata;
+  metadata: ResponseMetadata;
 }
 
-export namespace ErrorResponse {
-  export interface Metadata {
-    /**
-     * A unique identifier for the request, useful for troubleshooting.
-     */
-    request_id: string;
+export interface ResponseMetadata {
+  /**
+   * A unique identifier for the request, useful for troubleshooting.
+   */
+  request_id: string;
 
-    /**
-     * A token that can be sent as `page_token` to retrieve the next page. If this
-     * field is omitted or null, there are no subsequent pages.
-     */
-    next_page_token?: string | null;
+  /**
+   * A token that can be sent as `page_token` to retrieve the next page. If this
+   * field is omitted or null, there are no subsequent pages.
+   */
+  next_page_token?: string | null;
 
-    /**
-     * The current page number (1-indexed).
-     */
-    page_number?: number;
+  /**
+   * The current page number (1-indexed).
+   */
+  page_number?: number;
 
-    /**
-     * The total number of items across all pages.
-     */
-    total_items?: number;
+  /**
+   * The total number of items across all pages.
+   */
+  total_items?: number;
 
-    /**
-     * The total number of pages available.
-     */
-    total_pages?: number;
-  }
+  /**
+   * The total number of pages available.
+   */
+  total_pages?: number;
 }
+
+export type SecurityIDSource = 'CMS' | 'CLST' | 'OPRA' | 'FIGI';
+
+export type SecurityType = 'COMMON_STOCK' | 'OPTION';
