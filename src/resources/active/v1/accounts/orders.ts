@@ -338,15 +338,7 @@ export interface Order {
   /**
    * The execution strategy used for this order.
    */
-  strategy?:
-    | SorStrategy
-    | VwapStrategy
-    | TwapStrategy
-    | ApStrategy
-    | PovStrategy
-    | DarkStrategy
-    | DmaStrategy
-    | unknown;
+  strategy?: OrderStrategy | null;
 }
 
 export type OrderSide = 'BUY' | 'SELL' | 'SELL_SHORT';
@@ -518,12 +510,12 @@ export namespace OrderCreateResponse {
     /**
      * Error details when the order placement fails.
      */
-    error?: Shared.APIError | unknown;
+    error?: Shared.APIError | null;
 
     /**
      * The accepted order when placement succeeds.
      */
-    order?: OrdersAPI.Order | unknown;
+    order?: OrdersAPI.Order | null;
   }
 }
 
