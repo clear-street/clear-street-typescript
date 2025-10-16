@@ -7,10 +7,10 @@ const client = new ClearStreet({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource accounts', () => {
+describe('resource instruments', () => {
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.active.v1.accounts.retrieve('19816');
+    const responsePromise = client.active.v1.instruments.retrieve('037833100');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,20 @@ describe('resource accounts', () => {
   });
 
   // Prism tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.active.v1.instruments.retrieve(
+        '037833100',
+        { fields: 'symbol,last_price,volume' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.active.v1.accounts.list();
+    const responsePromise = client.active.v1.instruments.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,8 +48,14 @@ describe('resource accounts', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.active.v1.accounts.list(
-        { page_size: 50, page_token: 'cGFnZT0yJmxhc3RfaWQ9MTk4MTY=' },
+      client.active.v1.instruments.list(
+        {
+          easy_to_borrow: true,
+          fields: 'symbol,last_price,volume',
+          is_threshold_security: true,
+          page_size: 1500,
+          page_token: 'cGFnZT0yJmxhc3RfaWQ9MTk4MTY=',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);

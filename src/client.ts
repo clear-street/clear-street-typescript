@@ -755,10 +755,10 @@ export declare namespace ClearStreet {
 
   export { Polygon as Polygon };
 
-  export type AnyArray = API.AnyArray;
-  export type AnyObject = API.AnyObject;
-  export type AnyValue = API.AnyValue;
   export type APIError = API.APIError;
   export type BaseResponse = API.BaseResponse;
   export type ErrorResponse = API.ErrorResponse;
+  export type ResponseMetadata = API.ResponseMetadata;
+  export type SecurityIDSource = API.SecurityIDSource;
+  export type SecurityType = API.SecurityType;
 }

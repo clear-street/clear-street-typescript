@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as V1API from './v1/v1';
-import { V1, V1RetrieveScreenerParams, V1RetrieveScreenerResponse } from './v1/v1';
+import { V1 } from './v1/v1';
 
 export class Active extends APIResource {
   v1: V1API.V1 = new V1API.V1(this._client);
@@ -11,9 +11,5 @@ export class Active extends APIResource {
 Active.V1 = V1;
 
 export declare namespace Active {
-  export {
-    V1 as V1,
-    type V1RetrieveScreenerResponse as V1RetrieveScreenerResponse,
-    type V1RetrieveScreenerParams as V1RetrieveScreenerParams,
-  };
+  export { V1 as V1 };
 }
