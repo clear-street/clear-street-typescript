@@ -36,7 +36,7 @@ export interface ScreenerItem {
   /**
    * The consensus analyst rating (e.g., BUY, HOLD, SELL).
    */
-  analyst_rating?: AnalystReportingAPI.AnalystRating | unknown;
+  analyst_rating?: AnalystReportingAPI.AnalystRating | null;
 
   /**
    * The ISO country code of the instrument's issue.

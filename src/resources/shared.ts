@@ -45,7 +45,7 @@ export interface BaseResponse {
   /**
    * Structured error details when the request is unsuccessful.
    */
-  error?: APIError | unknown;
+  error?: APIError | null;
 }
 
 export interface ErrorResponse {

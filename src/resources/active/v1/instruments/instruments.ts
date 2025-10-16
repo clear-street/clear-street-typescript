@@ -229,7 +229,7 @@ export interface Instrument {
   /**
    * Real-time market quote data for the instrument.
    */
-  quote?: InstrumentQuote | unknown;
+  quote?: InstrumentQuote | null;
 
   /**
    * The business sector of the instrument's issuer.
