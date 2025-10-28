@@ -451,6 +451,16 @@ export interface PovStrategy {
 }
 
 /**
+ * Risk settings for an account
+ */
+export interface RiskSettings {
+  /**
+   * The maximum notional value available to the account
+   */
+  max_notional?: string | null;
+}
+
+/**
  * Base parameters common to most algorithmic strategies
  */
 export interface SorStrategy {
@@ -785,6 +795,7 @@ export declare namespace Orders {
     type OrderType as OrderType,
     type PositionEffect as PositionEffect,
     type PovStrategy as PovStrategy,
+    type RiskSettings as RiskSettings,
     type SorStrategy as SorStrategy,
     type TimeInForce as TimeInForce,
     type TwapStrategy as TwapStrategy,

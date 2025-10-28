@@ -37,6 +37,7 @@ export {
   type OrderType,
   type PositionEffect,
   type PovStrategy,
+  type RiskSettings,
   type SorStrategy,
   type TimeInForce,
   type TwapStrategy,
