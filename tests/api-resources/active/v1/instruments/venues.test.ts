@@ -7,10 +7,10 @@ const client = new ClearStreet({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource polygon', () => {
+describe('resource venues', () => {
   // Prism tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.polygon.retrieve('v1/last_quote/stocks/AAPL');
+  test.skip('list', async () => {
+    const responsePromise = client.active.v1.instruments.venues.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

@@ -9,20 +9,18 @@ import { path } from '../../../../internal/utils/path';
 
 export class Orders extends APIResource {
   /**
-   * Places a batch of new orders for the specified account. A successful response
-   * indicates the batch has been accepted for processing. The response will detail
-   * the outcome for each individual order.
+   * Creates one or more new trading orders for the account.
    *
    * @example
    * ```ts
    * const order = await client.active.v1.accounts.orders.create(
-   *   '19816',
+   *   'account_id',
    *   {
-   *     orders: [
+   *     body: [
    *       {
+   *         order_id: 'my-ref-id-20251001-002',
    *         order_type: 'LIMIT',
    *         quantity: '25',
-   *         security_id: 'GOOG',
    *         security_type: 'COMMON_STOCK',
    *         side: 'BUY',
    *         time_in_force: 'DAY',
@@ -34,21 +32,22 @@ export class Orders extends APIResource {
    */
   create(
     accountID: string,
-    body: OrderCreateParams,
+    params: OrderCreateParams,
     options?: RequestOptions,
   ): APIPromise<OrderCreateResponse> {
-    return this._client.post(path`/active/v1/accounts/${accountID}/orders`, { body, ...options });
+    const { body } = params;
+    return this._client.post(path`/active/v1/accounts/${accountID}/orders`, { body: body, ...options });
   }
 
   /**
-   * Retrieves the current state and details of a specific order.
+   * Retrieves details for a specific order.
    *
    * @example
    * ```ts
    * const order =
    *   await client.active.v1.accounts.orders.retrieve(
-   *     'ord_2aF3b4C5d6E7f8G9',
-   *     { account_id: '19816' },
+   *     'order_id',
+   *     { account_id: 'account_id' },
    *   );
    * ```
    */
@@ -62,18 +61,13 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Replaces an existing open order with a new set of parameters (e.g., new price or
-   * quantity). This is an asynchronous operation.
+   * Replaces an existing order with new parameters.
    *
    * @example
    * ```ts
    * const order = await client.active.v1.accounts.orders.update(
-   *   'ord_2aF3b4C5d6E7f8G9',
-   *   {
-   *     account_id: '19816',
-   *     limit_price: '150.50',
-   *     quantity: '125',
-   *   },
+   *   'order_id',
+   *   { account_id: 'account_id' },
    * );
    * ```
    */
@@ -87,32 +81,28 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Retrieves a paginated list of orders for a given account, with optional
-   * filtering by status and time range.
+   * Retrieves all orders for the specified trading account.
    *
    * @example
    * ```ts
    * const orders = await client.active.v1.accounts.orders.list(
-   *   '19816',
+   *   'account_id',
+   *   { from: 'from', to: 'to' },
    * );
    * ```
    */
-  list(
-    accountID: string,
-    query: OrderListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<OrderListResponse> {
+  list(accountID: string, query: OrderListParams, options?: RequestOptions): APIPromise<OrderListResponse> {
     return this._client.get(path`/active/v1/accounts/${accountID}/orders`, { query, ...options });
   }
 
   /**
-   * Attempts to cancel a specific open order. This is an asynchronous operation.
+   * Cancels a specific order.
    *
    * @example
    * ```ts
    * const order = await client.active.v1.accounts.orders.delete(
-   *   'ord_2aF3b4C5d6E7f8G9',
-   *   { account_id: '19816' },
+   *   'order_id',
+   *   { account_id: 'account_id' },
    * );
    * ```
    */
@@ -126,14 +116,14 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Attempts to cancel all open orders for a given account. The response will
-   * contain a list of order IDs for which a cancellation was attempted. This is an
-   * asynchronous operation.
+   * Cancels all active orders for the specified account.
    *
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.accounts.orders.deleteAll('19816');
+   *   await client.active.v1.accounts.orders.deleteAll(
+   *     'account_id',
+   *   );
    * ```
    */
   deleteAll(accountID: string, options?: RequestOptions): APIPromise<OrderDeleteAllResponse> {
@@ -141,557 +131,653 @@ export class Orders extends APIResource {
   }
 }
 
-export interface ApStrategy extends BaseStrategy {
+/**
+ * Arrival Price strategy
+ */
+export interface ApStrategy {
   /**
-   * The maximum percentage of market volume to participate in. Must be between 0
-   * and 100.
-   */
-  max_percent?: number;
-
-  /**
-   * The minimum percentage of market volume to participate in. Must be between 0
-   * and 100.
-   */
-  min_percent?: number;
-}
-
-export interface BaseStrategy {
-  /**
-   * Strategy type used for execution.
-   *
-   * - `SOR`: Smart Order Router (default). Routes the order to the best available
-   *   venue.
-   * - `DARK`: Dark Pool. Routes the order to a dark pool venue.
-   * - `AP`: Arrival Price. Aims to match the price at the time the order was placed.
-   * - `POV`: Percentage of Volume. Aims to participate as a percentage of the total
-   *   market volume.
-   * - `TWAP`: Time Weighted Average Price. Spreads the order execution evenly over a
-   *   specified time period.
-   * - `VWAP`: Volume Weighted Average Price. Aims to match the volume-weighted
-   *   average price over a specified period.
-   * - `DMA`: Direct Market Access. Sends the order directly to a specified exchange.
-   */
-  type: StrategyType;
-
-  /**
-   * The UTC timestamp at which to end the execution strategy. Defaults to the market
-   * close.
+   * UTC timestamp to end execution (defaults to market close)
    */
   end_at?: string | null;
 
   /**
-   * The UTC timestamp at which to start the execution strategy. Defaults to the time
-   * of order placement.
+   * Maximum percentage of market volume to participate in (0-100)
+   */
+  max_percent?: number | null;
+
+  /**
+   * Minimum percentage of market volume to participate in (0-100)
+   */
+  min_percent?: number | null;
+
+  /**
+   * UTC timestamp to start execution (defaults to order placement time)
    */
   start_at?: string | null;
 
   /**
-   * The urgency level for algorithmic execution strategies, influencing how
-   * aggressively the strategy will try to execute the order.
+   * Urgency level for execution aggressiveness
    */
   urgency?: Urgency;
 }
 
-export interface DarkStrategy extends BaseStrategy {
+/**
+ * Dark Pool strategy
+ */
+export interface DarkStrategy {
   /**
-   * The maximum percentage of market volume to participate in. Must be between 0
-   * and 100.
+   * UTC timestamp to end execution (defaults to market close)
    */
-  max_percent?: number;
-}
-
-export interface DmaStrategy {
-  /**
-   * The destination exchange for a Direct Market Access (DMA) order, specified by
-   * its Market Identifier Code (MIC). | MIC | Exchange |
-   * |------|-------------------------| | ARCX | NYSE ARCA | | BATS | Cboe BZX
-   * Exchange | | BATY | Cboe BYX Exchange | | EDGA | Cboe EDGA Exchange | | EDGX |
-   * Cboe EDGX Exchange | | EPRL | MIAX Pearl Equities | | IEXG | Investors' Exchange
-   * | | MEMX | Members' Exchange | | XASE | NYSE American | | XBOS | Nasdaq BX
-   * Exchange | | XCIS | NYSE National | | XNMS | Nasdaq | | XNYS | New York Stock
-   * Exchange |
-   */
-  destination:
-    | 'ARCX'
-    | 'BATS'
-    | 'BATY'
-    | 'EDGA'
-    | 'EDGX'
-    | 'EPRL'
-    | 'IEXG'
-    | 'MEMX'
-    | 'XASE'
-    | 'XBOS'
-    | 'XCIS'
-    | 'XNMS'
-    | 'XNYS';
+  end_at?: string | null;
 
   /**
-   * Strategy type used for execution.
-   *
-   * - `SOR`: Smart Order Router (default). Routes the order to the best available
-   *   venue.
-   * - `DARK`: Dark Pool. Routes the order to a dark pool venue.
-   * - `AP`: Arrival Price. Aims to match the price at the time the order was placed.
-   * - `POV`: Percentage of Volume. Aims to participate as a percentage of the total
-   *   market volume.
-   * - `TWAP`: Time Weighted Average Price. Spreads the order execution evenly over a
-   *   specified time period.
-   * - `VWAP`: Volume Weighted Average Price. Aims to match the volume-weighted
-   *   average price over a specified period.
-   * - `DMA`: Direct Market Access. Sends the order directly to a specified exchange.
+   * Maximum percentage of market volume to participate in (0-100)
    */
-  type: StrategyType;
+  max_percent?: number | null;
+
+  /**
+   * UTC timestamp to start execution (defaults to order placement time)
+   */
+  start_at?: string | null;
+
+  /**
+   * Urgency level for execution aggressiveness
+   */
+  urgency?: Urgency;
 }
 
 /**
- * Represents a single trading order.
+ * Destination exchange for DMA orders (Market Identifier Code)
+ */
+export type Destination =
+  | 'ARCX'
+  | 'BATS'
+  | 'BATY'
+  | 'EDGA'
+  | 'EDGX'
+  | 'EPRL'
+  | 'IEXG'
+  | 'MEMX'
+  | 'XASE'
+  | 'XBOS'
+  | 'XCIS'
+  | 'XNMS'
+  | 'XNYS';
+
+/**
+ * Direct Market Access strategy
+ */
+export interface DmaStrategy {
+  /**
+   * Destination exchange (MIC code)
+   */
+  destination: Destination;
+}
+
+/**
+ * A trading order with its current state and execution details.
+ *
+ * This is the unified API representation of an order across its lifecycle,
+ * combining data from execution reports, order status queries, and parent/child
+ * tracking.
  */
 export interface Order {
   /**
-   * The account the order belongs to.
+   * Account placing the order
    */
-  account_id: string;
+  account_id: number;
 
   /**
-   * The client-provided identifier for the order.
-   */
-  client_order_id: string;
-
-  /**
-   * The timestamp when the order was created in UTC.
+   * Timestamp when order was created (UTC)
    */
   created_at: string;
 
   /**
-   * The quantity of the order that has been executed.
+   * Cumulative filled quantity
    */
   filled_quantity: string;
 
   /**
-   * The quantity of the order that is remaining to be executed.
+   * Unique identifier for the instrument (e.g., CUSIP, ISIN, FIGI)
+   */
+  instrument_id: string;
+
+  /**
+   * Remaining unfilled quantity
    */
   leaves_quantity: string;
 
   /**
-   * The unique, internally-generated identifier for the order.
+   * Client-provided unique identifier for this order
    */
   order_id: string;
 
+  /**
+   * Type of order (MARKET, LIMIT, etc.)
+   */
   order_type: OrderType;
 
   /**
-   * The total ordered quantity.
+   * Total order quantity
    */
   quantity: string;
 
+  /**
+   * Type of security
+   */
+  security_type: Shared.SecurityType;
+
+  /**
+   * Side of the order (BUY, SELL, SELL_SHORT)
+   */
   side: OrderSide;
 
   /**
-   * The current status of the order.
+   * Current status of the order
    */
   status: OrderStatus;
 
   /**
-   * The symbol of the instrument being traded.
+   * Trading symbol
    */
   symbol: string;
 
   /**
-   * Specifies how long an order remains active before it is executed or expires.
-   *
-   * - `DAY`: Good for the trading day; expires at market close if not filled.
-   * - `GOOD_TILL_CANCEL`: Remains active until explicitly canceled.
-   * - `IMMEDIATE_OR_CANCEL`: Must be filled immediately; any unfilled portion is
-   *   canceled.
-   * - `FILL_OR_KILL`: Must be filled immediately in its entirety or canceled.
-   * - `AT_THE_OPENING`: Valid only for the opening auction.
-   * - `AT_THE_CLOSE`: Valid only for the closing auction.
+   * Time in force instruction
    */
   time_in_force: TimeInForce;
 
   /**
-   * The timestamp when the order was last updated in UTC.
+   * Timestamp of the most recent update (UTC)
    */
   updated_at: string;
 
   /**
-   * The average price at which the filled quantity was executed.
+   * MIC code of the venue where the order is routed
+   */
+  venue: string;
+
+  /**
+   * Average fill price across all executions
    */
   average_fill_price?: string | null;
 
   /**
-   * The limit price of the order.
+   * Timestamp when the order will expire (UTC). Present when time_in_force is
+   * GOOD_TILL_DATE.
+   */
+  expires_at?: string | null;
+
+  /**
+   * Limit price (for LIMIT and STOP_LIMIT orders)
    */
   limit_price?: string | null;
 
   /**
-   * The type of security for the order.
-   */
-  security_type?: string;
-
-  /**
-   * The stop price of the order.
+   * Stop price (for STOP and STOP_LIMIT orders)
    */
   stop_price?: string | null;
 
   /**
-   * The execution strategy used for this order.
+   * Execution strategy for this order
    */
   strategy?: OrderStrategy | null;
 }
 
-export type OrderSide = 'BUY' | 'SELL' | 'SELL_SHORT';
+/**
+ * Side of an order
+ */
+export type OrderSide = 'BUY' | 'SELL' | 'SELL_SHORT' | 'OTHER';
 
 /**
- * The current status of the order.
+ * Order status
  */
 export type OrderStatus =
+  | 'PENDING_NEW'
   | 'NEW'
   | 'PARTIALLY_FILLED'
   | 'FILLED'
-  | 'DONE_FOR_DAY'
   | 'CANCELED'
-  | 'REPLACED'
-  | 'PENDING_CANCEL'
-  | 'STOPPED'
   | 'REJECTED'
-  | 'SUSPENDED'
-  | 'PENDING_NEW'
-  | 'CALCULATED'
   | 'EXPIRED'
-  | 'PENDING_REPLACE';
+  | 'PENDING_CANCEL'
+  | 'PENDING_REPLACE'
+  | 'REPLACED'
+  | 'DONE_FOR_DAY'
+  | 'STOPPED'
+  | 'SUSPENDED'
+  | 'CALCULATED'
+  | 'OTHER';
 
 /**
- * Defines the execution strategy for an order, allowing for advanced routing and
- * execution logic beyond simple order types. The `type` field determines which
- * strategy is being used and which corresponding parameters are required.
+ * Execution strategy for an order
+ *
+ * Defines advanced routing and execution logic beyond simple order types. The
+ * strategy type determines which parameters are available and required.
  */
 export type OrderStrategy =
-  | SorStrategy
-  | VwapStrategy
-  | TwapStrategy
-  | ApStrategy
-  | PovStrategy
-  | DarkStrategy
-  | DmaStrategy;
+  | OrderStrategy.UnionMember0
+  | OrderStrategy.UnionMember1
+  | OrderStrategy.UnionMember2
+  | OrderStrategy.UnionMember3
+  | OrderStrategy.UnionMember4
+  | OrderStrategy.UnionMember5
+  | OrderStrategy.UnionMember6;
 
-export type OrderType = 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT';
-
-export interface PovStrategy extends BaseStrategy {
+export namespace OrderStrategy {
   /**
-   * The target percentage of market volume to participate in. Must be between 0
-   * and 100.
+   * Smart Order Router (default) - routes to best available venue
    */
-  target_percent: number;
+  export interface UnionMember0 extends OrdersAPI.SorStrategy {
+    type: 'SOR';
+  }
+
+  /**
+   * Volume Weighted Average Price - matches VWAP over a period
+   */
+  export interface UnionMember1 extends OrdersAPI.VwapStrategy {
+    type: 'VWAP';
+  }
+
+  /**
+   * Time Weighted Average Price - spreads execution evenly over time
+   */
+  export interface UnionMember2 extends OrdersAPI.TwapStrategy {
+    type: 'TWAP';
+  }
+
+  /**
+   * Arrival Price - aims to match price at order placement time
+   */
+  export interface UnionMember3 extends OrdersAPI.ApStrategy {
+    type: 'AP';
+  }
+
+  /**
+   * Percentage of Volume - participates as a percentage of market volume
+   */
+  export interface UnionMember4 extends OrdersAPI.PovStrategy {
+    type: 'POV';
+  }
+
+  /**
+   * Dark Pool - routes to dark pool venues
+   */
+  export interface UnionMember5 extends OrdersAPI.DarkStrategy {
+    type: 'DARK';
+  }
+
+  /**
+   * Direct Market Access - sends directly to a specified exchange
+   */
+  export interface UnionMember6 extends OrdersAPI.DmaStrategy {
+    type: 'DMA';
+  }
 }
 
-export interface SorStrategy {
+/**
+ * Order type
+ */
+export type OrderType = 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT' | 'OTHER';
+
+/**
+ * Position effect for options orders
+ */
+export type PositionEffect = 'OPEN' | 'CLOSE';
+
+/**
+ * Percentage of Volume strategy
+ */
+export interface PovStrategy {
   /**
-   * Strategy type used for execution.
-   *
-   * - `SOR`: Smart Order Router (default). Routes the order to the best available
-   *   venue.
-   * - `DARK`: Dark Pool. Routes the order to a dark pool venue.
-   * - `AP`: Arrival Price. Aims to match the price at the time the order was placed.
-   * - `POV`: Percentage of Volume. Aims to participate as a percentage of the total
-   *   market volume.
-   * - `TWAP`: Time Weighted Average Price. Spreads the order execution evenly over a
-   *   specified time period.
-   * - `VWAP`: Volume Weighted Average Price. Aims to match the volume-weighted
-   *   average price over a specified period.
-   * - `DMA`: Direct Market Access. Sends the order directly to a specified exchange.
+   * Target percentage of market volume to participate in (0-100)
    */
-  type: StrategyType;
+  target_percent: number;
 
   /**
-   * The UTC timestamp at which to end the execution strategy. Defaults to the market
-   * close.
+   * UTC timestamp to end execution (defaults to market close)
    */
   end_at?: string | null;
 
   /**
-   * The UTC timestamp at which to start the execution strategy. Defaults to the time
-   * of order placement.
+   * UTC timestamp to start execution (defaults to order placement time)
    */
   start_at?: string | null;
 
   /**
-   * The urgency level for algorithmic execution strategies, influencing how
-   * aggressively the strategy will try to execute the order.
+   * Urgency level for execution aggressiveness
    */
   urgency?: Urgency;
 }
 
 /**
- * Strategy type used for execution.
- *
- * - `SOR`: Smart Order Router (default). Routes the order to the best available
- *   venue.
- * - `DARK`: Dark Pool. Routes the order to a dark pool venue.
- * - `AP`: Arrival Price. Aims to match the price at the time the order was placed.
- * - `POV`: Percentage of Volume. Aims to participate as a percentage of the total
- *   market volume.
- * - `TWAP`: Time Weighted Average Price. Spreads the order execution evenly over a
- *   specified time period.
- * - `VWAP`: Volume Weighted Average Price. Aims to match the volume-weighted
- *   average price over a specified period.
- * - `DMA`: Direct Market Access. Sends the order directly to a specified exchange.
+ * Risk settings for an account
  */
-export type StrategyType = 'SOR' | 'DARK' | 'AP' | 'POV' | 'TWAP' | 'VWAP' | 'DMA';
+export interface RiskSettings {
+  /**
+   * The maximum notional value available to the account
+   */
+  max_notional?: string | null;
+}
 
 /**
- * Specifies how long an order remains active before it is executed or expires.
- *
- * - `DAY`: Good for the trading day; expires at market close if not filled.
- * - `GOOD_TILL_CANCEL`: Remains active until explicitly canceled.
- * - `IMMEDIATE_OR_CANCEL`: Must be filled immediately; any unfilled portion is
- *   canceled.
- * - `FILL_OR_KILL`: Must be filled immediately in its entirety or canceled.
- * - `AT_THE_OPENING`: Valid only for the opening auction.
- * - `AT_THE_CLOSE`: Valid only for the closing auction.
+ * Base parameters common to most algorithmic strategies
+ */
+export interface SorStrategy {
+  /**
+   * UTC timestamp to end execution (defaults to market close)
+   */
+  end_at?: string | null;
+
+  /**
+   * UTC timestamp to start execution (defaults to order placement time)
+   */
+  start_at?: string | null;
+
+  /**
+   * Urgency level for execution aggressiveness
+   */
+  urgency?: Urgency;
+}
+
+/**
+ * Time in force
  */
 export type TimeInForce =
   | 'DAY'
   | 'GOOD_TILL_CANCEL'
   | 'IMMEDIATE_OR_CANCEL'
   | 'FILL_OR_KILL'
+  | 'GOOD_TILL_DATE'
   | 'AT_THE_OPENING'
-  | 'AT_THE_CLOSE';
+  | 'AT_THE_CLOSE'
+  | 'GOOD_TILL_CROSSING'
+  | 'GOOD_THROUGH_CROSSING'
+  | 'AT_CROSSING'
+  | 'OTHER';
 
-export interface TwapStrategy extends BaseStrategy {
+/**
+ * Time Weighted Average Price strategy
+ */
+export interface TwapStrategy {
   /**
-   * The maximum percentage of market volume to participate in. Must be between 0
-   * and 50.
+   * UTC timestamp to end execution (defaults to market close)
    */
-  max_percent?: number;
+  end_at?: string | null;
 
   /**
-   * The minimum percentage of market volume to participate in. Must be between 0
-   * and 100.
+   * Maximum percentage of market volume to participate in (0-50)
    */
-  min_percent?: number;
+  max_percent?: number | null;
+
+  /**
+   * Minimum percentage of market volume to participate in (0-100)
+   */
+  min_percent?: number | null;
+
+  /**
+   * UTC timestamp to start execution (defaults to order placement time)
+   */
+  start_at?: string | null;
+
+  /**
+   * Urgency level for execution aggressiveness
+   */
+  urgency?: Urgency;
 }
 
 /**
- * The urgency level for algorithmic execution strategies, influencing how
- * aggressively the strategy will try to execute the order.
+ * Urgency level for algorithmic execution
  */
 export type Urgency = 'SUPER_PASSIVE' | 'PASSIVE' | 'MODERATE' | 'AGGRESSIVE' | 'SUPER_AGGRESSIVE';
 
-export interface VwapStrategy extends BaseStrategy {
+/**
+ * Volume Weighted Average Price strategy
+ */
+export interface VwapStrategy {
   /**
-   * The maximum percentage of market volume to participate in. Must be between 0
-   * and 50.
+   * UTC timestamp to end execution (defaults to market close)
    */
-  max_percent?: number;
+  end_at?: string | null;
 
   /**
-   * The minimum percentage of market volume to participate in. Must be between 0
-   * and 100.
+   * Maximum percentage of market volume to participate in (0-50)
    */
-  min_percent?: number;
-}
+  max_percent?: number | null;
 
-export interface OrderCreateResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<OrderCreateResponse.Data>;
-}
-
-export namespace OrderCreateResponse {
   /**
-   * The result of a single order placement within a batch request.
+   * Minimum percentage of market volume to participate in (0-100)
    */
-  export interface Data {
-    /**
-     * The client-provided identifier for the order, used for correlation.
-     */
-    client_order_id?: string;
+  min_percent?: number | null;
 
-    /**
-     * Error details when the order placement fails.
-     */
-    error?: Shared.APIError | null;
-
-    /**
-     * The accepted order when placement succeeds.
-     */
-    order?: OrdersAPI.Order | null;
-  }
-}
-
-export interface OrderRetrieveResponse extends Omit<Shared.BaseResponse, 'data'> {
   /**
-   * Represents a single trading order.
+   * UTC timestamp to start execution (defaults to order placement time)
    */
-  data?: Order;
-}
+  start_at?: string | null;
 
-export interface OrderUpdateResponse extends Omit<Shared.BaseResponse, 'data'> {
   /**
-   * Represents a single trading order.
+   * Urgency level for execution aggressiveness
    */
-  data?: Order;
+  urgency?: Urgency;
 }
 
-export interface OrderListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<Order>;
+export interface OrderCreateResponse extends Shared.BaseResponse {
+  data: Array<Order>;
 }
 
-export interface OrderDeleteResponse extends Omit<Shared.BaseResponse, 'data'> {
+export interface OrderRetrieveResponse extends Shared.BaseResponse {
   /**
-   * Represents a single trading order.
+   * A trading order with its current state and execution details.
+   *
+   * This is the unified API representation of an order across its lifecycle,
+   * combining data from execution reports, order status queries, and parent/child
+   * tracking.
    */
-  data?: Order;
+  data: Order;
 }
 
-export interface OrderDeleteAllResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: OrderDeleteAllResponse.Data;
+export interface OrderUpdateResponse extends Shared.BaseResponse {
+  /**
+   * A trading order with its current state and execution details.
+   *
+   * This is the unified API representation of an order across its lifecycle,
+   * combining data from execution reports, order status queries, and parent/child
+   * tracking.
+   */
+  data: Order;
 }
 
-export namespace OrderDeleteAllResponse {
-  export interface Data {
-    /**
-     * A list of order IDs for which cancellation was attempted.
-     */
-    order_ids?: Array<string>;
-  }
+export interface OrderListResponse extends Shared.BaseResponse {
+  data: Array<Order>;
+}
+
+export interface OrderDeleteResponse extends Shared.BaseResponse {
+  /**
+   * A trading order with its current state and execution details.
+   *
+   * This is the unified API representation of an order across its lifecycle,
+   * combining data from execution reports, order status queries, and parent/child
+   * tracking.
+   */
+  data: Order;
+}
+
+export interface OrderDeleteAllResponse extends Shared.BaseResponse {
+  data: Array<Order>;
 }
 
 export interface OrderCreateParams {
-  /**
-   * A list of orders to be placed.
-   */
-  orders: Array<OrderCreateParams.Order>;
+  body: Array<OrderCreateParams.Body>;
 }
 
 export namespace OrderCreateParams {
   /**
-   * Specifies the parameters for placing a new order.
+   * Request to submit a new order (PlaceOrderRequest from spec)
    */
-  export interface Order {
+  export interface Body {
+    /**
+     * Client-provided unique ID (idempotency). Required to be unique per account.
+     */
+    order_id: string;
+
+    /**
+     * Type of order
+     */
     order_type: OrdersAPI.OrderType;
 
     /**
-     * The number of shares to trade.
+     * Quantity to trade. For COMMON_STOCK: shares (may be fractional if supported).
+     * For OPTION (single-leg): contracts (must be an integer)
      */
     quantity: string;
 
     /**
-     * The security_id of the instrument to trade.
+     * Type of security
      */
-    security_id: string;
-
     security_type: Shared.SecurityType;
 
+    /**
+     * Side of the order
+     */
     side: OrdersAPI.OrderSide;
 
     /**
-     * Specifies how long an order remains active before it is executed or expires.
-     *
-     * - `DAY`: Good for the trading day; expires at market close if not filled.
-     * - `GOOD_TILL_CANCEL`: Remains active until explicitly canceled.
-     * - `IMMEDIATE_OR_CANCEL`: Must be filled immediately; any unfilled portion is
-     *   canceled.
-     * - `FILL_OR_KILL`: Must be filled immediately in its entirety or canceled.
-     * - `AT_THE_OPENING`: Valid only for the opening auction.
-     * - `AT_THE_CLOSE`: Valid only for the closing auction.
+     * Time in force
      */
     time_in_force: OrdersAPI.TimeInForce;
 
     /**
-     * A client-provided, unique identifier for the order. If not provided, a UUID will
-     * be generated.
+     * The timestamp when the order should expire (UTC). Required when time_in_force is
+     * GOOD_TILL_DATE.
      */
-    client_order_id?: string;
+    expire_at?: string | null;
 
     /**
-     * The limit price for LIMIT or STOP_LIMIT orders. Required if `order_type` is
-     * `LIMIT` or `STOP_LIMIT`.
+     * Allow trading outside regular trading hours. Some brokers disallow options
+     * outside RTH.
+     */
+    extended_hours?: boolean | null;
+
+    /**
+     * Unique identifier for the instrument (CUSIP/ISIN/FIGI for equities or an option
+     * contract id)
+     */
+    instrument_id?: string | null;
+
+    /**
+     * Limit price (required for LIMIT and STOP_LIMIT orders)
      */
     limit_price?: string | null;
 
     /**
-     * For `security_type: COMMON_STOCK` defaults to `CMS`, for `OPTION` defaults to
-     * `OPRA`.
+     * Required when security_type is OPTION. Specifies whether the order opens or
+     * closes a position.
      */
-    security_id_source?: Shared.SecurityIDSource;
+    position_effect?: OrdersAPI.PositionEffect;
 
     /**
-     * The stop price for STOP or STOP_LIMIT orders. Required if `order_type` is `STOP`
-     * or `STOP_LIMIT`.
+     * Stop price (required for STOP and STOP_LIMIT orders)
      */
     stop_price?: string | null;
 
     /**
-     * The execution strategy to use for this order. If not provided, the default smart
-     * order router (SOR) will be used.
+     * Execution strategy/router. Defaults to SOR where applicable.
      */
-    strategy?: OrdersAPI.OrderStrategy;
+    strategy?: OrdersAPI.OrderStrategy | null;
+
+    /**
+     * Trading symbol. For equities, use the ticker symbol (e.g., "AAPL"). For options,
+     * use the OSI symbol (e.g., "AAPL 250117C00190000").
+     */
+    symbol?: string | null;
+
+    /**
+     * MIC code for equities. If omitted, defaults to the primary US venue. Not used
+     * for options orders.
+     */
+    venue?: string | null;
   }
 }
 
 export interface OrderRetrieveParams {
   /**
-   * The unique identifier for the account.
+   * Account identifier
    */
   account_id: string;
 }
 
 export interface OrderUpdateParams {
   /**
-   * Path param: The unique identifier for the account.
+   * Path param: Account identifier
    */
   account_id: string;
 
   /**
-   * Body param: The new limit price for the order.
+   * Body param: New limit price for the order
    */
-  limit_price?: string;
+  limit_price?: string | null;
 
   /**
-   * Body param: The new quantity for the order.
+   * Body param: New quantity for the order
    */
-  quantity?: string;
+  quantity?: string | null;
 
   /**
-   * Body param: The new stop price for the order.
+   * Body param: New stop price for the order
    */
-  stop_price?: string;
+  stop_price?: string | null;
+
+  /**
+   * Body param: New time in force for the order
+   */
+  time_in_force?: TimeInForce;
 }
 
 export interface OrderListParams {
   /**
-   * The start date and time for the query range, inclusive (ISO 8601 format).
+   * The start date and time for the query range, inclusive (ISO 8601 format)
    */
-  from?: string;
+  from: string;
 
   /**
-   * The number of items to return per page.
+   * The end date and time for the query range, inclusive (ISO 8601 format)
+   */
+  to: string;
+
+  /**
+   * Filter by instrument ID
+   */
+  instrument_id?: string;
+
+  /**
+   * The number of items to return per page
    */
   page_size?: number;
 
   /**
-   * The token for the next page of results. When the page token is specified, the
-   * page size parameter is ignored. The page token is an opaque value that need not
-   * be interpreted by the client. It is obtained from the `next_page_token` field in
-   * a previous response.
+   * The token for the next page of results
    */
   page_token?: string;
 
   /**
-   * The current status of the order.
+   * Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
+   */
+  security_type?: Shared.SecurityType;
+
+  /**
+   * Filter by order status
    */
   status?: OrderStatus;
 
   /**
-   * The end date and time for the query range, inclusive (ISO 8601 format).
+   * Filter by symbol
    */
-  to?: string;
+  symbol?: string;
 }
 
 export interface OrderDeleteParams {
   /**
-   * The unique identifier for the account.
+   * Account identifier
    */
   account_id: string;
 }
@@ -699,17 +785,18 @@ export interface OrderDeleteParams {
 export declare namespace Orders {
   export {
     type ApStrategy as ApStrategy,
-    type BaseStrategy as BaseStrategy,
     type DarkStrategy as DarkStrategy,
+    type Destination as Destination,
     type DmaStrategy as DmaStrategy,
     type Order as Order,
     type OrderSide as OrderSide,
     type OrderStatus as OrderStatus,
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
+    type PositionEffect as PositionEffect,
     type PovStrategy as PovStrategy,
+    type RiskSettings as RiskSettings,
     type SorStrategy as SorStrategy,
-    type StrategyType as StrategyType,
     type TimeInForce as TimeInForce,
     type TwapStrategy as TwapStrategy,
     type Urgency as Urgency,

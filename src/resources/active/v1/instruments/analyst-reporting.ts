@@ -8,25 +8,14 @@ import { path } from '../../../../internal/utils/path';
 
 export class AnalystReporting extends APIResource {
   /**
-   * Retrieves analyst consensus snapshot(s) for the specified instrument over a
-   * given date range. Each snapshot aggregates current analyst rating distribution
-   * and price target statistics as of the snapshot `date`.
-   *
-   * The optional `from` and `to` query parameters define an inclusive date range
-   * (based on the snapshot `date`). If neither is provided, the latest available
-   * snapshot is returned. If only `from` is provided, all snapshots on or after that
-   * date are returned. If only `to` is provided, the most recent snapshot on or
-   * before that date is returned.
-   *
-   * Results are ordered descending by `date` (newest first). An empty list is
-   * returned when no snapshots fall within the requested range.
+   * Retrieves analyst ratings and price targets for an instrument.
    *
    * @example
    * ```ts
    * const analystReportings =
    *   await client.active.v1.instruments.analystReporting.list(
-   *     '037833100',
-   *     { from_date: '2025-04-24', to_date: '2025-07-24' },
+   *     'instrument_id',
+   *     { from_date: 'from_date', to_date: 'to_date' },
    *   );
    * ```
    */
@@ -43,98 +32,115 @@ export class AnalystReporting extends APIResource {
 }
 
 /**
- * Consensus analyst rating category.
+ * Analyst recommendation distribution
+ */
+export interface AnalystDistribution {
+  /**
+   * Number of buy recommendations
+   */
+  buy: number;
+
+  /**
+   * Number of hold recommendations
+   */
+  hold: number;
+
+  /**
+   * Number of sell recommendations
+   */
+  sell: number;
+
+  /**
+   * Number of strong buy recommendations
+   */
+  strong_buy: number;
+
+  /**
+   * Number of strong sell recommendations
+   */
+  strong_sell: number;
+}
+
+/**
+ * Analyst rating category
  */
 export type AnalystRating = 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SELL';
 
 /**
- * Aggregated analyst consensus metrics including rating distribution and price
- * targets for an instrument.
+ * Aggregated analyst consensus metrics
  */
-export interface AnalystReport {
+export interface InstrumentAnalystConsensus {
   /**
-   * The date the consensus snapshot was generated.
+   * The date the consensus snapshot was generated
    */
   date: string;
 
   /**
-   * Count of individual analyst recommendations by category.
+   * Count of individual analyst recommendations by category
    */
-  distribution: AnalystReport.Distribution;
+  distribution: AnalystDistribution;
 
   /**
-   * Aggregated analyst price target statistics.
+   * Aggregated analyst price target statistics
    */
-  price_target: AnalystReport.PriceTarget;
+  price_target: PriceTarget;
 
   /**
-   * Consensus analyst rating category.
+   * Consensus analyst rating
    */
   rating: AnalystRating;
 }
 
-export namespace AnalystReport {
+/**
+ * Analyst price target statistics
+ */
+export interface PriceTarget {
   /**
-   * Count of individual analyst recommendations by category.
+   * Average analyst price target
    */
-  export interface Distribution {
-    buy: number;
-
-    hold: number;
-
-    sell: number;
-
-    strong_buy: number;
-
-    strong_sell: number;
-  }
+  average: string;
 
   /**
-   * Aggregated analyst price target statistics.
+   * ISO 4217 currency code of the price targets
    */
-  export interface PriceTarget {
-    /**
-     * Average analyst price target.
-     */
-    average: string;
+  currency: string;
 
-    /**
-     * ISO 4217 currency code of the price targets.
-     */
-    currency: string;
+  /**
+   * Highest analyst price target
+   */
+  high: string;
 
-    /**
-     * Highest analyst price target.
-     */
-    high: string;
-
-    /**
-     * Lowest analyst price target.
-     */
-    low: string;
-  }
+  /**
+   * Lowest analyst price target
+   */
+  low: string;
 }
 
-export interface AnalystReportingListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<AnalystReport>;
+export interface AnalystReportingListResponse extends Shared.BaseResponse {
+  /**
+   * Aggregated analyst consensus metrics
+   */
+  data: InstrumentAnalystConsensus;
 }
 
 export interface AnalystReportingListParams {
   /**
-   * The start date for the query range, inclusive (YYYY-MM-DD).
+   * The start date for the query range, inclusive (YYYY-MM-DD)
    */
   from_date: string;
 
   /**
-   * The end date for the query range, inclusive (YYYY-MM-DD).
+   * The end date for the query range, inclusive (YYYY-MM-DD)
    */
   to_date: string;
 }
 
 export declare namespace AnalystReporting {
   export {
+    type AnalystDistribution as AnalystDistribution,
     type AnalystRating as AnalystRating,
-    type AnalystReport as AnalystReport,
+    type InstrumentAnalystConsensus as InstrumentAnalystConsensus,
+    type PriceTarget as PriceTarget,
     type AnalystReportingListResponse as AnalystReportingListResponse,
     type AnalystReportingListParams as AnalystReportingListParams,
   };

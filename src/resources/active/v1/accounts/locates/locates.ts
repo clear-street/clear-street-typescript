@@ -17,60 +17,55 @@ export class Locates extends APIResource {
   locateInventory: LocateInventoryAPI.LocateInventory = new LocateInventoryAPI.LocateInventory(this._client);
 
   /**
-   * Submits a batch of locate requests to locate shares for short selling. This is
-   * an asynchronous operation.
+   * Submits a new short stock locate request.
    *
    * @example
    * ```ts
    * const locate =
-   *   await client.active.v1.accounts.locates.create('19816', {
-   *     quantity: 1000,
-   *     symbol: 'TSLA',
-   *     comments: 'Request for locate of 1000 TSLA shares',
-   *     reference_id: 'my-locate-ref-001',
-   *   });
+   *   await client.active.v1.accounts.locates.create(
+   *     'account_id',
+   *     { body: [{ quantity: 500, symbol: 'AAPL' }] },
+   *   );
    * ```
    */
   create(
     accountID: string,
-    body: LocateCreateParams,
+    params: LocateCreateParams,
     options?: RequestOptions,
   ): APIPromise<LocateCreateResponse> {
-    return this._client.post(path`/active/v1/accounts/${accountID}/locates`, { body, ...options });
+    const { body } = params;
+    return this._client.post(path`/active/v1/accounts/${accountID}/locates`, { body: body, ...options });
   }
 
   /**
-   * Accept or decline a locate order that has been offered. This is an asynchronous
-   * operation.
+   * Modifies an existing locate request.
    *
    * @example
    * ```ts
    * const locate =
    *   await client.active.v1.accounts.locates.update(
-   *     'loc_2af0305ffa5b4c91ba4e7ab45e2d8e4e',
-   *     { account_id: '19816', accept: true },
+   *     'account_id',
+   *     { accept: true },
    *   );
    * ```
    */
   update(
-    locateOrderID: string,
-    params: LocateUpdateParams,
+    accountID: string,
+    body: LocateUpdateParams,
     options?: RequestOptions,
   ): APIPromise<LocateUpdateResponse> {
-    const { account_id, ...body } = params;
-    return this._client.patch(path`/active/v1/accounts/${account_id}/locates/${locateOrderID}`, {
-      body,
-      ...options,
-    });
+    return this._client.patch(path`/active/v1/accounts/${accountID}/locates`, { body, ...options });
   }
 
   /**
-   * Retrieves a paginated list of all locate requests for a given account.
+   * Retrieves all locate requests for the specified account.
    *
    * @example
    * ```ts
    * const locates =
-   *   await client.active.v1.accounts.locates.list('19816');
+   *   await client.active.v1.accounts.locates.list(
+   *     'account_id',
+   *   );
    * ```
    */
   list(
@@ -83,88 +78,88 @@ export class Locates extends APIResource {
 }
 
 /**
- * Represents a single locate order and its status.
+ * Represents a single locate order and its status
  */
 export interface LocateOrder {
   /**
-   * The unique system-generated ID for the locate order.
+   * The unique system-generated ID for the locate order
    */
   locate_order_id: string;
 
   /**
-   * The quantity of shares that have been located.
+   * The quantity of shares that have been located
    */
   located_quantity: number;
 
   /**
-   * The client Market Participant Identifier, assigned by Clear Street.
+   * The client Market Participant Identifier, assigned by Clear Street
    */
   mpid: string;
 
   /**
-   * The timestamp when the locate order was received from the client in UTC.
+   * The timestamp when the locate order was received from the client in UTC
    */
   requested_at: string;
 
   /**
-   * The quantity of shares requested by the client.
+   * The quantity of shares requested by the client
    */
   requested_quantity: number;
 
   /**
-   * The status of the locate order.
+   * The status of the locate order
    */
   status: LocateOrderStatus;
 
   /**
-   * The symbol of the security to locate.
+   * The symbol of the security to locate
    */
   symbol: string;
 
   /**
-   * The borrow rate for the security if held overnight, expressed as a decimal.
+   * The borrow rate for the security if held overnight, expressed as a decimal
    */
   borrow_rate?: string | null;
 
   /**
-   * Comments provided by the trading desk.
+   * Comments provided by the trading desk
    */
   desk_comment?: string | null;
 
   /**
    * The timestamp when the locate order will expire, set once the order has been
-   * processed, in UTC.
+   * processed, in UTC
    */
   expires_at?: string | null;
 
   /**
-   * A unique ID for the locate order, available after the order has been `OFFERED`.
+   * A unique ID for the locate order, available after the order has been `OFFERED`
    */
   locate_id?: string | null;
 
   /**
-   * The timestamp when the security was located in UTC.
+   * The timestamp when the security was located in UTC
    */
   located_at?: string | null;
 
   /**
-   * The reference ID provided when submitting the locate order.
+   * The reference ID provided when submitting the locate order
    */
   reference_id?: string | null;
 
   /**
-   * The total cost of the locate.
+   * The total cost of the locate
    */
   total_cost?: string | null;
 
   /**
-   * Comments provided by the trader when submitting the locate order.
+   * Comments provided by the trader when submitting the locate order
    */
   trader_comment?: string | null;
 }
 
 /**
- * The status of the locate order.
+ * The status of a locate order
  */
 export type LocateOrderStatus =
   | 'PENDING'
@@ -175,79 +170,77 @@ export type LocateOrderStatus =
   | 'EXPIRED'
   | 'CANCELED';
 
-export interface LocateCreateResponse extends Omit<Shared.BaseResponse, 'data'> {
-  /**
-   * Represents a single locate order and its status.
-   */
-  data?: LocateOrder;
+export interface LocateCreateResponse extends Shared.BaseResponse {
+  data: Array<LocateOrder>;
 }
 
-export interface LocateUpdateResponse extends Omit<Shared.BaseResponse, 'data'> {
+export interface LocateUpdateResponse extends Shared.BaseResponse {
   /**
-   * Represents a single locate order and its status.
+   * Represents a single locate order and its status
    */
-  data?: LocateOrder;
+  data: LocateOrder;
 }
 
-export interface LocateListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<LocateOrder>;
+export interface LocateListResponse extends Shared.BaseResponse {
+  data: Array<LocateOrder>;
 }
 
 export interface LocateCreateParams {
-  /**
-   * The quantity of shares to locate.
-   */
-  quantity: number;
+  body: Array<LocateCreateParams.Body>;
+}
 
+export namespace LocateCreateParams {
   /**
-   * The symbol of the security to locate.
+   * Request to create a new locate order
    */
-  symbol: string;
+  export interface Body {
+    /**
+     * The quantity of shares to locate
+     */
+    quantity: number;
 
-  /**
-   * Optional comments to associate with the locate request.
-   */
-  comments?: string | null;
+    /**
+     * The symbol of the security to locate
+     */
+    symbol: string;
 
-  /**
-   * A client-provided reference ID to identify the locate order.
-   */
-  reference_id?: string | null;
+    /**
+     * Optional comments to associate with the locate request
+     */
+    comments?: string | null;
+
+    /**
+     * A client-provided reference ID to identify the locate order
+     */
+    reference_id?: string | null;
+  }
 }
 
 export interface LocateUpdateParams {
   /**
-   * Path param: The unique identifier for the account.
-   */
-  account_id: string;
-
-  /**
-   * Body param: Whether to accept (`true`) or decline (`false`) the locate offer.
+   * Whether to accept (`true`) or decline (`false`) the locate offer
    */
   accept: boolean;
 }
 
 export interface LocateListParams {
   /**
-   * The number of items to return per page.
+   * The number of items to return per page
    */
   page_size?: number;
 
   /**
-   * The token for the next page of results. When the page token is specified, the
-   * page size parameter is ignored. The page token is an opaque value that need not
-   * be interpreted by the client. It is obtained from the `next_page_token` field in
-   * a previous response.
+   * The token for the next page of results
    */
   page_token?: string;
 
   /**
-   * Optional client reference ID to use to filter locate orders.
+   * Filter by client reference ID
    */
   reference_id?: string;
 
   /**
-   * Filter to only include locate orders with the specified status.
+   * Filter by locate order status
    */
   status?: LocateOrderStatus;
 }

@@ -10,7 +10,7 @@ const client = new ClearStreet({
 describe('resource positions', () => {
   // Prism tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.active.v1.accounts.positions.list('19816');
+    const responsePromise = client.active.v1.accounts.positions.list('account_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,8 +25,8 @@ describe('resource positions', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.active.v1.accounts.positions.list(
-        '19816',
-        { page_size: 50, page_token: 'cGFnZT0yJmxhc3RfaWQ9MTk4MTY=' },
+        'account_id',
+        { page_size: 1, page_token: 'page_token' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);

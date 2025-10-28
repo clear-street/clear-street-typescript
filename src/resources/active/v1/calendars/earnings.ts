@@ -7,15 +7,14 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class Earnings extends APIResource {
   /**
-   * Retrieves a list of upcoming and recent earnings announcement events within a
-   * given date range.
+   * Retrieves upcoming earnings announcements.
    *
    * @example
    * ```ts
    * const earnings =
    *   await client.active.v1.calendars.earnings.list({
-   *     from_date: '2025-04-24',
-   *     to_date: '2025-07-24',
+   *     from_date: 'from_date',
+   *     to_date: 'to_date',
    *   });
    * ```
    */
@@ -25,57 +24,57 @@ export class Earnings extends APIResource {
 }
 
 /**
- * Represents a single earnings announcement event.
+ * Represents a single earnings announcement event
  */
 export interface EarningsCalendarEvent {
   /**
-   * The date of the earnings announcement.
+   * The date of the earnings announcement
    */
   date: string;
 
   /**
-   * The date of the last update to this event.
+   * The date of the last update to this event
    */
   last_updated: string;
 
   /**
-   * The symbol for the instrument.
+   * The symbol for the instrument
    */
   symbol: string;
 
   /**
-   * The actual reported earnings per share.
+   * The actual reported earnings per share
    */
   eps_actual?: string | null;
 
   /**
-   * The consensus estimated earnings per share.
+   * The consensus estimated earnings per share
    */
   eps_estimated?: string | null;
 
   /**
-   * The actual reported revenue.
+   * The actual reported revenue
    */
   revenue_actual?: string | null;
 
   /**
-   * The consensus estimated revenue.
+   * The consensus estimated revenue
    */
   revenue_estimated?: string | null;
 }
 
-export interface EarningListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<EarningsCalendarEvent>;
+export interface EarningListResponse extends Shared.BaseResponse {
+  data: Array<EarningsCalendarEvent>;
 }
 
 export interface EarningListParams {
   /**
-   * The start date for the query range, inclusive (YYYY-MM-DD).
+   * The start date for the query range, inclusive (YYYY-MM-DD)
    */
   from_date: string;
 
   /**
-   * The end date for the query range, inclusive (YYYY-MM-DD).
+   * The end date for the query range, inclusive (YYYY-MM-DD)
    */
   to_date: string;
 }
