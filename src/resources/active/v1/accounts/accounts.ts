@@ -29,6 +29,7 @@ import {
   Orders,
   PositionEffect,
   PovStrategy,
+  RiskSettings,
   SorStrategy,
   TimeInForce,
   TwapStrategy,
@@ -217,19 +218,7 @@ export interface AccountUpdateParams {
   /**
    * Risk settings for the account
    */
-  risk?: AccountUpdateParams.Risk | null;
-}
-
-export namespace AccountUpdateParams {
-  /**
-   * Risk settings for the account
-   */
-  export interface Risk {
-    /**
-     * The maximum notional value available to the account
-     */
-    max_notional?: string | null;
-  }
+  risk?: OrdersAPI.RiskSettings | null;
 }
 
 export interface AccountListParams {
@@ -289,6 +278,7 @@ export declare namespace Accounts {
     type OrderType as OrderType,
     type PositionEffect as PositionEffect,
     type PovStrategy as PovStrategy,
+    type RiskSettings as RiskSettings,
     type SorStrategy as SorStrategy,
     type TimeInForce as TimeInForce,
     type TwapStrategy as TwapStrategy,

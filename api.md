@@ -67,6 +67,7 @@ Types:
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderType</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">PositionEffect</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">PovStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">RiskSettings</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">SorStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">TimeInForce</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">TwapStrategy</a></code>
