@@ -23,6 +23,8 @@ export interface APIError {
 }
 
 export interface BaseResponse {
+  data: unknown;
+
   /**
    * Response metadata, including the request ID and optional pagination info.
    */
