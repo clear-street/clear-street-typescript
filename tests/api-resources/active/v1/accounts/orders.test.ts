@@ -10,12 +10,12 @@ const client = new ClearStreet({
 describe('resource orders', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.orders.create('19816', {
-      orders: [
+    const responsePromise = client.active.v1.accounts.orders.create('account_id', {
+      body: [
         {
+          order_id: 'my-ref-id-20251001-002',
           order_type: 'LIMIT',
           quantity: '25',
-          security_id: 'GOOG',
           security_type: 'COMMON_STOCK',
           side: 'BUY',
           time_in_force: 'DAY',
@@ -33,25 +33,29 @@ describe('resource orders', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.active.v1.accounts.orders.create('19816', {
-      orders: [
+    const response = await client.active.v1.accounts.orders.create('account_id', {
+      body: [
         {
+          order_id: 'my-ref-id-20251001-002',
           order_type: 'LIMIT',
           quantity: '25',
-          security_id: 'GOOG',
           security_type: 'COMMON_STOCK',
           side: 'BUY',
           time_in_force: 'DAY',
-          client_order_id: 'my-ref-id-20251001-002',
+          expire_at: '2025-10-15T16:00:00.000000000Z',
+          extended_hours: true,
+          instrument_id: '037833100',
           limit_price: '140.50',
-          security_id_source: 'CMS',
+          position_effect: 'OPEN',
           stop_price: '135.00',
           strategy: {
-            type: 'SOR',
-            end_at: '2025-10-01T13:35:10.000000000Z',
-            start_at: '2025-10-01T13:35:10.000000000Z',
+            end_at: '2019-12-27T18:11:19.117Z',
+            start_at: '2019-12-27T18:11:19.117Z',
             urgency: 'SUPER_PASSIVE',
+            type: 'SOR',
           },
+          symbol: 'AAPL',
+          venue: 'XNMS',
         },
       ],
     });
@@ -59,8 +63,8 @@ describe('resource orders', () => {
 
   // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.orders.retrieve('ord_2aF3b4C5d6E7f8G9', {
-      account_id: '19816',
+    const responsePromise = client.active.v1.accounts.orders.retrieve('order_id', {
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -73,16 +77,14 @@ describe('resource orders', () => {
 
   // Prism tests are disabled
   test.skip('retrieve: required and optional params', async () => {
-    const response = await client.active.v1.accounts.orders.retrieve('ord_2aF3b4C5d6E7f8G9', {
-      account_id: '19816',
+    const response = await client.active.v1.accounts.orders.retrieve('order_id', {
+      account_id: 'account_id',
     });
   });
 
   // Prism tests are disabled
   test.skip('update: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.orders.update('ord_2aF3b4C5d6E7f8G9', {
-      account_id: '19816',
-    });
+    const responsePromise = client.active.v1.accounts.orders.update('order_id', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -94,17 +96,18 @@ describe('resource orders', () => {
 
   // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
-    const response = await client.active.v1.accounts.orders.update('ord_2aF3b4C5d6E7f8G9', {
-      account_id: '19816',
+    const response = await client.active.v1.accounts.orders.update('order_id', {
+      account_id: 'account_id',
       limit_price: '150.50',
       quantity: '125',
       stop_price: '148.00',
+      time_in_force: 'DAY',
     });
   });
 
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.active.v1.accounts.orders.list('19816');
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.active.v1.accounts.orders.list('account_id', { from: 'from', to: 'to' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -115,28 +118,22 @@ describe('resource orders', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.active.v1.accounts.orders.list(
-        '19816',
-        {
-          from: '2025-04-24T14:30:00.000000000Z',
-          page_size: 50,
-          page_token: 'cGFnZT0yJmxhc3RfaWQ9MTk4MTY=',
-          status: 'PARTIALLY_FILLED',
-          to: '2025-04-24T18:30:00.000000000Z',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(ClearStreet.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await client.active.v1.accounts.orders.list('account_id', {
+      from: 'from',
+      to: 'to',
+      instrument_id: 'instrument_id',
+      page_size: 1,
+      page_token: 'page_token',
+      security_type: 'COMMON_STOCK',
+      status: 'PENDING_NEW',
+      symbol: 'symbol',
+    });
   });
 
   // Prism tests are disabled
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.orders.delete('ord_2aF3b4C5d6E7f8G9', {
-      account_id: '19816',
-    });
+    const responsePromise = client.active.v1.accounts.orders.delete('order_id', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -148,14 +145,12 @@ describe('resource orders', () => {
 
   // Prism tests are disabled
   test.skip('delete: required and optional params', async () => {
-    const response = await client.active.v1.accounts.orders.delete('ord_2aF3b4C5d6E7f8G9', {
-      account_id: '19816',
-    });
+    const response = await client.active.v1.accounts.orders.delete('order_id', { account_id: 'account_id' });
   });
 
   // Prism tests are disabled
   test.skip('deleteAll', async () => {
-    const responsePromise = client.active.v1.accounts.orders.deleteAll('19816');
+    const responsePromise = client.active.v1.accounts.orders.deleteAll('account_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

@@ -2,4 +2,3 @@
 
 export * from './shared';
 export { Active } from './active/active';
-export { Polygon } from './polygon';

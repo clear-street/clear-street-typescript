@@ -21,8 +21,8 @@ describe('resource version', () => {
   });
 
   // Prism tests are disabled
-  test.skip('update: only required params', async () => {
-    const responsePromise = client.active.v1.version.update({ version: '2025-10-10' });
+  test.skip('update', async () => {
+    const responsePromise = client.active.v1.version.update();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,10 +30,5 @@ describe('resource version', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('update: required and optional params', async () => {
-    const response = await client.active.v1.version.update({ version: '2025-10-10' });
   });
 });

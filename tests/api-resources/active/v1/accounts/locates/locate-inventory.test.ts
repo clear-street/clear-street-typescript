@@ -10,8 +10,8 @@ const client = new ClearStreet({
 describe('resource locateInventory', () => {
   // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.locates.locateInventory.retrieve('19816', {
-      symbol: 'AAPL',
+    const responsePromise = client.active.v1.accounts.locates.locateInventory.retrieve('account_id', {
+      symbol: 'symbol',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,8 +24,8 @@ describe('resource locateInventory', () => {
 
   // Prism tests are disabled
   test.skip('retrieve: required and optional params', async () => {
-    const response = await client.active.v1.accounts.locates.locateInventory.retrieve('19816', {
-      symbol: 'AAPL',
+    const response = await client.active.v1.accounts.locates.locateInventory.retrieve('account_id', {
+      symbol: 'symbol',
     });
   });
 });

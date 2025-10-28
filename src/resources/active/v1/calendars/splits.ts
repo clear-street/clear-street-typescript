@@ -7,13 +7,12 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class Splits extends APIResource {
   /**
-   * Retrieves a list of upcoming and recent stock split events within a given date
-   * range.
+   * Retrieves upcoming stock splits.
    *
    * @example
    * ```ts
    * const splits = await client.active.v1.calendars.splits.list(
-   *   { from_date: '2025-04-24', to_date: '2025-07-24' },
+   *   { from_date: 'from_date', to_date: 'to_date' },
    * );
    * ```
    */
@@ -23,42 +22,42 @@ export class Splits extends APIResource {
 }
 
 /**
- * Represents a single stock split event.
+ * Represents a stock split event
  */
 export interface StockSplitEvent {
   /**
-   * The date the split will occur.
+   * The date the split will occur
    */
   date: string;
 
   /**
-   * The pre-split number of shares.
+   * The pre-split number of shares
    */
   denominator: number;
 
   /**
-   * The post-split number of shares for every 'denominator' pre-split shares.
+   * The post-split number of shares for every 'denominator' pre-split shares
    */
   numerator: number;
 
   /**
-   * The symbol for the instrument.
+   * The symbol for the instrument
    */
   symbol: string;
 }
 
-export interface SplitListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<StockSplitEvent>;
+export interface SplitListResponse extends Shared.BaseResponse {
+  data: Array<StockSplitEvent>;
 }
 
 export interface SplitListParams {
   /**
-   * The start date for the query range, inclusive (YYYY-MM-DD).
+   * The start date for the query range, inclusive (YYYY-MM-DD)
    */
   from_date: string;
 
   /**
-   * The end date for the query range, inclusive (YYYY-MM-DD).
+   * The end date for the query range, inclusive (YYYY-MM-DD)
    */
   to_date: string;
 }

@@ -7,14 +7,14 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class Economic extends APIResource {
   /**
-   * Retrieves a list of major economic events within a given date range.
+   * Retrieves upcoming economic events and indicators.
    *
    * @example
    * ```ts
    * const economics =
    *   await client.active.v1.calendars.economic.list({
-   *     from_date: '2025-04-24',
-   *     to_date: '2025-07-24',
+   *     from_date: 'from_date',
+   *     to_date: 'to_date',
    *   });
    * ```
    */
@@ -24,67 +24,72 @@ export class Economic extends APIResource {
 }
 
 /**
- * Represents a single economic calendar event.
+ * Represents a single economic calendar event
  */
 export interface EconomicCalendarEvent {
   /**
-   * The ISO 3166-1 alpha-2 country code.
+   * The ISO 3166-1 alpha-2 country code
    */
   country: string;
 
   /**
-   * The ISO 4217 currency code.
+   * The ISO 4217 currency code
    */
   currency: string;
 
   /**
-   * The name of the economic event.
+   * The name of the economic event
    */
   event_name: string;
 
   /**
-   * The date and time of the event in UTC.
+   * The date and time of the event in UTC
    */
   event_timestamp: string;
 
   /**
-   * The expected market impact of the event.
+   * The expected market impact of the event
    */
-  impact: 'LOW' | 'MEDIUM' | 'HIGH';
+  impact: EconomicEventImpact;
 
   /**
-   * The actual value reported for the event.
+   * The actual value reported for the event
    */
   actual_value?: string | null;
 
   /**
-   * The percentage change between the actual and previous values.
+   * The percentage change between the actual and previous values
    */
   change_percent?: string | null;
 
   /**
-   * The market consensus estimate for the event's value.
+   * The market consensus estimate for the event's value
    */
   estimated_value?: string | null;
 
   /**
-   * The previous value for this event.
+   * The previous value for this event
    */
   previous_value?: string | null;
 }
 
-export interface EconomicListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<EconomicCalendarEvent>;
+/**
+ * Economic event impact level
+ */
+export type EconomicEventImpact = 'LOW' | 'MEDIUM' | 'HIGH';
+
+export interface EconomicListResponse extends Shared.BaseResponse {
+  data: Array<EconomicCalendarEvent>;
 }
 
 export interface EconomicListParams {
   /**
-   * The start date for the query range, inclusive (YYYY-MM-DD).
+   * The start date for the query range, inclusive (YYYY-MM-DD)
    */
   from_date: string;
 
   /**
-   * The end date for the query range, inclusive (YYYY-MM-DD).
+   * The end date for the query range, inclusive (YYYY-MM-DD)
    */
   to_date: string;
 }
@@ -92,6 +97,7 @@ export interface EconomicListParams {
 export declare namespace Economic {
   export {
     type EconomicCalendarEvent as EconomicCalendarEvent,
+    type EconomicEventImpact as EconomicEventImpact,
     type EconomicListResponse as EconomicListResponse,
     type EconomicListParams as EconomicListParams,
   };

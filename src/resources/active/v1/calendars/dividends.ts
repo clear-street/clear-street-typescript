@@ -7,15 +7,14 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class Dividends extends APIResource {
   /**
-   * Retrieves a list of upcoming and recent dividend events within a given date
-   * range.
+   * Retrieves upcoming dividend payments.
    *
    * @example
    * ```ts
    * const dividends =
    *   await client.active.v1.calendars.dividends.list({
-   *     from_date: '2025-04-24',
-   *     to_date: '2025-07-24',
+   *     from_date: 'from_date',
+   *     to_date: 'to_date',
    *   });
    * ```
    */
@@ -25,67 +24,72 @@ export class Dividends extends APIResource {
 }
 
 /**
- * Represents a single dividend event.
+ * Represents a single dividend event
  */
 export interface DividendCalendarEvent {
   /**
-   * The dividend amount adjusted for any stock splits.
+   * The dividend amount adjusted for any stock splits
    */
   adjusted_dividend: string;
 
   /**
-   * The ex-dividend date.
+   * The ex-dividend date
    */
   date: string;
 
   /**
-   * The dividend amount per share.
+   * The dividend amount per share
    */
   dividend: string;
 
   /**
-   * The symbol for the instrument.
+   * The symbol for the instrument
    */
   symbol: string;
 
   /**
-   * The date the dividend was declared.
+   * The date the dividend was declared
    */
   declaration_date?: string | null;
 
   /**
-   * The frequency of the dividend payment.
+   * The frequency of the dividend payment
    */
-  frequency?: 'ANNUALLY' | 'SEMI_ANNUALLY' | 'QUARTERLY' | 'MONTHLY' | 'OTHER' | null;
+  frequency?: DividendFrequency | null;
 
   /**
-   * The payment date for the dividend.
+   * The payment date for the dividend
    */
   payment_date?: string | null;
 
   /**
-   * The record date for the dividend.
+   * The record date for the dividend
    */
   record_date?: string | null;
 
   /**
-   * The dividend yield as a percentage decimal (e.g., 0.045 for 4.5%).
+   * The dividend yield as a percentage decimal
    */
   yield?: string | null;
 }
 
-export interface DividendListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<DividendCalendarEvent>;
+/**
+ * Dividend payment frequency
+ */
+export type DividendFrequency = 'ANNUALLY' | 'SEMI_ANNUALLY' | 'QUARTERLY' | 'MONTHLY' | 'OTHER';
+
+export interface DividendListResponse extends Shared.BaseResponse {
+  data: Array<DividendCalendarEvent>;
 }
 
 export interface DividendListParams {
   /**
-   * The start date for the query range, inclusive (YYYY-MM-DD).
+   * The start date for the query range, inclusive (YYYY-MM-DD)
    */
   from_date: string;
 
   /**
-   * The end date for the query range, inclusive (YYYY-MM-DD).
+   * The end date for the query range, inclusive (YYYY-MM-DD)
    */
   to_date: string;
 }
@@ -93,6 +97,7 @@ export interface DividendListParams {
 export declare namespace Dividends {
   export {
     type DividendCalendarEvent as DividendCalendarEvent,
+    type DividendFrequency as DividendFrequency,
     type DividendListResponse as DividendListResponse,
     type DividendListParams as DividendListParams,
   };

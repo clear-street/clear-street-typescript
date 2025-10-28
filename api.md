@@ -4,9 +4,7 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">APIError</a></code>
 - <code><a href="./src/resources/shared.ts">BaseResponse</a></code>
-- <code><a href="./src/resources/shared.ts">ErrorResponse</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseMetadata</a></code>
-- <code><a href="./src/resources/shared.ts">SecurityIDSource</a></code>
 - <code><a href="./src/resources/shared.ts">SecurityType</a></code>
 
 # Active
@@ -18,29 +16,25 @@ Types:
 Types:
 
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">Account</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountKind</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountStatus</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountSubkind</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountRetrieveResponse</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountUpdateResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountListResponse</a></code>
 
 Methods:
 
 - <code title="get /active/v1/accounts/{account_id}">client.active.v1.accounts.<a href="./src/resources/active/v1/accounts/accounts.ts">retrieve</a>(accountID) -> AccountRetrieveResponse</code>
+- <code title="patch /active/v1/accounts/{account_id}">client.active.v1.accounts.<a href="./src/resources/active/v1/accounts/accounts.ts">update</a>(accountID, { ...params }) -> AccountUpdateResponse</code>
 - <code title="get /active/v1/accounts">client.active.v1.accounts.<a href="./src/resources/active/v1/accounts/accounts.ts">list</a>({ ...params }) -> AccountListResponse</code>
-
-#### Settings
-
-Types:
-
-- <code><a href="./src/resources/active/v1/accounts/settings.ts">SettingUpdateResponse</a></code>
-
-Methods:
-
-- <code title="patch /active/v1/accounts/{account_id}/settings">client.active.v1.accounts.settings.<a href="./src/resources/active/v1/accounts/settings.ts">update</a>(accountID, { ...params }) -> SettingUpdateResponse</code>
 
 #### Positions
 
 Types:
 
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">Position</a></code>
+- <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionType</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionListResponse</a></code>
 
 Methods:
@@ -63,17 +57,17 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">ApStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">BaseStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">DarkStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">Destination</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">DmaStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">Order</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderSide</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderStatus</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderType</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">PositionEffect</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">PovStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">SorStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">StrategyType</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">TimeInForce</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">TwapStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">Urgency</a></code>
@@ -87,7 +81,7 @@ Types:
 
 Methods:
 
-- <code title="post /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">create</a>(accountID, { ...params }) -> OrderCreateResponse</code>
+- <code title="post /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">create</a>(accountID, [ ...body ]) -> OrderCreateResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">retrieve</a>(orderID, { ...params }) -> OrderRetrieveResponse</code>
 - <code title="put /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">update</a>(orderID, { ...params }) -> OrderUpdateResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">list</a>(accountID, { ...params }) -> OrderListResponse</code>
@@ -106,8 +100,8 @@ Types:
 
 Methods:
 
-- <code title="post /active/v1/accounts/{account_id}/locates">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates/locates.ts">create</a>(accountID, { ...params }) -> LocateCreateResponse</code>
-- <code title="patch /active/v1/accounts/{account_id}/locates/{locate_order_id}">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates/locates.ts">update</a>(locateOrderID, { ...params }) -> LocateUpdateResponse</code>
+- <code title="post /active/v1/accounts/{account_id}/locates">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates/locates.ts">create</a>(accountID, [ ...body ]) -> LocateCreateResponse</code>
+- <code title="patch /active/v1/accounts/{account_id}/locates">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates/locates.ts">update</a>(accountID, { ...params }) -> LocateUpdateResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/locates">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates/locates.ts">list</a>(accountID, { ...params }) -> LocateListResponse</code>
 
 ##### LocateInventory
@@ -135,11 +129,26 @@ Methods:
 - <code title="get /active/v1/instruments/{instrument_id}">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">retrieve</a>(instrumentID, { ...params }) -> InstrumentRetrieveResponse</code>
 - <code title="get /active/v1/instruments">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">list</a>({ ...params }) -> InstrumentListResponse</code>
 
+#### Venues
+
+Types:
+
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">DisplayType</a></code>
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">GtdAccepts</a></code>
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">Venue</a></code>
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">VenueSession</a></code>
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">VenueListResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/instruments/venues">client.active.v1.instruments.venues.<a href="./src/resources/active/v1/instruments/venues.ts">list</a>() -> VenueListResponse</code>
+
 #### Events
 
 Types:
 
 - <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentEvent</a></code>
+- <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentEventType</a></code>
 - <code><a href="./src/resources/active/v1/instruments/events.ts">EventListResponse</a></code>
 
 Methods:
@@ -151,12 +160,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/active/v1/instruments/reporting.ts">FiscalPeriodType</a></code>
-- <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentBalanceSheet</a></code>
-- <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentCashFlow</a></code>
-- <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentDividendReport</a></code>
 - <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentEarnings</a></code>
-- <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentIncome</a></code>
-- <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentReport</a></code>
 - <code><a href="./src/resources/active/v1/instruments/reporting.ts">ReportingListResponse</a></code>
 
 Methods:
@@ -167,8 +171,10 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">AnalystDistribution</a></code>
 - <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">AnalystRating</a></code>
-- <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">AnalystReport</a></code>
+- <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">InstrumentAnalystConsensus</a></code>
+- <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">PriceTarget</a></code>
 - <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">AnalystReportingListResponse</a></code>
 
 Methods:
@@ -180,6 +186,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/active/v1/instruments/news.ts">News</a></code>
+- <code><a href="./src/resources/active/v1/instruments/news.ts">NewsType</a></code>
 - <code><a href="./src/resources/active/v1/instruments/news.ts">NewsListResponse</a></code>
 
 Methods:
@@ -193,6 +200,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicCalendarEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicEventImpact</a></code>
 - <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicListResponse</a></code>
 
 Methods:
@@ -215,6 +223,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendCalendarEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendFrequency</a></code>
 - <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendListResponse</a></code>
 
 Methods:
@@ -236,7 +245,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/calendars/mergers-acquisitions.ts">MergersAcqusitionsEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/mergers-acquisitions.ts">MergersAcquisitionsEvent</a></code>
 - <code><a href="./src/resources/active/v1/calendars/mergers-acquisitions.ts">MergersAcquisitionListResponse</a></code>
 
 Methods:
@@ -269,13 +278,14 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/version.ts">Version</a></code>
 - <code><a href="./src/resources/active/v1/version.ts">VersionRetrieveResponse</a></code>
 - <code><a href="./src/resources/active/v1/version.ts">VersionUpdateResponse</a></code>
 
 Methods:
 
 - <code title="get /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">retrieve</a>() -> VersionRetrieveResponse</code>
-- <code title="patch /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">update</a>({ ...params }) -> VersionUpdateResponse</code>
+- <code title="patch /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">update</a>() -> VersionUpdateResponse</code>
 
 ### Screener
 
@@ -287,9 +297,3 @@ Types:
 Methods:
 
 - <code title="get /active/v1/screener">client.active.v1.screener.<a href="./src/resources/active/v1/screener.ts">list</a>({ ...params }) -> ScreenerListResponse</code>
-
-# Polygon
-
-Methods:
-
-- <code title="get /polygon/v1/{polygon_path}">client.polygon.<a href="./src/resources/polygon.ts">retrieve</a>(polygonPath) -> BaseResponse</code>

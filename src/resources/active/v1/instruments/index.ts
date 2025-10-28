@@ -2,12 +2,20 @@
 
 export {
   AnalystReporting,
+  type AnalystDistribution,
   type AnalystRating,
-  type AnalystReport,
+  type InstrumentAnalystConsensus,
+  type PriceTarget,
   type AnalystReportingListResponse,
   type AnalystReportingListParams,
 } from './analyst-reporting';
-export { Events, type InstrumentEvent, type EventListResponse, type EventListParams } from './events';
+export {
+  Events,
+  type InstrumentEvent,
+  type InstrumentEventType,
+  type EventListResponse,
+  type EventListParams,
+} from './events';
 export {
   Instruments,
   type Instrument,
@@ -17,16 +25,19 @@ export {
   type InstrumentRetrieveParams,
   type InstrumentListParams,
 } from './instruments';
-export { News, type NewsListResponse, type NewsListParams } from './news';
+export { News, type NewsType, type NewsListResponse, type NewsListParams } from './news';
 export {
   Reporting,
   type FiscalPeriodType,
-  type InstrumentBalanceSheet,
-  type InstrumentCashFlow,
-  type InstrumentDividendReport,
   type InstrumentEarnings,
-  type InstrumentIncome,
-  type InstrumentReport,
   type ReportingListResponse,
   type ReportingListParams,
 } from './reporting';
+export {
+  Venues,
+  type DisplayType,
+  type GtdAccepts,
+  type Venue,
+  type VenueSession,
+  type VenueListResponse,
+} from './venues';

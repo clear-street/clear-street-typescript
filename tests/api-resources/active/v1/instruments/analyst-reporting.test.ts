@@ -10,9 +10,9 @@ const client = new ClearStreet({
 describe('resource analystReporting', () => {
   // Prism tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.active.v1.instruments.analystReporting.list('037833100', {
-      from_date: '2025-04-24',
-      to_date: '2025-07-24',
+    const responsePromise = client.active.v1.instruments.analystReporting.list('instrument_id', {
+      from_date: 'from_date',
+      to_date: 'to_date',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,9 +25,9 @@ describe('resource analystReporting', () => {
 
   // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
-    const response = await client.active.v1.instruments.analystReporting.list('037833100', {
-      from_date: '2025-04-24',
-      to_date: '2025-07-24',
+    const response = await client.active.v1.instruments.analystReporting.list('instrument_id', {
+      from_date: 'from_date',
+      to_date: 'to_date',
     });
   });
 });

@@ -1,45 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 /**
- * A structured error response following the gRPC status spec.
+ * A direct mapping of tonic::Status, for use in HTTP responses.
  */
 export interface APIError {
   /**
-   * A gRPC status code identifying the nature of the error.
+   * The error code is used to identify the nature of the error. It corresponds to a
+   * gRPC status code.
    */
-  code?:
-    | 'OK'
-    | 'CANCELLED'
-    | 'UNKNOWN'
-    | 'INVALID_ARGUMENT'
-    | 'DEADLINE_EXCEEDED'
-    | 'NOT_FOUND'
-    | 'ALREADY_EXISTS'
-    | 'PERMISSION_DENIED'
-    | 'RESOURCE_EXHAUSTED'
-    | 'FAILED_PRECONDITION'
-    | 'ABORTED'
-    | 'OUT_OF_RANGE'
-    | 'UNIMPLEMENTED'
-    | 'INTERNAL'
-    | 'UNAVAILABLE'
-    | 'DATA_LOSS'
-    | 'UNAUTHENTICATED';
-
-  /**
-   * Additional structured error details, such as field violations.
-   */
-  details?: Array<{ [key: string]: unknown }>;
+  code: number;
 
   /**
    * A human-readable message providing more details about the error.
    */
-  message?: string;
+  message: string;
+
+  /**
+   * Additional error details, if any. This can include structured information such
+   * as field violations or error metadata.
+   */
+  details?: Array<{ [key: string]: unknown }>;
 }
 
 export interface BaseResponse {
-  data: { [key: string]: unknown } | null;
-
+  /**
+   * Response metadata, including the request ID and optional pagination info.
+   */
   metadata: ResponseMetadata;
 
   /**
@@ -48,43 +34,48 @@ export interface BaseResponse {
   error?: APIError | null;
 }
 
-export interface ErrorResponse {
-  /**
-   * A structured error response following the gRPC status spec.
-   */
-  error: APIError;
-
-  metadata: ResponseMetadata;
-}
-
+/**
+ * Metadata for the response. This will always contain a request ID which can be
+ * used to identify the request to Clear Street for tracing, and optionally may
+ * include pagination data.
+ */
 export interface ResponseMetadata {
   /**
-   * A unique identifier for the request, useful for troubleshooting.
+   * A unique ID for this request, generated upon ingestion of the request.
    */
   request_id: string;
 
   /**
-   * A token that can be sent as `page_token` to retrieve the next page. If this
-   * field is omitted or null, there are no subsequent pages.
+   * A token that can be used to retrieve the next page of results, if any. The
+   * filtering and sorting information is embedded within the token, so no additional
+   * parameters are needed to retrieve the next page.
    */
   next_page_token?: string | null;
 
   /**
-   * The current page number (1-indexed).
+   * Pagination. Included if this was a GET (list) response
    */
-  page_number?: number;
+  page_number?: number | null;
 
   /**
-   * The total number of items across all pages.
+   * Total number of items available (not just in this page).
    */
-  total_items?: number;
+  total_items?: number | null;
 
   /**
-   * The total number of pages available.
+   * Total number of pages available.
    */
-  total_pages?: number;
+  total_pages?: number | null;
 }
 
-export type SecurityIDSource = 'CMS' | 'CLST' | 'OPRA' | 'FIGI';
-
-export type SecurityType = 'COMMON_STOCK' | 'OPTION';
+/**
+ * Security type
+ */
+export type SecurityType =
+  | 'COMMON_STOCK'
+  | 'PREFERRED_STOCK'
+  | 'CORPORATE_BOND'
+  | 'OPTION'
+  | 'FUTURE'
+  | 'WARRANT'
+  | 'OTHER';

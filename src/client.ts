@@ -16,7 +16,6 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Polygon } from './resources/polygon';
 import { Active } from './resources/active/active';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -742,23 +741,17 @@ export class ClearStreet {
   static toFile = Uploads.toFile;
 
   active: API.Active = new API.Active(this);
-  polygon: API.Polygon = new API.Polygon(this);
 }
 
 ClearStreet.Active = Active;
-ClearStreet.Polygon = Polygon;
 
 export declare namespace ClearStreet {
   export type RequestOptions = Opts.RequestOptions;
 
   export { Active as Active };
 
-  export { Polygon as Polygon };
-
   export type APIError = API.APIError;
   export type BaseResponse = API.BaseResponse;
-  export type ErrorResponse = API.ErrorResponse;
   export type ResponseMetadata = API.ResponseMetadata;
-  export type SecurityIDSource = API.SecurityIDSource;
   export type SecurityType = API.SecurityType;
 }

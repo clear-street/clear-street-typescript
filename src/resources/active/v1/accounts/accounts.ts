@@ -7,8 +7,8 @@ import { AccountBalances, BalanceListResponse, Balances } from './balances';
 import * as OrdersAPI from './orders';
 import {
   ApStrategy,
-  BaseStrategy,
   DarkStrategy,
+  Destination,
   DmaStrategy,
   Order,
   OrderCreateParams,
@@ -27,18 +27,16 @@ import {
   OrderUpdateParams,
   OrderUpdateResponse,
   Orders,
+  PositionEffect,
   PovStrategy,
   SorStrategy,
-  StrategyType,
   TimeInForce,
   TwapStrategy,
   Urgency,
   VwapStrategy,
 } from './orders';
 import * as PositionsAPI from './positions';
-import { Position, PositionListParams, PositionListResponse, Positions } from './positions';
-import * as SettingsAPI from './settings';
-import { SettingUpdateParams, SettingUpdateResponse, Settings } from './settings';
+import { Position, PositionListParams, PositionListResponse, PositionType, Positions } from './positions';
 import * as LocatesAPI from './locates/locates';
 import {
   LocateCreateParams,
@@ -56,19 +54,18 @@ import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 export class Accounts extends APIResource {
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
   balances: BalancesAPI.Balances = new BalancesAPI.Balances(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
   locates: LocatesAPI.Locates = new LocatesAPI.Locates(this._client);
 
   /**
-   * Retrieves detailed information for a specific account.
+   * Retrieves detailed information for a specific trading account.
    *
    * @example
    * ```ts
    * const account = await client.active.v1.accounts.retrieve(
-   *   '19816',
+   *   'account_id',
    * );
    * ```
    */
@@ -77,7 +74,25 @@ export class Accounts extends APIResource {
   }
 
   /**
-   * Retrieves a paginated list of accounts accessible by the authenticated user.
+   * Modifies settings for a specific trading account.
+   *
+   * @example
+   * ```ts
+   * const account = await client.active.v1.accounts.update(
+   *   'account_id',
+   * );
+   * ```
+   */
+  update(
+    accountID: string,
+    body: AccountUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<AccountUpdateResponse> {
+    return this._client.patch(path`/active/v1/accounts/${accountID}`, { body, ...options });
+  }
+
+  /**
+   * Retrieves a list of all trading accounts accessible to the authenticated user.
    *
    * @example
    * ```ts
@@ -93,105 +108,142 @@ export class Accounts extends APIResource {
 }
 
 /**
- * Represents a trading account.
+ * Represents a trading account
  */
 export interface Account {
   /**
-   * The unique identifier for the account.
+   * The unique identifier for the account
    */
-  id: string;
+  id: number;
 
   /**
-   * The full legal name of the account.
+   * The full legal name of the account
    */
   full_name: string;
 
   /**
-   * The type of account.
+   * The type of account
    */
-  kind: 'HOUSE' | 'PAB' | 'CUSTOMER' | 'COUNTERPARTY' | 'OTHER';
+  kind: AccountKind;
 
   /**
-   * The date the account was opened.
+   * The date the account was opened
    */
   open_date: string;
 
   /**
-   * The short name of the account.
+   * The short name of the account
    */
   short_name: string;
 
   /**
-   * The current status of the account.
+   * The current status of the account
    */
-  status: 'ACTIVE' | 'INACTIVE' | 'CLOSED';
+  status: AccountStatus;
 
   /**
-   * The sub-type of account.
+   * The sub-type of account
    */
-  subkind:
-    | 'AFFILIATE'
-    | 'ALLOCATION'
-    | 'ARRANGING'
-    | 'BANK'
-    | 'BLOCK_TRADING'
-    | 'CARRY_BROKER'
-    | 'CASH'
-    | 'CLIENT'
-    | 'COLLATERAL'
-    | 'COURTESY_MASTER'
-    | 'CROSS'
-    | 'DEPOSIT'
-    | 'DVP'
-    | 'ERROR'
-    | 'EXECUTION'
-    | 'FACILITATION'
-    | 'FUNDING_SOURCE'
-    | 'HEDGE'
-    | 'MARGIN'
-    | 'MUTUAL_FUND'
-    | 'OPERATING'
-    | 'OTHER'
-    | 'RELATED_MASTER'
-    | 'REPO'
-    | 'SECURITIES_LENDING'
-    | 'SHADOW_AWAY'
-    | 'TRADING'
-    | 'TRIPARTY_COLLATERAL_AWAY';
+  subkind: AccountSubkind;
 
   /**
-   * The date the account was closed, if applicable.
+   * The date the account was closed, if applicable
    */
   close_date?: string | null;
 }
 
-export interface AccountRetrieveResponse extends Omit<Shared.BaseResponse, 'data'> {
+/**
+ * Account kind classification
+ */
+export type AccountKind = 'HOUSE' | 'PAB' | 'CUSTOMER' | 'COUNTERPARTY' | 'OTHER';
+
+/**
+ * Account status
+ */
+export type AccountStatus = 'ACTIVE' | 'INACTIVE' | 'CLOSED';
+
+/**
+ * Account sub-kind classification providing more granular categorization
+ */
+export type AccountSubkind =
+  | 'AFFILIATE'
+  | 'ALLOCATION'
+  | 'ARRANGING'
+  | 'BANK'
+  | 'BLOCK_TRADING'
+  | 'CARRY_BROKER'
+  | 'CASH'
+  | 'CLIENT'
+  | 'COLLATERAL'
+  | 'COURTESY_MASTER'
+  | 'CROSS'
+  | 'DEPOSIT'
+  | 'DVP'
+  | 'ERROR'
+  | 'EXECUTION'
+  | 'FACILITATION'
+  | 'FUNDING_SOURCE'
+  | 'HEDGE'
+  | 'MARGIN'
+  | 'MUTUAL_FUND'
+  | 'OPERATING'
+  | 'OTHER'
+  | 'RELATED_MASTER'
+  | 'REPO'
+  | 'SECURITIES_LENDING'
+  | 'SHADOW_AWAY'
+  | 'TRADING'
+  | 'TRIPARTY_COLLATERAL_AWAY';
+
+export interface AccountRetrieveResponse extends Shared.BaseResponse {
   /**
-   * Represents a trading account.
+   * Represents a trading account
    */
-  data?: Account;
+  data: Account;
 }
 
-export interface AccountListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<Account>;
+export interface AccountUpdateResponse extends Shared.BaseResponse {
+  /**
+   * Represents a trading account
+   */
+  data: Account;
+}
+
+export interface AccountListResponse extends Shared.BaseResponse {
+  data: Array<Account>;
+}
+
+export interface AccountUpdateParams {
+  /**
+   * Risk settings for the account
+   */
+  risk?: AccountUpdateParams.Risk | null;
+}
+
+export namespace AccountUpdateParams {
+  /**
+   * Risk settings for the account
+   */
+  export interface Risk {
+    /**
+     * The maximum notional value available to the account
+     */
+    max_notional?: string | null;
+  }
 }
 
 export interface AccountListParams {
   /**
-   * The number of items to return per page.
+   * The number of items to return per page
    */
   page_size?: number;
 
   /**
-   * The token for the next page of results. When the page token is specified, the
-   * page size parameter is ignored. The page token is an opaque value that need not
-   * be interpreted by the client. It is obtained from the `next_page_token` field in
-   * a previous response.
+   * The token for the next page of results
    */
   page_token?: string;
 }
 
-Accounts.Settings = Settings;
 Accounts.Positions = Positions;
 Accounts.Balances = Balances;
 Accounts.Orders = Orders;
@@ -200,20 +252,20 @@ Accounts.Locates = Locates;
 export declare namespace Accounts {
   export {
     type Account as Account,
+    type AccountKind as AccountKind,
+    type AccountStatus as AccountStatus,
+    type AccountSubkind as AccountSubkind,
     type AccountRetrieveResponse as AccountRetrieveResponse,
+    type AccountUpdateResponse as AccountUpdateResponse,
     type AccountListResponse as AccountListResponse,
+    type AccountUpdateParams as AccountUpdateParams,
     type AccountListParams as AccountListParams,
-  };
-
-  export {
-    Settings as Settings,
-    type SettingUpdateResponse as SettingUpdateResponse,
-    type SettingUpdateParams as SettingUpdateParams,
   };
 
   export {
     Positions as Positions,
     type Position as Position,
+    type PositionType as PositionType,
     type PositionListResponse as PositionListResponse,
     type PositionListParams as PositionListParams,
   };
@@ -227,17 +279,17 @@ export declare namespace Accounts {
   export {
     Orders as Orders,
     type ApStrategy as ApStrategy,
-    type BaseStrategy as BaseStrategy,
     type DarkStrategy as DarkStrategy,
+    type Destination as Destination,
     type DmaStrategy as DmaStrategy,
     type Order as Order,
     type OrderSide as OrderSide,
     type OrderStatus as OrderStatus,
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
+    type PositionEffect as PositionEffect,
     type PovStrategy as PovStrategy,
     type SorStrategy as SorStrategy,
-    type StrategyType as StrategyType,
     type TimeInForce as TimeInForce,
     type TwapStrategy as TwapStrategy,
     type Urgency as Urgency,

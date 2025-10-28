@@ -10,7 +10,7 @@ const client = new ClearStreet({
 describe('resource instruments', () => {
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.active.v1.instruments.retrieve('037833100');
+    const responsePromise = client.active.v1.instruments.retrieve('instrument_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,8 +25,8 @@ describe('resource instruments', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.active.v1.instruments.retrieve(
-        '037833100',
-        { fields: 'symbol,last_price,volume' },
+        'instrument_id',
+        { fields: 'fields' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);
@@ -51,10 +51,10 @@ describe('resource instruments', () => {
       client.active.v1.instruments.list(
         {
           easy_to_borrow: true,
-          fields: 'symbol,last_price,volume',
+          fields: 'fields',
           is_threshold_security: true,
-          page_size: 1500,
-          page_token: 'cGFnZT0yJmxhc3RfaWQ9MTk4MTY=',
+          page_size: 1,
+          page_token: 'page_token',
         },
         { path: '/_stainless_unknown_path' },
       ),
