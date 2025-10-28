@@ -11,8 +11,8 @@ describe('resource earnings', () => {
   // Prism tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.active.v1.calendars.earnings.list({
-      from_date: '2025-04-24',
-      to_date: '2025-07-24',
+      from_date: 'from_date',
+      to_date: 'to_date',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,8 +26,8 @@ describe('resource earnings', () => {
   // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.active.v1.calendars.earnings.list({
-      from_date: '2025-04-24',
-      to_date: '2025-07-24',
+      from_date: 'from_date',
+      to_date: 'to_date',
     });
   });
 });

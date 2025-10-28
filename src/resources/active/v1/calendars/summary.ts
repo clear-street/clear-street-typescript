@@ -7,15 +7,14 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class Summary extends APIResource {
   /**
-   * Retrieves a summary of all calendar events (economic, earnings, dividends,
-   * splits, mergers & acquisitions) within a given date range.
+   * Retrieves a consolidated view of all calendar events.
    *
    * @example
    * ```ts
    * const summaries =
    *   await client.active.v1.calendars.summary.list({
-   *     from_date: '2025-04-24',
-   *     to_date: '2025-07-24',
+   *     from_date: 'from_date',
+   *     to_date: 'to_date',
    *   });
    * ```
    */
@@ -25,52 +24,52 @@ export class Summary extends APIResource {
 }
 
 /**
- * Summary of events for a specific date.
+ * Summary of events for a specific date
  */
 export interface CalendarDateSummary {
   /**
-   * The date of the events.
+   * The date of the events
    */
   date: string;
 
   /**
-   * The number of dividend events on this date.
+   * The number of dividend events on this date
    */
   dividends_count: number;
 
   /**
-   * The number of earnings announcements on this date.
+   * The number of earnings announcements on this date
    */
   earnings_count: number;
 
   /**
-   * The number of economic events on this date.
+   * The number of economic events on this date
    */
   economic_events_count: number;
 
   /**
-   * The number of mergers and acquisitions on this date.
+   * The number of mergers and acquisitions on this date
    */
   mergers_acquisitions_count: number;
 
   /**
-   * The number of stock split events on this date.
+   * The number of stock split events on this date
    */
   stock_splits_count: number;
 }
 
-export interface SummaryListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<CalendarDateSummary>;
+export interface SummaryListResponse extends Shared.BaseResponse {
+  data: Array<CalendarDateSummary>;
 }
 
 export interface SummaryListParams {
   /**
-   * The start date for the query range, inclusive (YYYY-MM-DD).
+   * The start date for the query range, inclusive (YYYY-MM-DD)
    */
   from_date: string;
 
   /**
-   * The end date for the query range, inclusive (YYYY-MM-DD).
+   * The end date for the query range, inclusive (YYYY-MM-DD)
    */
   to_date: string;
 }

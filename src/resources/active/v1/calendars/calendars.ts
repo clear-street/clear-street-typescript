@@ -2,11 +2,23 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as DividendsAPI from './dividends';
-import { DividendCalendarEvent, DividendListParams, DividendListResponse, Dividends } from './dividends';
+import {
+  DividendCalendarEvent,
+  DividendFrequency,
+  DividendListParams,
+  DividendListResponse,
+  Dividends,
+} from './dividends';
 import * as EarningsAPI from './earnings';
 import { EarningListParams, EarningListResponse, Earnings, EarningsCalendarEvent } from './earnings';
 import * as EconomicAPI from './economic';
-import { Economic, EconomicCalendarEvent, EconomicListParams, EconomicListResponse } from './economic';
+import {
+  Economic,
+  EconomicCalendarEvent,
+  EconomicEventImpact,
+  EconomicListParams,
+  EconomicListResponse,
+} from './economic';
 import * as MarketHoursAPI from './market-hours';
 import { MarketHourRetrieveParams, MarketHourRetrieveResponse, MarketHours } from './market-hours';
 import * as MergersAcquisitionsAPI from './mergers-acquisitions';
@@ -14,7 +26,7 @@ import {
   MergersAcquisitionListParams,
   MergersAcquisitionListResponse,
   MergersAcquisitions,
-  MergersAcqusitionsEvent,
+  MergersAcquisitionsEvent,
 } from './mergers-acquisitions';
 import * as SplitsAPI from './splits';
 import { SplitListParams, SplitListResponse, Splits, StockSplitEvent } from './splits';
@@ -43,6 +55,7 @@ export declare namespace Calendars {
   export {
     Economic as Economic,
     type EconomicCalendarEvent as EconomicCalendarEvent,
+    type EconomicEventImpact as EconomicEventImpact,
     type EconomicListResponse as EconomicListResponse,
     type EconomicListParams as EconomicListParams,
   };
@@ -57,6 +70,7 @@ export declare namespace Calendars {
   export {
     Dividends as Dividends,
     type DividendCalendarEvent as DividendCalendarEvent,
+    type DividendFrequency as DividendFrequency,
     type DividendListResponse as DividendListResponse,
     type DividendListParams as DividendListParams,
   };
@@ -70,7 +84,7 @@ export declare namespace Calendars {
 
   export {
     MergersAcquisitions as MergersAcquisitions,
-    type MergersAcqusitionsEvent as MergersAcqusitionsEvent,
+    type MergersAcquisitionsEvent as MergersAcquisitionsEvent,
     type MergersAcquisitionListResponse as MergersAcquisitionListResponse,
     type MergersAcquisitionListParams as MergersAcquisitionListParams,
   };

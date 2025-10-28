@@ -2,14 +2,12 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as AnalystReportingAPI from './instruments/analyst-reporting';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
 export class Screener extends APIResource {
   /**
-   * Screens instruments based on various criteria. Use the `fields` parameter to
-   * reduce payload size by requesting only specific fields.
+   * Searches for instruments matching specified criteria.
    *
    * @example
    * ```ts
@@ -25,135 +23,117 @@ export class Screener extends APIResource {
 }
 
 /**
- * Represents a single instrument returned by the screener.
+ * An instrument returned by the screener
  */
 export interface ScreenerItem {
   /**
-   * The consensus analyst price target.
+   * A unique Clear Street identifier for the instrument
    */
-  analyst_price_target?: string | null;
+  instrument_id: string;
 
   /**
-   * The consensus analyst rating (e.g., BUY, HOLD, SELL).
+   * The latest price for the instrument
    */
-  analyst_rating?: AnalystReportingAPI.AnalystRating | null;
+  price: string;
 
   /**
-   * The ISO country code of the instrument's issue.
+   * The trading symbol for the instrument
+   */
+  symbol: string;
+
+  /**
+   * The latest trading volume for the instrument
+   */
+  volume: string;
+
+  /**
+   * The ISO country code of the instrument's issue
    */
   country_of_issue?: string | null;
 
   /**
-   * A detailed description of the instrument or company.
+   * A detailed description of the instrument or company
    */
   description?: string | null;
 
   /**
-   * The dividend yield percent.
+   * The dividend yield percent
    */
   dividend_yield?: string | null;
 
   /**
-   * The specific industry of the instrument's issuer.
+   * The specific industry of the instrument's issuer
    */
   industry?: string | null;
 
   /**
-   * The date the instrument was first listed.
+   * The date the instrument was first listed
    */
   list_date?: string | null;
 
   /**
-   * The average trading volume over the past month.
+   * The average trading volume over the past month
    */
   month_avg_volume?: string | null;
 
   /**
-   * The full name of the instrument or its issuer.
+   * The full name of the instrument or its issuer
    */
   name?: string | null;
 
   /**
-   * The latest price for the instrument.
+   * The MIC code of the primary listing venue
    */
-  price?: string;
+  primary_venue?: string | null;
 
   /**
-   * The business sector of the instrument's issuer.
+   * The business sector of the instrument's issuer
    */
   sector?: string | null;
 
   /**
-   * The MIC code of the primary listing exchange.
-   */
-  security_exchange?: string | null;
-
-  /**
-   * The canonical, unique identifier for the instrument (e.g., CUSIP).
-   */
-  security_id?: string;
-
-  /**
-   * The type of security (e.g., Common Stock, ETF).
+   * The type of security
    */
   security_type?: string | null;
 
   /**
-   * The trading symbol for the instrument.
-   */
-  symbol?: string;
-
-  /**
-   * The total number of employees at the company.
-   */
-  total_employees?: number | null;
-
-  /**
-   * The debt-to-equity ratio for the trailing twelve months.
+   * The TTM debt-to-equity ratio
    */
   ttm_debt_to_equity?: string | null;
 
   /**
-   * The earnings per share for the trailing twelve months.
+   * The TTM earnings per share
    */
   ttm_earnings_per_share?: string | null;
 
   /**
-   * The total market capitalization.
+   * The total market capitalization
    */
   ttm_market_cap?: string | null;
 
   /**
-   * The price-to-earnings (P/E) ratio for the trailing twelve months.
+   * The TTM price-to-earnings ratio
    */
   ttm_price_to_earnings?: string | null;
 
   /**
-   * The latest trading volume for the instrument.
-   */
-  volume?: string;
-
-  /**
-   * The average trading volume over the past week.
+   * The average trading volume over the past week
    */
   week_avg_volume?: string | null;
 }
 
-export interface ScreenerListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<ScreenerItem>;
+export interface ScreenerListResponse extends Shared.BaseResponse {
+  data: Array<ScreenerItem>;
 }
 
 export interface ScreenerListParams {
   /**
-   * Comma-separated list of field names to include in the response objects. When
-   * specified, only the requested fields are returned, reducing payload size. Useful
-   * for bandwidth-sensitive applications and high-frequency trading clients.
-   * Example: fields=symbol,last_price,volume
+   * Comma-separated list of field names to include in the response
    */
   fields?: string;
 
   /**
-   * A comma-separated list of instrument symbols to filter the results.
+   * A comma-separated list of instrument symbols to filter the results
    */
   symbols?: string;
 }

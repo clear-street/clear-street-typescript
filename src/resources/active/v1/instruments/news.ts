@@ -8,24 +8,13 @@ import { path } from '../../../../internal/utils/path';
 
 export class News extends APIResource {
   /**
-   * Retrieves news and press release items for the specified instrument over a given
-   * inclusive date range. Results are ordered descending by `published_date` (newest
-   * first).
-   *
-   * The optional `from` and `to` query parameters define an inclusive date range
-   * (based on `published_date`, in the instrument's primary listing timezone or UTC
-   * as provided by the source). If neither parameter is supplied the latest items
-   * (implementation-defined default window) are returned. If only `from` is
-   * supplied, all items on or after that date are returned. If only `to` is
-   * supplied, all items on or before that date are returned.
-   *
-   * An empty list is returned when no news items fall within the requested range.
+   * Retrieves recent news articles related to an instrument.
    *
    * @example
    * ```ts
    * const news = await client.active.v1.instruments.news.list(
-   *   '037833100',
-   *   { from_date: '2025-04-24', to_date: '2025-07-24' },
+   *   'instrument_id',
+   *   { from_date: 'from_date', to_date: 'to_date' },
    * );
    * ```
    */
@@ -35,69 +24,72 @@ export class News extends APIResource {
 }
 
 /**
- * A single news or press release item related to an instrument.
+ * A news or press release item related to an instrument
  */
 export interface News {
   /**
-   * The published date/time of the article in UTC (original source timestamp if
-   * available).
+   * The published date/time of the article in UTC
    */
   published_at: string;
 
   /**
-   * The trading symbol associated with the news item.
+   * The trading symbol associated with the news item
    */
   symbol: string;
 
   /**
-   * The headline/title of the article.
+   * The headline/title of the article
    */
   title: string;
 
   /**
-   * Classification of the item.
+   * Classification of the item
    */
-  type: 'NEWS' | 'PRESS_RELEASE';
+  type: NewsType;
 
   /**
-   * Canonical URL to the full article.
+   * Canonical URL to the full article
    */
   url: string;
 
   /**
-   * URL of an associated image if provided by the source.
+   * URL of an associated image if provided by the source
    */
   image_url?: string | null;
 
   /**
-   * The publisher or newswire source.
+   * The publisher or newswire source
    */
-  publisher?: string;
+  publisher?: string | null;
 
   /**
-   * The primary domain/site of the publisher.
+   * The primary domain/site of the publisher
    */
-  site?: string;
+  site?: string | null;
 
   /**
-   * The full or excerpted article body (length may be truncated depending on source
-   * licensing).
+   * The full or excerpted article body
    */
-  text?: string;
+  text?: string | null;
 }
 
-export interface NewsListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<News>;
+/**
+ * News item classification
+ */
+export type NewsType = 'NEWS' | 'PRESS_RELEASE';
+
+export interface NewsListResponse extends Shared.BaseResponse {
+  data: Array<News>;
 }
 
 export interface NewsListParams {
   /**
-   * The start date for the query range, inclusive (YYYY-MM-DD).
+   * The start date for the query range, inclusive (YYYY-MM-DD)
    */
   from_date: string;
 
   /**
-   * The end date for the query range, inclusive (YYYY-MM-DD).
+   * The end date for the query range, inclusive (YYYY-MM-DD)
    */
   to_date: string;
 }
@@ -105,6 +97,7 @@ export interface NewsListParams {
 export declare namespace News {
   export {
     type News as News,
+    type NewsType as NewsType,
     type NewsListResponse as NewsListResponse,
     type NewsListParams as NewsListParams,
   };

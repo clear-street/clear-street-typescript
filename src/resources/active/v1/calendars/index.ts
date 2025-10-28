@@ -4,6 +4,7 @@ export { Calendars } from './calendars';
 export {
   Dividends,
   type DividendCalendarEvent,
+  type DividendFrequency,
   type DividendListResponse,
   type DividendListParams,
 } from './dividends';
@@ -16,13 +17,14 @@ export {
 export {
   Economic,
   type EconomicCalendarEvent,
+  type EconomicEventImpact,
   type EconomicListResponse,
   type EconomicListParams,
 } from './economic';
 export { MarketHours, type MarketHourRetrieveResponse, type MarketHourRetrieveParams } from './market-hours';
 export {
   MergersAcquisitions,
-  type MergersAcqusitionsEvent,
+  type MergersAcquisitionsEvent,
   type MergersAcquisitionListResponse,
   type MergersAcquisitionListParams,
 } from './mergers-acquisitions';

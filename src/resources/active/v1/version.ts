@@ -5,9 +5,9 @@ import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Version extends APIResource {
+export class VersionResource extends APIResource {
   /**
-   * Retrieves the current version of the API service.
+   * Returns the current version string for this API endpoint.
    *
    * @example
    * ```ts
@@ -19,53 +19,46 @@ export class Version extends APIResource {
   }
 
   /**
-   * Upgrades the pinned API version for the authenticated principal to a specified
-   * date-based version. This allows you to opt into new features or changes in the
-   * API.
+   * Allows clients to set their preferred API version.
    *
    * @example
    * ```ts
-   * const version = await client.active.v1.version.update({
-   *   version: '2025-10-10',
-   * });
+   * const version = await client.active.v1.version.update();
    * ```
    */
-  update(body: VersionUpdateParams, options?: RequestOptions): APIPromise<VersionUpdateResponse> {
-    return this._client.patch('/active/v1/version', { body, ...options });
+  update(options?: RequestOptions): APIPromise<VersionUpdateResponse> {
+    return this._client.patch('/active/v1/version', options);
   }
 }
 
-export interface VersionRetrieveResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: VersionRetrieveResponse.Data;
-}
-
-export namespace VersionRetrieveResponse {
-  export interface Data {
-    version?: string;
-  }
-}
-
-export interface VersionUpdateResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: VersionUpdateResponse.Data;
-}
-
-export namespace VersionUpdateResponse {
-  export interface Data {
-    version?: string;
-  }
-}
-
-export interface VersionUpdateParams {
+/**
+ * API version information
+ */
+export interface Version {
   /**
-   * The new API version identifier (date-based string).
+   * API version string
    */
   version: string;
 }
 
-export declare namespace Version {
+export interface VersionRetrieveResponse extends Shared.BaseResponse {
+  /**
+   * API version information
+   */
+  data: Version;
+}
+
+export interface VersionUpdateResponse extends Shared.BaseResponse {
+  /**
+   * API version information
+   */
+  data: Version;
+}
+
+export declare namespace VersionResource {
   export {
+    type Version as Version,
     type VersionRetrieveResponse as VersionRetrieveResponse,
     type VersionUpdateResponse as VersionUpdateResponse,
-    type VersionUpdateParams as VersionUpdateParams,
   };
 }

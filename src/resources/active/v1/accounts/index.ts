@@ -3,8 +3,13 @@
 export {
   Accounts,
   type Account,
+  type AccountKind,
+  type AccountStatus,
+  type AccountSubkind,
   type AccountRetrieveResponse,
+  type AccountUpdateResponse,
   type AccountListResponse,
+  type AccountUpdateParams,
   type AccountListParams,
 } from './accounts';
 export { Balances, type AccountBalances, type BalanceListResponse } from './balances';
@@ -22,17 +27,17 @@ export {
 export {
   Orders,
   type ApStrategy,
-  type BaseStrategy,
   type DarkStrategy,
+  type Destination,
   type DmaStrategy,
   type Order,
   type OrderSide,
   type OrderStatus,
   type OrderStrategy,
   type OrderType,
+  type PositionEffect,
   type PovStrategy,
   type SorStrategy,
-  type StrategyType,
   type TimeInForce,
   type TwapStrategy,
   type Urgency,
@@ -49,5 +54,10 @@ export {
   type OrderListParams,
   type OrderDeleteParams,
 } from './orders';
-export { Positions, type Position, type PositionListResponse, type PositionListParams } from './positions';
-export { Settings, type SettingUpdateResponse, type SettingUpdateParams } from './settings';
+export {
+  Positions,
+  type Position,
+  type PositionType,
+  type PositionListResponse,
+  type PositionListParams,
+} from './positions';

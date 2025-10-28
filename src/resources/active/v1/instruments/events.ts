@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as EventsAPI from './events';
 import * as Shared from '../../../shared';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -9,16 +8,14 @@ import { path } from '../../../../internal/utils/path';
 
 export class Events extends APIResource {
   /**
-   * Retrieves a list of major events (splits, dividends, earnings) for the specified
-   * instrument over a given date range. Results are ordered descending by
-   * `event_date`.
+   * Retrieves corporate events (dividends, splits, etc.) for an instrument.
    *
    * @example
    * ```ts
    * const events =
    *   await client.active.v1.instruments.events.list(
-   *     '037833100',
-   *     { from_date: '2025-04-24', to_date: '2025-07-24' },
+   *     'instrument_id',
+   *     { from_date: 'from_date', to_date: 'to_date' },
    *   );
    * ```
    */
@@ -31,49 +28,43 @@ export class Events extends APIResource {
   }
 }
 
+/**
+ * Represents an instrument event (dividends, splits, etc.)
+ */
 export interface InstrumentEvent {
   /**
-   * The date of the event.
+   * The date of the event
    */
   date: string;
 
   /**
-   * A brief description of the event.
+   * A brief description of the event
    */
   description: string;
 
   /**
-   * The type of event (e.g., EARNINGS, DIVIDEND, etc.).
+   * The type of event
    */
-  event_type: 'EARNINGS' | 'DIVIDEND' | 'SPLIT' | 'MERGER_ACQUISITION';
+  event_type: InstrumentEventType;
 }
 
-export interface EventListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: EventListResponse.Data;
-}
+/**
+ * Event type for instrument events
+ */
+export type InstrumentEventType = 'EARNINGS' | 'DIVIDEND' | 'SPLIT' | 'MERGER_ACQUISITION';
 
-export namespace EventListResponse {
-  export interface Data {
-    /**
-     * List of significant events related to the instrument.
-     */
-    events: Array<EventsAPI.InstrumentEvent>;
-
-    /**
-     * The symbol of the security.
-     */
-    symbol: string;
-  }
+export interface EventListResponse extends Shared.BaseResponse {
+  data: Array<InstrumentEvent>;
 }
 
 export interface EventListParams {
   /**
-   * The start date for the query range, inclusive (YYYY-MM-DD).
+   * The start date for the query range, inclusive (YYYY-MM-DD)
    */
   from_date: string;
 
   /**
-   * The end date for the query range, inclusive (YYYY-MM-DD).
+   * The end date for the query range, inclusive (YYYY-MM-DD)
    */
   to_date: string;
 }
@@ -81,6 +72,7 @@ export interface EventListParams {
 export declare namespace Events {
   export {
     type InstrumentEvent as InstrumentEvent,
+    type InstrumentEventType as InstrumentEventType,
     type EventListResponse as EventListResponse,
     type EventListParams as EventListParams,
   };

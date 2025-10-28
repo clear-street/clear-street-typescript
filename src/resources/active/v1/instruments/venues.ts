@@ -1,0 +1,136 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../../core/resource';
+import * as Shared from '../../../shared';
+import { APIPromise } from '../../../../core/api-promise';
+import { RequestOptions } from '../../../../internal/request-options';
+
+export class Venues extends APIResource {
+  /**
+   * Retrieves a list of available trading venues and exchanges.
+   *
+   * @example
+   * ```ts
+   * const venues =
+   *   await client.active.v1.instruments.venues.list();
+   * ```
+   */
+  list(options?: RequestOptions): APIPromise<VenueListResponse> {
+    return this._client.get('/active/v1/instruments/venues', options);
+  }
+}
+
+/**
+ * Display characteristics of a venue
+ */
+export type DisplayType = 'LIT' | 'DARK' | 'PERIODIC_AUCTION' | 'RFQ';
+
+/**
+ * Good-till-date order acceptance capabilities
+ */
+export interface GtdAccepts {
+  /**
+   * Whether the venue accepts date-only expiration (YYYY-MM-DD)
+   */
+  date: boolean;
+
+  /**
+   * Whether the venue accepts precise timestamp expiration
+   */
+  timestamp: boolean;
+}
+
+/**
+ * A trading venue with its characteristics and capabilities
+ */
+export interface Venue {
+  /**
+   * The ISO country code where the venue operates
+   */
+  country: string;
+
+  /**
+   * The display characteristics of the venue
+   */
+  display_type: DisplayType;
+
+  /**
+   * Indicates whether GOOD_TILL_DATE orders accept date-only or timestamp
+   * specifications
+   */
+  gtd_accepts: GtdAccepts;
+
+  /**
+   * The minimum quantity increment for orders at this venue
+   */
+  lot_size: number;
+
+  /**
+   * The Market Identifier Code (MIC) for the venue
+   */
+  mic: string;
+
+  /**
+   * The display name of the venue
+   */
+  name: string;
+
+  /**
+   * Trading sessions available at this venue
+   */
+  sessions: Array<VenueSession>;
+
+  /**
+   * Order types supported by this venue
+   */
+  supported_order_types: Array<string>;
+
+  /**
+   * Time-in-force options supported by this venue
+   */
+  supported_tifs: Array<string>;
+
+  /**
+   * The minimum price increment for orders at this venue
+   */
+  tick_size: string;
+
+  /**
+   * IANA timezone identifier for the venue's local time
+   */
+  timezone: string;
+}
+
+/**
+ * A trading session within a venue's trading day
+ */
+export interface VenueSession {
+  /**
+   * Session end time in venue's local timezone (HH:MM format, 24-hour)
+   */
+  end_local: string;
+
+  /**
+   * The name of the trading session
+   */
+  name: string;
+
+  /**
+   * Session start time in venue's local timezone (HH:MM format, 24-hour)
+   */
+  start_local: string;
+}
+
+export interface VenueListResponse extends Shared.BaseResponse {
+  data: Array<Venue>;
+}
+
+export declare namespace Venues {
+  export {
+    type DisplayType as DisplayType,
+    type GtdAccepts as GtdAccepts,
+    type Venue as Venue,
+    type VenueSession as VenueSession,
+    type VenueListResponse as VenueListResponse,
+  };
+}

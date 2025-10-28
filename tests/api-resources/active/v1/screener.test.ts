@@ -25,7 +25,7 @@ describe('resource screener', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.active.v1.screener.list(
-        { fields: 'symbol,last_price,volume', symbols: 'AAPL,MSFT,GOOGL' },
+        { fields: 'fields', symbols: 'symbols' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);

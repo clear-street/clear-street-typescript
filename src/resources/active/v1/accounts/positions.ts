@@ -8,12 +8,14 @@ import { path } from '../../../../internal/utils/path';
 
 export class Positions extends APIResource {
   /**
-   * Retrieves a paginated list of all current positions for a given account.
+   * Retrieves all positions for the specified trading account.
    *
    * @example
    * ```ts
    * const positions =
-   *   await client.active.v1.accounts.positions.list('19816');
+   *   await client.active.v1.accounts.positions.list(
+   *     'account_id',
+   *   );
    * ```
    */
   list(
@@ -26,100 +28,113 @@ export class Positions extends APIResource {
 }
 
 /**
- * Represents a holding of a particular instrument in an account.
+ * Represents a holding of a particular instrument in an account
  */
 export interface Position {
   /**
-   * The account this position belongs to.
+   * The account this position belongs to
    */
-  account_id: string;
+  account_id: number;
 
   /**
-   * Timestamp when this position snapshot was calculated (UTC).
+   * Timestamp when this position snapshot was calculated (UTC)
    */
   calculated_at: string;
 
   /**
-   * The closing price used to value the position for the last trading day.
+   * The closing price used to value the position for the last trading day
    */
   closing_price: string;
 
   /**
-   * The current market value of the position.
+   * A unique Clear Street identifier for the instrument
+   */
+  instrument_id: string;
+
+  /**
+   * The current market value of the position
    */
   market_value: string;
 
   /**
-   * The type of position.
+   * The type of position
    */
-  position_type: 'LONG' | 'SHORT' | 'LONG_CALL' | 'SHORT_CALL' | 'LONG_PUT' | 'SHORT_PUT';
+  position_type: PositionType;
 
   /**
-   * The number of shares or contracts. Can be positive (long) or negative (short).
+   * The number of shares or contracts. Can be positive (long) or negative (short)
    */
   quantity: string;
 
   /**
-   * The ID of the instrument, typically the ticker symbol.
+   * Type of security
    */
-  security_id: string;
-
-  security_id_source: Shared.SecurityIDSource;
-
   security_type: Shared.SecurityType;
 
   /**
-   * The average price paid per share or contract for this position.
+   * The trading symbol for the instrument
    */
-  avg_price?: string;
+  symbol: string;
 
   /**
-   * The total cost basis for this position.
+   * The MIC code of the primary listing venue
    */
-  cost_basis?: string;
+  venue: string;
 
   /**
-   * The expiration date for options positions, if applicable.
+   * The average price paid per share or contract for this position
+   */
+  avg_price?: string | null;
+
+  /**
+   * The total cost basis for this position
+   */
+  cost_basis?: string | null;
+
+  /**
+   * The expiration date for options positions, if applicable
    */
   expiration_date?: string | null;
 
   /**
-   * The current market price of the instrument.
+   * The current market price of the instrument
    */
-  last_market_price?: string;
+  last_market_price?: string | null;
 
   /**
-   * The total realized profit or loss for this position.
+   * The total realized profit or loss for this position
    */
-  realized_pnl?: string;
+  realized_pnl?: string | null;
 
   /**
-   * The strike price for options positions, if applicable.
+   * The strike price for options positions, if applicable
    */
   strike_price?: string | null;
 
   /**
    * The total unrealized profit or loss for this position based on current market
-   * value.
+   * value
    */
-  unrealized_pnl?: string;
+  unrealized_pnl?: string | null;
 }
 
-export interface PositionListResponse extends Omit<Shared.BaseResponse, 'data'> {
-  data?: Array<Position>;
+/**
+ * Position type classification
+ */
+export type PositionType = 'LONG' | 'SHORT' | 'LONG_CALL' | 'SHORT_CALL' | 'LONG_PUT' | 'SHORT_PUT';
+
+export interface PositionListResponse extends Shared.BaseResponse {
+  data: Array<Position>;
 }
 
 export interface PositionListParams {
   /**
-   * The number of items to return per page.
+   * The number of items to return per page
    */
   page_size?: number;
 
   /**
-   * The token for the next page of results. When the page token is specified, the
-   * page size parameter is ignored. The page token is an opaque value that need not
-   * be interpreted by the client. It is obtained from the `next_page_token` field in
-   * a previous response.
+   * The token for the next page of results
    */
   page_token?: string;
 }
@@ -127,6 +142,7 @@ export interface PositionListParams {
 export declare namespace Positions {
   export {
     type Position as Position,
+    type PositionType as PositionType,
     type PositionListResponse as PositionListResponse,
     type PositionListParams as PositionListParams,
   };
