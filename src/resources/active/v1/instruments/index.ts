@@ -6,38 +6,38 @@ export {
   type AnalystRating,
   type InstrumentAnalystConsensus,
   type PriceTarget,
-  type AnalystReportingListResponse,
-  type AnalystReportingListParams,
+  type AnalystReportingGetInstrumentAnalystConsensusResponse,
+  type AnalystReportingGetInstrumentAnalystConsensusParams,
 } from './analyst-reporting';
 export {
   Events,
   type InstrumentEvent,
-  type InstrumentEventType,
-  type EventListResponse,
-  type EventListParams,
+  type InstrumentEventList,
+  type EventGetInstrumentEventsResponse,
+  type EventGetInstrumentEventsParams,
 } from './events';
 export {
   Instruments,
   type Instrument,
+  type InstrumentList,
   type InstrumentQuote,
-  type InstrumentRetrieveResponse,
-  type InstrumentListResponse,
-  type InstrumentRetrieveParams,
-  type InstrumentListParams,
+  type InstrumentGetInstrumentByIDResponse,
+  type InstrumentGetInstrumentsResponse,
+  type InstrumentGetInstrumentByIDParams,
+  type InstrumentGetInstrumentsParams,
 } from './instruments';
-export { News, type NewsType, type NewsListResponse, type NewsListParams } from './news';
+export {
+  News,
+  type InstrumentNews,
+  type InstrumentNewsList,
+  type NewsGetInstrumentNewsResponse,
+  type NewsGetInstrumentNewsParams,
+} from './news';
 export {
   Reporting,
   type FiscalPeriodType,
   type InstrumentEarnings,
-  type ReportingListResponse,
-  type ReportingListParams,
+  type ReportingGetInstrumentReportingResponse,
+  type ReportingGetInstrumentReportingParams,
 } from './reporting';
-export {
-  Venues,
-  type DisplayType,
-  type GtdAccepts,
-  type Venue,
-  type VenueSession,
-  type VenueListResponse,
-} from './venues';
+export { Venues, type Venue, type VenueList, type VenueGetVenuesResponse } from './venues';

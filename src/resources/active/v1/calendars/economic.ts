@@ -11,14 +11,16 @@ export class Economic extends APIResource {
    *
    * @example
    * ```ts
-   * const economics =
-   *   await client.active.v1.calendars.economic.list({
-   *     from_date: 'from_date',
-   *     to_date: 'to_date',
-   *   });
+   * const response =
+   *   await client.active.v1.calendars.economic.getEconomicCalendar(
+   *     { from_date: 'from_date', to_date: 'to_date' },
+   *   );
    * ```
    */
-  list(query: EconomicListParams, options?: RequestOptions): APIPromise<EconomicListResponse> {
+  getEconomicCalendar(
+    query: EconomicGetEconomicCalendarParams,
+    options?: RequestOptions,
+  ): APIPromise<EconomicGetEconomicCalendarResponse> {
     return this._client.get('/active/v1/calendars/economic', { query, ...options });
   }
 }
@@ -50,7 +52,7 @@ export interface EconomicCalendarEvent {
   /**
    * The expected market impact of the event
    */
-  impact: EconomicEventImpact;
+  impact: 'LOW' | 'MEDIUM' | 'HIGH';
 
   /**
    * The actual value reported for the event
@@ -73,16 +75,13 @@ export interface EconomicCalendarEvent {
   previous_value?: string | null;
 }
 
-/**
- * Economic event impact level
- */
-export type EconomicEventImpact = 'LOW' | 'MEDIUM' | 'HIGH';
+export type EconomicCalendarEventList = Array<EconomicCalendarEvent>;
 
-export interface EconomicListResponse extends Shared.BaseResponse {
-  data: Array<EconomicCalendarEvent>;
+export interface EconomicGetEconomicCalendarResponse extends Shared.BaseResponse {
+  data: EconomicCalendarEventList;
 }
 
-export interface EconomicListParams {
+export interface EconomicGetEconomicCalendarParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
@@ -97,8 +96,8 @@ export interface EconomicListParams {
 export declare namespace Economic {
   export {
     type EconomicCalendarEvent as EconomicCalendarEvent,
-    type EconomicEventImpact as EconomicEventImpact,
-    type EconomicListResponse as EconomicListResponse,
-    type EconomicListParams as EconomicListParams,
+    type EconomicCalendarEventList as EconomicCalendarEventList,
+    type EconomicGetEconomicCalendarResponse as EconomicGetEconomicCalendarResponse,
+    type EconomicGetEconomicCalendarParams as EconomicGetEconomicCalendarParams,
   };
 }

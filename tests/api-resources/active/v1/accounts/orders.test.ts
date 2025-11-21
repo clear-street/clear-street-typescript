@@ -9,8 +9,103 @@ const client = new ClearStreet({
 
 describe('resource orders', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.orders.create('account_id', {
+  test.skip('cancelAllOrders', async () => {
+    const responsePromise = client.active.v1.accounts.orders.cancelAllOrders(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('cancelOrder: only required params', async () => {
+    const responsePromise = client.active.v1.accounts.orders.cancelOrder('order_id', { account_id: 0 });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('cancelOrder: required and optional params', async () => {
+    const response = await client.active.v1.accounts.orders.cancelOrder('order_id', { account_id: 0 });
+  });
+
+  // Prism tests are disabled
+  test.skip('getOrderByID: only required params', async () => {
+    const responsePromise = client.active.v1.accounts.orders.getOrderByID('order_id', { account_id: 0 });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('getOrderByID: required and optional params', async () => {
+    const response = await client.active.v1.accounts.orders.getOrderByID('order_id', { account_id: 0 });
+  });
+
+  // Prism tests are disabled
+  test.skip('getOrders: only required params', async () => {
+    const responsePromise = client.active.v1.accounts.orders.getOrders(0, { from: 'from', to: 'to' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('getOrders: required and optional params', async () => {
+    const response = await client.active.v1.accounts.orders.getOrders(0, {
+      from: 'from',
+      to: 'to',
+      instrument_id: 'instrument_id',
+      page_size: 1,
+      page_token: 'page_token',
+      security_type: 'COMMON_STOCK',
+      status: 'PENDING_NEW',
+      symbol: 'symbol',
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('replaceOrder: only required params', async () => {
+    const responsePromise = client.active.v1.accounts.orders.replaceOrder('order_id', { account_id: 0 });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('replaceOrder: required and optional params', async () => {
+    const response = await client.active.v1.accounts.orders.replaceOrder('order_id', {
+      account_id: 0,
+      limit_price: '150.50',
+      quantity: '125',
+      stop_price: '148.00',
+      time_in_force: 'DAY',
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('submitOrders: only required params', async () => {
+    const responsePromise = client.active.v1.accounts.orders.submitOrders(0, {
       body: [
         {
           order_id: 'my-ref-id-20251001-002',
@@ -32,8 +127,8 @@ describe('resource orders', () => {
   });
 
   // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.active.v1.accounts.orders.create('account_id', {
+  test.skip('submitOrders: required and optional params', async () => {
+    const response = await client.active.v1.accounts.orders.submitOrders(0, {
       body: [
         {
           order_id: 'my-ref-id-20251001-002',
@@ -59,104 +154,5 @@ describe('resource orders', () => {
         },
       ],
     });
-  });
-
-  // Prism tests are disabled
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.orders.retrieve('order_id', {
-      account_id: 'account_id',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.active.v1.accounts.orders.retrieve('order_id', {
-      account_id: 'account_id',
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('update: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.orders.update('order_id', { account_id: 'account_id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('update: required and optional params', async () => {
-    const response = await client.active.v1.accounts.orders.update('order_id', {
-      account_id: 'account_id',
-      limit_price: '150.50',
-      quantity: '125',
-      stop_price: '148.00',
-      time_in_force: 'DAY',
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.orders.list('account_id', { from: 'from', to: 'to' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.active.v1.accounts.orders.list('account_id', {
-      from: 'from',
-      to: 'to',
-      instrument_id: 'instrument_id',
-      page_size: 1,
-      page_token: 'page_token',
-      security_type: 'COMMON_STOCK',
-      status: 'PENDING_NEW',
-      symbol: 'symbol',
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('delete: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.orders.delete('order_id', { account_id: 'account_id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('delete: required and optional params', async () => {
-    const response = await client.active.v1.accounts.orders.delete('order_id', { account_id: 'account_id' });
-  });
-
-  // Prism tests are disabled
-  test.skip('deleteAll', async () => {
-    const responsePromise = client.active.v1.accounts.orders.deleteAll('account_id');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

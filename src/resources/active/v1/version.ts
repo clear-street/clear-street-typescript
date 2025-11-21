@@ -11,10 +11,11 @@ export class VersionResource extends APIResource {
    *
    * @example
    * ```ts
-   * const version = await client.active.v1.version.retrieve();
+   * const response =
+   *   await client.active.v1.version.getVersion();
    * ```
    */
-  retrieve(options?: RequestOptions): APIPromise<VersionRetrieveResponse> {
+  getVersion(options?: RequestOptions): APIPromise<VersionGetVersionResponse> {
     return this._client.get('/active/v1/version', options);
   }
 
@@ -23,10 +24,11 @@ export class VersionResource extends APIResource {
    *
    * @example
    * ```ts
-   * const version = await client.active.v1.version.update();
+   * const response =
+   *   await client.active.v1.version.updateVersion();
    * ```
    */
-  update(options?: RequestOptions): APIPromise<VersionUpdateResponse> {
+  updateVersion(options?: RequestOptions): APIPromise<VersionUpdateVersionResponse> {
     return this._client.patch('/active/v1/version', options);
   }
 }
@@ -41,14 +43,14 @@ export interface Version {
   version: string;
 }
 
-export interface VersionRetrieveResponse extends Shared.BaseResponse {
+export interface VersionGetVersionResponse extends Shared.BaseResponse {
   /**
    * API version information
    */
   data: Version;
 }
 
-export interface VersionUpdateResponse extends Shared.BaseResponse {
+export interface VersionUpdateVersionResponse extends Shared.BaseResponse {
   /**
    * API version information
    */
@@ -58,7 +60,7 @@ export interface VersionUpdateResponse extends Shared.BaseResponse {
 export declare namespace VersionResource {
   export {
     type Version as Version,
-    type VersionRetrieveResponse as VersionRetrieveResponse,
-    type VersionUpdateResponse as VersionUpdateResponse,
+    type VersionGetVersionResponse as VersionGetVersionResponse,
+    type VersionUpdateVersionResponse as VersionUpdateVersionResponse,
   };
 }

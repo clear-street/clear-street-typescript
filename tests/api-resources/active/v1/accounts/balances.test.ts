@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource balances', () => {
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.active.v1.accounts.balances.list('account_id');
+  test.skip('getAccountBalances', async () => {
+    const responsePromise = client.active.v1.accounts.balances.getAccountBalances(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
+import * as OrdersAPI from './orders';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -12,17 +13,15 @@ export class Positions extends APIResource {
    *
    * @example
    * ```ts
-   * const positions =
-   *   await client.active.v1.accounts.positions.list(
-   *     'account_id',
-   *   );
+   * const response =
+   *   await client.active.v1.accounts.positions.getPositions(0);
    * ```
    */
-  list(
-    accountID: string,
-    query: PositionListParams | null | undefined = {},
+  getPositions(
+    accountID: number,
+    query: PositionGetPositionsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<PositionListResponse> {
+  ): APIPromise<PositionGetPositionsResponse> {
     return this._client.get(path`/active/v1/accounts/${accountID}/positions`, { query, ...options });
   }
 }
@@ -59,7 +58,7 @@ export interface Position {
   /**
    * The type of position
    */
-  position_type: PositionType;
+  position_type: 'LONG' | 'SHORT' | 'LONG_CALL' | 'SHORT_CALL' | 'LONG_PUT' | 'SHORT_PUT';
 
   /**
    * The number of shares or contracts. Can be positive (long) or negative (short)
@@ -69,7 +68,7 @@ export interface Position {
   /**
    * Type of security
    */
-  security_type: Shared.SecurityType;
+  security_type: OrdersAPI.SecurityType;
 
   /**
    * The trading symbol for the instrument
@@ -118,16 +117,13 @@ export interface Position {
   unrealized_pnl?: string | null;
 }
 
-/**
- * Position type classification
- */
-export type PositionType = 'LONG' | 'SHORT' | 'LONG_CALL' | 'SHORT_CALL' | 'LONG_PUT' | 'SHORT_PUT';
+export type PositionList = Array<Position>;
 
-export interface PositionListResponse extends Shared.BaseResponse {
-  data: Array<Position>;
+export interface PositionGetPositionsResponse extends Shared.BaseResponse {
+  data: PositionList;
 }
 
-export interface PositionListParams {
+export interface PositionGetPositionsParams {
   /**
    * The number of items to return per page
    */
@@ -142,8 +138,8 @@ export interface PositionListParams {
 export declare namespace Positions {
   export {
     type Position as Position,
-    type PositionType as PositionType,
-    type PositionListResponse as PositionListResponse,
-    type PositionListParams as PositionListParams,
+    type PositionList as PositionList,
+    type PositionGetPositionsResponse as PositionGetPositionsResponse,
+    type PositionGetPositionsParams as PositionGetPositionsParams,
   };
 }

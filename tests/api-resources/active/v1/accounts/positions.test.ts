@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource positions', () => {
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.active.v1.accounts.positions.list('account_id');
+  test.skip('getPositions', async () => {
+    const responsePromise = client.active.v1.accounts.positions.getPositions(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,11 +21,11 @@ describe('resource positions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
+  test.skip('getPositions: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.active.v1.accounts.positions.list(
-        'account_id',
+      client.active.v1.accounts.positions.getPositions(
+        0,
         { page_size: 1, page_token: 'page_token' },
         { path: '/_stainless_unknown_path' },
       ),

@@ -12,18 +12,18 @@ export class AnalystReporting extends APIResource {
    *
    * @example
    * ```ts
-   * const analystReportings =
-   *   await client.active.v1.instruments.analystReporting.list(
+   * const response =
+   *   await client.active.v1.instruments.analystReporting.getInstrumentAnalystConsensus(
    *     'instrument_id',
    *     { from_date: 'from_date', to_date: 'to_date' },
    *   );
    * ```
    */
-  list(
+  getInstrumentAnalystConsensus(
     instrumentID: string,
-    query: AnalystReportingListParams,
+    query: AnalystReportingGetInstrumentAnalystConsensusParams,
     options?: RequestOptions,
-  ): APIPromise<AnalystReportingListResponse> {
+  ): APIPromise<AnalystReportingGetInstrumentAnalystConsensusResponse> {
     return this._client.get(path`/active/v1/instruments/${instrumentID}/analyst-reporting`, {
       query,
       ...options,
@@ -116,14 +116,14 @@ export interface PriceTarget {
   low: string;
 }
 
-export interface AnalystReportingListResponse extends Shared.BaseResponse {
+export interface AnalystReportingGetInstrumentAnalystConsensusResponse extends Shared.BaseResponse {
   /**
    * Aggregated analyst consensus metrics
    */
   data: InstrumentAnalystConsensus;
 }
 
-export interface AnalystReportingListParams {
+export interface AnalystReportingGetInstrumentAnalystConsensusParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
@@ -141,7 +141,7 @@ export declare namespace AnalystReporting {
     type AnalystRating as AnalystRating,
     type InstrumentAnalystConsensus as InstrumentAnalystConsensus,
     type PriceTarget as PriceTarget,
-    type AnalystReportingListResponse as AnalystReportingListResponse,
-    type AnalystReportingListParams as AnalystReportingListParams,
+    type AnalystReportingGetInstrumentAnalystConsensusResponse as AnalystReportingGetInstrumentAnalystConsensusResponse,
+    type AnalystReportingGetInstrumentAnalystConsensusParams as AnalystReportingGetInstrumentAnalystConsensusParams,
   };
 }

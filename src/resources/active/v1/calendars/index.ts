@@ -4,34 +4,48 @@ export { Calendars } from './calendars';
 export {
   Dividends,
   type DividendCalendarEvent,
-  type DividendFrequency,
-  type DividendListResponse,
-  type DividendListParams,
+  type DividendCalendarEventList,
+  type DividendGetDividendsCalendarResponse,
+  type DividendGetDividendsCalendarParams,
 } from './dividends';
 export {
   Earnings,
   type EarningsCalendarEvent,
-  type EarningListResponse,
-  type EarningListParams,
+  type EarningsCalendarEventList,
+  type EarningGetEarningsCalendarResponse,
+  type EarningGetEarningsCalendarParams,
 } from './earnings';
 export {
   Economic,
   type EconomicCalendarEvent,
-  type EconomicEventImpact,
-  type EconomicListResponse,
-  type EconomicListParams,
+  type EconomicCalendarEventList,
+  type EconomicGetEconomicCalendarResponse,
+  type EconomicGetEconomicCalendarParams,
 } from './economic';
-export { MarketHours, type MarketHourRetrieveResponse, type MarketHourRetrieveParams } from './market-hours';
+export {
+  MarketHours,
+  type MarketHoursList,
+  type MarketHourGetMarketHoursCalendarResponse,
+  type MarketHourGetMarketHoursCalendarParams,
+} from './market-hours';
 export {
   MergersAcquisitions,
   type MergersAcquisitionsEvent,
-  type MergersAcquisitionListResponse,
-  type MergersAcquisitionListParams,
+  type MergersAcquisitionsEventList,
+  type MergersAcquisitionGetMergersAndAcquisitionsCalendarResponse,
+  type MergersAcquisitionGetMergersAndAcquisitionsCalendarParams,
 } from './mergers-acquisitions';
-export { Splits, type StockSplitEvent, type SplitListResponse, type SplitListParams } from './splits';
+export {
+  Splits,
+  type StockSplitEvent,
+  type StockSplitEventList,
+  type SplitGetSplitsCalendarResponse,
+  type SplitGetSplitsCalendarParams,
+} from './splits';
 export {
   Summary,
   type CalendarDateSummary,
-  type SummaryListResponse,
-  type SummaryListParams,
+  type CalendarDateSummaryList,
+  type SummaryGetCalendarSummaryResponse,
+  type SummaryGetCalendarSummaryParams,
 } from './summary';

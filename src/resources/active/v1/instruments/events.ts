@@ -12,18 +12,18 @@ export class Events extends APIResource {
    *
    * @example
    * ```ts
-   * const events =
-   *   await client.active.v1.instruments.events.list(
+   * const response =
+   *   await client.active.v1.instruments.events.getInstrumentEvents(
    *     'instrument_id',
    *     { from_date: 'from_date', to_date: 'to_date' },
    *   );
    * ```
    */
-  list(
+  getInstrumentEvents(
     instrumentID: string,
-    query: EventListParams,
+    query: EventGetInstrumentEventsParams,
     options?: RequestOptions,
-  ): APIPromise<EventListResponse> {
+  ): APIPromise<EventGetInstrumentEventsResponse> {
     return this._client.get(path`/active/v1/instruments/${instrumentID}/events`, { query, ...options });
   }
 }
@@ -45,19 +45,16 @@ export interface InstrumentEvent {
   /**
    * The type of event
    */
-  event_type: InstrumentEventType;
+  event_type: 'EARNINGS' | 'DIVIDEND' | 'SPLIT' | 'MERGER_ACQUISITION';
 }
 
-/**
- * Event type for instrument events
- */
-export type InstrumentEventType = 'EARNINGS' | 'DIVIDEND' | 'SPLIT' | 'MERGER_ACQUISITION';
+export type InstrumentEventList = Array<InstrumentEvent>;
 
-export interface EventListResponse extends Shared.BaseResponse {
-  data: Array<InstrumentEvent>;
+export interface EventGetInstrumentEventsResponse extends Shared.BaseResponse {
+  data: InstrumentEventList;
 }
 
-export interface EventListParams {
+export interface EventGetInstrumentEventsParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
@@ -72,8 +69,8 @@ export interface EventListParams {
 export declare namespace Events {
   export {
     type InstrumentEvent as InstrumentEvent,
-    type InstrumentEventType as InstrumentEventType,
-    type EventListResponse as EventListResponse,
-    type EventListParams as EventListParams,
+    type InstrumentEventList as InstrumentEventList,
+    type EventGetInstrumentEventsResponse as EventGetInstrumentEventsResponse,
+    type EventGetInstrumentEventsParams as EventGetInstrumentEventsParams,
   };
 }

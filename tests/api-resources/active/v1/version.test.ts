@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource version', () => {
   // Prism tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.active.v1.version.retrieve();
+  test.skip('getVersion', async () => {
+    const responsePromise = client.active.v1.version.getVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,8 @@ describe('resource version', () => {
   });
 
   // Prism tests are disabled
-  test.skip('update', async () => {
-    const responsePromise = client.active.v1.version.update();
+  test.skip('updateVersion', async () => {
+    const responsePromise = client.active.v1.version.updateVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

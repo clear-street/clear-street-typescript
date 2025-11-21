@@ -11,14 +11,16 @@ export class Earnings extends APIResource {
    *
    * @example
    * ```ts
-   * const earnings =
-   *   await client.active.v1.calendars.earnings.list({
-   *     from_date: 'from_date',
-   *     to_date: 'to_date',
-   *   });
+   * const response =
+   *   await client.active.v1.calendars.earnings.getEarningsCalendar(
+   *     { from_date: 'from_date', to_date: 'to_date' },
+   *   );
    * ```
    */
-  list(query: EarningListParams, options?: RequestOptions): APIPromise<EarningListResponse> {
+  getEarningsCalendar(
+    query: EarningGetEarningsCalendarParams,
+    options?: RequestOptions,
+  ): APIPromise<EarningGetEarningsCalendarResponse> {
     return this._client.get('/active/v1/calendars/earnings', { query, ...options });
   }
 }
@@ -63,11 +65,13 @@ export interface EarningsCalendarEvent {
   revenue_estimated?: string | null;
 }
 
-export interface EarningListResponse extends Shared.BaseResponse {
-  data: Array<EarningsCalendarEvent>;
+export type EarningsCalendarEventList = Array<EarningsCalendarEvent>;
+
+export interface EarningGetEarningsCalendarResponse extends Shared.BaseResponse {
+  data: EarningsCalendarEventList;
 }
 
-export interface EarningListParams {
+export interface EarningGetEarningsCalendarParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
@@ -82,7 +86,8 @@ export interface EarningListParams {
 export declare namespace Earnings {
   export {
     type EarningsCalendarEvent as EarningsCalendarEvent,
-    type EarningListResponse as EarningListResponse,
-    type EarningListParams as EarningListParams,
+    type EarningsCalendarEventList as EarningsCalendarEventList,
+    type EarningGetEarningsCalendarResponse as EarningGetEarningsCalendarResponse,
+    type EarningGetEarningsCalendarParams as EarningGetEarningsCalendarParams,
   };
 }

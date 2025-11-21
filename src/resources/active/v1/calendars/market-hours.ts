@@ -11,16 +11,16 @@ export class MarketHours extends APIResource {
    *
    * @example
    * ```ts
-   * const marketHour =
-   *   await client.active.v1.calendars.marketHours.retrieve({
-   *     date: 'date',
-   *   });
+   * const response =
+   *   await client.active.v1.calendars.marketHours.getMarketHoursCalendar(
+   *     { date: 'date' },
+   *   );
    * ```
    */
-  retrieve(
-    query: MarketHourRetrieveParams,
+  getMarketHoursCalendar(
+    query: MarketHourGetMarketHoursCalendarParams,
     options?: RequestOptions,
-  ): APIPromise<MarketHourRetrieveResponse> {
+  ): APIPromise<MarketHourGetMarketHoursCalendarResponse> {
     return this._client.get('/active/v1/calendars/market-hours', { query, ...options });
   }
 }
@@ -75,11 +75,13 @@ export interface MarketHours {
   open_time?: string | null;
 }
 
-export interface MarketHourRetrieveResponse extends Shared.BaseResponse {
-  data: Array<MarketHours>;
+export type MarketHoursList = Array<MarketHours>;
+
+export interface MarketHourGetMarketHoursCalendarResponse extends Shared.BaseResponse {
+  data: MarketHoursList;
 }
 
-export interface MarketHourRetrieveParams {
+export interface MarketHourGetMarketHoursCalendarParams {
   /**
    * The date to query market hours for (YYYY-MM-DD)
    */
@@ -94,7 +96,8 @@ export interface MarketHourRetrieveParams {
 export declare namespace MarketHours {
   export {
     type MarketHours as MarketHours,
-    type MarketHourRetrieveResponse as MarketHourRetrieveResponse,
-    type MarketHourRetrieveParams as MarketHourRetrieveParams,
+    type MarketHoursList as MarketHoursList,
+    type MarketHourGetMarketHoursCalendarResponse as MarketHourGetMarketHoursCalendarResponse,
+    type MarketHourGetMarketHoursCalendarParams as MarketHourGetMarketHoursCalendarParams,
   };
 }

@@ -23,8 +23,6 @@ export interface APIError {
 }
 
 export interface BaseResponse {
-  data: unknown;
-
   /**
    * Response metadata, including the request ID and optional pagination info.
    */
@@ -48,11 +46,11 @@ export interface ResponseMetadata {
   request_id: string;
 
   /**
-   * A token that can be used to retrieve the next page of results, if any. The
-   * filtering and sorting information is embedded within the token, so no additional
-   * parameters are needed to retrieve the next page.
+   * A token that can be used to retrieve the next page of results, if any. The token
+   * contains only the pagination state (offset and limit). Filtering and sorting
+   * parameters must be provided with each request.
    */
-  next_page_token?: string | null;
+  next_page_token?: ResponseMetadata.NextPageToken | null;
 
   /**
    * Pagination. Included if this was a GET (list) response
@@ -70,14 +68,15 @@ export interface ResponseMetadata {
   total_pages?: number | null;
 }
 
-/**
- * Security type
- */
-export type SecurityType =
-  | 'COMMON_STOCK'
-  | 'PREFERRED_STOCK'
-  | 'CORPORATE_BOND'
-  | 'OPTION'
-  | 'FUTURE'
-  | 'WARRANT'
-  | 'OTHER';
+export namespace ResponseMetadata {
+  /**
+   * A token that can be used to retrieve the next page of results, if any. The token
+   * contains only the pagination state (offset and limit). Filtering and sorting
+   * parameters must be provided with each request.
+   */
+  export interface NextPageToken {
+    limit: number;
+
+    offset: number;
+  }
+}

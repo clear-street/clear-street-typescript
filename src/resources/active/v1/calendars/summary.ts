@@ -11,14 +11,16 @@ export class Summary extends APIResource {
    *
    * @example
    * ```ts
-   * const summaries =
-   *   await client.active.v1.calendars.summary.list({
-   *     from_date: 'from_date',
-   *     to_date: 'to_date',
-   *   });
+   * const response =
+   *   await client.active.v1.calendars.summary.getCalendarSummary(
+   *     { from_date: 'from_date', to_date: 'to_date' },
+   *   );
    * ```
    */
-  list(query: SummaryListParams, options?: RequestOptions): APIPromise<SummaryListResponse> {
+  getCalendarSummary(
+    query: SummaryGetCalendarSummaryParams,
+    options?: RequestOptions,
+  ): APIPromise<SummaryGetCalendarSummaryResponse> {
     return this._client.get('/active/v1/calendars/summary', { query, ...options });
   }
 }
@@ -58,11 +60,13 @@ export interface CalendarDateSummary {
   stock_splits_count: number;
 }
 
-export interface SummaryListResponse extends Shared.BaseResponse {
-  data: Array<CalendarDateSummary>;
+export type CalendarDateSummaryList = Array<CalendarDateSummary>;
+
+export interface SummaryGetCalendarSummaryResponse extends Shared.BaseResponse {
+  data: CalendarDateSummaryList;
 }
 
-export interface SummaryListParams {
+export interface SummaryGetCalendarSummaryParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
@@ -77,7 +81,8 @@ export interface SummaryListParams {
 export declare namespace Summary {
   export {
     type CalendarDateSummary as CalendarDateSummary,
-    type SummaryListResponse as SummaryListResponse,
-    type SummaryListParams as SummaryListParams,
+    type CalendarDateSummaryList as CalendarDateSummaryList,
+    type SummaryGetCalendarSummaryResponse as SummaryGetCalendarSummaryResponse,
+    type SummaryGetCalendarSummaryParams as SummaryGetCalendarSummaryParams,
   };
 }

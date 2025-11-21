@@ -12,18 +12,18 @@ export class Reporting extends APIResource {
    *
    * @example
    * ```ts
-   * const reportings =
-   *   await client.active.v1.instruments.reporting.list(
+   * const response =
+   *   await client.active.v1.instruments.reporting.getInstrumentReporting(
    *     'instrument_id',
    *     { from_date: 'from_date', to_date: 'to_date' },
    *   );
    * ```
    */
-  list(
+  getInstrumentReporting(
     instrumentID: string,
-    query: ReportingListParams,
+    query: ReportingGetInstrumentReportingParams,
     options?: RequestOptions,
-  ): APIPromise<ReportingListResponse> {
+  ): APIPromise<ReportingGetInstrumentReportingResponse> {
     return this._client.get(path`/active/v1/instruments/${instrumentID}/reporting`, { query, ...options });
   }
 }
@@ -88,14 +88,14 @@ export interface InstrumentEarnings {
   revenue_surprise_percent?: string | null;
 }
 
-export interface ReportingListResponse extends Shared.BaseResponse {
+export interface ReportingGetInstrumentReportingResponse extends Shared.BaseResponse {
   /**
    * Represents instrument earnings data
    */
   data: InstrumentEarnings;
 }
 
-export interface ReportingListParams {
+export interface ReportingGetInstrumentReportingParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
@@ -111,7 +111,7 @@ export declare namespace Reporting {
   export {
     type FiscalPeriodType as FiscalPeriodType,
     type InstrumentEarnings as InstrumentEarnings,
-    type ReportingListResponse as ReportingListResponse,
-    type ReportingListParams as ReportingListParams,
+    type ReportingGetInstrumentReportingResponse as ReportingGetInstrumentReportingResponse,
+    type ReportingGetInstrumentReportingParams as ReportingGetInstrumentReportingParams,
   };
 }

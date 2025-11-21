@@ -7,13 +7,13 @@ const client = new ClearStreet({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource events', () => {
+describe('resource run', () => {
   // Prism tests are disabled
-  test.skip('getInstrumentEvents: only required params', async () => {
-    const responsePromise = client.active.v1.instruments.events.getInstrumentEvents('instrument_id', {
-      from_date: 'from_date',
-      to_date: 'to_date',
-    });
+  test.skip('promptLayerRunWorkflowV251131', async () => {
+    const responsePromise = client.active.v1.promptLayer.v1.workflows.run.promptLayerRunWorkflowV251131(
+      'workflow_name',
+      {},
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,13 +21,5 @@ describe('resource events', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('getInstrumentEvents: required and optional params', async () => {
-    const response = await client.active.v1.instruments.events.getInstrumentEvents('instrument_id', {
-      from_date: 'from_date',
-      to_date: 'to_date',
-    });
   });
 });

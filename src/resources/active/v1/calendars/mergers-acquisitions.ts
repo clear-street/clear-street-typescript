@@ -11,16 +11,16 @@ export class MergersAcquisitions extends APIResource {
    *
    * @example
    * ```ts
-   * const mergersAcquisitions =
-   *   await client.active.v1.calendars.mergersAcquisitions.list(
+   * const response =
+   *   await client.active.v1.calendars.mergersAcquisitions.getMergersAndAcquisitionsCalendar(
    *     { from_date: 'from_date', to_date: 'to_date' },
    *   );
    * ```
    */
-  list(
-    query: MergersAcquisitionListParams,
+  getMergersAndAcquisitionsCalendar(
+    query: MergersAcquisitionGetMergersAndAcquisitionsCalendarParams,
     options?: RequestOptions,
-  ): APIPromise<MergersAcquisitionListResponse> {
+  ): APIPromise<MergersAcquisitionGetMergersAndAcquisitionsCalendarResponse> {
     return this._client.get('/active/v1/calendars/mergers-acquisitions', { query, ...options });
   }
 }
@@ -70,11 +70,13 @@ export interface MergersAcquisitionsEvent {
   target_cik?: string | null;
 }
 
-export interface MergersAcquisitionListResponse extends Shared.BaseResponse {
-  data: Array<MergersAcquisitionsEvent>;
+export type MergersAcquisitionsEventList = Array<MergersAcquisitionsEvent>;
+
+export interface MergersAcquisitionGetMergersAndAcquisitionsCalendarResponse extends Shared.BaseResponse {
+  data: MergersAcquisitionsEventList;
 }
 
-export interface MergersAcquisitionListParams {
+export interface MergersAcquisitionGetMergersAndAcquisitionsCalendarParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
@@ -89,7 +91,8 @@ export interface MergersAcquisitionListParams {
 export declare namespace MergersAcquisitions {
   export {
     type MergersAcquisitionsEvent as MergersAcquisitionsEvent,
-    type MergersAcquisitionListResponse as MergersAcquisitionListResponse,
-    type MergersAcquisitionListParams as MergersAcquisitionListParams,
+    type MergersAcquisitionsEventList as MergersAcquisitionsEventList,
+    type MergersAcquisitionGetMergersAndAcquisitionsCalendarResponse as MergersAcquisitionGetMergersAndAcquisitionsCalendarResponse,
+    type MergersAcquisitionGetMergersAndAcquisitionsCalendarParams as MergersAcquisitionGetMergersAndAcquisitionsCalendarParams,
   };
 }
