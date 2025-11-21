@@ -2,59 +2,40 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as Shared from '../../../../shared';
-import * as LocateInventoryAPI from './locate-inventory';
+import * as InventoryAPI from './inventory';
 import {
-  InventoryItem,
-  LocateInventory,
-  LocateInventoryRetrieveParams,
-  LocateInventoryRetrieveResponse,
-} from './locate-inventory';
+  Inventory,
+  InventoryGetLocateInventoryParams,
+  InventoryGetLocateInventoryResponse,
+  LocateInventoryItem,
+  LocateInventoryItemList,
+} from './inventory';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
 export class Locates extends APIResource {
-  locateInventory: LocateInventoryAPI.LocateInventory = new LocateInventoryAPI.LocateInventory(this._client);
+  inventory: InventoryAPI.Inventory = new InventoryAPI.Inventory(this._client);
 
   /**
    * Submits a new short stock locate request.
    *
    * @example
    * ```ts
-   * const locate =
-   *   await client.active.v1.accounts.locates.create(
-   *     'account_id',
+   * const response =
+   *   await client.active.v1.accounts.locates.createLocateRequest(
+   *     0,
    *     { body: [{ quantity: 500, symbol: 'AAPL' }] },
    *   );
    * ```
    */
-  create(
-    accountID: string,
-    params: LocateCreateParams,
+  createLocateRequest(
+    accountID: number,
+    params: LocateCreateLocateRequestParams,
     options?: RequestOptions,
-  ): APIPromise<LocateCreateResponse> {
+  ): APIPromise<LocateCreateLocateRequestResponse> {
     const { body } = params;
     return this._client.post(path`/active/v1/accounts/${accountID}/locates`, { body: body, ...options });
-  }
-
-  /**
-   * Modifies an existing locate request.
-   *
-   * @example
-   * ```ts
-   * const locate =
-   *   await client.active.v1.accounts.locates.update(
-   *     'account_id',
-   *     { accept: true },
-   *   );
-   * ```
-   */
-  update(
-    accountID: string,
-    body: LocateUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<LocateUpdateResponse> {
-    return this._client.patch(path`/active/v1/accounts/${accountID}/locates`, { body, ...options });
   }
 
   /**
@@ -62,18 +43,38 @@ export class Locates extends APIResource {
    *
    * @example
    * ```ts
-   * const locates =
-   *   await client.active.v1.accounts.locates.list(
-   *     'account_id',
+   * const response =
+   *   await client.active.v1.accounts.locates.getLocateRequests(
+   *     0,
    *   );
    * ```
    */
-  list(
-    accountID: string,
-    query: LocateListParams | null | undefined = {},
+  getLocateRequests(
+    accountID: number,
+    query: LocateGetLocateRequestsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<LocateListResponse> {
+  ): APIPromise<LocateGetLocateRequestsResponse> {
     return this._client.get(path`/active/v1/accounts/${accountID}/locates`, { query, ...options });
+  }
+
+  /**
+   * Modifies an existing locate request.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.accounts.locates.updateLocateRequest(
+   *     0,
+   *     { accept: true },
+   *   );
+   * ```
+   */
+  updateLocateRequest(
+    accountID: number,
+    body: LocateUpdateLocateRequestParams,
+    options?: RequestOptions,
+  ): APIPromise<LocateUpdateLocateRequestResponse> {
+    return this._client.patch(path`/active/v1/accounts/${accountID}/locates`, { body, ...options });
   }
 }
 
@@ -158,6 +159,8 @@ export interface LocateOrder {
   trader_comment?: string | null;
 }
 
+export type LocateOrderList = Array<LocateOrder>;
+
 /**
  * The status of a locate order
  */
@@ -170,26 +173,26 @@ export type LocateOrderStatus =
   | 'EXPIRED'
   | 'CANCELED';
 
-export interface LocateCreateResponse extends Shared.BaseResponse {
-  data: Array<LocateOrder>;
+export interface LocateCreateLocateRequestResponse extends Shared.BaseResponse {
+  data: LocateOrderList;
 }
 
-export interface LocateUpdateResponse extends Shared.BaseResponse {
+export interface LocateGetLocateRequestsResponse extends Shared.BaseResponse {
+  data: LocateOrderList;
+}
+
+export interface LocateUpdateLocateRequestResponse extends Shared.BaseResponse {
   /**
    * Represents a single locate order and its status
    */
   data: LocateOrder;
 }
 
-export interface LocateListResponse extends Shared.BaseResponse {
-  data: Array<LocateOrder>;
+export interface LocateCreateLocateRequestParams {
+  body: Array<LocateCreateLocateRequestParams.Body>;
 }
 
-export interface LocateCreateParams {
-  body: Array<LocateCreateParams.Body>;
-}
-
-export namespace LocateCreateParams {
+export namespace LocateCreateLocateRequestParams {
   /**
    * Request to create a new locate order
    */
@@ -216,14 +219,7 @@ export namespace LocateCreateParams {
   }
 }
 
-export interface LocateUpdateParams {
-  /**
-   * Whether to accept (`true`) or decline (`false`) the locate offer
-   */
-  accept: boolean;
-}
-
-export interface LocateListParams {
+export interface LocateGetLocateRequestsParams {
   /**
    * The number of items to return per page
    */
@@ -245,24 +241,33 @@ export interface LocateListParams {
   status?: LocateOrderStatus;
 }
 
-Locates.LocateInventory = LocateInventory;
+export interface LocateUpdateLocateRequestParams {
+  /**
+   * Whether to accept (`true`) or decline (`false`) the locate offer
+   */
+  accept: boolean;
+}
+
+Locates.Inventory = Inventory;
 
 export declare namespace Locates {
   export {
     type LocateOrder as LocateOrder,
+    type LocateOrderList as LocateOrderList,
     type LocateOrderStatus as LocateOrderStatus,
-    type LocateCreateResponse as LocateCreateResponse,
-    type LocateUpdateResponse as LocateUpdateResponse,
-    type LocateListResponse as LocateListResponse,
-    type LocateCreateParams as LocateCreateParams,
-    type LocateUpdateParams as LocateUpdateParams,
-    type LocateListParams as LocateListParams,
+    type LocateCreateLocateRequestResponse as LocateCreateLocateRequestResponse,
+    type LocateGetLocateRequestsResponse as LocateGetLocateRequestsResponse,
+    type LocateUpdateLocateRequestResponse as LocateUpdateLocateRequestResponse,
+    type LocateCreateLocateRequestParams as LocateCreateLocateRequestParams,
+    type LocateGetLocateRequestsParams as LocateGetLocateRequestsParams,
+    type LocateUpdateLocateRequestParams as LocateUpdateLocateRequestParams,
   };
 
   export {
-    LocateInventory as LocateInventory,
-    type InventoryItem as InventoryItem,
-    type LocateInventoryRetrieveResponse as LocateInventoryRetrieveResponse,
-    type LocateInventoryRetrieveParams as LocateInventoryRetrieveParams,
+    Inventory as Inventory,
+    type LocateInventoryItem as LocateInventoryItem,
+    type LocateInventoryItemList as LocateInventoryItemList,
+    type InventoryGetLocateInventoryResponse as InventoryGetLocateInventoryResponse,
+    type InventoryGetLocateInventoryParams as InventoryGetLocateInventoryParams,
   };
 }

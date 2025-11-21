@@ -11,12 +11,16 @@ export class Splits extends APIResource {
    *
    * @example
    * ```ts
-   * const splits = await client.active.v1.calendars.splits.list(
-   *   { from_date: 'from_date', to_date: 'to_date' },
-   * );
+   * const response =
+   *   await client.active.v1.calendars.splits.getSplitsCalendar(
+   *     { from_date: 'from_date', to_date: 'to_date' },
+   *   );
    * ```
    */
-  list(query: SplitListParams, options?: RequestOptions): APIPromise<SplitListResponse> {
+  getSplitsCalendar(
+    query: SplitGetSplitsCalendarParams,
+    options?: RequestOptions,
+  ): APIPromise<SplitGetSplitsCalendarResponse> {
     return this._client.get('/active/v1/calendars/splits', { query, ...options });
   }
 }
@@ -46,11 +50,13 @@ export interface StockSplitEvent {
   symbol: string;
 }
 
-export interface SplitListResponse extends Shared.BaseResponse {
-  data: Array<StockSplitEvent>;
+export type StockSplitEventList = Array<StockSplitEvent>;
+
+export interface SplitGetSplitsCalendarResponse extends Shared.BaseResponse {
+  data: StockSplitEventList;
 }
 
-export interface SplitListParams {
+export interface SplitGetSplitsCalendarParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
@@ -65,7 +71,8 @@ export interface SplitListParams {
 export declare namespace Splits {
   export {
     type StockSplitEvent as StockSplitEvent,
-    type SplitListResponse as SplitListResponse,
-    type SplitListParams as SplitListParams,
+    type StockSplitEventList as StockSplitEventList,
+    type SplitGetSplitsCalendarResponse as SplitGetSplitsCalendarResponse,
+    type SplitGetSplitsCalendarParams as SplitGetSplitsCalendarParams,
   };
 }

@@ -11,33 +11,13 @@ export class Venues extends APIResource {
    *
    * @example
    * ```ts
-   * const venues =
-   *   await client.active.v1.instruments.venues.list();
+   * const response =
+   *   await client.active.v1.instruments.venues.getVenues();
    * ```
    */
-  list(options?: RequestOptions): APIPromise<VenueListResponse> {
+  getVenues(options?: RequestOptions): APIPromise<VenueGetVenuesResponse> {
     return this._client.get('/active/v1/instruments/venues', options);
   }
-}
-
-/**
- * Display characteristics of a venue
- */
-export type DisplayType = 'LIT' | 'DARK' | 'PERIODIC_AUCTION' | 'RFQ';
-
-/**
- * Good-till-date order acceptance capabilities
- */
-export interface GtdAccepts {
-  /**
-   * Whether the venue accepts date-only expiration (YYYY-MM-DD)
-   */
-  date: boolean;
-
-  /**
-   * Whether the venue accepts precise timestamp expiration
-   */
-  timestamp: boolean;
 }
 
 /**
@@ -52,13 +32,13 @@ export interface Venue {
   /**
    * The display characteristics of the venue
    */
-  display_type: DisplayType;
+  display_type: 'LIT' | 'DARK' | 'PERIODIC_AUCTION' | 'RFQ';
 
   /**
    * Indicates whether GOOD_TILL_DATE orders accept date-only or timestamp
    * specifications
    */
-  gtd_accepts: GtdAccepts;
+  gtd_accepts: Venue.GtdAccepts;
 
   /**
    * The minimum quantity increment for orders at this venue
@@ -78,7 +58,7 @@ export interface Venue {
   /**
    * Trading sessions available at this venue
    */
-  sessions: Array<VenueSession>;
+  sessions: Array<Venue.Session>;
 
   /**
    * Order types supported by this venue
@@ -101,36 +81,54 @@ export interface Venue {
   timezone: string;
 }
 
-/**
- * A trading session within a venue's trading day
- */
-export interface VenueSession {
+export namespace Venue {
   /**
-   * Session end time in venue's local timezone (HH:MM format, 24-hour)
+   * Indicates whether GOOD_TILL_DATE orders accept date-only or timestamp
+   * specifications
    */
-  end_local: string;
+  export interface GtdAccepts {
+    /**
+     * Whether the venue accepts date-only expiration (YYYY-MM-DD)
+     */
+    date: boolean;
+
+    /**
+     * Whether the venue accepts precise timestamp expiration
+     */
+    timestamp: boolean;
+  }
 
   /**
-   * The name of the trading session
+   * A trading session within a venue's trading day
    */
-  name: string;
+  export interface Session {
+    /**
+     * Session end time in venue's local timezone (HH:MM format, 24-hour)
+     */
+    end_local: string;
 
-  /**
-   * Session start time in venue's local timezone (HH:MM format, 24-hour)
-   */
-  start_local: string;
+    /**
+     * The name of the trading session
+     */
+    name: string;
+
+    /**
+     * Session start time in venue's local timezone (HH:MM format, 24-hour)
+     */
+    start_local: string;
+  }
 }
 
-export interface VenueListResponse extends Shared.BaseResponse {
-  data: Array<Venue>;
+export type VenueList = Array<Venue>;
+
+export interface VenueGetVenuesResponse extends Shared.BaseResponse {
+  data: VenueList;
 }
 
 export declare namespace Venues {
   export {
-    type DisplayType as DisplayType,
-    type GtdAccepts as GtdAccepts,
     type Venue as Venue,
-    type VenueSession as VenueSession,
-    type VenueListResponse as VenueListResponse,
+    type VenueList as VenueList,
+    type VenueGetVenuesResponse as VenueGetVenuesResponse,
   };
 }

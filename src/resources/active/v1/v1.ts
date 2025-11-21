@@ -2,20 +2,27 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ScreenerAPI from './screener';
-import { Screener, ScreenerItem, ScreenerListParams, ScreenerListResponse } from './screener';
+import {
+  Screener,
+  ScreenerGetScreenerParams,
+  ScreenerGetScreenerResponse,
+  ScreenerItem,
+  ScreenerItemList,
+} from './screener';
 import * as VersionAPI from './version';
-import { Version, VersionResource, VersionRetrieveResponse, VersionUpdateResponse } from './version';
+import { Version, VersionGetVersionResponse, VersionResource, VersionUpdateVersionResponse } from './version';
 import * as AccountsAPI from './accounts/accounts';
 import {
   Account,
+  AccountGetAccountByIDResponse,
+  AccountGetAccountsParams,
+  AccountGetAccountsResponse,
   AccountKind,
-  AccountListParams,
-  AccountListResponse,
-  AccountRetrieveResponse,
+  AccountList,
+  AccountPatchAccountByIDParams,
+  AccountPatchAccountByIDResponse,
   AccountStatus,
   AccountSubkind,
-  AccountUpdateParams,
-  AccountUpdateResponse,
   Accounts,
 } from './accounts/accounts';
 import * as CalendarsAPI from './calendars/calendars';
@@ -23,65 +30,75 @@ import { Calendars } from './calendars/calendars';
 import * as InstrumentsAPI from './instruments/instruments';
 import {
   Instrument,
-  InstrumentListParams,
-  InstrumentListResponse,
+  InstrumentGetInstrumentByIDParams,
+  InstrumentGetInstrumentByIDResponse,
+  InstrumentGetInstrumentsParams,
+  InstrumentGetInstrumentsResponse,
+  InstrumentList,
   InstrumentQuote,
-  InstrumentRetrieveParams,
-  InstrumentRetrieveResponse,
   Instruments,
 } from './instruments/instruments';
+import * as PromptLayerAPI from './prompt-layer/prompt-layer';
+import { PromptLayer } from './prompt-layer/prompt-layer';
 
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
-  instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
   calendars: CalendarsAPI.Calendars = new CalendarsAPI.Calendars(this._client);
-  version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
+  instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
+  promptLayer: PromptLayerAPI.PromptLayer = new PromptLayerAPI.PromptLayer(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
+  version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
 }
 
 V1.Accounts = Accounts;
-V1.Instruments = Instruments;
 V1.Calendars = Calendars;
-V1.VersionResource = VersionResource;
+V1.Instruments = Instruments;
+V1.PromptLayer = PromptLayer;
 V1.Screener = Screener;
+V1.VersionResource = VersionResource;
 
 export declare namespace V1 {
   export {
     Accounts as Accounts,
     type Account as Account,
     type AccountKind as AccountKind,
+    type AccountList as AccountList,
     type AccountStatus as AccountStatus,
     type AccountSubkind as AccountSubkind,
-    type AccountRetrieveResponse as AccountRetrieveResponse,
-    type AccountUpdateResponse as AccountUpdateResponse,
-    type AccountListResponse as AccountListResponse,
-    type AccountUpdateParams as AccountUpdateParams,
-    type AccountListParams as AccountListParams,
-  };
-
-  export {
-    Instruments as Instruments,
-    type Instrument as Instrument,
-    type InstrumentQuote as InstrumentQuote,
-    type InstrumentRetrieveResponse as InstrumentRetrieveResponse,
-    type InstrumentListResponse as InstrumentListResponse,
-    type InstrumentRetrieveParams as InstrumentRetrieveParams,
-    type InstrumentListParams as InstrumentListParams,
+    type AccountGetAccountByIDResponse as AccountGetAccountByIDResponse,
+    type AccountGetAccountsResponse as AccountGetAccountsResponse,
+    type AccountPatchAccountByIDResponse as AccountPatchAccountByIDResponse,
+    type AccountGetAccountsParams as AccountGetAccountsParams,
+    type AccountPatchAccountByIDParams as AccountPatchAccountByIDParams,
   };
 
   export { Calendars as Calendars };
 
   export {
-    VersionResource as VersionResource,
-    type Version as Version,
-    type VersionRetrieveResponse as VersionRetrieveResponse,
-    type VersionUpdateResponse as VersionUpdateResponse,
+    Instruments as Instruments,
+    type Instrument as Instrument,
+    type InstrumentList as InstrumentList,
+    type InstrumentQuote as InstrumentQuote,
+    type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
+    type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
+    type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
+    type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
   };
+
+  export { PromptLayer as PromptLayer };
 
   export {
     Screener as Screener,
     type ScreenerItem as ScreenerItem,
-    type ScreenerListResponse as ScreenerListResponse,
-    type ScreenerListParams as ScreenerListParams,
+    type ScreenerItemList as ScreenerItemList,
+    type ScreenerGetScreenerResponse as ScreenerGetScreenerResponse,
+    type ScreenerGetScreenerParams as ScreenerGetScreenerParams,
+  };
+
+  export {
+    VersionResource as VersionResource,
+    type Version as Version,
+    type VersionGetVersionResponse as VersionGetVersionResponse,
+    type VersionUpdateVersionResponse as VersionUpdateVersionResponse,
   };
 }

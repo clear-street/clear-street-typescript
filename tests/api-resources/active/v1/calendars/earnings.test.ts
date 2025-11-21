@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource earnings', () => {
   // Prism tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.active.v1.calendars.earnings.list({
+  test.skip('getEarningsCalendar: only required params', async () => {
+    const responsePromise = client.active.v1.calendars.earnings.getEarningsCalendar({
       from_date: 'from_date',
       to_date: 'to_date',
     });
@@ -24,8 +24,8 @@ describe('resource earnings', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.active.v1.calendars.earnings.list({
+  test.skip('getEarningsCalendar: required and optional params', async () => {
+    const response = await client.active.v1.calendars.earnings.getEarningsCalendar({
       from_date: 'from_date',
       to_date: 'to_date',
     });

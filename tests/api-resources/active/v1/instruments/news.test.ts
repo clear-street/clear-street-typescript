@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource news', () => {
   // Prism tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.active.v1.instruments.news.list('instrument_id', {
+  test.skip('getInstrumentNews: only required params', async () => {
+    const responsePromise = client.active.v1.instruments.news.getInstrumentNews('instrument_id', {
       from_date: 'from_date',
       to_date: 'to_date',
     });
@@ -24,8 +24,8 @@ describe('resource news', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.active.v1.instruments.news.list('instrument_id', {
+  test.skip('getInstrumentNews: required and optional params', async () => {
+    const response = await client.active.v1.instruments.news.getInstrumentNews('instrument_id', {
       from_date: 'from_date',
       to_date: 'to_date',
     });

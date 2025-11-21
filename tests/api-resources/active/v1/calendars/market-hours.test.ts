@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource marketHours', () => {
   // Prism tests are disabled
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.active.v1.calendars.marketHours.retrieve({ date: 'date' });
+  test.skip('getMarketHoursCalendar: only required params', async () => {
+    const responsePromise = client.active.v1.calendars.marketHours.getMarketHoursCalendar({ date: 'date' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,7 +21,10 @@ describe('resource marketHours', () => {
   });
 
   // Prism tests are disabled
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.active.v1.calendars.marketHours.retrieve({ date: 'date', venue: 'venue' });
+  test.skip('getMarketHoursCalendar: required and optional params', async () => {
+    const response = await client.active.v1.calendars.marketHours.getMarketHoursCalendar({
+      date: 'date',
+      venue: 'venue',
+    });
   });
 });

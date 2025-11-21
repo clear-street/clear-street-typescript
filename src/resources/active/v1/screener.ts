@@ -11,13 +11,14 @@ export class Screener extends APIResource {
    *
    * @example
    * ```ts
-   * const screeners = await client.active.v1.screener.list();
+   * const response =
+   *   await client.active.v1.screener.getScreener();
    * ```
    */
-  list(
-    query: ScreenerListParams | null | undefined = {},
+  getScreener(
+    query: ScreenerGetScreenerParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ScreenerListResponse> {
+  ): APIPromise<ScreenerGetScreenerResponse> {
     return this._client.get('/active/v1/screener', { query, ...options });
   }
 }
@@ -57,11 +58,6 @@ export interface ScreenerItem {
   description?: string | null;
 
   /**
-   * The dividend yield percent
-   */
-  dividend_yield?: string | null;
-
-  /**
    * The specific industry of the instrument's issuer
    */
   industry?: string | null;
@@ -72,6 +68,11 @@ export interface ScreenerItem {
   list_date?: string | null;
 
   /**
+   * The total market capitalization
+   */
+  market_cap?: string | null;
+
+  /**
    * The average trading volume over the past month
    */
   month_avg_volume?: string | null;
@@ -80,6 +81,11 @@ export interface ScreenerItem {
    * The full name of the instrument or its issuer
    */
   name?: string | null;
+
+  /**
+   * The percent change from previous close to current price
+   */
+  percent_change?: string | null;
 
   /**
    * The MIC code of the primary listing venue
@@ -102,14 +108,14 @@ export interface ScreenerItem {
   ttm_debt_to_equity?: string | null;
 
   /**
+   * The TTM dividend yield percent
+   */
+  ttm_dividend_yield?: string | null;
+
+  /**
    * The TTM earnings per share
    */
   ttm_earnings_per_share?: string | null;
-
-  /**
-   * The total market capitalization
-   */
-  ttm_market_cap?: string | null;
 
   /**
    * The TTM price-to-earnings ratio
@@ -122,11 +128,13 @@ export interface ScreenerItem {
   week_avg_volume?: string | null;
 }
 
-export interface ScreenerListResponse extends Shared.BaseResponse {
-  data: Array<ScreenerItem>;
+export type ScreenerItemList = Array<ScreenerItem>;
+
+export interface ScreenerGetScreenerResponse extends Shared.BaseResponse {
+  data: ScreenerItemList;
 }
 
-export interface ScreenerListParams {
+export interface ScreenerGetScreenerParams {
   /**
    * Comma-separated list of field names to include in the response
    */
@@ -141,7 +149,8 @@ export interface ScreenerListParams {
 export declare namespace Screener {
   export {
     type ScreenerItem as ScreenerItem,
-    type ScreenerListResponse as ScreenerListResponse,
-    type ScreenerListParams as ScreenerListParams,
+    type ScreenerItemList as ScreenerItemList,
+    type ScreenerGetScreenerResponse as ScreenerGetScreenerResponse,
+    type ScreenerGetScreenerParams as ScreenerGetScreenerParams,
   };
 }

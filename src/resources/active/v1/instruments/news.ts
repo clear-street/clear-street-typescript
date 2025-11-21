@@ -12,13 +12,18 @@ export class News extends APIResource {
    *
    * @example
    * ```ts
-   * const news = await client.active.v1.instruments.news.list(
-   *   'instrument_id',
-   *   { from_date: 'from_date', to_date: 'to_date' },
-   * );
+   * const response =
+   *   await client.active.v1.instruments.news.getInstrumentNews(
+   *     'instrument_id',
+   *     { from_date: 'from_date', to_date: 'to_date' },
+   *   );
    * ```
    */
-  list(instrumentID: string, query: NewsListParams, options?: RequestOptions): APIPromise<NewsListResponse> {
+  getInstrumentNews(
+    instrumentID: string,
+    query: NewsGetInstrumentNewsParams,
+    options?: RequestOptions,
+  ): APIPromise<NewsGetInstrumentNewsResponse> {
     return this._client.get(path`/active/v1/instruments/${instrumentID}/news`, { query, ...options });
   }
 }
@@ -26,7 +31,7 @@ export class News extends APIResource {
 /**
  * A news or press release item related to an instrument
  */
-export interface News {
+export interface InstrumentNews {
   /**
    * The published date/time of the article in UTC
    */
@@ -45,7 +50,7 @@ export interface News {
   /**
    * Classification of the item
    */
-  type: NewsType;
+  type: 'NEWS' | 'PRESS_RELEASE';
 
   /**
    * Canonical URL to the full article
@@ -73,16 +78,13 @@ export interface News {
   text?: string | null;
 }
 
-/**
- * News item classification
- */
-export type NewsType = 'NEWS' | 'PRESS_RELEASE';
+export type InstrumentNewsList = Array<InstrumentNews>;
 
-export interface NewsListResponse extends Shared.BaseResponse {
-  data: Array<News>;
+export interface NewsGetInstrumentNewsResponse extends Shared.BaseResponse {
+  data: InstrumentNewsList;
 }
 
-export interface NewsListParams {
+export interface NewsGetInstrumentNewsParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
@@ -96,9 +98,9 @@ export interface NewsListParams {
 
 export declare namespace News {
   export {
-    type News as News,
-    type NewsType as NewsType,
-    type NewsListResponse as NewsListResponse,
-    type NewsListParams as NewsListParams,
+    type InstrumentNews as InstrumentNews,
+    type InstrumentNewsList as InstrumentNewsList,
+    type NewsGetInstrumentNewsResponse as NewsGetInstrumentNewsResponse,
+    type NewsGetInstrumentNewsParams as NewsGetInstrumentNewsParams,
   };
 }

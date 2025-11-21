@@ -12,13 +12,16 @@ export class Balances extends APIResource {
    *
    * @example
    * ```ts
-   * const balances =
-   *   await client.active.v1.accounts.balances.list(
-   *     'account_id',
+   * const response =
+   *   await client.active.v1.accounts.balances.getAccountBalances(
+   *     0,
    *   );
    * ```
    */
-  list(accountID: string, options?: RequestOptions): APIPromise<BalanceListResponse> {
+  getAccountBalances(
+    accountID: number,
+    options?: RequestOptions,
+  ): APIPromise<BalanceGetAccountBalancesResponse> {
     return this._client.get(path`/active/v1/accounts/${accountID}/balances`, options);
   }
 }
@@ -103,7 +106,7 @@ export interface AccountBalances {
   total_cash: string;
 }
 
-export interface BalanceListResponse extends Shared.BaseResponse {
+export interface BalanceGetAccountBalancesResponse extends Shared.BaseResponse {
   /**
    * Represents the balance details for a trading account
    */
@@ -111,5 +114,8 @@ export interface BalanceListResponse extends Shared.BaseResponse {
 }
 
 export declare namespace Balances {
-  export { type AccountBalances as AccountBalances, type BalanceListResponse as BalanceListResponse };
+  export {
+    type AccountBalances as AccountBalances,
+    type BalanceGetAccountBalancesResponse as BalanceGetAccountBalancesResponse,
+  };
 }

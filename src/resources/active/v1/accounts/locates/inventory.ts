@@ -6,24 +6,24 @@ import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class LocateInventory extends APIResource {
+export class Inventory extends APIResource {
   /**
    * Retrieves available inventory for short stock locates.
    *
    * @example
    * ```ts
-   * const locateInventory =
-   *   await client.active.v1.accounts.locates.locateInventory.retrieve(
-   *     'account_id',
+   * const response =
+   *   await client.active.v1.accounts.locates.inventory.getLocateInventory(
+   *     0,
    *     { symbol: 'symbol' },
    *   );
    * ```
    */
-  retrieve(
-    accountID: string,
-    query: LocateInventoryRetrieveParams,
+  getLocateInventory(
+    accountID: number,
+    query: InventoryGetLocateInventoryParams,
     options?: RequestOptions,
-  ): APIPromise<LocateInventoryRetrieveResponse> {
+  ): APIPromise<InventoryGetLocateInventoryResponse> {
     return this._client.get(path`/active/v1/accounts/${accountID}/locates/inventory`, { query, ...options });
   }
 }
@@ -31,7 +31,7 @@ export class LocateInventory extends APIResource {
 /**
  * Represents the available locate inventory for a symbol
  */
-export interface InventoryItem {
+export interface LocateInventoryItem {
   /**
    * The account the locate inventory belongs to
    */
@@ -59,21 +59,24 @@ export interface InventoryItem {
   used: number;
 }
 
-export interface LocateInventoryRetrieveResponse extends Shared.BaseResponse {
-  data: Array<InventoryItem>;
+export type LocateInventoryItemList = Array<LocateInventoryItem>;
+
+export interface InventoryGetLocateInventoryResponse extends Shared.BaseResponse {
+  data: LocateInventoryItemList;
 }
 
-export interface LocateInventoryRetrieveParams {
+export interface InventoryGetLocateInventoryParams {
   /**
    * The instrument symbol
    */
   symbol: string;
 }
 
-export declare namespace LocateInventory {
+export declare namespace Inventory {
   export {
-    type InventoryItem as InventoryItem,
-    type LocateInventoryRetrieveResponse as LocateInventoryRetrieveResponse,
-    type LocateInventoryRetrieveParams as LocateInventoryRetrieveParams,
+    type LocateInventoryItem as LocateInventoryItem,
+    type LocateInventoryItemList as LocateInventoryItemList,
+    type InventoryGetLocateInventoryResponse as InventoryGetLocateInventoryResponse,
+    type InventoryGetLocateInventoryParams as InventoryGetLocateInventoryParams,
   };
 }

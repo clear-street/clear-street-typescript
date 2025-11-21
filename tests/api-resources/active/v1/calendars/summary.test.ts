@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource summary', () => {
   // Prism tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.active.v1.calendars.summary.list({
+  test.skip('getCalendarSummary: only required params', async () => {
+    const responsePromise = client.active.v1.calendars.summary.getCalendarSummary({
       from_date: 'from_date',
       to_date: 'to_date',
     });
@@ -24,8 +24,8 @@ describe('resource summary', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.active.v1.calendars.summary.list({
+  test.skip('getCalendarSummary: required and optional params', async () => {
+    const response = await client.active.v1.calendars.summary.getCalendarSummary({
       from_date: 'from_date',
       to_date: 'to_date',
     });
