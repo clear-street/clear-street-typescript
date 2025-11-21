@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource accounts', () => {
   // Prism tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.active.v1.accounts.retrieve('account_id');
+  test.skip('getAccountByID', async () => {
+    const responsePromise = client.active.v1.accounts.getAccountByID(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,8 @@ describe('resource accounts', () => {
   });
 
   // Prism tests are disabled
-  test.skip('update', async () => {
-    const responsePromise = client.active.v1.accounts.update('account_id', {});
+  test.skip('getAccounts', async () => {
+    const responsePromise = client.active.v1.accounts.getAccounts();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -33,25 +33,25 @@ describe('resource accounts', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.active.v1.accounts.list();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
+  test.skip('getAccounts: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.active.v1.accounts.list(
+      client.active.v1.accounts.getAccounts(
         { page_size: 1, page_token: 'page_token' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
+
+  // Prism tests are disabled
+  test.skip('patchAccountByID', async () => {
+    const responsePromise = client.active.v1.accounts.patchAccountByID(0, {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

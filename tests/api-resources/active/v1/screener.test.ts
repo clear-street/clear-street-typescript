@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource screener', () => {
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.active.v1.screener.list();
+  test.skip('getScreener', async () => {
+    const responsePromise = client.active.v1.screener.getScreener();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,10 +21,10 @@ describe('resource screener', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
+  test.skip('getScreener: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.active.v1.screener.list(
+      client.active.v1.screener.getScreener(
         { fields: 'fields', symbols: 'symbols' },
         { path: '/_stainless_unknown_path' },
       ),

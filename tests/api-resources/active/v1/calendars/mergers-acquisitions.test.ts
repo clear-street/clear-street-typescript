@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource mergersAcquisitions', () => {
   // Prism tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.active.v1.calendars.mergersAcquisitions.list({
+  test.skip('getMergersAndAcquisitionsCalendar: only required params', async () => {
+    const responsePromise = client.active.v1.calendars.mergersAcquisitions.getMergersAndAcquisitionsCalendar({
       from_date: 'from_date',
       to_date: 'to_date',
     });
@@ -24,8 +24,8 @@ describe('resource mergersAcquisitions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.active.v1.calendars.mergersAcquisitions.list({
+  test.skip('getMergersAndAcquisitionsCalendar: required and optional params', async () => {
+    const response = await client.active.v1.calendars.mergersAcquisitions.getMergersAndAcquisitionsCalendar({
       from_date: 'from_date',
       to_date: 'to_date',
     });

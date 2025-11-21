@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource venues', () => {
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.active.v1.instruments.venues.list();
+  test.skip('getVenues', async () => {
+    const responsePromise = client.active.v1.instruments.venues.getVenues();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

@@ -9,11 +9,11 @@ const client = new ClearStreet({
 
 describe('resource analystReporting', () => {
   // Prism tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.active.v1.instruments.analystReporting.list('instrument_id', {
-      from_date: 'from_date',
-      to_date: 'to_date',
-    });
+  test.skip('getInstrumentAnalystConsensus: only required params', async () => {
+    const responsePromise = client.active.v1.instruments.analystReporting.getInstrumentAnalystConsensus(
+      'instrument_id',
+      { from_date: 'from_date', to_date: 'to_date' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,10 +24,10 @@ describe('resource analystReporting', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.active.v1.instruments.analystReporting.list('instrument_id', {
-      from_date: 'from_date',
-      to_date: 'to_date',
-    });
+  test.skip('getInstrumentAnalystConsensus: required and optional params', async () => {
+    const response = await client.active.v1.instruments.analystReporting.getInstrumentAnalystConsensus(
+      'instrument_id',
+      { from_date: 'from_date', to_date: 'to_date' },
+    );
   });
 });

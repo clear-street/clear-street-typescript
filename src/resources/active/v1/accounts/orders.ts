@@ -9,13 +9,111 @@ import { path } from '../../../../internal/utils/path';
 
 export class Orders extends APIResource {
   /**
+   * Cancels all active orders for the specified account.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.accounts.orders.cancelAllOrders(0);
+   * ```
+   */
+  cancelAllOrders(accountID: number, options?: RequestOptions): APIPromise<OrderCancelAllOrdersResponse> {
+    return this._client.delete(path`/active/v1/accounts/${accountID}/orders`, options);
+  }
+
+  /**
+   * Cancels a specific order.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.accounts.orders.cancelOrder(
+   *     'order_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
+   */
+  cancelOrder(
+    orderID: string,
+    params: OrderCancelOrderParams,
+    options?: RequestOptions,
+  ): APIPromise<OrderCancelOrderResponse> {
+    const { account_id } = params;
+    return this._client.delete(path`/active/v1/accounts/${account_id}/orders/${orderID}`, options);
+  }
+
+  /**
+   * Retrieves details for a specific order.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.accounts.orders.getOrderByID(
+   *     'order_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
+   */
+  getOrderByID(
+    orderID: string,
+    params: OrderGetOrderByIDParams,
+    options?: RequestOptions,
+  ): APIPromise<OrderGetOrderByIDResponse> {
+    const { account_id } = params;
+    return this._client.get(path`/active/v1/accounts/${account_id}/orders/${orderID}`, options);
+  }
+
+  /**
+   * Retrieves all orders for the specified trading account.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.accounts.orders.getOrders(0, {
+   *     from: 'from',
+   *     to: 'to',
+   *   });
+   * ```
+   */
+  getOrders(
+    accountID: number,
+    query: OrderGetOrdersParams,
+    options?: RequestOptions,
+  ): APIPromise<OrderGetOrdersResponse> {
+    return this._client.get(path`/active/v1/accounts/${accountID}/orders`, { query, ...options });
+  }
+
+  /**
+   * Replaces an existing order with new parameters.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.accounts.orders.replaceOrder(
+   *     'order_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
+   */
+  replaceOrder(
+    orderID: string,
+    params: OrderReplaceOrderParams,
+    options?: RequestOptions,
+  ): APIPromise<OrderReplaceOrderResponse> {
+    const { account_id, ...body } = params;
+    return this._client.patch(path`/active/v1/accounts/${account_id}/orders/${orderID}`, {
+      body,
+      ...options,
+    });
+  }
+
+  /**
    * Creates one or more new trading orders for the account.
    *
    * @example
    * ```ts
-   * const order = await client.active.v1.accounts.orders.create(
-   *   'account_id',
-   *   {
+   * const response =
+   *   await client.active.v1.accounts.orders.submitOrders(0, {
    *     body: [
    *       {
    *         order_id: 'my-ref-id-20251001-002',
@@ -26,120 +124,23 @@ export class Orders extends APIResource {
    *         time_in_force: 'DAY',
    *       },
    *     ],
-   *   },
-   * );
+   *   });
    * ```
    */
-  create(
-    accountID: string,
-    params: OrderCreateParams,
+  submitOrders(
+    accountID: number,
+    params: OrderSubmitOrdersParams,
     options?: RequestOptions,
-  ): APIPromise<OrderCreateResponse> {
+  ): APIPromise<OrderSubmitOrdersResponse> {
     const { body } = params;
     return this._client.post(path`/active/v1/accounts/${accountID}/orders`, { body: body, ...options });
-  }
-
-  /**
-   * Retrieves details for a specific order.
-   *
-   * @example
-   * ```ts
-   * const order =
-   *   await client.active.v1.accounts.orders.retrieve(
-   *     'order_id',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
-   */
-  retrieve(
-    orderID: string,
-    params: OrderRetrieveParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderRetrieveResponse> {
-    const { account_id } = params;
-    return this._client.get(path`/active/v1/accounts/${account_id}/orders/${orderID}`, options);
-  }
-
-  /**
-   * Replaces an existing order with new parameters.
-   *
-   * @example
-   * ```ts
-   * const order = await client.active.v1.accounts.orders.update(
-   *   'order_id',
-   *   { account_id: 'account_id' },
-   * );
-   * ```
-   */
-  update(
-    orderID: string,
-    params: OrderUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderUpdateResponse> {
-    const { account_id, ...body } = params;
-    return this._client.put(path`/active/v1/accounts/${account_id}/orders/${orderID}`, { body, ...options });
-  }
-
-  /**
-   * Retrieves all orders for the specified trading account.
-   *
-   * @example
-   * ```ts
-   * const orders = await client.active.v1.accounts.orders.list(
-   *   'account_id',
-   *   { from: 'from', to: 'to' },
-   * );
-   * ```
-   */
-  list(accountID: string, query: OrderListParams, options?: RequestOptions): APIPromise<OrderListResponse> {
-    return this._client.get(path`/active/v1/accounts/${accountID}/orders`, { query, ...options });
-  }
-
-  /**
-   * Cancels a specific order.
-   *
-   * @example
-   * ```ts
-   * const order = await client.active.v1.accounts.orders.delete(
-   *   'order_id',
-   *   { account_id: 'account_id' },
-   * );
-   * ```
-   */
-  delete(
-    orderID: string,
-    params: OrderDeleteParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderDeleteResponse> {
-    const { account_id } = params;
-    return this._client.delete(path`/active/v1/accounts/${account_id}/orders/${orderID}`, options);
-  }
-
-  /**
-   * Cancels all active orders for the specified account.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.active.v1.accounts.orders.deleteAll(
-   *     'account_id',
-   *   );
-   * ```
-   */
-  deleteAll(accountID: string, options?: RequestOptions): APIPromise<OrderDeleteAllResponse> {
-    return this._client.delete(path`/active/v1/accounts/${accountID}/orders`, options);
   }
 }
 
 /**
  * Arrival Price strategy
  */
-export interface ApStrategy {
-  /**
-   * UTC timestamp to end execution (defaults to market close)
-   */
-  end_at?: string | null;
-
+export interface ApStrategy extends BaseStrategyParams {
   /**
    * Maximum percentage of market volume to participate in (0-100)
    */
@@ -149,6 +150,16 @@ export interface ApStrategy {
    * Minimum percentage of market volume to participate in (0-100)
    */
   min_percent?: number | null;
+}
+
+/**
+ * Base parameters common to most algorithmic strategies
+ */
+export interface BaseStrategyParams {
+  /**
+   * UTC timestamp to end execution (defaults to market close)
+   */
+  end_at?: string | null;
 
   /**
    * UTC timestamp to start execution (defaults to order placement time)
@@ -164,26 +175,11 @@ export interface ApStrategy {
 /**
  * Dark Pool strategy
  */
-export interface DarkStrategy {
-  /**
-   * UTC timestamp to end execution (defaults to market close)
-   */
-  end_at?: string | null;
-
+export interface DarkStrategy extends BaseStrategyParams {
   /**
    * Maximum percentage of market volume to participate in (0-100)
    */
   max_percent?: number | null;
-
-  /**
-   * UTC timestamp to start execution (defaults to order placement time)
-   */
-  start_at?: string | null;
-
-  /**
-   * Urgency level for execution aggressiveness
-   */
-  urgency?: Urgency;
 }
 
 /**
@@ -265,12 +261,12 @@ export interface Order {
   /**
    * Type of security
    */
-  security_type: Shared.SecurityType;
+  security_type: SecurityType;
 
   /**
    * Side of the order (BUY, SELL, SELL_SHORT)
    */
-  side: OrderSide;
+  side: Side;
 
   /**
    * Current status of the order
@@ -324,10 +320,7 @@ export interface Order {
   strategy?: OrderStrategy | null;
 }
 
-/**
- * Side of an order
- */
-export type OrderSide = 'BUY' | 'SELL' | 'SELL_SHORT' | 'OTHER';
+export type OrderList = Array<Order>;
 
 /**
  * Order status
@@ -356,61 +349,61 @@ export type OrderStatus =
  * strategy type determines which parameters are available and required.
  */
 export type OrderStrategy =
-  | OrderStrategy.UnionMember0
-  | OrderStrategy.UnionMember1
-  | OrderStrategy.UnionMember2
-  | OrderStrategy.UnionMember3
-  | OrderStrategy.UnionMember4
-  | OrderStrategy.UnionMember5
-  | OrderStrategy.UnionMember6;
+  | OrderStrategy.Sor
+  | OrderStrategy.Vwap
+  | OrderStrategy.Twap
+  | OrderStrategy.Ap
+  | OrderStrategy.Pov
+  | OrderStrategy.Dark
+  | OrderStrategy.Dma;
 
 export namespace OrderStrategy {
   /**
    * Smart Order Router (default) - routes to best available venue
    */
-  export interface UnionMember0 extends OrdersAPI.SorStrategy {
+  export interface Sor extends OrdersAPI.SorStrategy {
     type: 'SOR';
   }
 
   /**
    * Volume Weighted Average Price - matches VWAP over a period
    */
-  export interface UnionMember1 extends OrdersAPI.VwapStrategy {
+  export interface Vwap extends OrdersAPI.VwapStrategy {
     type: 'VWAP';
   }
 
   /**
    * Time Weighted Average Price - spreads execution evenly over time
    */
-  export interface UnionMember2 extends OrdersAPI.TwapStrategy {
+  export interface Twap extends OrdersAPI.TwapStrategy {
     type: 'TWAP';
   }
 
   /**
    * Arrival Price - aims to match price at order placement time
    */
-  export interface UnionMember3 extends OrdersAPI.ApStrategy {
+  export interface Ap extends OrdersAPI.ApStrategy {
     type: 'AP';
   }
 
   /**
    * Percentage of Volume - participates as a percentage of market volume
    */
-  export interface UnionMember4 extends OrdersAPI.PovStrategy {
+  export interface Pov extends OrdersAPI.PovStrategy {
     type: 'POV';
   }
 
   /**
    * Dark Pool - routes to dark pool venues
    */
-  export interface UnionMember5 extends OrdersAPI.DarkStrategy {
+  export interface Dark extends OrdersAPI.DarkStrategy {
     type: 'DARK';
   }
 
   /**
    * Direct Market Access - sends directly to a specified exchange
    */
-  export interface UnionMember6 extends OrdersAPI.DmaStrategy {
+  export interface Dma extends OrdersAPI.DmaStrategy {
     type: 'DMA';
   }
 }
@@ -421,44 +414,31 @@ export namespace OrderStrategy {
 export type OrderType = 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT' | 'OTHER';
 
 /**
- * Position effect for options orders
- */
-export type PositionEffect = 'OPEN' | 'CLOSE';
-
-/**
  * Percentage of Volume strategy
  */
-export interface PovStrategy {
+export interface PovStrategy extends BaseStrategyParams {
   /**
    * Target percentage of market volume to participate in (0-100)
    */
   target_percent: number;
-
-  /**
-   * UTC timestamp to end execution (defaults to market close)
-   */
-  end_at?: string | null;
-
-  /**
-   * UTC timestamp to start execution (defaults to order placement time)
-   */
-  start_at?: string | null;
-
-  /**
-   * Urgency level for execution aggressiveness
-   */
-  urgency?: Urgency;
 }
 
 /**
- * Risk settings for an account
+ * Security type
  */
-export interface RiskSettings {
-  /**
-   * The maximum notional value available to the account
-   */
-  max_notional?: string | null;
-}
+export type SecurityType =
+  | 'COMMON_STOCK'
+  | 'PREFERRED_STOCK'
+  | 'CORPORATE_BOND'
+  | 'OPTION'
+  | 'FUTURE'
+  | 'WARRANT'
+  | 'OTHER';
+
+/**
+ * Side of an order
+ */
+export type Side = 'BUY' | 'SELL' | 'SELL_SHORT' | 'OTHER';
 
 /**
  * Base parameters common to most algorithmic strategies
@@ -499,12 +479,7 @@ export type TimeInForce =
 /**
  * Time Weighted Average Price strategy
  */
-export interface TwapStrategy {
-  /**
-   * UTC timestamp to end execution (defaults to market close)
-   */
-  end_at?: string | null;
-
+export interface TwapStrategy extends BaseStrategyParams {
   /**
    * Maximum percentage of market volume to participate in (0-50)
    */
@@ -514,16 +489,6 @@ export interface TwapStrategy {
    * Minimum percentage of market volume to participate in (0-100)
    */
   min_percent?: number | null;
-
-  /**
-   * UTC timestamp to start execution (defaults to order placement time)
-   */
-  start_at?: string | null;
-
-  /**
-   * Urgency level for execution aggressiveness
-   */
-  urgency?: Urgency;
 }
 
 /**
@@ -534,12 +499,7 @@ export type Urgency = 'SUPER_PASSIVE' | 'PASSIVE' | 'MODERATE' | 'AGGRESSIVE' | 
 /**
  * Volume Weighted Average Price strategy
  */
-export interface VwapStrategy {
-  /**
-   * UTC timestamp to end execution (defaults to market close)
-   */
-  end_at?: string | null;
-
+export interface VwapStrategy extends BaseStrategyParams {
   /**
    * Maximum percentage of market volume to participate in (0-50)
    */
@@ -549,23 +509,13 @@ export interface VwapStrategy {
    * Minimum percentage of market volume to participate in (0-100)
    */
   min_percent?: number | null;
-
-  /**
-   * UTC timestamp to start execution (defaults to order placement time)
-   */
-  start_at?: string | null;
-
-  /**
-   * Urgency level for execution aggressiveness
-   */
-  urgency?: Urgency;
 }
 
-export interface OrderCreateResponse extends Shared.BaseResponse {
-  data: Array<Order>;
+export interface OrderCancelAllOrdersResponse extends Shared.BaseResponse {
+  data: OrderList;
 }
 
-export interface OrderRetrieveResponse extends Shared.BaseResponse {
+export interface OrderCancelOrderResponse extends Shared.BaseResponse {
   /**
    * A trading order with its current state and execution details.
    *
@@ -576,7 +526,7 @@ export interface OrderRetrieveResponse extends Shared.BaseResponse {
   data: Order;
 }
 
-export interface OrderUpdateResponse extends Shared.BaseResponse {
+export interface OrderGetOrderByIDResponse extends Shared.BaseResponse {
   /**
    * A trading order with its current state and execution details.
    *
@@ -587,11 +537,11 @@ export interface OrderUpdateResponse extends Shared.BaseResponse {
   data: Order;
 }
 
-export interface OrderListResponse extends Shared.BaseResponse {
-  data: Array<Order>;
+export interface OrderGetOrdersResponse extends Shared.BaseResponse {
+  data: OrderList;
 }
 
-export interface OrderDeleteResponse extends Shared.BaseResponse {
+export interface OrderReplaceOrderResponse extends Shared.BaseResponse {
   /**
    * A trading order with its current state and execution details.
    *
@@ -602,15 +552,98 @@ export interface OrderDeleteResponse extends Shared.BaseResponse {
   data: Order;
 }
 
-export interface OrderDeleteAllResponse extends Shared.BaseResponse {
-  data: Array<Order>;
+export interface OrderSubmitOrdersResponse extends Shared.BaseResponse {
+  data: OrderList;
 }
 
-export interface OrderCreateParams {
-  body: Array<OrderCreateParams.Body>;
+export interface OrderCancelOrderParams {
+  /**
+   * Account identifier
+   */
+  account_id: number;
 }
 
-export namespace OrderCreateParams {
+export interface OrderGetOrderByIDParams {
+  /**
+   * Account identifier
+   */
+  account_id: number;
+}
+
+export interface OrderGetOrdersParams {
+  /**
+   * The start date and time for the query range, inclusive (ISO 8601 format)
+   */
+  from: string;
+
+  /**
+   * The end date and time for the query range, inclusive (ISO 8601 format)
+   */
+  to: string;
+
+  /**
+   * Filter by instrument ID
+   */
+  instrument_id?: string;
+
+  /**
+   * The number of items to return per page
+   */
+  page_size?: number;
+
+  /**
+   * The token for the next page of results
+   */
+  page_token?: string;
+
+  /**
+   * Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
+   */
+  security_type?: SecurityType;
+
+  /**
+   * Filter by order status
+   */
+  status?: OrderStatus;
+
+  /**
+   * Filter by symbol
+   */
+  symbol?: string;
+}
+
+export interface OrderReplaceOrderParams {
+  /**
+   * Path param: Account identifier
+   */
+  account_id: number;
+
+  /**
+   * Body param: New limit price for the order
+   */
+  limit_price?: string | null;
+
+  /**
+   * Body param: New quantity for the order
+   */
+  quantity?: string | null;
+
+  /**
+   * Body param: New stop price for the order
+   */
+  stop_price?: string | null;
+
+  /**
+   * Body param: New time in force for the order
+   */
+  time_in_force?: TimeInForce;
+}
+
+export interface OrderSubmitOrdersParams {
+  body: Array<OrderSubmitOrdersParams.Body>;
+}
+
+export namespace OrderSubmitOrdersParams {
   /**
    * Request to submit a new order (PlaceOrderRequest from spec)
    */
@@ -634,12 +667,12 @@ export namespace OrderCreateParams {
     /**
      * Type of security
      */
-    security_type: Shared.SecurityType;
+    security_type: OrdersAPI.SecurityType;
 
     /**
      * Side of the order
      */
-    side: OrdersAPI.OrderSide;
+    side: OrdersAPI.Side;
 
     /**
      * Time in force
@@ -673,7 +706,7 @@ export namespace OrderCreateParams {
      * Required when security_type is OPTION. Specifies whether the order opens or
      * closes a position.
      */
-    position_effect?: OrdersAPI.PositionEffect;
+    position_effect?: 'OPEN' | 'CLOSE';
 
     /**
      * Stop price (required for STOP and STOP_LIMIT orders)
@@ -699,118 +732,36 @@ export namespace OrderCreateParams {
   }
 }
 
-export interface OrderRetrieveParams {
-  /**
-   * Account identifier
-   */
-  account_id: string;
-}
-
-export interface OrderUpdateParams {
-  /**
-   * Path param: Account identifier
-   */
-  account_id: string;
-
-  /**
-   * Body param: New limit price for the order
-   */
-  limit_price?: string | null;
-
-  /**
-   * Body param: New quantity for the order
-   */
-  quantity?: string | null;
-
-  /**
-   * Body param: New stop price for the order
-   */
-  stop_price?: string | null;
-
-  /**
-   * Body param: New time in force for the order
-   */
-  time_in_force?: TimeInForce;
-}
-
-export interface OrderListParams {
-  /**
-   * The start date and time for the query range, inclusive (ISO 8601 format)
-   */
-  from: string;
-
-  /**
-   * The end date and time for the query range, inclusive (ISO 8601 format)
-   */
-  to: string;
-
-  /**
-   * Filter by instrument ID
-   */
-  instrument_id?: string;
-
-  /**
-   * The number of items to return per page
-   */
-  page_size?: number;
-
-  /**
-   * The token for the next page of results
-   */
-  page_token?: string;
-
-  /**
-   * Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
-   */
-  security_type?: Shared.SecurityType;
-
-  /**
-   * Filter by order status
-   */
-  status?: OrderStatus;
-
-  /**
-   * Filter by symbol
-   */
-  symbol?: string;
-}
-
-export interface OrderDeleteParams {
-  /**
-   * Account identifier
-   */
-  account_id: string;
-}
-
 export declare namespace Orders {
   export {
     type ApStrategy as ApStrategy,
+    type BaseStrategyParams as BaseStrategyParams,
     type DarkStrategy as DarkStrategy,
     type Destination as Destination,
     type DmaStrategy as DmaStrategy,
     type Order as Order,
-    type OrderSide as OrderSide,
+    type OrderList as OrderList,
     type OrderStatus as OrderStatus,
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
-    type PositionEffect as PositionEffect,
     type PovStrategy as PovStrategy,
-    type RiskSettings as RiskSettings,
+    type SecurityType as SecurityType,
+    type Side as Side,
     type SorStrategy as SorStrategy,
     type TimeInForce as TimeInForce,
     type TwapStrategy as TwapStrategy,
     type Urgency as Urgency,
     type VwapStrategy as VwapStrategy,
-    type OrderCreateResponse as OrderCreateResponse,
-    type OrderRetrieveResponse as OrderRetrieveResponse,
-    type OrderUpdateResponse as OrderUpdateResponse,
-    type OrderListResponse as OrderListResponse,
-    type OrderDeleteResponse as OrderDeleteResponse,
-    type OrderDeleteAllResponse as OrderDeleteAllResponse,
-    type OrderCreateParams as OrderCreateParams,
-    type OrderRetrieveParams as OrderRetrieveParams,
-    type OrderUpdateParams as OrderUpdateParams,
-    type OrderListParams as OrderListParams,
-    type OrderDeleteParams as OrderDeleteParams,
+    type OrderCancelAllOrdersResponse as OrderCancelAllOrdersResponse,
+    type OrderCancelOrderResponse as OrderCancelOrderResponse,
+    type OrderGetOrderByIDResponse as OrderGetOrderByIDResponse,
+    type OrderGetOrdersResponse as OrderGetOrdersResponse,
+    type OrderReplaceOrderResponse as OrderReplaceOrderResponse,
+    type OrderSubmitOrdersResponse as OrderSubmitOrdersResponse,
+    type OrderCancelOrderParams as OrderCancelOrderParams,
+    type OrderGetOrderByIDParams as OrderGetOrderByIDParams,
+    type OrderGetOrdersParams as OrderGetOrdersParams,
+    type OrderReplaceOrderParams as OrderReplaceOrderParams,
+    type OrderSubmitOrdersParams as OrderSubmitOrdersParams,
   };
 }

@@ -11,14 +11,16 @@ export class Dividends extends APIResource {
    *
    * @example
    * ```ts
-   * const dividends =
-   *   await client.active.v1.calendars.dividends.list({
-   *     from_date: 'from_date',
-   *     to_date: 'to_date',
-   *   });
+   * const response =
+   *   await client.active.v1.calendars.dividends.getDividendsCalendar(
+   *     { from_date: 'from_date', to_date: 'to_date' },
+   *   );
    * ```
    */
-  list(query: DividendListParams, options?: RequestOptions): APIPromise<DividendListResponse> {
+  getDividendsCalendar(
+    query: DividendGetDividendsCalendarParams,
+    options?: RequestOptions,
+  ): APIPromise<DividendGetDividendsCalendarResponse> {
     return this._client.get('/active/v1/calendars/dividends', { query, ...options });
   }
 }
@@ -55,7 +57,7 @@ export interface DividendCalendarEvent {
   /**
    * The frequency of the dividend payment
    */
-  frequency?: DividendFrequency | null;
+  frequency?: 'ANNUALLY' | 'SEMI_ANNUALLY' | 'QUARTERLY' | 'MONTHLY' | 'OTHER' | null;
 
   /**
    * The payment date for the dividend
@@ -73,16 +75,13 @@ export interface DividendCalendarEvent {
   yield?: string | null;
 }
 
-/**
- * Dividend payment frequency
- */
-export type DividendFrequency = 'ANNUALLY' | 'SEMI_ANNUALLY' | 'QUARTERLY' | 'MONTHLY' | 'OTHER';
+export type DividendCalendarEventList = Array<DividendCalendarEvent>;
 
-export interface DividendListResponse extends Shared.BaseResponse {
-  data: Array<DividendCalendarEvent>;
+export interface DividendGetDividendsCalendarResponse extends Shared.BaseResponse {
+  data: DividendCalendarEventList;
 }
 
-export interface DividendListParams {
+export interface DividendGetDividendsCalendarParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
@@ -97,8 +96,8 @@ export interface DividendListParams {
 export declare namespace Dividends {
   export {
     type DividendCalendarEvent as DividendCalendarEvent,
-    type DividendFrequency as DividendFrequency,
-    type DividendListResponse as DividendListResponse,
-    type DividendListParams as DividendListParams,
+    type DividendCalendarEventList as DividendCalendarEventList,
+    type DividendGetDividendsCalendarResponse as DividendGetDividendsCalendarResponse,
+    type DividendGetDividendsCalendarParams as DividendGetDividendsCalendarParams,
   };
 }

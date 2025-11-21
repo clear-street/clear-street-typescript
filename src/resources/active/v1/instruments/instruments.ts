@@ -7,54 +7,66 @@ import {
   AnalystDistribution,
   AnalystRating,
   AnalystReporting,
-  AnalystReportingListParams,
-  AnalystReportingListResponse,
+  AnalystReportingGetInstrumentAnalystConsensusParams,
+  AnalystReportingGetInstrumentAnalystConsensusResponse,
   InstrumentAnalystConsensus,
   PriceTarget,
 } from './analyst-reporting';
 import * as EventsAPI from './events';
-import { EventListParams, EventListResponse, Events, InstrumentEvent, InstrumentEventType } from './events';
+import {
+  EventGetInstrumentEventsParams,
+  EventGetInstrumentEventsResponse,
+  Events,
+  InstrumentEvent,
+  InstrumentEventList,
+} from './events';
 import * as NewsAPI from './news';
-import { News, NewsListParams, NewsListResponse, NewsType } from './news';
+import {
+  InstrumentNews,
+  InstrumentNewsList,
+  News,
+  NewsGetInstrumentNewsParams,
+  NewsGetInstrumentNewsResponse,
+} from './news';
 import * as ReportingAPI from './reporting';
 import {
   FiscalPeriodType,
   InstrumentEarnings,
   Reporting,
-  ReportingListParams,
-  ReportingListResponse,
+  ReportingGetInstrumentReportingParams,
+  ReportingGetInstrumentReportingResponse,
 } from './reporting';
 import * as VenuesAPI from './venues';
-import { DisplayType, GtdAccepts, Venue, VenueListResponse, VenueSession, Venues } from './venues';
+import { Venue, VenueGetVenuesResponse, VenueList, Venues } from './venues';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 export class Instruments extends APIResource {
-  venues: VenuesAPI.Venues = new VenuesAPI.Venues(this._client);
-  events: EventsAPI.Events = new EventsAPI.Events(this._client);
-  reporting: ReportingAPI.Reporting = new ReportingAPI.Reporting(this._client);
   analystReporting: AnalystReportingAPI.AnalystReporting = new AnalystReportingAPI.AnalystReporting(
     this._client,
   );
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
   news: NewsAPI.News = new NewsAPI.News(this._client);
+  reporting: ReportingAPI.Reporting = new ReportingAPI.Reporting(this._client);
+  venues: VenuesAPI.Venues = new VenuesAPI.Venues(this._client);
 
   /**
    * Retrieves detailed information for a specific instrument.
    *
    * @example
    * ```ts
-   * const instrument =
-   *   await client.active.v1.instruments.retrieve(
+   * const response =
+   *   await client.active.v1.instruments.getInstrumentByID(
    *     'instrument_id',
    *   );
    * ```
    */
-  retrieve(
+  getInstrumentByID(
     instrumentID: string,
-    query: InstrumentRetrieveParams | null | undefined = {},
+    query: InstrumentGetInstrumentByIDParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<InstrumentRetrieveResponse> {
+  ): APIPromise<InstrumentGetInstrumentByIDResponse> {
     return this._client.get(path`/active/v1/instruments/${instrumentID}`, { query, ...options });
   }
 
@@ -63,14 +75,14 @@ export class Instruments extends APIResource {
    *
    * @example
    * ```ts
-   * const instruments =
-   *   await client.active.v1.instruments.list();
+   * const response =
+   *   await client.active.v1.instruments.getInstruments();
    * ```
    */
-  list(
-    query: InstrumentListParams | null | undefined = {},
+  getInstruments(
+    query: InstrumentGetInstrumentsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<InstrumentListResponse> {
+  ): APIPromise<InstrumentGetInstrumentsResponse> {
     return this._client.get('/active/v1/instruments', { query, ...options });
   }
 }
@@ -243,6 +255,8 @@ export interface Instrument {
   short_margin_rate?: string | null;
 }
 
+export type InstrumentList = Array<Instrument>;
+
 /**
  * Real-time market quote data for a specific instrument
  */
@@ -273,25 +287,25 @@ export interface InstrumentQuote {
   volume: number;
 }
 
-export interface InstrumentRetrieveResponse extends Shared.BaseResponse {
+export interface InstrumentGetInstrumentByIDResponse extends Shared.BaseResponse {
   /**
    * Represents a tradable financial instrument
    */
   data: Instrument;
 }
 
-export interface InstrumentListResponse extends Shared.BaseResponse {
-  data: Array<Instrument>;
+export interface InstrumentGetInstrumentsResponse extends Shared.BaseResponse {
+  data: InstrumentList;
 }
 
-export interface InstrumentRetrieveParams {
+export interface InstrumentGetInstrumentByIDParams {
   /**
    * Comma-separated list of field names to include in the response
    */
   fields?: string;
 }
 
-export interface InstrumentListParams {
+export interface InstrumentGetInstrumentsParams {
   /**
    * Filter to only include Easy-To-Borrow instruments
    */
@@ -318,44 +332,21 @@ export interface InstrumentListParams {
   page_token?: string;
 }
 
-Instruments.Venues = Venues;
-Instruments.Events = Events;
-Instruments.Reporting = Reporting;
 Instruments.AnalystReporting = AnalystReporting;
+Instruments.Events = Events;
+Instruments.News = News;
+Instruments.Reporting = Reporting;
+Instruments.Venues = Venues;
 
 export declare namespace Instruments {
   export {
     type Instrument as Instrument,
+    type InstrumentList as InstrumentList,
     type InstrumentQuote as InstrumentQuote,
-    type InstrumentRetrieveResponse as InstrumentRetrieveResponse,
-    type InstrumentListResponse as InstrumentListResponse,
-    type InstrumentRetrieveParams as InstrumentRetrieveParams,
-    type InstrumentListParams as InstrumentListParams,
-  };
-
-  export {
-    Venues as Venues,
-    type DisplayType as DisplayType,
-    type GtdAccepts as GtdAccepts,
-    type Venue as Venue,
-    type VenueSession as VenueSession,
-    type VenueListResponse as VenueListResponse,
-  };
-
-  export {
-    Events as Events,
-    type InstrumentEvent as InstrumentEvent,
-    type InstrumentEventType as InstrumentEventType,
-    type EventListResponse as EventListResponse,
-    type EventListParams as EventListParams,
-  };
-
-  export {
-    Reporting as Reporting,
-    type FiscalPeriodType as FiscalPeriodType,
-    type InstrumentEarnings as InstrumentEarnings,
-    type ReportingListResponse as ReportingListResponse,
-    type ReportingListParams as ReportingListParams,
+    type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
+    type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
+    type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
+    type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
   };
 
   export {
@@ -364,14 +355,38 @@ export declare namespace Instruments {
     type AnalystRating as AnalystRating,
     type InstrumentAnalystConsensus as InstrumentAnalystConsensus,
     type PriceTarget as PriceTarget,
-    type AnalystReportingListResponse as AnalystReportingListResponse,
-    type AnalystReportingListParams as AnalystReportingListParams,
+    type AnalystReportingGetInstrumentAnalystConsensusResponse as AnalystReportingGetInstrumentAnalystConsensusResponse,
+    type AnalystReportingGetInstrumentAnalystConsensusParams as AnalystReportingGetInstrumentAnalystConsensusParams,
   };
 
   export {
-    type News as News,
-    type NewsType as NewsType,
-    type NewsListResponse as NewsListResponse,
-    type NewsListParams as NewsListParams,
+    Events as Events,
+    type InstrumentEvent as InstrumentEvent,
+    type InstrumentEventList as InstrumentEventList,
+    type EventGetInstrumentEventsResponse as EventGetInstrumentEventsResponse,
+    type EventGetInstrumentEventsParams as EventGetInstrumentEventsParams,
+  };
+
+  export {
+    News as News,
+    type InstrumentNews as InstrumentNews,
+    type InstrumentNewsList as InstrumentNewsList,
+    type NewsGetInstrumentNewsResponse as NewsGetInstrumentNewsResponse,
+    type NewsGetInstrumentNewsParams as NewsGetInstrumentNewsParams,
+  };
+
+  export {
+    Reporting as Reporting,
+    type FiscalPeriodType as FiscalPeriodType,
+    type InstrumentEarnings as InstrumentEarnings,
+    type ReportingGetInstrumentReportingResponse as ReportingGetInstrumentReportingResponse,
+    type ReportingGetInstrumentReportingParams as ReportingGetInstrumentReportingParams,
+  };
+
+  export {
+    Venues as Venues,
+    type Venue as Venue,
+    type VenueList as VenueList,
+    type VenueGetVenuesResponse as VenueGetVenuesResponse,
   };
 }
