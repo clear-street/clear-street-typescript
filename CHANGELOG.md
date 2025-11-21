@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.22.0 (2025-11-21)
+
+Full Changelog: [v0.21.0...v0.22.0](https://github.com/clear-street/clear-street-typescript/compare/v0.21.0...v0.22.0)
+
+### Features
+
+* **api:** add endpoints for AI / PromptLayer requests ([b77cc57](https://github.com/clear-street/clear-street-typescript/commit/b77cc57ec0673cc4e4bf6c83142426992a7677f8))
+
 ## 0.21.0 (2025-10-28)
 
 Full Changelog: [v0.20.0...v0.21.0](https://github.com/clear-street/clear-street-typescript/compare/v0.20.0...v0.21.0)
