@@ -11,9 +11,9 @@ describe('resource workflowVersionExecutionResults', () => {
   // Prism tests are disabled
   test.skip('promptLayerGetWorkflowExecutionResultsV251131: only required params', async () => {
     const responsePromise =
-      client.active.v1.promptLayer.v1.workflowVersionExecutionResults.promptLayerGetWorkflowExecutionResultsV251131(
-        { workflow_version_execution_id: 1 },
-      );
+      client.promptLayer.v1.workflowVersionExecutionResults.promptLayerGetWorkflowExecutionResultsV251131({
+        workflow_version_execution_id: 1,
+      });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,7 +26,7 @@ describe('resource workflowVersionExecutionResults', () => {
   // Prism tests are disabled
   test.skip('promptLayerGetWorkflowExecutionResultsV251131: required and optional params', async () => {
     const response =
-      await client.active.v1.promptLayer.v1.workflowVersionExecutionResults.promptLayerGetWorkflowExecutionResultsV251131(
+      await client.promptLayer.v1.workflowVersionExecutionResults.promptLayerGetWorkflowExecutionResultsV251131(
         { workflow_version_execution_id: 1, return_all_outputs: true },
       );
   });
