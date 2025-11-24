@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.23.0 (2025-11-24)
+
+Full Changelog: [v0.22.0...v0.23.0](https://github.com/clear-street/clear-street-typescript/compare/v0.22.0...v0.23.0)
+
+### Features
+
+* **api:** fix bug in promptlayer route ([a819721](https://github.com/clear-street/clear-street-typescript/commit/a819721049b2108ad6aa59c12c7bf685afa25abd))
+
 ## 0.22.0 (2025-11-21)
 
 Full Changelog: [v0.21.0...v0.22.0](https://github.com/clear-street/clear-street-typescript/compare/v0.21.0...v0.22.0)
