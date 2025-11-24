@@ -10,7 +10,7 @@ const client = new ClearStreet({
 describe('resource run', () => {
   // Prism tests are disabled
   test.skip('promptLayerRunWorkflowV251131', async () => {
-    const responsePromise = client.active.v1.promptLayer.v1.workflows.run.promptLayerRunWorkflowV251131(
+    const responsePromise = client.promptLayer.v1.workflows.run.promptLayerRunWorkflowV251131(
       'workflow_name',
       {},
     );

@@ -17,6 +17,7 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { Active } from './resources/active/active';
+import { PromptLayer } from './resources/prompt-layer/prompt-layer';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -741,14 +742,18 @@ export class ClearStreet {
   static toFile = Uploads.toFile;
 
   active: API.Active = new API.Active(this);
+  promptLayer: API.PromptLayer = new API.PromptLayer(this);
 }
 
 ClearStreet.Active = Active;
+ClearStreet.PromptLayer = PromptLayer;
 
 export declare namespace ClearStreet {
   export type RequestOptions = Opts.RequestOptions;
 
   export { Active as Active };
+
+  export { PromptLayer as PromptLayer };
 
   export type APIError = API.APIError;
   export type BaseResponse = API.BaseResponse;

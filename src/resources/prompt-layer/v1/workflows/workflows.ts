@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../../../core/resource';
+import { APIResource } from '../../../../core/resource';
 import * as RunAPI from './run';
 import { Run, RunPromptLayerRunWorkflowV251131Params, RunPromptLayerRunWorkflowV251131Response } from './run';
 

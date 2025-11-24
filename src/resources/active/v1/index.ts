@@ -5,8 +5,10 @@ export {
   type Account,
   type AccountKind,
   type AccountList,
+  type AccountSettings,
   type AccountStatus,
   type AccountSubkind,
+  type RiskSettings,
   type AccountGetAccountByIDResponse,
   type AccountGetAccountsResponse,
   type AccountPatchAccountByIDResponse,
@@ -24,7 +26,6 @@ export {
   type InstrumentGetInstrumentByIDParams,
   type InstrumentGetInstrumentsParams,
 } from './instruments/index';
-export { PromptLayer } from './prompt-layer/index';
 export {
   Screener,
   type ScreenerItem,

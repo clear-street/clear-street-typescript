@@ -21,9 +21,11 @@ import {
   AccountList,
   AccountPatchAccountByIDParams,
   AccountPatchAccountByIDResponse,
+  AccountSettings,
   AccountStatus,
   AccountSubkind,
   Accounts,
+  RiskSettings,
 } from './accounts/accounts';
 import * as CalendarsAPI from './calendars/calendars';
 import { Calendars } from './calendars/calendars';
@@ -38,14 +40,11 @@ import {
   InstrumentQuote,
   Instruments,
 } from './instruments/instruments';
-import * as PromptLayerAPI from './prompt-layer/prompt-layer';
-import { PromptLayer } from './prompt-layer/prompt-layer';
 
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
   calendars: CalendarsAPI.Calendars = new CalendarsAPI.Calendars(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
-  promptLayer: PromptLayerAPI.PromptLayer = new PromptLayerAPI.PromptLayer(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
 }
@@ -53,7 +52,6 @@ export class V1 extends APIResource {
 V1.Accounts = Accounts;
 V1.Calendars = Calendars;
 V1.Instruments = Instruments;
-V1.PromptLayer = PromptLayer;
 V1.Screener = Screener;
 V1.VersionResource = VersionResource;
 
@@ -63,8 +61,10 @@ export declare namespace V1 {
     type Account as Account,
     type AccountKind as AccountKind,
     type AccountList as AccountList,
+    type AccountSettings as AccountSettings,
     type AccountStatus as AccountStatus,
     type AccountSubkind as AccountSubkind,
+    type RiskSettings as RiskSettings,
     type AccountGetAccountByIDResponse as AccountGetAccountByIDResponse,
     type AccountGetAccountsResponse as AccountGetAccountsResponse,
     type AccountPatchAccountByIDResponse as AccountPatchAccountByIDResponse,
@@ -84,8 +84,6 @@ export declare namespace V1 {
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
   };
-
-  export { PromptLayer as PromptLayer };
 
   export {
     Screener as Screener,

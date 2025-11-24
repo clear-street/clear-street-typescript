@@ -2,3 +2,4 @@
 
 export * from './shared';
 export { Active } from './active/active';
+export { PromptLayer } from './prompt-layer/prompt-layer';
