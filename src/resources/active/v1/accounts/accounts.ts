@@ -167,6 +167,13 @@ export type AccountKind = 'HOUSE' | 'PAB' | 'CUSTOMER' | 'COUNTERPARTY' | 'OTHER
 
 export type AccountList = Array<Account>;
 
+export interface AccountSettings {
+  /**
+   * Risk settings for the account
+   */
+  risk?: RiskSettings | null;
+}
+
 /**
  * Account status
  */
@@ -206,6 +213,16 @@ export type AccountSubkind =
   | 'TRIPARTY_COLLATERAL_AWAY'
   | 'UNKNOWN';
 
+/**
+ * Risk settings for an account
+ */
+export interface RiskSettings {
+  /**
+   * The maximum notional value available to the account
+   */
+  max_notional?: string | null;
+}
+
 export interface AccountGetAccountByIDResponse extends Shared.BaseResponse {
   /**
    * Represents a trading account
@@ -218,10 +235,7 @@ export interface AccountGetAccountsResponse extends Shared.BaseResponse {
 }
 
 export interface AccountPatchAccountByIDResponse extends Shared.BaseResponse {
-  /**
-   * Represents a trading account
-   */
-  data: Account;
+  data: AccountSettings;
 }
 
 export interface AccountGetAccountsParams {
@@ -240,19 +254,7 @@ export interface AccountPatchAccountByIDParams {
   /**
    * Risk settings for the account
    */
-  risk?: AccountPatchAccountByIDParams.Risk | null;
-}
-
-export namespace AccountPatchAccountByIDParams {
-  /**
-   * Risk settings for the account
-   */
-  export interface Risk {
-    /**
-     * The maximum notional value available to the account
-     */
-    max_notional?: string | null;
-  }
+  risk?: RiskSettings | null;
 }
 
 Accounts.Balances = Balances;
@@ -265,8 +267,10 @@ export declare namespace Accounts {
     type Account as Account,
     type AccountKind as AccountKind,
     type AccountList as AccountList,
+    type AccountSettings as AccountSettings,
     type AccountStatus as AccountStatus,
     type AccountSubkind as AccountSubkind,
+    type RiskSettings as RiskSettings,
     type AccountGetAccountByIDResponse as AccountGetAccountByIDResponse,
     type AccountGetAccountsResponse as AccountGetAccountsResponse,
     type AccountPatchAccountByIDResponse as AccountPatchAccountByIDResponse,

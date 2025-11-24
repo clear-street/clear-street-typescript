@@ -17,8 +17,10 @@ Types:
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">Account</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountKind</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountList</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountSettings</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountStatus</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountSubkind</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">RiskSettings</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountGetAccountByIDResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountGetAccountsResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountPatchAccountByIDResponse</a></code>
@@ -282,32 +284,6 @@ Methods:
 
 - <code title="get /active/v1/instruments/venues">client.active.v1.instruments.venues.<a href="./src/resources/active/v1/instruments/venues.ts">getVenues</a>() -> VenueGetVenuesResponse</code>
 
-### PromptLayer
-
-#### V1
-
-##### WorkflowVersionExecutionResults
-
-Types:
-
-- <code><a href="./src/resources/active/v1/prompt-layer/v1/workflow-version-execution-results.ts">WorkflowVersionExecutionResultPromptLayerGetWorkflowExecutionResultsV251131Response</a></code>
-
-Methods:
-
-- <code title="get /active/v1/prompt_layer/v1/workflow-version-execution-results">client.active.v1.promptLayer.v1.workflowVersionExecutionResults.<a href="./src/resources/active/v1/prompt-layer/v1/workflow-version-execution-results.ts">promptLayerGetWorkflowExecutionResultsV251131</a>({ ...params }) -> WorkflowVersionExecutionResultPromptLayerGetWorkflowExecutionResultsV251131Response</code>
-
-##### Workflows
-
-###### Run
-
-Types:
-
-- <code><a href="./src/resources/active/v1/prompt-layer/v1/workflows/run.ts">RunPromptLayerRunWorkflowV251131Response</a></code>
-
-Methods:
-
-- <code title="post /active/v1/prompt_layer/v1/workflows/{workflow_name}/run">client.active.v1.promptLayer.v1.workflows.run.<a href="./src/resources/active/v1/prompt-layer/v1/workflows/run.ts">promptLayerRunWorkflowV251131</a>(workflowName, { ...params }) -> RunPromptLayerRunWorkflowV251131Response</code>
-
 ### Screener
 
 Types:
@@ -332,3 +308,29 @@ Methods:
 
 - <code title="get /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">getVersion</a>() -> VersionGetVersionResponse</code>
 - <code title="patch /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">updateVersion</a>() -> VersionUpdateVersionResponse</code>
+
+# PromptLayer
+
+## V1
+
+### WorkflowVersionExecutionResults
+
+Types:
+
+- <code><a href="./src/resources/prompt-layer/v1/workflow-version-execution-results.ts">WorkflowVersionExecutionResultPromptLayerGetWorkflowExecutionResultsV251131Response</a></code>
+
+Methods:
+
+- <code title="get /prompt_layer/v1/workflow-version-execution-results">client.promptLayer.v1.workflowVersionExecutionResults.<a href="./src/resources/prompt-layer/v1/workflow-version-execution-results.ts">promptLayerGetWorkflowExecutionResultsV251131</a>({ ...params }) -> WorkflowVersionExecutionResultPromptLayerGetWorkflowExecutionResultsV251131Response</code>
+
+### Workflows
+
+#### Run
+
+Types:
+
+- <code><a href="./src/resources/prompt-layer/v1/workflows/run.ts">RunPromptLayerRunWorkflowV251131Response</a></code>
+
+Methods:
+
+- <code title="post /prompt_layer/v1/workflows/{workflow_name}/run">client.promptLayer.v1.workflows.run.<a href="./src/resources/prompt-layer/v1/workflows/run.ts">promptLayerRunWorkflowV251131</a>(workflowName, { ...params }) -> RunPromptLayerRunWorkflowV251131Response</code>

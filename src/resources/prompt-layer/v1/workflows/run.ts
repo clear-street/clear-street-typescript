@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../../../core/resource';
-import { APIPromise } from '../../../../../../core/api-promise';
-import { RequestOptions } from '../../../../../../internal/request-options';
-import { path } from '../../../../../../internal/utils/path';
+import { APIResource } from '../../../../core/resource';
+import { APIPromise } from '../../../../core/api-promise';
+import { RequestOptions } from '../../../../internal/request-options';
+import { path } from '../../../../internal/utils/path';
 
 export class Run extends APIResource {
   /**
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.promptLayer.v1.workflows.run.promptLayerRunWorkflowV251131(
+   *   await client.promptLayer.v1.workflows.run.promptLayerRunWorkflowV251131(
    *     'workflow_name',
    *     {
    *       callback_url:
@@ -32,10 +32,7 @@ export class Run extends APIResource {
     body: RunPromptLayerRunWorkflowV251131Params,
     options?: RequestOptions,
   ): APIPromise<RunPromptLayerRunWorkflowV251131Response> {
-    return this._client.post(path`/active/v1/prompt_layer/v1/workflows/${workflowName}/run`, {
-      body,
-      ...options,
-    });
+    return this._client.post(path`/prompt_layer/v1/workflows/${workflowName}/run`, { body, ...options });
   }
 }
 

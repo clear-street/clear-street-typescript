@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../../core/resource';
-import { APIPromise } from '../../../../../core/api-promise';
-import { RequestOptions } from '../../../../../internal/request-options';
+import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
+import { RequestOptions } from '../../../internal/request-options';
 
 export class WorkflowVersionExecutionResults extends APIResource {
   /**
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.promptLayer.v1.workflowVersionExecutionResults.promptLayerGetWorkflowExecutionResultsV251131(
+   *   await client.promptLayer.v1.workflowVersionExecutionResults.promptLayerGetWorkflowExecutionResultsV251131(
    *     { workflow_version_execution_id: 1 },
    *   );
    * ```
@@ -18,10 +18,7 @@ export class WorkflowVersionExecutionResults extends APIResource {
     query: WorkflowVersionExecutionResultPromptLayerGetWorkflowExecutionResultsV251131Params,
     options?: RequestOptions,
   ): APIPromise<WorkflowVersionExecutionResultPromptLayerGetWorkflowExecutionResultsV251131Response> {
-    return this._client.get('/active/v1/prompt_layer/v1/workflow-version-execution-results', {
-      query,
-      ...options,
-    });
+    return this._client.get('/prompt_layer/v1/workflow-version-execution-results', { query, ...options });
   }
 }
 
