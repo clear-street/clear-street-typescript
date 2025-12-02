@@ -69,7 +69,7 @@ export class Accounts extends APIResource {
   positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
 
   /**
-   * Retrieves detailed information for a specific trading account.
+   * Fetch account details by ID
    *
    * @example
    * ```ts
@@ -82,7 +82,7 @@ export class Accounts extends APIResource {
   }
 
   /**
-   * Retrieves a list of all trading accounts accessible to the authenticated user.
+   * List accounts the authenticated user has permission to access
    *
    * @example
    * ```ts
@@ -98,7 +98,7 @@ export class Accounts extends APIResource {
   }
 
   /**
-   * Modifies settings for a specific trading account.
+   * Update account risk settings
    *
    * @example
    * ```ts
@@ -240,14 +240,28 @@ export interface AccountPatchAccountByIDResponse extends Shared.BaseResponse {
 
 export interface AccountGetAccountsParams {
   /**
-   * The number of items to return per page
+   * The number of items to return per page (only used when page_token is not
+   * provided)
    */
   page_size?: number;
 
   /**
-   * The token for the next page of results
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
    */
-  page_token?: string;
+  page_token?: AccountGetAccountsParams.PageToken;
+}
+
+export namespace AccountGetAccountsParams {
+  /**
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
+   */
+  export interface PageToken {
+    limit: number;
+
+    offset: number;
+  }
 }
 
 export interface AccountPatchAccountByIDParams {
