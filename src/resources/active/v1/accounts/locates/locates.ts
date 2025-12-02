@@ -221,14 +221,16 @@ export namespace LocateCreateLocateRequestParams {
 
 export interface LocateGetLocateRequestsParams {
   /**
-   * The number of items to return per page
+   * The number of items to return per page (only used when page_token is not
+   * provided)
    */
   page_size?: number;
 
   /**
-   * The token for the next page of results
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
    */
-  page_token?: string;
+  page_token?: LocateGetLocateRequestsParams.PageToken;
 
   /**
    * Filter by client reference ID
@@ -239,6 +241,18 @@ export interface LocateGetLocateRequestsParams {
    * Filter by locate order status
    */
   status?: LocateOrderStatus;
+}
+
+export namespace LocateGetLocateRequestsParams {
+  /**
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
+   */
+  export interface PageToken {
+    limit: number;
+
+    offset: number;
+  }
 }
 
 export interface LocateUpdateLocateRequestParams {

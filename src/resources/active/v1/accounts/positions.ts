@@ -36,9 +36,9 @@ export interface Position {
   account_id: number;
 
   /**
-   * Timestamp when this position snapshot was calculated (UTC)
+   * The quantity of a position that is free to be operated on.
    */
-  calculated_at: string;
+  available_quantity: string;
 
   /**
    * The closing price used to value the position for the last trading day
@@ -49,6 +49,11 @@ export interface Position {
    * A unique Clear Street identifier for the instrument
    */
   instrument_id: string;
+
+  /**
+   * Type of security
+   */
+  instrument_type: OrdersAPI.SecurityType;
 
   /**
    * The current market value of the position
@@ -64,11 +69,6 @@ export interface Position {
    * The number of shares or contracts. Can be positive (long) or negative (short)
    */
   quantity: string;
-
-  /**
-   * Type of security
-   */
-  security_type: OrdersAPI.SecurityType;
 
   /**
    * The trading symbol for the instrument
@@ -91,24 +91,9 @@ export interface Position {
   cost_basis?: string | null;
 
   /**
-   * The expiration date for options positions, if applicable
-   */
-  expiration_date?: string | null;
-
-  /**
    * The current market price of the instrument
    */
-  last_market_price?: string | null;
-
-  /**
-   * The total realized profit or loss for this position
-   */
-  realized_pnl?: string | null;
-
-  /**
-   * The strike price for options positions, if applicable
-   */
-  strike_price?: string | null;
+  market_price?: string | null;
 
   /**
    * The total unrealized profit or loss for this position based on current market
@@ -125,14 +110,28 @@ export interface PositionGetPositionsResponse extends Shared.BaseResponse {
 
 export interface PositionGetPositionsParams {
   /**
-   * The number of items to return per page
+   * The number of items to return per page (only used when page_token is not
+   * provided)
    */
   page_size?: number;
 
   /**
-   * The token for the next page of results
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
    */
-  page_token?: string;
+  page_token?: PositionGetPositionsParams.PageToken;
+}
+
+export namespace PositionGetPositionsParams {
+  /**
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
+   */
+  export interface PageToken {
+    limit: number;
+
+    offset: number;
+  }
 }
 
 export declare namespace Positions {

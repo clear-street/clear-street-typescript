@@ -8,7 +8,7 @@ import { path } from '../../../../internal/utils/path';
 
 export class Balances extends APIResource {
   /**
-   * Retrieves current balance information for a trading account.
+   * Fetch account balance information
    *
    * @example
    * ```ts

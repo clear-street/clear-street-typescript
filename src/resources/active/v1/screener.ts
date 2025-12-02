@@ -12,11 +12,13 @@ export class Screener extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.screener.getScreener();
+   *   await client.active.v1.screener.getScreener({
+   *     filters: {},
+   *   });
    * ```
    */
   getScreener(
-    query: ScreenerGetScreenerParams | null | undefined = {},
+    query: ScreenerGetScreenerParams,
     options?: RequestOptions,
   ): APIPromise<ScreenerGetScreenerResponse> {
     return this._client.get('/active/v1/screener', { query, ...options });
@@ -136,14 +138,48 @@ export interface ScreenerGetScreenerResponse extends Shared.BaseResponse {
 
 export interface ScreenerGetScreenerParams {
   /**
-   * Comma-separated list of field names to include in the response
+   * Dynamic filters with dot notation (e.g., price.gte=50, symbol.bw=A) All other
+   * query parameters are captured here for filter parsing
    */
-  fields?: string;
+  filters: unknown;
 
   /**
-   * A comma-separated list of instrument symbols to filter the results
+   * Comma-separated list of field names to include in the response
    */
-  symbols?: string;
+  field_filter?: Array<string>;
+
+  /**
+   * Number of items to return per page (default: 100, max: 10000)
+   */
+  page_size?: number;
+
+  /**
+   * Token for retrieving the next page of results. Contains encoded pagination
+   * state.
+   */
+  page_token?: ScreenerGetScreenerParams.PageToken;
+
+  /**
+   * Field to sort by
+   */
+  sort_by?: string;
+
+  /**
+   * Sort direction (ASC or DESC, defaults to DESC)
+   */
+  sort_direction?: 'ASC' | 'DESC';
+}
+
+export namespace ScreenerGetScreenerParams {
+  /**
+   * Token for retrieving the next page of results. Contains encoded pagination
+   * state.
+   */
+  export interface PageToken {
+    limit: number;
+
+    offset: number;
+  }
 }
 
 export declare namespace Screener {

@@ -9,7 +9,7 @@ import { path } from '../../../../internal/utils/path';
 
 export class Orders extends APIResource {
   /**
-   * Cancels all active orders for the specified account.
+   * Cancel all orders for an account
    *
    * @example
    * ```ts
@@ -22,7 +22,7 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Cancels a specific order.
+   * Cancel a specific order
    *
    * @example
    * ```ts
@@ -43,7 +43,7 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Retrieves details for a specific order.
+   * Get order by ID
    *
    * @example
    * ```ts
@@ -64,7 +64,7 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Retrieves all orders for the specified trading account.
+   * List orders for an account with optional filtering
    *
    * @example
    * ```ts
@@ -84,7 +84,7 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Replaces an existing order with new parameters.
+   * Replace an order with new parameters
    *
    * @example
    * ```ts
@@ -108,7 +108,7 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Creates one or more new trading orders for the account.
+   * Submit new orders
    *
    * @example
    * ```ts
@@ -433,6 +433,7 @@ export type SecurityType =
   | 'OPTION'
   | 'FUTURE'
   | 'WARRANT'
+  | 'CASH'
   | 'OTHER';
 
 /**
@@ -587,14 +588,16 @@ export interface OrderGetOrdersParams {
   instrument_id?: string;
 
   /**
-   * The number of items to return per page
+   * The number of items to return per page (only used when page_token is not
+   * provided)
    */
   page_size?: number;
 
   /**
-   * The token for the next page of results
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
    */
-  page_token?: string;
+  page_token?: OrderGetOrdersParams.PageToken;
 
   /**
    * Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
@@ -610,6 +613,18 @@ export interface OrderGetOrdersParams {
    * Filter by symbol
    */
   symbol?: string;
+}
+
+export namespace OrderGetOrdersParams {
+  /**
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
+   */
+  export interface PageToken {
+    limit: number;
+
+    offset: number;
+  }
 }
 
 export interface OrderReplaceOrderParams {
