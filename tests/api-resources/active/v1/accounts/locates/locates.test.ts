@@ -54,7 +54,12 @@ describe('resource locates', () => {
     await expect(
       client.active.v1.accounts.locates.getLocateRequests(
         0,
-        { page_size: 1, page_token: 'page_token', reference_id: 'reference_id', status: 'PENDING' },
+        {
+          page_size: 1,
+          page_token: { limit: 0, offset: 0 },
+          reference_id: 'reference_id',
+          status: 'PENDING',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);

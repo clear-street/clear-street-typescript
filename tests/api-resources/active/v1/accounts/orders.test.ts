@@ -73,7 +73,7 @@ describe('resource orders', () => {
       to: 'to',
       instrument_id: 'instrument_id',
       page_size: 1,
-      page_token: 'page_token',
+      page_token: { limit: 0, offset: 0 },
       security_type: 'COMMON_STOCK',
       status: 'PENDING_NEW',
       symbol: 'symbol',
