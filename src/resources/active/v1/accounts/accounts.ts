@@ -11,7 +11,6 @@ import {
   DarkStrategy,
   Destination,
   DmaStrategy,
-  Order,
   OrderCancelAllOrdersResponse,
   OrderCancelOrderParams,
   OrderCancelOrderResponse,
@@ -19,7 +18,6 @@ import {
   OrderGetOrderByIDResponse,
   OrderGetOrdersParams,
   OrderGetOrdersResponse,
-  OrderList,
   OrderReplaceOrderParams,
   OrderReplaceOrderResponse,
   OrderStatus,
@@ -40,6 +38,8 @@ import {
 import * as PositionsAPI from './positions';
 import {
   Position,
+  PositionClosePositionParams,
+  PositionClosePositionResponse,
   PositionGetPositionsParams,
   PositionGetPositionsResponse,
   PositionList,
@@ -214,6 +214,118 @@ export type AccountSubkind =
   | 'UNKNOWN';
 
 /**
+ * A trading order with its current state and execution details.
+ *
+ * This is the unified API representation of an order across its lifecycle,
+ * combining data from execution reports, order status queries, and parent/child
+ * tracking.
+ */
+export interface Order {
+  /**
+   * Account placing the order
+   */
+  account_id: number;
+
+  /**
+   * Timestamp when order was created (UTC)
+   */
+  created_at: string;
+
+  /**
+   * Cumulative filled quantity
+   */
+  filled_quantity: string;
+
+  /**
+   * Unique identifier for the instrument (e.g., CUSIP, ISIN, FIGI)
+   */
+  instrument_id: string;
+
+  /**
+   * Remaining unfilled quantity
+   */
+  leaves_quantity: string;
+
+  /**
+   * Client-provided unique identifier for this order
+   */
+  order_id: string;
+
+  /**
+   * Type of order (MARKET, LIMIT, etc.)
+   */
+  order_type: OrdersAPI.OrderType;
+
+  /**
+   * Total order quantity
+   */
+  quantity: string;
+
+  /**
+   * Type of security
+   */
+  security_type: OrdersAPI.SecurityType;
+
+  /**
+   * Side of the order (BUY, SELL, SELL_SHORT)
+   */
+  side: OrdersAPI.Side;
+
+  /**
+   * Current status of the order
+   */
+  status: OrdersAPI.OrderStatus;
+
+  /**
+   * Trading symbol
+   */
+  symbol: string;
+
+  /**
+   * Time in force instruction
+   */
+  time_in_force: OrdersAPI.TimeInForce;
+
+  /**
+   * Timestamp of the most recent update (UTC)
+   */
+  updated_at: string;
+
+  /**
+   * MIC code of the venue where the order is routed
+   */
+  venue: string;
+
+  /**
+   * Average fill price across all executions
+   */
+  average_fill_price?: string | null;
+
+  /**
+   * Timestamp when the order will expire (UTC). Present when time_in_force is
+   * GOOD_TILL_DATE.
+   */
+  expires_at?: string | null;
+
+  /**
+   * Limit price (for LIMIT and STOP_LIMIT orders)
+   */
+  limit_price?: string | null;
+
+  /**
+   * Stop price (for STOP and STOP_LIMIT orders)
+   */
+  stop_price?: string | null;
+
+  /**
+   * Execution strategy for this order
+   */
+  strategy?: OrdersAPI.OrderStrategy | null;
+}
+
+export type OrderList = Array<Order>;
+
+/**
  * Risk settings for an account
  */
 export interface RiskSettings {
@@ -284,6 +396,8 @@ export declare namespace Accounts {
     type AccountSettings as AccountSettings,
     type AccountStatus as AccountStatus,
     type AccountSubkind as AccountSubkind,
+    type Order as Order,
+    type OrderList as OrderList,
     type RiskSettings as RiskSettings,
     type AccountGetAccountByIDResponse as AccountGetAccountByIDResponse,
     type AccountGetAccountsResponse as AccountGetAccountsResponse,
@@ -318,8 +432,6 @@ export declare namespace Accounts {
     type DarkStrategy as DarkStrategy,
     type Destination as Destination,
     type DmaStrategy as DmaStrategy,
-    type Order as Order,
-    type OrderList as OrderList,
     type OrderStatus as OrderStatus,
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
@@ -348,7 +460,9 @@ export declare namespace Accounts {
     Positions as Positions,
     type Position as Position,
     type PositionList as PositionList,
+    type PositionClosePositionResponse as PositionClosePositionResponse,
     type PositionGetPositionsResponse as PositionGetPositionsResponse,
+    type PositionClosePositionParams as PositionClosePositionParams,
     type PositionGetPositionsParams as PositionGetPositionsParams,
   };
 }

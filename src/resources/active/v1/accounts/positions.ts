@@ -2,12 +2,37 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
+import * as AccountsAPI from './accounts';
 import * as OrdersAPI from './orders';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 export class Positions extends APIResource {
+  /**
+   * Retrieves all positions for the specified trading account.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.accounts.positions.closePosition(
+   *     'instrument_id',
+   *     { account_id: 0 },
+   *   );
+   * ```
+   */
+  closePosition(
+    instrumentID: string,
+    params: PositionClosePositionParams,
+    options?: RequestOptions,
+  ): APIPromise<PositionClosePositionResponse> {
+    const { account_id, page_size, page_token } = params;
+    return this._client.delete(path`/active/v1/accounts/${account_id}/positions/${instrumentID}`, {
+      query: { page_size, page_token },
+      ...options,
+    });
+  }
+
   /**
    * Retrieves all positions for the specified trading account.
    *
@@ -104,8 +129,43 @@ export interface Position {
 
 export type PositionList = Array<Position>;
 
+export interface PositionClosePositionResponse extends Shared.BaseResponse {
+  data: AccountsAPI.OrderList;
+}
+
 export interface PositionGetPositionsResponse extends Shared.BaseResponse {
   data: PositionList;
+}
+
+export interface PositionClosePositionParams {
+  /**
+   * Path param: Account identifier
+   */
+  account_id: number;
+
+  /**
+   * Query param: The number of items to return per page (only used when page_token
+   * is not provided)
+   */
+  page_size?: number;
+
+  /**
+   * Query param: Token for retrieving the next page of results. Contains encoded
+   * pagination state (limit + offset). When provided, page_size is ignored.
+   */
+  page_token?: PositionClosePositionParams.PageToken;
+}
+
+export namespace PositionClosePositionParams {
+  /**
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
+   */
+  export interface PageToken {
+    limit: number;
+
+    offset: number;
+  }
 }
 
 export interface PositionGetPositionsParams {
@@ -138,7 +198,9 @@ export declare namespace Positions {
   export {
     type Position as Position,
     type PositionList as PositionList,
+    type PositionClosePositionResponse as PositionClosePositionResponse,
     type PositionGetPositionsResponse as PositionGetPositionsResponse,
+    type PositionClosePositionParams as PositionClosePositionParams,
     type PositionGetPositionsParams as PositionGetPositionsParams,
   };
 }

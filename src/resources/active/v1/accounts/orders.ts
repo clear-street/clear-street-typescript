@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as OrdersAPI from './orders';
 import * as Shared from '../../../shared';
+import * as AccountsAPI from './accounts';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -211,118 +212,6 @@ export interface DmaStrategy {
 }
 
 /**
- * A trading order with its current state and execution details.
- *
- * This is the unified API representation of an order across its lifecycle,
- * combining data from execution reports, order status queries, and parent/child
- * tracking.
- */
-export interface Order {
-  /**
-   * Account placing the order
-   */
-  account_id: number;
-
-  /**
-   * Timestamp when order was created (UTC)
-   */
-  created_at: string;
-
-  /**
-   * Cumulative filled quantity
-   */
-  filled_quantity: string;
-
-  /**
-   * Unique identifier for the instrument (e.g., CUSIP, ISIN, FIGI)
-   */
-  instrument_id: string;
-
-  /**
-   * Remaining unfilled quantity
-   */
-  leaves_quantity: string;
-
-  /**
-   * Client-provided unique identifier for this order
-   */
-  order_id: string;
-
-  /**
-   * Type of order (MARKET, LIMIT, etc.)
-   */
-  order_type: OrderType;
-
-  /**
-   * Total order quantity
-   */
-  quantity: string;
-
-  /**
-   * Type of security
-   */
-  security_type: SecurityType;
-
-  /**
-   * Side of the order (BUY, SELL, SELL_SHORT)
-   */
-  side: Side;
-
-  /**
-   * Current status of the order
-   */
-  status: OrderStatus;
-
-  /**
-   * Trading symbol
-   */
-  symbol: string;
-
-  /**
-   * Time in force instruction
-   */
-  time_in_force: TimeInForce;
-
-  /**
-   * Timestamp of the most recent update (UTC)
-   */
-  updated_at: string;
-
-  /**
-   * MIC code of the venue where the order is routed
-   */
-  venue: string;
-
-  /**
-   * Average fill price across all executions
-   */
-  average_fill_price?: string | null;
-
-  /**
-   * Timestamp when the order will expire (UTC). Present when time_in_force is
-   * GOOD_TILL_DATE.
-   */
-  expires_at?: string | null;
-
-  /**
-   * Limit price (for LIMIT and STOP_LIMIT orders)
-   */
-  limit_price?: string | null;
-
-  /**
-   * Stop price (for STOP and STOP_LIMIT orders)
-   */
-  stop_price?: string | null;
-
-  /**
-   * Execution strategy for this order
-   */
-  strategy?: OrderStrategy | null;
-}
-
-export type OrderList = Array<Order>;
-
-/**
  * Order status
  */
 export type OrderStatus =
@@ -513,7 +402,7 @@ export interface VwapStrategy extends BaseStrategyParams {
 }
 
 export interface OrderCancelAllOrdersResponse extends Shared.BaseResponse {
-  data: OrderList;
+  data: AccountsAPI.OrderList;
 }
 
 export interface OrderCancelOrderResponse extends Shared.BaseResponse {
@@ -524,7 +413,7 @@ export interface OrderCancelOrderResponse extends Shared.BaseResponse {
    * combining data from execution reports, order status queries, and parent/child
    * tracking.
    */
-  data: Order;
+  data: AccountsAPI.Order;
 }
 
 export interface OrderGetOrderByIDResponse extends Shared.BaseResponse {
@@ -535,11 +424,11 @@ export interface OrderGetOrderByIDResponse extends Shared.BaseResponse {
    * combining data from execution reports, order status queries, and parent/child
    * tracking.
    */
-  data: Order;
+  data: AccountsAPI.Order;
 }
 
 export interface OrderGetOrdersResponse extends Shared.BaseResponse {
-  data: OrderList;
+  data: AccountsAPI.OrderList;
 }
 
 export interface OrderReplaceOrderResponse extends Shared.BaseResponse {
@@ -550,11 +439,11 @@ export interface OrderReplaceOrderResponse extends Shared.BaseResponse {
    * combining data from execution reports, order status queries, and parent/child
    * tracking.
    */
-  data: Order;
+  data: AccountsAPI.Order;
 }
 
 export interface OrderSubmitOrdersResponse extends Shared.BaseResponse {
-  data: OrderList;
+  data: AccountsAPI.OrderList;
 }
 
 export interface OrderCancelOrderParams {
@@ -754,8 +643,6 @@ export declare namespace Orders {
     type DarkStrategy as DarkStrategy,
     type Destination as Destination,
     type DmaStrategy as DmaStrategy,
-    type Order as Order,
-    type OrderList as OrderList,
     type OrderStatus as OrderStatus,
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
