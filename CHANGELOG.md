@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.25.0 (2025-12-08)
+
+Full Changelog: [v0.24.0...v0.25.0](https://github.com/clear-street/clear-street-typescript/compare/v0.24.0...v0.25.0)
+
+### Features
+
+* **api:** manual updates dec8 ([9e10f86](https://github.com/clear-street/clear-street-typescript/commit/9e10f868930b54608df20a718c1d4cae9d2974b7))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([9683e2e](https://github.com/clear-street/clear-street-typescript/commit/9683e2e172f3355bd60bbfb90d314cfb85831856))
+* **mcp:** return correct lines on typescript errors ([a610ce6](https://github.com/clear-street/clear-street-typescript/commit/a610ce60bd821d728db4fcf82403ec89a9bc7606))
+
+
+### Chores
+
+* **internal:** codegen related update ([2cf5e7a](https://github.com/clear-street/clear-street-typescript/commit/2cf5e7ac2f1d61327ddf329f330f125826c5d76d))
+* **internal:** codegen related update ([db41811](https://github.com/clear-street/clear-street-typescript/commit/db41811c45bbd2c955f76cd70f929bb487371550))
+* **internal:** upgrade eslint ([b84314d](https://github.com/clear-street/clear-street-typescript/commit/b84314d2fec27014fc71d7438d75ad047074f5c2))
+
 ## 0.24.0 (2025-12-02)
 
 Full Changelog: [v0.23.0...v0.24.0](https://github.com/clear-street/clear-street-typescript/compare/v0.23.0...v0.24.0)
