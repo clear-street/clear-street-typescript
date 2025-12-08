@@ -8,6 +8,8 @@ export {
   type AccountSettings,
   type AccountStatus,
   type AccountSubkind,
+  type Order,
+  type OrderList,
   type RiskSettings,
   type AccountGetAccountByIDResponse,
   type AccountGetAccountsResponse,
