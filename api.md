@@ -20,6 +20,8 @@ Types:
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountSettings</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountStatus</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountSubkind</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">Order</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">OrderList</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">RiskSettings</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountGetAccountByIDResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountGetAccountsResponse</a></code>
@@ -80,8 +82,6 @@ Types:
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">DarkStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">Destination</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">DmaStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">Order</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderList</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderStatus</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderType</a></code>
@@ -115,10 +115,12 @@ Types:
 
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">Position</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionList</a></code>
+- <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionClosePositionResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionGetPositionsResponse</a></code>
 
 Methods:
 
+- <code title="delete /active/v1/accounts/{account_id}/positions/{instrument_id}">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">closePosition</a>(instrumentID, { ...params }) -> PositionClosePositionResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
 
 ### Calendars

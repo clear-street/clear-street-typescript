@@ -25,6 +25,8 @@ import {
   AccountStatus,
   AccountSubkind,
   Accounts,
+  Order,
+  OrderList,
   RiskSettings,
 } from './accounts/accounts';
 import * as CalendarsAPI from './calendars/calendars';
@@ -64,6 +66,8 @@ export declare namespace V1 {
     type AccountSettings as AccountSettings,
     type AccountStatus as AccountStatus,
     type AccountSubkind as AccountSubkind,
+    type Order as Order,
+    type OrderList as OrderList,
     type RiskSettings as RiskSettings,
     type AccountGetAccountByIDResponse as AccountGetAccountByIDResponse,
     type AccountGetAccountsResponse as AccountGetAccountsResponse,
