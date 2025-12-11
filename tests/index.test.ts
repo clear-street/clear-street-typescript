@@ -306,13 +306,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['CLEAR_STREET_BASE_URL'] = ''; // empty
       const client = new ClearStreet({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api.clearstreet.io');
+      expect(client.baseURL).toEqual('https://api-active.clearstreet.io');
     });
 
     test('blank env variable', () => {
       process.env['CLEAR_STREET_BASE_URL'] = '  '; // blank
       const client = new ClearStreet({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api.clearstreet.io');
+      expect(client.baseURL).toEqual('https://api-active.clearstreet.io');
     });
 
     test('env variable with environment', () => {
@@ -325,7 +325,7 @@ describe('instantiate client', () => {
       );
 
       const client = new ClearStreet({ apiKey: 'My API Key', baseURL: null, environment: 'production' });
-      expect(client.baseURL).toEqual('https://api.clearstreet.io');
+      expect(client.baseURL).toEqual('https://api-active.clearstreet.io');
     });
 
     test('in request options', () => {
