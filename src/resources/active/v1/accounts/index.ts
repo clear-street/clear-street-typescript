@@ -64,8 +64,6 @@ export {
   Positions,
   type Position,
   type PositionList,
-  type PositionClosePositionResponse,
   type PositionGetPositionsResponse,
-  type PositionClosePositionParams,
   type PositionGetPositionsParams,
 } from './positions';

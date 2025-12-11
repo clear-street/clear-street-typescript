@@ -115,12 +115,10 @@ Types:
 
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">Position</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionList</a></code>
-- <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionClosePositionResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionGetPositionsResponse</a></code>
 
 Methods:
 
-- <code title="delete /active/v1/accounts/{account_id}/positions/{instrument_id}">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">closePosition</a>(instrumentID, { ...params }) -> PositionClosePositionResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
 
 ### Calendars
