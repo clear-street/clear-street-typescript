@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.26.1 (2025-12-11)
+
+Full Changelog: [v0.26.0...v0.26.1](https://github.com/clear-street/clear-street-typescript/compare/v0.26.0...v0.26.1)
+
 ## 0.26.0 (2025-12-11)
 
 Full Changelog: [v0.25.0...v0.26.0](https://github.com/clear-street/clear-street-typescript/compare/v0.25.0...v0.26.0)
