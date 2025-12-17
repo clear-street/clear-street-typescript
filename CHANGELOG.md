@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.27.0 (2025-12-17)
+
+Full Changelog: [v0.26.1...v0.27.0](https://github.com/clear-street/clear-street-typescript/compare/v0.26.1...v0.27.0)
+
+### Features
+
+* **api:** Promptlayer EP test changes ([7dc5e6f](https://github.com/clear-street/clear-street-typescript/commit/7dc5e6f9b34762338a2d058e6fd89449be3db65e))
+
 ## 0.26.1 (2025-12-11)
 
 Full Changelog: [v0.26.0...v0.26.1](https://github.com/clear-street/clear-street-typescript/compare/v0.26.0...v0.26.1)
