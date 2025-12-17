@@ -29,22 +29,25 @@ import {
   OrderList,
   RiskSettings,
 } from './accounts/accounts';
+import * as AssistantAPI from './assistant/assistant';
+import { Assistant } from './assistant/assistant';
 import * as CalendarsAPI from './calendars/calendars';
 import { Calendars } from './calendars/calendars';
 import * as InstrumentsAPI from './instruments/instruments';
 import {
   Instrument,
-  InstrumentGetInstrumentByIDParams,
+  InstrumentCore,
+  InstrumentCoreList,
   InstrumentGetInstrumentByIDResponse,
   InstrumentGetInstrumentsParams,
   InstrumentGetInstrumentsResponse,
-  InstrumentList,
   InstrumentQuote,
   Instruments,
 } from './instruments/instruments';
 
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
+  assistant: AssistantAPI.Assistant = new AssistantAPI.Assistant(this._client);
   calendars: CalendarsAPI.Calendars = new CalendarsAPI.Calendars(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
@@ -52,6 +55,7 @@ export class V1 extends APIResource {
 }
 
 V1.Accounts = Accounts;
+V1.Assistant = Assistant;
 V1.Calendars = Calendars;
 V1.Instruments = Instruments;
 V1.Screener = Screener;
@@ -76,16 +80,18 @@ export declare namespace V1 {
     type AccountPatchAccountByIDParams as AccountPatchAccountByIDParams,
   };
 
+  export { Assistant as Assistant };
+
   export { Calendars as Calendars };
 
   export {
     Instruments as Instruments,
     type Instrument as Instrument,
-    type InstrumentList as InstrumentList,
+    type InstrumentCore as InstrumentCore,
+    type InstrumentCoreList as InstrumentCoreList,
     type InstrumentQuote as InstrumentQuote,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
-    type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
   };
 

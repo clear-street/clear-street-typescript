@@ -21,18 +21,6 @@ describe('resource instruments', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getInstrumentByID: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.active.v1.instruments.getInstrumentByID(
-        'instrument_id',
-        { fields: 'fields' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(ClearStreet.NotFoundError);
-  });
-
-  // Prism tests are disabled
   test.skip('getInstruments', async () => {
     const responsePromise = client.active.v1.instruments.getInstruments();
     const rawResponse = await responsePromise.asResponse();
@@ -51,10 +39,15 @@ describe('resource instruments', () => {
       client.active.v1.instruments.getInstruments(
         {
           easy_to_borrow: true,
-          fields: 'fields',
+          id_filter: 'id_filter',
+          is_liquidation_only: true,
+          is_marginable: true,
+          is_restricted: true,
+          is_short_prohibited: true,
           is_threshold_security: true,
           page_size: 1,
-          page_token: 'page_token',
+          page_token: { limit: 0, offset: 0 },
+          security_type: 'COMMON_STOCK',
         },
         { path: '/_stainless_unknown_path' },
       ),

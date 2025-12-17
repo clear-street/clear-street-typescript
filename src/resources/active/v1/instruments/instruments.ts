@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
+import * as OrdersAPI from '../accounts/orders';
 import * as AnalystReportingAPI from './analyst-reporting';
 import {
   AnalystDistribution,
@@ -64,10 +65,9 @@ export class Instruments extends APIResource {
    */
   getInstrumentByID(
     instrumentID: string,
-    query: InstrumentGetInstrumentByIDParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstrumentGetInstrumentByIDResponse> {
-    return this._client.get(path`/active/v1/instruments/${instrumentID}`, { query, ...options });
+    return this._client.get(path`/active/v1/instruments/${instrumentID}`, options);
   }
 
   /**
@@ -88,54 +88,9 @@ export class Instruments extends APIResource {
 }
 
 /**
- * Represents a tradable financial instrument
+ * Represents a tradable financial instrument, including supplemental information
  */
-export interface Instrument {
-  /**
-   * The ISO country code of the instrument's issue
-   */
-  country_of_issue: string;
-
-  /**
-   * The ISO currency code in which the instrument is traded
-   */
-  currency: string;
-
-  /**
-   * Indicates if the instrument is classified as Easy-To-Borrow
-   */
-  easy_to_borrow: boolean;
-
-  /**
-   * A unique Clear Street identifier for the instrument
-   */
-  instrument_id: string;
-
-  /**
-   * Indicates if the instrument is blocked from trading
-   */
-  is_blocked: boolean;
-
-  /**
-   * Indicates if short selling is prohibited for the instrument
-   */
-  is_short_prohibited: boolean;
-
-  /**
-   * Indicates if the instrument is on the Regulation SHO Threshold Security List
-   */
-  is_threshold_security: boolean;
-
-  /**
-   * The MIC code of the primary listing venue
-   */
-  primary_venue: string;
-
-  /**
-   * The trading symbol for the instrument
-   */
-  symbol: string;
-
+export interface Instrument extends InstrumentCore {
   /**
    * The number of shares currently available to borrow
    */
@@ -214,11 +169,6 @@ export interface Instrument {
   market_cap?: string | null;
 
   /**
-   * The full name of the instrument or its issuer
-   */
-  name?: string | null;
-
-  /**
    * The closing price from the previous trading day
    */
   previous_close?: string | null;
@@ -239,11 +189,6 @@ export interface Instrument {
   sector?: string | null;
 
   /**
-   * The type of security (e.g., Common Stock, ETF)
-   */
-  security_type?: string | null;
-
-  /**
    * A cap on how much of your equity you can allocate to a single symbol on the
    * short side
    */
@@ -255,7 +200,83 @@ export interface Instrument {
   short_margin_rate?: string | null;
 }
 
-export type InstrumentList = Array<Instrument>;
+/**
+ * Represents a tradable financial instrument, as a more concise item listing only
+ * key fields.
+ */
+export interface InstrumentCore {
+  /**
+   * The ISO country code of the instrument's issue
+   */
+  country_of_issue: string;
+
+  /**
+   * The ISO currency code in which the instrument is traded
+   */
+  currency: string;
+
+  /**
+   * Indicates if the instrument is classified as Easy-To-Borrow
+   */
+  easy_to_borrow: boolean;
+
+  /**
+   * Indicates if the instrument is liquidation only and cannot be bought
+   */
+  is_liquidation_only: boolean;
+
+  /**
+   * Indicates if the instrument is marginable
+   */
+  is_marginable: boolean;
+
+  /**
+   * Indicates if the instrument is restricted from trading
+   */
+  is_restricted: boolean;
+
+  /**
+   * Indicates if short selling is prohibited for the instrument
+   */
+  is_short_prohibited: boolean;
+
+  /**
+   * Indicates if the instrument is on the Regulation SHO Threshold Security List
+   */
+  is_threshold_security: boolean;
+
+  /**
+   * A unique Clear Street identifier for the instrument
+   */
+  security_id: string;
+
+  /**
+   * The source system for the security identifier
+   */
+  security_id_source: string;
+
+  /**
+   * The trading symbol for the instrument
+   */
+  symbol: string;
+
+  /**
+   * The MIC code of the primary listing venue
+   */
+  venue: string;
+
+  /**
+   * The full name of the instrument or its issuer
+   */
+  name?: string | null;
+
+  /**
+   * The type of security (e.g., Common Stock, ETF)
+   */
+  security_type?: string | null;
+}
+
+export type InstrumentCoreList = Array<InstrumentCore>;
 
 /**
  * Real-time market quote data for a specific instrument
@@ -289,47 +310,80 @@ export interface InstrumentQuote {
 
 export interface InstrumentGetInstrumentByIDResponse extends Shared.BaseResponse {
   /**
-   * Represents a tradable financial instrument
+   * Represents a tradable financial instrument, including supplemental information
    */
   data: Instrument;
 }
 
 export interface InstrumentGetInstrumentsResponse extends Shared.BaseResponse {
-  data: InstrumentList;
-}
-
-export interface InstrumentGetInstrumentByIDParams {
-  /**
-   * Comma-separated list of field names to include in the response
-   */
-  fields?: string;
+  data: InstrumentCoreList;
 }
 
 export interface InstrumentGetInstrumentsParams {
   /**
-   * Filter to only include Easy-To-Borrow instruments
+   * Filter by easy to borrow status
    */
   easy_to_borrow?: boolean;
 
   /**
-   * Comma-separated list of field names to include in the response
+   * Filter IDs to those containing this substring. For options, this is required and
+   * is used to filter exclusively to the underlying symbol.
    */
-  fields?: string;
+  id_filter?: string;
 
   /**
-   * Filter to only include instruments on the Regulation SHO Threshold Security List
+   * Filter by liquidation only status
+   */
+  is_liquidation_only?: boolean;
+
+  /**
+   * Filter by marginable status
+   */
+  is_marginable?: boolean;
+
+  /**
+   * Filter by restricted status
+   */
+  is_restricted?: boolean;
+
+  /**
+   * filter by short prohibited status
+   */
+  is_short_prohibited?: boolean;
+
+  /**
+   * Filter by threshold security status
    */
   is_threshold_security?: boolean;
 
   /**
-   * The number of items to return per page
+   * The number of items to return per page (only used when page_token is not
+   * provided)
    */
   page_size?: number;
 
   /**
-   * The token for the next page of results
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
    */
-  page_token?: string;
+  page_token?: InstrumentGetInstrumentsParams.PageToken;
+
+  /**
+   * Filter by security type, required and defaults to `COMMON_STOCK`
+   */
+  security_type?: OrdersAPI.SecurityType;
+}
+
+export namespace InstrumentGetInstrumentsParams {
+  /**
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
+   */
+  export interface PageToken {
+    limit: number;
+
+    offset: number;
+  }
 }
 
 Instruments.AnalystReporting = AnalystReporting;
@@ -341,11 +395,11 @@ Instruments.Venues = Venues;
 export declare namespace Instruments {
   export {
     type Instrument as Instrument,
-    type InstrumentList as InstrumentList,
+    type InstrumentCore as InstrumentCore,
+    type InstrumentCoreList as InstrumentCoreList,
     type InstrumentQuote as InstrumentQuote,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
-    type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
   };
 

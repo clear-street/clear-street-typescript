@@ -115,11 +115,30 @@ Types:
 
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">Position</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionList</a></code>
+- <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionClosePositionResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionGetPositionsResponse</a></code>
 
 Methods:
 
+- <code title="delete /active/v1/accounts/{account_id}/positions/{instrument_id}">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">closePosition</a>(instrumentID, { ...params }) -> PositionClosePositionResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
+
+### Assistant
+
+#### Prompts
+
+Types:
+
+- <code><a href="./src/resources/active/v1/assistant/prompts.ts">PromptResult</a></code>
+- <code><a href="./src/resources/active/v1/assistant/prompts.ts">PromptStatus</a></code>
+- <code><a href="./src/resources/active/v1/assistant/prompts.ts">RunPromptResponse</a></code>
+- <code><a href="./src/resources/active/v1/assistant/prompts.ts">PromptGetPromptResultResponse</a></code>
+- <code><a href="./src/resources/active/v1/assistant/prompts.ts">PromptRunPromptResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/assistant/prompts/{id}">client.active.v1.assistant.prompts.<a href="./src/resources/active/v1/assistant/prompts.ts">getPromptResult</a>(id, { ...params }) -> PromptGetPromptResultResponse</code>
+- <code title="post /active/v1/assistant/prompts">client.active.v1.assistant.prompts.<a href="./src/resources/active/v1/assistant/prompts.ts">runPrompt</a>({ ...params }) -> PromptRunPromptResponse</code>
 
 ### Calendars
 
@@ -212,14 +231,15 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">Instrument</a></code>
-- <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentList</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentCore</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentCoreList</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentQuote</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentGetInstrumentByIDResponse</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentGetInstrumentsResponse</a></code>
 
 Methods:
 
-- <code title="get /active/v1/instruments/{instrument_id}">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">getInstrumentByID</a>(instrumentID, { ...params }) -> InstrumentGetInstrumentByIDResponse</code>
+- <code title="get /active/v1/instruments/{instrument_id}">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">getInstrumentByID</a>(instrumentID) -> InstrumentGetInstrumentByIDResponse</code>
 - <code title="get /active/v1/instruments">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">getInstruments</a>({ ...params }) -> InstrumentGetInstrumentsResponse</code>
 
 #### AnalystReporting
