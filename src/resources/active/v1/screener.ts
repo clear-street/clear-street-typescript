@@ -12,13 +12,11 @@ export class Screener extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.screener.getScreener({
-   *     filters: {},
-   *   });
+   *   await client.active.v1.screener.getScreener();
    * ```
    */
   getScreener(
-    query: ScreenerGetScreenerParams,
+    query: ScreenerGetScreenerParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ScreenerGetScreenerResponse> {
     return this._client.get('/active/v1/screener', { query, ...options });
@@ -90,11 +88,6 @@ export interface ScreenerItem {
   percent_change?: string | null;
 
   /**
-   * The MIC code of the primary listing venue
-   */
-  primary_venue?: string | null;
-
-  /**
    * The business sector of the instrument's issuer
    */
   sector?: string | null;
@@ -125,6 +118,11 @@ export interface ScreenerItem {
   ttm_price_to_earnings?: string | null;
 
   /**
+   * The MIC code of the primary listing venue
+   */
+  venue?: string | null;
+
+  /**
    * The average trading volume over the past week
    */
   week_avg_volume?: string | null;
@@ -138,15 +136,15 @@ export interface ScreenerGetScreenerResponse extends Shared.BaseResponse {
 
 export interface ScreenerGetScreenerParams {
   /**
-   * Dynamic filters with dot notation (e.g., price.gte=50, symbol.bw=A) All other
-   * query parameters are captured here for filter parsing
-   */
-  filters: unknown;
-
-  /**
    * Comma-separated list of field names to include in the response
    */
   field_filter?: Array<string>;
+
+  /**
+   * Dynamic filters with dot notation (e.g., filter[price.gte]=50,
+   * filter[symbol.bw]=A)
+   */
+  filter?: { [key: string]: string };
 
   /**
    * Number of items to return per page (default: 100, max: 10000)

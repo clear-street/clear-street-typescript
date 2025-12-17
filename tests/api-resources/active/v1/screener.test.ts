@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource screener', () => {
   // Prism tests are disabled
-  test.skip('getScreener: only required params', async () => {
-    const responsePromise = client.active.v1.screener.getScreener({ filters: {} });
+  test.skip('getScreener', async () => {
+    const responsePromise = client.active.v1.screener.getScreener();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,14 +21,20 @@ describe('resource screener', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getScreener: required and optional params', async () => {
-    const response = await client.active.v1.screener.getScreener({
-      filters: {},
-      field_filter: ['string'],
-      page_size: 1,
-      page_token: { limit: 0, offset: 0 },
-      sort_by: 'sort_by',
-      sort_direction: 'ASC',
-    });
+  test.skip('getScreener: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.active.v1.screener.getScreener(
+        {
+          field_filter: ['string'],
+          filter: { foo: 'string' },
+          page_size: 1,
+          page_token: { limit: 0, offset: 0 },
+          sort_by: 'sort_by',
+          sort_direction: 'ASC',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 });

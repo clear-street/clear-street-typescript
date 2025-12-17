@@ -19,11 +19,11 @@ export {
 export {
   Instruments,
   type Instrument,
-  type InstrumentList,
+  type InstrumentCore,
+  type InstrumentCoreList,
   type InstrumentQuote,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
-  type InstrumentGetInstrumentByIDParams,
   type InstrumentGetInstrumentsParams,
 } from './instruments';
 export {

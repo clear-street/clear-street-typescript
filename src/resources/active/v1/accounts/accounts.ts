@@ -38,6 +38,8 @@ import {
 import * as PositionsAPI from './positions';
 import {
   Position,
+  PositionClosePositionParams,
+  PositionClosePositionResponse,
   PositionGetPositionsParams,
   PositionGetPositionsResponse,
   PositionList,
@@ -458,7 +460,9 @@ export declare namespace Accounts {
     Positions as Positions,
     type Position as Position,
     type PositionList as PositionList,
+    type PositionClosePositionResponse as PositionClosePositionResponse,
     type PositionGetPositionsResponse as PositionGetPositionsResponse,
+    type PositionClosePositionParams as PositionClosePositionParams,
     type PositionGetPositionsParams as PositionGetPositionsParams,
   };
 }

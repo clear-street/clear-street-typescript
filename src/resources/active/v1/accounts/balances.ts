@@ -36,24 +36,9 @@ export interface AccountBalances {
   account_id: number;
 
   /**
-   * The total accrued fees for the account
+   * The total buying power available in the account
    */
-  accrued_fees: string;
-
-  /**
-   * The total accrued interest for the account
-   */
-  accrued_interest: string;
-
-  /**
-   * The total intraday buying power available in the account
-   */
-  buying_power_day: string;
-
-  /**
-   * The overnight buying power available in the account
-   */
-  buying_power_overnight: string;
+  buying_power: string;
 
   /**
    * The total equity in the account (market value of all assets minus liabilities)
@@ -61,7 +46,7 @@ export interface AccountBalances {
   equity: string;
 
   /**
-   * Required margin for opening new positions
+   * Start-of-day margin requirement.
    */
   initial_margin: string;
 
@@ -71,24 +56,9 @@ export interface AccountBalances {
   long_market_value: string;
 
   /**
-   * Minimum required margin to maintain current positions
-   */
-  maintenance_margin: string;
-
-  /**
    * Available margin for new positions
    */
   margin_available: string;
-
-  /**
-   * Current margin utilization
-   */
-  margin_used: string;
-
-  /**
-   * The market value of all options positions in the account
-   */
-  options_market_value: string;
 
   /**
    * The amount of cash that is settled and available for withdrawal or trading
@@ -101,9 +71,14 @@ export interface AccountBalances {
   short_market_value: string;
 
   /**
-   * The total cash balance in the account including settled and unsettled cash
+   * Trade-date unsettled cash credits.
    */
-  total_cash: string;
+  unsettled_cash_credits: string;
+
+  /**
+   * Trade-date unsettled cash debits.
+   */
+  unsettled_cash_debits: string;
 }
 
 export interface BalanceGetAccountBalancesResponse extends Shared.BaseResponse {
