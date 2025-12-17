@@ -17,15 +17,16 @@ export {
   type AccountGetAccountsParams,
   type AccountPatchAccountByIDParams,
 } from './accounts/index';
+export { Assistant } from './assistant/index';
 export { Calendars } from './calendars/index';
 export {
   Instruments,
   type Instrument,
-  type InstrumentList,
+  type InstrumentCore,
+  type InstrumentCoreList,
   type InstrumentQuote,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
-  type InstrumentGetInstrumentByIDParams,
   type InstrumentGetInstrumentsParams,
 } from './instruments/index';
 export {
