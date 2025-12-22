@@ -10,6 +10,10 @@ Types:
 
 ## V1
 
+Types:
+
+- <code><a href="./src/resources/active/v1/v1.ts">SecurityType</a></code>
+
 ### Accounts
 
 Types:
@@ -86,7 +90,6 @@ Types:
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderType</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">PovStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">SecurityType</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">Side</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">SorStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">TimeInForce</a></code>
@@ -239,7 +242,7 @@ Types:
 
 Methods:
 
-- <code title="get /active/v1/instruments/{instrument_id}">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">getInstrumentByID</a>(instrumentID) -> InstrumentGetInstrumentByIDResponse</code>
+- <code title="get /active/v1/instruments/{security_id_source}/{security_id}">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">getInstrumentByID</a>(securityID, { ...params }) -> InstrumentGetInstrumentByIDResponse</code>
 - <code title="get /active/v1/instruments">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">getInstruments</a>({ ...params }) -> InstrumentGetInstrumentsResponse</code>
 
 #### AnalystReporting

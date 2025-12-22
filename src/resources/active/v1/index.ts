@@ -27,6 +27,7 @@ export {
   type InstrumentQuote,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
+  type InstrumentGetInstrumentByIDParams,
   type InstrumentGetInstrumentsParams,
 } from './instruments/index';
 export {
@@ -36,7 +37,7 @@ export {
   type ScreenerGetScreenerResponse,
   type ScreenerGetScreenerParams,
 } from './screener';
-export { V1 } from './v1';
+export { V1, type SecurityType } from './v1';
 export {
   VersionResource,
   type Version,

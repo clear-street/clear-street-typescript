@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
+import * as V1API from '../v1';
 import * as BalancesAPI from './balances';
 import { AccountBalances, BalanceGetAccountBalancesResponse, Balances } from './balances';
 import * as OrdersAPI from './orders';
@@ -27,7 +28,6 @@ import {
   OrderType,
   Orders,
   PovStrategy,
-  SecurityType,
   Side,
   SorStrategy,
   TimeInForce,
@@ -264,7 +264,7 @@ export interface Order {
   /**
    * Type of security
    */
-  security_type: OrdersAPI.SecurityType;
+  security_type: V1API.SecurityType;
 
   /**
    * Side of the order (BUY, SELL, SELL_SHORT)
@@ -436,7 +436,6 @@ export declare namespace Accounts {
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
     type PovStrategy as PovStrategy,
-    type SecurityType as SecurityType,
     type Side as Side,
     type SorStrategy as SorStrategy,
     type TimeInForce as TimeInForce,
