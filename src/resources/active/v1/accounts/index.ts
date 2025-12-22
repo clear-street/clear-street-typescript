@@ -41,7 +41,6 @@ export {
   type OrderStrategy,
   type OrderType,
   type PovStrategy,
-  type SecurityType,
   type Side,
   type SorStrategy,
   type TimeInForce,

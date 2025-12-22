@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as OrdersAPI from './orders';
 import * as Shared from '../../../shared';
+import * as V1API from '../v1';
 import * as AccountsAPI from './accounts';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -313,19 +314,6 @@ export interface PovStrategy extends BaseStrategyParams {
 }
 
 /**
- * Security type
- */
-export type SecurityType =
-  | 'COMMON_STOCK'
-  | 'PREFERRED_STOCK'
-  | 'CORPORATE_BOND'
-  | 'OPTION'
-  | 'FUTURE'
-  | 'WARRANT'
-  | 'CASH'
-  | 'OTHER';
-
-/**
  * Side of an order
  */
 export type Side = 'BUY' | 'SELL' | 'SELL_SHORT' | 'OTHER';
@@ -491,7 +479,7 @@ export interface OrderGetOrdersParams {
   /**
    * Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
    */
-  security_type?: SecurityType;
+  security_type?: V1API.SecurityType;
 
   /**
    * Filter by order status
@@ -571,7 +559,7 @@ export namespace OrderSubmitOrdersParams {
     /**
      * Type of security
      */
-    security_type: OrdersAPI.SecurityType;
+    security_type: V1API.SecurityType;
 
     /**
      * Side of the order
@@ -647,7 +635,6 @@ export declare namespace Orders {
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
     type PovStrategy as PovStrategy,
-    type SecurityType as SecurityType,
     type Side as Side,
     type SorStrategy as SorStrategy,
     type TimeInForce as TimeInForce,

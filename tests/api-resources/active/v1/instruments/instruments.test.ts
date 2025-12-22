@@ -9,8 +9,10 @@ const client = new ClearStreet({
 
 describe('resource instruments', () => {
   // Prism tests are disabled
-  test.skip('getInstrumentByID', async () => {
-    const responsePromise = client.active.v1.instruments.getInstrumentByID('instrument_id');
+  test.skip('getInstrumentByID: only required params', async () => {
+    const responsePromise = client.active.v1.instruments.getInstrumentByID('security_id', {
+      security_id_source: {},
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,6 +20,13 @@ describe('resource instruments', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('getInstrumentByID: required and optional params', async () => {
+    const response = await client.active.v1.instruments.getInstrumentByID('security_id', {
+      security_id_source: {},
+    });
   });
 
   // Prism tests are disabled

@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
+import * as V1API from '../v1';
 import * as AccountsAPI from './accounts';
-import * as OrdersAPI from './orders';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -73,7 +73,7 @@ export interface Position {
   /**
    * Type of security
    */
-  instrument_type: OrdersAPI.SecurityType;
+  instrument_type: V1API.SecurityType;
 
   /**
    * The current market value of the position

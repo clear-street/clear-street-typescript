@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
-import * as OrdersAPI from '../accounts/orders';
+import * as V1API from '../v1';
 import * as AnalystReportingAPI from './analyst-reporting';
 import {
   AnalystDistribution,
@@ -59,15 +59,18 @@ export class Instruments extends APIResource {
    * ```ts
    * const response =
    *   await client.active.v1.instruments.getInstrumentByID(
-   *     'instrument_id',
+   *     'security_id',
+   *     { security_id_source: {} },
    *   );
    * ```
    */
   getInstrumentByID(
-    instrumentID: string,
+    securityID: string,
+    params: InstrumentGetInstrumentByIDParams,
     options?: RequestOptions,
   ): APIPromise<InstrumentGetInstrumentByIDResponse> {
-    return this._client.get(path`/active/v1/instruments/${instrumentID}`, options);
+    const { security_id_source } = params;
+    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}`, options);
   }
 
   /**
@@ -273,7 +276,7 @@ export interface InstrumentCore {
   /**
    * The type of security (e.g., Common Stock, ETF)
    */
-  security_type?: string | null;
+  security_type?: V1API.SecurityType | null;
 }
 
 export type InstrumentCoreList = Array<InstrumentCore>;
@@ -317,6 +320,13 @@ export interface InstrumentGetInstrumentByIDResponse extends Shared.BaseResponse
 
 export interface InstrumentGetInstrumentsResponse extends Shared.BaseResponse {
   data: InstrumentCoreList;
+}
+
+export interface InstrumentGetInstrumentByIDParams {
+  /**
+   * Security identifier source (e.g., CMS, OPRA, FIGI)
+   */
+  security_id_source: unknown;
 }
 
 export interface InstrumentGetInstrumentsParams {
@@ -371,7 +381,7 @@ export interface InstrumentGetInstrumentsParams {
   /**
    * Filter by security type, required and defaults to `COMMON_STOCK`
    */
-  security_type?: OrdersAPI.SecurityType;
+  security_type?: V1API.SecurityType;
 }
 
 export namespace InstrumentGetInstrumentsParams {
@@ -400,6 +410,7 @@ export declare namespace Instruments {
     type InstrumentQuote as InstrumentQuote,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
+    type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
   };
 

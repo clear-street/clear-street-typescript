@@ -24,6 +24,7 @@ export {
   type InstrumentQuote,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
+  type InstrumentGetInstrumentByIDParams,
   type InstrumentGetInstrumentsParams,
 } from './instruments';
 export {
