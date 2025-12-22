@@ -36,9 +36,58 @@ export interface AccountBalances {
   account_id: number;
 
   /**
+   * The Reg T balance for the account
+   */
+  balance: RegTBalance;
+
+  /**
+   * The applicable margin model for the account
+   */
+  margin_type: MarginType;
+
+  /**
+   * Timestamp for the start-of-day values
+   */
+  sod_asof?: APITimestamp | null;
+}
+
+/**
+ * A timestamp in ISO 8601/RFC 3339 profile format with nanosecond precision.
+ */
+export type APITimestamp = string;
+
+/**
+ * An account's margin type
+ */
+export type MarginType =
+  | 'OTHER'
+  | 'NONE'
+  | 'PORTFOLIO_MARGIN'
+  | 'RISK_BASED_HAIRCUT_BROKER_DEALER'
+  | 'REG_T'
+  | 'RISK_BASED_HAIRCUT_MARKET_MAKER'
+  | 'CIRO'
+  | 'FUTURES_NLV'
+  | 'FUTURES_TOT_EQ';
+
+/**
+ * The Reg T balance for the account
+ */
+export interface RegTBalance {
+  /**
    * The total buying power available in the account
    */
   buying_power: string;
+
+  /**
+   * Currency identifier for all monetary values
+   */
+  currency: string;
+
+  /**
+   * Day-trading buying power.
+   */
+  daytrading_buying_power: string;
 
   /**
    * The total equity in the account (market value of all assets minus liabilities)
@@ -46,19 +95,29 @@ export interface AccountBalances {
   equity: string;
 
   /**
-   * Start-of-day margin requirement.
-   */
-  initial_margin: string;
-
-  /**
    * The total market value of all long positions
    */
   long_market_value: string;
 
   /**
-   * Available margin for new positions
+   * Margin requirement for trade-date balances.
    */
-  margin_available: string;
+  maintenance_margin: string;
+
+  /**
+   * Margin excess for trade-date balances.
+   */
+  margin_excess: string;
+
+  /**
+   * Applied multiplier for margin calculations.
+   */
+  multiplier: string;
+
+  /**
+   * Regulation T buying power.
+   */
+  regt_buying_power: string;
 
   /**
    * The amount of cash that is settled and available for withdrawal or trading
@@ -69,6 +128,51 @@ export interface AccountBalances {
    * The total market value of all short positions (represented as a positive value)
    */
   short_market_value: string;
+
+  /**
+   * Start-of-day cash balance.
+   */
+  sod_cash: string;
+
+  /**
+   * Start-of-day day-trading buying power.
+   */
+  sod_daytrading_buying_power: string;
+
+  /**
+   * Start-of-day equity based on cash and positions.
+   */
+  sod_equity: string;
+
+  /**
+   * Start-of-day long position market value (ex-cash).
+   */
+  sod_long_market_value: string;
+
+  /**
+   * Start-of-day margin excess.
+   */
+  sod_margin_excess: string;
+
+  /**
+   * Start-of-day margin requirement.
+   */
+  sod_margin_requirement: string;
+
+  /**
+   * Start-of-day Regulation T buying power.
+   */
+  sod_reg_t_buying_power: string;
+
+  /**
+   * Start-of-day short position market value (ex-cash).
+   */
+  sod_short_market_value: string;
+
+  /**
+   * Aggregated cash value.
+   */
+  trade_cash: string;
 
   /**
    * Trade-date unsettled cash credits.
@@ -91,6 +195,9 @@ export interface BalanceGetAccountBalancesResponse extends Shared.BaseResponse {
 export declare namespace Balances {
   export {
     type AccountBalances as AccountBalances,
+    type APITimestamp as APITimestamp,
+    type MarginType as MarginType,
+    type RegTBalance as RegTBalance,
     type BalanceGetAccountBalancesResponse as BalanceGetAccountBalancesResponse,
   };
 }

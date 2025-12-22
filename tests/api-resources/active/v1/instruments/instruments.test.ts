@@ -11,7 +11,7 @@ describe('resource instruments', () => {
   // Prism tests are disabled
   test.skip('getInstrumentByID: only required params', async () => {
     const responsePromise = client.active.v1.instruments.getInstrumentByID('security_id', {
-      security_id_source: {},
+      security_id_source: 'CMS',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,7 +25,7 @@ describe('resource instruments', () => {
   // Prism tests are disabled
   test.skip('getInstrumentByID: required and optional params', async () => {
     const response = await client.active.v1.instruments.getInstrumentByID('security_id', {
-      security_id_source: {},
+      security_id_source: 'CMS',
     });
   });
 
