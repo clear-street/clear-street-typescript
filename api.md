@@ -42,6 +42,9 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/active/v1/accounts/balances.ts">AccountBalances</a></code>
+- <code><a href="./src/resources/active/v1/accounts/balances.ts">APITimestamp</a></code>
+- <code><a href="./src/resources/active/v1/accounts/balances.ts">MarginType</a></code>
+- <code><a href="./src/resources/active/v1/accounts/balances.ts">RegTBalance</a></code>
 - <code><a href="./src/resources/active/v1/accounts/balances.ts">BalanceGetAccountBalancesResponse</a></code>
 
 Methods:

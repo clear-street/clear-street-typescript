@@ -17,7 +17,14 @@ export {
   type AccountGetAccountsParams,
   type AccountPatchAccountByIDParams,
 } from './accounts';
-export { Balances, type AccountBalances, type BalanceGetAccountBalancesResponse } from './balances';
+export {
+  Balances,
+  type AccountBalances,
+  type APITimestamp,
+  type MarginType,
+  type RegTBalance,
+  type BalanceGetAccountBalancesResponse,
+} from './balances';
 export {
   Locates,
   type LocateOrder,

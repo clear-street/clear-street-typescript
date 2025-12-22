@@ -4,7 +4,14 @@ import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as V1API from '../v1';
 import * as BalancesAPI from './balances';
-import { AccountBalances, BalanceGetAccountBalancesResponse, Balances } from './balances';
+import {
+  APITimestamp,
+  AccountBalances,
+  BalanceGetAccountBalancesResponse,
+  Balances,
+  MarginType,
+  RegTBalance,
+} from './balances';
 import * as OrdersAPI from './orders';
 import {
   ApStrategy,
@@ -302,6 +309,11 @@ export interface Order {
   average_fill_price?: string | null;
 
   /**
+   * Contains execution, rejection or cancellation details, if any
+   */
+  details?: Array<string>;
+
+  /**
    * Timestamp when the order will expire (UTC). Present when time_in_force is
    * GOOD_TILL_DATE.
    */
@@ -409,6 +421,9 @@ export declare namespace Accounts {
   export {
     Balances as Balances,
     type AccountBalances as AccountBalances,
+    type APITimestamp as APITimestamp,
+    type MarginType as MarginType,
+    type RegTBalance as RegTBalance,
     type BalanceGetAccountBalancesResponse as BalanceGetAccountBalancesResponse,
   };
 

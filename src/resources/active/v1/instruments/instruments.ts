@@ -60,7 +60,7 @@ export class Instruments extends APIResource {
    * const response =
    *   await client.active.v1.instruments.getInstrumentByID(
    *     'security_id',
-   *     { security_id_source: {} },
+   *     { security_id_source: 'CMS' },
    *   );
    * ```
    */
@@ -324,9 +324,9 @@ export interface InstrumentGetInstrumentsResponse extends Shared.BaseResponse {
 
 export interface InstrumentGetInstrumentByIDParams {
   /**
-   * Security identifier source (e.g., CMS, OPRA, FIGI)
+   * Security identifier source
    */
-  security_id_source: unknown;
+  security_id_source: 'CMS' | 'CLST' | 'OPRA' | 'FIGI' | 'OTHER';
 }
 
 export interface InstrumentGetInstrumentsParams {
