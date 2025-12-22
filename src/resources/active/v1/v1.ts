@@ -38,6 +38,7 @@ import {
   Instrument,
   InstrumentCore,
   InstrumentCoreList,
+  InstrumentGetInstrumentByIDParams,
   InstrumentGetInstrumentByIDResponse,
   InstrumentGetInstrumentsParams,
   InstrumentGetInstrumentsResponse,
@@ -54,6 +55,19 @@ export class V1 extends APIResource {
   version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
 }
 
+/**
+ * Security type
+ */
+export type SecurityType =
+  | 'COMMON_STOCK'
+  | 'PREFERRED_STOCK'
+  | 'CORPORATE_BOND'
+  | 'OPTION'
+  | 'FUTURE'
+  | 'WARRANT'
+  | 'CASH'
+  | 'OTHER';
+
 V1.Accounts = Accounts;
 V1.Assistant = Assistant;
 V1.Calendars = Calendars;
@@ -62,6 +76,8 @@ V1.Screener = Screener;
 V1.VersionResource = VersionResource;
 
 export declare namespace V1 {
+  export { type SecurityType as SecurityType };
+
   export {
     Accounts as Accounts,
     type Account as Account,
@@ -92,6 +108,7 @@ export declare namespace V1 {
     type InstrumentQuote as InstrumentQuote,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
+    type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
   };
 
