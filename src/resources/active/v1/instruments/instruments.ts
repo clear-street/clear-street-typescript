@@ -256,7 +256,7 @@ export interface InstrumentCore {
   /**
    * The source system for the security identifier
    */
-  security_id_source: string;
+  security_id_source: V1API.SecurityIDSource;
 
   /**
    * The trading symbol for the instrument
@@ -326,7 +326,7 @@ export interface InstrumentGetInstrumentByIDParams {
   /**
    * Security identifier source
    */
-  security_id_source: 'CMS' | 'CLST' | 'OPRA' | 'FIGI' | 'OTHER';
+  security_id_source: V1API.SecurityIDSource;
 }
 
 export interface InstrumentGetInstrumentsParams {

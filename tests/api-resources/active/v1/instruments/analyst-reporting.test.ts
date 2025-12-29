@@ -11,8 +11,8 @@ describe('resource analystReporting', () => {
   // Prism tests are disabled
   test.skip('getInstrumentAnalystConsensus: only required params', async () => {
     const responsePromise = client.active.v1.instruments.analystReporting.getInstrumentAnalystConsensus(
-      'instrument_id',
-      { from_date: 'from_date', to_date: 'to_date' },
+      'security_id',
+      { security_id_source: 'CMS', from_date: 'from_date', to_date: 'to_date' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,8 +26,8 @@ describe('resource analystReporting', () => {
   // Prism tests are disabled
   test.skip('getInstrumentAnalystConsensus: required and optional params', async () => {
     const response = await client.active.v1.instruments.analystReporting.getInstrumentAnalystConsensus(
-      'instrument_id',
-      { from_date: 'from_date', to_date: 'to_date' },
+      'security_id',
+      { security_id_source: 'CMS', from_date: 'from_date', to_date: 'to_date' },
     );
   });
 });

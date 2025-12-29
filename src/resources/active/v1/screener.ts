@@ -28,14 +28,19 @@ export class Screener extends APIResource {
  */
 export interface ScreenerItem {
   /**
-   * A unique Clear Street identifier for the instrument
-   */
-  instrument_id: string;
-
-  /**
    * The latest price for the instrument
    */
   price: string;
+
+  /**
+   * The identifier for the instrument
+   */
+  security_id: string;
+
+  /**
+   * The source of the security identifier
+   */
+  security_id_source: string;
 
   /**
    * The trading symbol for the instrument
