@@ -60,6 +60,7 @@ export {
   type OrderGetOrdersResponse,
   type OrderReplaceOrderResponse,
   type OrderSubmitOrdersResponse,
+  type OrderCancelAllOrdersParams,
   type OrderCancelOrderParams,
   type OrderGetOrderByIDParams,
   type OrderGetOrdersParams,

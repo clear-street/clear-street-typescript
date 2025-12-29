@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
+import * as V1API from '../v1';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -14,17 +15,25 @@ export class News extends APIResource {
    * ```ts
    * const response =
    *   await client.active.v1.instruments.news.getInstrumentNews(
-   *     'instrument_id',
-   *     { from_date: 'from_date', to_date: 'to_date' },
+   *     'security_id',
+   *     {
+   *       security_id_source: 'CMS',
+   *       from_date: 'from_date',
+   *       to_date: 'to_date',
+   *     },
    *   );
    * ```
    */
   getInstrumentNews(
-    instrumentID: string,
-    query: NewsGetInstrumentNewsParams,
+    securityID: string,
+    params: NewsGetInstrumentNewsParams,
     options?: RequestOptions,
   ): APIPromise<NewsGetInstrumentNewsResponse> {
-    return this._client.get(path`/active/v1/instruments/${instrumentID}/news`, { query, ...options });
+    const { security_id_source, ...query } = params;
+    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}/news`, {
+      query,
+      ...options,
+    });
   }
 }
 
@@ -86,12 +95,17 @@ export interface NewsGetInstrumentNewsResponse extends Shared.BaseResponse {
 
 export interface NewsGetInstrumentNewsParams {
   /**
-   * The start date for the query range, inclusive (YYYY-MM-DD)
+   * Path param: Security identifier source
+   */
+  security_id_source: V1API.SecurityIDSource;
+
+  /**
+   * Query param: The start date for the query range, inclusive (YYYY-MM-DD)
    */
   from_date: string;
 
   /**
-   * The end date for the query range, inclusive (YYYY-MM-DD)
+   * Query param: The end date for the query range, inclusive (YYYY-MM-DD)
    */
   to_date: string;
 }

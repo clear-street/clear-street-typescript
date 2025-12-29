@@ -16,21 +16,21 @@ export class Positions extends APIResource {
    * ```ts
    * const response =
    *   await client.active.v1.accounts.positions.closePosition(
-   *     'instrument_id',
-   *     { account_id: 0 },
+   *     'security_id',
+   *     { account_id: 0, security_id_source: 'CMS' },
    *   );
    * ```
    */
   closePosition(
-    instrumentID: string,
+    securityID: string,
     params: PositionClosePositionParams,
     options?: RequestOptions,
   ): APIPromise<PositionClosePositionResponse> {
-    const { account_id, page_size, page_token } = params;
-    return this._client.delete(path`/active/v1/accounts/${account_id}/positions/${instrumentID}`, {
-      query: { page_size, page_token },
-      ...options,
-    });
+    const { account_id, security_id_source, page_size, page_token } = params;
+    return this._client.delete(
+      path`/active/v1/accounts/${account_id}/positions/${security_id_source}/${securityID}`,
+      { query: { page_size, page_token }, ...options },
+    );
   }
 
   /**
@@ -66,11 +66,6 @@ export interface Position {
   available_quantity: string;
 
   /**
-   * A unique Clear Street identifier for the instrument
-   */
-  instrument_id: string;
-
-  /**
    * Type of security
    */
   instrument_type: V1API.SecurityType;
@@ -89,6 +84,16 @@ export interface Position {
    * The number of shares or contracts. Can be positive (long) or negative (short)
    */
   quantity: string;
+
+  /**
+   * A unique Clear Street identifier for the instrument
+   */
+  security_id: string;
+
+  /**
+   * The source of the security identifier
+   */
+  security_id_source: string;
 
   /**
    * The trading symbol for the instrument
@@ -142,6 +147,11 @@ export interface PositionClosePositionParams {
    * Path param: Account identifier
    */
   account_id: number;
+
+  /**
+   * Path param: Security identifier source
+   */
+  security_id_source: V1API.SecurityIDSource;
 
   /**
    * Query param: The number of items to return per page (only used when page_token

@@ -21,6 +21,24 @@ describe('resource orders', () => {
   });
 
   // Prism tests are disabled
+  test.skip('cancelAllOrders: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.active.v1.accounts.orders.cancelAllOrders(
+        0,
+        {
+          security_id: 'security_id',
+          security_id_source: 'CMS',
+          security_type: 'COMMON_STOCK',
+          side: 'BUY',
+          type: 'MARKET',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('cancelOrder: only required params', async () => {
     const responsePromise = client.active.v1.accounts.orders.cancelOrder('order_id', { account_id: 0 });
     const rawResponse = await responsePromise.asResponse();
@@ -71,9 +89,10 @@ describe('resource orders', () => {
     const response = await client.active.v1.accounts.orders.getOrders(0, {
       from: 'from',
       to: 'to',
-      instrument_id: 'instrument_id',
       page_size: 1,
       page_token: { limit: 0, offset: 0 },
+      security_id: 'security_id',
+      security_id_source: 'CMS',
       security_type: 'COMMON_STOCK',
       status: 'PENDING_NEW',
       symbol: 'symbol',
@@ -111,6 +130,8 @@ describe('resource orders', () => {
           order_id: 'my-ref-id-20251001-002',
           order_type: 'LIMIT',
           quantity: '25',
+          security_id: 'AAPL',
+          security_id_source: 'CMS',
           security_type: 'COMMON_STOCK',
           side: 'BUY',
           time_in_force: 'DAY',
@@ -134,12 +155,13 @@ describe('resource orders', () => {
           order_id: 'my-ref-id-20251001-002',
           order_type: 'LIMIT',
           quantity: '25',
+          security_id: 'AAPL',
+          security_id_source: 'CMS',
           security_type: 'COMMON_STOCK',
           side: 'BUY',
           time_in_force: 'DAY',
           expire_at: '2025-10-15T16:00:00.000000000Z',
           extended_hours: true,
-          instrument_id: '037833100',
           limit_price: '140.50',
           position_effect: 'OPEN',
           stop_price: '135.00',
@@ -149,8 +171,6 @@ describe('resource orders', () => {
             urgency: 'SUPER_PASSIVE',
             type: 'SOR',
           },
-          symbol: 'AAPL',
-          venue: 'XNMS',
         },
       ],
     });

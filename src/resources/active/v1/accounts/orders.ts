@@ -11,7 +11,9 @@ import { path } from '../../../../internal/utils/path';
 
 export class Orders extends APIResource {
   /**
-   * Cancel all orders for an account
+   * All filter parameters can be used independently or combined. The only constraint
+   * is that `security_id` and `security_id_source` must be provided together if
+   * either is specified.
    *
    * @example
    * ```ts
@@ -19,8 +21,16 @@ export class Orders extends APIResource {
    *   await client.active.v1.accounts.orders.cancelAllOrders(0);
    * ```
    */
-  cancelAllOrders(accountID: number, options?: RequestOptions): APIPromise<OrderCancelAllOrdersResponse> {
-    return this._client.delete(path`/active/v1/accounts/${accountID}/orders`, options);
+  cancelAllOrders(
+    accountID: number,
+    params: OrderCancelAllOrdersParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OrderCancelAllOrdersResponse> {
+    const { security_id, security_id_source, security_type, side, type } = params ?? {};
+    return this._client.delete(path`/active/v1/accounts/${accountID}/orders`, {
+      query: { security_id, security_id_source, security_type, side, type },
+      ...options,
+    });
   }
 
   /**
@@ -121,6 +131,8 @@ export class Orders extends APIResource {
    *         order_id: 'my-ref-id-20251001-002',
    *         order_type: 'LIMIT',
    *         quantity: '25',
+   *         security_id: 'AAPL',
+   *         security_id_source: 'CMS',
    *         security_type: 'COMMON_STOCK',
    *         side: 'BUY',
    *         time_in_force: 'DAY',
@@ -434,6 +446,34 @@ export interface OrderSubmitOrdersResponse extends Shared.BaseResponse {
   data: AccountsAPI.OrderList;
 }
 
+export interface OrderCancelAllOrdersParams {
+  /**
+   * Filter by security identifier (e.g., CUSIP, ISIN). Must be provided with
+   * security_id_source.
+   */
+  security_id?: string;
+
+  /**
+   * Type of security identifier. Must be provided with security_id.
+   */
+  security_id_source?: V1API.SecurityIDSource;
+
+  /**
+   * Filter by security type (e.g., COMMON_STOCK, OPTION)
+   */
+  security_type?: V1API.SecurityType;
+
+  /**
+   * Filter by order side (BUY or SELL)
+   */
+  side?: Side;
+
+  /**
+   * Filter by order type (e.g., MARKET, LIMIT)
+   */
+  type?: OrderType;
+}
+
 export interface OrderCancelOrderParams {
   /**
    * Account identifier
@@ -460,11 +500,6 @@ export interface OrderGetOrdersParams {
   to: string;
 
   /**
-   * Filter by instrument ID
-   */
-  instrument_id?: string;
-
-  /**
    * The number of items to return per page (only used when page_token is not
    * provided)
    */
@@ -475,6 +510,16 @@ export interface OrderGetOrdersParams {
    * (limit + offset). When provided, page_size is ignored.
    */
   page_token?: OrderGetOrdersParams.PageToken;
+
+  /**
+   * Filter by security ID
+   */
+  security_id?: string;
+
+  /**
+   * Source for the security ID filter
+   */
+  security_id_source?: V1API.SecurityIDSource;
 
   /**
    * Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
@@ -557,6 +602,17 @@ export namespace OrderSubmitOrdersParams {
     quantity: string;
 
     /**
+     * Unique identifier for the instrument (CMS/CUSIP/ISIN/FIGI for equities or option
+     * OPRA OSI)
+     */
+    security_id: string;
+
+    /**
+     * The source of the security identifier
+     */
+    security_id_source: V1API.SecurityIDSource;
+
+    /**
      * Type of security
      */
     security_type: V1API.SecurityType;
@@ -584,12 +640,6 @@ export namespace OrderSubmitOrdersParams {
     extended_hours?: boolean | null;
 
     /**
-     * Unique identifier for the instrument (CUSIP/ISIN/FIGI for equities or an option
-     * contract id)
-     */
-    instrument_id?: string | null;
-
-    /**
      * Limit price (required for LIMIT and STOP_LIMIT orders)
      */
     limit_price?: string | null;
@@ -609,18 +659,6 @@ export namespace OrderSubmitOrdersParams {
      * Execution strategy/router. Defaults to SOR where applicable.
      */
     strategy?: OrdersAPI.OrderStrategy | null;
-
-    /**
-     * Trading symbol. For equities, use the ticker symbol (e.g., "AAPL"). For options,
-     * use the OSI symbol (e.g., "AAPL 250117C00190000").
-     */
-    symbol?: string | null;
-
-    /**
-     * MIC code for equities. If omitted, defaults to the primary US venue. Not used
-     * for options orders.
-     */
-    venue?: string | null;
   }
 }
 
@@ -647,6 +685,7 @@ export declare namespace Orders {
     type OrderGetOrdersResponse as OrderGetOrdersResponse,
     type OrderReplaceOrderResponse as OrderReplaceOrderResponse,
     type OrderSubmitOrdersResponse as OrderSubmitOrdersResponse,
+    type OrderCancelAllOrdersParams as OrderCancelAllOrdersParams,
     type OrderCancelOrderParams as OrderCancelOrderParams,
     type OrderGetOrderByIDParams as OrderGetOrderByIDParams,
     type OrderGetOrdersParams as OrderGetOrdersParams,

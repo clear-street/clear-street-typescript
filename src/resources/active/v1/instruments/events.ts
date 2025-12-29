@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
+import * as V1API from '../v1';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -14,17 +15,25 @@ export class Events extends APIResource {
    * ```ts
    * const response =
    *   await client.active.v1.instruments.events.getInstrumentEvents(
-   *     'instrument_id',
-   *     { from_date: 'from_date', to_date: 'to_date' },
+   *     'security_id',
+   *     {
+   *       security_id_source: 'CMS',
+   *       from_date: 'from_date',
+   *       to_date: 'to_date',
+   *     },
    *   );
    * ```
    */
   getInstrumentEvents(
-    instrumentID: string,
-    query: EventGetInstrumentEventsParams,
+    securityID: string,
+    params: EventGetInstrumentEventsParams,
     options?: RequestOptions,
   ): APIPromise<EventGetInstrumentEventsResponse> {
-    return this._client.get(path`/active/v1/instruments/${instrumentID}/events`, { query, ...options });
+    const { security_id_source, ...query } = params;
+    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}/events`, {
+      query,
+      ...options,
+    });
   }
 }
 
@@ -56,12 +65,17 @@ export interface EventGetInstrumentEventsResponse extends Shared.BaseResponse {
 
 export interface EventGetInstrumentEventsParams {
   /**
-   * The start date for the query range, inclusive (YYYY-MM-DD)
+   * Path param: Security identifier source
+   */
+  security_id_source: V1API.SecurityIDSource;
+
+  /**
+   * Query param: The start date for the query range, inclusive (YYYY-MM-DD)
    */
   from_date: string;
 
   /**
-   * The end date for the query range, inclusive (YYYY-MM-DD)
+   * Query param: The end date for the query range, inclusive (YYYY-MM-DD)
    */
   to_date: string;
 }
