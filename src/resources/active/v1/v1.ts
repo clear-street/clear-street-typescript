@@ -56,6 +56,11 @@ export class V1 extends APIResource {
 }
 
 /**
+ * Security identifier source
+ */
+export type SecurityIDSource = 'CMS' | 'CLST' | 'OPRA' | 'FIGI' | 'CUSIP' | 'OTHER';
+
+/**
  * Security type
  */
 export type SecurityType =
@@ -76,7 +81,7 @@ V1.Screener = Screener;
 V1.VersionResource = VersionResource;
 
 export declare namespace V1 {
-  export { type SecurityType as SecurityType };
+  export { type SecurityIDSource as SecurityIDSource, type SecurityType as SecurityType };
 
   export {
     Accounts as Accounts,

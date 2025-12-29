@@ -12,6 +12,7 @@ Types:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/v1.ts">SecurityIDSource</a></code>
 - <code><a href="./src/resources/active/v1/v1.ts">SecurityType</a></code>
 
 ### Accounts
@@ -108,7 +109,7 @@ Types:
 
 Methods:
 
-- <code title="delete /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">cancelAllOrders</a>(accountID) -> OrderCancelAllOrdersResponse</code>
+- <code title="delete /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">cancelAllOrders</a>(accountID, { ...params }) -> OrderCancelAllOrdersResponse</code>
 - <code title="delete /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">cancelOrder</a>(orderID, { ...params }) -> OrderCancelOrderResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">getOrderByID</a>(orderID, { ...params }) -> OrderGetOrderByIDResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">getOrders</a>(accountID, { ...params }) -> OrderGetOrdersResponse</code>
@@ -126,7 +127,7 @@ Types:
 
 Methods:
 
-- <code title="delete /active/v1/accounts/{account_id}/positions/{instrument_id}">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">closePosition</a>(instrumentID, { ...params }) -> PositionClosePositionResponse</code>
+- <code title="delete /active/v1/accounts/{account_id}/positions/{security_id_source}/{security_id}">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">closePosition</a>(securityID, { ...params }) -> PositionClosePositionResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
 
 ### Assistant
@@ -260,7 +261,7 @@ Types:
 
 Methods:
 
-- <code title="get /active/v1/instruments/{instrument_id}/analyst-reporting">client.active.v1.instruments.analystReporting.<a href="./src/resources/active/v1/instruments/analyst-reporting.ts">getInstrumentAnalystConsensus</a>(instrumentID, { ...params }) -> AnalystReportingGetInstrumentAnalystConsensusResponse</code>
+- <code title="get /active/v1/instruments/{security_id_source}/{security_id}/analyst-reporting">client.active.v1.instruments.analystReporting.<a href="./src/resources/active/v1/instruments/analyst-reporting.ts">getInstrumentAnalystConsensus</a>(securityID, { ...params }) -> AnalystReportingGetInstrumentAnalystConsensusResponse</code>
 
 #### Events
 
@@ -272,7 +273,7 @@ Types:
 
 Methods:
 
-- <code title="get /active/v1/instruments/{instrument_id}/events">client.active.v1.instruments.events.<a href="./src/resources/active/v1/instruments/events.ts">getInstrumentEvents</a>(instrumentID, { ...params }) -> EventGetInstrumentEventsResponse</code>
+- <code title="get /active/v1/instruments/{security_id_source}/{security_id}/events">client.active.v1.instruments.events.<a href="./src/resources/active/v1/instruments/events.ts">getInstrumentEvents</a>(securityID, { ...params }) -> EventGetInstrumentEventsResponse</code>
 
 #### News
 
@@ -284,7 +285,7 @@ Types:
 
 Methods:
 
-- <code title="get /active/v1/instruments/{instrument_id}/news">client.active.v1.instruments.news.<a href="./src/resources/active/v1/instruments/news.ts">getInstrumentNews</a>(instrumentID, { ...params }) -> NewsGetInstrumentNewsResponse</code>
+- <code title="get /active/v1/instruments/{security_id_source}/{security_id}/news">client.active.v1.instruments.news.<a href="./src/resources/active/v1/instruments/news.ts">getInstrumentNews</a>(securityID, { ...params }) -> NewsGetInstrumentNewsResponse</code>
 
 #### Reporting
 
@@ -296,7 +297,7 @@ Types:
 
 Methods:
 
-- <code title="get /active/v1/instruments/{instrument_id}/reporting">client.active.v1.instruments.reporting.<a href="./src/resources/active/v1/instruments/reporting.ts">getInstrumentReporting</a>(instrumentID, { ...params }) -> ReportingGetInstrumentReportingResponse</code>
+- <code title="get /active/v1/instruments/{security_id_source}/{security_id}/reporting">client.active.v1.instruments.reporting.<a href="./src/resources/active/v1/instruments/reporting.ts">getInstrumentReporting</a>(securityID, { ...params }) -> ReportingGetInstrumentReportingResponse</code>
 
 #### Venues
 

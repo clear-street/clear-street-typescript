@@ -10,8 +10,9 @@ const client = new ClearStreet({
 describe('resource positions', () => {
   // Prism tests are disabled
   test.skip('closePosition: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.positions.closePosition('instrument_id', {
+    const responsePromise = client.active.v1.accounts.positions.closePosition('security_id', {
       account_id: 0,
+      security_id_source: 'CMS',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,8 +25,9 @@ describe('resource positions', () => {
 
   // Prism tests are disabled
   test.skip('closePosition: required and optional params', async () => {
-    const response = await client.active.v1.accounts.positions.closePosition('instrument_id', {
+    const response = await client.active.v1.accounts.positions.closePosition('security_id', {
       account_id: 0,
+      security_id_source: 'CMS',
       page_size: 1,
       page_token: { limit: 0, offset: 0 },
     });

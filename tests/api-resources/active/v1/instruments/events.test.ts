@@ -10,7 +10,8 @@ const client = new ClearStreet({
 describe('resource events', () => {
   // Prism tests are disabled
   test.skip('getInstrumentEvents: only required params', async () => {
-    const responsePromise = client.active.v1.instruments.events.getInstrumentEvents('instrument_id', {
+    const responsePromise = client.active.v1.instruments.events.getInstrumentEvents('security_id', {
+      security_id_source: 'CMS',
       from_date: 'from_date',
       to_date: 'to_date',
     });
@@ -25,7 +26,8 @@ describe('resource events', () => {
 
   // Prism tests are disabled
   test.skip('getInstrumentEvents: required and optional params', async () => {
-    const response = await client.active.v1.instruments.events.getInstrumentEvents('instrument_id', {
+    const response = await client.active.v1.instruments.events.getInstrumentEvents('security_id', {
+      security_id_source: 'CMS',
       from_date: 'from_date',
       to_date: 'to_date',
     });

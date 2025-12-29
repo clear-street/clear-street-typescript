@@ -10,7 +10,8 @@ const client = new ClearStreet({
 describe('resource reporting', () => {
   // Prism tests are disabled
   test.skip('getInstrumentReporting: only required params', async () => {
-    const responsePromise = client.active.v1.instruments.reporting.getInstrumentReporting('instrument_id', {
+    const responsePromise = client.active.v1.instruments.reporting.getInstrumentReporting('security_id', {
+      security_id_source: 'CMS',
       from_date: 'from_date',
       to_date: 'to_date',
     });
@@ -25,7 +26,8 @@ describe('resource reporting', () => {
 
   // Prism tests are disabled
   test.skip('getInstrumentReporting: required and optional params', async () => {
-    const response = await client.active.v1.instruments.reporting.getInstrumentReporting('instrument_id', {
+    const response = await client.active.v1.instruments.reporting.getInstrumentReporting('security_id', {
+      security_id_source: 'CMS',
       from_date: 'from_date',
       to_date: 'to_date',
     });

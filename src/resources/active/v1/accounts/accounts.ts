@@ -19,6 +19,7 @@ import {
   DarkStrategy,
   Destination,
   DmaStrategy,
+  OrderCancelAllOrdersParams,
   OrderCancelAllOrdersResponse,
   OrderCancelOrderParams,
   OrderCancelOrderResponse,
@@ -244,11 +245,6 @@ export interface Order {
   filled_quantity: string;
 
   /**
-   * Unique identifier for the instrument (e.g., CUSIP, ISIN, FIGI)
-   */
-  instrument_id: string;
-
-  /**
    * Remaining unfilled quantity
    */
   leaves_quantity: string;
@@ -267,6 +263,17 @@ export interface Order {
    * Total order quantity
    */
   quantity: string;
+
+  /**
+   * The identifier for the traded instrument (CMS/CUSIP/ISIN/FIGI for equities or
+   * option OPRA OSI)
+   */
+  security_id: string;
+
+  /**
+   * The source of the security identifier
+   */
+  security_id_source: V1API.SecurityIDSource;
 
   /**
    * Type of security
@@ -463,6 +470,7 @@ export declare namespace Accounts {
     type OrderGetOrdersResponse as OrderGetOrdersResponse,
     type OrderReplaceOrderResponse as OrderReplaceOrderResponse,
     type OrderSubmitOrdersResponse as OrderSubmitOrdersResponse,
+    type OrderCancelAllOrdersParams as OrderCancelAllOrdersParams,
     type OrderCancelOrderParams as OrderCancelOrderParams,
     type OrderGetOrderByIDParams as OrderGetOrderByIDParams,
     type OrderGetOrdersParams as OrderGetOrdersParams,
