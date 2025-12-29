@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.29.0 (2025-12-29)
+
+Full Changelog: [v0.28.0...v0.29.0](https://github.com/clear-street/clear-street-typescript/compare/v0.28.0...v0.29.0)
+
+### Features
+
+* **api:** manual updates ([3a03d46](https://github.com/clear-street/clear-street-typescript/commit/3a03d4686c20637b5c4516fb52bb44a093d1688d))
+
 ## 0.28.0 (2025-12-22)
 
 Full Changelog: [v0.27.0...v0.28.0](https://github.com/clear-street/clear-street-typescript/compare/v0.27.0...v0.28.0)
