@@ -171,6 +171,7 @@ describe('resource orders', () => {
             urgency: 'SUPER_PASSIVE',
             type: 'SOR',
           },
+          venue: 'CDRG',
         },
       ],
     });
