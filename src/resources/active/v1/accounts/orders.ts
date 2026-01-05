@@ -659,6 +659,12 @@ export namespace OrderSubmitOrdersParams {
      * Execution strategy/router. Defaults to SOR where applicable.
      */
     strategy?: OrdersAPI.OrderStrategy | null;
+
+    /**
+     * Execution venue to route the order to. If not specified, the system will choose
+     * the best venue.
+     */
+    venue?: string;
   }
 }
 
