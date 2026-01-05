@@ -86,7 +86,8 @@ export interface Position {
   quantity: string;
 
   /**
-   * A unique Clear Street identifier for the instrument
+   * An identifier for the instrument which, when paired with `security_id_source`,
+   * identifies one or more financial instruments.
    */
   security_id: string;
 
