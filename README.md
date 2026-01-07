@@ -141,7 +141,9 @@ const response = await client.active.v1.accounts.getAccounts().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.active.v1.accounts.getAccounts().withResponse();
+const { data: response, response: raw } = await client.active.v1.accounts
+  .getAccounts()
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(response);
 ```
