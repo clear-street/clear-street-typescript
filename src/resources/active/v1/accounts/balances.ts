@@ -41,6 +41,21 @@ export interface AccountBalances {
   balance: RegTBalance;
 
   /**
+   * Realized profit or loss since start of day.
+   */
+  daily_realized_pnl: string;
+
+  /**
+   * Total profit or loss since start of day.
+   */
+  daily_total_pnl: string;
+
+  /**
+   * Total unrealized profit or loss across all positions relative to prior close.
+   */
+  daily_unrealized_pnl: string;
+
+  /**
    * The applicable margin model for the account
    */
   margin_type: MarginType;

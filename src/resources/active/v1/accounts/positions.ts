@@ -122,6 +122,11 @@ export interface Position {
   cost_basis?: string | null;
 
   /**
+   * The unrealized profit or loss for this position relative to the previous close
+   */
+  daily_unrealized_pnl?: string | null;
+
+  /**
    * The current market price of the instrument
    */
   market_price?: string | null;

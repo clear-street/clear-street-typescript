@@ -336,6 +336,12 @@ Methods:
 - <code title="get /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">getVersion</a>() -> VersionGetVersionResponse</code>
 - <code title="patch /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">updateVersion</a>() -> VersionUpdateVersionResponse</code>
 
+### Ws
+
+Methods:
+
+- <code title="get /active/v1/ws">client.active.v1.ws.<a href="./src/resources/active/v1/ws.ts">websocketHandler</a>() -> void</code>
+
 # PromptLayer
 
 ## V1

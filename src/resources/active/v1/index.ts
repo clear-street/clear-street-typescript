@@ -44,3 +44,4 @@ export {
   type VersionGetVersionResponse,
   type VersionUpdateVersionResponse,
 } from './version';
+export { Ws } from './ws';

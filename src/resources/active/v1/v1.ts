@@ -11,6 +11,8 @@ import {
 } from './screener';
 import * as VersionAPI from './version';
 import { Version, VersionGetVersionResponse, VersionResource, VersionUpdateVersionResponse } from './version';
+import * as WsAPI from './ws';
+import { Ws } from './ws';
 import * as AccountsAPI from './accounts/accounts';
 import {
   Account,
@@ -53,6 +55,7 @@ export class V1 extends APIResource {
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
+  ws: WsAPI.Ws = new WsAPI.Ws(this._client);
 }
 
 /**
@@ -79,6 +82,7 @@ V1.Calendars = Calendars;
 V1.Instruments = Instruments;
 V1.Screener = Screener;
 V1.VersionResource = VersionResource;
+V1.Ws = Ws;
 
 export declare namespace V1 {
   export { type SecurityIDSource as SecurityIDSource, type SecurityType as SecurityType };
@@ -131,4 +135,6 @@ export declare namespace V1 {
     type VersionGetVersionResponse as VersionGetVersionResponse,
     type VersionUpdateVersionResponse as VersionUpdateVersionResponse,
   };
+
+  export { Ws as Ws };
 }
