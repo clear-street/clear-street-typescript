@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.31.0 (2026-01-08)
+
+Full Changelog: [v0.30.0...v0.31.0](https://github.com/clear-street/clear-street-typescript/compare/v0.30.0...v0.31.0)
+
+### Features
+
+* **api:** 0.31.0 updates ([3afa642](https://github.com/clear-street/clear-street-typescript/commit/3afa642853def33cf6269107b9c9d8c9e583ea33))
+
+
+### Chores
+
+* break long lines in snippets into multiline ([137b82a](https://github.com/clear-street/clear-street-typescript/commit/137b82a7b13315378adcf5536024d3676bacfafd))
+
 ## 0.30.0 (2026-01-05)
 
 Full Changelog: [v0.29.0...v0.30.0](https://github.com/clear-street/clear-street-typescript/compare/v0.29.0...v0.30.0)
