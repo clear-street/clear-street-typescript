@@ -51,7 +51,10 @@ describe('resource positions', () => {
     await expect(
       client.active.v1.accounts.positions.getPositions(
         0,
-        { page_size: 1, page_token: { limit: 0, offset: 0 } },
+        {
+          page_size: 1,
+          page_token: { limit: 0, offset: 0 },
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);

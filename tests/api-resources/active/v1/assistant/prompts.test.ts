@@ -34,7 +34,10 @@ describe('resource prompts', () => {
 
   // Prism tests are disabled
   test.skip('runPrompt: only required params', async () => {
-    const responsePromise = client.active.v1.assistant.prompts.runPrompt({ body: {}, slug: 'slug' });
+    const responsePromise = client.active.v1.assistant.prompts.runPrompt({
+      body: {},
+      slug: 'slug',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
