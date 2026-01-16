@@ -55,7 +55,7 @@ describe('resource instruments', () => {
           is_short_prohibited: true,
           is_threshold_security: true,
           page_size: 1,
-          page_token: { limit: 0, offset: 0 },
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
           security_type: 'COMMON_STOCK',
         },
         { path: '/_stainless_unknown_path' },
