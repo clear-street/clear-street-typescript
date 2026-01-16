@@ -131,8 +131,6 @@ export class Orders extends APIResource {
    *         order_id: 'my-ref-id-20251001-002',
    *         order_type: 'LIMIT',
    *         quantity: '25',
-   *         security_id: 'AAPL',
-   *         security_id_source: 'CMS',
    *         security_type: 'COMMON_STOCK',
    *         side: 'BUY',
    *         time_in_force: 'DAY',
@@ -509,7 +507,7 @@ export interface OrderGetOrdersParams {
    * Token for retrieving the next page of results. Contains encoded pagination state
    * (limit + offset). When provided, page_size is ignored.
    */
-  page_token?: OrderGetOrdersParams.PageToken;
+  page_token?: string;
 
   /**
    * Filter by security ID
@@ -535,18 +533,6 @@ export interface OrderGetOrdersParams {
    * Filter by symbol
    */
   symbol?: string;
-}
-
-export namespace OrderGetOrdersParams {
-  /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
-   */
-  export interface PageToken {
-    limit: number;
-
-    offset: number;
-  }
 }
 
 export interface OrderReplaceOrderParams {
@@ -602,17 +588,6 @@ export namespace OrderSubmitOrdersParams {
     quantity: string;
 
     /**
-     * Unique identifier for the instrument (CMS/CUSIP/ISIN/FIGI for equities or option
-     * OPRA OSI)
-     */
-    security_id: string;
-
-    /**
-     * The source of the security identifier
-     */
-    security_id_source: V1API.SecurityIDSource;
-
-    /**
      * Type of security
      */
     security_type: V1API.SecurityType;
@@ -651,6 +626,17 @@ export namespace OrderSubmitOrdersParams {
     position_effect?: 'OPEN' | 'CLOSE';
 
     /**
+     * Unique identifier for the instrument (CMS/CUSIP/ISIN/FIGI for equities or option
+     * OPRA OSI). Required if symbol is not provided.
+     */
+    security_id?: string | null;
+
+    /**
+     * The source of the security identifier. Required if security_id is provided.
+     */
+    security_id_source?: V1API.SecurityIDSource | null;
+
+    /**
      * Stop price (required for STOP and STOP_LIMIT orders)
      */
     stop_price?: string | null;
@@ -659,6 +645,14 @@ export namespace OrderSubmitOrdersParams {
      * Execution strategy/router. Defaults to SOR where applicable.
      */
     strategy?: OrdersAPI.OrderStrategy | null;
+
+    /**
+     * Trading symbol. For equities, use the ticker symbol (e.g., "AAPL"). For options,
+     * use the OSI symbol (e.g., "AAPL 250117C00190000"). If provided without
+     * security_id, the system will derive security_id and source based on
+     * security_type (CMS for equities, OPRA for options).
+     */
+    symbol?: string | null;
 
     /**
      * Execution venue to route the order to. If not specified, the system will choose

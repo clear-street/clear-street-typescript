@@ -376,24 +376,12 @@ export interface InstrumentGetInstrumentsParams {
    * Token for retrieving the next page of results. Contains encoded pagination state
    * (limit + offset). When provided, page_size is ignored.
    */
-  page_token?: InstrumentGetInstrumentsParams.PageToken;
+  page_token?: string;
 
   /**
    * Filter by security type, required and defaults to `COMMON_STOCK`
    */
   security_type?: V1API.SecurityType;
-}
-
-export namespace InstrumentGetInstrumentsParams {
-  /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
-   */
-  export interface PageToken {
-    limit: number;
-
-    offset: number;
-  }
 }
 
 Instruments.AnalystReporting = AnalystReporting;
