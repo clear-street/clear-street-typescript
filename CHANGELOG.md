@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.32.0 (2026-01-16)
+
+Full Changelog: [v0.31.0...v0.32.0](https://github.com/clear-street/clear-street-typescript/compare/v0.31.0...v0.32.0)
+
+### Features
+
+* **api:** manual updates ([985d617](https://github.com/clear-street/clear-street-typescript/commit/985d617ea8dc8764a2490acdfe75ee2311070a3b))
+
+
+### Chores
+
+* **internal:** upgrade babel, qs, js-yaml ([27b482e](https://github.com/clear-street/clear-street-typescript/commit/27b482e80ba5a93729758b02ac4027741814a7ac))
+
 ## 0.31.0 (2026-01-08)
 
 Full Changelog: [v0.30.0...v0.31.0](https://github.com/clear-street/clear-street-typescript/compare/v0.30.0...v0.31.0)
