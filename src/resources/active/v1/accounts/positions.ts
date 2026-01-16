@@ -169,19 +169,7 @@ export interface PositionClosePositionParams {
    * Query param: Token for retrieving the next page of results. Contains encoded
    * pagination state (limit + offset). When provided, page_size is ignored.
    */
-  page_token?: PositionClosePositionParams.PageToken;
-}
-
-export namespace PositionClosePositionParams {
-  /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
-   */
-  export interface PageToken {
-    limit: number;
-
-    offset: number;
-  }
+  page_token?: string;
 }
 
 export interface PositionGetPositionsParams {
@@ -195,19 +183,7 @@ export interface PositionGetPositionsParams {
    * Token for retrieving the next page of results. Contains encoded pagination state
    * (limit + offset). When provided, page_size is ignored.
    */
-  page_token?: PositionGetPositionsParams.PageToken;
-}
-
-export namespace PositionGetPositionsParams {
-  /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
-   */
-  export interface PageToken {
-    limit: number;
-
-    offset: number;
-  }
+  page_token?: string;
 }
 
 export declare namespace Positions {

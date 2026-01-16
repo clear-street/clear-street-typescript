@@ -160,7 +160,7 @@ export interface ScreenerGetScreenerParams {
    * Token for retrieving the next page of results. Contains encoded pagination
    * state.
    */
-  page_token?: ScreenerGetScreenerParams.PageToken;
+  page_token?: string;
 
   /**
    * Field to sort by
@@ -171,18 +171,6 @@ export interface ScreenerGetScreenerParams {
    * Sort direction (ASC or DESC, defaults to DESC)
    */
   sort_direction?: 'ASC' | 'DESC';
-}
-
-export namespace ScreenerGetScreenerParams {
-  /**
-   * Token for retrieving the next page of results. Contains encoded pagination
-   * state.
-   */
-  export interface PageToken {
-    limit: number;
-
-    offset: number;
-  }
 }
 
 export declare namespace Screener {

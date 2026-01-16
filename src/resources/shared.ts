@@ -46,11 +46,9 @@ export interface ResponseMetadata {
   request_id: string;
 
   /**
-   * A token that can be used to retrieve the next page of results, if any. The token
-   * contains only the pagination state (offset and limit). Filtering and sorting
-   * parameters must be provided with each request.
+   * Base64URL-encoded pagination token containing limit and offset
    */
-  next_page_token?: ResponseMetadata.NextPageToken | null;
+  next_page_token?: string | null;
 
   /**
    * Pagination. Included if this was a GET (list) response
@@ -66,17 +64,4 @@ export interface ResponseMetadata {
    * Total number of pages available.
    */
   total_pages?: number | null;
-}
-
-export namespace ResponseMetadata {
-  /**
-   * A token that can be used to retrieve the next page of results, if any. The token
-   * contains only the pagination state (offset and limit). Filtering and sorting
-   * parameters must be provided with each request.
-   */
-  export interface NextPageToken {
-    limit: number;
-
-    offset: number;
-  }
 }

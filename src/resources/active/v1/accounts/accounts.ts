@@ -380,19 +380,7 @@ export interface AccountGetAccountsParams {
    * Token for retrieving the next page of results. Contains encoded pagination state
    * (limit + offset). When provided, page_size is ignored.
    */
-  page_token?: AccountGetAccountsParams.PageToken;
-}
-
-export namespace AccountGetAccountsParams {
-  /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
-   */
-  export interface PageToken {
-    limit: number;
-
-    offset: number;
-  }
+  page_token?: string;
 }
 
 export interface AccountPatchAccountByIDParams {

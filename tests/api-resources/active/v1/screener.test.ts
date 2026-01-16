@@ -29,7 +29,7 @@ describe('resource screener', () => {
           field_filter: ['string'],
           filter: { foo: 'string' },
           page_size: 1,
-          page_token: { limit: 0, offset: 0 },
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
           sort_by: 'sort_by',
           sort_direction: 'ASC',
         },

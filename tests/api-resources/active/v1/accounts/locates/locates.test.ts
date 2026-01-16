@@ -56,7 +56,7 @@ describe('resource locates', () => {
         0,
         {
           page_size: 1,
-          page_token: { limit: 0, offset: 0 },
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
           reference_id: 'reference_id',
           status: 'PENDING',
         },

@@ -230,7 +230,7 @@ export interface LocateGetLocateRequestsParams {
    * Token for retrieving the next page of results. Contains encoded pagination state
    * (limit + offset). When provided, page_size is ignored.
    */
-  page_token?: LocateGetLocateRequestsParams.PageToken;
+  page_token?: string;
 
   /**
    * Filter by client reference ID
@@ -241,18 +241,6 @@ export interface LocateGetLocateRequestsParams {
    * Filter by locate order status
    */
   status?: LocateOrderStatus;
-}
-
-export namespace LocateGetLocateRequestsParams {
-  /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
-   */
-  export interface PageToken {
-    limit: number;
-
-    offset: number;
-  }
 }
 
 export interface LocateUpdateLocateRequestParams {

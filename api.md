@@ -341,29 +341,3 @@ Methods:
 Methods:
 
 - <code title="get /active/v1/ws">client.active.v1.ws.<a href="./src/resources/active/v1/ws.ts">websocketHandler</a>() -> void</code>
-
-# PromptLayer
-
-## V1
-
-### WorkflowVersionExecutionResults
-
-Types:
-
-- <code><a href="./src/resources/prompt-layer/v1/workflow-version-execution-results.ts">WorkflowVersionExecutionResultPromptLayerGetWorkflowExecutionResultsV251131Response</a></code>
-
-Methods:
-
-- <code title="get /prompt_layer/v1/workflow-version-execution-results">client.promptLayer.v1.workflowVersionExecutionResults.<a href="./src/resources/prompt-layer/v1/workflow-version-execution-results.ts">promptLayerGetWorkflowExecutionResultsV251131</a>({ ...params }) -> WorkflowVersionExecutionResultPromptLayerGetWorkflowExecutionResultsV251131Response</code>
-
-### Workflows
-
-#### Run
-
-Types:
-
-- <code><a href="./src/resources/prompt-layer/v1/workflows/run.ts">RunPromptLayerRunWorkflowV251131Response</a></code>
-
-Methods:
-
-- <code title="post /prompt_layer/v1/workflows/{workflow_name}/run">client.promptLayer.v1.workflows.run.<a href="./src/resources/prompt-layer/v1/workflows/run.ts">promptLayerRunWorkflowV251131</a>(workflowName, { ...params }) -> RunPromptLayerRunWorkflowV251131Response</code>

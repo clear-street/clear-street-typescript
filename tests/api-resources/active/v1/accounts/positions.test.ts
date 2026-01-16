@@ -29,7 +29,7 @@ describe('resource positions', () => {
       account_id: 0,
       security_id_source: 'CMS',
       page_size: 1,
-      page_token: { limit: 0, offset: 0 },
+      page_token: 'U3RhaW5sZXNzIHJvY2tz',
     });
   });
 
@@ -51,10 +51,7 @@ describe('resource positions', () => {
     await expect(
       client.active.v1.accounts.positions.getPositions(
         0,
-        {
-          page_size: 1,
-          page_token: { limit: 0, offset: 0 },
-        },
+        { page_size: 1, page_token: 'U3RhaW5sZXNzIHJvY2tz' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);
