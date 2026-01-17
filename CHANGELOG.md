@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.32.1 (2026-01-17)
+
+Full Changelog: [v0.32.0...v0.32.1](https://github.com/clear-street/clear-street-typescript/compare/v0.32.0...v0.32.1)
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([2e30ff2](https://github.com/clear-street/clear-street-typescript/commit/2e30ff295dbf8675302567acceacfff08349616b))
+
 ## 0.32.0 (2026-01-16)
 
 Full Changelog: [v0.31.0...v0.32.0](https://github.com/clear-street/clear-street-typescript/compare/v0.31.0...v0.32.0)
