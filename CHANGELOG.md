@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.32.2 (2026-01-18)
+
+Full Changelog: [v0.32.1...v0.32.2](https://github.com/clear-street/clear-street-typescript/compare/v0.32.1...v0.32.2)
+
+### Chores
+
+* configure new SDK language ([d6cdb60](https://github.com/clear-street/clear-street-typescript/commit/d6cdb60285007e48a126712091f0d08ad54db9a3))
+
 ## 0.32.1 (2026-01-17)
 
 Full Changelog: [v0.32.0...v0.32.1](https://github.com/clear-street/clear-street-typescript/compare/v0.32.0...v0.32.1)
