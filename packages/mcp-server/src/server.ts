@@ -21,7 +21,7 @@ export const newMcpServer = () =>
   new McpServer(
     {
       name: 'clear_street_internal_sdk_api',
-      version: '0.32.2',
+      version: '0.32.1',
     },
     { capabilities: { tools: {}, logging: {} } },
   );
