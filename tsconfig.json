@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "@clear-street-internal/sdk/*": ["./src/*"],
-      "@clear-street-internal/sdk": ["./src/index.ts"]
+      "@clear-street/clear-street-sdk/*": ["./src/*"],
+      "@clear-street/clear-street-sdk": ["./src/index.ts"]
     },
     "noEmit": true,
 
