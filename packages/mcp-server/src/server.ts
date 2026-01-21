@@ -7,20 +7,20 @@ import {
   ListToolsRequestSchema,
   SetLevelRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
-import { ClientOptions } from '@clear-street-internal/sdk';
-import ClearStreet from '@clear-street-internal/sdk';
+import { ClientOptions } from '@clear-street/clear-street-sdk';
+import ClearStreet from '@clear-street/clear-street-sdk';
 import { codeTool } from './code-tool';
 import docsSearchTool from './docs-search-tool';
 import { McpOptions } from './options';
 import { HandlerFunction, McpTool } from './types';
 
 export { McpOptions } from './options';
-export { ClientOptions } from '@clear-street-internal/sdk';
+export { ClientOptions } from '@clear-street/clear-street-sdk';
 
 export const newMcpServer = () =>
   new McpServer(
     {
-      name: 'clear_street_internal_sdk_api',
+      name: 'clear_street_clear_street_sdk_api',
       version: '0.32.1',
     },
     { capabilities: { tools: {}, logging: {} } },

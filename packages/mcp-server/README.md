@@ -24,7 +24,7 @@ For clients with a configuration JSON, it might look something like this:
 ```json
 {
   "mcpServers": {
-    "clear_street_internal_sdk_api": {
+    "clear_street_clear_street_sdk_api": {
       "command": "npx",
       "args": ["-y", "@clear-street-internal/sdk-mcp"],
       "env": {
@@ -87,7 +87,7 @@ A configuration JSON for this server might look like this, assuming the server i
 ```json
 {
   "mcpServers": {
-    "clear_street_internal_sdk_api": {
+    "clear_street_clear_street_sdk_api": {
       "url": "http://localhost:3000",
       "headers": {
         "Authorization": "Bearer <auth value>"

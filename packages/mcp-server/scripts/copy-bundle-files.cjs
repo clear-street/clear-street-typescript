@@ -25,7 +25,7 @@ async function copyFiles() {
 
   // replace package.json reference with local reference
   for (const dep in pkgJson.dependencies) {
-    if (dep === '@clear-street-internal/sdk') {
+    if (dep === '@clear-street/clear-street-sdk') {
       pkgJson.dependencies[dep] = 'file:../../../dist/';
     }
   }

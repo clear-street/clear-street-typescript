@@ -45,6 +45,6 @@ jobs:
       - name: Upload MCP Server DXT GitHub release asset
         run: |
           gh release upload ${{ github.event.release.tag_name }} \
-            packages/mcp-server/clear_street_internal_sdk_api.mcpb
+            packages/mcp-server/clear_street_clear_street_sdk_api.mcpb
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
