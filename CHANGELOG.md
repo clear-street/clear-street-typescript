@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.32.2 (2026-01-21)
+
+Full Changelog: [v0.32.1...v0.32.2](https://github.com/clear-street/clear-street-typescript/compare/v0.32.1...v0.32.2)
+
+### Chores
+
+* sync repo ([1980343](https://github.com/clear-street/clear-street-typescript/commit/1980343159f0aac354e78d9c4f24af90c4f8a776))
+
 ## 0.32.1 (2026-01-17)
 
 Full Changelog: [v0.32.0...v0.32.1](https://github.com/clear-street/clear-street-typescript/compare/v0.32.0...v0.32.1)
