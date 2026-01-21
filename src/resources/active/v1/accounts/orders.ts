@@ -311,7 +311,14 @@ export namespace OrderStrategy {
 /**
  * Order type
  */
-export type OrderType = 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT' | 'OTHER';
+export type OrderType =
+  | 'MARKET'
+  | 'LIMIT'
+  | 'STOP'
+  | 'STOP_LIMIT'
+  | 'TRAILING_STOP'
+  | 'TRAILING_STOP_LIMIT'
+  | 'OTHER';
 
 /**
  * Percentage of Volume strategy
@@ -615,6 +622,11 @@ export namespace OrderSubmitOrdersParams {
     extended_hours?: boolean | null;
 
     /**
+     * Limit offset for trailing stop-limit orders (signed)
+     */
+    limit_offset?: string | null;
+
+    /**
      * Limit price (required for LIMIT and STOP_LIMIT orders)
      */
     limit_price?: string | null;
@@ -653,6 +665,16 @@ export namespace OrderSubmitOrdersParams {
      * security_type (CMS for equities, OPRA for options).
      */
     symbol?: string | null;
+
+    /**
+     * Trailing offset amount (required for trailing orders)
+     */
+    trailing_offset_amt?: string | null;
+
+    /**
+     * Trailing offset type (PRICE or PERCENT_BPS)
+     */
+    trailing_offset_amt_type?: 'PRICE' | 'PERCENT_BPS' | null;
 
     /**
      * Execution venue to route the order to. If not specified, the system will choose

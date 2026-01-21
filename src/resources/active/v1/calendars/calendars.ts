@@ -30,7 +30,8 @@ import {
   MarketHourGetMarketHoursCalendarParams,
   MarketHourGetMarketHoursCalendarResponse,
   MarketHours,
-  MarketHoursList,
+  MarketHoursDetail,
+  MarketHoursDetailList,
 } from './market-hours';
 import * as MergersAcquisitionsAPI from './mergers-acquisitions';
 import {
@@ -71,6 +72,7 @@ export class Calendars extends APIResource {
 Calendars.Dividends = Dividends;
 Calendars.Earnings = Earnings;
 Calendars.Economic = Economic;
+Calendars.MarketHours = MarketHours;
 Calendars.MergersAcquisitions = MergersAcquisitions;
 Calendars.Splits = Splits;
 Calendars.Summary = Summary;
@@ -101,8 +103,9 @@ export declare namespace Calendars {
   };
 
   export {
-    type MarketHours as MarketHours,
-    type MarketHoursList as MarketHoursList,
+    MarketHours as MarketHours,
+    type MarketHoursDetail as MarketHoursDetail,
+    type MarketHoursDetailList as MarketHoursDetailList,
     type MarketHourGetMarketHoursCalendarResponse as MarketHourGetMarketHoursCalendarResponse,
     type MarketHourGetMarketHoursCalendarParams as MarketHourGetMarketHoursCalendarParams,
   };

@@ -1,6 +1,6 @@
 # Clear Street TypeScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/@clear-street/clear-street-sdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/@clear-street/clear-street-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@clear-street/clear-street-sdk)
+[![NPM version](<https://img.shields.io/npm/v/@clear-street-internal/sdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/@clear-street-internal/sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@clear-street-internal/sdk)
 
 This library provides convenient access to the Clear Street REST API from server-side TypeScript or JavaScript.
 
@@ -8,19 +8,10 @@ The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
-## MCP Server
-
-Use the Clear Street MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
-
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40clear-street-internal%2Fsdk-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBjbGVhci1zdHJlZXQtaW50ZXJuYWwvc2RrLW1jcCJdfQ)
-[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40clear-street-internal%2Fsdk-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40clear-street-internal%2Fsdk-mcp%22%5D%7D)
-
-> Note: You may need to set environment variables in your MCP client.
-
 ## Installation
 
 ```sh
-npm install @clear-street/clear-street-sdk
+npm install @clear-street-internal/sdk
 ```
 
 ## Usage
@@ -29,7 +20,7 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import ClearStreet from '@clear-street/clear-street-sdk';
+import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
   apiKey: 'My API Key',
@@ -45,7 +36,7 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import ClearStreet from '@clear-street/clear-street-sdk';
+import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
   apiKey: 'My API Key',
@@ -171,7 +162,7 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import ClearStreet from '@clear-street/clear-street-sdk';
+import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
   logLevel: 'debug', // Show all log messages
@@ -199,7 +190,7 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import ClearStreet from '@clear-street/clear-street-sdk';
+import ClearStreet from '@clear-street-internal/sdk';
 import pino from 'pino';
 
 const logger = pino();
@@ -268,7 +259,7 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import ClearStreet from '@clear-street/clear-street-sdk';
+import ClearStreet from '@clear-street-internal/sdk';
 import fetch from 'my-fetch';
 
 const client = new ClearStreet({ fetch });
@@ -279,7 +270,7 @@ const client = new ClearStreet({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import ClearStreet from '@clear-street/clear-street-sdk';
+import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
   fetchOptions: {
@@ -296,7 +287,7 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import ClearStreet from '@clear-street/clear-street-sdk';
+import ClearStreet from '@clear-street-internal/sdk';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
@@ -310,7 +301,7 @@ const client = new ClearStreet({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import ClearStreet from '@clear-street/clear-street-sdk';
+import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
   fetchOptions: {
@@ -322,7 +313,7 @@ const client = new ClearStreet({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import ClearStreet from 'npm:@clear-street/clear-street-sdk';
+import ClearStreet from 'npm:@clear-street-internal/sdk';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const client = new ClearStreet({

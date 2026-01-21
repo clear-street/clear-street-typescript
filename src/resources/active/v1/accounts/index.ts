@@ -68,6 +68,11 @@ export {
   type OrderSubmitOrdersParams,
 } from './orders';
 export {
+  PortfolioHistory,
+  type PortfolioHistoryGetPortfolioHistoryResponse,
+  type PortfolioHistoryGetPortfolioHistoryParams,
+} from './portfolio-history';
+export {
   Positions,
   type Position,
   type PositionList,

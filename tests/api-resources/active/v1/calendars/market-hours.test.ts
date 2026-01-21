@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import ClearStreet from '@clear-street/clear-street-sdk';
+import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
   apiKey: 'My API Key',
@@ -24,7 +24,7 @@ describe('resource marketHours', () => {
   test.skip('getMarketHoursCalendar: required and optional params', async () => {
     const response = await client.active.v1.calendars.marketHours.getMarketHoursCalendar({
       date: 'date',
-      venue: 'venue',
+      market: 'us_equities',
     });
   });
 });

@@ -26,10 +26,10 @@ export class Positions extends APIResource {
     params: PositionClosePositionParams,
     options?: RequestOptions,
   ): APIPromise<PositionClosePositionResponse> {
-    const { account_id, security_id_source, page_size, page_token } = params;
+    const { account_id, security_id_source, ...body } = params;
     return this._client.delete(
       path`/active/v1/accounts/${account_id}/positions/${security_id_source}/${securityID}`,
-      { query: { page_size, page_token }, ...options },
+      { body, ...options },
     );
   }
 
@@ -94,7 +94,7 @@ export interface Position {
   /**
    * The source of the security identifier
    */
-  security_id_source: string;
+  security_id_source: V1API.SecurityIDSource;
 
   /**
    * The trading symbol for the instrument
@@ -160,16 +160,9 @@ export interface PositionClosePositionParams {
   security_id_source: V1API.SecurityIDSource;
 
   /**
-   * Query param: The number of items to return per page (only used when page_token
-   * is not provided)
+   * Body param
    */
-  page_size?: number;
-
-  /**
-   * Query param: Token for retrieving the next page of results. Contains encoded
-   * pagination state (limit + offset). When provided, page_size is ignored.
-   */
-  page_token?: string;
+  cancel_orders?: boolean;
 }
 
 export interface PositionGetPositionsParams {

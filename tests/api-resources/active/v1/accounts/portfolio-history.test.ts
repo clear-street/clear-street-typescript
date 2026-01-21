@@ -7,17 +7,13 @@ const client = new ClearStreet({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource analystReporting', () => {
+describe('resource portfolioHistory', () => {
   // Prism tests are disabled
-  test.skip('getInstrumentAnalystConsensus: only required params', async () => {
-    const responsePromise = client.active.v1.instruments.analystReporting.getInstrumentAnalystConsensus(
-      'security_id',
-      {
-        security_id_source: 'CMS',
-        from_date: 'from_date',
-        to_date: 'to_date',
-      },
-    );
+  test.skip('getPortfolioHistory: only required params', async () => {
+    const responsePromise = client.active.v1.accounts.portfolioHistory.getPortfolioHistory(0, {
+      end_date: '2019-12-27',
+      start_date: '2019-12-27',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,14 +24,10 @@ describe('resource analystReporting', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getInstrumentAnalystConsensus: required and optional params', async () => {
-    const response = await client.active.v1.instruments.analystReporting.getInstrumentAnalystConsensus(
-      'security_id',
-      {
-        security_id_source: 'CMS',
-        from_date: 'from_date',
-        to_date: 'to_date',
-      },
-    );
+  test.skip('getPortfolioHistory: required and optional params', async () => {
+    const response = await client.active.v1.accounts.portfolioHistory.getPortfolioHistory(0, {
+      end_date: '2019-12-27',
+      start_date: '2019-12-27',
+    });
   });
 });

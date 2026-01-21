@@ -116,6 +116,16 @@ Methods:
 - <code title="patch /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">replaceOrder</a>(orderID, { ...params }) -> OrderReplaceOrderResponse</code>
 - <code title="post /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">submitOrders</a>(accountID, [ ...body ]) -> OrderSubmitOrdersResponse</code>
 
+#### PortfolioHistory
+
+Types:
+
+- <code><a href="./src/resources/active/v1/accounts/portfolio-history.ts">PortfolioHistoryGetPortfolioHistoryResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/accounts/{account_id}/portfolio-history">client.active.v1.accounts.portfolioHistory.<a href="./src/resources/active/v1/accounts/portfolio-history.ts">getPortfolioHistory</a>(accountID, { ...params }) -> PortfolioHistoryGetPortfolioHistoryResponse</code>
+
 #### Positions
 
 Types:
@@ -189,8 +199,8 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketHours</a></code>
-- <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketHoursList</a></code>
+- <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketHoursDetail</a></code>
+- <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketHoursDetailList</a></code>
 - <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketHourGetMarketHoursCalendarResponse</a></code>
 
 Methods:
