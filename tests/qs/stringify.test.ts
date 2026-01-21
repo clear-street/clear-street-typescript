@@ -1,7 +1,7 @@
 import iconv from 'iconv-lite';
-import { stringify } from '@clear-street/clear-street-sdk/internal/qs';
-import { encode } from '@clear-street/clear-street-sdk/internal/qs/utils';
-import { StringifyOptions } from '@clear-street/clear-street-sdk/internal/qs/types';
+import { stringify } from '@clear-street-internal/sdk/internal/qs';
+import { encode } from '@clear-street-internal/sdk/internal/qs/utils';
+import { StringifyOptions } from '@clear-street-internal/sdk/internal/qs/types';
 import { empty_test_cases } from './empty-keys-cases';
 import assert from 'assert';
 

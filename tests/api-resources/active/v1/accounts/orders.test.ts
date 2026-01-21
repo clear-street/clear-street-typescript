@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import ClearStreet from '@clear-street/clear-street-sdk';
+import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
   apiKey: 'My API Key',
@@ -158,6 +158,7 @@ describe('resource orders', () => {
           time_in_force: 'DAY',
           expire_at: '2025-10-15T16:00:00.000000000Z',
           extended_hours: true,
+          limit_offset: '0.10',
           limit_price: '140.50',
           position_effect: 'OPEN',
           security_id: 'AAPL',
@@ -170,6 +171,8 @@ describe('resource orders', () => {
             type: 'SOR',
           },
           symbol: 'AAPL',
+          trailing_offset_amt: '1.25',
+          trailing_offset_amt_type: 'PRICE',
           venue: 'CDRG',
         },
       ],

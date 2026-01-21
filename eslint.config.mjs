@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^@clear-street/clear-street-sdk(/.*)?',
+              regex: '^@clear-street-internal/sdk(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],
@@ -34,7 +34,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['tests/**', 'examples/**', 'packages/**'],
+    files: ['tests/**', 'examples/**'],
     rules: {
       'no-restricted-imports': 'off',
     },

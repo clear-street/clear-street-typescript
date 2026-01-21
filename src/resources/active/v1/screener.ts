@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as V1API from './v1';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
@@ -40,17 +41,12 @@ export interface ScreenerItem {
   /**
    * The source of the security identifier
    */
-  security_id_source: string;
+  security_id_source: V1API.SecurityIDSource;
 
   /**
    * The trading symbol for the instrument
    */
   symbol: string;
-
-  /**
-   * The latest trading volume for the instrument
-   */
-  volume: string;
 
   /**
    * The ISO country code of the instrument's issue
@@ -93,6 +89,11 @@ export interface ScreenerItem {
   percent_change?: string | null;
 
   /**
+   * The previous day's closing price
+   */
+  prev_day_close?: string | null;
+
+  /**
    * The business sector of the instrument's issuer
    */
   sector?: string | null;
@@ -126,6 +127,11 @@ export interface ScreenerItem {
    * The MIC code of the primary listing venue
    */
   venue?: string | null;
+
+  /**
+   * The latest trading volume for the instrument
+   */
+  volume?: string | null;
 
   /**
    * The average trading volume over the past week

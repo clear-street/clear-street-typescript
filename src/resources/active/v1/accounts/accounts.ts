@@ -43,6 +43,12 @@ import {
   Urgency,
   VwapStrategy,
 } from './orders';
+import * as PortfolioHistoryAPI from './portfolio-history';
+import {
+  PortfolioHistory,
+  PortfolioHistoryGetPortfolioHistoryParams,
+  PortfolioHistoryGetPortfolioHistoryResponse,
+} from './portfolio-history';
 import * as PositionsAPI from './positions';
 import {
   Position,
@@ -74,6 +80,9 @@ export class Accounts extends APIResource {
   balances: BalancesAPI.Balances = new BalancesAPI.Balances(this._client);
   locates: LocatesAPI.Locates = new LocatesAPI.Locates(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
+  portfolioHistory: PortfolioHistoryAPI.PortfolioHistory = new PortfolioHistoryAPI.PortfolioHistory(
+    this._client,
+  );
   positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
 
   /**
@@ -340,6 +349,16 @@ export interface Order {
    * Execution strategy for this order
    */
   strategy?: OrdersAPI.OrderStrategy | null;
+
+  /**
+   * Trailing watermark price for trailing orders
+   */
+  trailing_watermark_px?: string | null;
+
+  /**
+   * Trailing watermark timestamp for trailing orders
+   */
+  trailing_watermark_ts?: string | null;
 }
 
 export type OrderList = Array<Order>;
@@ -393,6 +412,7 @@ export interface AccountPatchAccountByIDParams {
 Accounts.Balances = Balances;
 Accounts.Locates = Locates;
 Accounts.Orders = Orders;
+Accounts.PortfolioHistory = PortfolioHistory;
 Accounts.Positions = Positions;
 
 export declare namespace Accounts {
@@ -464,6 +484,12 @@ export declare namespace Accounts {
     type OrderGetOrdersParams as OrderGetOrdersParams,
     type OrderReplaceOrderParams as OrderReplaceOrderParams,
     type OrderSubmitOrdersParams as OrderSubmitOrdersParams,
+  };
+
+  export {
+    PortfolioHistory as PortfolioHistory,
+    type PortfolioHistoryGetPortfolioHistoryResponse as PortfolioHistoryGetPortfolioHistoryResponse,
+    type PortfolioHistoryGetPortfolioHistoryParams as PortfolioHistoryGetPortfolioHistoryParams,
   };
 
   export {

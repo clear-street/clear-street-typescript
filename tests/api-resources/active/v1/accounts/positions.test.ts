@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import ClearStreet from '@clear-street/clear-street-sdk';
+import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
   apiKey: 'My API Key',
@@ -28,8 +28,7 @@ describe('resource positions', () => {
     const response = await client.active.v1.accounts.positions.closePosition('security_id', {
       account_id: 0,
       security_id_source: 'CMS',
-      page_size: 1,
-      page_token: 'U3RhaW5sZXNzIHJvY2tz',
+      cancel_orders: false,
     });
   });
 

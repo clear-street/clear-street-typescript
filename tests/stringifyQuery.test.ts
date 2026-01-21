@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { ClearStreet } from '@clear-street/clear-street-sdk';
+import { ClearStreet } from '@clear-street-internal/sdk';
 
 const { stringifyQuery } = ClearStreet.prototype as any;
 

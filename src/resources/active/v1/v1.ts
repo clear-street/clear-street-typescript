@@ -61,7 +61,7 @@ export class V1 extends APIResource {
 /**
  * Security identifier source
  */
-export type SecurityIDSource = 'CMS' | 'CLST' | 'OPRA' | 'FIGI' | 'CUSIP' | 'OTHER';
+export type SecurityIDSource = 'CMS' | 'CLST' | 'OPRA' | 'FIGI' | 'CUSIP' | 'CURRENCY' | 'FMP' | 'OTHER';
 
 /**
  * Security type

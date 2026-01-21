@@ -5,8 +5,8 @@
  */
 export interface APIError {
   /**
-   * The error code is used to identify the nature of the error. It corresponds to a
-   * gRPC status code.
+   * The error code is used to identify the nature of the error. It corresponds to an
+   * HTTP status code.
    */
   code: number;
 

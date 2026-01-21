@@ -24,7 +24,8 @@ export {
 } from './economic';
 export {
   MarketHours,
-  type MarketHoursList,
+  type MarketHoursDetail,
+  type MarketHoursDetailList,
   type MarketHourGetMarketHoursCalendarResponse,
   type MarketHourGetMarketHoursCalendarParams,
 } from './market-hours';
