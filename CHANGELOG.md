@@ -1,12 +1,18 @@
 # Changelog
 
-## 0.32.2 (2026-01-18)
+## 0.33.0 (2026-01-21)
 
-Full Changelog: [v0.32.1...v0.32.2](https://github.com/clear-street/clear-street-typescript/compare/v0.32.1...v0.32.2)
+Full Changelog: [v0.32.1...v0.33.0](https://github.com/clear-street/clear-street-typescript/compare/v0.32.1...v0.33.0)
+
+### Features
+
+* **api:** AI Assistant updates ([d468d32](https://github.com/clear-street/clear-street-typescript/commit/d468d323ab1acb014197a7b78606157b1fa62b4a))
+
 
 ### Chores
 
-* configure new SDK language ([d6cdb60](https://github.com/clear-street/clear-street-typescript/commit/d6cdb60285007e48a126712091f0d08ad54db9a3))
+* sync repo ([7812d55](https://github.com/clear-street/clear-street-typescript/commit/7812d554eecaa8a7c943abc22eaaede6302d6bdb))
+* update SDK settings ([1e46cc7](https://github.com/clear-street/clear-street-typescript/commit/1e46cc72a24e7a557dbaf376020fe1ae87f92357))
 
 ## 0.32.1 (2026-01-17)
 

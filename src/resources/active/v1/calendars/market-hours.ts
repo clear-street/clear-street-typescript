@@ -7,7 +7,9 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class MarketHours extends APIResource {
   /**
-   * Retrieves trading hours and market holidays.
+   * Retrieves comprehensive trading hours including pre-market, regular, and
+   * after-hours sessions. Returns market status, session times, and next session
+   * schedules.
    *
    * @example
    * ```ts
@@ -26,77 +28,294 @@ export class MarketHours extends APIResource {
 }
 
 /**
- * Trading hours and market status for a specific venue and date
+ * Comprehensive market hours information for a specific market and date
  */
-export interface MarketHours {
+export interface MarketHoursDetail {
+  /**
+   * Current time in market timezone with offset
+   */
+  current_time: string;
+
   /**
    * The date for which market hours are provided
    */
   date: string;
 
   /**
-   * Whether the market is open for trading on this date
+   * Market type identifier
    */
-  is_open: boolean;
+  market: string;
 
   /**
-   * IANA timezone identifier for the venue
+   * Human-readable market name
+   */
+  market_name: string;
+
+  /**
+   * Next trading day's session schedules (without time_until fields)
+   */
+  next_sessions: MarketHoursDetail.NextSessions;
+
+  /**
+   * Market status information
+   */
+  status: MarketHoursDetail.Status;
+
+  /**
+   * IANA timezone identifier for the market
    */
   timezone: string;
 
   /**
-   * The MIC code of the venue
+   * Trading session schedules for the requested date with time_until fields
    */
-  venue: string;
-
-  /**
-   * Market close time in local venue timezone (HH:MM:SS). Null if market is closed
-   */
-  close_time?: string | null;
-
-  /**
-   * Name of the holiday if market is closed for a holiday. Null otherwise
-   */
-  holiday_name?: string | null;
-
-  /**
-   * Next market close timestamp in UTC
-   */
-  next_close?: string | null;
-
-  /**
-   * Next market open timestamp in UTC
-   */
-  next_open?: string | null;
-
-  /**
-   * Market open time in local venue timezone (HH:MM:SS). Null if market is closed
-   */
-  open_time?: string | null;
+  today_sessions: MarketHoursDetail.TodaySessions;
 }
 
-export type MarketHoursList = Array<MarketHours>;
+export namespace MarketHoursDetail {
+  /**
+   * Next trading day's session schedules (without time_until fields)
+   */
+  export interface NextSessions {
+    /**
+     * After-hours session schedule, null if not available
+     */
+    after_hours?: NextSessions.AfterHours | null;
+
+    /**
+     * Pre-market session schedule, null if not available
+     */
+    pre_market?: NextSessions.PreMarket | null;
+
+    /**
+     * Regular trading session schedule, null if holiday/weekend
+     */
+    regular?: NextSessions.Regular | null;
+  }
+
+  export namespace NextSessions {
+    /**
+     * After-hours session schedule, null if not available
+     */
+    export interface AfterHours {
+      /**
+       * Session close timestamp with timezone offset
+       */
+      close: string;
+
+      /**
+       * Session open timestamp with timezone offset
+       */
+      open: string;
+
+      /**
+       * ISO 8601 duration until session closes. Null if session is not currently open.
+       */
+      time_until_close?: string | null;
+
+      /**
+       * ISO 8601 duration until session opens. Null if session has already started or
+       * closed.
+       */
+      time_until_open?: string | null;
+    }
+
+    /**
+     * Pre-market session schedule, null if not available
+     */
+    export interface PreMarket {
+      /**
+       * Session close timestamp with timezone offset
+       */
+      close: string;
+
+      /**
+       * Session open timestamp with timezone offset
+       */
+      open: string;
+
+      /**
+       * ISO 8601 duration until session closes. Null if session is not currently open.
+       */
+      time_until_close?: string | null;
+
+      /**
+       * ISO 8601 duration until session opens. Null if session has already started or
+       * closed.
+       */
+      time_until_open?: string | null;
+    }
+
+    /**
+     * Regular trading session schedule, null if holiday/weekend
+     */
+    export interface Regular {
+      /**
+       * Session close timestamp with timezone offset
+       */
+      close: string;
+
+      /**
+       * Session open timestamp with timezone offset
+       */
+      open: string;
+
+      /**
+       * ISO 8601 duration until session closes. Null if session is not currently open.
+       */
+      time_until_close?: string | null;
+
+      /**
+       * ISO 8601 duration until session opens. Null if session has already started or
+       * closed.
+       */
+      time_until_open?: string | null;
+    }
+  }
+
+  /**
+   * Market status information
+   */
+  export interface Status {
+    /**
+     * The type of trading day
+     */
+    day_type: 'TRADING_DAY' | 'EARLY_CLOSE' | 'HOLIDAY' | 'WEEKEND';
+
+    /**
+     * Whether the market is currently open (real-time)
+     */
+    is_open: boolean;
+
+    /**
+     * Current session type if market is open, null if closed
+     */
+    current_session?: 'pre_market' | 'regular' | 'after_hours' | null;
+  }
+
+  /**
+   * Trading session schedules for the requested date with time_until fields
+   */
+  export interface TodaySessions {
+    /**
+     * After-hours session schedule, null if not available
+     */
+    after_hours?: TodaySessions.AfterHours | null;
+
+    /**
+     * Pre-market session schedule, null if not available
+     */
+    pre_market?: TodaySessions.PreMarket | null;
+
+    /**
+     * Regular trading session schedule, null if holiday/weekend
+     */
+    regular?: TodaySessions.Regular | null;
+  }
+
+  export namespace TodaySessions {
+    /**
+     * After-hours session schedule, null if not available
+     */
+    export interface AfterHours {
+      /**
+       * Session close timestamp with timezone offset
+       */
+      close: string;
+
+      /**
+       * Session open timestamp with timezone offset
+       */
+      open: string;
+
+      /**
+       * ISO 8601 duration until session closes. Null if session is not currently open.
+       */
+      time_until_close?: string | null;
+
+      /**
+       * ISO 8601 duration until session opens. Null if session has already started or
+       * closed.
+       */
+      time_until_open?: string | null;
+    }
+
+    /**
+     * Pre-market session schedule, null if not available
+     */
+    export interface PreMarket {
+      /**
+       * Session close timestamp with timezone offset
+       */
+      close: string;
+
+      /**
+       * Session open timestamp with timezone offset
+       */
+      open: string;
+
+      /**
+       * ISO 8601 duration until session closes. Null if session is not currently open.
+       */
+      time_until_close?: string | null;
+
+      /**
+       * ISO 8601 duration until session opens. Null if session has already started or
+       * closed.
+       */
+      time_until_open?: string | null;
+    }
+
+    /**
+     * Regular trading session schedule, null if holiday/weekend
+     */
+    export interface Regular {
+      /**
+       * Session close timestamp with timezone offset
+       */
+      close: string;
+
+      /**
+       * Session open timestamp with timezone offset
+       */
+      open: string;
+
+      /**
+       * ISO 8601 duration until session closes. Null if session is not currently open.
+       */
+      time_until_close?: string | null;
+
+      /**
+       * ISO 8601 duration until session opens. Null if session has already started or
+       * closed.
+       */
+      time_until_open?: string | null;
+    }
+  }
+}
+
+export type MarketHoursDetailList = Array<MarketHoursDetail>;
 
 export interface MarketHourGetMarketHoursCalendarResponse extends Shared.BaseResponse {
-  data: MarketHoursList;
+  data: MarketHoursDetailList;
 }
 
 export interface MarketHourGetMarketHoursCalendarParams {
   /**
-   * The date to query market hours for (YYYY-MM-DD)
+   * The date to query market hours for (YYYY-MM-DD). Defaults to today.
    */
   date: string;
 
   /**
-   * The MIC code of the venue
+   * Market type to query (us_equities, us_options). If omitted, returns all markets.
    */
-  venue?: string;
+  market?: 'us_equities' | 'us_options';
 }
 
 export declare namespace MarketHours {
   export {
-    type MarketHours as MarketHours,
-    type MarketHoursList as MarketHoursList,
+    type MarketHoursDetail as MarketHoursDetail,
+    type MarketHoursDetailList as MarketHoursDetailList,
     type MarketHourGetMarketHoursCalendarResponse as MarketHourGetMarketHoursCalendarResponse,
     type MarketHourGetMarketHoursCalendarParams as MarketHourGetMarketHoursCalendarParams,
   };
