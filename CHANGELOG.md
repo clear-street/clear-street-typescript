@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.32.2 (2026-01-21)
+
+Full Changelog: [v0.32.1...v0.32.2](https://github.com/clear-street/clear-street-typescript/compare/v0.32.1...v0.32.2)
+
+### Chores
+
+* sync repo ([7812d55](https://github.com/clear-street/clear-street-typescript/commit/7812d554eecaa8a7c943abc22eaaede6302d6bdb))
+* update SDK settings ([1e46cc7](https://github.com/clear-street/clear-street-typescript/commit/1e46cc72a24e7a557dbaf376020fe1ae87f92357))
+
 ## 0.32.1 (2026-01-17)
 
 Full Changelog: [v0.32.0...v0.32.1](https://github.com/clear-street/clear-street-typescript/compare/v0.32.0...v0.32.1)
