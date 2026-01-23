@@ -1,8 +1,8 @@
 {
   "name": "@clear-street-internal/sdk",
-  "version": "0.33.0",
+  "version": "0.34.0",
   "description": "The official TypeScript library for the Clear Street API",
-  "author": "Clear Street <>",
+  "author": "Clear Street <support@clearstreet.io>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",

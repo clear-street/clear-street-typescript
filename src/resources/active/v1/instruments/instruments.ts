@@ -249,6 +249,11 @@ export interface InstrumentCore {
   is_threshold_security: boolean;
 
   /**
+   * A unique Clear Street identifier for the instrument
+   */
+  security_id: string;
+
+  /**
    * The source system for the security identifier
    */
   security_id_source: V1API.SecurityIDSource;
@@ -272,11 +277,6 @@ export interface InstrumentCore {
    * The full name of the instrument or its issuer
    */
   name?: string | null;
-
-  /**
-   * A unique Clear Street identifier for the instrument
-   */
-  security_id?: string | null;
 
   /**
    * The type of security (e.g., Common Stock, ETF)
