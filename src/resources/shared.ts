@@ -56,6 +56,11 @@ export interface ResponseMetadata {
   page_number?: number | null;
 
   /**
+   * Base64URL-encoded pagination token containing limit and offset
+   */
+  previous_page_token?: string | null;
+
+  /**
    * Total number of items available (not just in this page).
    */
   total_items?: number | null;
