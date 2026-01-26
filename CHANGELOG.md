@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.35.0 (2026-01-26)
+
+Full Changelog: [v0.34.0...v0.35.0](https://github.com/clear-street/clear-street-typescript/compare/v0.34.0...v0.35.0)
+
+### Features
+
+* **ACTIVE-2226:** Get position by instrument ID endpoint ([bee7472](https://github.com/clear-street/clear-street-typescript/commit/bee747200c8c33b356462c516f87bc182b398551))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([4581aab](https://github.com/clear-street/clear-street-typescript/commit/4581aab9121a61df67553bff45ff6186510dc8e4))
+
 ## 0.34.0 (2026-01-23)
 
 Full Changelog: [v0.33.0...v0.34.0](https://github.com/clear-street/clear-street-typescript/compare/v0.33.0...v0.34.0)
