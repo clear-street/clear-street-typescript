@@ -177,6 +177,16 @@ export interface PositionGetPositionsParams {
    * (limit + offset). When provided, page_size is ignored.
    */
   page_token?: string;
+
+  /**
+   * Filter by security ID
+   */
+  security_id?: string;
+
+  /**
+   * Filter by security ID source
+   */
+  security_id_source?: V1API.SecurityIDSource;
 }
 
 export declare namespace Positions {
