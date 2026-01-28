@@ -12,8 +12,6 @@ describe('resource reporting', () => {
   test.skip('getInstrumentReporting: only required params', async () => {
     const responsePromise = client.active.v1.instruments.reporting.getInstrumentReporting('security_id', {
       security_id_source: 'CMS',
-      from_date: 'from_date',
-      to_date: 'to_date',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,8 +26,8 @@ describe('resource reporting', () => {
   test.skip('getInstrumentReporting: required and optional params', async () => {
     const response = await client.active.v1.instruments.reporting.getInstrumentReporting('security_id', {
       security_id_source: 'CMS',
-      from_date: 'from_date',
-      to_date: 'to_date',
+      from: '2019-12-27',
+      to: '2019-12-27',
     });
   });
 });

@@ -12,13 +12,11 @@ export class Summary extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.calendars.summary.getCalendarSummary(
-   *     { from_date: 'from_date', to_date: 'to_date' },
-   *   );
+   *   await client.active.v1.calendars.summary.getCalendarSummary();
    * ```
    */
   getCalendarSummary(
-    query: SummaryGetCalendarSummaryParams,
+    query: SummaryGetCalendarSummaryParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SummaryGetCalendarSummaryResponse> {
     return this._client.get('/active/v1/calendars/summary', { query, ...options });
@@ -70,12 +68,12 @@ export interface SummaryGetCalendarSummaryParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
-  from_date: string;
+  from?: string;
 
   /**
    * The end date for the query range, inclusive (YYYY-MM-DD)
    */
-  to_date: string;
+  to?: string;
 }
 
 export declare namespace Summary {

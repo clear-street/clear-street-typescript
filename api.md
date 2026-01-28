@@ -321,6 +321,69 @@ Methods:
 
 - <code title="get /active/v1/instruments/venues">client.active.v1.instruments.venues.<a href="./src/resources/active/v1/instruments/venues.ts">getVenues</a>() -> VenueGetVenuesResponse</code>
 
+### Iris
+
+Types:
+
+- <code><a href="./src/resources/active/v1/iris/iris.ts">Message</a></code>
+- <code><a href="./src/resources/active/v1/iris/iris.ts">Thread</a></code>
+
+#### Feedback
+
+Types:
+
+- <code><a href="./src/resources/active/v1/iris/feedback.ts">CreateFeedbackResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/feedback.ts">FeedbackCreateFeedbackResponse</a></code>
+
+Methods:
+
+- <code title="post /active/v1/iris/feedback">client.active.v1.iris.feedback.<a href="./src/resources/active/v1/iris/feedback.ts">createFeedback</a>({ ...params }) -> FeedbackCreateFeedbackResponse</code>
+
+#### Runs
+
+Types:
+
+- <code><a href="./src/resources/active/v1/iris/runs.ts">CancelRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">GetRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">MessageRole</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">Run</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">RunStatus</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">StartRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">RunCancelRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">RunGetRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">RunStartRunResponse</a></code>
+
+Methods:
+
+- <code title="delete /active/v1/iris/runs/{run_id}">client.active.v1.iris.runs.<a href="./src/resources/active/v1/iris/runs.ts">cancelRun</a>(runID, { ...params }) -> RunCancelRunResponse</code>
+- <code title="get /active/v1/iris/runs/{run_id}">client.active.v1.iris.runs.<a href="./src/resources/active/v1/iris/runs.ts">getRun</a>(runID, { ...params }) -> RunGetRunResponse</code>
+- <code title="post /active/v1/iris/runs">client.active.v1.iris.runs.<a href="./src/resources/active/v1/iris/runs.ts">startRun</a>({ ...params }) -> RunStartRunResponse</code>
+
+#### Threads
+
+Types:
+
+- <code><a href="./src/resources/active/v1/iris/threads/threads.ts">GetThreadResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/threads/threads.ts">ListThreadsResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/threads/threads.ts">ThreadGetThreadResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/threads/threads.ts">ThreadListThreadsResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/iris/threads/{thread_id}">client.active.v1.iris.threads.<a href="./src/resources/active/v1/iris/threads/threads.ts">getThread</a>(threadID, { ...params }) -> ThreadGetThreadResponse</code>
+- <code title="get /active/v1/iris/threads">client.active.v1.iris.threads.<a href="./src/resources/active/v1/iris/threads/threads.ts">listThreads</a>({ ...params }) -> ThreadListThreadsResponse</code>
+
+##### Messages
+
+Types:
+
+- <code><a href="./src/resources/active/v1/iris/threads/messages.ts">ListMessagesResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/threads/messages.ts">MessageListMessagesResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/iris/threads/{thread_id}/messages">client.active.v1.iris.threads.messages.<a href="./src/resources/active/v1/iris/threads/messages.ts">listMessages</a>(threadID, { ...params }) -> MessageListMessagesResponse</code>
+
 ### Screener
 
 Types:

@@ -16,11 +16,7 @@ export class Events extends APIResource {
    * const response =
    *   await client.active.v1.instruments.events.getInstrumentEvents(
    *     'security_id',
-   *     {
-   *       security_id_source: 'CMS',
-   *       from_date: 'from_date',
-   *       to_date: 'to_date',
-   *     },
+   *     { security_id_source: 'CMS' },
    *   );
    * ```
    */
@@ -72,12 +68,12 @@ export interface EventGetInstrumentEventsParams {
   /**
    * Query param: The start date for the query range, inclusive (YYYY-MM-DD)
    */
-  from_date: string;
+  from?: string;
 
   /**
    * Query param: The end date for the query range, inclusive (YYYY-MM-DD)
    */
-  to_date: string;
+  to?: string;
 }
 
 export declare namespace Events {

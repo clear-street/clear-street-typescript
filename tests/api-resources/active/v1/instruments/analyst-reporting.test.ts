@@ -12,11 +12,7 @@ describe('resource analystReporting', () => {
   test.skip('getInstrumentAnalystConsensus: only required params', async () => {
     const responsePromise = client.active.v1.instruments.analystReporting.getInstrumentAnalystConsensus(
       'security_id',
-      {
-        security_id_source: 'CMS',
-        from_date: 'from_date',
-        to_date: 'to_date',
-      },
+      { security_id_source: 'CMS' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -33,8 +29,8 @@ describe('resource analystReporting', () => {
       'security_id',
       {
         security_id_source: 'CMS',
-        from_date: 'from_date',
-        to_date: 'to_date',
+        from: '2019-12-27',
+        to: '2019-12-27',
       },
     );
   });
