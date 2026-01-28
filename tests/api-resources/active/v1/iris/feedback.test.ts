@@ -7,11 +7,14 @@ const client = new ClearStreet({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource events', () => {
+describe('resource feedback', () => {
   // Prism tests are disabled
-  test.skip('getInstrumentEvents: only required params', async () => {
-    const responsePromise = client.active.v1.instruments.events.getInstrumentEvents('security_id', {
-      security_id_source: 'CMS',
+  test.skip('createFeedback: only required params', async () => {
+    const responsePromise = client.active.v1.iris.feedback.createFeedback({
+      account_id: 'account_id',
+      message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      score: 0,
+      thread_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -23,11 +26,14 @@ describe('resource events', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getInstrumentEvents: required and optional params', async () => {
-    const response = await client.active.v1.instruments.events.getInstrumentEvents('security_id', {
-      security_id_source: 'CMS',
-      from: '2019-12-27',
-      to: '2019-12-27',
+  test.skip('createFeedback: required and optional params', async () => {
+    const response = await client.active.v1.iris.feedback.createFeedback({
+      account_id: 'account_id',
+      message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      score: 0,
+      thread_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      comment: 'comment',
+      metadata: {},
     });
   });
 });

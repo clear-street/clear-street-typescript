@@ -12,13 +12,11 @@ export class Dividends extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.calendars.dividends.getDividendsCalendar(
-   *     { from_date: 'from_date', to_date: 'to_date' },
-   *   );
+   *   await client.active.v1.calendars.dividends.getDividendsCalendar();
    * ```
    */
   getDividendsCalendar(
-    query: DividendGetDividendsCalendarParams,
+    query: DividendGetDividendsCalendarParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DividendGetDividendsCalendarResponse> {
     return this._client.get('/active/v1/calendars/dividends', { query, ...options });
@@ -85,12 +83,12 @@ export interface DividendGetDividendsCalendarParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
-  from_date: string;
+  from?: string;
 
   /**
    * The end date for the query range, inclusive (YYYY-MM-DD)
    */
-  to_date: string;
+  to?: string;
 }
 
 export declare namespace Dividends {

@@ -12,13 +12,11 @@ export class Economic extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.calendars.economic.getEconomicCalendar(
-   *     { from_date: 'from_date', to_date: 'to_date' },
-   *   );
+   *   await client.active.v1.calendars.economic.getEconomicCalendar();
    * ```
    */
   getEconomicCalendar(
-    query: EconomicGetEconomicCalendarParams,
+    query: EconomicGetEconomicCalendarParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EconomicGetEconomicCalendarResponse> {
     return this._client.get('/active/v1/calendars/economic', { query, ...options });
@@ -85,12 +83,12 @@ export interface EconomicGetEconomicCalendarParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
-  from_date: string;
+  from?: string;
 
   /**
    * The end date for the query range, inclusive (YYYY-MM-DD)
    */
-  to_date: string;
+  to?: string;
 }
 
 export declare namespace Economic {

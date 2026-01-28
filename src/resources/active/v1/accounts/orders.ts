@@ -81,15 +81,12 @@ export class Orders extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.accounts.orders.getOrders(0, {
-   *     from: 'from',
-   *     to: 'to',
-   *   });
+   *   await client.active.v1.accounts.orders.getOrders(0);
    * ```
    */
   getOrders(
     accountID: number,
-    query: OrderGetOrdersParams,
+    query: OrderGetOrdersParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OrderGetOrdersResponse> {
     return this._client.get(path`/active/v1/accounts/${accountID}/orders`, { query, ...options });
@@ -128,7 +125,7 @@ export class Orders extends APIResource {
    *   await client.active.v1.accounts.orders.submitOrders(0, {
    *     body: [
    *       {
-   *         order_id: 'my-ref-id-20251001-002',
+   *         id: 'my-ref-id-20251001-002',
    *         order_type: 'LIMIT',
    *         quantity: '25',
    *         security_type: 'COMMON_STOCK',
@@ -515,12 +512,7 @@ export interface OrderGetOrdersParams {
   /**
    * The start date and time for the query range, inclusive (ISO 8601 format)
    */
-  from: string;
-
-  /**
-   * The end date and time for the query range, inclusive (ISO 8601 format)
-   */
-  to: string;
+  from?: string;
 
   /**
    * The number of items to return per page (only used when page_token is not
@@ -592,6 +584,11 @@ export interface OrderGetOrdersParams {
    * Filter by symbol
    */
   symbol?: string;
+
+  /**
+   * The end date and time for the query range, inclusive (ISO 8601 format)
+   */
+  to?: string;
 }
 
 export interface OrderReplaceOrderParams {
@@ -633,7 +630,7 @@ export namespace OrderSubmitOrdersParams {
     /**
      * Client-provided unique ID (idempotency). Required to be unique per account.
      */
-    order_id: string;
+    id: string;
 
     /**
      * Type of order

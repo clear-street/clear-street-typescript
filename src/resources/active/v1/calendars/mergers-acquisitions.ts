@@ -12,13 +12,11 @@ export class MergersAcquisitions extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.calendars.mergersAcquisitions.getMergersAndAcquisitionsCalendar(
-   *     { from_date: 'from_date', to_date: 'to_date' },
-   *   );
+   *   await client.active.v1.calendars.mergersAcquisitions.getMergersAndAcquisitionsCalendar();
    * ```
    */
   getMergersAndAcquisitionsCalendar(
-    query: MergersAcquisitionGetMergersAndAcquisitionsCalendarParams,
+    query: MergersAcquisitionGetMergersAndAcquisitionsCalendarParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MergersAcquisitionGetMergersAndAcquisitionsCalendarResponse> {
     return this._client.get('/active/v1/calendars/mergers-acquisitions', { query, ...options });
@@ -80,12 +78,12 @@ export interface MergersAcquisitionGetMergersAndAcquisitionsCalendarParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
-  from_date: string;
+  from?: string;
 
   /**
    * The end date for the query range, inclusive (YYYY-MM-DD)
    */
-  to_date: string;
+  to?: string;
 }
 
 export declare namespace MergersAcquisitions {

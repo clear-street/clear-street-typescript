@@ -30,6 +30,7 @@ export {
   type InstrumentGetInstrumentByIDParams,
   type InstrumentGetInstrumentsParams,
 } from './instruments/index';
+export { Iris, type Message, type Thread } from './iris/index';
 export {
   Screener,
   type ScreenerItem,

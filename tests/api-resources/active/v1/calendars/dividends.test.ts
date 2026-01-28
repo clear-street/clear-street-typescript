@@ -9,11 +9,8 @@ const client = new ClearStreet({
 
 describe('resource dividends', () => {
   // Prism tests are disabled
-  test.skip('getDividendsCalendar: only required params', async () => {
-    const responsePromise = client.active.v1.calendars.dividends.getDividendsCalendar({
-      from_date: 'from_date',
-      to_date: 'to_date',
-    });
+  test.skip('getDividendsCalendar', async () => {
+    const responsePromise = client.active.v1.calendars.dividends.getDividendsCalendar();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,10 +21,13 @@ describe('resource dividends', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getDividendsCalendar: required and optional params', async () => {
-    const response = await client.active.v1.calendars.dividends.getDividendsCalendar({
-      from_date: 'from_date',
-      to_date: 'to_date',
-    });
+  test.skip('getDividendsCalendar: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.active.v1.calendars.dividends.getDividendsCalendar(
+        { from: '2019-12-27', to: '2019-12-27' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 });

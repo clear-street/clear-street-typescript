@@ -47,12 +47,15 @@ import {
   InstrumentQuote,
   Instruments,
 } from './instruments/instruments';
+import * as IrisAPI from './iris/iris';
+import { Iris, Message, Thread } from './iris/iris';
 
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
   assistant: AssistantAPI.Assistant = new AssistantAPI.Assistant(this._client);
   calendars: CalendarsAPI.Calendars = new CalendarsAPI.Calendars(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
+  iris: IrisAPI.Iris = new IrisAPI.Iris(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
   ws: WsAPI.Ws = new WsAPI.Ws(this._client);
@@ -80,6 +83,7 @@ V1.Accounts = Accounts;
 V1.Assistant = Assistant;
 V1.Calendars = Calendars;
 V1.Instruments = Instruments;
+V1.Iris = Iris;
 V1.Screener = Screener;
 V1.VersionResource = VersionResource;
 V1.Ws = Ws;
@@ -120,6 +124,8 @@ export declare namespace V1 {
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
   };
+
+  export { Iris as Iris, type Message as Message, type Thread as Thread };
 
   export {
     Screener as Screener,
