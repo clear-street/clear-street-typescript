@@ -53,8 +53,8 @@ describe('resource positions', () => {
         {
           page_size: 1,
           page_token: 'U3RhaW5sZXNzIHJvY2tz',
-          security_id: 'security_id',
-          security_id_source: 'CMS',
+          security_id: ['string'],
+          security_id_source: ['string'],
         },
         { path: '/_stainless_unknown_path' },
       ),

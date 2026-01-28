@@ -27,8 +27,8 @@ describe('resource orders', () => {
       client.active.v1.accounts.orders.cancelAllOrders(
         0,
         {
-          security_id: 'security_id',
-          security_id_source: 'CMS',
+          security_id: ['string'],
+          security_id_source: ['string'],
           security_type: 'COMMON_STOCK',
           side: 'BUY',
           type: 'MARKET',
@@ -91,8 +91,8 @@ describe('resource orders', () => {
       to: 'to',
       page_size: 1,
       page_token: 'U3RhaW5sZXNzIHJvY2tz',
-      security_id: 'security_id',
-      security_id_source: 'CMS',
+      security_id: ['string'],
+      security_id_source: ['string'],
       security_type: 'COMMON_STOCK',
       status: 'PENDING_NEW',
       symbol: 'symbol',
