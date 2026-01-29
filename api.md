@@ -271,6 +271,7 @@ Types:
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">Instrument</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentCore</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentCoreList</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentEarnings</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentQuote</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentGetInstrumentByIDResponse</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentGetInstrumentsResponse</a></code>
@@ -298,8 +299,9 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentEvent</a></code>
-- <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentEventList</a></code>
+- <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentDividendEvent</a></code>
+- <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentEventsData</a></code>
+- <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentSplitEvent</a></code>
 - <code><a href="./src/resources/active/v1/instruments/events.ts">EventGetInstrumentEventsResponse</a></code>
 
 Methods:
@@ -322,8 +324,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/instruments/reporting.ts">FiscalPeriodType</a></code>
-- <code><a href="./src/resources/active/v1/instruments/reporting.ts">InstrumentEarnings</a></code>
 - <code><a href="./src/resources/active/v1/instruments/reporting.ts">ReportingGetInstrumentReportingResponse</a></code>
 
 Methods:

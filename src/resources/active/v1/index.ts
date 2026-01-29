@@ -37,6 +37,7 @@ export {
   type Instrument,
   type InstrumentCore,
   type InstrumentCoreList,
+  type InstrumentEarnings,
   type InstrumentQuote,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
