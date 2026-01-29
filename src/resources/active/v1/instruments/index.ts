@@ -11,8 +11,9 @@ export {
 } from './analyst-reporting';
 export {
   Events,
-  type InstrumentEvent,
-  type InstrumentEventList,
+  type InstrumentDividendEvent,
+  type InstrumentEventsData,
+  type InstrumentSplitEvent,
   type EventGetInstrumentEventsResponse,
   type EventGetInstrumentEventsParams,
 } from './events';
@@ -21,6 +22,7 @@ export {
   type Instrument,
   type InstrumentCore,
   type InstrumentCoreList,
+  type InstrumentEarnings,
   type InstrumentQuote,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
@@ -36,8 +38,6 @@ export {
 } from './news';
 export {
   Reporting,
-  type FiscalPeriodType,
-  type InstrumentEarnings,
   type ReportingGetInstrumentReportingResponse,
   type ReportingGetInstrumentReportingParams,
 } from './reporting';
