@@ -365,7 +365,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/active/v1/iris/runs.ts">CancelRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">Capability</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">ContentPart</a></code>
 - <code><a href="./src/resources/active/v1/iris/runs.ts">GetRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">MessageContent</a></code>
 - <code><a href="./src/resources/active/v1/iris/runs.ts">MessageRole</a></code>
 - <code><a href="./src/resources/active/v1/iris/runs.ts">Run</a></code>
 - <code><a href="./src/resources/active/v1/iris/runs.ts">RunStatus</a></code>
