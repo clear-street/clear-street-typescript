@@ -11,7 +11,10 @@ import {
 import * as RunsAPI from './runs';
 import {
   CancelRunResponse,
+  Capability,
+  ContentPart,
   GetRunResponse,
+  MessageContent,
   MessageRole,
   Run,
   RunCancelRunParams,
@@ -42,6 +45,9 @@ export class Iris extends APIResource {
 }
 
 export interface Message {
+  /**
+   * Denormalized text content for search/display
+   */
   content_text: string;
 
   created_at: string;
@@ -53,6 +59,11 @@ export interface Message {
   id?: string | null;
 
   author_user_id?: string | null;
+
+  /**
+   * Parsed content parts (text and structured actions)
+   */
+  content?: RunsAPI.MessageContent | null;
 
   metadata?: unknown | null;
 
@@ -96,7 +107,10 @@ export declare namespace Iris {
   export {
     Runs as Runs,
     type CancelRunResponse as CancelRunResponse,
+    type Capability as Capability,
+    type ContentPart as ContentPart,
     type GetRunResponse as GetRunResponse,
+    type MessageContent as MessageContent,
     type MessageRole as MessageRole,
     type Run as Run,
     type RunStatus as RunStatus,
