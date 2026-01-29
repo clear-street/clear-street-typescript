@@ -10,7 +10,10 @@ export { Iris, type Message, type Thread } from './iris';
 export {
   Runs,
   type CancelRunResponse,
+  type Capability,
+  type ContentPart,
   type GetRunResponse,
+  type MessageContent,
   type MessageRole,
   type Run,
   type RunStatus,

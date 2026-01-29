@@ -73,8 +73,8 @@ describe('resource runs', () => {
     const response = await client.active.v1.iris.runs.startRun({
       account_id: 'account_id',
       command_text: 'command_text',
+      capabilities: ['NAVIGATE'],
       context: {},
-      fe_capabilities: ['string'],
       metadata: {},
       model: 'model',
       parameters: {},
