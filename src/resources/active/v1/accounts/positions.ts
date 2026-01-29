@@ -179,14 +179,25 @@ export interface PositionGetPositionsParams {
   page_token?: string;
 
   /**
-   * Filter by security ID
+   * Filter by security ID(s). Accepts single value or indexed array.
+   *
+   * Examples:
+   *
+   * - Single: `security_id=037833100`
+   * - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
    */
-  security_id?: string;
+  security_id?: Array<string>;
 
   /**
-   * Filter by security ID source
+   * Source(s) for the security ID filter. Must match the count and order of
+   * security_id.
+   *
+   * Examples:
+   *
+   * - Single: `security_id_source=CUSIP`
+   * - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
    */
-  security_id_source?: V1API.SecurityIDSource;
+  security_id_source?: Array<string>;
 }
 
 export declare namespace Positions {

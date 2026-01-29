@@ -346,8 +346,7 @@ export interface InstrumentGetInstrumentsParams {
   easy_to_borrow?: boolean;
 
   /**
-   * Filter IDs to those containing this substring. For options, this is required and
-   * is used to filter exclusively to the underlying symbol.
+   * Filter IDs to those containing this substring. For options, this is required.
    */
   id_filter?: string;
 
@@ -367,7 +366,7 @@ export interface InstrumentGetInstrumentsParams {
   is_restricted?: boolean;
 
   /**
-   * filter by short prohibited status
+   * Filter by short prohibited status
    */
   is_short_prohibited?: boolean;
 
@@ -389,9 +388,38 @@ export interface InstrumentGetInstrumentsParams {
   page_token?: string;
 
   /**
-   * Filter by security type, required and defaults to `COMMON_STOCK`
+   * Filter by security ID(s). Accepts single value or indexed array.
+   *
+   * Examples:
+   *
+   * - Single: `security_id=037833100`
+   * - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
    */
-  security_type?: V1API.SecurityType;
+  security_id?: Array<string>;
+
+  /**
+   * Source(s) for the security ID filter. Must match the count and order of
+   * security_id.
+   *
+   * Examples:
+   *
+   * - Single: `security_id_source=CUSIP`
+   * - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
+   */
+  security_id_source?: Array<string>;
+
+  /**
+   * Filter by security type, required and defaults to COMMON_STOCK
+   */
+  security_type?:
+    | 'COMMON_STOCK'
+    | 'PREFERRED_STOCK'
+    | 'CORPORATE_BOND'
+    | 'OPTION'
+    | 'FUTURE'
+    | 'WARRANT'
+    | 'CASH'
+    | 'OTHER';
 }
 
 Instruments.AnalystReporting = AnalystReporting;

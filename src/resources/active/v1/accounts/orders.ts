@@ -81,15 +81,12 @@ export class Orders extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.accounts.orders.getOrders(0, {
-   *     from: 'from',
-   *     to: 'to',
-   *   });
+   *   await client.active.v1.accounts.orders.getOrders(0);
    * ```
    */
   getOrders(
     accountID: number,
-    query: OrderGetOrdersParams,
+    query: OrderGetOrdersParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OrderGetOrdersResponse> {
     return this._client.get(path`/active/v1/accounts/${accountID}/orders`, { query, ...options });
@@ -128,7 +125,7 @@ export class Orders extends APIResource {
    *   await client.active.v1.accounts.orders.submitOrders(0, {
    *     body: [
    *       {
-   *         order_id: 'my-ref-id-20251001-002',
+   *         id: 'my-ref-id-20251001-002',
    *         order_type: 'LIMIT',
    *         quantity: '25',
    *         security_type: 'COMMON_STOCK',
@@ -453,30 +450,48 @@ export interface OrderSubmitOrdersResponse extends Shared.BaseResponse {
 
 export interface OrderCancelAllOrdersParams {
   /**
-   * Filter by security identifier (e.g., CUSIP, ISIN). Must be provided with
-   * security_id_source.
+   * Filter by security ID(s). Accepts single value or indexed array.
+   *
+   * Examples:
+   *
+   * - Single: `security_id=037833100`
+   * - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
    */
-  security_id?: string;
+  security_id?: Array<string>;
 
   /**
-   * Type of security identifier. Must be provided with security_id.
+   * Source(s) for the security ID filter. Must match the count and order of
+   * security_id.
+   *
+   * Examples:
+   *
+   * - Single: `security_id_source=CUSIP`
+   * - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
    */
-  security_id_source?: V1API.SecurityIDSource;
+  security_id_source?: Array<string>;
 
   /**
    * Filter by security type (e.g., COMMON_STOCK, OPTION)
    */
-  security_type?: V1API.SecurityType;
+  security_type?:
+    | 'COMMON_STOCK'
+    | 'PREFERRED_STOCK'
+    | 'CORPORATE_BOND'
+    | 'OPTION'
+    | 'FUTURE'
+    | 'WARRANT'
+    | 'CASH'
+    | 'OTHER';
 
   /**
    * Filter by order side (BUY or SELL)
    */
-  side?: Side;
+  side?: 'BUY' | 'SELL' | 'SELL_SHORT' | 'OTHER';
 
   /**
    * Filter by order type (e.g., MARKET, LIMIT)
    */
-  type?: OrderType;
+  type?: 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT' | 'TRAILING_STOP' | 'TRAILING_STOP_LIMIT' | 'OTHER';
 }
 
 export interface OrderCancelOrderParams {
@@ -497,12 +512,7 @@ export interface OrderGetOrdersParams {
   /**
    * The start date and time for the query range, inclusive (ISO 8601 format)
    */
-  from: string;
-
-  /**
-   * The end date and time for the query range, inclusive (ISO 8601 format)
-   */
-  to: string;
+  from?: string;
 
   /**
    * The number of items to return per page (only used when page_token is not
@@ -517,29 +527,68 @@ export interface OrderGetOrdersParams {
   page_token?: string;
 
   /**
-   * Filter by security ID
+   * Filter by security ID(s). Accepts single value or indexed array.
+   *
+   * Examples:
+   *
+   * - Single: `security_id=037833100`
+   * - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
    */
-  security_id?: string;
+  security_id?: Array<string>;
 
   /**
-   * Source for the security ID filter
+   * Source(s) for the security ID filter. Must match the count and order of
+   * security_id.
+   *
+   * Examples:
+   *
+   * - Single: `security_id_source=CUSIP`
+   * - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
    */
-  security_id_source?: V1API.SecurityIDSource;
+  security_id_source?: Array<string>;
 
   /**
    * Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
    */
-  security_type?: V1API.SecurityType;
+  security_type?:
+    | 'COMMON_STOCK'
+    | 'PREFERRED_STOCK'
+    | 'CORPORATE_BOND'
+    | 'OPTION'
+    | 'FUTURE'
+    | 'WARRANT'
+    | 'CASH'
+    | 'OTHER';
 
   /**
    * Filter by order status
    */
-  status?: OrderStatus;
+  status?:
+    | 'PENDING_NEW'
+    | 'NEW'
+    | 'PARTIALLY_FILLED'
+    | 'FILLED'
+    | 'CANCELED'
+    | 'REJECTED'
+    | 'EXPIRED'
+    | 'PENDING_CANCEL'
+    | 'PENDING_REPLACE'
+    | 'REPLACED'
+    | 'DONE_FOR_DAY'
+    | 'STOPPED'
+    | 'SUSPENDED'
+    | 'CALCULATED'
+    | 'OTHER';
 
   /**
    * Filter by symbol
    */
   symbol?: string;
+
+  /**
+   * The end date and time for the query range, inclusive (ISO 8601 format)
+   */
+  to?: string;
 }
 
 export interface OrderReplaceOrderParams {
@@ -581,7 +630,7 @@ export namespace OrderSubmitOrdersParams {
     /**
      * Client-provided unique ID (idempotency). Required to be unique per account.
      */
-    order_id: string;
+    id: string;
 
     /**
      * Type of order

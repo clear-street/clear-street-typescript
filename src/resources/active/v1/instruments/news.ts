@@ -16,11 +16,7 @@ export class News extends APIResource {
    * const response =
    *   await client.active.v1.instruments.news.getInstrumentNews(
    *     'security_id',
-   *     {
-   *       security_id_source: 'CMS',
-   *       from_date: 'from_date',
-   *       to_date: 'to_date',
-   *     },
+   *     { security_id_source: 'CMS' },
    *   );
    * ```
    */
@@ -102,12 +98,12 @@ export interface NewsGetInstrumentNewsParams {
   /**
    * Query param: The start date for the query range, inclusive (YYYY-MM-DD)
    */
-  from_date: string;
+  from?: string;
 
   /**
    * Query param: The end date for the query range, inclusive (YYYY-MM-DD)
    */
-  to_date: string;
+  to?: string;
 }
 
 export declare namespace News {

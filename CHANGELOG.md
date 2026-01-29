@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.36.0 (2026-01-29)
+
+Full Changelog: [v0.35.0...v0.36.0](https://github.com/clear-street/clear-street-typescript/compare/v0.35.0...v0.36.0)
+
+### Features
+
+* **ACTIVE-2025:** Implement Revoke an API key endpoint. ([0f16c3f](https://github.com/clear-street/clear-street-typescript/commit/0f16c3f4ff172c468cee2a005158944acf2141ea))
+* **ACTIVE-2123:** SecurityIdFilter one-or-many query param ([c05b125](https://github.com/clear-street/clear-street-typescript/commit/c05b125093f51ee836ff9466777f61f997fded66))
+
+
+### Chores
+
+* **ACTIVE-2283:** Improve api-gw public API ergonomics. ([d08149b](https://github.com/clear-street/clear-street-typescript/commit/d08149b7fed66efd2bec721b9bd6247519c232bc))
+
 ## 0.35.0 (2026-01-26)
 
 Full Changelog: [v0.34.0...v0.35.0](https://github.com/clear-street/clear-street-typescript/compare/v0.34.0...v0.35.0)

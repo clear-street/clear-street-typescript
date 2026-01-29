@@ -12,13 +12,11 @@ export class Earnings extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.calendars.earnings.getEarningsCalendar(
-   *     { from_date: 'from_date', to_date: 'to_date' },
-   *   );
+   *   await client.active.v1.calendars.earnings.getEarningsCalendar();
    * ```
    */
   getEarningsCalendar(
-    query: EarningGetEarningsCalendarParams,
+    query: EarningGetEarningsCalendarParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EarningGetEarningsCalendarResponse> {
     return this._client.get('/active/v1/calendars/earnings', { query, ...options });
@@ -75,12 +73,12 @@ export interface EarningGetEarningsCalendarParams {
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD)
    */
-  from_date: string;
+  from?: string;
 
   /**
    * The end date for the query range, inclusive (YYYY-MM-DD)
    */
-  to_date: string;
+  to?: string;
 }
 
 export declare namespace Earnings {

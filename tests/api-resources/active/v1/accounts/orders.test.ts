@@ -27,8 +27,8 @@ describe('resource orders', () => {
       client.active.v1.accounts.orders.cancelAllOrders(
         0,
         {
-          security_id: 'security_id',
-          security_id_source: 'CMS',
+          security_id: ['string'],
+          security_id_source: ['string'],
           security_type: 'COMMON_STOCK',
           side: 'BUY',
           type: 'MARKET',
@@ -73,8 +73,8 @@ describe('resource orders', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getOrders: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.orders.getOrders(0, { from: 'from', to: 'to' });
+  test.skip('getOrders', async () => {
+    const responsePromise = client.active.v1.accounts.orders.getOrders(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -85,18 +85,25 @@ describe('resource orders', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getOrders: required and optional params', async () => {
-    const response = await client.active.v1.accounts.orders.getOrders(0, {
-      from: 'from',
-      to: 'to',
-      page_size: 1,
-      page_token: 'U3RhaW5sZXNzIHJvY2tz',
-      security_id: 'security_id',
-      security_id_source: 'CMS',
-      security_type: 'COMMON_STOCK',
-      status: 'PENDING_NEW',
-      symbol: 'symbol',
-    });
+  test.skip('getOrders: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.active.v1.accounts.orders.getOrders(
+        0,
+        {
+          from: '2019-12-27T18:11:19.117Z',
+          page_size: 1,
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
+          security_id: ['string'],
+          security_id_source: ['string'],
+          security_type: 'COMMON_STOCK',
+          status: 'PENDING_NEW',
+          symbol: 'symbol',
+          to: '2019-12-27T18:11:19.117Z',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -127,7 +134,7 @@ describe('resource orders', () => {
     const responsePromise = client.active.v1.accounts.orders.submitOrders(0, {
       body: [
         {
-          order_id: 'my-ref-id-20251001-002',
+          id: 'my-ref-id-20251001-002',
           order_type: 'LIMIT',
           quantity: '25',
           security_type: 'COMMON_STOCK',
@@ -150,7 +157,7 @@ describe('resource orders', () => {
     const response = await client.active.v1.accounts.orders.submitOrders(0, {
       body: [
         {
-          order_id: 'my-ref-id-20251001-002',
+          id: 'my-ref-id-20251001-002',
           order_type: 'LIMIT',
           quantity: '25',
           security_type: 'COMMON_STOCK',

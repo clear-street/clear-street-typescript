@@ -239,6 +239,11 @@ export type AccountSubkind =
  */
 export interface Order {
   /**
+   * Client-provided unique identifier for this order
+   */
+  id: string;
+
+  /**
    * Account placing the order
    */
   account_id: number;
@@ -257,11 +262,6 @@ export interface Order {
    * Remaining unfilled quantity
    */
   leaves_quantity: string;
-
-  /**
-   * Client-provided unique identifier for this order
-   */
-  order_id: string;
 
   /**
    * Type of order (MARKET, LIMIT, etc.)

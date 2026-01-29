@@ -1,6 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as APIKeysAPI from './api-keys';
+import {
+  APIKey,
+  APIKeyCreateParams,
+  APIKeyCreateResponse,
+  APIKeyListEntry,
+  APIKeyListEntryList,
+  APIKeyListResponse,
+  APIKeyRevokeAllResponse,
+  APIKeyRevokeResponse,
+  APIKeys,
+  Revocation,
+  RevocationList,
+} from './api-keys';
 import * as ScreenerAPI from './screener';
 import {
   Screener,
@@ -47,12 +61,16 @@ import {
   InstrumentQuote,
   Instruments,
 } from './instruments/instruments';
+import * as IrisAPI from './iris/iris';
+import { Iris, Message, Thread } from './iris/iris';
 
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
+  apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
   assistant: AssistantAPI.Assistant = new AssistantAPI.Assistant(this._client);
   calendars: CalendarsAPI.Calendars = new CalendarsAPI.Calendars(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
+  iris: IrisAPI.Iris = new IrisAPI.Iris(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
   ws: WsAPI.Ws = new WsAPI.Ws(this._client);
@@ -77,9 +95,11 @@ export type SecurityType =
   | 'OTHER';
 
 V1.Accounts = Accounts;
+V1.APIKeys = APIKeys;
 V1.Assistant = Assistant;
 V1.Calendars = Calendars;
 V1.Instruments = Instruments;
+V1.Iris = Iris;
 V1.Screener = Screener;
 V1.VersionResource = VersionResource;
 V1.Ws = Ws;
@@ -105,6 +125,20 @@ export declare namespace V1 {
     type AccountPatchAccountByIDParams as AccountPatchAccountByIDParams,
   };
 
+  export {
+    APIKeys as APIKeys,
+    type APIKey as APIKey,
+    type APIKeyListEntry as APIKeyListEntry,
+    type APIKeyListEntryList as APIKeyListEntryList,
+    type Revocation as Revocation,
+    type RevocationList as RevocationList,
+    type APIKeyCreateResponse as APIKeyCreateResponse,
+    type APIKeyListResponse as APIKeyListResponse,
+    type APIKeyRevokeResponse as APIKeyRevokeResponse,
+    type APIKeyRevokeAllResponse as APIKeyRevokeAllResponse,
+    type APIKeyCreateParams as APIKeyCreateParams,
+  };
+
   export { Assistant as Assistant };
 
   export { Calendars as Calendars };
@@ -120,6 +154,8 @@ export declare namespace V1 {
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
   };
+
+  export { Iris as Iris, type Message as Message, type Thread as Thread };
 
   export {
     Screener as Screener,
