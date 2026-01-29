@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as V1API from '../v1';
+import * as InstrumentsAPI from './instruments';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -33,71 +34,11 @@ export class Reporting extends APIResource {
   }
 }
 
-/**
- * Fiscal period type for earnings reports
- */
-export type FiscalPeriodType = 'QUARTERLY' | 'ANNUAL' | 'TTM';
-
-/**
- * Represents instrument earnings data
- */
-export interface InstrumentEarnings {
-  /**
-   * The date when the earnings report was published
-   */
-  date: string;
-
-  /**
-   * The fiscal period (e.g., quarter) within the year
-   */
-  period: number;
-
-  /**
-   * The type of fiscal period
-   */
-  period_type: FiscalPeriodType;
-
-  /**
-   * The fiscal year of the earnings period
-   */
-  year: number;
-
-  /**
-   * The actual earnings per share (EPS) for the period
-   */
-  eps_actual?: string | null;
-
-  /**
-   * The estimated earnings per share (EPS) for the period
-   */
-  eps_estimate?: string | null;
-
-  /**
-   * The percentage difference between actual and estimated EPS
-   */
-  eps_surprise_percent?: string | null;
-
-  /**
-   * The actual total revenue for the period
-   */
-  revenue_actual?: number | null;
-
-  /**
-   * The estimated total revenue for the period
-   */
-  revenue_estimate?: number | null;
-
-  /**
-   * The percentage difference between actual and estimated revenue
-   */
-  revenue_surprise_percent?: string | null;
-}
-
 export interface ReportingGetInstrumentReportingResponse extends Shared.BaseResponse {
   /**
    * Represents instrument earnings data
    */
-  data: InstrumentEarnings;
+  data: InstrumentsAPI.InstrumentEarnings;
 }
 
 export interface ReportingGetInstrumentReportingParams {
@@ -119,8 +60,6 @@ export interface ReportingGetInstrumentReportingParams {
 
 export declare namespace Reporting {
   export {
-    type FiscalPeriodType as FiscalPeriodType,
-    type InstrumentEarnings as InstrumentEarnings,
     type ReportingGetInstrumentReportingResponse as ReportingGetInstrumentReportingResponse,
     type ReportingGetInstrumentReportingParams as ReportingGetInstrumentReportingParams,
   };

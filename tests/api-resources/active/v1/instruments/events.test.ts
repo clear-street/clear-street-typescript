@@ -26,8 +26,8 @@ describe('resource events', () => {
   test.skip('getInstrumentEvents: required and optional params', async () => {
     const response = await client.active.v1.instruments.events.getInstrumentEvents('security_id', {
       security_id_source: 'CMS',
-      from: '2019-12-27',
-      to: '2019-12-27',
+      from_date: 'from_date',
+      to_date: 'to_date',
     });
   });
 });

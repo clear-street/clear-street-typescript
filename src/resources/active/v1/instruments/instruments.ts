@@ -18,8 +18,9 @@ import {
   EventGetInstrumentEventsParams,
   EventGetInstrumentEventsResponse,
   Events,
-  InstrumentEvent,
-  InstrumentEventList,
+  InstrumentDividendEvent,
+  InstrumentEventsData,
+  InstrumentSplitEvent,
 } from './events';
 import * as NewsAPI from './news';
 import {
@@ -31,8 +32,6 @@ import {
 } from './news';
 import * as ReportingAPI from './reporting';
 import {
-  FiscalPeriodType,
-  InstrumentEarnings,
   Reporting,
   ReportingGetInstrumentReportingParams,
   ReportingGetInstrumentReportingResponse,
@@ -292,6 +291,46 @@ export interface InstrumentCore {
 export type InstrumentCoreList = Array<InstrumentCore>;
 
 /**
+ * Represents instrument earnings data
+ */
+export interface InstrumentEarnings {
+  /**
+   * The date when the earnings report was published
+   */
+  date: string;
+
+  /**
+   * The actual earnings per share (EPS) for the period
+   */
+  eps_actual?: string | null;
+
+  /**
+   * The estimated earnings per share (EPS) for the period
+   */
+  eps_estimate?: string | null;
+
+  /**
+   * The percentage difference between actual and estimated EPS
+   */
+  eps_surprise_percent?: string | null;
+
+  /**
+   * The actual total revenue for the period
+   */
+  revenue_actual?: string | null;
+
+  /**
+   * The estimated total revenue for the period
+   */
+  revenue_estimate?: string | null;
+
+  /**
+   * The percentage difference between actual and estimated revenue
+   */
+  revenue_surprise_percent?: string | null;
+}
+
+/**
  * Real-time market quote data for a specific instrument
  */
 export interface InstrumentQuote {
@@ -433,6 +472,7 @@ export declare namespace Instruments {
     type Instrument as Instrument,
     type InstrumentCore as InstrumentCore,
     type InstrumentCoreList as InstrumentCoreList,
+    type InstrumentEarnings as InstrumentEarnings,
     type InstrumentQuote as InstrumentQuote,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
@@ -452,8 +492,9 @@ export declare namespace Instruments {
 
   export {
     Events as Events,
-    type InstrumentEvent as InstrumentEvent,
-    type InstrumentEventList as InstrumentEventList,
+    type InstrumentDividendEvent as InstrumentDividendEvent,
+    type InstrumentEventsData as InstrumentEventsData,
+    type InstrumentSplitEvent as InstrumentSplitEvent,
     type EventGetInstrumentEventsResponse as EventGetInstrumentEventsResponse,
     type EventGetInstrumentEventsParams as EventGetInstrumentEventsParams,
   };
@@ -468,8 +509,6 @@ export declare namespace Instruments {
 
   export {
     Reporting as Reporting,
-    type FiscalPeriodType as FiscalPeriodType,
-    type InstrumentEarnings as InstrumentEarnings,
     type ReportingGetInstrumentReportingResponse as ReportingGetInstrumentReportingResponse,
     type ReportingGetInstrumentReportingParams as ReportingGetInstrumentReportingParams,
   };
