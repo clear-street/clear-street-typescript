@@ -134,7 +134,6 @@ describe('resource orders', () => {
     const responsePromise = client.active.v1.accounts.orders.submitOrders(0, {
       body: [
         {
-          id: 'my-ref-id-20251001-002',
           order_type: 'LIMIT',
           quantity: '25',
           security_type: 'COMMON_STOCK',
@@ -157,12 +156,12 @@ describe('resource orders', () => {
     const response = await client.active.v1.accounts.orders.submitOrders(0, {
       body: [
         {
-          id: 'my-ref-id-20251001-002',
           order_type: 'LIMIT',
           quantity: '25',
           security_type: 'COMMON_STOCK',
           side: 'BUY',
           time_in_force: 'DAY',
+          id: 'my-ref-id-20251001-002',
           expire_at: '2025-10-15T16:00:00.000000000Z',
           extended_hours: true,
           limit_offset: '0.10',
