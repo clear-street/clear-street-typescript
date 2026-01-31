@@ -125,7 +125,6 @@ export class Orders extends APIResource {
    *   await client.active.v1.accounts.orders.submitOrders(0, {
    *     body: [
    *       {
-   *         id: 'my-ref-id-20251001-002',
    *         order_type: 'LIMIT',
    *         quantity: '25',
    *         security_type: 'COMMON_STOCK',
@@ -628,11 +627,6 @@ export namespace OrderSubmitOrdersParams {
    */
   export interface Body {
     /**
-     * Client-provided unique ID (idempotency). Required to be unique per account.
-     */
-    id: string;
-
-    /**
      * Type of order
      */
     order_type: OrdersAPI.OrderType;
@@ -657,6 +651,12 @@ export namespace OrderSubmitOrdersParams {
      * Time in force
      */
     time_in_force: OrdersAPI.TimeInForce;
+
+    /**
+     * Optional client-provided unique ID (idempotency). Required to be unique per
+     * account.
+     */
+    id?: string | null;
 
     /**
      * The timestamp when the order should expire (UTC). Required when time_in_force is
