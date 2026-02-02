@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.38.0 (2026-02-02)
+
+Full Changelog: [v0.37.0...v0.38.0](https://github.com/clear-street/clear-street-typescript/compare/v0.37.0...v0.38.0)
+
+### Features
+
+* **ACTIVE-1644:** Instrument events endpoint ([10c009a](https://github.com/clear-street/clear-street-typescript/commit/10c009ab668c0bea71e8788a57628c39ed58c8c3))
+* add SecurityId::Oems ([65c94f7](https://github.com/clear-street/clear-street-typescript/commit/65c94f785b563657aab75cea1c8380162f2dca17))
+* **api:** manual updates ([5029594](https://github.com/clear-street/clear-street-typescript/commit/5029594009f68465d2ec39c9797103fbec2d9f6e))
+
+
+### Chores
+
+* **ACTIVE-2364:** Make ID optional when submitting orders. ([816198e](https://github.com/clear-street/clear-street-typescript/commit/816198ebc6b30203a1576ec6f955d1b5c61e3f48))
+
 ## 0.37.0 (2026-01-29)
 
 Full Changelog: [v0.36.0...v0.37.0](https://github.com/clear-street/clear-street-typescript/compare/v0.36.0...v0.37.0)
