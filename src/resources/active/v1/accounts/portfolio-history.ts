@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as Shared from '../../../shared';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -27,72 +28,78 @@ export class PortfolioHistory extends APIResource {
   }
 }
 
-export interface PortfolioHistoryGetPortfolioHistoryResponse {
-  segments: Array<PortfolioHistoryGetPortfolioHistoryResponse.Segment>;
+export interface PortfolioHistoryGetPortfolioHistoryResponse extends Shared.BaseResponse {
+  data: PortfolioHistoryGetPortfolioHistoryResponse.Data;
 }
 
 export namespace PortfolioHistoryGetPortfolioHistoryResponse {
-  export interface Segment {
-    /**
-     * Amount bought MTM
-     */
-    bought_notional: string;
+  export interface Data {
+    segments: Array<Data.Segment>;
+  }
 
-    /**
-     * Quantity bought MTM
-     */
-    bought_quantity: string;
+  export namespace Data {
+    export interface Segment {
+      /**
+       * Amount bought MTM
+       */
+      bought_notional: string;
 
-    /**
-     * The date for this segment
-     */
-    date: string;
+      /**
+       * Quantity bought MTM
+       */
+      bought_quantity: string;
 
-    /**
-     * Sum of the profit and loss from intraday trading activities for the trading day.
-     */
-    day_pnl: string;
+      /**
+       * The date for this segment
+       */
+      date: string;
 
-    /**
-     * The equity at the end of the trading day.
-     */
-    ending_equity: string;
+      /**
+       * Sum of the profit and loss from intraday trading activities for the trading day.
+       */
+      day_pnl: string;
 
-    /**
-     * P&L after netting all realized and unrealized P&L, adjustments, dividends,
-     * change in accruals, income and expenses
-     */
-    net_pnl: string;
+      /**
+       * The equity at the end of the trading day.
+       */
+      ending_equity: string;
 
-    /**
-     * Sum of the profit and loss from the previous trading day.
-     */
-    position_pnl: string;
+      /**
+       * P&L after netting all realized and unrealized P&L, adjustments, dividends,
+       * change in accruals, income and expenses
+       */
+      net_pnl: string;
 
-    /**
-     * Sum of the profit and loss realized from position closing trading activity.
-     */
-    realized_pnl: string;
+      /**
+       * Sum of the profit and loss from the previous trading day.
+       */
+      position_pnl: string;
 
-    /**
-     * Amount sold MTM
-     */
-    sold_notional: string;
+      /**
+       * Sum of the profit and loss realized from position closing trading activity.
+       */
+      realized_pnl: string;
 
-    /**
-     * Quantity sold MTM
-     */
-    sold_quantity: string;
+      /**
+       * Amount sold MTM
+       */
+      sold_notional: string;
 
-    /**
-     * The equity at the start of the trading day.
-     */
-    starting_equity: string;
+      /**
+       * Quantity sold MTM
+       */
+      sold_quantity: string;
 
-    /**
-     * Sum of the profit and loss from market changes.
-     */
-    unrealized_pnl: string;
+      /**
+       * The equity at the start of the trading day.
+       */
+      starting_equity: string;
+
+      /**
+       * Sum of the profit and loss from market changes.
+       */
+      unrealized_pnl: string;
+    }
   }
 }
 
