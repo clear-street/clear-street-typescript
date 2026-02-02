@@ -162,7 +162,7 @@ export interface PositionClosePositionParams {
   /**
    * Body param
    */
-  cancel_orders?: boolean;
+  cancel_orders?: boolean | null;
 }
 
 export interface PositionGetPositionsParams {
