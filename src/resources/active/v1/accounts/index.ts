@@ -69,6 +69,8 @@ export {
 } from './orders';
 export {
   PortfolioHistory,
+  type PortfolioHistoryResponse,
+  type PortfolioHistorySegment,
   type PortfolioHistoryGetPortfolioHistoryResponse,
   type PortfolioHistoryGetPortfolioHistoryParams,
 } from './portfolio-history';
@@ -77,7 +79,9 @@ export {
   type Position,
   type PositionList,
   type PositionClosePositionResponse,
+  type PositionClosePositionsResponse,
   type PositionGetPositionsResponse,
   type PositionClosePositionParams,
+  type PositionClosePositionsParams,
   type PositionGetPositionsParams,
 } from './positions';

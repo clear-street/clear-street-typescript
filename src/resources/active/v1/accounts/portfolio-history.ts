@@ -28,79 +28,75 @@ export class PortfolioHistory extends APIResource {
   }
 }
 
-export interface PortfolioHistoryGetPortfolioHistoryResponse extends Shared.BaseResponse {
-  data: PortfolioHistoryGetPortfolioHistoryResponse.Data;
+export interface PortfolioHistoryResponse {
+  segments: Array<PortfolioHistorySegment>;
 }
 
-export namespace PortfolioHistoryGetPortfolioHistoryResponse {
-  export interface Data {
-    segments: Array<Data.Segment>;
-  }
+export interface PortfolioHistorySegment {
+  /**
+   * Amount bought MTM
+   */
+  bought_notional: string;
 
-  export namespace Data {
-    export interface Segment {
-      /**
-       * Amount bought MTM
-       */
-      bought_notional: string;
+  /**
+   * Quantity bought MTM
+   */
+  bought_quantity: string;
 
-      /**
-       * Quantity bought MTM
-       */
-      bought_quantity: string;
+  /**
+   * The date for this segment
+   */
+  date: string;
 
-      /**
-       * The date for this segment
-       */
-      date: string;
+  /**
+   * Sum of the profit and loss from intraday trading activities for the trading day.
+   */
+  day_pnl: string;
 
-      /**
-       * Sum of the profit and loss from intraday trading activities for the trading day.
-       */
-      day_pnl: string;
+  /**
+   * The equity at the end of the trading day.
+   */
+  ending_equity: string;
 
-      /**
-       * The equity at the end of the trading day.
-       */
-      ending_equity: string;
+  /**
+   * P&L after netting all realized and unrealized P&L, adjustments, dividends,
+   * change in accruals, income and expenses
+   */
+  net_pnl: string;
 
-      /**
-       * P&L after netting all realized and unrealized P&L, adjustments, dividends,
-       * change in accruals, income and expenses
-       */
-      net_pnl: string;
+  /**
+   * Sum of the profit and loss from the previous trading day.
+   */
+  position_pnl: string;
 
-      /**
-       * Sum of the profit and loss from the previous trading day.
-       */
-      position_pnl: string;
+  /**
+   * Sum of the profit and loss realized from position closing trading activity.
+   */
+  realized_pnl: string;
 
-      /**
-       * Sum of the profit and loss realized from position closing trading activity.
-       */
-      realized_pnl: string;
+  /**
+   * Amount sold MTM
+   */
+  sold_notional: string;
 
-      /**
-       * Amount sold MTM
-       */
-      sold_notional: string;
+  /**
+   * Quantity sold MTM
+   */
+  sold_quantity: string;
 
-      /**
-       * Quantity sold MTM
-       */
-      sold_quantity: string;
+  /**
+   * The equity at the start of the trading day.
+   */
+  starting_equity: string;
 
-      /**
-       * The equity at the start of the trading day.
-       */
-      starting_equity: string;
+  /**
+   * Sum of the profit and loss from market changes.
+   */
+  unrealized_pnl: string;
+}
 
-      /**
-       * Sum of the profit and loss from market changes.
-       */
-      unrealized_pnl: string;
-    }
-  }
+export interface PortfolioHistoryGetPortfolioHistoryResponse extends Shared.BaseResponse {
+  data: PortfolioHistoryResponse;
 }
 
 export interface PortfolioHistoryGetPortfolioHistoryParams {
@@ -111,6 +107,8 @@ export interface PortfolioHistoryGetPortfolioHistoryParams {
 
 export declare namespace PortfolioHistory {
   export {
+    type PortfolioHistoryResponse as PortfolioHistoryResponse,
+    type PortfolioHistorySegment as PortfolioHistorySegment,
     type PortfolioHistoryGetPortfolioHistoryResponse as PortfolioHistoryGetPortfolioHistoryResponse,
     type PortfolioHistoryGetPortfolioHistoryParams as PortfolioHistoryGetPortfolioHistoryParams,
   };
