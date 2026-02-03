@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.38.1 (2026-02-03)
+
+Full Changelog: [v0.38.0...v0.38.1](https://github.com/clear-street/clear-street-typescript/compare/v0.38.0...v0.38.1)
+
+### Bug Fixes
+
+* **client:** avoid memory leak with abort signals ([c6e61b8](https://github.com/clear-street/clear-street-typescript/commit/c6e61b85e97c1503a07c4d0e89bb24ac542f0f08))
+
+
+### Chores
+
+* **client:** do not parse responses with empty content-length ([1dc1dd5](https://github.com/clear-street/clear-street-typescript/commit/1dc1dd5127afa12bf4f2fa277000f0145fcdaab6))
+
 ## 0.38.0 (2026-02-02)
 
 Full Changelog: [v0.37.0...v0.38.0](https://github.com/clear-street/clear-street-typescript/compare/v0.37.0...v0.38.0)
