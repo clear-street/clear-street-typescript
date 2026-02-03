@@ -48,12 +48,16 @@ import {
   PortfolioHistory,
   PortfolioHistoryGetPortfolioHistoryParams,
   PortfolioHistoryGetPortfolioHistoryResponse,
+  PortfolioHistoryResponse,
+  PortfolioHistorySegment,
 } from './portfolio-history';
 import * as PositionsAPI from './positions';
 import {
   Position,
   PositionClosePositionParams,
   PositionClosePositionResponse,
+  PositionClosePositionsParams,
+  PositionClosePositionsResponse,
   PositionGetPositionsParams,
   PositionGetPositionsResponse,
   PositionList,
@@ -488,6 +492,8 @@ export declare namespace Accounts {
 
   export {
     PortfolioHistory as PortfolioHistory,
+    type PortfolioHistoryResponse as PortfolioHistoryResponse,
+    type PortfolioHistorySegment as PortfolioHistorySegment,
     type PortfolioHistoryGetPortfolioHistoryResponse as PortfolioHistoryGetPortfolioHistoryResponse,
     type PortfolioHistoryGetPortfolioHistoryParams as PortfolioHistoryGetPortfolioHistoryParams,
   };
@@ -497,8 +503,10 @@ export declare namespace Accounts {
     type Position as Position,
     type PositionList as PositionList,
     type PositionClosePositionResponse as PositionClosePositionResponse,
+    type PositionClosePositionsResponse as PositionClosePositionsResponse,
     type PositionGetPositionsResponse as PositionGetPositionsResponse,
     type PositionClosePositionParams as PositionClosePositionParams,
+    type PositionClosePositionsParams as PositionClosePositionsParams,
     type PositionGetPositionsParams as PositionGetPositionsParams,
   };
 }

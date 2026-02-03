@@ -34,6 +34,25 @@ export class Positions extends APIResource {
   }
 
   /**
+   * Closes all positions for the specified trading account.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.accounts.positions.closePositions(
+   *     0,
+   *   );
+   * ```
+   */
+  closePositions(
+    accountID: number,
+    body: PositionClosePositionsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PositionClosePositionsResponse> {
+    return this._client.delete(path`/active/v1/accounts/${accountID}/positions`, { body, ...options });
+  }
+
+  /**
    * Retrieves all positions for the specified trading account.
    *
    * @example
@@ -144,6 +163,10 @@ export interface PositionClosePositionResponse extends Shared.BaseResponse {
   data: AccountsAPI.OrderList;
 }
 
+export interface PositionClosePositionsResponse extends Shared.BaseResponse {
+  data: AccountsAPI.OrderList;
+}
+
 export interface PositionGetPositionsResponse extends Shared.BaseResponse {
   data: PositionList;
 }
@@ -162,6 +185,10 @@ export interface PositionClosePositionParams {
   /**
    * Body param
    */
+  cancel_orders?: boolean | null;
+}
+
+export interface PositionClosePositionsParams {
   cancel_orders?: boolean | null;
 }
 
@@ -198,6 +225,23 @@ export interface PositionGetPositionsParams {
    * - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
    */
   security_id_source?: Array<string>;
+
+  /**
+   * Field to sort by
+   */
+  sort_by?:
+    | 'SYMBOL'
+    | 'INSTRUMENT_TYPE'
+    | 'QUANTITY'
+    | 'MARKET_VALUE'
+    | 'POSITION_TYPE'
+    | 'UNREALIZED_PNL'
+    | 'DAILY_UNREALIZED_PNL';
+
+  /**
+   * Sort direction
+   */
+  sort_direction?: 'ASC' | 'DESC';
 }
 
 export declare namespace Positions {
@@ -205,8 +249,10 @@ export declare namespace Positions {
     type Position as Position,
     type PositionList as PositionList,
     type PositionClosePositionResponse as PositionClosePositionResponse,
+    type PositionClosePositionsResponse as PositionClosePositionsResponse,
     type PositionGetPositionsResponse as PositionGetPositionsResponse,
     type PositionClosePositionParams as PositionClosePositionParams,
+    type PositionClosePositionsParams as PositionClosePositionsParams,
     type PositionGetPositionsParams as PositionGetPositionsParams,
   };
 }
