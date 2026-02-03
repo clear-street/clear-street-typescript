@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.38.2 (2026-02-03)
+
+Full Changelog: [v0.38.1...v0.38.2](https://github.com/clear-street/clear-street-typescript/compare/v0.38.1...v0.38.2)
+
+### Chores
+
+* **ACTIVE-2017:** GET Positions pagination/sorting/filtering. ([d7b4690](https://github.com/clear-street/clear-street-typescript/commit/d7b469039a70b1725175fc16a1bc2328cbad3fb4))
+
 ## 0.38.1 (2026-02-03)
 
 Full Changelog: [v0.38.0...v0.38.1](https://github.com/clear-street/clear-street-typescript/compare/v0.38.0...v0.38.1)
