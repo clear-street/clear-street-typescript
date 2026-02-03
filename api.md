@@ -120,6 +120,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/accounts/portfolio-history.ts">PortfolioHistoryResponse</a></code>
+- <code><a href="./src/resources/active/v1/accounts/portfolio-history.ts">PortfolioHistorySegment</a></code>
 - <code><a href="./src/resources/active/v1/accounts/portfolio-history.ts">PortfolioHistoryGetPortfolioHistoryResponse</a></code>
 
 Methods:
@@ -133,11 +135,13 @@ Types:
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">Position</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionList</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionClosePositionResponse</a></code>
+- <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionClosePositionsResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionGetPositionsResponse</a></code>
 
 Methods:
 
 - <code title="delete /active/v1/accounts/{account_id}/positions/{security_id_source}/{security_id}">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">closePosition</a>(securityID, { ...params }) -> PositionClosePositionResponse</code>
+- <code title="delete /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">closePositions</a>(accountID, { ...params }) -> PositionClosePositionsResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
 
 ### APIKeys

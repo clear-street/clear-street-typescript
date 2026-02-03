@@ -33,6 +33,30 @@ describe('resource positions', () => {
   });
 
   // Prism tests are disabled
+  test.skip('closePositions', async () => {
+    const responsePromise = client.active.v1.accounts.positions.closePositions(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('closePositions: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.active.v1.accounts.positions.closePositions(
+        0,
+        { cancel_orders: false },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('getPositions', async () => {
     const responsePromise = client.active.v1.accounts.positions.getPositions(0);
     const rawResponse = await responsePromise.asResponse();
@@ -55,6 +79,8 @@ describe('resource positions', () => {
           page_token: 'U3RhaW5sZXNzIHJvY2tz',
           security_id: ['string'],
           security_id_source: ['string'],
+          sort_by: 'SYMBOL',
+          sort_direction: 'ASC',
         },
         { path: '/_stainless_unknown_path' },
       ),
