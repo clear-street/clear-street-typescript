@@ -42,7 +42,6 @@ export {
   type ApStrategy,
   type BaseStrategyParams,
   type DarkStrategy,
-  type Destination,
   type DmaStrategy,
   type OrderStatus,
   type OrderStrategy,

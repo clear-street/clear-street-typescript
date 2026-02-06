@@ -179,7 +179,6 @@ describe('resource orders', () => {
           symbol: 'AAPL',
           trailing_offset_amt: '1.25',
           trailing_offset_amt_type: 'PRICE',
-          venue: 'CDRG',
         },
       ],
     });

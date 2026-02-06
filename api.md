@@ -88,7 +88,6 @@ Types:
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">ApStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">BaseStrategyParams</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">DarkStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">Destination</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">DmaStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderStatus</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderStrategy</a></code>
