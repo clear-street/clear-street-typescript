@@ -191,31 +191,13 @@ export interface DarkStrategy extends BaseStrategyParams {
 }
 
 /**
- * Destination exchange for DMA orders (Market Identifier Code)
- */
-export type Destination =
-  | 'ARCX'
-  | 'BATS'
-  | 'BATY'
-  | 'EDGA'
-  | 'EDGX'
-  | 'EPRL'
-  | 'IEXG'
-  | 'MEMX'
-  | 'XASE'
-  | 'XBOS'
-  | 'XCIS'
-  | 'XNMS'
-  | 'XNYS';
-
-/**
  * Direct Market Access strategy
  */
 export interface DmaStrategy {
   /**
    * Destination exchange (MIC code)
    */
-  destination: Destination;
+  destination: string;
 }
 
 /**
@@ -724,12 +706,6 @@ export namespace OrderSubmitOrdersParams {
      * Trailing offset type (PRICE or PERCENT_BPS)
      */
     trailing_offset_amt_type?: 'PRICE' | 'PERCENT_BPS' | null;
-
-    /**
-     * Execution venue to route the order to. If not specified, the system will choose
-     * the best venue.
-     */
-    venue?: string;
   }
 }
 
@@ -738,7 +714,6 @@ export declare namespace Orders {
     type ApStrategy as ApStrategy,
     type BaseStrategyParams as BaseStrategyParams,
     type DarkStrategy as DarkStrategy,
-    type Destination as Destination,
     type DmaStrategy as DmaStrategy,
     type OrderStatus as OrderStatus,
     type OrderStrategy as OrderStrategy,
