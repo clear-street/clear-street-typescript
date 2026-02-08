@@ -161,11 +161,6 @@ export interface Instrument extends InstrumentCore {
   long_concentration_limit?: string | null;
 
   /**
-   * The percent of a long position's value you must post as margin
-   */
-  long_margin_rate?: string | null;
-
-  /**
    * The total market capitalization
    */
   market_cap?: string | null;
@@ -195,11 +190,6 @@ export interface Instrument extends InstrumentCore {
    * short side
    */
   short_concentration_limit?: string | null;
-
-  /**
-   * The percent of a short position's value you must post as margin
-   */
-  short_margin_rate?: string | null;
 }
 
 /**
@@ -273,6 +263,11 @@ export interface InstrumentCore {
   expiry?: string | null;
 
   /**
+   * The percent of a long position's value you must post as margin
+   */
+  long_margin_rate?: string | null;
+
+  /**
    * The full name of the instrument or its issuer
    */
   name?: string | null;
@@ -281,6 +276,11 @@ export interface InstrumentCore {
    * The type of security (e.g., Common Stock, ETF)
    */
   security_type?: V1API.SecurityType | null;
+
+  /**
+   * The percent of a short position's value you must post as margin
+   */
+  short_margin_rate?: string | null;
 
   /**
    * The strike price for options instruments
