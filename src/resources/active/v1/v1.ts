@@ -25,6 +25,15 @@ import {
 } from './screener';
 import * as VersionAPI from './version';
 import { Version, VersionGetVersionResponse, VersionResource, VersionUpdateVersionResponse } from './version';
+import * as WatchlistsAPI from './watchlists';
+import {
+  WatchlistCreateWatchlistParams,
+  WatchlistCreateWatchlistResponse,
+  WatchlistEntry,
+  WatchlistEntryList,
+  WatchlistGetWatchlistsResponse,
+  Watchlists,
+} from './watchlists';
 import * as WsAPI from './ws';
 import { Ws } from './ws';
 import * as AccountsAPI from './accounts/accounts';
@@ -74,6 +83,7 @@ export class V1 extends APIResource {
   iris: IrisAPI.Iris = new IrisAPI.Iris(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
+  watchlists: WatchlistsAPI.Watchlists = new WatchlistsAPI.Watchlists(this._client);
   ws: WsAPI.Ws = new WsAPI.Ws(this._client);
 }
 
@@ -112,6 +122,7 @@ V1.Instruments = Instruments;
 V1.Iris = Iris;
 V1.Screener = Screener;
 V1.VersionResource = VersionResource;
+V1.Watchlists = Watchlists;
 V1.Ws = Ws;
 
 export declare namespace V1 {
@@ -181,6 +192,15 @@ export declare namespace V1 {
     type Version as Version,
     type VersionGetVersionResponse as VersionGetVersionResponse,
     type VersionUpdateVersionResponse as VersionUpdateVersionResponse,
+  };
+
+  export {
+    Watchlists as Watchlists,
+    type WatchlistEntry as WatchlistEntry,
+    type WatchlistEntryList as WatchlistEntryList,
+    type WatchlistCreateWatchlistResponse as WatchlistCreateWatchlistResponse,
+    type WatchlistGetWatchlistsResponse as WatchlistGetWatchlistsResponse,
+    type WatchlistCreateWatchlistParams as WatchlistCreateWatchlistParams,
   };
 
   export { Ws as Ws };

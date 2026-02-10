@@ -436,6 +436,20 @@ Methods:
 - <code title="get /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">getVersion</a>() -> VersionGetVersionResponse</code>
 - <code title="patch /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">updateVersion</a>() -> VersionUpdateVersionResponse</code>
 
+### Watchlists
+
+Types:
+
+- <code><a href="./src/resources/active/v1/watchlists.ts">WatchlistEntry</a></code>
+- <code><a href="./src/resources/active/v1/watchlists.ts">WatchlistEntryList</a></code>
+- <code><a href="./src/resources/active/v1/watchlists.ts">WatchlistCreateWatchlistResponse</a></code>
+- <code><a href="./src/resources/active/v1/watchlists.ts">WatchlistGetWatchlistsResponse</a></code>
+
+Methods:
+
+- <code title="post /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists.ts">createWatchlist</a>({ ...params }) -> WatchlistCreateWatchlistResponse</code>
+- <code title="get /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists.ts">getWatchlists</a>() -> WatchlistGetWatchlistsResponse</code>
+
 ### Ws
 
 Methods:
