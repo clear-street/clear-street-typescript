@@ -59,4 +59,12 @@ export {
   type VersionGetVersionResponse,
   type VersionUpdateVersionResponse,
 } from './version';
+export {
+  Watchlists,
+  type WatchlistEntry,
+  type WatchlistEntryList,
+  type WatchlistCreateWatchlistResponse,
+  type WatchlistGetWatchlistsResponse,
+  type WatchlistCreateWatchlistParams,
+} from './watchlists';
 export { Ws } from './ws';
