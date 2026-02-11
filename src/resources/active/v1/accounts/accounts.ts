@@ -14,6 +14,7 @@ import {
 } from './balances';
 import * as OrdersAPI from './orders';
 import {
+  APIDecimal64,
   ApStrategy,
   BaseStrategyParams,
   DarkStrategy,
@@ -461,6 +462,7 @@ export declare namespace Accounts {
   export {
     Orders as Orders,
     type ApStrategy as ApStrategy,
+    type APIDecimal64 as APIDecimal64,
     type BaseStrategyParams as BaseStrategyParams,
     type DarkStrategy as DarkStrategy,
     type DmaStrategy as DmaStrategy,

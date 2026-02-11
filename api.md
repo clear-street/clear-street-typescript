@@ -86,6 +86,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">ApStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">APIDecimal64</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">BaseStrategyParams</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">DarkStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">DmaStrategy</a></code>

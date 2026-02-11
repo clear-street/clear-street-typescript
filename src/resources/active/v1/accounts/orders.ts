@@ -152,13 +152,18 @@ export interface ApStrategy extends BaseStrategyParams {
   /**
    * Maximum percentage of market volume to participate in (0-100)
    */
-  max_percent?: number | null;
+  max_percent?: APIDecimal64 | null;
 
   /**
    * Minimum percentage of market volume to participate in (0-100)
    */
-  min_percent?: number | null;
+  min_percent?: APIDecimal64 | null;
 }
+
+/**
+ * A decimal number represented as a string.
+ */
+export type APIDecimal64 = string;
 
 /**
  * Base parameters common to most algorithmic strategies
@@ -187,7 +192,7 @@ export interface DarkStrategy extends BaseStrategyParams {
   /**
    * Maximum percentage of market volume to participate in (0-100)
    */
-  max_percent?: number | null;
+  max_percent?: APIDecimal64 | null;
 }
 
 /**
@@ -305,7 +310,7 @@ export interface PovStrategy extends BaseStrategyParams {
   /**
    * Target percentage of market volume to participate in (0-100)
    */
-  target_percent: number;
+  target_percent: APIDecimal64;
 }
 
 /**
@@ -356,12 +361,12 @@ export interface TwapStrategy extends BaseStrategyParams {
   /**
    * Maximum percentage of market volume to participate in (0-50)
    */
-  max_percent?: number | null;
+  max_percent?: APIDecimal64 | null;
 
   /**
    * Minimum percentage of market volume to participate in (0-100)
    */
-  min_percent?: number | null;
+  min_percent?: APIDecimal64 | null;
 }
 
 /**
@@ -376,12 +381,12 @@ export interface VwapStrategy extends BaseStrategyParams {
   /**
    * Maximum percentage of market volume to participate in (0-50)
    */
-  max_percent?: number | null;
+  max_percent?: APIDecimal64 | null;
 
   /**
    * Minimum percentage of market volume to participate in (0-100)
    */
-  min_percent?: number | null;
+  min_percent?: APIDecimal64 | null;
 }
 
 export interface OrderCancelAllOrdersResponse extends Shared.BaseResponse {
@@ -712,6 +717,7 @@ export namespace OrderSubmitOrdersParams {
 export declare namespace Orders {
   export {
     type ApStrategy as ApStrategy,
+    type APIDecimal64 as APIDecimal64,
     type BaseStrategyParams as BaseStrategyParams,
     type DarkStrategy as DarkStrategy,
     type DmaStrategy as DmaStrategy,
