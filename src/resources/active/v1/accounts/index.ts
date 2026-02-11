@@ -40,6 +40,7 @@ export {
 export {
   Orders,
   type ApStrategy,
+  type APIDecimal64,
   type BaseStrategyParams,
   type DarkStrategy,
   type DmaStrategy,
