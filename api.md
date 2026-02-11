@@ -276,6 +276,7 @@ Types:
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentCoreList</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentEarnings</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentQuote</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentSecurityID</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentGetInstrumentByIDResponse</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentGetInstrumentsResponse</a></code>
 

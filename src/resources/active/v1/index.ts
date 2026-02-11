@@ -39,6 +39,7 @@ export {
   type InstrumentCoreList,
   type InstrumentEarnings,
   type InstrumentQuote,
+  type InstrumentSecurityID,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
   type InstrumentGetInstrumentByIDParams,
