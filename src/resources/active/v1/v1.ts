@@ -69,6 +69,7 @@ import {
   InstrumentGetInstrumentsParams,
   InstrumentGetInstrumentsResponse,
   InstrumentQuote,
+  InstrumentSecurityID,
   Instruments,
 } from './instruments/instruments';
 import * as IrisAPI from './iris/iris';
@@ -99,6 +100,36 @@ export type SecurityIDSource =
   | 'CURRENCY'
   | 'FMP'
   | 'OEMS'
+  | 'SEDOL'
+  | 'QUIK'
+  | 'ISIN'
+  | 'RIC'
+  | 'COUNTRY'
+  | 'EXCHANGE'
+  | 'CTA'
+  | 'BLOOMBERG'
+  | 'WERTPAPIER'
+  | 'DUTCH'
+  | 'VALOREN'
+  | 'SICOVAM'
+  | 'BELGIAN'
+  | 'COMMON'
+  | 'CLEARING_HOUSE'
+  | 'ISDA_FPML_SPECIFICATION'
+  | 'ISDA_FPML_URL'
+  | 'LETTER_OF_CREDIT'
+  | 'MARKETPLACE_ASSIGNED_IDENTIFIER'
+  | 'MARKIT_RED_ENTITY_CLIP'
+  | 'MARKIT_RED_PAIR_CLIP'
+  | 'CFTC'
+  | 'ISDA_COMMODITY_REFERENCE_PRICE'
+  | 'LEGAL_ENTITY_IDENTIFIER'
+  | 'SYNTHETIC'
+  | 'FIDESSA_INSTRUMENT_MNEMONIC'
+  | 'INDEX_NAME'
+  | 'UNIFORM_SYMBOL'
+  | 'DIGITAL_TOKEN_IDENTIFIER'
+  | 'MASSIVE'
   | 'OTHER';
 
 /**
@@ -171,6 +202,7 @@ export declare namespace V1 {
     type InstrumentCoreList as InstrumentCoreList,
     type InstrumentEarnings as InstrumentEarnings,
     type InstrumentQuote as InstrumentQuote,
+    type InstrumentSecurityID as InstrumentSecurityID,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,

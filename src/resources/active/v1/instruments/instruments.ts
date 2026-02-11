@@ -192,11 +192,12 @@ export interface Instrument extends InstrumentCore {
   short_concentration_limit?: string | null;
 }
 
-/**
- * Represents a tradable financial instrument, as a more concise item listing only
- * key fields.
- */
 export interface InstrumentCore {
+  /**
+   * Unique instrument identifier
+   */
+  id: string;
+
   /**
    * The ISO country code of the instrument's issue
    */
@@ -238,14 +239,23 @@ export interface InstrumentCore {
   is_threshold_security: boolean;
 
   /**
-   * A unique Clear Street identifier for the instrument
+   * @deprecated Deprecated. Use `security_ids`.
+   *
+   * A primary security identifier for this instrument.
    */
   security_id: string;
 
   /**
-   * The source system for the security identifier
+   * Deprecated. Use `security_ids`.
+   *
+   * The source for `security_id`.
    */
   security_id_source: V1API.SecurityIDSource;
+
+  /**
+   * All known security identifiers for this instrument
+   */
+  security_ids: Array<InstrumentSecurityID>;
 
   /**
    * The trading symbol for the instrument
@@ -358,6 +368,22 @@ export interface InstrumentQuote {
    * The total number of shares traded during the current trading day
    */
   volume: number;
+}
+
+/**
+ * Represents a tradable financial instrument, as a more concise item listing only
+ * key fields.
+ */
+export interface InstrumentSecurityID {
+  /**
+   * The identifier for the instrument
+   */
+  security_id: string;
+
+  /**
+   * The source system for the security identifier
+   */
+  security_id_source: V1API.SecurityIDSource;
 }
 
 export interface InstrumentGetInstrumentByIDResponse extends Shared.BaseResponse {
@@ -474,6 +500,7 @@ export declare namespace Instruments {
     type InstrumentCoreList as InstrumentCoreList,
     type InstrumentEarnings as InstrumentEarnings,
     type InstrumentQuote as InstrumentQuote,
+    type InstrumentSecurityID as InstrumentSecurityID,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
