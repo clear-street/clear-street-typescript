@@ -67,5 +67,5 @@ export {
   type WatchlistCreateWatchlistResponse,
   type WatchlistGetWatchlistsResponse,
   type WatchlistCreateWatchlistParams,
-} from './watchlists';
+} from './watchlists/index';
 export { Ws } from './ws';
