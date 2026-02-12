@@ -442,15 +442,27 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/watchlists.ts">WatchlistEntry</a></code>
-- <code><a href="./src/resources/active/v1/watchlists.ts">WatchlistEntryList</a></code>
-- <code><a href="./src/resources/active/v1/watchlists.ts">WatchlistCreateWatchlistResponse</a></code>
-- <code><a href="./src/resources/active/v1/watchlists.ts">WatchlistGetWatchlistsResponse</a></code>
+- <code><a href="./src/resources/active/v1/watchlists/watchlists.ts">WatchlistEntry</a></code>
+- <code><a href="./src/resources/active/v1/watchlists/watchlists.ts">WatchlistEntryList</a></code>
+- <code><a href="./src/resources/active/v1/watchlists/watchlists.ts">WatchlistCreateWatchlistResponse</a></code>
+- <code><a href="./src/resources/active/v1/watchlists/watchlists.ts">WatchlistGetWatchlistsResponse</a></code>
 
 Methods:
 
-- <code title="post /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists.ts">createWatchlist</a>({ ...params }) -> WatchlistCreateWatchlistResponse</code>
-- <code title="get /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists.ts">getWatchlists</a>() -> WatchlistGetWatchlistsResponse</code>
+- <code title="post /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists/watchlists.ts">createWatchlist</a>({ ...params }) -> WatchlistCreateWatchlistResponse</code>
+- <code title="get /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists/watchlists.ts">getWatchlists</a>() -> WatchlistGetWatchlistsResponse</code>
+
+#### Items
+
+Types:
+
+- <code><a href="./src/resources/active/v1/watchlists/items.ts">AddWatchlistItemData</a></code>
+- <code><a href="./src/resources/active/v1/watchlists/items.ts">ItemAddWatchlistItemResponse</a></code>
+
+Methods:
+
+- <code title="post /active/v1/watchlists/{watchlist_id}/items">client.active.v1.watchlists.items.<a href="./src/resources/active/v1/watchlists/items.ts">addWatchlistItem</a>(watchlistID, { ...params }) -> ItemAddWatchlistItemResponse</code>
+- <code title="delete /active/v1/watchlists/{watchlist_id}/items/{item_id}">client.active.v1.watchlists.items.<a href="./src/resources/active/v1/watchlists/items.ts">deleteWatchlistItem</a>(itemID, { ...params }) -> void</code>
 
 ### Ws
 

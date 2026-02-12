@@ -25,15 +25,6 @@ import {
 } from './screener';
 import * as VersionAPI from './version';
 import { Version, VersionGetVersionResponse, VersionResource, VersionUpdateVersionResponse } from './version';
-import * as WatchlistsAPI from './watchlists';
-import {
-  WatchlistCreateWatchlistParams,
-  WatchlistCreateWatchlistResponse,
-  WatchlistEntry,
-  WatchlistEntryList,
-  WatchlistGetWatchlistsResponse,
-  Watchlists,
-} from './watchlists';
 import * as WsAPI from './ws';
 import { Ws } from './ws';
 import * as AccountsAPI from './accounts/accounts';
@@ -74,6 +65,15 @@ import {
 } from './instruments/instruments';
 import * as IrisAPI from './iris/iris';
 import { Iris, Message, Thread } from './iris/iris';
+import * as WatchlistsAPI from './watchlists/watchlists';
+import {
+  WatchlistCreateWatchlistParams,
+  WatchlistCreateWatchlistResponse,
+  WatchlistEntry,
+  WatchlistEntryList,
+  WatchlistGetWatchlistsResponse,
+  Watchlists,
+} from './watchlists/watchlists';
 
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
