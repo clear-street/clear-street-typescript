@@ -26,6 +26,20 @@ describe('resource watchlists', () => {
   });
 
   // Prism tests are disabled
+  test.skip('getWatchlistByID', async () => {
+    const responsePromise = client.active.v1.watchlists.getWatchlistByID(
+      '550e8400-e29b-41d4-a716-446655440000',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('getWatchlists', async () => {
     const responsePromise = client.active.v1.watchlists.getWatchlists();
     const rawResponse = await responsePromise.asResponse();

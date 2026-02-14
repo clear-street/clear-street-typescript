@@ -65,13 +65,18 @@ import {
 } from './instruments/instruments';
 import * as IrisAPI from './iris/iris';
 import { Iris, Message, Thread } from './iris/iris';
+import * as MarketDataAPI from './market-data/market-data';
+import { MarketData } from './market-data/market-data';
 import * as WatchlistsAPI from './watchlists/watchlists';
 import {
   WatchlistCreateWatchlistParams,
   WatchlistCreateWatchlistResponse,
+  WatchlistDetail,
   WatchlistEntry,
   WatchlistEntryList,
+  WatchlistGetWatchlistByIDResponse,
   WatchlistGetWatchlistsResponse,
+  WatchlistItemEntry,
   Watchlists,
 } from './watchlists/watchlists';
 
@@ -82,6 +87,7 @@ export class V1 extends APIResource {
   calendars: CalendarsAPI.Calendars = new CalendarsAPI.Calendars(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
   iris: IrisAPI.Iris = new IrisAPI.Iris(this._client);
+  marketData: MarketDataAPI.MarketData = new MarketDataAPI.MarketData(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
   watchlists: WatchlistsAPI.Watchlists = new WatchlistsAPI.Watchlists(this._client);
@@ -151,6 +157,7 @@ V1.Assistant = Assistant;
 V1.Calendars = Calendars;
 V1.Instruments = Instruments;
 V1.Iris = Iris;
+V1.MarketData = MarketData;
 V1.Screener = Screener;
 V1.VersionResource = VersionResource;
 V1.Watchlists = Watchlists;
@@ -211,6 +218,8 @@ export declare namespace V1 {
 
   export { Iris as Iris, type Message as Message, type Thread as Thread };
 
+  export { MarketData as MarketData };
+
   export {
     Screener as Screener,
     type ScreenerItem as ScreenerItem,
@@ -228,9 +237,12 @@ export declare namespace V1 {
 
   export {
     Watchlists as Watchlists,
+    type WatchlistDetail as WatchlistDetail,
     type WatchlistEntry as WatchlistEntry,
     type WatchlistEntryList as WatchlistEntryList,
+    type WatchlistItemEntry as WatchlistItemEntry,
     type WatchlistCreateWatchlistResponse as WatchlistCreateWatchlistResponse,
+    type WatchlistGetWatchlistByIDResponse as WatchlistGetWatchlistByIDResponse,
     type WatchlistGetWatchlistsResponse as WatchlistGetWatchlistsResponse,
     type WatchlistCreateWatchlistParams as WatchlistCreateWatchlistParams,
   };

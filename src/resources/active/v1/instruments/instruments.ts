@@ -15,10 +15,14 @@ import {
 } from './analyst-reporting';
 import * as EventsAPI from './events';
 import {
+  EventGetAllInstrumentEventsParams,
+  EventGetAllInstrumentEventsResponse,
   EventGetInstrumentEventsParams,
   EventGetInstrumentEventsResponse,
   Events,
+  InstrumentAllEventsData,
   InstrumentDividendEvent,
+  InstrumentEventsByDate,
   InstrumentEventsData,
   InstrumentSplitEvent,
 } from './events';
@@ -519,10 +523,14 @@ export declare namespace Instruments {
 
   export {
     Events as Events,
+    type InstrumentAllEventsData as InstrumentAllEventsData,
     type InstrumentDividendEvent as InstrumentDividendEvent,
+    type InstrumentEventsByDate as InstrumentEventsByDate,
     type InstrumentEventsData as InstrumentEventsData,
     type InstrumentSplitEvent as InstrumentSplitEvent,
+    type EventGetAllInstrumentEventsResponse as EventGetAllInstrumentEventsResponse,
     type EventGetInstrumentEventsResponse as EventGetInstrumentEventsResponse,
+    type EventGetAllInstrumentEventsParams as EventGetAllInstrumentEventsParams,
     type EventGetInstrumentEventsParams as EventGetInstrumentEventsParams,
   };
 

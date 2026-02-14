@@ -304,13 +304,17 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentAllEventsData</a></code>
 - <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentDividendEvent</a></code>
+- <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentEventsByDate</a></code>
 - <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentEventsData</a></code>
 - <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentSplitEvent</a></code>
+- <code><a href="./src/resources/active/v1/instruments/events.ts">EventGetAllInstrumentEventsResponse</a></code>
 - <code><a href="./src/resources/active/v1/instruments/events.ts">EventGetInstrumentEventsResponse</a></code>
 
 Methods:
 
+- <code title="get /active/v1/instruments/events">client.active.v1.instruments.events.<a href="./src/resources/active/v1/instruments/events.ts">getAllInstrumentEvents</a>({ ...params }) -> EventGetAllInstrumentEventsResponse</code>
 - <code title="get /active/v1/instruments/{security_id_source}/{security_id}/events">client.active.v1.instruments.events.<a href="./src/resources/active/v1/instruments/events.ts">getInstrumentEvents</a>(securityID, { ...params }) -> EventGetInstrumentEventsResponse</code>
 
 #### News
@@ -413,6 +417,20 @@ Methods:
 
 - <code title="get /active/v1/iris/threads/{thread_id}/messages">client.active.v1.iris.threads.messages.<a href="./src/resources/active/v1/iris/threads/messages.ts">listMessages</a>(threadID, { ...params }) -> MessageListMessagesResponse</code>
 
+### MarketData
+
+#### Snapshot
+
+Types:
+
+- <code><a href="./src/resources/active/v1/market-data/snapshot.ts">MarketDataSnapshot</a></code>
+- <code><a href="./src/resources/active/v1/market-data/snapshot.ts">MarketDataSnapshotList</a></code>
+- <code><a href="./src/resources/active/v1/market-data/snapshot.ts">SnapshotGetSnapshotsResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/market-data/snapshot">client.active.v1.marketData.snapshot.<a href="./src/resources/active/v1/market-data/snapshot.ts">getSnapshots</a>({ ...params }) -> SnapshotGetSnapshotsResponse</code>
+
 ### Screener
 
 Types:
@@ -442,14 +460,18 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/watchlists/watchlists.ts">WatchlistDetail</a></code>
 - <code><a href="./src/resources/active/v1/watchlists/watchlists.ts">WatchlistEntry</a></code>
 - <code><a href="./src/resources/active/v1/watchlists/watchlists.ts">WatchlistEntryList</a></code>
+- <code><a href="./src/resources/active/v1/watchlists/watchlists.ts">WatchlistItemEntry</a></code>
 - <code><a href="./src/resources/active/v1/watchlists/watchlists.ts">WatchlistCreateWatchlistResponse</a></code>
+- <code><a href="./src/resources/active/v1/watchlists/watchlists.ts">WatchlistGetWatchlistByIDResponse</a></code>
 - <code><a href="./src/resources/active/v1/watchlists/watchlists.ts">WatchlistGetWatchlistsResponse</a></code>
 
 Methods:
 
 - <code title="post /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists/watchlists.ts">createWatchlist</a>({ ...params }) -> WatchlistCreateWatchlistResponse</code>
+- <code title="get /active/v1/watchlists/{watchlist_id}">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists/watchlists.ts">getWatchlistByID</a>(watchlistID) -> WatchlistGetWatchlistByIDResponse</code>
 - <code title="get /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists/watchlists.ts">getWatchlists</a>() -> WatchlistGetWatchlistsResponse</code>
 
 #### Items
