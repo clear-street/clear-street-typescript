@@ -9,9 +9,12 @@ export {
 } from './items';
 export {
   Watchlists,
+  type WatchlistDetail,
   type WatchlistEntry,
   type WatchlistEntryList,
+  type WatchlistItemEntry,
   type WatchlistCreateWatchlistResponse,
+  type WatchlistGetWatchlistByIDResponse,
   type WatchlistGetWatchlistsResponse,
   type WatchlistCreateWatchlistParams,
 } from './watchlists';

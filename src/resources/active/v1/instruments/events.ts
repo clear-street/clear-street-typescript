@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as EventsAPI from './events';
 import * as Shared from '../../../shared';
 import * as V1API from '../v1';
 import * as InstrumentsAPI from './instruments';
@@ -9,6 +10,22 @@ import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 export class Events extends APIResource {
+  /**
+   * Retrieves all instrument events grouped by date.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.instruments.events.getAllInstrumentEvents();
+   * ```
+   */
+  getAllInstrumentEvents(
+    query: EventGetAllInstrumentEventsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EventGetAllInstrumentEventsResponse> {
+    return this._client.get('/active/v1/instruments/events', { query, ...options });
+  }
+
   /**
    * Retrieves corporate events (dividends, splits, etc.) for an instrument, grouped
    * by event type.
@@ -38,6 +55,16 @@ export class Events extends APIResource {
       ...options,
     });
   }
+}
+
+/**
+ * All-events payload grouped by date.
+ */
+export interface InstrumentAllEventsData {
+  /**
+   * Events grouped by date in descending order.
+   */
+  event_dates: Array<InstrumentEventsByDate>;
 }
 
 /**
@@ -86,6 +113,121 @@ export interface InstrumentDividendEvent {
    * dividend.
    */
   record_date?: string | null;
+}
+
+/**
+ * Instrument events for a single date.
+ */
+export interface InstrumentEventsByDate {
+  /**
+   * Event date.
+   */
+  date: string;
+
+  /**
+   * Flat event envelopes for this date.
+   */
+  events: Array<InstrumentEventsByDate.Event>;
+}
+
+export namespace InstrumentEventsByDate {
+  /**
+   * Unified envelope for the all-events response.
+   */
+  export interface Event {
+    /**
+     * Security identifier for the event.
+     */
+    security_id: string;
+
+    /**
+     * Security identifier source for the event.
+     */
+    security_id_source: V1API.SecurityIDSource;
+
+    /**
+     * Symbol associated with the event.
+     */
+    symbol: string;
+
+    /**
+     * Event type discriminator.
+     */
+    type: 'EARNINGS' | 'DIVIDEND' | 'STOCK_SPLIT' | 'IPO';
+
+    /**
+     * Dividend payload when type is DIVIDEND.
+     */
+    dividend_event_data?: EventsAPI.InstrumentDividendEvent | null;
+
+    /**
+     * Earnings payload when type is EARNINGS.
+     */
+    earnings_event_data?: InstrumentsAPI.InstrumentEarnings | null;
+
+    /**
+     * OEMS instrument identifier, when the instrument is found in the instrument
+     * cache.
+     */
+    instrument_id?: string | null;
+
+    /**
+     * IPO payload when type is IPO.
+     */
+    ipo_event_data?: Event.IpoEventData | null;
+
+    /**
+     * Instrument name associated with the event, when available.
+     */
+    name?: string | null;
+
+    /**
+     * Stock split payload when type is STOCK_SPLIT.
+     */
+    stock_split_event_data?: EventsAPI.InstrumentSplitEvent | null;
+  }
+
+  export namespace Event {
+    /**
+     * IPO payload when type is IPO.
+     */
+    export interface IpoEventData {
+      /**
+       * IPO action.
+       */
+      actions?: string | null;
+
+      /**
+       * IPO announced timestamp.
+       */
+      announced_at?: string | null;
+
+      /**
+       * IPO company name.
+       */
+      company?: string | null;
+
+      /**
+       * IPO exchange.
+       */
+      exchange?: string | null;
+
+      /**
+       * IPO market cap.
+       */
+      market_cap?: string | null;
+
+      /**
+       * IPO price range.
+       */
+      price_range?: string | null;
+
+      /**
+       * IPO shares offered.
+       */
+      shares?: string | null;
+    }
+  }
 }
 
 /**
@@ -143,11 +285,63 @@ export interface InstrumentSplitEvent {
   split_type: string;
 }
 
+export interface EventGetAllInstrumentEventsResponse extends Shared.BaseResponse {
+  /**
+   * All-events payload grouped by date.
+   */
+  data: InstrumentAllEventsData;
+}
+
 export interface EventGetInstrumentEventsResponse extends Shared.BaseResponse {
   /**
    * Grouped instrument events by type
    */
   data: InstrumentEventsData;
+}
+
+export interface EventGetAllInstrumentEventsParams {
+  /**
+   * Filter by event type(s). Comma-delimited list. Example:
+   * `event_types=EARNINGS,IPO`.
+   */
+  event_types?: Array<'EARNINGS' | 'DIVIDEND' | 'STOCK_SPLIT' | 'IPO'>;
+
+  /**
+   * The start date for the query range, inclusive (YYYY-MM-DD).
+   */
+  from_date?: string;
+
+  /**
+   * Filter by OEMS instrument ID(s). Comma-delimited list of UUIDs. Example:
+   * `instrument_ids=550e8400-e29b-41d4-a716-446655440000`.
+   */
+  instrument_ids?: Array<string>;
+
+  /**
+   * Filter by security ID(s). Accepts single value or indexed array.
+   *
+   * Examples:
+   *
+   * - Single: `security_id=037833100`
+   * - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
+   */
+  security_id?: Array<string>;
+
+  /**
+   * Source(s) for the security ID filter. Must match the count and order of
+   * security_id.
+   *
+   * Examples:
+   *
+   * - Single: `security_id_source=CUSIP`
+   * - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
+   */
+  security_id_source?: Array<string>;
+
+  /**
+   * The end date for the query range, inclusive (YYYY-MM-DD).
+   */
+  to_date?: string;
 }
 
 export interface EventGetInstrumentEventsParams {
@@ -169,10 +363,14 @@ export interface EventGetInstrumentEventsParams {
 
 export declare namespace Events {
   export {
+    type InstrumentAllEventsData as InstrumentAllEventsData,
     type InstrumentDividendEvent as InstrumentDividendEvent,
+    type InstrumentEventsByDate as InstrumentEventsByDate,
     type InstrumentEventsData as InstrumentEventsData,
     type InstrumentSplitEvent as InstrumentSplitEvent,
+    type EventGetAllInstrumentEventsResponse as EventGetAllInstrumentEventsResponse,
     type EventGetInstrumentEventsResponse as EventGetInstrumentEventsResponse,
+    type EventGetAllInstrumentEventsParams as EventGetAllInstrumentEventsParams,
     type EventGetInstrumentEventsParams as EventGetInstrumentEventsParams,
   };
 }

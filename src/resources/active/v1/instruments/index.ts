@@ -11,10 +11,14 @@ export {
 } from './analyst-reporting';
 export {
   Events,
+  type InstrumentAllEventsData,
   type InstrumentDividendEvent,
+  type InstrumentEventsByDate,
   type InstrumentEventsData,
   type InstrumentSplitEvent,
+  type EventGetAllInstrumentEventsResponse,
   type EventGetInstrumentEventsResponse,
+  type EventGetAllInstrumentEventsParams,
   type EventGetInstrumentEventsParams,
 } from './events';
 export {
