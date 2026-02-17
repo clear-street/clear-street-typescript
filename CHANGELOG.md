@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.40.0 (2026-02-17)
+
+Full Changelog: [v0.39.0...v0.40.0](https://github.com/clear-street/clear-street-typescript/compare/v0.39.0...v0.40.0)
+
+### Features
+
+* **ACTIVE-1604:** Delete watchlist endpoint ([12af739](https://github.com/clear-street/clear-street-typescript/commit/12af7395091cac73ee15ca2046d99117f2181f93))
+
+
+### Bug Fixes
+
+* **ACTIVE-2731:** Add analyst ratings to screener ([11c7ea5](https://github.com/clear-street/clear-street-typescript/commit/11c7ea52ab49967c42bd190d9ff4a6f2184eaa14))
+
 ## 0.39.0 (2026-02-16)
 
 Full Changelog: [v0.38.2...v0.39.0](https://github.com/clear-street/clear-street-typescript/compare/v0.38.2...v0.39.0)
