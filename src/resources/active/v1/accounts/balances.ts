@@ -130,6 +130,11 @@ export interface RegTBalance {
   multiplier: string;
 
   /**
+   * Notional exposure from open risk-increasing orders.
+   */
+  open_order_notional_value: string;
+
+  /**
    * Regulation T buying power.
    */
   regt_buying_power: string;
