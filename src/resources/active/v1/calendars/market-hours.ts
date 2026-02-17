@@ -44,7 +44,7 @@ export interface MarketHoursDetail {
   /**
    * Market type identifier
    */
-  market: string;
+  market: 'us_equities' | 'us_options';
 
   /**
    * Human-readable market name

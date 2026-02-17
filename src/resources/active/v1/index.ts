@@ -39,12 +39,14 @@ export {
   type InstrumentCoreList,
   type InstrumentEarnings,
   type InstrumentQuote,
+  type InstrumentSecurityID,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
   type InstrumentGetInstrumentByIDParams,
   type InstrumentGetInstrumentsParams,
 } from './instruments/index';
 export { Iris, type Message, type Thread } from './iris/index';
+export { MarketData } from './market-data/index';
 export {
   Screener,
   type ScreenerItem,
@@ -59,4 +61,15 @@ export {
   type VersionGetVersionResponse,
   type VersionUpdateVersionResponse,
 } from './version';
+export {
+  Watchlists,
+  type WatchlistDetail,
+  type WatchlistEntry,
+  type WatchlistEntryList,
+  type WatchlistItemEntry,
+  type WatchlistCreateWatchlistResponse,
+  type WatchlistGetWatchlistByIDResponse,
+  type WatchlistGetWatchlistsResponse,
+  type WatchlistCreateWatchlistParams,
+} from './watchlists/index';
 export { Ws } from './ws';

@@ -60,10 +60,25 @@ import {
   InstrumentGetInstrumentsParams,
   InstrumentGetInstrumentsResponse,
   InstrumentQuote,
+  InstrumentSecurityID,
   Instruments,
 } from './instruments/instruments';
 import * as IrisAPI from './iris/iris';
 import { Iris, Message, Thread } from './iris/iris';
+import * as MarketDataAPI from './market-data/market-data';
+import { MarketData } from './market-data/market-data';
+import * as WatchlistsAPI from './watchlists/watchlists';
+import {
+  WatchlistCreateWatchlistParams,
+  WatchlistCreateWatchlistResponse,
+  WatchlistDetail,
+  WatchlistEntry,
+  WatchlistEntryList,
+  WatchlistGetWatchlistByIDResponse,
+  WatchlistGetWatchlistsResponse,
+  WatchlistItemEntry,
+  Watchlists,
+} from './watchlists/watchlists';
 
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
@@ -72,8 +87,10 @@ export class V1 extends APIResource {
   calendars: CalendarsAPI.Calendars = new CalendarsAPI.Calendars(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
   iris: IrisAPI.Iris = new IrisAPI.Iris(this._client);
+  marketData: MarketDataAPI.MarketData = new MarketDataAPI.MarketData(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
+  watchlists: WatchlistsAPI.Watchlists = new WatchlistsAPI.Watchlists(this._client);
   ws: WsAPI.Ws = new WsAPI.Ws(this._client);
 }
 
@@ -89,6 +106,36 @@ export type SecurityIDSource =
   | 'CURRENCY'
   | 'FMP'
   | 'OEMS'
+  | 'SEDOL'
+  | 'QUIK'
+  | 'ISIN'
+  | 'RIC'
+  | 'COUNTRY'
+  | 'EXCHANGE'
+  | 'CTA'
+  | 'BLOOMBERG'
+  | 'WERTPAPIER'
+  | 'DUTCH'
+  | 'VALOREN'
+  | 'SICOVAM'
+  | 'BELGIAN'
+  | 'COMMON'
+  | 'CLEARING_HOUSE'
+  | 'ISDA_FPML_SPECIFICATION'
+  | 'ISDA_FPML_URL'
+  | 'LETTER_OF_CREDIT'
+  | 'MARKETPLACE_ASSIGNED_IDENTIFIER'
+  | 'MARKIT_RED_ENTITY_CLIP'
+  | 'MARKIT_RED_PAIR_CLIP'
+  | 'CFTC'
+  | 'ISDA_COMMODITY_REFERENCE_PRICE'
+  | 'LEGAL_ENTITY_IDENTIFIER'
+  | 'SYNTHETIC'
+  | 'FIDESSA_INSTRUMENT_MNEMONIC'
+  | 'INDEX_NAME'
+  | 'UNIFORM_SYMBOL'
+  | 'DIGITAL_TOKEN_IDENTIFIER'
+  | 'MASSIVE'
   | 'OTHER';
 
 /**
@@ -110,8 +157,10 @@ V1.Assistant = Assistant;
 V1.Calendars = Calendars;
 V1.Instruments = Instruments;
 V1.Iris = Iris;
+V1.MarketData = MarketData;
 V1.Screener = Screener;
 V1.VersionResource = VersionResource;
+V1.Watchlists = Watchlists;
 V1.Ws = Ws;
 
 export declare namespace V1 {
@@ -160,6 +209,7 @@ export declare namespace V1 {
     type InstrumentCoreList as InstrumentCoreList,
     type InstrumentEarnings as InstrumentEarnings,
     type InstrumentQuote as InstrumentQuote,
+    type InstrumentSecurityID as InstrumentSecurityID,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
@@ -167,6 +217,8 @@ export declare namespace V1 {
   };
 
   export { Iris as Iris, type Message as Message, type Thread as Thread };
+
+  export { MarketData as MarketData };
 
   export {
     Screener as Screener,
@@ -181,6 +233,18 @@ export declare namespace V1 {
     type Version as Version,
     type VersionGetVersionResponse as VersionGetVersionResponse,
     type VersionUpdateVersionResponse as VersionUpdateVersionResponse,
+  };
+
+  export {
+    Watchlists as Watchlists,
+    type WatchlistDetail as WatchlistDetail,
+    type WatchlistEntry as WatchlistEntry,
+    type WatchlistEntryList as WatchlistEntryList,
+    type WatchlistItemEntry as WatchlistItemEntry,
+    type WatchlistCreateWatchlistResponse as WatchlistCreateWatchlistResponse,
+    type WatchlistGetWatchlistByIDResponse as WatchlistGetWatchlistByIDResponse,
+    type WatchlistGetWatchlistsResponse as WatchlistGetWatchlistsResponse,
+    type WatchlistCreateWatchlistParams as WatchlistCreateWatchlistParams,
   };
 
   export { Ws as Ws };

@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.39.0 (2026-02-16)
+
+Full Changelog: [v0.38.2...v0.39.0](https://github.com/clear-street/clear-street-typescript/compare/v0.38.2...v0.39.0)
+
+### Features
+
+* **ACTIVE-1602:** create and list watchlists endpoints ([4f44d18](https://github.com/clear-street/clear-street-typescript/commit/4f44d18c736ad97b73a7b8b8bb97d6443dcb7ce1))
+* **ACTIVE-1603:** Add to and remove from watchlist endpoints ([785f226](https://github.com/clear-street/clear-street-typescript/commit/785f22646756b36226e11db30388698c112e82a8))
+* **ACTIVE-2471:** Get watchlist by id endpoint ([cf84b8e](https://github.com/clear-street/clear-street-typescript/commit/cf84b8ee601e2d1eb991aa8f169e74a571d663fd))
+* **ACTIVE-2508:** Populate margin_rates for Instrument endpoints. ([da73adf](https://github.com/clear-street/clear-street-typescript/commit/da73adf4d9c15e3a68b3bd1d6a4f17c8ace1242f))
+* **ACTIVE-2518:** Stitch current intraday equity from engine into historical PnLs ([df17ebc](https://github.com/clear-street/clear-street-typescript/commit/df17ebc3cf177d95eec72c64af3174d52ed8f10c))
+
+
+### Bug Fixes
+
+* **client:** avoid removing abort listener too early ([edc42c5](https://github.com/clear-street/clear-street-typescript/commit/edc42c5bb1b0209470f23c6e4ce642fe3e5985f9))
+
+
+### Chores
+
+* **ACTIVE-2485:** Restrict venue specification to DMA orders ([4c53f80](https://github.com/clear-street/clear-street-typescript/commit/4c53f8094b2a710d59d029b21689c3cff24d7452))
+* **ACTIVE-2494:** Ensure that optional and mandatory order strategy fields are being set in NewOrderSingle ([8a746cc](https://github.com/clear-street/clear-street-typescript/commit/8a746ccc78c8c16b28215176a36b7743c51cc745))
+* **ACTIVE-2502:** Speed up GET instruments ([be940d3](https://github.com/clear-street/clear-street-typescript/commit/be940d30a685992f54537ccf7f1c0bf4eb3b097c))
+* **client:** restructure abort controller binding ([14e36e8](https://github.com/clear-street/clear-street-typescript/commit/14e36e897997b8636d89e0e3100fe14816a07a57))
+* **internal:** avoid type checking errors with ts-reset ([ee4144a](https://github.com/clear-street/clear-street-typescript/commit/ee4144ac75550893bddea8f73d716ee153326063))
+
 ## 0.38.2 (2026-02-03)
 
 Full Changelog: [v0.38.1...v0.38.2](https://github.com/clear-street/clear-street-typescript/compare/v0.38.1...v0.38.2)

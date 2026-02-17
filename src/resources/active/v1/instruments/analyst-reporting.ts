@@ -80,17 +80,17 @@ export interface InstrumentAnalystConsensus {
   /**
    * Count of individual analyst recommendations by category
    */
-  distribution: AnalystDistribution;
+  distribution?: AnalystDistribution | null;
 
   /**
    * Aggregated analyst price target statistics
    */
-  price_target: PriceTarget;
+  price_target?: PriceTarget | null;
 
   /**
    * Consensus analyst rating
    */
-  rating: AnalystRating;
+  rating?: AnalystRating | null;
 }
 
 /**

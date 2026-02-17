@@ -34,24 +34,9 @@ export interface PortfolioHistoryResponse {
 
 export interface PortfolioHistorySegment {
   /**
-   * Amount bought MTM
-   */
-  bought_notional: string;
-
-  /**
-   * Quantity bought MTM
-   */
-  bought_quantity: string;
-
-  /**
    * The date for this segment
    */
   date: string;
-
-  /**
-   * Sum of the profit and loss from intraday trading activities for the trading day.
-   */
-  day_pnl: string;
 
   /**
    * The equity at the end of the trading day.
@@ -59,30 +44,9 @@ export interface PortfolioHistorySegment {
   ending_equity: string;
 
   /**
-   * P&L after netting all realized and unrealized P&L, adjustments, dividends,
-   * change in accruals, income and expenses
-   */
-  net_pnl: string;
-
-  /**
-   * Sum of the profit and loss from the previous trading day.
-   */
-  position_pnl: string;
-
-  /**
    * Sum of the profit and loss realized from position closing trading activity.
    */
   realized_pnl: string;
-
-  /**
-   * Amount sold MTM
-   */
-  sold_notional: string;
-
-  /**
-   * Quantity sold MTM
-   */
-  sold_quantity: string;
 
   /**
    * The equity at the start of the trading day.
@@ -93,6 +57,42 @@ export interface PortfolioHistorySegment {
    * Sum of the profit and loss from market changes.
    */
   unrealized_pnl: string;
+
+  /**
+   * Amount bought MTM
+   */
+  bought_notional?: string | null;
+
+  /**
+   * Quantity bought MTM
+   */
+  bought_quantity?: string | null;
+
+  /**
+   * Sum of the profit and loss from intraday trading activities for the trading day.
+   */
+  day_pnl?: string | null;
+
+  /**
+   * P&L after netting all realized and unrealized P&L, adjustments, dividends,
+   * change in accruals, income and expenses
+   */
+  net_pnl?: string | null;
+
+  /**
+   * Sum of the profit and loss from the previous trading day.
+   */
+  position_pnl?: string | null;
+
+  /**
+   * Amount sold MTM
+   */
+  sold_notional?: string | null;
+
+  /**
+   * Quantity sold MTM
+   */
+  sold_quantity?: string | null;
 }
 
 export interface PortfolioHistoryGetPortfolioHistoryResponse extends Shared.BaseResponse {

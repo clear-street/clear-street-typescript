@@ -152,13 +152,18 @@ export interface ApStrategy extends BaseStrategyParams {
   /**
    * Maximum percentage of market volume to participate in (0-100)
    */
-  max_percent?: number | null;
+  max_percent?: APIDecimal64 | null;
 
   /**
    * Minimum percentage of market volume to participate in (0-100)
    */
-  min_percent?: number | null;
+  min_percent?: APIDecimal64 | null;
 }
+
+/**
+ * A decimal number represented as a string.
+ */
+export type APIDecimal64 = string;
 
 /**
  * Base parameters common to most algorithmic strategies
@@ -187,26 +192,8 @@ export interface DarkStrategy extends BaseStrategyParams {
   /**
    * Maximum percentage of market volume to participate in (0-100)
    */
-  max_percent?: number | null;
+  max_percent?: APIDecimal64 | null;
 }
-
-/**
- * Destination exchange for DMA orders (Market Identifier Code)
- */
-export type Destination =
-  | 'ARCX'
-  | 'BATS'
-  | 'BATY'
-  | 'EDGA'
-  | 'EDGX'
-  | 'EPRL'
-  | 'IEXG'
-  | 'MEMX'
-  | 'XASE'
-  | 'XBOS'
-  | 'XCIS'
-  | 'XNMS'
-  | 'XNYS';
 
 /**
  * Direct Market Access strategy
@@ -215,7 +202,7 @@ export interface DmaStrategy {
   /**
    * Destination exchange (MIC code)
    */
-  destination: Destination;
+  destination: string;
 }
 
 /**
@@ -323,7 +310,7 @@ export interface PovStrategy extends BaseStrategyParams {
   /**
    * Target percentage of market volume to participate in (0-100)
    */
-  target_percent: number;
+  target_percent: APIDecimal64;
 }
 
 /**
@@ -374,12 +361,12 @@ export interface TwapStrategy extends BaseStrategyParams {
   /**
    * Maximum percentage of market volume to participate in (0-50)
    */
-  max_percent?: number | null;
+  max_percent?: APIDecimal64 | null;
 
   /**
    * Minimum percentage of market volume to participate in (0-100)
    */
-  min_percent?: number | null;
+  min_percent?: APIDecimal64 | null;
 }
 
 /**
@@ -394,12 +381,12 @@ export interface VwapStrategy extends BaseStrategyParams {
   /**
    * Maximum percentage of market volume to participate in (0-50)
    */
-  max_percent?: number | null;
+  max_percent?: APIDecimal64 | null;
 
   /**
    * Minimum percentage of market volume to participate in (0-100)
    */
-  min_percent?: number | null;
+  min_percent?: APIDecimal64 | null;
 }
 
 export interface OrderCancelAllOrdersResponse extends Shared.BaseResponse {
@@ -724,21 +711,15 @@ export namespace OrderSubmitOrdersParams {
      * Trailing offset type (PRICE or PERCENT_BPS)
      */
     trailing_offset_amt_type?: 'PRICE' | 'PERCENT_BPS' | null;
-
-    /**
-     * Execution venue to route the order to. If not specified, the system will choose
-     * the best venue.
-     */
-    venue?: string;
   }
 }
 
 export declare namespace Orders {
   export {
     type ApStrategy as ApStrategy,
+    type APIDecimal64 as APIDecimal64,
     type BaseStrategyParams as BaseStrategyParams,
     type DarkStrategy as DarkStrategy,
-    type Destination as Destination,
     type DmaStrategy as DmaStrategy,
     type OrderStatus as OrderStatus,
     type OrderStrategy as OrderStrategy,
