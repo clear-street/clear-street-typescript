@@ -12,6 +12,7 @@ import {
   Items,
 } from './items';
 import { APIPromise } from '../../../../core/api-promise';
+import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -34,6 +35,23 @@ export class Watchlists extends APIResource {
     options?: RequestOptions,
   ): APIPromise<WatchlistCreateWatchlistResponse> {
     return this._client.post('/active/v1/watchlists', { body, ...options });
+  }
+
+  /**
+   * Delete a watchlist and all its items
+   *
+   * @example
+   * ```ts
+   * await client.active.v1.watchlists.deleteWatchlist(
+   *   '550e8400-e29b-41d4-a716-446655440000',
+   * );
+   * ```
+   */
+  deleteWatchlist(watchlistID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/active/v1/watchlists/${watchlistID}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   /**
