@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as V1API from './v1';
+import * as AnalystReportingAPI from './instruments/analyst-reporting';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
@@ -29,6 +30,16 @@ export class Screener extends APIResource {
  */
 export interface ScreenerItem {
   /**
+   * The count of buy analyst ratings
+   */
+  buy_ratings: number;
+
+  /**
+   * The count of hold analyst ratings
+   */
+  hold_ratings: number;
+
+  /**
    * The latest price for the instrument
    */
   price: string;
@@ -44,9 +55,49 @@ export interface ScreenerItem {
   security_id_source: V1API.SecurityIDSource;
 
   /**
+   * The count of sell analyst ratings
+   */
+  sell_ratings: number;
+
+  /**
+   * The count of strong buy analyst ratings
+   */
+  strong_buy_ratings: number;
+
+  /**
+   * The count of strong sell analyst ratings
+   */
+  strong_sell_ratings: number;
+
+  /**
    * The trading symbol for the instrument
    */
   symbol: string;
+
+  /**
+   * The total count of analyst ratings
+   */
+  total_ratings: number;
+
+  /**
+   * The consensus analyst price target
+   */
+  consensus_price_target?: string | null;
+
+  /**
+   * The highest analyst price target
+   */
+  consensus_price_target_high?: string | null;
+
+  /**
+   * The lowest analyst price target
+   */
+  consensus_price_target_low?: string | null;
+
+  /**
+   * The consensus analyst rating
+   */
+  consensus_rating?: AnalystReportingAPI.AnalystRating | null;
 
   /**
    * The ISO country code of the instrument's issue
