@@ -26,14 +26,6 @@ import {
   InstrumentEventsData,
   InstrumentSplitEvent,
 } from './events';
-import * as NewsAPI from './news';
-import {
-  InstrumentNews,
-  InstrumentNewsList,
-  News,
-  NewsGetInstrumentNewsParams,
-  NewsGetInstrumentNewsResponse,
-} from './news';
 import * as ReportingAPI from './reporting';
 import {
   Reporting,
@@ -51,7 +43,6 @@ export class Instruments extends APIResource {
     this._client,
   );
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
-  news: NewsAPI.News = new NewsAPI.News(this._client);
   reporting: ReportingAPI.Reporting = new ReportingAPI.Reporting(this._client);
   venues: VenuesAPI.Venues = new VenuesAPI.Venues(this._client);
 
@@ -498,7 +489,6 @@ export interface InstrumentGetInstrumentsParams {
 
 Instruments.AnalystReporting = AnalystReporting;
 Instruments.Events = Events;
-Instruments.News = News;
 Instruments.Reporting = Reporting;
 Instruments.Venues = Venues;
 
@@ -537,14 +527,6 @@ export declare namespace Instruments {
     type EventGetInstrumentEventsResponse as EventGetInstrumentEventsResponse,
     type EventGetAllInstrumentEventsParams as EventGetAllInstrumentEventsParams,
     type EventGetInstrumentEventsParams as EventGetInstrumentEventsParams,
-  };
-
-  export {
-    News as News,
-    type InstrumentNews as InstrumentNews,
-    type InstrumentNewsList as InstrumentNewsList,
-    type NewsGetInstrumentNewsResponse as NewsGetInstrumentNewsResponse,
-    type NewsGetInstrumentNewsParams as NewsGetInstrumentNewsParams,
   };
 
   export {

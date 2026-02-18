@@ -15,6 +15,8 @@ import {
   Revocation,
   RevocationList,
 } from './api-keys';
+import * as NewsAPI from './news';
+import { News, NewsGetNewsParams, NewsGetNewsResponse, NewsItem, NewsItemList } from './news';
 import * as ScreenerAPI from './screener';
 import {
   Screener,
@@ -88,6 +90,7 @@ export class V1 extends APIResource {
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
   iris: IrisAPI.Iris = new IrisAPI.Iris(this._client);
   marketData: MarketDataAPI.MarketData = new MarketDataAPI.MarketData(this._client);
+  news: NewsAPI.News = new NewsAPI.News(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
   watchlists: WatchlistsAPI.Watchlists = new WatchlistsAPI.Watchlists(this._client);
@@ -158,6 +161,7 @@ V1.Calendars = Calendars;
 V1.Instruments = Instruments;
 V1.Iris = Iris;
 V1.MarketData = MarketData;
+V1.News = News;
 V1.Screener = Screener;
 V1.VersionResource = VersionResource;
 V1.Watchlists = Watchlists;
@@ -219,6 +223,14 @@ export declare namespace V1 {
   export { Iris as Iris, type Message as Message, type Thread as Thread };
 
   export { MarketData as MarketData };
+
+  export {
+    News as News,
+    type NewsItem as NewsItem,
+    type NewsItemList as NewsItemList,
+    type NewsGetNewsResponse as NewsGetNewsResponse,
+    type NewsGetNewsParams as NewsGetNewsParams,
+  };
 
   export {
     Screener as Screener,
