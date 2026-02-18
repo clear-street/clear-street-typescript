@@ -35,13 +35,6 @@ export {
   type InstrumentGetInstrumentsParams,
 } from './instruments';
 export {
-  News,
-  type InstrumentNews,
-  type InstrumentNewsList,
-  type NewsGetInstrumentNewsResponse,
-  type NewsGetInstrumentNewsParams,
-} from './news';
-export {
   Reporting,
   type ReportingGetInstrumentReportingResponse,
   type ReportingGetInstrumentReportingParams,
