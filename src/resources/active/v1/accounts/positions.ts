@@ -121,11 +121,6 @@ export interface Position {
   symbol: string;
 
   /**
-   * The MIC code of the primary listing venue
-   */
-  venue: string;
-
-  /**
    * The average price paid per share or contract for this position
    */
   avg_price?: string | null;
