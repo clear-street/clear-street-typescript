@@ -291,11 +291,6 @@ export interface InstrumentCore {
    * The strike price for options instruments
    */
   strike_price?: string | null;
-
-  /**
-   * The friendly name of the primary listing venue
-   */
-  venue_friendly?: string | null;
 }
 
 export type InstrumentCoreList = Array<InstrumentCore>;
