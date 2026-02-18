@@ -317,18 +317,6 @@ Methods:
 - <code title="get /active/v1/instruments/events">client.active.v1.instruments.events.<a href="./src/resources/active/v1/instruments/events.ts">getAllInstrumentEvents</a>({ ...params }) -> EventGetAllInstrumentEventsResponse</code>
 - <code title="get /active/v1/instruments/{security_id_source}/{security_id}/events">client.active.v1.instruments.events.<a href="./src/resources/active/v1/instruments/events.ts">getInstrumentEvents</a>(securityID, { ...params }) -> EventGetInstrumentEventsResponse</code>
 
-#### News
-
-Types:
-
-- <code><a href="./src/resources/active/v1/instruments/news.ts">InstrumentNews</a></code>
-- <code><a href="./src/resources/active/v1/instruments/news.ts">InstrumentNewsList</a></code>
-- <code><a href="./src/resources/active/v1/instruments/news.ts">NewsGetInstrumentNewsResponse</a></code>
-
-Methods:
-
-- <code title="get /active/v1/instruments/{security_id_source}/{security_id}/news">client.active.v1.instruments.news.<a href="./src/resources/active/v1/instruments/news.ts">getInstrumentNews</a>(securityID, { ...params }) -> NewsGetInstrumentNewsResponse</code>
-
 #### Reporting
 
 Types:
@@ -430,6 +418,18 @@ Types:
 Methods:
 
 - <code title="get /active/v1/market-data/snapshot">client.active.v1.marketData.snapshot.<a href="./src/resources/active/v1/market-data/snapshot.ts">getSnapshots</a>({ ...params }) -> SnapshotGetSnapshotsResponse</code>
+
+### News
+
+Types:
+
+- <code><a href="./src/resources/active/v1/news.ts">NewsItem</a></code>
+- <code><a href="./src/resources/active/v1/news.ts">NewsItemList</a></code>
+- <code><a href="./src/resources/active/v1/news.ts">NewsGetNewsResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/news">client.active.v1.news.<a href="./src/resources/active/v1/news.ts">getNews</a>({ ...params }) -> NewsGetNewsResponse</code>
 
 ### Screener
 

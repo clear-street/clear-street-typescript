@@ -48,6 +48,13 @@ export {
 export { Iris, type Message, type Thread } from './iris/index';
 export { MarketData } from './market-data/index';
 export {
+  News,
+  type NewsItem,
+  type NewsItemList,
+  type NewsGetNewsResponse,
+  type NewsGetNewsParams,
+} from './news';
+export {
   Screener,
   type ScreenerItem,
   type ScreenerItemList,
