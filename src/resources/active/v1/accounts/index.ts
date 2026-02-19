@@ -51,6 +51,7 @@ export {
   type Side,
   type SorStrategy,
   type TimeInForce,
+  type TrailingOffsetType,
   type TwapStrategy,
   type Urgency,
   type VwapStrategy,

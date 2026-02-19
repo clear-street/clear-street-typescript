@@ -39,6 +39,7 @@ import {
   Side,
   SorStrategy,
   TimeInForce,
+  TrailingOffsetType,
   TwapStrategy,
   Urgency,
   VwapStrategy,
@@ -340,6 +341,11 @@ export interface Order {
   expires_at?: string | null;
 
   /**
+   * Limit offset for trailing stop-limit orders (signed)
+   */
+  limit_offset?: string | null;
+
+  /**
    * Limit price (for LIMIT and STOP_LIMIT orders)
    */
   limit_price?: string | null;
@@ -353,6 +359,16 @@ export interface Order {
    * Execution strategy for this order
    */
   strategy?: OrdersAPI.OrderStrategy | null;
+
+  /**
+   * Trailing offset amount for trailing orders
+   */
+  trailing_offset_amt?: string | null;
+
+  /**
+   * Trailing offset type for trailing orders
+   */
+  trailing_offset_amt_type?: OrdersAPI.TrailingOffsetType | null;
 
   /**
    * Trailing watermark price for trailing orders
@@ -473,6 +489,7 @@ export declare namespace Accounts {
     type Side as Side,
     type SorStrategy as SorStrategy,
     type TimeInForce as TimeInForce,
+    type TrailingOffsetType as TrailingOffsetType,
     type TwapStrategy as TwapStrategy,
     type Urgency as Urgency,
     type VwapStrategy as VwapStrategy,
