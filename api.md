@@ -97,6 +97,7 @@ Types:
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">Side</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">SorStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">TimeInForce</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">TrailingOffsetType</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">TwapStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">Urgency</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">VwapStrategy</a></code>

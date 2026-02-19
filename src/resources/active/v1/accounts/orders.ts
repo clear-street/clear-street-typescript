@@ -355,6 +355,11 @@ export type TimeInForce =
   | 'OTHER';
 
 /**
+ * Trailing offset type for trailing stop orders.
+ */
+export type TrailingOffsetType = 'PRICE' | 'PERCENT_BPS';
+
+/**
  * Time Weighted Average Price strategy
  */
 export interface TwapStrategy extends BaseStrategyParams {
@@ -710,7 +715,7 @@ export namespace OrderSubmitOrdersParams {
     /**
      * Trailing offset type (PRICE or PERCENT_BPS)
      */
-    trailing_offset_amt_type?: 'PRICE' | 'PERCENT_BPS' | null;
+    trailing_offset_amt_type?: OrdersAPI.TrailingOffsetType | null;
   }
 }
 
@@ -728,6 +733,7 @@ export declare namespace Orders {
     type Side as Side,
     type SorStrategy as SorStrategy,
     type TimeInForce as TimeInForce,
+    type TrailingOffsetType as TrailingOffsetType,
     type TwapStrategy as TwapStrategy,
     type Urgency as Urgency,
     type VwapStrategy as VwapStrategy,
