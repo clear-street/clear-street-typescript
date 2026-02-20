@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource accounts', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getAccountByID', async () => {
     const responsePromise = client.active.v1.accounts.getAccountByID(0);
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getAccounts', async () => {
     const responsePromise = client.active.v1.accounts.getAccounts();
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getAccounts: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -43,7 +43,7 @@ describe('resource accounts', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('patchAccountByID', async () => {
     const responsePromise = client.active.v1.accounts.patchAccountByID(0, {});
     const rawResponse = await responsePromise.asResponse();

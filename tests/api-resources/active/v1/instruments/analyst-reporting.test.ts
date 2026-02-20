@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource analystReporting', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getInstrumentAnalystConsensus: only required params', async () => {
     const responsePromise = client.active.v1.instruments.analystReporting.getInstrumentAnalystConsensus(
       'security_id',
@@ -23,7 +23,7 @@ describe('resource analystReporting', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getInstrumentAnalystConsensus: required and optional params', async () => {
     const response = await client.active.v1.instruments.analystReporting.getInstrumentAnalystConsensus(
       'security_id',

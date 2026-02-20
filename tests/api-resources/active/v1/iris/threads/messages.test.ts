@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource messages', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listMessages: only required params', async () => {
     const responsePromise = client.active.v1.iris.threads.messages.listMessages(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -23,7 +23,7 @@ describe('resource messages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listMessages: required and optional params', async () => {
     const response = await client.active.v1.iris.threads.messages.listMessages(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

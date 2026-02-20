@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource portfolioHistory', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getPortfolioHistory: only required params', async () => {
     const responsePromise = client.active.v1.accounts.portfolioHistory.getPortfolioHistory(0, {
       end_date: '2019-12-27',
@@ -23,7 +23,7 @@ describe('resource portfolioHistory', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getPortfolioHistory: required and optional params', async () => {
     const response = await client.active.v1.accounts.portfolioHistory.getPortfolioHistory(0, {
       end_date: '2019-12-27',
