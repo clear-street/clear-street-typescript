@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource watchlists', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createWatchlist: only required params', async () => {
     const responsePromise = client.active.v1.watchlists.createWatchlist({ name: 'name' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,12 +20,12 @@ describe('resource watchlists', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createWatchlist: required and optional params', async () => {
     const response = await client.active.v1.watchlists.createWatchlist({ name: 'name' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('deleteWatchlist', async () => {
     const responsePromise = client.active.v1.watchlists.deleteWatchlist(
       '550e8400-e29b-41d4-a716-446655440000',
@@ -39,7 +39,7 @@ describe('resource watchlists', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getWatchlistByID', async () => {
     const responsePromise = client.active.v1.watchlists.getWatchlistByID(
       '550e8400-e29b-41d4-a716-446655440000',
@@ -53,7 +53,7 @@ describe('resource watchlists', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getWatchlists', async () => {
     const responsePromise = client.active.v1.watchlists.getWatchlists();
     const rawResponse = await responsePromise.asResponse();

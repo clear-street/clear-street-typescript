@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource prompts', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getPromptResult', async () => {
     const responsePromise = client.active.v1.assistant.prompts.getPromptResult('id');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource prompts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getPromptResult: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -32,7 +32,7 @@ describe('resource prompts', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('runPrompt: only required params', async () => {
     const responsePromise = client.active.v1.assistant.prompts.runPrompt({
       body: {},
@@ -47,7 +47,7 @@ describe('resource prompts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('runPrompt: required and optional params', async () => {
     const response = await client.active.v1.assistant.prompts.runPrompt({
       body: {},

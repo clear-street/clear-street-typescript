@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource reporting', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getInstrumentReporting: only required params', async () => {
     const responsePromise = client.active.v1.instruments.reporting.getInstrumentReporting('security_id', {
       security_id_source: 'CMS',
@@ -22,7 +22,7 @@ describe('resource reporting', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getInstrumentReporting: required and optional params', async () => {
     const response = await client.active.v1.instruments.reporting.getInstrumentReporting('security_id', {
       security_id_source: 'CMS',

@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource instruments', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getInstrumentByID: only required params', async () => {
     const responsePromise = client.active.v1.instruments.getInstrumentByID('security_id', {
       security_id_source: 'CMS',
@@ -22,14 +22,14 @@ describe('resource instruments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getInstrumentByID: required and optional params', async () => {
     const response = await client.active.v1.instruments.getInstrumentByID('security_id', {
       security_id_source: 'CMS',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getInstruments', async () => {
     const responsePromise = client.active.v1.instruments.getInstruments();
     const rawResponse = await responsePromise.asResponse();
@@ -41,7 +41,7 @@ describe('resource instruments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getInstruments: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
