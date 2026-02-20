@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.41.0 (2026-02-20)
+
+Full Changelog: [v0.40.0...v0.41.0](https://github.com/clear-street/clear-street-typescript/compare/v0.40.0...v0.41.0)
+
+### Features
+
+* **ACTIVE-2466:** News endpoints ([86d556a](https://github.com/clear-street/clear-street-typescript/commit/86d556a2707520ccaca30c56c4678df660760e9e))
+* **ACTIVE-2570:** Remove venue from positions endpoint. ([0792aa2](https://github.com/clear-street/clear-street-typescript/commit/0792aa21a723d8dec66a757785b51583239549a1))
+* **ACTIVE-2725:** Add venue friendly name to get instruments endpoints ([6fbdc54](https://github.com/clear-street/clear-street-typescript/commit/6fbdc541b77a6db8bcdc044df3df4a57592e612a))
+* fix snapshot integration OrderConfig fields ([20eb892](https://github.com/clear-street/clear-street-typescript/commit/20eb892b6b73f9adc1bbb4d8b0f211a4d51be36e))
+* prioritize all non-option instruments during clientside hydration ([516b830](https://github.com/clear-street/clear-street-typescript/commit/516b830680a29eabc4a2c231c543d934a5e1f3e5))
+
+
+### Bug Fixes
+
+* **mcp:** initialize SDK lazily to avoid failing the connection on init errors ([6c98f02](https://github.com/clear-street/clear-street-typescript/commit/6c98f026c82941f634335c058a7ae3bd5d8e734d))
+
+
+### Chores
+
+* configure new SDK language ([c9c0d22](https://github.com/clear-street/clear-street-typescript/commit/c9c0d22701306a3543b0d621c8d2f845b401acb6))
+* **internal/client:** fix form-urlencoded requests ([89dbd7b](https://github.com/clear-street/clear-street-typescript/commit/89dbd7bdbca3739e4ece546cfd7be9c5180434aa))
+* **internal:** configure MCP Server hosting ([916fb43](https://github.com/clear-street/clear-street-typescript/commit/916fb43eb116ad49c25d9ee2e08d5c95c6333056))
+* **internal:** remove mock server code ([49954e2](https://github.com/clear-street/clear-street-typescript/commit/49954e2a9bd26f765274a9804ae68ae6b930eeca))
+* **mcp:** correctly update version in sync with sdk ([39f8bd6](https://github.com/clear-street/clear-street-typescript/commit/39f8bd62402878296a0bf8069c8089383deb65f0))
+* update mock server docs ([dcc244a](https://github.com/clear-street/clear-street-typescript/commit/dcc244a0a2e7dd0058640052fa435168517830ec))
+
 ## 0.40.0 (2026-02-17)
 
 Full Changelog: [v0.39.0...v0.40.0](https://github.com/clear-street/clear-street-typescript/compare/v0.39.0...v0.40.0)
