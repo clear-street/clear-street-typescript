@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource balances', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getAccountBalances', async () => {
     const responsePromise = client.active.v1.accounts.balances.getAccountBalances(0);
     const rawResponse = await responsePromise.asResponse();

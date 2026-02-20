@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource items', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('addWatchlistItem', async () => {
     const responsePromise = client.active.v1.watchlists.items.addWatchlistItem(
       '550e8400-e29b-41d4-a716-446655440000',
@@ -23,7 +23,7 @@ describe('resource items', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('deleteWatchlistItem: only required params', async () => {
     const responsePromise = client.active.v1.watchlists.items.deleteWatchlistItem(
       '660e8400-e29b-41d4-a716-446655440001',
@@ -38,7 +38,7 @@ describe('resource items', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('deleteWatchlistItem: required and optional params', async () => {
     const response = await client.active.v1.watchlists.items.deleteWatchlistItem(
       '660e8400-e29b-41d4-a716-446655440001',

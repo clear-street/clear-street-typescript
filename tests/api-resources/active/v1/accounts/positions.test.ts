@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource positions', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('closePosition: only required params', async () => {
     const responsePromise = client.active.v1.accounts.positions.closePosition('security_id', {
       account_id: 0,
@@ -23,7 +23,7 @@ describe('resource positions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('closePosition: required and optional params', async () => {
     const response = await client.active.v1.accounts.positions.closePosition('security_id', {
       account_id: 0,
@@ -32,7 +32,7 @@ describe('resource positions', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('closePositions', async () => {
     const responsePromise = client.active.v1.accounts.positions.closePositions(0);
     const rawResponse = await responsePromise.asResponse();
@@ -44,7 +44,7 @@ describe('resource positions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('closePositions: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -56,7 +56,7 @@ describe('resource positions', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getPositions', async () => {
     const responsePromise = client.active.v1.accounts.positions.getPositions(0);
     const rawResponse = await responsePromise.asResponse();
@@ -68,7 +68,7 @@ describe('resource positions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getPositions: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

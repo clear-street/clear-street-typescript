@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource ws', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('websocketHandler', async () => {
     const responsePromise = client.active.v1.ws.websocketHandler();
     const rawResponse = await responsePromise.asResponse();

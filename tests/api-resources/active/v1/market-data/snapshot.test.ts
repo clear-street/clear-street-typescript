@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource snapshot', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getSnapshots', async () => {
     const responsePromise = client.active.v1.marketData.snapshot.getSnapshots();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource snapshot', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getSnapshots: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

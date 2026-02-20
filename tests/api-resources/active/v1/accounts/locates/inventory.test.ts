@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource inventory', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getLocateInventory: only required params', async () => {
     const responsePromise = client.active.v1.accounts.locates.inventory.getLocateInventory(0, {
       symbol: 'symbol',
@@ -22,7 +22,7 @@ describe('resource inventory', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getLocateInventory: required and optional params', async () => {
     const response = await client.active.v1.accounts.locates.inventory.getLocateInventory(0, {
       symbol: 'symbol',

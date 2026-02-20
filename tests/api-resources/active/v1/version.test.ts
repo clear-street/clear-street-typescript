@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource version', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getVersion', async () => {
     const responsePromise = client.active.v1.version.getVersion();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource version', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('updateVersion', async () => {
     const responsePromise = client.active.v1.version.updateVersion();
     const rawResponse = await responsePromise.asResponse();

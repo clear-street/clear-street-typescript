@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource marketHours', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getMarketHoursCalendar: only required params', async () => {
     const responsePromise = client.active.v1.calendars.marketHours.getMarketHoursCalendar({ date: 'date' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource marketHours', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getMarketHoursCalendar: required and optional params', async () => {
     const response = await client.active.v1.calendars.marketHours.getMarketHoursCalendar({
       date: 'date',

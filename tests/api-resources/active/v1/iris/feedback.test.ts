@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource feedback', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createFeedback: only required params', async () => {
     const responsePromise = client.active.v1.iris.feedback.createFeedback({
       account_id: 'account_id',
@@ -25,7 +25,7 @@ describe('resource feedback', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createFeedback: required and optional params', async () => {
     const response = await client.active.v1.iris.feedback.createFeedback({
       account_id: 'account_id',

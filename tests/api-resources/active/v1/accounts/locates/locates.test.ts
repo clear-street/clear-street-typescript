@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource locates', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createLocateRequest: only required params', async () => {
     const responsePromise = client.active.v1.accounts.locates.createLocateRequest(0, {
       body: [{ quantity: 500, symbol: 'AAPL' }],
@@ -22,7 +22,7 @@ describe('resource locates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createLocateRequest: required and optional params', async () => {
     const response = await client.active.v1.accounts.locates.createLocateRequest(0, {
       body: [
@@ -36,7 +36,7 @@ describe('resource locates', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getLocateRequests', async () => {
     const responsePromise = client.active.v1.accounts.locates.getLocateRequests(0);
     const rawResponse = await responsePromise.asResponse();
@@ -48,7 +48,7 @@ describe('resource locates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getLocateRequests: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -65,7 +65,7 @@ describe('resource locates', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('updateLocateRequest: only required params', async () => {
     const responsePromise = client.active.v1.accounts.locates.updateLocateRequest(0, { accept: true });
     const rawResponse = await responsePromise.asResponse();
@@ -77,7 +77,7 @@ describe('resource locates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('updateLocateRequest: required and optional params', async () => {
     const response = await client.active.v1.accounts.locates.updateLocateRequest(0, { accept: true });
   });

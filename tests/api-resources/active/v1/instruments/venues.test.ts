@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource venues', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getVenues', async () => {
     const responsePromise = client.active.v1.instruments.venues.getVenues();
     const rawResponse = await responsePromise.asResponse();

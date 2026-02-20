@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource orders', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cancelAllOrders', async () => {
     const responsePromise = client.active.v1.accounts.orders.cancelAllOrders(0);
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cancelAllOrders: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -38,7 +38,7 @@ describe('resource orders', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cancelOrder: only required params', async () => {
     const responsePromise = client.active.v1.accounts.orders.cancelOrder('order_id', { account_id: 0 });
     const rawResponse = await responsePromise.asResponse();
@@ -50,12 +50,12 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('cancelOrder: required and optional params', async () => {
     const response = await client.active.v1.accounts.orders.cancelOrder('order_id', { account_id: 0 });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getOrderByID: only required params', async () => {
     const responsePromise = client.active.v1.accounts.orders.getOrderByID('order_id', { account_id: 0 });
     const rawResponse = await responsePromise.asResponse();
@@ -67,12 +67,12 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getOrderByID: required and optional params', async () => {
     const response = await client.active.v1.accounts.orders.getOrderByID('order_id', { account_id: 0 });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getOrders', async () => {
     const responsePromise = client.active.v1.accounts.orders.getOrders(0);
     const rawResponse = await responsePromise.asResponse();
@@ -84,7 +84,7 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getOrders: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -106,7 +106,7 @@ describe('resource orders', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('replaceOrder: only required params', async () => {
     const responsePromise = client.active.v1.accounts.orders.replaceOrder('order_id', { account_id: 0 });
     const rawResponse = await responsePromise.asResponse();
@@ -118,7 +118,7 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('replaceOrder: required and optional params', async () => {
     const response = await client.active.v1.accounts.orders.replaceOrder('order_id', {
       account_id: 0,
@@ -129,7 +129,7 @@ describe('resource orders', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('submitOrders: only required params', async () => {
     const responsePromise = client.active.v1.accounts.orders.submitOrders(0, {
       body: [
@@ -151,7 +151,7 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('submitOrders: required and optional params', async () => {
     const response = await client.active.v1.accounts.orders.submitOrders(0, {
       body: [
