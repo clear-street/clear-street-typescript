@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.41.1 (2026-02-24)
+
+Full Changelog: [v0.41.0...v0.41.1](https://github.com/clear-street/clear-street-typescript/compare/v0.41.0...v0.41.1)
+
+### Bug Fixes
+
+* **docs/contributing:** correct pnpm link command ([7203aab](https://github.com/clear-street/clear-street-typescript/commit/7203aabd6df00e8db0c3bdb20e708cc084f67fe0))
+
+
+### Chores
+
+* **internal:** upgrade @modelcontextprotocol/sdk and hono ([5f262ad](https://github.com/clear-street/clear-street-typescript/commit/5f262adfda691a4e17f3246a4536306f41d7ae81))
+
 ## 0.41.0 (2026-02-20)
 
 Full Changelog: [v0.40.0...v0.41.0](https://github.com/clear-street/clear-street-typescript/compare/v0.40.0...v0.41.0)

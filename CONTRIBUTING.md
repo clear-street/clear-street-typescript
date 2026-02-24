@@ -60,7 +60,7 @@ $ yarn link @clear-street-internal/sdk
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @clear-street-internal/sdk
+$ pnpm link --global @clear-street-internal/sdk
 ```
 
 ## Running tests
