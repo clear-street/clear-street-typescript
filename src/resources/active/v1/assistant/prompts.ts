@@ -6,6 +6,9 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+/**
+ * Run and monitor Iris prompt workflows.
+ */
 export class Prompts extends APIResource {
   /**
    * Retrieve the status and outputs of a prompt workflow by ID.

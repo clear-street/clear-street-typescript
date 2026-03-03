@@ -8,6 +8,9 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+/**
+ * View account positions.
+ */
 export class Positions extends APIResource {
   /**
    * Retrieves all positions for the specified trading account.

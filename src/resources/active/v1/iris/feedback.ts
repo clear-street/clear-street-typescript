@@ -5,6 +5,9 @@ import * as Shared from '../../../shared';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
+/**
+ * AI assistant for conversational trading interactions.
+ */
 export class Feedback extends APIResource {
   /**
    * Submit user feedback (thumbs up/down, rating, comment) for an assistant message.

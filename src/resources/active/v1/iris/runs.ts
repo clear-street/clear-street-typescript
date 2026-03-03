@@ -9,6 +9,9 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+/**
+ * AI assistant for conversational trading interactions.
+ */
 export class Runs extends APIResource {
   /**
    * Cancel a running assistant run.

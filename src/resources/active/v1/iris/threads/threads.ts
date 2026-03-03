@@ -14,6 +14,9 @@ import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
+/**
+ * AI assistant for conversational trading interactions.
+ */
 export class Threads extends APIResource {
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
 

@@ -5,6 +5,9 @@ import * as Shared from '../../../shared';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
+/**
+ * Real-time market data snapshots.
+ */
 export class Snapshot extends APIResource {
   /**
    * Get market data snapshots for one or more securities.

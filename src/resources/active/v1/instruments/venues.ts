@@ -5,6 +5,9 @@ import * as Shared from '../../../shared';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
+/**
+ * Retrieve details and lists of tradable instruments.
+ */
 export class Venues extends APIResource {
   /**
    * Retrieves a list of available trading venues and exchanges.

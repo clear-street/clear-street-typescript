@@ -16,6 +16,9 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+/**
+ * Retrieve details and lists of tradable instruments.
+ */
 export class Watchlists extends APIResource {
   items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
 

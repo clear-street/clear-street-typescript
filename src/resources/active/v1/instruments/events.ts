@@ -9,6 +9,9 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+/**
+ * Retrieve details and lists of tradable instruments.
+ */
 export class Events extends APIResource {
   /**
    * Retrieves all instrument events grouped by date.

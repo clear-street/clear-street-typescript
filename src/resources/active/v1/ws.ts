@@ -5,6 +5,9 @@ import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 
+/**
+ * Active Websocket.
+ */
 export class Ws extends APIResource {
   /**
    * Upgrade the HTTP connection to a WebSocket and echo incoming messages.
