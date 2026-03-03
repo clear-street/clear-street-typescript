@@ -6,6 +6,9 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+/**
+ * Manage trading accounts and view balances.
+ */
 export class PortfolioHistory extends APIResource {
   /**
    * Retrieves daily portfolio history for the specified account.

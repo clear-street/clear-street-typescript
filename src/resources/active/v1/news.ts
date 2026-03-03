@@ -6,6 +6,9 @@ import * as V1API from './v1';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
+/**
+ * Retrieve details and lists of tradable instruments.
+ */
 export class News extends APIResource {
   /**
    * Retrieves news items with optional filtering by security IDs, time range,

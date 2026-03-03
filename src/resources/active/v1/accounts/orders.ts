@@ -9,6 +9,9 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+/**
+ * Place, monitor, and manage trading orders.
+ */
 export class Orders extends APIResource {
   /**
    * All filter parameters can be used independently or combined. The only constraint

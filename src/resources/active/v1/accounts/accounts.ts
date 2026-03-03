@@ -81,6 +81,9 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+/**
+ * Manage trading accounts and view balances.
+ */
 export class Accounts extends APIResource {
   balances: BalancesAPI.Balances = new BalancesAPI.Balances(this._client);
   locates: LocatesAPI.Locates = new LocatesAPI.Locates(this._client);

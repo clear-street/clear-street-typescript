@@ -7,6 +7,9 @@ import * as AnalystReportingAPI from './instruments/analyst-reporting';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
+/**
+ * Retrieve details and lists of tradable instruments.
+ */
 export class Screener extends APIResource {
   /**
    * Searches for instruments matching specified criteria.
