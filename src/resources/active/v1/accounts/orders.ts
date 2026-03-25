@@ -417,7 +417,7 @@ export namespace OrderSubmitOrdersParams {
       /**
        * Security identifier for the leg.
        */
-      security: string | Leg.SecurityIdentifierVariant1;
+      security: string | Leg.UnionMember1;
 
       /**
        * Security type for the leg.
@@ -441,7 +441,7 @@ export namespace OrderSubmitOrdersParams {
     }
 
     export namespace Leg {
-      export interface SecurityIdentifierVariant1 {
+      export interface UnionMember1 {
         id: string;
 
         /**
