@@ -1,6 +1,6 @@
 {
   "name": "@clear-street-internal/sdk-mcp",
-  "version": "0.41.1",
+  "version": "0.42.0",
   "description": "The official MCP Server for the Clear Street API",
   "author": "Clear Street <support@clearstreet.io>",
   "types": "dist/index.d.ts",

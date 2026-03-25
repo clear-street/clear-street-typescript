@@ -21,7 +21,7 @@ export const newMcpServer = async (stainlessApiKey: string | undefined) =>
   new McpServer(
     {
       name: 'clear_street_internal_sdk_api',
-      version: '0.41.1',
+      version: '0.42.0',
     },
     {
       instructions: await getInstructions(stainlessApiKey),
