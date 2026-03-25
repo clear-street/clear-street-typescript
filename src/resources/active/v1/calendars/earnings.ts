@@ -5,6 +5,9 @@ import * as Shared from '../../../shared';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
+/**
+ * Access financial calendars for events like earnings, dividends, and splits.
+ */
 export class Earnings extends APIResource {
   /**
    * Retrieves upcoming earnings announcements.

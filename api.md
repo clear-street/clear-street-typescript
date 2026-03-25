@@ -12,8 +12,41 @@ Types:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/v1.ts">AnalystRating</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">CancelRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">Capability</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">ContentPart</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">ContentPartText</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">CreateFeedbackResponse</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">GetRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">GetThreadResponse</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">Instrument</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">InstrumentCore</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">InstrumentQuote</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">InstrumentSecurityID</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">ListMessagesResponse</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">ListThreadsResponse</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">Message</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">MessageContent</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">MessageRole</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">NavigateAction</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">OpenChartAction</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">OpenChatWindowAction</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">OpenScreenerAction</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">OrderPayload</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">OrderStrategyType</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">OrderType</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">PrefillOrderAction</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">Run</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">RunStatus</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">ScreenerFilter</a></code>
 - <code><a href="./src/resources/active/v1/v1.ts">SecurityIDSource</a></code>
 - <code><a href="./src/resources/active/v1/v1.ts">SecurityType</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">Side</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">StartRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">StructuredAction</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">Thread</a></code>
+- <code><a href="./src/resources/active/v1/v1.ts">TimeInForce</a></code>
 
 ### Accounts
 
@@ -25,9 +58,22 @@ Types:
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountSettings</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountStatus</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountSubkind</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">ApStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">APIDecimal64</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">BaseStrategyParams</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">DarkStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">DmaStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">Order</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">OrderList</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">OrderStatus</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">OrderStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">PovStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">RiskSettings</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">SorStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">TrailingOffsetType</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">TwapStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">Urgency</a></code>
+- <code><a href="./src/resources/active/v1/accounts/accounts.ts">VwapStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountGetAccountByIDResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountGetAccountsResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/accounts.ts">AccountPatchAccountByIDResponse</a></code>
@@ -85,22 +131,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">ApStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">APIDecimal64</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">BaseStrategyParams</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">DarkStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">DmaStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderStatus</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderType</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">PovStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">Side</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">SorStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">TimeInForce</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">TrailingOffsetType</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">TwapStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">Urgency</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">VwapStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderCancelAllOrdersResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderCancelOrderResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderGetOrderByIDResponse</a></code>
@@ -135,6 +165,7 @@ Types:
 
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">Position</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionList</a></code>
+- <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionType</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionClosePositionResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionClosePositionsResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/positions.ts">PositionGetPositionsResponse</a></code>
@@ -166,23 +197,6 @@ Methods:
 - <code title="delete /active/v1/api_keys/{id}">client.active.v1.apiKeys.<a href="./src/resources/active/v1/api-keys.ts">revoke</a>(id) -> APIKeyRevokeResponse</code>
 - <code title="delete /active/v1/api_keys">client.active.v1.apiKeys.<a href="./src/resources/active/v1/api-keys.ts">revokeAll</a>() -> APIKeyRevokeAllResponse</code>
 
-### Assistant
-
-#### Prompts
-
-Types:
-
-- <code><a href="./src/resources/active/v1/assistant/prompts.ts">PromptResult</a></code>
-- <code><a href="./src/resources/active/v1/assistant/prompts.ts">PromptStatus</a></code>
-- <code><a href="./src/resources/active/v1/assistant/prompts.ts">RunPromptResponse</a></code>
-- <code><a href="./src/resources/active/v1/assistant/prompts.ts">PromptGetPromptResultResponse</a></code>
-- <code><a href="./src/resources/active/v1/assistant/prompts.ts">PromptRunPromptResponse</a></code>
-
-Methods:
-
-- <code title="get /active/v1/assistant/prompts/{id}">client.active.v1.assistant.prompts.<a href="./src/resources/active/v1/assistant/prompts.ts">getPromptResult</a>(id, { ...params }) -> PromptGetPromptResultResponse</code>
-- <code title="post /active/v1/assistant/prompts">client.active.v1.assistant.prompts.<a href="./src/resources/active/v1/assistant/prompts.ts">runPrompt</a>({ ...params }) -> PromptRunPromptResponse</code>
-
 ### Calendars
 
 #### Dividends
@@ -191,6 +205,7 @@ Types:
 
 - <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendCalendarEvent</a></code>
 - <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendCalendarEventList</a></code>
+- <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendFrequency</a></code>
 - <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendGetDividendsCalendarResponse</a></code>
 
 Methods:
@@ -215,6 +230,7 @@ Types:
 
 - <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicCalendarEvent</a></code>
 - <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicCalendarEventList</a></code>
+- <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicEventImpact</a></code>
 - <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicGetEconomicCalendarResponse</a></code>
 
 Methods:
@@ -225,8 +241,14 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/calendars/market-hours.ts">DayType</a></code>
 - <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketHoursDetail</a></code>
 - <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketHoursDetailList</a></code>
+- <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketSessionType</a></code>
+- <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketStatus</a></code>
+- <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketType</a></code>
+- <code><a href="./src/resources/active/v1/calendars/market-hours.ts">SessionSchedule</a></code>
+- <code><a href="./src/resources/active/v1/calendars/market-hours.ts">TradingSessions</a></code>
 - <code><a href="./src/resources/active/v1/calendars/market-hours.ts">MarketHourGetMarketHoursCalendarResponse</a></code>
 
 Methods:
@@ -273,12 +295,8 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/instruments/instruments.ts">Instrument</a></code>
-- <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentCore</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentCoreList</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentEarnings</a></code>
-- <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentQuote</a></code>
-- <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentSecurityID</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentGetInstrumentByIDResponse</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentGetInstrumentsResponse</a></code>
 
@@ -292,7 +310,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">AnalystDistribution</a></code>
-- <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">AnalystRating</a></code>
 - <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">InstrumentAnalystConsensus</a></code>
 - <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">PriceTarget</a></code>
 - <code><a href="./src/resources/active/v1/instruments/analyst-reporting.ts">AnalystReportingGetInstrumentAnalystConsensusResponse</a></code>
@@ -305,8 +322,11 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/instruments/events.ts">AllEventsEventType</a></code>
 - <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentAllEventsData</a></code>
 - <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentDividendEvent</a></code>
+- <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentEventEnvelope</a></code>
+- <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentEventIpoItem</a></code>
 - <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentEventsByDate</a></code>
 - <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentEventsData</a></code>
 - <code><a href="./src/resources/active/v1/instruments/events.ts">InstrumentSplitEvent</a></code>
@@ -332,8 +352,11 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">DisplayType</a></code>
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">GtdAccepts</a></code>
 - <code><a href="./src/resources/active/v1/instruments/venues.ts">Venue</a></code>
 - <code><a href="./src/resources/active/v1/instruments/venues.ts">VenueList</a></code>
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">VenueSession</a></code>
 - <code><a href="./src/resources/active/v1/instruments/venues.ts">VenueGetVenuesResponse</a></code>
 
 Methods:
@@ -342,69 +365,51 @@ Methods:
 
 ### Iris
 
-Types:
-
-- <code><a href="./src/resources/active/v1/iris/iris.ts">Message</a></code>
-- <code><a href="./src/resources/active/v1/iris/iris.ts">Thread</a></code>
-
 #### Feedback
 
 Types:
 
-- <code><a href="./src/resources/active/v1/iris/feedback.ts">CreateFeedbackResponse</a></code>
-- <code><a href="./src/resources/active/v1/iris/feedback.ts">FeedbackCreateFeedbackResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/feedback.ts">FeedbackCreateFeedbackDeprecatedResponse</a></code>
 
 Methods:
 
-- <code title="post /active/v1/iris/feedback">client.active.v1.iris.feedback.<a href="./src/resources/active/v1/iris/feedback.ts">createFeedback</a>({ ...params }) -> FeedbackCreateFeedbackResponse</code>
+- <code title="post /active/v1/iris/feedback">client.active.v1.iris.feedback.<a href="./src/resources/active/v1/iris/feedback.ts">createFeedbackDeprecated</a>({ ...params }) -> FeedbackCreateFeedbackDeprecatedResponse</code>
 
 #### Runs
 
 Types:
 
-- <code><a href="./src/resources/active/v1/iris/runs.ts">CancelRunResponse</a></code>
-- <code><a href="./src/resources/active/v1/iris/runs.ts">Capability</a></code>
-- <code><a href="./src/resources/active/v1/iris/runs.ts">ContentPart</a></code>
-- <code><a href="./src/resources/active/v1/iris/runs.ts">GetRunResponse</a></code>
-- <code><a href="./src/resources/active/v1/iris/runs.ts">MessageContent</a></code>
-- <code><a href="./src/resources/active/v1/iris/runs.ts">MessageRole</a></code>
-- <code><a href="./src/resources/active/v1/iris/runs.ts">Run</a></code>
-- <code><a href="./src/resources/active/v1/iris/runs.ts">RunStatus</a></code>
-- <code><a href="./src/resources/active/v1/iris/runs.ts">StartRunResponse</a></code>
-- <code><a href="./src/resources/active/v1/iris/runs.ts">RunCancelRunResponse</a></code>
-- <code><a href="./src/resources/active/v1/iris/runs.ts">RunGetRunResponse</a></code>
-- <code><a href="./src/resources/active/v1/iris/runs.ts">RunStartRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">RunCancelRunDeprecatedResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">RunGetRunDeprecatedResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">RunStartRunDeprecatedResponse</a></code>
 
 Methods:
 
-- <code title="delete /active/v1/iris/runs/{run_id}">client.active.v1.iris.runs.<a href="./src/resources/active/v1/iris/runs.ts">cancelRun</a>(runID, { ...params }) -> RunCancelRunResponse</code>
-- <code title="get /active/v1/iris/runs/{run_id}">client.active.v1.iris.runs.<a href="./src/resources/active/v1/iris/runs.ts">getRun</a>(runID, { ...params }) -> RunGetRunResponse</code>
-- <code title="post /active/v1/iris/runs">client.active.v1.iris.runs.<a href="./src/resources/active/v1/iris/runs.ts">startRun</a>({ ...params }) -> RunStartRunResponse</code>
+- <code title="delete /active/v1/iris/runs/{run_id}">client.active.v1.iris.runs.<a href="./src/resources/active/v1/iris/runs.ts">cancelRunDeprecated</a>(runID, { ...params }) -> RunCancelRunDeprecatedResponse</code>
+- <code title="get /active/v1/iris/runs/{run_id}">client.active.v1.iris.runs.<a href="./src/resources/active/v1/iris/runs.ts">getRunDeprecated</a>(runID, { ...params }) -> RunGetRunDeprecatedResponse</code>
+- <code title="post /active/v1/iris/runs">client.active.v1.iris.runs.<a href="./src/resources/active/v1/iris/runs.ts">startRunDeprecated</a>({ ...params }) -> RunStartRunDeprecatedResponse</code>
 
 #### Threads
 
 Types:
 
-- <code><a href="./src/resources/active/v1/iris/threads/threads.ts">GetThreadResponse</a></code>
-- <code><a href="./src/resources/active/v1/iris/threads/threads.ts">ListThreadsResponse</a></code>
-- <code><a href="./src/resources/active/v1/iris/threads/threads.ts">ThreadGetThreadResponse</a></code>
-- <code><a href="./src/resources/active/v1/iris/threads/threads.ts">ThreadListThreadsResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/threads/threads.ts">ThreadGetThreadDeprecatedResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/threads/threads.ts">ThreadListThreadsDeprecatedResponse</a></code>
 
 Methods:
 
-- <code title="get /active/v1/iris/threads/{thread_id}">client.active.v1.iris.threads.<a href="./src/resources/active/v1/iris/threads/threads.ts">getThread</a>(threadID, { ...params }) -> ThreadGetThreadResponse</code>
-- <code title="get /active/v1/iris/threads">client.active.v1.iris.threads.<a href="./src/resources/active/v1/iris/threads/threads.ts">listThreads</a>({ ...params }) -> ThreadListThreadsResponse</code>
+- <code title="get /active/v1/iris/threads/{thread_id}">client.active.v1.iris.threads.<a href="./src/resources/active/v1/iris/threads/threads.ts">getThreadDeprecated</a>(threadID, { ...params }) -> ThreadGetThreadDeprecatedResponse</code>
+- <code title="get /active/v1/iris/threads">client.active.v1.iris.threads.<a href="./src/resources/active/v1/iris/threads/threads.ts">listThreadsDeprecated</a>({ ...params }) -> ThreadListThreadsDeprecatedResponse</code>
 
 ##### Messages
 
 Types:
 
-- <code><a href="./src/resources/active/v1/iris/threads/messages.ts">ListMessagesResponse</a></code>
-- <code><a href="./src/resources/active/v1/iris/threads/messages.ts">MessageListMessagesResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/threads/messages.ts">MessageListMessagesDeprecatedResponse</a></code>
 
 Methods:
 
-- <code title="get /active/v1/iris/threads/{thread_id}/messages">client.active.v1.iris.threads.messages.<a href="./src/resources/active/v1/iris/threads/messages.ts">listMessages</a>(threadID, { ...params }) -> MessageListMessagesResponse</code>
+- <code title="get /active/v1/iris/threads/{thread_id}/messages">client.active.v1.iris.threads.messages.<a href="./src/resources/active/v1/iris/threads/messages.ts">listMessagesDeprecated</a>(threadID, { ...params }) -> MessageListMessagesDeprecatedResponse</code>
 
 ### MarketData
 
@@ -414,6 +419,9 @@ Types:
 
 - <code><a href="./src/resources/active/v1/market-data/snapshot.ts">MarketDataSnapshot</a></code>
 - <code><a href="./src/resources/active/v1/market-data/snapshot.ts">MarketDataSnapshotList</a></code>
+- <code><a href="./src/resources/active/v1/market-data/snapshot.ts">SnapshotLastTrade</a></code>
+- <code><a href="./src/resources/active/v1/market-data/snapshot.ts">SnapshotQuote</a></code>
+- <code><a href="./src/resources/active/v1/market-data/snapshot.ts">SnapshotSession</a></code>
 - <code><a href="./src/resources/active/v1/market-data/snapshot.ts">SnapshotGetSnapshotsResponse</a></code>
 
 Methods:
@@ -424,13 +432,83 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/news.ts">NewsInstrument</a></code>
 - <code><a href="./src/resources/active/v1/news.ts">NewsItem</a></code>
 - <code><a href="./src/resources/active/v1/news.ts">NewsItemList</a></code>
+- <code><a href="./src/resources/active/v1/news.ts">NewsType</a></code>
 - <code><a href="./src/resources/active/v1/news.ts">NewsGetNewsResponse</a></code>
 
 Methods:
 
 - <code title="get /active/v1/news">client.active.v1.news.<a href="./src/resources/active/v1/news.ts">getNews</a>({ ...params }) -> NewsGetNewsResponse</code>
+
+### OmniAI
+
+#### Feedback
+
+Types:
+
+- <code><a href="./src/resources/active/v1/omni-ai/feedback.ts">FeedbackCreateFeedbackResponse</a></code>
+
+Methods:
+
+- <code title="post /active/v1/omni-ai/feedback">client.active.v1.omniAI.feedback.<a href="./src/resources/active/v1/omni-ai/feedback.ts">createFeedback</a>({ ...params }) -> FeedbackCreateFeedbackResponse</code>
+
+#### Runs
+
+Types:
+
+- <code><a href="./src/resources/active/v1/omni-ai/runs.ts">RunCancelRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/runs.ts">RunGetRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/runs.ts">RunStartRunResponse</a></code>
+
+Methods:
+
+- <code title="delete /active/v1/omni-ai/runs/{run_id}">client.active.v1.omniAI.runs.<a href="./src/resources/active/v1/omni-ai/runs.ts">cancelRun</a>(runID, { ...params }) -> RunCancelRunResponse</code>
+- <code title="get /active/v1/omni-ai/runs/{run_id}">client.active.v1.omniAI.runs.<a href="./src/resources/active/v1/omni-ai/runs.ts">getRun</a>(runID, { ...params }) -> RunGetRunResponse</code>
+- <code title="post /active/v1/omni-ai/runs">client.active.v1.omniAI.runs.<a href="./src/resources/active/v1/omni-ai/runs.ts">startRun</a>({ ...params }) -> RunStartRunResponse</code>
+
+#### Threads
+
+Types:
+
+- <code><a href="./src/resources/active/v1/omni-ai/threads/threads.ts">ThreadGetThreadResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/threads/threads.ts">ThreadListThreadsResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/omni-ai/threads/{thread_id}">client.active.v1.omniAI.threads.<a href="./src/resources/active/v1/omni-ai/threads/threads.ts">getThread</a>(threadID, { ...params }) -> ThreadGetThreadResponse</code>
+- <code title="get /active/v1/omni-ai/threads">client.active.v1.omniAI.threads.<a href="./src/resources/active/v1/omni-ai/threads/threads.ts">listThreads</a>({ ...params }) -> ThreadListThreadsResponse</code>
+
+##### Messages
+
+Types:
+
+- <code><a href="./src/resources/active/v1/omni-ai/threads/messages.ts">MessageListMessagesResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/omni-ai/threads/{thread_id}/messages">client.active.v1.omniAI.threads.messages.<a href="./src/resources/active/v1/omni-ai/threads/messages.ts">listMessages</a>(threadID, { ...params }) -> MessageListMessagesResponse</code>
+
+### SavedScreeners
+
+Types:
+
+- <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerFilter</a></code>
+- <code><a href="./src/resources/active/v1/saved-screeners.ts">ScreenerEntry</a></code>
+- <code><a href="./src/resources/active/v1/saved-screeners.ts">ScreenerEntryList</a></code>
+- <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerCreateScreenerResponse</a></code>
+- <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerGetScreenerByIDResponse</a></code>
+- <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerListScreenersResponse</a></code>
+- <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerUpdateScreenerResponse</a></code>
+
+Methods:
+
+- <code title="post /active/v1/saved-screeners">client.active.v1.savedScreeners.<a href="./src/resources/active/v1/saved-screeners.ts">createScreener</a>({ ...params }) -> SavedScreenerCreateScreenerResponse</code>
+- <code title="delete /active/v1/saved-screeners/{screener_id}">client.active.v1.savedScreeners.<a href="./src/resources/active/v1/saved-screeners.ts">deleteScreener</a>(screenerID) -> void</code>
+- <code title="get /active/v1/saved-screeners/{screener_id}">client.active.v1.savedScreeners.<a href="./src/resources/active/v1/saved-screeners.ts">getScreenerByID</a>(screenerID) -> SavedScreenerGetScreenerByIDResponse</code>
+- <code title="get /active/v1/saved-screeners">client.active.v1.savedScreeners.<a href="./src/resources/active/v1/saved-screeners.ts">listScreeners</a>() -> SavedScreenerListScreenersResponse</code>
+- <code title="put /active/v1/saved-screeners/{screener_id}">client.active.v1.savedScreeners.<a href="./src/resources/active/v1/saved-screeners.ts">updateScreener</a>(screenerID, { ...params }) -> SavedScreenerUpdateScreenerResponse</code>
 
 ### Screener
 

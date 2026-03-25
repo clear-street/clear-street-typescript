@@ -1,5 +1,44 @@
 # Changelog
 
+## 0.42.0 (2026-03-25)
+
+Full Changelog: [v0.41.1...v0.42.0](https://github.com/clear-street/clear-street-typescript/compare/v0.41.1...v0.42.0)
+
+### Features
+
+* **api:** api update ([9f42aa5](https://github.com/clear-street/clear-street-typescript/commit/9f42aa5b57fdbee53682d7a624862e188621079f))
+* **api:** manual updates ([033bbff](https://github.com/clear-street/clear-street-typescript/commit/033bbffd49babc23bb3280c9167f3fbe52a158a1))
+* **mcp:** add an option to disable code tool ([c7f8074](https://github.com/clear-street/clear-street-typescript/commit/c7f80749e2290f29b913e3e44e29c2adb3e833da))
+
+
+### Bug Fixes
+
+* **client:** preserve URL params already embedded in path ([1097d48](https://github.com/clear-street/clear-street-typescript/commit/1097d48e43fd652eb18ab039e2b1a30772d241de))
+* **mcp:** update prompt ([79a8d32](https://github.com/clear-street/clear-street-typescript/commit/79a8d32c4e97b8b7212349ff24c3f7f2bb6e43ba))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([ea0d964](https://github.com/clear-street/clear-street-typescript/commit/ea0d964b14bd2c1906020212d0acd5e7cc80a6b3))
+* **ci:** skip uploading artifacts on stainless-internal branches ([d21d249](https://github.com/clear-street/clear-street-typescript/commit/d21d2490b58c9e2e2072a63eb5bbd314519468e6))
+* **internal:** bump @modelcontextprotocol/sdk, @hono/node-server, and minimatch ([ec85e00](https://github.com/clear-street/clear-street-typescript/commit/ec85e002f618db72437d1c40175806444095fc07))
+* **internal:** codegen related update ([59e6c50](https://github.com/clear-street/clear-street-typescript/commit/59e6c5048801565dc60d4ee64f4bbd42878bec93))
+* **internal:** codegen related update ([3845084](https://github.com/clear-street/clear-street-typescript/commit/3845084488772c4ae8e3c68e4616db4eb80c03ad))
+* **internal:** fix MCP Dockerfiles so they can be built without buildkit ([62b2451](https://github.com/clear-street/clear-street-typescript/commit/62b24518cb39e326191db588be73416ab3394ac1))
+* **internal:** fix MCP Dockerfiles so they can be built without buildkit ([4c1337d](https://github.com/clear-street/clear-street-typescript/commit/4c1337d38318d19f7cd7de8f4aea8322155bccd4))
+* **internal:** fix MCP server TS errors that occur with required client options ([83afaa6](https://github.com/clear-street/clear-street-typescript/commit/83afaa696a34011a4288b42dc9b99bcb95188947))
+* **internal:** make generated MCP servers compatible with Cloudflare worker environments ([1a6dce1](https://github.com/clear-street/clear-street-typescript/commit/1a6dce1d2cf3365075232e016f8f7095a65c2600))
+* **internal:** make MCP code execution location configurable via a flag ([4b23cb6](https://github.com/clear-street/clear-street-typescript/commit/4b23cb60c86e8a892bcf125ec56dc98a90bd6afc))
+* **internal:** move stringifyQuery implementation to internal function ([5491315](https://github.com/clear-street/clear-street-typescript/commit/54913153596aad330b06515e5656a0877c2ff259))
+* **internal:** support x-stainless-mcp-client-envs header in MCP servers ([21fe2ca](https://github.com/clear-street/clear-street-typescript/commit/21fe2cab11b2c94e432d04cb6f4e411e1eba2a63))
+* **internal:** support x-stainless-mcp-client-permissions headers in MCP servers ([8192ee7](https://github.com/clear-street/clear-street-typescript/commit/8192ee7ee4765405f703a3d87417cc2664040bec))
+* **internal:** tweak CI branches ([5923b99](https://github.com/clear-street/clear-street-typescript/commit/5923b998980d75d5c238cc49e438aa19f99333b6))
+* **internal:** update dependencies to address dependabot vulnerabilities ([feb6c2d](https://github.com/clear-street/clear-street-typescript/commit/feb6c2d085478ac2f5661803f1b04ef2e8909712))
+* **internal:** update gitignore ([86a2803](https://github.com/clear-street/clear-street-typescript/commit/86a280386e1ba2f49f52d5ec6bfe76733fb16b89))
+* **internal:** use x-stainless-mcp-client-envs header for MCP remote code tool calls ([8890917](https://github.com/clear-street/clear-street-typescript/commit/88909176203352eec2a69fdd2e883a75cd16184e))
+* **mcp-server:** improve instructions ([819e652](https://github.com/clear-street/clear-street-typescript/commit/819e652b15ed913ddb5c0421e34617539a1d16a2))
+* **mcp-server:** return access instructions for 404 without API key ([5b39f7f](https://github.com/clear-street/clear-street-typescript/commit/5b39f7fcaad3f672b38b48821bea8e3af1e3aec1))
+
 ## 0.41.1 (2026-02-24)
 
 Full Changelog: [v0.41.0...v0.41.1](https://github.com/clear-street/clear-street-typescript/compare/v0.41.0...v0.41.1)

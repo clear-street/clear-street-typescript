@@ -5,6 +5,9 @@ import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
+/**
+ * Endpoints for API service metadata.
+ */
 export class VersionResource extends APIResource {
   /**
    * Returns the current version string for this API endpoint.

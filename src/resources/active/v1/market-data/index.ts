@@ -5,6 +5,9 @@ export {
   Snapshot,
   type MarketDataSnapshot,
   type MarketDataSnapshotList,
+  type SnapshotLastTrade,
+  type SnapshotQuote,
+  type SnapshotSession,
   type SnapshotGetSnapshotsResponse,
   type SnapshotGetSnapshotsParams,
 } from './snapshot';

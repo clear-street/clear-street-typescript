@@ -14,6 +14,9 @@ import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
+/**
+ * Manage locate requests for short selling.
+ */
 export class Locates extends APIResource {
   inventory: InventoryAPI.Inventory = new InventoryAPI.Inventory(this._client);
 

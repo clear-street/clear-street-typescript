@@ -2,16 +2,13 @@
 
 export {
   Messages,
-  type ListMessagesResponse,
-  type MessageListMessagesResponse,
-  type MessageListMessagesParams,
+  type MessageListMessagesDeprecatedResponse,
+  type MessageListMessagesDeprecatedParams,
 } from './messages';
 export {
   Threads,
-  type GetThreadResponse,
-  type ListThreadsResponse,
-  type ThreadGetThreadResponse,
-  type ThreadListThreadsResponse,
-  type ThreadGetThreadParams,
-  type ThreadListThreadsParams,
+  type ThreadGetThreadDeprecatedResponse,
+  type ThreadListThreadsDeprecatedResponse,
+  type ThreadGetThreadDeprecatedParams,
+  type ThreadListThreadsDeprecatedParams,
 } from './threads';

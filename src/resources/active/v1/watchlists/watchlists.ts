@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
-import * as InstrumentsAPI from '../instruments/instruments';
+import * as V1API from '../v1';
 import * as ItemsAPI from './items';
 import {
   AddWatchlistItemData,
@@ -16,6 +16,9 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+/**
+ * Retrieve details and lists of tradable instruments.
+ */
 export class Watchlists extends APIResource {
   items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
 
@@ -155,7 +158,7 @@ export interface WatchlistItemEntry {
   /**
    * Instrument details
    */
-  instrument?: InstrumentsAPI.Instrument | null;
+  instrument?: V1API.Instrument | null;
 }
 
 export interface WatchlistCreateWatchlistResponse extends Shared.BaseResponse {

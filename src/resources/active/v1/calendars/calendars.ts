@@ -5,6 +5,7 @@ import * as DividendsAPI from './dividends';
 import {
   DividendCalendarEvent,
   DividendCalendarEventList,
+  DividendFrequency,
   DividendGetDividendsCalendarParams,
   DividendGetDividendsCalendarResponse,
   Dividends,
@@ -22,16 +23,23 @@ import {
   Economic,
   EconomicCalendarEvent,
   EconomicCalendarEventList,
+  EconomicEventImpact,
   EconomicGetEconomicCalendarParams,
   EconomicGetEconomicCalendarResponse,
 } from './economic';
 import * as MarketHoursAPI from './market-hours';
 import {
+  DayType,
   MarketHourGetMarketHoursCalendarParams,
   MarketHourGetMarketHoursCalendarResponse,
   MarketHours,
   MarketHoursDetail,
   MarketHoursDetailList,
+  MarketSessionType,
+  MarketStatus,
+  MarketType,
+  SessionSchedule,
+  TradingSessions,
 } from './market-hours';
 import * as MergersAcquisitionsAPI from './mergers-acquisitions';
 import {
@@ -82,6 +90,7 @@ export declare namespace Calendars {
     Dividends as Dividends,
     type DividendCalendarEvent as DividendCalendarEvent,
     type DividendCalendarEventList as DividendCalendarEventList,
+    type DividendFrequency as DividendFrequency,
     type DividendGetDividendsCalendarResponse as DividendGetDividendsCalendarResponse,
     type DividendGetDividendsCalendarParams as DividendGetDividendsCalendarParams,
   };
@@ -98,14 +107,21 @@ export declare namespace Calendars {
     Economic as Economic,
     type EconomicCalendarEvent as EconomicCalendarEvent,
     type EconomicCalendarEventList as EconomicCalendarEventList,
+    type EconomicEventImpact as EconomicEventImpact,
     type EconomicGetEconomicCalendarResponse as EconomicGetEconomicCalendarResponse,
     type EconomicGetEconomicCalendarParams as EconomicGetEconomicCalendarParams,
   };
 
   export {
     MarketHours as MarketHours,
+    type DayType as DayType,
     type MarketHoursDetail as MarketHoursDetail,
     type MarketHoursDetailList as MarketHoursDetailList,
+    type MarketSessionType as MarketSessionType,
+    type MarketStatus as MarketStatus,
+    type MarketType as MarketType,
+    type SessionSchedule as SessionSchedule,
+    type TradingSessions as TradingSessions,
     type MarketHourGetMarketHoursCalendarResponse as MarketHourGetMarketHoursCalendarResponse,
     type MarketHourGetMarketHoursCalendarParams as MarketHourGetMarketHoursCalendarParams,
   };

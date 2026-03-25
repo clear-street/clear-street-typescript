@@ -8,6 +8,9 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+/**
+ * Retrieve details and lists of tradable instruments.
+ */
 export class Items extends APIResource {
   /**
    * Add an instrument to a watchlist

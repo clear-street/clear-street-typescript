@@ -9,10 +9,11 @@ const client = new ClearStreet({
 
 describe('resource threads', () => {
   // Mock server tests are disabled
-  test.skip('getThread: only required params', async () => {
-    const responsePromise = client.active.v1.iris.threads.getThread('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 'account_id',
-    });
+  test.skip('getThreadDeprecated: only required params', async () => {
+    const responsePromise = client.active.v1.iris.threads.getThreadDeprecated(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,15 +24,16 @@ describe('resource threads', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getThread: required and optional params', async () => {
-    const response = await client.active.v1.iris.threads.getThread('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 'account_id',
-    });
+  test.skip('getThreadDeprecated: required and optional params', async () => {
+    const response = await client.active.v1.iris.threads.getThreadDeprecated(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
   });
 
   // Mock server tests are disabled
-  test.skip('listThreads: only required params', async () => {
-    const responsePromise = client.active.v1.iris.threads.listThreads({ account_id: 'account_id' });
+  test.skip('listThreadsDeprecated: only required params', async () => {
+    const responsePromise = client.active.v1.iris.threads.listThreadsDeprecated({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,8 +44,8 @@ describe('resource threads', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listThreads: required and optional params', async () => {
-    const response = await client.active.v1.iris.threads.listThreads({
+  test.skip('listThreadsDeprecated: required and optional params', async () => {
+    const response = await client.active.v1.iris.threads.listThreadsDeprecated({
       account_id: 'account_id',
       page_size: 0,
       page_token: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

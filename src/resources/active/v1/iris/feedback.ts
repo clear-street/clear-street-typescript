@@ -2,43 +2,32 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
+import * as V1API from '../v1';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
+/**
+ * Deprecated /iris/* routes. Use /omni-ai/* instead.
+ */
 export class Feedback extends APIResource {
   /**
-   * Submit user feedback (thumbs up/down, rating, comment) for an assistant message.
+   * **Deprecated**: Use `POST /omni-ai/feedback` instead.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.active.v1.iris.feedback.createFeedback({
-   *     account_id: 'account_id',
-   *     message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     score: 0,
-   *     thread_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   });
-   * ```
+   * @deprecated
    */
-  createFeedback(
-    body: FeedbackCreateFeedbackParams,
+  createFeedbackDeprecated(
+    body: FeedbackCreateFeedbackDeprecatedParams,
     options?: RequestOptions,
-  ): APIPromise<FeedbackCreateFeedbackResponse> {
+  ): APIPromise<FeedbackCreateFeedbackDeprecatedResponse> {
     return this._client.post('/active/v1/iris/feedback', { body, ...options });
   }
 }
 
-export interface CreateFeedbackResponse {
-  created_at: string;
-
-  feedback_id?: string | null;
+export interface FeedbackCreateFeedbackDeprecatedResponse extends Shared.BaseResponse {
+  data: V1API.CreateFeedbackResponse;
 }
 
-export interface FeedbackCreateFeedbackResponse extends Shared.BaseResponse {
-  data: CreateFeedbackResponse;
-}
-
-export interface FeedbackCreateFeedbackParams {
+export interface FeedbackCreateFeedbackDeprecatedParams {
   /**
    * Account ID for the request
    */
@@ -72,8 +61,7 @@ export interface FeedbackCreateFeedbackParams {
 
 export declare namespace Feedback {
   export {
-    type CreateFeedbackResponse as CreateFeedbackResponse,
-    type FeedbackCreateFeedbackResponse as FeedbackCreateFeedbackResponse,
-    type FeedbackCreateFeedbackParams as FeedbackCreateFeedbackParams,
+    type FeedbackCreateFeedbackDeprecatedResponse as FeedbackCreateFeedbackDeprecatedResponse,
+    type FeedbackCreateFeedbackDeprecatedParams as FeedbackCreateFeedbackDeprecatedParams,
   };
 }

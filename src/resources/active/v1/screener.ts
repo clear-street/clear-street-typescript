@@ -3,10 +3,12 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as V1API from './v1';
-import * as AnalystReportingAPI from './instruments/analyst-reporting';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
+/**
+ * Retrieve details and lists of tradable instruments.
+ */
 export class Screener extends APIResource {
   /**
    * Searches for instruments matching specified criteria.
@@ -97,7 +99,7 @@ export interface ScreenerItem {
   /**
    * The consensus analyst rating
    */
-  consensus_rating?: AnalystReportingAPI.AnalystRating | null;
+  consensus_rating?: V1API.AnalystRating | null;
 
   /**
    * The ISO country code of the instrument's issue
@@ -108,6 +110,26 @@ export interface ScreenerItem {
    * A detailed description of the instrument or company
    */
   description?: string | null;
+
+  /**
+   * The highest price over the last 52 weeks
+   */
+  fifty_two_week_high?: string | null;
+
+  /**
+   * The lowest price over the last 52 weeks
+   */
+  fifty_two_week_low?: string | null;
+
+  /**
+   * Percent gap from 52-week high to previous day close (negative = below high)
+   */
+  gap_from_52w_high_pct?: string | null;
+
+  /**
+   * Percent gap from 52-week low to previous day close (positive = above low)
+   */
+  gap_from_52w_low_pct?: string | null;
 
   /**
    * The specific industry of the instrument's issuer
@@ -135,6 +157,51 @@ export interface ScreenerItem {
   name?: string | null;
 
   /**
+   * The closing price approximately one month ago
+   */
+  one_month_ago_close?: string | null;
+
+  /**
+   * The opening price approximately one month ago
+   */
+  one_month_ago_open?: string | null;
+
+  /**
+   * Percent change from one month ago close to previous day close
+   */
+  one_month_change_pct?: string | null;
+
+  /**
+   * The closing price approximately one week ago
+   */
+  one_week_ago_close?: string | null;
+
+  /**
+   * The opening price approximately one week ago
+   */
+  one_week_ago_open?: string | null;
+
+  /**
+   * Percent change from one week ago close to previous day close
+   */
+  one_week_change_pct?: string | null;
+
+  /**
+   * The closing price approximately one year ago
+   */
+  one_year_ago_close?: string | null;
+
+  /**
+   * The opening price approximately one year ago
+   */
+  one_year_ago_open?: string | null;
+
+  /**
+   * Percent change from one year ago close to previous day close
+   */
+  one_year_change_pct?: string | null;
+
+  /**
    * The percent change from previous close to current price
    */
   percent_change?: string | null;
@@ -153,6 +220,36 @@ export interface ScreenerItem {
    * The type of security
    */
   security_type?: string | null;
+
+  /**
+   * Percent change from six months ago close to previous day close
+   */
+  six_month_change_pct?: string | null;
+
+  /**
+   * The closing price approximately six months ago
+   */
+  six_months_ago_close?: string | null;
+
+  /**
+   * The opening price approximately six months ago
+   */
+  six_months_ago_open?: string | null;
+
+  /**
+   * Percent change from three months ago close to previous day close
+   */
+  three_month_change_pct?: string | null;
+
+  /**
+   * The closing price approximately three months ago
+   */
+  three_months_ago_close?: string | null;
+
+  /**
+   * The opening price approximately three months ago
+   */
+  three_months_ago_open?: string | null;
 
   /**
    * The TTM debt-to-equity ratio
@@ -188,6 +285,16 @@ export interface ScreenerItem {
    * The average trading volume over the past week
    */
   week_avg_volume?: string | null;
+
+  /**
+   * The opening price on the first trading day of the current year
+   */
+  year_to_date_open?: string | null;
+
+  /**
+   * Percent change from year-to-date open to previous day close
+   */
+  ytd_change_pct?: string | null;
 }
 
 export type ScreenerItemList = Array<ScreenerItem>;

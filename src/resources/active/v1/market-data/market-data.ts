@@ -8,6 +8,9 @@ import {
   Snapshot,
   SnapshotGetSnapshotsParams,
   SnapshotGetSnapshotsResponse,
+  SnapshotLastTrade,
+  SnapshotQuote,
+  SnapshotSession,
 } from './snapshot';
 
 export class MarketData extends APIResource {
@@ -21,6 +24,9 @@ export declare namespace MarketData {
     Snapshot as Snapshot,
     type MarketDataSnapshot as MarketDataSnapshot,
     type MarketDataSnapshotList as MarketDataSnapshotList,
+    type SnapshotLastTrade as SnapshotLastTrade,
+    type SnapshotQuote as SnapshotQuote,
+    type SnapshotSession as SnapshotSession,
     type SnapshotGetSnapshotsResponse as SnapshotGetSnapshotsResponse,
     type SnapshotGetSnapshotsParams as SnapshotGetSnapshotsParams,
   };
