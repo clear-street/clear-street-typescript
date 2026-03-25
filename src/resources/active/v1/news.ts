@@ -28,18 +28,48 @@ export class News extends APIResource {
 }
 
 /**
+ * Instrument associated with a news item.
+ */
+export interface NewsInstrument {
+  /**
+   * Security identifier value.
+   */
+  security_id: string;
+
+  /**
+   * Security identifier source.
+   */
+  security_id_source: V1API.SecurityIDSource;
+
+  /**
+   * OEMS instrument UUID, if available from instrument cache enrichment.
+   */
+  instrument_id?: string | null;
+
+  /**
+   * Instrument name/description, if available from instrument cache enrichment.
+   */
+  name?: string | null;
+
+  /**
+   * Trading symbol, if available from instrument cache enrichment.
+   */
+  symbol?: string | null;
+}
+
+/**
  * A single news item and its associated instruments.
  */
 export interface NewsItem {
   /**
    * Instruments associated with this news item.
    */
-  instruments: Array<NewsItem.Instrument>;
+  instruments: Array<NewsInstrument>;
 
   /**
    * Classification of the item.
    */
-  news_type: 'NEWS' | 'PRESS_RELEASE';
+  news_type: NewsType;
 
   /**
    * The published date/time of the article in UTC.
@@ -77,39 +107,12 @@ export interface NewsItem {
   text?: string | null;
 }
 
-export namespace NewsItem {
-  /**
-   * Instrument associated with a news item.
-   */
-  export interface Instrument {
-    /**
-     * Security identifier value.
-     */
-    security_id: string;
-
-    /**
-     * Security identifier source.
-     */
-    security_id_source: V1API.SecurityIDSource;
-
-    /**
-     * OEMS instrument UUID, if available from instrument cache enrichment.
-     */
-    instrument_id?: string | null;
-
-    /**
-     * Instrument name/description, if available from instrument cache enrichment.
-     */
-    name?: string | null;
-
-    /**
-     * Trading symbol, if available from instrument cache enrichment.
-     */
-    symbol?: string | null;
-  }
-}
-
 export type NewsItemList = Array<NewsItem>;
+
+/**
+ * News item classification.
+ */
+export type NewsType = 'NEWS' | 'PRESS_RELEASE';
 
 export interface NewsGetNewsResponse extends Shared.BaseResponse {
   data: NewsItemList;
@@ -189,8 +192,10 @@ export interface NewsGetNewsParams {
 
 export declare namespace News {
   export {
+    type NewsInstrument as NewsInstrument,
     type NewsItem as NewsItem,
     type NewsItemList as NewsItemList,
+    type NewsType as NewsType,
     type NewsGetNewsResponse as NewsGetNewsResponse,
     type NewsGetNewsParams as NewsGetNewsParams,
   };

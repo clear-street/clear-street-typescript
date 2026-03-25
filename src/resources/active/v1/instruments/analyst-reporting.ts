@@ -67,11 +67,6 @@ export interface AnalystDistribution {
 }
 
 /**
- * Analyst rating category
- */
-export type AnalystRating = 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SELL';
-
-/**
  * Aggregated analyst consensus metrics
  */
 export interface InstrumentAnalystConsensus {
@@ -93,7 +88,7 @@ export interface InstrumentAnalystConsensus {
   /**
    * Consensus analyst rating
    */
-  rating?: AnalystRating | null;
+  rating?: V1API.AnalystRating | null;
 }
 
 /**
@@ -148,7 +143,6 @@ export interface AnalystReportingGetInstrumentAnalystConsensusParams {
 export declare namespace AnalystReporting {
   export {
     type AnalystDistribution as AnalystDistribution,
-    type AnalystRating as AnalystRating,
     type InstrumentAnalystConsensus as InstrumentAnalystConsensus,
     type PriceTarget as PriceTarget,
     type AnalystReportingGetInstrumentAnalystConsensusResponse as AnalystReportingGetInstrumentAnalystConsensusResponse,

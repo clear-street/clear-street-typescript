@@ -7,27 +7,36 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
 /**
- * Deprecated /iris/* routes. Use /omni-ai/* instead.
+ * AI assistant for conversational trading interactions.
  */
 export class Feedback extends APIResource {
   /**
-   * **Deprecated**: Use `POST /omni-ai/feedback` instead.
+   * Submit user feedback (thumbs up/down, rating, comment) for an assistant message.
    *
-   * @deprecated
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.omniAI.feedback.createFeedback({
+   *     account_id: 'account_id',
+   *     message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     score: 0,
+   *     thread_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   });
+   * ```
    */
-  createFeedbackDeprecated(
-    body: FeedbackCreateFeedbackDeprecatedParams,
+  createFeedback(
+    body: FeedbackCreateFeedbackParams,
     options?: RequestOptions,
-  ): APIPromise<FeedbackCreateFeedbackDeprecatedResponse> {
-    return this._client.post('/active/v1/iris/feedback', { body, ...options });
+  ): APIPromise<FeedbackCreateFeedbackResponse> {
+    return this._client.post('/active/v1/omni-ai/feedback', { body, ...options });
   }
 }
 
-export interface FeedbackCreateFeedbackDeprecatedResponse extends Shared.BaseResponse {
+export interface FeedbackCreateFeedbackResponse extends Shared.BaseResponse {
   data: V1API.CreateFeedbackResponse;
 }
 
-export interface FeedbackCreateFeedbackDeprecatedParams {
+export interface FeedbackCreateFeedbackParams {
   /**
    * Account ID for the request
    */
@@ -61,7 +70,7 @@ export interface FeedbackCreateFeedbackDeprecatedParams {
 
 export declare namespace Feedback {
   export {
-    type FeedbackCreateFeedbackDeprecatedResponse as FeedbackCreateFeedbackDeprecatedResponse,
-    type FeedbackCreateFeedbackDeprecatedParams as FeedbackCreateFeedbackDeprecatedParams,
+    type FeedbackCreateFeedbackResponse as FeedbackCreateFeedbackResponse,
+    type FeedbackCreateFeedbackParams as FeedbackCreateFeedbackParams,
   };
 }

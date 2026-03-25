@@ -53,7 +53,7 @@ export interface EconomicCalendarEvent {
   /**
    * The expected market impact of the event
    */
-  impact: 'LOW' | 'MEDIUM' | 'HIGH';
+  impact: EconomicEventImpact;
 
   /**
    * The actual value reported for the event
@@ -78,6 +78,11 @@ export interface EconomicCalendarEvent {
 
 export type EconomicCalendarEventList = Array<EconomicCalendarEvent>;
 
+/**
+ * Economic event impact level
+ */
+export type EconomicEventImpact = 'LOW' | 'MEDIUM' | 'HIGH';
+
 export interface EconomicGetEconomicCalendarResponse extends Shared.BaseResponse {
   data: EconomicCalendarEventList;
 }
@@ -98,6 +103,7 @@ export declare namespace Economic {
   export {
     type EconomicCalendarEvent as EconomicCalendarEvent,
     type EconomicCalendarEventList as EconomicCalendarEventList,
+    type EconomicEventImpact as EconomicEventImpact,
     type EconomicGetEconomicCalendarResponse as EconomicGetEconomicCalendarResponse,
     type EconomicGetEconomicCalendarParams as EconomicGetEconomicCalendarParams,
   };

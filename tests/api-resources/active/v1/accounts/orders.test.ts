@@ -134,10 +134,27 @@ describe('resource orders', () => {
     const responsePromise = client.active.v1.accounts.orders.submitOrders(0, {
       body: [
         {
+          legs: [
+            {
+              ratio: 'ratio',
+              security: '0193bb84-447a-706f-996f-097254663f02',
+              security_type: 'OPTION',
+              side: 'BUY',
+            },
+            {
+              ratio: 'ratio',
+              security: '0193bb84-4db4-78ec-b4fd-cba8be61cf8a',
+              security_type: 'OPTION',
+              side: 'SELL',
+            },
+            {
+              ratio: 'ratio',
+              security: '0193bb84-5264-7f20-8fd3-35df82cd6ef0',
+              security_type: 'OPTION',
+              side: 'BUY',
+            },
+          ],
           order_type: 'LIMIT',
-          quantity: '25',
-          security_type: 'COMMON_STOCK',
-          side: 'BUY',
           time_in_force: 'DAY',
         },
       ],
@@ -156,29 +173,37 @@ describe('resource orders', () => {
     const response = await client.active.v1.accounts.orders.submitOrders(0, {
       body: [
         {
+          legs: [
+            {
+              ratio: 'ratio',
+              security: '0193bb84-447a-706f-996f-097254663f02',
+              security_type: 'OPTION',
+              side: 'BUY',
+              id: '1',
+              position_effect: 'OPEN',
+            },
+            {
+              ratio: 'ratio',
+              security: '0193bb84-4db4-78ec-b4fd-cba8be61cf8a',
+              security_type: 'OPTION',
+              side: 'SELL',
+              id: '2',
+              position_effect: 'OPEN',
+            },
+            {
+              ratio: 'ratio',
+              security: '0193bb84-5264-7f20-8fd3-35df82cd6ef0',
+              security_type: 'OPTION',
+              side: 'BUY',
+              id: '3',
+              position_effect: 'OPEN',
+            },
+          ],
           order_type: 'LIMIT',
-          quantity: '25',
-          security_type: 'COMMON_STOCK',
-          side: 'BUY',
           time_in_force: 'DAY',
-          id: 'my-ref-id-20251001-002',
-          expire_at: '2025-10-15T16:00:00.000000000Z',
-          extended_hours: true,
-          limit_offset: '0.10',
-          limit_price: '140.50',
-          position_effect: 'OPEN',
-          security_id: 'AAPL',
-          security_id_source: 'CMS',
-          stop_price: '135.00',
-          strategy: {
-            end_at: '2019-12-27T18:11:19.117Z',
-            start_at: '2019-12-27T18:11:19.117Z',
-            urgency: 'SUPER_PASSIVE',
-            type: 'SOR',
-          },
-          symbol: 'AAPL',
-          trailing_offset_amt: '1.25',
-          trailing_offset_amt_type: 'PRICE',
+          id: 'my-mleg-ref-20251001-001',
+          limit_price: '0.50',
+          quantity: '1',
         },
       ],
     });

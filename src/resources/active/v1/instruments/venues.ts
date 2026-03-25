@@ -24,6 +24,26 @@ export class Venues extends APIResource {
 }
 
 /**
+ * Display characteristics of a venue
+ */
+export type DisplayType = 'LIT' | 'DARK' | 'PERIODIC_AUCTION' | 'RFQ';
+
+/**
+ * Good-till-date order acceptance capabilities
+ */
+export interface GtdAccepts {
+  /**
+   * Whether the venue accepts date-only expiration (YYYY-MM-DD)
+   */
+  date: boolean;
+
+  /**
+   * Whether the venue accepts precise timestamp expiration
+   */
+  timestamp: boolean;
+}
+
+/**
  * A trading venue with its characteristics and capabilities
  */
 export interface Venue {
@@ -35,13 +55,13 @@ export interface Venue {
   /**
    * The display characteristics of the venue
    */
-  display_type: 'LIT' | 'DARK' | 'PERIODIC_AUCTION' | 'RFQ';
+  display_type: DisplayType;
 
   /**
    * Indicates whether GOOD_TILL_DATE orders accept date-only or timestamp
    * specifications
    */
-  gtd_accepts: Venue.GtdAccepts;
+  gtd_accepts: GtdAccepts;
 
   /**
    * The minimum quantity increment for orders at this venue
@@ -61,7 +81,7 @@ export interface Venue {
   /**
    * Trading sessions available at this venue
    */
-  sessions: Array<Venue.Session>;
+  sessions: Array<VenueSession>;
 
   /**
    * Order types supported by this venue
@@ -84,45 +104,27 @@ export interface Venue {
   timezone: string;
 }
 
-export namespace Venue {
-  /**
-   * Indicates whether GOOD_TILL_DATE orders accept date-only or timestamp
-   * specifications
-   */
-  export interface GtdAccepts {
-    /**
-     * Whether the venue accepts date-only expiration (YYYY-MM-DD)
-     */
-    date: boolean;
-
-    /**
-     * Whether the venue accepts precise timestamp expiration
-     */
-    timestamp: boolean;
-  }
-
-  /**
-   * A trading session within a venue's trading day
-   */
-  export interface Session {
-    /**
-     * Session end time in venue's local timezone (HH:MM format, 24-hour)
-     */
-    end_local: string;
-
-    /**
-     * The name of the trading session
-     */
-    name: string;
-
-    /**
-     * Session start time in venue's local timezone (HH:MM format, 24-hour)
-     */
-    start_local: string;
-  }
-}
-
 export type VenueList = Array<Venue>;
+
+/**
+ * A trading session within a venue's trading day
+ */
+export interface VenueSession {
+  /**
+   * Session end time in venue's local timezone (HH:MM format, 24-hour)
+   */
+  end_local: string;
+
+  /**
+   * The name of the trading session
+   */
+  name: string;
+
+  /**
+   * Session start time in venue's local timezone (HH:MM format, 24-hour)
+   */
+  start_local: string;
+}
 
 export interface VenueGetVenuesResponse extends Shared.BaseResponse {
   data: VenueList;
@@ -130,8 +132,11 @@ export interface VenueGetVenuesResponse extends Shared.BaseResponse {
 
 export declare namespace Venues {
   export {
+    type DisplayType as DisplayType,
+    type GtdAccepts as GtdAccepts,
     type Venue as Venue,
     type VenueList as VenueList,
+    type VenueSession as VenueSession,
     type VenueGetVenuesResponse as VenueGetVenuesResponse,
   };
 }

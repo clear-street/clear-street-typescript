@@ -58,7 +58,7 @@ export interface DividendCalendarEvent {
   /**
    * The frequency of the dividend payment
    */
-  frequency?: 'ANNUALLY' | 'SEMI_ANNUALLY' | 'QUARTERLY' | 'MONTHLY' | 'OTHER' | null;
+  frequency?: DividendFrequency | null;
 
   /**
    * The payment date for the dividend
@@ -77,6 +77,11 @@ export interface DividendCalendarEvent {
 }
 
 export type DividendCalendarEventList = Array<DividendCalendarEvent>;
+
+/**
+ * Dividend payment frequency
+ */
+export type DividendFrequency = 'ANNUALLY' | 'SEMI_ANNUALLY' | 'QUARTERLY' | 'MONTHLY' | 'OTHER';
 
 export interface DividendGetDividendsCalendarResponse extends Shared.BaseResponse {
   data: DividendCalendarEventList;
@@ -98,6 +103,7 @@ export declare namespace Dividends {
   export {
     type DividendCalendarEvent as DividendCalendarEvent,
     type DividendCalendarEventList as DividendCalendarEventList,
+    type DividendFrequency as DividendFrequency,
     type DividendGetDividendsCalendarResponse as DividendGetDividendsCalendarResponse,
     type DividendGetDividendsCalendarParams as DividendGetDividendsCalendarParams,
   };

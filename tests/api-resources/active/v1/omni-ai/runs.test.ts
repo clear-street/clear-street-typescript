@@ -9,11 +9,10 @@ const client = new ClearStreet({
 
 describe('resource runs', () => {
   // Mock server tests are disabled
-  test.skip('cancelRunDeprecated: only required params', async () => {
-    const responsePromise = client.active.v1.iris.runs.cancelRunDeprecated(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id' },
-    );
+  test.skip('cancelRun: only required params', async () => {
+    const responsePromise = client.active.v1.omniAI.runs.cancelRun('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,19 +23,18 @@ describe('resource runs', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('cancelRunDeprecated: required and optional params', async () => {
-    const response = await client.active.v1.iris.runs.cancelRunDeprecated(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id', reason: 'reason' },
-    );
+  test.skip('cancelRun: required and optional params', async () => {
+    const response = await client.active.v1.omniAI.runs.cancelRun('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+      reason: 'reason',
+    });
   });
 
   // Mock server tests are disabled
-  test.skip('getRunDeprecated: only required params', async () => {
-    const responsePromise = client.active.v1.iris.runs.getRunDeprecated(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id' },
-    );
+  test.skip('getRun: only required params', async () => {
+    const responsePromise = client.active.v1.omniAI.runs.getRun('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,20 +45,17 @@ describe('resource runs', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getRunDeprecated: required and optional params', async () => {
-    const response = await client.active.v1.iris.runs.getRunDeprecated(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        account_id: 'account_id',
-        page_size: 0,
-        page_token: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      },
-    );
+  test.skip('getRun: required and optional params', async () => {
+    const response = await client.active.v1.omniAI.runs.getRun('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+      page_size: 0,
+      page_token: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    });
   });
 
   // Mock server tests are disabled
-  test.skip('startRunDeprecated: only required params', async () => {
-    const responsePromise = client.active.v1.iris.runs.startRunDeprecated({
+  test.skip('startRun: only required params', async () => {
+    const responsePromise = client.active.v1.omniAI.runs.startRun({
       account_id: 'account_id',
       command_text: 'command_text',
     });
@@ -74,8 +69,8 @@ describe('resource runs', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('startRunDeprecated: required and optional params', async () => {
-    const response = await client.active.v1.iris.runs.startRunDeprecated({
+  test.skip('startRun: required and optional params', async () => {
+    const response = await client.active.v1.omniAI.runs.startRun({
       account_id: 'account_id',
       command_text: 'command_text',
       capabilities: ['NAVIGATE'],
