@@ -2,12 +2,11 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as Shared from '../../../../shared';
-import * as IrisAPI from '../iris';
+import * as V1API from '../../v1';
 import * as MessagesAPI from './messages';
 import {
-  ListMessagesResponse,
-  MessageListMessagesParams,
-  MessageListMessagesResponse,
+  MessageListMessagesDeprecatedParams,
+  MessageListMessagesDeprecatedResponse,
   Messages,
 } from './messages';
 import { APIPromise } from '../../../../../core/api-promise';
@@ -15,76 +14,53 @@ import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
 /**
- * AI assistant for conversational trading interactions.
+ * Deprecated /iris/* routes. Use /omni-ai/* instead.
  */
 export class Threads extends APIResource {
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
 
   /**
-   * Get a specific thread.
+   * **Deprecated**: Use `GET /omni-ai/threads/{thread_id}` instead.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.active.v1.iris.threads.getThread(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
+   * @deprecated
    */
-  getThread(
+  getThreadDeprecated(
     threadID: string,
-    query: ThreadGetThreadParams,
+    query: ThreadGetThreadDeprecatedParams,
     options?: RequestOptions,
-  ): APIPromise<ThreadGetThreadResponse> {
+  ): APIPromise<ThreadGetThreadDeprecatedResponse> {
     return this._client.get(path`/active/v1/iris/threads/${threadID}`, { query, ...options });
   }
 
   /**
-   * Retrieves threads for the authenticated user.
+   * **Deprecated**: Use `GET /omni-ai/threads` instead.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.active.v1.iris.threads.listThreads({
-   *     account_id: 'account_id',
-   *   });
-   * ```
+   * @deprecated
    */
-  listThreads(
-    query: ThreadListThreadsParams,
+  listThreadsDeprecated(
+    query: ThreadListThreadsDeprecatedParams,
     options?: RequestOptions,
-  ): APIPromise<ThreadListThreadsResponse> {
+  ): APIPromise<ThreadListThreadsDeprecatedResponse> {
     return this._client.get('/active/v1/iris/threads', { query, ...options });
   }
 }
 
-export interface GetThreadResponse {
-  thread: IrisAPI.Thread;
+export interface ThreadGetThreadDeprecatedResponse extends Shared.BaseResponse {
+  data: V1API.GetThreadResponse;
 }
 
-export interface ListThreadsResponse {
-  threads: Array<IrisAPI.Thread>;
-
-  next_page_token?: string | null;
+export interface ThreadListThreadsDeprecatedResponse extends Shared.BaseResponse {
+  data: V1API.ListThreadsResponse;
 }
 
-export interface ThreadGetThreadResponse extends Shared.BaseResponse {
-  data: GetThreadResponse;
-}
-
-export interface ThreadListThreadsResponse extends Shared.BaseResponse {
-  data: ListThreadsResponse;
-}
-
-export interface ThreadGetThreadParams {
+export interface ThreadGetThreadDeprecatedParams {
   /**
    * Account ID for the request
    */
   account_id: string;
 }
 
-export interface ThreadListThreadsParams {
+export interface ThreadListThreadsDeprecatedParams {
   /**
    * Account ID for the request
    */
@@ -105,18 +81,15 @@ Threads.Messages = Messages;
 
 export declare namespace Threads {
   export {
-    type GetThreadResponse as GetThreadResponse,
-    type ListThreadsResponse as ListThreadsResponse,
-    type ThreadGetThreadResponse as ThreadGetThreadResponse,
-    type ThreadListThreadsResponse as ThreadListThreadsResponse,
-    type ThreadGetThreadParams as ThreadGetThreadParams,
-    type ThreadListThreadsParams as ThreadListThreadsParams,
+    type ThreadGetThreadDeprecatedResponse as ThreadGetThreadDeprecatedResponse,
+    type ThreadListThreadsDeprecatedResponse as ThreadListThreadsDeprecatedResponse,
+    type ThreadGetThreadDeprecatedParams as ThreadGetThreadDeprecatedParams,
+    type ThreadListThreadsDeprecatedParams as ThreadListThreadsDeprecatedParams,
   };
 
   export {
     Messages as Messages,
-    type ListMessagesResponse as ListMessagesResponse,
-    type MessageListMessagesResponse as MessageListMessagesResponse,
-    type MessageListMessagesParams as MessageListMessagesParams,
+    type MessageListMessagesDeprecatedResponse as MessageListMessagesDeprecatedResponse,
+    type MessageListMessagesDeprecatedParams as MessageListMessagesDeprecatedParams,
   };
 }

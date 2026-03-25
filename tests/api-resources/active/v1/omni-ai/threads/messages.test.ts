@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource messages', () => {
   // Mock server tests are disabled
-  test.skip('listMessagesDeprecated: only required params', async () => {
-    const responsePromise = client.active.v1.iris.threads.messages.listMessagesDeprecated(
+  test.skip('listMessages: only required params', async () => {
+    const responsePromise = client.active.v1.omniAI.threads.messages.listMessages(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'account_id' },
     );
@@ -24,8 +24,8 @@ describe('resource messages', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listMessagesDeprecated: required and optional params', async () => {
-    const response = await client.active.v1.iris.threads.messages.listMessagesDeprecated(
+  test.skip('listMessages: required and optional params', async () => {
+    const response = await client.active.v1.omniAI.threads.messages.listMessages(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: 'account_id',

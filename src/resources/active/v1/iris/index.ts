@@ -2,35 +2,23 @@
 
 export {
   Feedback,
-  type CreateFeedbackResponse,
-  type FeedbackCreateFeedbackResponse,
-  type FeedbackCreateFeedbackParams,
+  type FeedbackCreateFeedbackDeprecatedResponse,
+  type FeedbackCreateFeedbackDeprecatedParams,
 } from './feedback';
-export { Iris, type Message, type Thread } from './iris';
+export { Iris } from './iris';
 export {
   Runs,
-  type CancelRunResponse,
-  type Capability,
-  type ContentPart,
-  type GetRunResponse,
-  type MessageContent,
-  type MessageRole,
-  type Run,
-  type RunStatus,
-  type StartRunResponse,
-  type RunCancelRunResponse,
-  type RunGetRunResponse,
-  type RunStartRunResponse,
-  type RunCancelRunParams,
-  type RunGetRunParams,
-  type RunStartRunParams,
+  type RunCancelRunDeprecatedResponse,
+  type RunGetRunDeprecatedResponse,
+  type RunStartRunDeprecatedResponse,
+  type RunCancelRunDeprecatedParams,
+  type RunGetRunDeprecatedParams,
+  type RunStartRunDeprecatedParams,
 } from './runs';
 export {
   Threads,
-  type GetThreadResponse,
-  type ListThreadsResponse,
-  type ThreadGetThreadResponse,
-  type ThreadListThreadsResponse,
-  type ThreadGetThreadParams,
-  type ThreadListThreadsParams,
+  type ThreadGetThreadDeprecatedResponse,
+  type ThreadListThreadsDeprecatedResponse,
+  type ThreadGetThreadDeprecatedParams,
+  type ThreadListThreadsDeprecatedParams,
 } from './threads/index';

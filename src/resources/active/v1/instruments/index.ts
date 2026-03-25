@@ -3,7 +3,6 @@
 export {
   AnalystReporting,
   type AnalystDistribution,
-  type AnalystRating,
   type InstrumentAnalystConsensus,
   type PriceTarget,
   type AnalystReportingGetInstrumentAnalystConsensusResponse,
@@ -11,8 +10,11 @@ export {
 } from './analyst-reporting';
 export {
   Events,
+  type AllEventsEventType,
   type InstrumentAllEventsData,
   type InstrumentDividendEvent,
+  type InstrumentEventEnvelope,
+  type InstrumentEventIpoItem,
   type InstrumentEventsByDate,
   type InstrumentEventsData,
   type InstrumentSplitEvent,
@@ -23,12 +25,8 @@ export {
 } from './events';
 export {
   Instruments,
-  type Instrument,
-  type InstrumentCore,
   type InstrumentCoreList,
   type InstrumentEarnings,
-  type InstrumentQuote,
-  type InstrumentSecurityID,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
   type InstrumentGetInstrumentByIDParams,
@@ -39,4 +37,12 @@ export {
   type ReportingGetInstrumentReportingResponse,
   type ReportingGetInstrumentReportingParams,
 } from './reporting';
-export { Venues, type Venue, type VenueList, type VenueGetVenuesResponse } from './venues';
+export {
+  Venues,
+  type DisplayType,
+  type GtdAccepts,
+  type Venue,
+  type VenueList,
+  type VenueSession,
+  type VenueGetVenuesResponse,
+} from './venues';

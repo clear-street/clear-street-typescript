@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as EventsAPI from './events';
 import * as Shared from '../../../shared';
 import * as V1API from '../v1';
 import * as InstrumentsAPI from './instruments';
@@ -59,6 +58,11 @@ export class Events extends APIResource {
     });
   }
 }
+
+/**
+ * Event types supported by the all-events endpoint.
+ */
+export type AllEventsEventType = 'EARNINGS' | 'DIVIDEND' | 'STOCK_SPLIT' | 'IPO';
 
 /**
  * All-events payload grouped by date.
@@ -119,6 +123,102 @@ export interface InstrumentDividendEvent {
 }
 
 /**
+ * Unified envelope for the all-events response.
+ */
+export interface InstrumentEventEnvelope {
+  /**
+   * Security identifier for the event.
+   */
+  security_id: string;
+
+  /**
+   * Security identifier source for the event.
+   */
+  security_id_source: V1API.SecurityIDSource;
+
+  /**
+   * Symbol associated with the event.
+   */
+  symbol: string;
+
+  /**
+   * Event type discriminator.
+   */
+  type: AllEventsEventType;
+
+  /**
+   * Dividend payload when type is DIVIDEND.
+   */
+  dividend_event_data?: InstrumentDividendEvent | null;
+
+  /**
+   * Earnings payload when type is EARNINGS.
+   */
+  earnings_event_data?: InstrumentsAPI.InstrumentEarnings | null;
+
+  /**
+   * OEMS instrument identifier, when the instrument is found in the instrument
+   * cache.
+   */
+  instrument_id?: string | null;
+
+  /**
+   * IPO payload when type is IPO.
+   */
+  ipo_event_data?: InstrumentEventIpoItem | null;
+
+  /**
+   * Instrument name associated with the event, when available.
+   */
+  name?: string | null;
+
+  /**
+   * Stock split payload when type is STOCK_SPLIT.
+   */
+  stock_split_event_data?: InstrumentSplitEvent | null;
+}
+
+/**
+ * IPO event in the all-events date grouping response.
+ */
+export interface InstrumentEventIpoItem {
+  /**
+   * IPO action.
+   */
+  actions?: string | null;
+
+  /**
+   * IPO announced timestamp.
+   */
+  announced_at?: string | null;
+
+  /**
+   * IPO company name.
+   */
+  company?: string | null;
+
+  /**
+   * IPO exchange.
+   */
+  exchange?: string | null;
+
+  /**
+   * IPO market cap.
+   */
+  market_cap?: string | null;
+
+  /**
+   * IPO price range.
+   */
+  price_range?: string | null;
+
+  /**
+   * IPO shares offered.
+   */
+  shares?: string | null;
+}
+
+/**
  * Instrument events for a single date.
  */
 export interface InstrumentEventsByDate {
@@ -130,107 +230,7 @@ export interface InstrumentEventsByDate {
   /**
    * Flat event envelopes for this date.
    */
-  events: Array<InstrumentEventsByDate.Event>;
-}
-
-export namespace InstrumentEventsByDate {
-  /**
-   * Unified envelope for the all-events response.
-   */
-  export interface Event {
-    /**
-     * Security identifier for the event.
-     */
-    security_id: string;
-
-    /**
-     * Security identifier source for the event.
-     */
-    security_id_source: V1API.SecurityIDSource;
-
-    /**
-     * Symbol associated with the event.
-     */
-    symbol: string;
-
-    /**
-     * Event type discriminator.
-     */
-    type: 'EARNINGS' | 'DIVIDEND' | 'STOCK_SPLIT' | 'IPO';
-
-    /**
-     * Dividend payload when type is DIVIDEND.
-     */
-    dividend_event_data?: EventsAPI.InstrumentDividendEvent | null;
-
-    /**
-     * Earnings payload when type is EARNINGS.
-     */
-    earnings_event_data?: InstrumentsAPI.InstrumentEarnings | null;
-
-    /**
-     * OEMS instrument identifier, when the instrument is found in the instrument
-     * cache.
-     */
-    instrument_id?: string | null;
-
-    /**
-     * IPO payload when type is IPO.
-     */
-    ipo_event_data?: Event.IpoEventData | null;
-
-    /**
-     * Instrument name associated with the event, when available.
-     */
-    name?: string | null;
-
-    /**
-     * Stock split payload when type is STOCK_SPLIT.
-     */
-    stock_split_event_data?: EventsAPI.InstrumentSplitEvent | null;
-  }
-
-  export namespace Event {
-    /**
-     * IPO payload when type is IPO.
-     */
-    export interface IpoEventData {
-      /**
-       * IPO action.
-       */
-      actions?: string | null;
-
-      /**
-       * IPO announced timestamp.
-       */
-      announced_at?: string | null;
-
-      /**
-       * IPO company name.
-       */
-      company?: string | null;
-
-      /**
-       * IPO exchange.
-       */
-      exchange?: string | null;
-
-      /**
-       * IPO market cap.
-       */
-      market_cap?: string | null;
-
-      /**
-       * IPO price range.
-       */
-      price_range?: string | null;
-
-      /**
-       * IPO shares offered.
-       */
-      shares?: string | null;
-    }
-  }
+  events: Array<InstrumentEventEnvelope>;
 }
 
 /**
@@ -307,7 +307,7 @@ export interface EventGetAllInstrumentEventsParams {
    * Filter by event type(s). Comma-delimited list. Example:
    * `event_types=EARNINGS,IPO`.
    */
-  event_types?: Array<'EARNINGS' | 'DIVIDEND' | 'STOCK_SPLIT' | 'IPO'>;
+  event_types?: Array<AllEventsEventType>;
 
   /**
    * The start date for the query range, inclusive (YYYY-MM-DD).
@@ -366,8 +366,11 @@ export interface EventGetInstrumentEventsParams {
 
 export declare namespace Events {
   export {
+    type AllEventsEventType as AllEventsEventType,
     type InstrumentAllEventsData as InstrumentAllEventsData,
     type InstrumentDividendEvent as InstrumentDividendEvent,
+    type InstrumentEventEnvelope as InstrumentEventEnvelope,
+    type InstrumentEventIpoItem as InstrumentEventIpoItem,
     type InstrumentEventsByDate as InstrumentEventsByDate,
     type InstrumentEventsData as InstrumentEventsData,
     type InstrumentSplitEvent as InstrumentSplitEvent,

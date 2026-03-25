@@ -5,6 +5,7 @@ export {
   Dividends,
   type DividendCalendarEvent,
   type DividendCalendarEventList,
+  type DividendFrequency,
   type DividendGetDividendsCalendarResponse,
   type DividendGetDividendsCalendarParams,
 } from './dividends';
@@ -19,13 +20,20 @@ export {
   Economic,
   type EconomicCalendarEvent,
   type EconomicCalendarEventList,
+  type EconomicEventImpact,
   type EconomicGetEconomicCalendarResponse,
   type EconomicGetEconomicCalendarParams,
 } from './economic';
 export {
   MarketHours,
+  type DayType,
   type MarketHoursDetail,
   type MarketHoursDetailList,
+  type MarketSessionType,
+  type MarketStatus,
+  type MarketType,
+  type SessionSchedule,
+  type TradingSessions,
   type MarketHourGetMarketHoursCalendarResponse,
   type MarketHourGetMarketHoursCalendarParams,
 } from './market-hours';

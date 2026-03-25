@@ -7,10 +7,13 @@ const client = new ClearStreet({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource prompts', () => {
+describe('resource threads', () => {
   // Mock server tests are disabled
-  test.skip('getPromptResult', async () => {
-    const responsePromise = client.active.v1.assistant.prompts.getPromptResult('id');
+  test.skip('getThread: only required params', async () => {
+    const responsePromise = client.active.v1.omniAI.threads.getThread(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,23 +24,15 @@ describe('resource prompts', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getPromptResult: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.active.v1.assistant.prompts.getPromptResult(
-        'id',
-        { return_all_outputs: true },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(ClearStreet.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('runPrompt: only required params', async () => {
-    const responsePromise = client.active.v1.assistant.prompts.runPrompt({
-      body: {},
-      slug: 'slug',
+  test.skip('getThread: required and optional params', async () => {
+    const response = await client.active.v1.omniAI.threads.getThread('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
     });
+  });
+
+  // Mock server tests are disabled
+  test.skip('listThreads: only required params', async () => {
+    const responsePromise = client.active.v1.omniAI.threads.listThreads({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,11 +43,11 @@ describe('resource prompts', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('runPrompt: required and optional params', async () => {
-    const response = await client.active.v1.assistant.prompts.runPrompt({
-      body: {},
-      slug: 'slug',
-      metadata: { foo: 'string' },
+  test.skip('listThreads: required and optional params', async () => {
+    const response = await client.active.v1.omniAI.threads.listThreads({
+      account_id: 'account_id',
+      page_size: 0,
+      page_token: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 });

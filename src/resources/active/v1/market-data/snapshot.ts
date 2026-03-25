@@ -43,12 +43,12 @@ export interface MarketDataSnapshot {
   /**
    * Most recent quote if available.
    */
-  last_quote?: MarketDataSnapshot.LastQuote | null;
+  last_quote?: SnapshotQuote | null;
 
   /**
    * Most recent last-sale trade if available.
    */
-  last_trade?: MarketDataSnapshot.LastTrade | null;
+  last_trade?: SnapshotLastTrade | null;
 
   /**
    * Security name if available.
@@ -58,72 +58,70 @@ export interface MarketDataSnapshot {
   /**
    * Session metrics computed from previous close and last trade, if available.
    */
-  session?: MarketDataSnapshot.Session | null;
-}
-
-export namespace MarketDataSnapshot {
-  /**
-   * Most recent quote if available.
-   */
-  export interface LastQuote {
-    /**
-     * Current best ask.
-     */
-    ask: string;
-
-    /**
-     * Current best bid.
-     */
-    bid: string;
-
-    /**
-     * Midpoint of bid and ask.
-     */
-    midpoint: string;
-
-    /**
-     * Size at the best ask, in shares.
-     */
-    ask_size?: number | null;
-
-    /**
-     * Size at the best bid, in shares.
-     */
-    bid_size?: number | null;
-  }
-
-  /**
-   * Most recent last-sale trade if available.
-   */
-  export interface LastTrade {
-    /**
-     * Most recent last-sale eligible trade price.
-     */
-    price: string;
-  }
-
-  /**
-   * Session metrics computed from previous close and last trade, if available.
-   */
-  export interface Session {
-    /**
-     * Absolute change from previous close to last trade.
-     */
-    change: string;
-
-    /**
-     * Percent change from previous close to last trade.
-     */
-    change_percent: string;
-
-    /**
-     * Previous session close price.
-     */
-    previous_close: string;
-  }
+  session?: SnapshotSession | null;
 }
 
 export type MarketDataSnapshotList = Array<MarketDataSnapshot>;
+
+/**
+ * Last-trade fields for a market data snapshot.
+ */
+export interface SnapshotLastTrade {
+  /**
+   * Most recent last-sale eligible trade price.
+   */
+  price: string;
+}
+
+/**
+ * L1 quote fields for a market data snapshot.
+ */
+export interface SnapshotQuote {
+  /**
+   * Current best ask.
+   */
+  ask: string;
+
+  /**
+   * Current best bid.
+   */
+  bid: string;
+
+  /**
+   * Midpoint of bid and ask.
+   */
+  midpoint: string;
+
+  /**
+   * Size at the best ask, in shares.
+   */
+  ask_size?: number | null;
+
+  /**
+   * Size at the best bid, in shares.
+   */
+  bid_size?: number | null;
+}
+
+/**
+ * Session-level pricing metrics for a market data snapshot.
+ */
+export interface SnapshotSession {
+  /**
+   * Absolute change from previous close to last trade.
+   */
+  change: string;
+
+  /**
+   * Percent change from previous close to last trade.
+   */
+  change_percent: string;
+
+  /**
+   * Previous session close price.
+   */
+  previous_close: string;
+}
 
 export interface SnapshotGetSnapshotsResponse extends Shared.BaseResponse {
   data: MarketDataSnapshotList;
@@ -161,6 +159,9 @@ export declare namespace Snapshot {
   export {
     type MarketDataSnapshot as MarketDataSnapshot,
     type MarketDataSnapshotList as MarketDataSnapshotList,
+    type SnapshotLastTrade as SnapshotLastTrade,
+    type SnapshotQuote as SnapshotQuote,
+    type SnapshotSession as SnapshotSession,
     type SnapshotGetSnapshotsResponse as SnapshotGetSnapshotsResponse,
     type SnapshotGetSnapshotsParams as SnapshotGetSnapshotsParams,
   };

@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource feedback', () => {
   // Mock server tests are disabled
-  test.skip('createFeedbackDeprecated: only required params', async () => {
-    const responsePromise = client.active.v1.iris.feedback.createFeedbackDeprecated({
+  test.skip('createFeedback: only required params', async () => {
+    const responsePromise = client.active.v1.omniAI.feedback.createFeedback({
       account_id: 'account_id',
       message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       score: 0,
@@ -26,8 +26,8 @@ describe('resource feedback', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('createFeedbackDeprecated: required and optional params', async () => {
-    const response = await client.active.v1.iris.feedback.createFeedbackDeprecated({
+  test.skip('createFeedback: required and optional params', async () => {
+    const response = await client.active.v1.omniAI.feedback.createFeedback({
       account_id: 'account_id',
       message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       score: 0,

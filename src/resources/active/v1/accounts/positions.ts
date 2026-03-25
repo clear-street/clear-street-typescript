@@ -100,7 +100,7 @@ export interface Position {
   /**
    * The type of position
    */
-  position_type: 'LONG' | 'SHORT' | 'LONG_CALL' | 'SHORT_CALL' | 'LONG_PUT' | 'SHORT_PUT';
+  position_type: PositionType;
 
   /**
    * The number of shares or contracts. Can be positive (long) or negative (short)
@@ -156,6 +156,11 @@ export interface Position {
 }
 
 export type PositionList = Array<Position>;
+
+/**
+ * Position type classification
+ */
+export type PositionType = 'LONG' | 'SHORT' | 'LONG_CALL' | 'SHORT_CALL' | 'LONG_PUT' | 'SHORT_PUT';
 
 export interface PositionClosePositionResponse extends Shared.BaseResponse {
   data: AccountsAPI.OrderList;
@@ -246,6 +251,7 @@ export declare namespace Positions {
   export {
     type Position as Position,
     type PositionList as PositionList,
+    type PositionType as PositionType,
     type PositionClosePositionResponse as PositionClosePositionResponse,
     type PositionClosePositionsResponse as PositionClosePositionsResponse,
     type PositionGetPositionsResponse as PositionGetPositionsResponse,

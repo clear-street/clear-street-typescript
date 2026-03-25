@@ -31,6 +31,11 @@ export class MarketHours extends APIResource {
 }
 
 /**
+ * Day type for market hours - indicates the type of trading day
+ */
+export type DayType = 'TRADING_DAY' | 'EARLY_CLOSE' | 'HOLIDAY' | 'WEEKEND';
+
+/**
  * Comprehensive market hours information for a specific market and date
  */
 export interface MarketHoursDetail {
@@ -47,7 +52,7 @@ export interface MarketHoursDetail {
   /**
    * Market type identifier
    */
-  market: 'us_equities' | 'us_options';
+  market: MarketType;
 
   /**
    * Human-readable market name
@@ -57,12 +62,12 @@ export interface MarketHoursDetail {
   /**
    * Next trading day's session schedules (without time_until fields)
    */
-  next_sessions: MarketHoursDetail.NextSessions;
+  next_sessions: TradingSessions;
 
   /**
    * Market status information
    */
-  status: MarketHoursDetail.Status;
+  status: MarketStatus;
 
   /**
    * IANA timezone identifier for the market
@@ -72,232 +77,86 @@ export interface MarketHoursDetail {
   /**
    * Trading session schedules for the requested date with time_until fields
    */
-  today_sessions: MarketHoursDetail.TodaySessions;
-}
-
-export namespace MarketHoursDetail {
-  /**
-   * Next trading day's session schedules (without time_until fields)
-   */
-  export interface NextSessions {
-    /**
-     * After-hours session schedule, null if not available
-     */
-    after_hours?: NextSessions.AfterHours | null;
-
-    /**
-     * Pre-market session schedule, null if not available
-     */
-    pre_market?: NextSessions.PreMarket | null;
-
-    /**
-     * Regular trading session schedule, null if holiday/weekend
-     */
-    regular?: NextSessions.Regular | null;
-  }
-
-  export namespace NextSessions {
-    /**
-     * After-hours session schedule, null if not available
-     */
-    export interface AfterHours {
-      /**
-       * Session close timestamp with timezone offset
-       */
-      close: string;
-
-      /**
-       * Session open timestamp with timezone offset
-       */
-      open: string;
-
-      /**
-       * ISO 8601 duration until session closes. Null if session is not currently open.
-       */
-      time_until_close?: string | null;
-
-      /**
-       * ISO 8601 duration until session opens. Null if session has already started or
-       * closed.
-       */
-      time_until_open?: string | null;
-    }
-
-    /**
-     * Pre-market session schedule, null if not available
-     */
-    export interface PreMarket {
-      /**
-       * Session close timestamp with timezone offset
-       */
-      close: string;
-
-      /**
-       * Session open timestamp with timezone offset
-       */
-      open: string;
-
-      /**
-       * ISO 8601 duration until session closes. Null if session is not currently open.
-       */
-      time_until_close?: string | null;
-
-      /**
-       * ISO 8601 duration until session opens. Null if session has already started or
-       * closed.
-       */
-      time_until_open?: string | null;
-    }
-
-    /**
-     * Regular trading session schedule, null if holiday/weekend
-     */
-    export interface Regular {
-      /**
-       * Session close timestamp with timezone offset
-       */
-      close: string;
-
-      /**
-       * Session open timestamp with timezone offset
-       */
-      open: string;
-
-      /**
-       * ISO 8601 duration until session closes. Null if session is not currently open.
-       */
-      time_until_close?: string | null;
-
-      /**
-       * ISO 8601 duration until session opens. Null if session has already started or
-       * closed.
-       */
-      time_until_open?: string | null;
-    }
-  }
-
-  /**
-   * Market status information
-   */
-  export interface Status {
-    /**
-     * The type of trading day
-     */
-    day_type: 'TRADING_DAY' | 'EARLY_CLOSE' | 'HOLIDAY' | 'WEEKEND';
-
-    /**
-     * Whether the market is currently open (real-time)
-     */
-    is_open: boolean;
-
-    /**
-     * Current session type if market is open, null if closed
-     */
-    current_session?: 'pre_market' | 'regular' | 'after_hours' | null;
-  }
-
-  /**
-   * Trading session schedules for the requested date with time_until fields
-   */
-  export interface TodaySessions {
-    /**
-     * After-hours session schedule, null if not available
-     */
-    after_hours?: TodaySessions.AfterHours | null;
-
-    /**
-     * Pre-market session schedule, null if not available
-     */
-    pre_market?: TodaySessions.PreMarket | null;
-
-    /**
-     * Regular trading session schedule, null if holiday/weekend
-     */
-    regular?: TodaySessions.Regular | null;
-  }
-
-  export namespace TodaySessions {
-    /**
-     * After-hours session schedule, null if not available
-     */
-    export interface AfterHours {
-      /**
-       * Session close timestamp with timezone offset
-       */
-      close: string;
-
-      /**
-       * Session open timestamp with timezone offset
-       */
-      open: string;
-
-      /**
-       * ISO 8601 duration until session closes. Null if session is not currently open.
-       */
-      time_until_close?: string | null;
-
-      /**
-       * ISO 8601 duration until session opens. Null if session has already started or
-       * closed.
-       */
-      time_until_open?: string | null;
-    }
-
-    /**
-     * Pre-market session schedule, null if not available
-     */
-    export interface PreMarket {
-      /**
-       * Session close timestamp with timezone offset
-       */
-      close: string;
-
-      /**
-       * Session open timestamp with timezone offset
-       */
-      open: string;
-
-      /**
-       * ISO 8601 duration until session closes. Null if session is not currently open.
-       */
-      time_until_close?: string | null;
-
-      /**
-       * ISO 8601 duration until session opens. Null if session has already started or
-       * closed.
-       */
-      time_until_open?: string | null;
-    }
-
-    /**
-     * Regular trading session schedule, null if holiday/weekend
-     */
-    export interface Regular {
-      /**
-       * Session close timestamp with timezone offset
-       */
-      close: string;
-
-      /**
-       * Session open timestamp with timezone offset
-       */
-      open: string;
-
-      /**
-       * ISO 8601 duration until session closes. Null if session is not currently open.
-       */
-      time_until_close?: string | null;
-
-      /**
-       * ISO 8601 duration until session opens. Null if session has already started or
-       * closed.
-       */
-      time_until_open?: string | null;
-    }
-  }
+  today_sessions: TradingSessions;
 }
 
 export type MarketHoursDetailList = Array<MarketHoursDetail>;
+
+/**
+ * Session type for market hours
+ */
+export type MarketSessionType = 'pre_market' | 'regular' | 'after_hours';
+
+/**
+ * Market status information
+ */
+export interface MarketStatus {
+  /**
+   * The type of trading day
+   */
+  day_type: DayType;
+
+  /**
+   * Whether the market is currently open (real-time)
+   */
+  is_open: boolean;
+
+  /**
+   * Current session type if market is open, null if closed
+   */
+  current_session?: MarketSessionType | null;
+}
+
+/**
+ * Market type for market hours calendar endpoint
+ */
+export type MarketType = 'us_equities' | 'us_options';
+
+/**
+ * Session schedule with open and close timestamps
+ */
+export interface SessionSchedule {
+  /**
+   * Session close timestamp with timezone offset
+   */
+  close: string;
+
+  /**
+   * Session open timestamp with timezone offset
+   */
+  open: string;
+
+  /**
+   * ISO 8601 duration until session closes. Null if session is not currently open.
+   */
+  time_until_close?: string | null;
+
+  /**
+   * ISO 8601 duration until session opens. Null if session has already started or
+   * closed.
+   */
+  time_until_open?: string | null;
+}
+
+/**
+ * Trading sessions for a market day with full timestamps
+ */
+export interface TradingSessions {
+  /**
+   * After-hours session schedule, null if not available
+   */
+  after_hours?: SessionSchedule | null;
+
+  /**
+   * Pre-market session schedule, null if not available
+   */
+  pre_market?: SessionSchedule | null;
+
+  /**
+   * Regular trading session schedule, null if holiday/weekend
+   */
+  regular?: SessionSchedule | null;
+}
 
 export interface MarketHourGetMarketHoursCalendarResponse extends Shared.BaseResponse {
   data: MarketHoursDetailList;
@@ -312,13 +171,19 @@ export interface MarketHourGetMarketHoursCalendarParams {
   /**
    * Market type to query (us_equities, us_options). If omitted, returns all markets.
    */
-  market?: 'us_equities' | 'us_options';
+  market?: MarketType;
 }
 
 export declare namespace MarketHours {
   export {
+    type DayType as DayType,
     type MarketHoursDetail as MarketHoursDetail,
     type MarketHoursDetailList as MarketHoursDetailList,
+    type MarketSessionType as MarketSessionType,
+    type MarketStatus as MarketStatus,
+    type MarketType as MarketType,
+    type SessionSchedule as SessionSchedule,
+    type TradingSessions as TradingSessions,
     type MarketHourGetMarketHoursCalendarResponse as MarketHourGetMarketHoursCalendarResponse,
     type MarketHourGetMarketHoursCalendarParams as MarketHourGetMarketHoursCalendarParams,
   };
