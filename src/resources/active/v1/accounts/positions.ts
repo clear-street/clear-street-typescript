@@ -144,6 +144,12 @@ export interface Position {
   daily_unrealized_pnl?: string | null;
 
   /**
+   * The daily unrealized profit or loss as a percentage of prior close basis (range:
+   * 0-100)
+   */
+  daily_unrealized_pnl_pct?: string | null;
+
+  /**
    * The current market price of the instrument
    */
   market_price?: string | null;
@@ -153,6 +159,11 @@ export interface Position {
    * value
    */
   unrealized_pnl?: string | null;
+
+  /**
+   * The unrealized profit or loss as a percentage of cost basis (range: 0-100)
+   */
+  unrealized_pnl_pct?: string | null;
 }
 
 export type PositionList = Array<Position>;
