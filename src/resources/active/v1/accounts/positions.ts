@@ -144,8 +144,8 @@ export interface Position {
   daily_unrealized_pnl?: string | null;
 
   /**
-   * The daily unrealized profit or loss as a percentage of prior close basis (range:
-   * 0-100)
+   * The unrealized profit/loss for the position for the current day, expressed as a
+   * percentage of the baseline value (range: 0-100).
    */
   daily_unrealized_pnl_pct?: string | null;
 
@@ -161,7 +161,8 @@ export interface Position {
   unrealized_pnl?: string | null;
 
   /**
-   * The unrealized profit or loss as a percentage of cost basis (range: 0-100)
+   * The unrealized profit/loss for the position, expressed as a percentage of the
+   * position's cost basis (range: 0-100).
    */
   unrealized_pnl_pct?: string | null;
 }
