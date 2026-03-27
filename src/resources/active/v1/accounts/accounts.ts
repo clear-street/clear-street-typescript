@@ -136,6 +136,11 @@ export interface Account {
   id: number;
 
   /**
+   * The account holder entity identifier
+   */
+  account_holder_entity_id: number;
+
+  /**
    * The full legal name of the account
    */
   full_name: string;
