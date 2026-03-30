@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as Shared from '../../../../shared';
-import * as OmniAIAPI from '../../omni-ai/omni-ai';
+import * as V1API from '../../v1';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
@@ -26,7 +26,7 @@ export class Messages extends APIResource {
 }
 
 export interface MessageListMessagesDeprecatedResponse extends Shared.BaseResponse {
-  data: OmniAIAPI.ListMessagesResponse;
+  data: V1API.ListMessagesResponse;
 }
 
 export interface MessageListMessagesDeprecatedParams {

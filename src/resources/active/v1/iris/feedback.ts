@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
-import * as OmniAIAPI from '../omni-ai/omni-ai';
+import * as V1API from '../v1';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
@@ -24,7 +24,7 @@ export class Feedback extends APIResource {
 }
 
 export interface FeedbackCreateFeedbackDeprecatedResponse extends Shared.BaseResponse {
-  data: OmniAIAPI.CreateFeedbackResponse;
+  data: V1API.CreateFeedbackResponse;
 }
 
 export interface FeedbackCreateFeedbackDeprecatedParams {

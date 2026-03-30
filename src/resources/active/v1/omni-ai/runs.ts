@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
-import * as OmniAIAPI from './omni-ai';
+import * as V1API from '../v1';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -65,15 +65,15 @@ export class Runs extends APIResource {
 }
 
 export interface RunCancelRunResponse extends Shared.BaseResponse {
-  data: OmniAIAPI.CancelRunResponse;
+  data: V1API.CancelRunResponse;
 }
 
 export interface RunGetRunResponse extends Shared.BaseResponse {
-  data: OmniAIAPI.GetRunResponse;
+  data: V1API.GetRunResponse;
 }
 
 export interface RunStartRunResponse extends Shared.BaseResponse {
-  data: OmniAIAPI.StartRunResponse;
+  data: V1API.StartRunResponse;
 }
 
 export interface RunCancelRunParams {
@@ -119,7 +119,7 @@ export interface RunStartRunParams {
   /**
    * Capabilities for structured actions
    */
-  capabilities?: Array<OmniAIAPI.Capability>;
+  capabilities?: Array<V1API.Capability>;
 
   /**
    * Optional context for the agent
