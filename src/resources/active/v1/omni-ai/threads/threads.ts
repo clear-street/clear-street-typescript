@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as Shared from '../../../../shared';
-import * as V1API from '../../v1';
+import * as OmniAIAPI from '../omni-ai';
 import * as MessagesAPI from './messages';
 import { MessageListMessagesParams, MessageListMessagesResponse, Messages } from './messages';
 import { APIPromise } from '../../../../../core/api-promise';
@@ -55,11 +55,11 @@ export class Threads extends APIResource {
 }
 
 export interface ThreadGetThreadResponse extends Shared.BaseResponse {
-  data: V1API.GetThreadResponse;
+  data: OmniAIAPI.GetThreadResponse;
 }
 
 export interface ThreadListThreadsResponse extends Shared.BaseResponse {
-  data: V1API.ListThreadsResponse;
+  data: OmniAIAPI.ListThreadsResponse;
 }
 
 export interface ThreadGetThreadParams {

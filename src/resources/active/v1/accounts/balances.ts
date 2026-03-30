@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
+import * as V1API from '../v1';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -66,13 +67,8 @@ export interface AccountBalances {
   /**
    * Timestamp for the start-of-day values
    */
-  sod_asof?: APITimestamp | null;
+  sod_asof?: V1API.APITimestamp | null;
 }
-
-/**
- * A timestamp in ISO 8601/RFC 3339 profile format with nanosecond precision.
- */
-export type APITimestamp = string;
 
 /**
  * An account's margin type
@@ -218,7 +214,6 @@ export interface BalanceGetAccountBalancesResponse extends Shared.BaseResponse {
 export declare namespace Balances {
   export {
     type AccountBalances as AccountBalances,
-    type APITimestamp as APITimestamp,
     type MarginType as MarginType,
     type RegTBalance as RegTBalance,
     type BalanceGetAccountBalancesResponse as BalanceGetAccountBalancesResponse,

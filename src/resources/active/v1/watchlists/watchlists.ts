@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
-import * as V1API from '../v1';
+import * as InstrumentsAPI from '../instruments/instruments';
 import * as ItemsAPI from './items';
 import {
   AddWatchlistItemData,
@@ -158,7 +158,7 @@ export interface WatchlistItemEntry {
   /**
    * Instrument details
    */
-  instrument?: V1API.Instrument | null;
+  instrument?: InstrumentsAPI.Instrument | null;
 }
 
 export interface WatchlistCreateWatchlistResponse extends Shared.BaseResponse {
