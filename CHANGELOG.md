@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.43.0 (2026-03-30)
+
+Full Changelog: [v0.42.0...v0.43.0](https://github.com/clear-street/clear-street-typescript/compare/v0.42.0...v0.43.0)
+
+### Features
+
+* **api:** api update ([70204ed](https://github.com/clear-street/clear-street-typescript/commit/70204ede13b2b9cf3bf86eb5f568282982bf983d))
+* **api:** api update ([e2e11a8](https://github.com/clear-street/clear-street-typescript/commit/e2e11a8ceed6a8dfec8519ff5917af6c4058e836))
+* **api:** api update ([085b053](https://github.com/clear-street/clear-street-typescript/commit/085b053597cfd4d12452a14711afb0b80043d879))
+* **api:** api update ([0a992be](https://github.com/clear-street/clear-street-typescript/commit/0a992be8d97aacfd8e8a3345d6ebda4fd77156ad))
+* **api:** manual updates ([9062668](https://github.com/clear-street/clear-street-typescript/commit/9062668ba339484b80ea7052398f328c77e09fc2))
+
 ## 0.42.0 (2026-03-25)
 
 Full Changelog: [v0.41.1...v0.42.0](https://github.com/clear-street/clear-street-typescript/compare/v0.41.1...v0.42.0)

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as V1API from './v1';
+import * as InstrumentsAPI from './instruments/instruments';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
@@ -25,6 +26,26 @@ export class Screener extends APIResource {
   ): APIPromise<ScreenerGetScreenerResponse> {
     return this._client.get('/active/v1/screener', { query, ...options });
   }
+}
+
+/**
+ * A single filter criterion for the screener.
+ */
+export interface ScreenerFilter {
+  /**
+   * Field to filter on (e.g., "market_cap", "sector", "price")
+   */
+  field: string;
+
+  /**
+   * Comparison operator (e.g., "eq", "gte", "lte", "in")
+   */
+  operator: string;
+
+  /**
+   * Filter value
+   */
+  value: unknown;
 }
 
 /**
@@ -99,7 +120,7 @@ export interface ScreenerItem {
   /**
    * The consensus analyst rating
    */
-  consensus_rating?: V1API.AnalystRating | null;
+  consensus_rating?: InstrumentsAPI.AnalystRating | null;
 
   /**
    * The ISO country code of the instrument's issue
@@ -339,6 +360,7 @@ export interface ScreenerGetScreenerParams {
 
 export declare namespace Screener {
   export {
+    type ScreenerFilter as ScreenerFilter,
     type ScreenerItem as ScreenerItem,
     type ScreenerItemList as ScreenerItemList,
     type ScreenerGetScreenerResponse as ScreenerGetScreenerResponse,
