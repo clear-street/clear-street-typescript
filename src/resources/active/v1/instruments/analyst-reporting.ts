@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as V1API from '../v1';
+import * as InstrumentsAPI from './instruments';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -88,7 +89,7 @@ export interface InstrumentAnalystConsensus {
   /**
    * Consensus analyst rating
    */
-  rating?: V1API.AnalystRating | null;
+  rating?: InstrumentsAPI.AnalystRating | null;
 }
 
 /**
