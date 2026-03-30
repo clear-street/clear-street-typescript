@@ -25,13 +25,8 @@ export {
 } from './events';
 export {
   Instruments,
-  type AnalystRating,
-  type Instrument,
-  type InstrumentCore,
   type InstrumentCoreList,
   type InstrumentEarnings,
-  type InstrumentQuote,
-  type InstrumentSecurityID,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
   type InstrumentGetInstrumentByIDParams,

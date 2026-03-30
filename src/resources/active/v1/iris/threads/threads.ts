@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as Shared from '../../../../shared';
-import * as OmniAIAPI from '../../omni-ai/omni-ai';
+import * as V1API from '../../v1';
 import * as MessagesAPI from './messages';
 import {
   MessageListMessagesDeprecatedParams,
@@ -46,11 +46,11 @@ export class Threads extends APIResource {
 }
 
 export interface ThreadGetThreadDeprecatedResponse extends Shared.BaseResponse {
-  data: OmniAIAPI.GetThreadResponse;
+  data: V1API.GetThreadResponse;
 }
 
 export interface ThreadListThreadsDeprecatedResponse extends Shared.BaseResponse {
-  data: OmniAIAPI.ListThreadsResponse;
+  data: V1API.ListThreadsResponse;
 }
 
 export interface ThreadGetThreadDeprecatedParams {

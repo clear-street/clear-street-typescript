@@ -3,7 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as V1API from '../v1';
-import * as OrdersAPI from './orders';
+import * as AccountsAPI from './accounts';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -175,11 +175,11 @@ export type PositionList = Array<Position>;
 export type PositionType = 'LONG' | 'SHORT' | 'LONG_CALL' | 'SHORT_CALL' | 'LONG_PUT' | 'SHORT_PUT';
 
 export interface PositionClosePositionResponse extends Shared.BaseResponse {
-  data: OrdersAPI.OrderList;
+  data: AccountsAPI.OrderList;
 }
 
 export interface PositionClosePositionsResponse extends Shared.BaseResponse {
-  data: OrdersAPI.OrderList;
+  data: AccountsAPI.OrderList;
 }
 
 export interface PositionGetPositionsResponse extends Shared.BaseResponse {
