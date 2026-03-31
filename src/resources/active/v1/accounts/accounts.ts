@@ -5,10 +5,14 @@ import * as Shared from '../../../shared';
 import * as BalancesAPI from './balances';
 import {
   AccountBalances,
+  AccountBalancesSod,
+  BalanceGetAccountBalancesParams,
   BalanceGetAccountBalancesResponse,
   Balances,
+  MarginDetails,
+  MarginDetailsUsage,
+  MarginTopContributor,
   MarginType,
-  RegTBalance,
 } from './balances';
 import * as OrdersAPI from './orders';
 import {
@@ -314,9 +318,13 @@ export declare namespace Accounts {
   export {
     Balances as Balances,
     type AccountBalances as AccountBalances,
+    type AccountBalancesSod as AccountBalancesSod,
+    type MarginDetails as MarginDetails,
+    type MarginDetailsUsage as MarginDetailsUsage,
+    type MarginTopContributor as MarginTopContributor,
     type MarginType as MarginType,
-    type RegTBalance as RegTBalance,
     type BalanceGetAccountBalancesResponse as BalanceGetAccountBalancesResponse,
+    type BalanceGetAccountBalancesParams as BalanceGetAccountBalancesParams,
   };
 
   export {

@@ -13,7 +13,6 @@ Types:
 Types:
 
 - <code><a href="./src/resources/active/v1/v1.ts">APIDecimal64</a></code>
-- <code><a href="./src/resources/active/v1/v1.ts">APITimestamp</a></code>
 - <code><a href="./src/resources/active/v1/v1.ts">SecurityIDSource</a></code>
 - <code><a href="./src/resources/active/v1/v1.ts">SecurityType</a></code>
 
@@ -43,13 +42,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/active/v1/accounts/balances.ts">AccountBalances</a></code>
+- <code><a href="./src/resources/active/v1/accounts/balances.ts">AccountBalancesSod</a></code>
+- <code><a href="./src/resources/active/v1/accounts/balances.ts">MarginDetails</a></code>
+- <code><a href="./src/resources/active/v1/accounts/balances.ts">MarginDetailsUsage</a></code>
+- <code><a href="./src/resources/active/v1/accounts/balances.ts">MarginTopContributor</a></code>
 - <code><a href="./src/resources/active/v1/accounts/balances.ts">MarginType</a></code>
-- <code><a href="./src/resources/active/v1/accounts/balances.ts">RegTBalance</a></code>
 - <code><a href="./src/resources/active/v1/accounts/balances.ts">BalanceGetAccountBalancesResponse</a></code>
 
 Methods:
 
-- <code title="get /active/v1/accounts/{account_id}/balances">client.active.v1.accounts.balances.<a href="./src/resources/active/v1/accounts/balances.ts">getAccountBalances</a>(accountID) -> BalanceGetAccountBalancesResponse</code>
+- <code title="get /active/v1/accounts/{account_id}/balances">client.active.v1.accounts.balances.<a href="./src/resources/active/v1/accounts/balances.ts">getAccountBalances</a>(accountID, { ...params }) -> BalanceGetAccountBalancesResponse</code>
 
 #### Locates
 

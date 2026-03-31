@@ -101,7 +101,7 @@ export {
   type ScreenerGetScreenerResponse,
   type ScreenerGetScreenerParams,
 } from './screener';
-export { V1, type APIDecimal64, type APITimestamp, type SecurityIDSource, type SecurityType } from './v1';
+export { V1, type APIDecimal64, type SecurityIDSource, type SecurityType } from './v1';
 export {
   VersionResource,
   type Version,
