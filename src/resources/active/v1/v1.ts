@@ -151,11 +151,6 @@ export class V1 extends APIResource {
 export type APIDecimal64 = string;
 
 /**
- * A timestamp in ISO 8601/RFC 3339 profile format with nanosecond precision.
- */
-export type APITimestamp = string;
-
-/**
  * Security identifier source
  */
 export type SecurityIDSource =
@@ -229,7 +224,6 @@ V1.Ws = Ws;
 export declare namespace V1 {
   export {
     type APIDecimal64 as APIDecimal64,
-    type APITimestamp as APITimestamp,
     type SecurityIDSource as SecurityIDSource,
     type SecurityType as SecurityType,
   };

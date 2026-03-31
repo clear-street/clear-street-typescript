@@ -424,7 +424,9 @@ export interface InstrumentGetInstrumentsParams {
   easy_to_borrow?: boolean;
 
   /**
-   * Filter IDs to those containing this substring. For options, this is required.
+   * Filter IDs to those containing this substring. For options, and when
+   * security_type is omitted and no security_id/security_id_source filters are
+   * provided, this is required.
    */
   id_filter?: string;
 
@@ -487,7 +489,7 @@ export interface InstrumentGetInstrumentsParams {
   security_id_source?: Array<string>;
 
   /**
-   * Filter by security type, required and defaults to COMMON_STOCK
+   * Filter by security type. If omitted, returns all types.
    */
   security_type?:
     | 'COMMON_STOCK'

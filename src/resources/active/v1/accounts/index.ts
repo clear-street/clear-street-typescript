@@ -18,9 +18,13 @@ export {
 export {
   Balances,
   type AccountBalances,
+  type AccountBalancesSod,
+  type MarginDetails,
+  type MarginDetailsUsage,
+  type MarginTopContributor,
   type MarginType,
-  type RegTBalance,
   type BalanceGetAccountBalancesResponse,
+  type BalanceGetAccountBalancesParams,
 } from './balances';
 export {
   Locates,
