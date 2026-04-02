@@ -356,10 +356,6 @@ export interface PrefillOrderAction {
 export interface Run {
   created_at: string;
 
-  model: string;
-
-  provider: string;
-
   status: RunStatus;
 
   id?: string | null;
@@ -370,15 +366,9 @@ export interface Run {
 
   error?: unknown | null;
 
-  metadata?: unknown | null;
-
-  parameters?: unknown | null;
-
   started_at?: string | null;
 
   thread_id?: string | null;
-
-  usage?: unknown | null;
 }
 
 export type RunStatus = 'UNSPECIFIED' | 'QUEUED' | 'RUNNING' | 'SUCCEEDED' | 'FAILED' | 'CANCELED';
