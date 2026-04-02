@@ -54,7 +54,6 @@ export type ContentPart =
   | ContentPart.OpenScreener
   | ContentPart.OpenChatWindow
   | ContentPart.Navigate
-  | ContentPart.Thinking
   | ContentPart.Type;
 
 export namespace ContentPart {
@@ -108,15 +107,6 @@ export namespace ContentPart {
     action_type: 'navigate';
 
     type?: 'structured_action';
-  }
-
-  /**
-   * Model reasoning/thinking content and tool call status indicators
-   */
-  export interface Thinking {
-    text: string;
-
-    type: 'thinking';
   }
 
   /**
