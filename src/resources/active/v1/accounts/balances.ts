@@ -85,6 +85,11 @@ export interface AccountBalances {
   open_order_adjustment: string;
 
   /**
+   * The amount of cash that is settled and available for withdrawal or trading.
+   */
+  settled_cash: string;
+
+  /**
    * Start-of-day snapshot balances.
    */
   sod: AccountBalancesSod;
@@ -113,11 +118,6 @@ export interface AccountBalances {
    * Applied multiplier for margin calculations.
    */
   multiplier?: string | null;
-
-  /**
-   * The amount of cash that is settled and available for withdrawal or trading.
-   */
-  settled_cash?: string | null;
 
   /**
    * The total market value of all short positions.
