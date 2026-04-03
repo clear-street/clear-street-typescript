@@ -32,6 +32,38 @@ export class OmniAI extends APIResource {
   threads: ThreadsAPI.Threads = new ThreadsAPI.Threads(this._client);
 }
 
+export interface ActionButton {
+  button_id: string;
+
+  label: string;
+
+  /**
+   * Send a follow-up prompt as the next user message
+   */
+  action?: ButtonAction | null;
+}
+
+/**
+ * Send a follow-up prompt as the next user message
+ */
+export type ButtonAction = ButtonAction.Prompt | ButtonAction.StructuredAction;
+
+export namespace ButtonAction {
+  /**
+   * Send a follow-up prompt as the next user message
+   */
+  export interface Prompt extends OmniAIAPI.PromptButtonAction {
+    action_type: 'prompt';
+  }
+
+  /**
+   * Trigger a structured action already present in the same message
+   */
+  export interface StructuredAction extends OmniAIAPI.StructuredActionButtonAction {
+    action_type: 'structured_action';
+  }
+}
+
 export interface CancelRunResponse {
   canceled: boolean;
 }
@@ -45,7 +77,40 @@ export interface CancelRunResponse {
 export type Capability = 'NAVIGATE' | 'OPEN_CHAT_WINDOW' | 'PREFILL_ORDER' | 'OPEN_CHART' | 'OPEN_SCREENER';
 
 /**
- * A single content part (text or structured action).
+ * Chart for a specific ticker symbol
+ */
+export type ChartKind = ChartKind.SymbolChart | ChartKind.DataChart;
+
+export namespace ChartKind {
+  /**
+   * Chart for a specific ticker symbol
+   */
+  export interface SymbolChart extends OmniAIAPI.SymbolChart {
+    chart_type: 'symbol_chart';
+  }
+
+  /**
+   * Chart built from explicit data series
+   */
+  export interface DataChart extends OmniAIAPI.DataChart {
+    chart_type: 'data_chart';
+  }
+}
+
+export interface ChartPoint {
+  x: string;
+
+  y: number;
+}
+
+export interface ChartSeries {
+  name: string;
+
+  points: Array<ChartPoint>;
+}
+
+/**
+ * A single content part.
  */
 export type ContentPart =
   | ContentPart.Text
@@ -55,6 +120,8 @@ export type ContentPart =
   | ContentPart.OpenChatWindow
   | ContentPart.Navigate
   | ContentPart.Thinking
+  | ContentPart.Chart
+  | ContentPart.SuggestedActions
   | ContentPart.Type;
 
 export namespace ContentPart {
@@ -113,10 +180,22 @@ export namespace ContentPart {
   /**
    * Model reasoning/thinking content and tool call status indicators
    */
-  export interface Thinking {
-    text: string;
-
+  export interface Thinking extends OmniAIAPI.ContentPartThinking {
     type: 'thinking';
+  }
+
+  /**
+   * Typed inline chart (symbol or data-driven)
+   */
+  export interface Chart extends OmniAIAPI.ContentPartChart {
+    type: 'chart';
+  }
+
+  /**
+   * Message-level follow-up action buttons
+   */
+  export interface SuggestedActions extends OmniAIAPI.ContentPartSuggestedActions {
+    type: 'suggested_actions';
   }
 
   /**
@@ -127,14 +206,37 @@ export namespace ContentPart {
   }
 }
 
+export interface ContentPartChart {
+  chart_id: string;
+
+  action_buttons?: Array<ActionButton>;
+
+  /**
+   * Chart for a specific ticker symbol
+   */
+  chart_kind?: ChartKind | null;
+}
+
+export interface ContentPartSuggestedActions {
+  action_buttons: Array<ActionButton>;
+}
+
 export interface ContentPartText {
   text: string;
+}
+
+export interface ContentPartThinking {
+  thoughts: Array<string>;
 }
 
 export interface CreateFeedbackResponse {
   created_at: string;
 
   feedback_id?: string | null;
+}
+
+export interface DataChart {
+  series: Array<ChartSeries>;
 }
 
 export interface GetRunResponse {
@@ -178,7 +280,7 @@ export interface Message {
   author_user_id?: string | null;
 
   /**
-   * Parsed content parts (text and structured actions)
+   * Parsed content parts (text, thinking, and structured actions)
    */
   content?: MessageContent | null;
 
@@ -363,6 +465,10 @@ export interface PrefillOrderAction {
   account_id?: number | null;
 }
 
+export interface PromptButtonAction {
+  prompt: string;
+}
+
 export interface Run {
   created_at: string;
 
@@ -451,6 +557,16 @@ export namespace StructuredAction {
   }
 }
 
+export interface StructuredActionButtonAction {
+  action_id?: string | null;
+}
+
+export interface SymbolChart {
+  symbol: string;
+
+  timeframe?: string | null;
+}
+
 export interface Thread {
   account_id: string;
 
@@ -475,11 +591,20 @@ OmniAI.Threads = Threads;
 
 export declare namespace OmniAI {
   export {
+    type ActionButton as ActionButton,
+    type ButtonAction as ButtonAction,
     type CancelRunResponse as CancelRunResponse,
     type Capability as Capability,
+    type ChartKind as ChartKind,
+    type ChartPoint as ChartPoint,
+    type ChartSeries as ChartSeries,
     type ContentPart as ContentPart,
+    type ContentPartChart as ContentPartChart,
+    type ContentPartSuggestedActions as ContentPartSuggestedActions,
     type ContentPartText as ContentPartText,
+    type ContentPartThinking as ContentPartThinking,
     type CreateFeedbackResponse as CreateFeedbackResponse,
+    type DataChart as DataChart,
     type GetRunResponse as GetRunResponse,
     type GetThreadResponse as GetThreadResponse,
     type ListMessagesResponse as ListMessagesResponse,
@@ -494,10 +619,13 @@ export declare namespace OmniAI {
     type OrderPayload as OrderPayload,
     type OrderStrategyType as OrderStrategyType,
     type PrefillOrderAction as PrefillOrderAction,
+    type PromptButtonAction as PromptButtonAction,
     type Run as Run,
     type RunStatus as RunStatus,
     type StartRunResponse as StartRunResponse,
     type StructuredAction as StructuredAction,
+    type StructuredActionButtonAction as StructuredActionButtonAction,
+    type SymbolChart as SymbolChart,
     type Thread as Thread,
   };
 
