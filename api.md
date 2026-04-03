@@ -423,11 +423,20 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ActionButton</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ButtonAction</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CancelRunResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Capability</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ChartKind</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ChartPoint</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ChartSeries</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPart</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartChart</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartSuggestedActions</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartText</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartThinking</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CreateFeedbackResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">DataChart</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">GetRunResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">GetThreadResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ListMessagesResponse</a></code>
@@ -442,10 +451,13 @@ Types:
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OrderPayload</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OrderStrategyType</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PrefillOrderAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PromptButtonAction</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Run</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">RunStatus</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">StartRunResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">StructuredAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">StructuredActionButtonAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">SymbolChart</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Thread</a></code>
 
 #### Feedback

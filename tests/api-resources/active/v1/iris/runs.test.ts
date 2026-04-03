@@ -79,6 +79,11 @@ describe('resource runs', () => {
       account_id: 'account_id',
       command_text: 'command_text',
       capabilities: ['NAVIGATE'],
+      context: {},
+      metadata: {},
+      model: 'model',
+      parameters: {},
+      provider: 'provider',
       thread_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       thread_title: 'thread_title',
     });
