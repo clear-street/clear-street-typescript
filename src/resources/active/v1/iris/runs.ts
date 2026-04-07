@@ -108,31 +108,6 @@ export interface RunStartRunDeprecatedParams {
   capabilities?: Array<OmniAIAPI.Capability>;
 
   /**
-   * Optional context for the agent
-   */
-  context?: unknown | null;
-
-  /**
-   * Optional metadata
-   */
-  metadata?: unknown | null;
-
-  /**
-   * Optional model override
-   */
-  model?: string | null;
-
-  /**
-   * Optional LLM parameters
-   */
-  parameters?: unknown | null;
-
-  /**
-   * Optional LLM provider override
-   */
-  provider?: string | null;
-
-  /**
    * Optional thread ID to continue an existing conversation
    */
   thread_id?: string | null;

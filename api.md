@@ -268,12 +268,17 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">AnalystRating</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">ContractType</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">ExerciseStyle</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">Instrument</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentCore</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentCoreList</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentEarnings</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentQuote</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentSecurityID</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">ListingType</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">OptionsContract</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">OptionsContractList</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentGetInstrumentByIDResponse</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentGetInstrumentsResponse</a></code>
 
@@ -314,6 +319,18 @@ Methods:
 
 - <code title="get /active/v1/instruments/events">client.active.v1.instruments.events.<a href="./src/resources/active/v1/instruments/events.ts">getAllInstrumentEvents</a>({ ...params }) -> EventGetAllInstrumentEventsResponse</code>
 - <code title="get /active/v1/instruments/{security_id_source}/{security_id}/events">client.active.v1.instruments.events.<a href="./src/resources/active/v1/instruments/events.ts">getInstrumentEvents</a>(securityID, { ...params }) -> EventGetInstrumentEventsResponse</code>
+
+#### Options
+
+##### Contracts
+
+Types:
+
+- <code><a href="./src/resources/active/v1/instruments/options/contracts.ts">ContractGetOptionContractsResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/instruments/options/contracts">client.active.v1.instruments.options.contracts.<a href="./src/resources/active/v1/instruments/options/contracts.ts">getOptionContracts</a>({ ...params }) -> ContractGetOptionContractsResponse</code>
 
 #### Reporting
 
@@ -423,20 +440,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ActionButton</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ButtonAction</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CancelRunResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Capability</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ChartKind</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ChartPoint</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ChartSeries</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPart</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartChart</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartSuggestedActions</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartText</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartThinking</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CreateFeedbackResponse</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">DataChart</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">GetRunResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">GetThreadResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ListMessagesResponse</a></code>
@@ -451,13 +459,10 @@ Types:
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OrderPayload</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OrderStrategyType</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PrefillOrderAction</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PromptButtonAction</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Run</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">RunStatus</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">StartRunResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">StructuredAction</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">StructuredActionButtonAction</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">SymbolChart</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Thread</a></code>
 
 #### Feedback

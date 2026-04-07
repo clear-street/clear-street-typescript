@@ -26,17 +26,23 @@ export {
 export {
   Instruments,
   type AnalystRating,
+  type ContractType,
+  type ExerciseStyle,
   type Instrument,
   type InstrumentCore,
   type InstrumentCoreList,
   type InstrumentEarnings,
   type InstrumentQuote,
   type InstrumentSecurityID,
+  type ListingType,
+  type OptionsContract,
+  type OptionsContractList,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
   type InstrumentGetInstrumentByIDParams,
   type InstrumentGetInstrumentsParams,
 } from './instruments';
+export { Options } from './options/index';
 export {
   Reporting,
   type ReportingGetInstrumentReportingResponse,
