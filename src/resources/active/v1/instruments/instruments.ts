@@ -79,8 +79,11 @@ export class Instruments extends APIResource {
     params: InstrumentGetInstrumentByIDParams,
     options?: RequestOptions,
   ): APIPromise<InstrumentGetInstrumentByIDResponse> {
-    const { security_id_source } = params;
-    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}`, options);
+    const { security_id_source, ...query } = params;
+    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -190,6 +193,12 @@ export interface Instrument extends InstrumentCore {
    * The total market capitalization
    */
   market_cap?: string | null;
+
+  /**
+   * Available options expiration dates for this instrument. Present only when
+   * `include_options_expiry_dates=true` in the request.
+   */
+  options_expiry_dates?: Array<string> | null;
 
   /**
    * The closing price from the previous trading day
@@ -512,9 +521,14 @@ export interface InstrumentGetInstrumentsResponse extends Shared.BaseResponse {
 
 export interface InstrumentGetInstrumentByIDParams {
   /**
-   * Security identifier source
+   * Path param: Security identifier source
    */
   security_id_source: V1API.SecurityIDSource;
+
+  /**
+   * Query param: When true, include unique options expiry dates for this instrument
+   */
+  include_options_expiry_dates?: boolean | null;
 }
 
 export interface InstrumentGetInstrumentsParams {

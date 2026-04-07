@@ -26,6 +26,7 @@ describe('resource instruments', () => {
   test.skip('getInstrumentByID: required and optional params', async () => {
     const response = await client.active.v1.instruments.getInstrumentByID('security_id', {
       security_id_source: 'CMS',
+      include_options_expiry_dates: true,
     });
   });
 
