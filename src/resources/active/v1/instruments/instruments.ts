@@ -44,6 +44,8 @@ import {
   VenueSession,
   Venues,
 } from './venues';
+import * as OptionsAPI from './options/options';
+import { Options } from './options/options';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -56,6 +58,7 @@ export class Instruments extends APIResource {
     this._client,
   );
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
+  options: OptionsAPI.Options = new OptionsAPI.Options(this._client);
   reporting: ReportingAPI.Reporting = new ReportingAPI.Reporting(this._client);
   venues: VenuesAPI.Venues = new VenuesAPI.Venues(this._client);
 
@@ -76,8 +79,11 @@ export class Instruments extends APIResource {
     params: InstrumentGetInstrumentByIDParams,
     options?: RequestOptions,
   ): APIPromise<InstrumentGetInstrumentByIDResponse> {
-    const { security_id_source } = params;
-    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}`, options);
+    const { security_id_source, ...query } = params;
+    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -101,6 +107,16 @@ export class Instruments extends APIResource {
  * Analyst rating category
  */
 export type AnalystRating = 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SELL';
+
+/**
+ * The type of options contract
+ */
+export type ContractType = 'CALL' | 'PUT';
+
+/**
+ * The exercise style of an options contract
+ */
+export type ExerciseStyle = 'AMERICAN' | 'EUROPEAN';
 
 /**
  * Represents a tradable financial instrument, including supplemental information
@@ -177,6 +193,12 @@ export interface Instrument extends InstrumentCore {
    * The total market capitalization
    */
   market_cap?: string | null;
+
+  /**
+   * Available options expiration dates for this instrument. Present only when
+   * `include_options_expiry_dates=true` in the request.
+   */
+  options_expiry_dates?: Array<string> | null;
 
   /**
    * The closing price from the previous trading day
@@ -399,6 +421,93 @@ export interface InstrumentSecurityID {
   security_id_source: V1API.SecurityIDSource;
 }
 
+/**
+ * The listing type of an options contract
+ */
+export type ListingType = 'STANDARD' | 'FLEX' | 'OTC';
+
+/**
+ * An options contract with options-specific metadata
+ */
+export interface OptionsContract {
+  /**
+   * OEMS instrument identifier
+   */
+  id: string;
+
+  /**
+   * Whether this is a CALL or PUT
+   */
+  contract_type: ContractType;
+
+  /**
+   * ISO currency code
+   */
+  currency: string;
+
+  /**
+   * MIC code of the primary listing venue
+   */
+  exchange: string;
+
+  /**
+   * Exercise style
+   */
+  exercise_style: ExerciseStyle;
+
+  /**
+   * Expiration date
+   */
+  expiry: string;
+
+  /**
+   * Whether the contract is liquidation-only
+   */
+  is_liquidation_only: boolean;
+
+  /**
+   * Whether the contract is marginable
+   */
+  is_marginable: boolean;
+
+  /**
+   * Whether the contract is restricted from trading
+   */
+  is_restricted: boolean;
+
+  /**
+   * Listing type
+   */
+  listing_type: ListingType;
+
+  /**
+   * Contract multiplier (100 for standard options)
+   */
+  multiplier: string;
+
+  /**
+   * All known security identifiers for this contract
+   */
+  security_ids: Array<InstrumentSecurityID>;
+
+  /**
+   * Strike price
+   */
+  strike_price: string;
+
+  /**
+   * OSI symbol (e.g. "AAPL 251219C00150000")
+   */
+  symbol: string;
+
+  /**
+   * OEMS instrument ID of the underlying instrument, if resolvable
+   */
+  underlier_instrument_id?: string | null;
+}
+
+export type OptionsContractList = Array<OptionsContract>;
+
 export interface InstrumentGetInstrumentByIDResponse extends Shared.BaseResponse {
   /**
    * Represents a tradable financial instrument, including supplemental information
@@ -412,9 +521,14 @@ export interface InstrumentGetInstrumentsResponse extends Shared.BaseResponse {
 
 export interface InstrumentGetInstrumentByIDParams {
   /**
-   * Security identifier source
+   * Path param: Security identifier source
    */
   security_id_source: V1API.SecurityIDSource;
+
+  /**
+   * Query param: When true, include unique options expiry dates for this instrument
+   */
+  include_options_expiry_dates?: boolean | null;
 }
 
 export interface InstrumentGetInstrumentsParams {
@@ -504,18 +618,24 @@ export interface InstrumentGetInstrumentsParams {
 
 Instruments.AnalystReporting = AnalystReporting;
 Instruments.Events = Events;
+Instruments.Options = Options;
 Instruments.Reporting = Reporting;
 Instruments.Venues = Venues;
 
 export declare namespace Instruments {
   export {
     type AnalystRating as AnalystRating,
+    type ContractType as ContractType,
+    type ExerciseStyle as ExerciseStyle,
     type Instrument as Instrument,
     type InstrumentCore as InstrumentCore,
     type InstrumentCoreList as InstrumentCoreList,
     type InstrumentEarnings as InstrumentEarnings,
     type InstrumentQuote as InstrumentQuote,
     type InstrumentSecurityID as InstrumentSecurityID,
+    type ListingType as ListingType,
+    type OptionsContract as OptionsContract,
+    type OptionsContractList as OptionsContractList,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
@@ -546,6 +666,8 @@ export declare namespace Instruments {
     type EventGetAllInstrumentEventsParams as EventGetAllInstrumentEventsParams,
     type EventGetInstrumentEventsParams as EventGetInstrumentEventsParams,
   };
+
+  export { Options as Options };
 
   export {
     Reporting as Reporting,

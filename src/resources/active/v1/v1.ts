@@ -72,6 +72,8 @@ import { Calendars } from './calendars/calendars';
 import * as InstrumentsAPI from './instruments/instruments';
 import {
   AnalystRating,
+  ContractType,
+  ExerciseStyle,
   Instrument,
   InstrumentCore,
   InstrumentCoreList,
@@ -83,6 +85,9 @@ import {
   InstrumentQuote,
   InstrumentSecurityID,
   Instruments,
+  ListingType,
+  OptionsContract,
+  OptionsContractList,
 } from './instruments/instruments';
 import * as IrisAPI from './iris/iris';
 import { Iris } from './iris/iris';
@@ -90,20 +95,11 @@ import * as MarketDataAPI from './market-data/market-data';
 import { MarketData } from './market-data/market-data';
 import * as OmniAIAPI from './omni-ai/omni-ai';
 import {
-  ActionButton,
-  ButtonAction,
   CancelRunResponse,
   Capability,
-  ChartKind,
-  ChartPoint,
-  ChartSeries,
   ContentPart,
-  ContentPartChart,
-  ContentPartSuggestedActions,
   ContentPartText,
-  ContentPartThinking,
   CreateFeedbackResponse,
-  DataChart,
   GetRunResponse,
   GetThreadResponse,
   ListMessagesResponse,
@@ -119,13 +115,10 @@ import {
   OrderPayload,
   OrderStrategyType,
   PrefillOrderAction,
-  PromptButtonAction,
   Run,
   RunStatus,
   StartRunResponse,
   StructuredAction,
-  StructuredActionButtonAction,
-  SymbolChart,
   Thread,
 } from './omni-ai/omni-ai';
 import * as WatchlistsAPI from './watchlists/watchlists';
@@ -275,12 +268,17 @@ export declare namespace V1 {
   export {
     Instruments as Instruments,
     type AnalystRating as AnalystRating,
+    type ContractType as ContractType,
+    type ExerciseStyle as ExerciseStyle,
     type Instrument as Instrument,
     type InstrumentCore as InstrumentCore,
     type InstrumentCoreList as InstrumentCoreList,
     type InstrumentEarnings as InstrumentEarnings,
     type InstrumentQuote as InstrumentQuote,
     type InstrumentSecurityID as InstrumentSecurityID,
+    type ListingType as ListingType,
+    type OptionsContract as OptionsContract,
+    type OptionsContractList as OptionsContractList,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
@@ -303,20 +301,11 @@ export declare namespace V1 {
 
   export {
     OmniAI as OmniAI,
-    type ActionButton as ActionButton,
-    type ButtonAction as ButtonAction,
     type CancelRunResponse as CancelRunResponse,
     type Capability as Capability,
-    type ChartKind as ChartKind,
-    type ChartPoint as ChartPoint,
-    type ChartSeries as ChartSeries,
     type ContentPart as ContentPart,
-    type ContentPartChart as ContentPartChart,
-    type ContentPartSuggestedActions as ContentPartSuggestedActions,
     type ContentPartText as ContentPartText,
-    type ContentPartThinking as ContentPartThinking,
     type CreateFeedbackResponse as CreateFeedbackResponse,
-    type DataChart as DataChart,
     type GetRunResponse as GetRunResponse,
     type GetThreadResponse as GetThreadResponse,
     type ListMessagesResponse as ListMessagesResponse,
@@ -331,13 +320,10 @@ export declare namespace V1 {
     type OrderPayload as OrderPayload,
     type OrderStrategyType as OrderStrategyType,
     type PrefillOrderAction as PrefillOrderAction,
-    type PromptButtonAction as PromptButtonAction,
     type Run as Run,
     type RunStatus as RunStatus,
     type StartRunResponse as StartRunResponse,
     type StructuredAction as StructuredAction,
-    type StructuredActionButtonAction as StructuredActionButtonAction,
-    type SymbolChart as SymbolChart,
     type Thread as Thread,
   };
 
