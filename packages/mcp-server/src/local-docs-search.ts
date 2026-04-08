@@ -67,6 +67,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.accounts.get_account_by_id',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.get_account_by_id(\n    0,\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.accounts.getAccountByID',
         example:
@@ -90,6 +95,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.accounts.get_accounts',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.get_accounts()\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.accounts.getAccounts',
@@ -115,6 +125,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $API_KEY\" \\\n    -d '{}'",
       },
+      python: {
+        method: 'active.v1.accounts.patch_account_by_id',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.patch_account_by_id(\n    account_id=0,\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.accounts.patchAccountByID',
         example:
@@ -138,6 +153,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/balances \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.accounts.balances.get_account_balances',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.balances.get_account_balances(\n    account_id=0,\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.accounts.balances.getAccountBalances',
@@ -165,6 +185,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/locates \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $API_KEY" \\\n    -d \'[\n          {\n            "quantity": 500,\n            "symbol": "AAPL",\n            "comments": "Locate for earnings play",\n            "reference_id": "my-locate-batch-001"\n          }\n        ]\'',
+      },
+      python: {
+        method: 'active.v1.accounts.locates.create_locate_request',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.locates.create_locate_request(\n    account_id=0,\n    body=[{\n        "quantity": 500,\n        "symbol": "AAPL",\n    }],\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.accounts.locates.createLocateRequest',
@@ -196,6 +221,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/locates \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.accounts.locates.get_locate_requests',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.locates.get_locate_requests(\n    account_id=0,\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.accounts.locates.getLocateRequests',
         example:
@@ -220,6 +250,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/locates \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $API_KEY" \\\n    -d \'{\n          "accept": true\n        }\'',
       },
+      python: {
+        method: 'active.v1.accounts.locates.update_locate_request',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.locates.update_locate_request(\n    account_id=0,\n    accept=True,\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.accounts.locates.updateLocateRequest',
         example:
@@ -243,6 +278,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/locates/inventory \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.accounts.locates.inventory.get_locate_inventory',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.locates.inventory.get_locate_inventory(\n    account_id=0,\n    symbol="symbol",\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.accounts.locates.inventory.getLocateInventory',
@@ -276,6 +316,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/orders \\\n    -X DELETE \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.accounts.orders.cancel_all_orders',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.orders.cancel_all_orders(\n    account_id=0,\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.accounts.orders.cancelAllOrders',
         example:
@@ -300,6 +345,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/orders/$ORDER_ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.accounts.orders.cancel_order',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.orders.cancel_order(\n    order_id="order_id",\n    account_id=0,\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.accounts.orders.cancelOrder',
         example:
@@ -323,6 +373,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/orders/$ORDER_ID \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.accounts.orders.get_order_by_id',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.orders.get_order_by_id(\n    order_id="order_id",\n    account_id=0,\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.accounts.orders.getOrderByID',
@@ -359,6 +414,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/orders \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.accounts.orders.get_orders',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.orders.get_orders(\n    account_id=0,\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.accounts.orders.getOrders',
         example:
@@ -390,6 +450,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/orders/$ORDER_ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $API_KEY" \\\n    -d \'{\n          "limit_price": "150.50",\n          "quantity": "125",\n          "stop_price": "148.00"\n        }\'',
       },
+      python: {
+        method: 'active.v1.accounts.orders.replace_order',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.orders.replace_order(\n    order_id="order_id",\n    account_id=0,\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.accounts.orders.replaceOrder',
         example:
@@ -417,6 +482,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/orders \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $API_KEY" \\\n    -d \'[\n          {\n            "legs": [\n              {\n                "ratio": "ratio",\n                "security": "0193bb84-447a-706f-996f-097254663f02",\n                "security_type": "OPTION",\n                "side": "BUY",\n                "id": "1",\n                "position_effect": "OPEN"\n              },\n              {\n                "ratio": "ratio",\n                "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",\n                "security_type": "OPTION",\n                "side": "SELL",\n                "id": "2",\n                "position_effect": "OPEN"\n              },\n              {\n                "ratio": "ratio",\n                "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",\n                "security_type": "OPTION",\n                "side": "BUY",\n                "id": "3",\n                "position_effect": "OPEN"\n              }\n            ],\n            "order_type": "LIMIT",\n            "time_in_force": "DAY",\n            "id": "my-mleg-ref-20251001-001",\n            "limit_price": "0.50",\n            "quantity": "1"\n          }\n        ]\'',
       },
+      python: {
+        method: 'active.v1.accounts.orders.submit_orders',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.orders.submit_orders(\n    account_id=0,\n    body=[{\n        "legs": [{\n            "ratio": "ratio",\n            "security": "0193bb84-447a-706f-996f-097254663f02",\n            "security_type": "OPTION",\n            "side": "BUY",\n        }, {\n            "ratio": "ratio",\n            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",\n            "security_type": "OPTION",\n            "side": "SELL",\n        }, {\n            "ratio": "ratio",\n            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",\n            "security_type": "OPTION",\n            "side": "BUY",\n        }],\n        "order_type": "LIMIT",\n        "time_in_force": "DAY",\n    }],\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.accounts.orders.submitOrders',
         example:
@@ -440,6 +510,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/portfolio-history \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.accounts.portfolio_history.get_portfolio_history',
+        example:
+          'from datetime import date\nfrom clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.portfolio_history.get_portfolio_history(\n    account_id=0,\n    end_date=date.fromisoformat("2019-12-27"),\n    start_date=date.fromisoformat("2019-12-27"),\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.accounts.portfolioHistory.getPortfolioHistory',
@@ -470,6 +545,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/positions/$SECURITY_ID_SOURCE/$SECURITY_ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.accounts.positions.close_position',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.positions.close_position(\n    security_id="security_id",\n    account_id=0,\n    security_id_source="CMS",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.accounts.positions.closePosition',
         example:
@@ -493,6 +573,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/positions \\\n    -X DELETE \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.accounts.positions.close_positions',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.positions.close_positions(\n    account_id=0,\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.accounts.positions.closePositions',
@@ -526,6 +611,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/accounts/$ACCOUNT_ID/positions \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.accounts.positions.get_positions',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.accounts.positions.get_positions(\n    account_id=0,\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.accounts.positions.getPositions',
         example:
@@ -550,6 +640,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://api-active.clearstreet.io/active/v1/api_keys \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $API_KEY\" \\\n    -d '{}'",
       },
+      python: {
+        method: 'active.v1.api_keys.create',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\napi_key = client.active.v1.api_keys.create()\nprint(api_key)',
+      },
       typescript: {
         method: 'client.active.v1.apiKeys.create',
         example:
@@ -572,6 +667,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/api_keys \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.api_keys.list',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\napi_keys = client.active.v1.api_keys.list()\nprint(api_keys)',
       },
       typescript: {
         method: 'client.active.v1.apiKeys.list',
@@ -597,6 +697,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/api_keys/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.api_keys.revoke',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.api_keys.revoke(\n    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.apiKeys.revoke',
         example:
@@ -619,6 +724,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/api_keys \\\n    -X DELETE \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.api_keys.revoke_all',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.api_keys.revoke_all()\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.apiKeys.revokeAll',
@@ -644,6 +754,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/calendars/dividends \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.calendars.dividends.get_dividends_calendar',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.calendars.dividends.get_dividends_calendar()\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.calendars.dividends.getDividendsCalendar',
         example:
@@ -668,6 +783,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/calendars/earnings \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.calendars.earnings.get_earnings_calendar',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.calendars.earnings.get_earnings_calendar()\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.calendars.earnings.getEarningsCalendar',
         example:
@@ -691,6 +811,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/calendars/economic \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.calendars.economic.get_economic_calendar',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.calendars.economic.get_economic_calendar()\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.calendars.economic.getEconomicCalendar',
@@ -717,6 +842,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/calendars/market-hours \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.calendars.market_hours.get_market_hours_calendar',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.calendars.market_hours.get_market_hours_calendar(\n    date="date",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.calendars.marketHours.getMarketHoursCalendar',
         example:
@@ -742,6 +872,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/calendars/mergers-acquisitions \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.calendars.mergers_acquisitions.get_mergers_and_acquisitions_calendar',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.calendars.mergers_acquisitions.get_mergers_and_acquisitions_calendar()\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.calendars.mergersAcquisitions.getMergersAndAcquisitionsCalendar',
         example:
@@ -766,6 +901,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/calendars/splits \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.calendars.splits.get_splits_calendar',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.calendars.splits.get_splits_calendar()\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.calendars.splits.getSplitsCalendar',
         example:
@@ -789,6 +929,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/calendars/summary \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.calendars.summary.get_calendar_summary',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.calendars.summary.get_calendar_summary()\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.calendars.summary.getCalendarSummary',
@@ -817,6 +962,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/instruments/$SECURITY_ID_SOURCE/$SECURITY_ID \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.instruments.get_instrument_by_id',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.instruments.get_instrument_by_id(\n    security_id="security_id",\n    security_id_source="CMS",\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.instruments.getInstrumentByID',
@@ -855,6 +1005,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/instruments \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.instruments.get_instruments',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.instruments.get_instruments()\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.instruments.getInstruments',
         example:
@@ -879,6 +1034,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/instruments/$SECURITY_ID_SOURCE/$SECURITY_ID/analyst-reporting \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.instruments.analyst_reporting.get_instrument_analyst_consensus',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.instruments.analyst_reporting.get_instrument_analyst_consensus(\n    security_id="security_id",\n    security_id_source="CMS",\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.instruments.analystReporting.getInstrumentAnalystConsensus',
@@ -911,6 +1071,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/instruments/events \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.instruments.events.get_all_instrument_events',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.instruments.events.get_all_instrument_events()\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.instruments.events.getAllInstrumentEvents',
         example:
@@ -940,6 +1105,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/instruments/$SECURITY_ID_SOURCE/$SECURITY_ID/events \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.instruments.events.get_instrument_events',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.instruments.events.get_instrument_events(\n    security_id="security_id",\n    security_id_source="CMS",\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.instruments.events.getInstrumentEvents',
@@ -975,6 +1145,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/instruments/options/contracts \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.instruments.options.contracts.get_option_contracts',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.instruments.options.contracts.get_option_contracts()\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.instruments.options.contracts.getOptionContracts',
         example:
@@ -999,6 +1174,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/instruments/$SECURITY_ID_SOURCE/$SECURITY_ID/reporting \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.instruments.reporting.get_instrument_reporting',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.instruments.reporting.get_instrument_reporting(\n    security_id="security_id",\n    security_id_source="CMS",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.instruments.reporting.getInstrumentReporting',
         example:
@@ -1021,6 +1201,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/instruments/venues \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.instruments.venues.get_venues',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.instruments.venues.get_venues()\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.instruments.venues.getVenues',
@@ -1053,6 +1238,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/iris/feedback \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $API_KEY" \\\n    -d \'{\n          "account_id": "account_id",\n          "message_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n          "score": 0,\n          "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"\n        }\'',
       },
+      python: {
+        method: 'active.v1.iris.feedback.create_feedback_deprecated',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.iris.feedback.create_feedback_deprecated(\n    account_id="account_id",\n    message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    score=0,\n    thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.iris.feedback.createFeedbackDeprecated',
         example:
@@ -1077,6 +1267,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/iris/runs/$RUN_ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.iris.runs.cancel_run_deprecated',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.iris.runs.cancel_run_deprecated(\n    run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="account_id",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.iris.runs.cancelRunDeprecated',
         example:
@@ -1100,6 +1295,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/iris/runs/$RUN_ID \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.iris.runs.get_run_deprecated',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.iris.runs.get_run_deprecated(\n    run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="account_id",\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.iris.runs.getRunDeprecated',
@@ -1131,6 +1331,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/iris/runs \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $API_KEY" \\\n    -d \'{\n          "account_id": "account_id",\n          "command_text": "command_text"\n        }\'',
       },
+      python: {
+        method: 'active.v1.iris.runs.start_run_deprecated',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.iris.runs.start_run_deprecated(\n    account_id="account_id",\n    command_text="command_text",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.iris.runs.startRunDeprecated',
         example:
@@ -1155,6 +1360,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/iris/threads/$THREAD_ID \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.iris.threads.get_thread_deprecated',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.iris.threads.get_thread_deprecated(\n    thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="account_id",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.iris.threads.getThreadDeprecated',
         example:
@@ -1178,6 +1388,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/iris/threads \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.iris.threads.list_threads_deprecated',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.iris.threads.list_threads_deprecated(\n    account_id="account_id",\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.iris.threads.listThreadsDeprecated',
@@ -1209,6 +1424,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/iris/threads/$THREAD_ID/messages \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.iris.threads.messages.list_messages_deprecated',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.iris.threads.messages.list_messages_deprecated(\n    thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="account_id",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.iris.threads.messages.listMessagesDeprecated',
         example:
@@ -1232,6 +1452,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/market-data/snapshot \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.market_data.snapshot.get_snapshots',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.market_data.snapshot.get_snapshots()\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.marketData.snapshot.getSnapshots',
@@ -1270,6 +1495,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/news \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.news.get_news',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.news.get_news()\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.news.getNews',
         example:
@@ -1301,6 +1531,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/omni-ai/feedback \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $API_KEY" \\\n    -d \'{\n          "account_id": "account_id",\n          "message_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n          "score": 0,\n          "thread_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"\n        }\'',
       },
+      python: {
+        method: 'active.v1.omni_ai.feedback.create_feedback',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.omni_ai.feedback.create_feedback(\n    account_id="account_id",\n    message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    score=0,\n    thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.omniAI.feedback.createFeedback',
         example:
@@ -1325,6 +1560,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/omni-ai/runs/$RUN_ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.omni_ai.runs.cancel_run',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.omni_ai.runs.cancel_run(\n    run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="account_id",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.omniAI.runs.cancelRun',
         example:
@@ -1348,6 +1588,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/omni-ai/runs/$RUN_ID \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.omni_ai.runs.get_run',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.omni_ai.runs.get_run(\n    run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="account_id",\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.omniAI.runs.getRun',
@@ -1380,6 +1625,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/omni-ai/runs \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $API_KEY" \\\n    -d \'{\n          "account_id": "account_id",\n          "command_text": "command_text"\n        }\'',
       },
+      python: {
+        method: 'active.v1.omni_ai.runs.start_run',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.omni_ai.runs.start_run(\n    account_id="account_id",\n    command_text="command_text",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.omniAI.runs.startRun',
         example:
@@ -1404,6 +1654,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/omni-ai/threads/$THREAD_ID \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.omni_ai.threads.get_thread',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.omni_ai.threads.get_thread(\n    thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="account_id",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.omniAI.threads.getThread',
         example:
@@ -1427,6 +1682,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/omni-ai/threads \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.omni_ai.threads.list_threads',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.omni_ai.threads.list_threads(\n    account_id="account_id",\n)\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.omniAI.threads.listThreads',
@@ -1458,6 +1718,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/omni-ai/threads/$THREAD_ID/messages \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.omni_ai.threads.messages.list_messages',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.omni_ai.threads.messages.list_messages(\n    thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",\n    account_id="account_id",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.omniAI.threads.messages.listMessages',
         example:
@@ -1488,6 +1753,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://api-active.clearstreet.io/active/v1/saved-screeners \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $API_KEY\" \\\n    -d '{}'",
       },
+      python: {
+        method: 'active.v1.saved_screeners.create_screener',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.saved_screeners.create_screener()\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.savedScreeners.createScreener',
         example:
@@ -1510,6 +1780,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/saved-screeners/$SCREENER_ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.saved_screeners.delete_screener',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nclient.active.v1.saved_screeners.delete_screener(\n    "550e8400-e29b-41d4-a716-446655440000",\n)',
       },
       typescript: {
         method: 'client.active.v1.savedScreeners.deleteScreener',
@@ -1535,6 +1810,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/saved-screeners/$SCREENER_ID \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.saved_screeners.get_screener_by_id',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.saved_screeners.get_screener_by_id(\n    "550e8400-e29b-41d4-a716-446655440000",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.savedScreeners.getScreenerByID',
         example:
@@ -1557,6 +1837,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/saved-screeners \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.saved_screeners.list_screeners',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.saved_screeners.list_screeners()\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.savedScreeners.listScreeners',
@@ -1590,6 +1875,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://api-active.clearstreet.io/active/v1/saved-screeners/$SCREENER_ID \\\n    -X PUT \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $API_KEY\" \\\n    -d '{}'",
       },
+      python: {
+        method: 'active.v1.saved_screeners.update_screener',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.saved_screeners.update_screener(\n    screener_id="550e8400-e29b-41d4-a716-446655440000",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.savedScreeners.updateScreener',
         example:
@@ -1621,6 +1911,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/screener \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.screener.get_screener',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.screener.get_screener()\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.screener.getScreener',
         example:
@@ -1644,6 +1939,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/version \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.version.get_version',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.version.get_version()\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.version.getVersion',
         example:
@@ -1666,6 +1966,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/version \\\n    -X PATCH \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.version.update_version',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.version.update_version()\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.version.updateVersion',
@@ -1691,6 +1996,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/watchlists \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $API_KEY" \\\n    -d \'{\n          "name": "name"\n        }\'',
       },
+      python: {
+        method: 'active.v1.watchlists.create_watchlist',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.watchlists.create_watchlist(\n    name="name",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.watchlists.createWatchlist',
         example:
@@ -1713,6 +2023,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/watchlists/$WATCHLIST_ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.watchlists.delete_watchlist',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nclient.active.v1.watchlists.delete_watchlist(\n    "550e8400-e29b-41d4-a716-446655440000",\n)',
       },
       typescript: {
         method: 'client.active.v1.watchlists.deleteWatchlist',
@@ -1738,6 +2053,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/watchlists/$WATCHLIST_ID \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.watchlists.get_watchlist_by_id',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.watchlists.get_watchlist_by_id(\n    "550e8400-e29b-41d4-a716-446655440000",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.watchlists.getWatchlistByID',
         example:
@@ -1760,6 +2080,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api-active.clearstreet.io/active/v1/watchlists \\\n    -H "Authorization: Bearer $API_KEY"',
+      },
+      python: {
+        method: 'active.v1.watchlists.get_watchlists',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.watchlists.get_watchlists()\nprint(response)',
       },
       typescript: {
         method: 'client.active.v1.watchlists.getWatchlists',
@@ -1790,6 +2115,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           "curl https://api-active.clearstreet.io/active/v1/watchlists/$WATCHLIST_ID/items \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $API_KEY\" \\\n    -d '{}'",
       },
+      python: {
+        method: 'active.v1.watchlists.items.add_watchlist_item',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nresponse = client.active.v1.watchlists.items.add_watchlist_item(\n    watchlist_id="550e8400-e29b-41d4-a716-446655440000",\n)\nprint(response)',
+      },
       typescript: {
         method: 'client.active.v1.watchlists.items.addWatchlistItem',
         example:
@@ -1813,6 +2143,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/watchlists/$WATCHLIST_ID/items/$ITEM_ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.watchlists.items.delete_watchlist_item',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nclient.active.v1.watchlists.items.delete_watchlist_item(\n    item_id="660e8400-e29b-41d4-a716-446655440001",\n    watchlist_id="550e8400-e29b-41d4-a716-446655440000",\n)',
+      },
       typescript: {
         method: 'client.active.v1.watchlists.items.deleteWatchlistItem',
         example:
@@ -1835,6 +2170,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api-active.clearstreet.io/active/v1/ws \\\n    -H "Authorization: Bearer $API_KEY"',
       },
+      python: {
+        method: 'active.v1.ws.websocket_handler',
+        example:
+          'from clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n)\nclient.active.v1.ws.websocket_handler()',
+      },
       typescript: {
         method: 'client.active.v1.ws.websocketHandler',
         example:
@@ -1845,6 +2185,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
 ];
 
 const EMBEDDED_READMES: { language: string; content: string }[] = [
+  {
+    language: 'python',
+    content:
+      '# Clear Street Python API library\n\n<!-- prettier-ignore -->\n[![PyPI version](https://img.shields.io/pypi/v/clear_street.svg?label=pypi%20(stable))](https://pypi.org/project/clear_street/)\n\nThe Clear Street Python library provides convenient access to the Clear Street REST API from any Python 3.9+\napplication. The library includes type definitions for all request params and response fields,\nand offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).\n\n\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Clear Street MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40clear-street-internal%2Fsdk-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBjbGVhci1zdHJlZXQtaW50ZXJuYWwvc2RrLW1jcCJdLCJlbnYiOnsiQ0xFQVJfU1RSRUVUX0FQSV9LRVkiOiJNeSBBUEkgS2V5In19)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40clear-street-internal%2Fsdk-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40clear-street-internal%2Fsdk-mcp%22%5D%2C%22env%22%3A%7B%22CLEAR_STREET_API_KEY%22%3A%22My%20API%20Key%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n## Documentation\n\n The full API of this library can be found in [api.md](api.md).\n\n## Installation\n\n```sh\n# install from this staging repo\npip install git+ssh://git@github.com/stainless-sdks/clear-street-python.git\n```\n> [!NOTE]\n> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install clear_street`\n\n## Usage\n\nThe full API of this library can be found in [api.md](api.md).\n\n```python\nfrom clear_street import ClearStreet\n\nclient = ClearStreet(\n    api_key="My API Key",\n    # defaults to "production".\n    environment="staging",\n)\n\nresponse = client.active.v1.accounts.get_accounts()\n```\n\n\n\n## Async usage\n\nSimply import `AsyncClearStreet` instead of `ClearStreet` and use `await` with each API call:\n\n```python\nimport asyncio\nfrom clear_street import AsyncClearStreet\n\nclient = AsyncClearStreet(\n    api_key="My API Key",\n    # defaults to "production".\n    environment="staging",\n)\n\nasync def main() -> None:\n  response = await client.active.v1.accounts.get_accounts()\n\nasyncio.run(main())\n```\n\nFunctionality between the synchronous and asynchronous clients is otherwise identical.\n\n### With aiohttp\n\nBy default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.\n\nYou can enable this by installing `aiohttp`:\n\n```sh\n# install from this staging repo\npip install \'clear_street[aiohttp] @ git+ssh://git@github.com/stainless-sdks/clear-street-python.git\'\n```\n\nThen you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:\n\n```python\nimport asyncio\nfrom clear_street import DefaultAioHttpClient\nfrom clear_street import AsyncClearStreet\n\nasync def main() -> None:\n  async with AsyncClearStreet(\n    api_key="My API Key",\n    http_client=DefaultAioHttpClient(),\n) as client:\n    response = await client.active.v1.accounts.get_accounts()\n\nasyncio.run(main())\n```\n\n\n\n## Using types\n\nNested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:\n\n- Serializing back into JSON, `model.to_json()`\n- Converting to a dictionary, `model.to_dict()`\n\nTyped requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.\n\n\n\n## Nested params\n\nNested parameters are dictionaries, typed using `TypedDict`, for example:\n\n```python\nfrom clear_street import ClearStreet\n\nclient = ClearStreet()\n\nresponse = client.active.v1.accounts.patch_account_by_id(\n    account_id=0,\n    risk={\n        "max_notional": "5000000.00"\n    },\n)\nprint(response.risk)\n```\n\n\n\n## Handling errors\n\nWhen the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `clear_street.APIConnectionError` is raised.\n\nWhen the API returns a non-success status code (that is, 4xx or 5xx\nresponse), a subclass of `clear_street.APIStatusError` is raised, containing `status_code` and `response` properties.\n\nAll errors inherit from `clear_street.APIError`.\n\n```python\nimport clear_street\nfrom clear_street import ClearStreet\n\nclient = ClearStreet()\n\ntry:\n    client.active.v1.accounts.get_accounts()\nexcept clear_street.APIConnectionError as e:\n    print("The server could not be reached")\n    print(e.__cause__) # an underlying Exception, likely raised within httpx.\nexcept clear_street.RateLimitError as e:\n    print("A 429 status code was received; we should back off a bit.")\nexcept clear_street.APIStatusError as e:\n    print("Another non-200-range status code was received")\n    print(e.status_code)\n    print(e.response)\n```\n\nError codes are as follows:\n\n| Status Code | Error Type                 |\n| ----------- | -------------------------- |\n| 400         | `BadRequestError`          |\n| 401         | `AuthenticationError`      |\n| 403         | `PermissionDeniedError`    |\n| 404         | `NotFoundError`            |\n| 422         | `UnprocessableEntityError` |\n| 429         | `RateLimitError`           |\n| >=500       | `InternalServerError`      |\n| N/A         | `APIConnectionError`       |\n\n### Retries\n\nCertain errors are automatically retried 2 times by default, with a short exponential backoff.\nConnection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict,\n429 Rate Limit, and >=500 Internal errors are all retried by default.\n\nYou can use the `max_retries` option to configure or disable retry settings:\n\n```python\nfrom clear_street import ClearStreet\n\n# Configure the default for all requests:\nclient = ClearStreet(\n    # default is 2\n    max_retries=0,\n)\n\n# Or, configure per-request:\nclient.with_options(max_retries = 5).active.v1.accounts.get_accounts()\n```\n\n### Timeouts\n\nBy default requests time out after 1 minute. You can configure this with a `timeout` option,\nwhich accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:\n\n```python\nfrom clear_street import ClearStreet\n\n# Configure the default for all requests:\nclient = ClearStreet(\n    # 20 seconds (default is 1 minute)\n    timeout=20.0,\n)\n\n# More granular control:\nclient = ClearStreet(\n    timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),\n)\n\n# Override per-request:\nclient.with_options(timeout = 5.0).active.v1.accounts.get_accounts()\n```\n\nOn timeout, an `APITimeoutError` is thrown.\n\nNote that requests that time out are [retried twice by default](#retries).\n\n\n\n## Advanced\n\n### Logging\n\nWe use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.\n\nYou can enable logging by setting the environment variable `CLEAR_STREET_LOG` to `info`.\n\n```shell\n$ export CLEAR_STREET_LOG=info\n```\n\nOr to `debug` for more verbose logging.\n\n### How to tell whether `None` means `null` or missing\n\nIn an API response, a field may be explicitly `null`, or missing entirely; in either case, its value is `None` in this library. You can differentiate the two cases with `.model_fields_set`:\n\n```py\nif response.my_field is None:\n  if \'my_field\' not in response.model_fields_set:\n    print(\'Got json like {}, without a "my_field" key present at all.\')\n  else:\n    print(\'Got json like {"my_field": null}.\')\n```\n\n### Accessing raw response data (e.g. headers)\n\nThe "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,\n\n```py\nfrom clear_street import ClearStreet\n\nclient = ClearStreet()\nresponse = client.active.v1.accounts.with_raw_response.get_accounts()\nprint(response.headers.get(\'X-My-Header\'))\n\naccount = response.parse()  # get the object that `active.v1.accounts.get_accounts()` would have returned\nprint(account)\n```\n\nThese methods return an [`APIResponse`](https://github.com/stainless-sdks/clear-street-python/tree/main/src/clear_street/_response.py) object.\n\nThe async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/clear-street-python/tree/main/src/clear_street/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.\n\n#### `.with_streaming_response`\n\nThe above interface eagerly reads the full response body when you make the request, which may not always be what you want.\n\nTo stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.\n\n```python\nwith client.active.v1.accounts.with_streaming_response.get_accounts() as response :\n    print(response.headers.get(\'X-My-Header\'))\n\n    for line in response.iter_lines():\n      print(line)\n```\n\nThe context manager is required so that the response will reliably be closed.\n\n### Making custom/undocumented requests\n\nThis library is typed for convenient access to the documented API.\n\nIf you need to access undocumented endpoints, params, or response properties, the library can still be used.\n\n#### Undocumented endpoints\n\nTo make requests to undocumented endpoints, you can make requests using `client.get`, `client.post`, and other\nhttp verbs. Options on the client will be respected (such as retries) when making this request.\n\n```py\nimport httpx\n\nresponse = client.post(\n    "/foo",\n    cast_to=httpx.Response,\n    body={"my_param": True},\n)\n\nprint(response.headers.get("x-foo"))\n```\n\n#### Undocumented request params\n\nIf you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` request\noptions.\n\n#### Undocumented response properties\n\nTo access undocumented response properties, you can access the extra fields like `response.unknown_prop`. You\ncan also get all the extra fields on the Pydantic model as a dict with\n[`response.model_extra`](https://docs.pydantic.dev/latest/api/base_model/#pydantic.BaseModel.model_extra).\n\n### Configuring the HTTP client\n\nYou can directly override the [httpx client](https://www.python-httpx.org/api/#client) to customize it for your use case, including:\n\n- Support for [proxies](https://www.python-httpx.org/advanced/proxies/)\n- Custom [transports](https://www.python-httpx.org/advanced/transports/)\n- Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality\n\n```python\nimport httpx\nfrom clear_street import ClearStreet, DefaultHttpxClient\n\nclient = ClearStreet(\n    # Or use the `CLEAR_STREET_BASE_URL` env var\n    base_url="http://my.test.server.example.com:8083",\n    http_client=DefaultHttpxClient(proxy="http://my.test.proxy.example.com", transport=httpx.HTTPTransport(local_address="0.0.0.0")),\n)\n```\n\nYou can also customize the client on a per-request basis by using `with_options()`:\n\n```python\nclient.with_options(http_client=DefaultHttpxClient(...))\n```\n\n### Managing HTTP resources\n\nBy default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.\n\n```py\nfrom clear_street import ClearStreet\n\nwith ClearStreet() as client:\n  # make requests here\n  ...\n\n# HTTP client is now closed\n```\n\n## Versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes that only affect static types, without breaking runtime behavior.\n2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n3. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/clear-street-python/issues) with questions, bugs, or suggestions.\n\n### Determining the installed version\n\nIf you\'ve upgraded to the latest version but aren\'t seeing any new features you were expecting then your python environment is likely still using an older version.\n\nYou can determine the version that is being used at runtime with:\n\n```py\nimport clear_street\nprint(clear_street.__version__)\n```\n\n## Requirements\n\nPython 3.9 or higher.\n\n## Contributing\n\nSee [the contributing documentation](./CONTRIBUTING.md).\n',
+  },
   {
     language: 'typescript',
     content:
