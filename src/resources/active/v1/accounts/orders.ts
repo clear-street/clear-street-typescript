@@ -390,7 +390,7 @@ export namespace OrderStrategy {
   /**
    * Smart Order Router (default) - routes to best available venue
    */
-  export interface Sor extends OrdersAPI.SorStrategy {
+  export interface Sor extends OrdersAPI.BaseStrategyParams {
     type: 'SOR';
   }
 

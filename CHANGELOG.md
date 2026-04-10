@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.48.0 (2026-04-10)
+
+Full Changelog: [v0.47.0...v0.48.0](https://github.com/clear-street/clear-street-typescript/compare/v0.47.0...v0.48.0)
+
+### Features
+
+* **api:** api update ([e249e5d](https://github.com/clear-street/clear-street-typescript/commit/e249e5d67cbb0d9b9d7d58f7c3618e8458562bda))
+* **api:** api update ([1299837](https://github.com/clear-street/clear-street-typescript/commit/12998374bdda2cb91e9d01fc69e6026cbdf29889))
+
+
+### Chores
+
+* configure new SDK language ([11c1b30](https://github.com/clear-street/clear-street-typescript/commit/11c1b300b2db1988a527249150850246342f349a))
+* configure new SDK language ([3862382](https://github.com/clear-street/clear-street-typescript/commit/386238277a4aa8825a246be2dd520c1f6dfebccd))
+* **internal:** codegen related update ([9b67deb](https://github.com/clear-street/clear-street-typescript/commit/9b67debe558d896b7ee4004c869ea7f3e976612a))
+* **internal:** codegen related update ([9bcb12b](https://github.com/clear-street/clear-street-typescript/commit/9bcb12b6d19ab70372b1f0c8c65604dfb066a427))
+
 ## 0.47.0 (2026-04-07)
 
 Full Changelog: [v0.46.0...v0.47.0](https://github.com/clear-street/clear-street-typescript/compare/v0.46.0...v0.47.0)
