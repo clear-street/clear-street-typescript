@@ -694,9 +694,9 @@ export interface OrderGetOrdersParams {
     | 'OTHER';
 
   /**
-   * Filter by order status
+   * Comma-separated order statuses to filter by
    */
-  status?:
+  status?: Array<
     | 'PENDING_NEW'
     | 'NEW'
     | 'PARTIALLY_FILLED'
@@ -711,7 +711,8 @@ export interface OrderGetOrdersParams {
     | 'STOPPED'
     | 'SUSPENDED'
     | 'CALCULATED'
-    | 'OTHER';
+    | 'OTHER'
+  >;
 
   /**
    * Filter by symbol
