@@ -569,10 +569,6 @@ export interface InstrumentGetInstrumentsParams {
    */
   is_threshold_security?: boolean;
 
-  /**
-   * The number of items to return per page (only used when page_token is not
-   * provided)
-   */
   page_size?: number;
 
   /**

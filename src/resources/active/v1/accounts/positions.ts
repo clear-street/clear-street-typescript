@@ -208,10 +208,6 @@ export interface PositionClosePositionsParams {
 }
 
 export interface PositionGetPositionsParams {
-  /**
-   * The number of items to return per page (only used when page_token is not
-   * provided)
-   */
   page_size?: number;
 
   /**
