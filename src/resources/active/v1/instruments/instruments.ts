@@ -501,6 +501,11 @@ export interface OptionsContract {
   symbol: string;
 
   /**
+   * Open interest (number of outstanding contracts), if available
+   */
+  open_interest?: number | null;
+
+  /**
    * OEMS instrument ID of the underlying instrument, if resolvable
    */
   underlier_instrument_id?: string | null;
