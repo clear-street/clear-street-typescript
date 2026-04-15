@@ -15,6 +15,8 @@ import {
   Revocation,
   RevocationList,
 } from './api-keys';
+import * as ClockAPI from './clock';
+import { Clock, ClockDetail, ClockGetClockResponse } from './clock';
 import * as NewsAPI from './news';
 import {
   News,
@@ -150,6 +152,7 @@ export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
   calendars: CalendarsAPI.Calendars = new CalendarsAPI.Calendars(this._client);
+  clock: ClockAPI.Clock = new ClockAPI.Clock(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
   iris: IrisAPI.Iris = new IrisAPI.Iris(this._client);
   marketData: MarketDataAPI.MarketData = new MarketDataAPI.MarketData(this._client);
@@ -227,6 +230,7 @@ export type SecurityType =
 V1.Accounts = Accounts;
 V1.APIKeys = APIKeys;
 V1.Calendars = Calendars;
+V1.Clock = Clock;
 V1.Instruments = Instruments;
 V1.Iris = Iris;
 V1.MarketData = MarketData;
@@ -276,6 +280,12 @@ export declare namespace V1 {
   };
 
   export { Calendars as Calendars };
+
+  export {
+    Clock as Clock,
+    type ClockDetail as ClockDetail,
+    type ClockGetClockResponse as ClockGetClockResponse,
+  };
 
   export {
     Instruments as Instruments,
