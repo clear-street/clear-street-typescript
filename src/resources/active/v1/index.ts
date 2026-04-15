@@ -29,6 +29,7 @@ export {
   type AccountPatchAccountByIDParams,
 } from './accounts/index';
 export { Calendars } from './calendars/index';
+export { Clock, type ClockDetail, type ClockGetClockResponse } from './clock';
 export {
   Instruments,
   type AnalystRating,

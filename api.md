@@ -263,6 +263,17 @@ Methods:
 
 - <code title="get /active/v1/calendars/summary">client.active.v1.calendars.summary.<a href="./src/resources/active/v1/calendars/summary.ts">getCalendarSummary</a>({ ...params }) -> SummaryGetCalendarSummaryResponse</code>
 
+### Clock
+
+Types:
+
+- <code><a href="./src/resources/active/v1/clock.ts">ClockDetail</a></code>
+- <code><a href="./src/resources/active/v1/clock.ts">ClockGetClockResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/clock">client.active.v1.clock.<a href="./src/resources/active/v1/clock.ts">getClock</a>() -> ClockGetClockResponse</code>
+
 ### Instruments
 
 Types:
