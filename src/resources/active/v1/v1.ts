@@ -42,12 +42,21 @@ import {
 } from './saved-screeners';
 import * as ScreenerAPI from './screener';
 import {
+  FieldLookback,
+  FieldPeriod,
+  FieldRef,
+  FieldType,
   Screener,
+  ScreenerColumn,
   ScreenerFilter,
   ScreenerGetScreenerParams,
   ScreenerGetScreenerResponse,
   ScreenerItem,
   ScreenerItemList,
+  ScreenerRow,
+  ScreenerRowList,
+  ScreenerSearchScreenerParams,
+  ScreenerSearchScreenerResponse,
 } from './screener';
 import * as VersionAPI from './version';
 import { Version, VersionGetVersionResponse, VersionResource, VersionUpdateVersionResponse } from './version';
@@ -376,11 +385,20 @@ export declare namespace V1 {
 
   export {
     Screener as Screener,
+    type FieldLookback as FieldLookback,
+    type FieldPeriod as FieldPeriod,
+    type FieldRef as FieldRef,
+    type FieldType as FieldType,
+    type ScreenerColumn as ScreenerColumn,
     type ScreenerFilter as ScreenerFilter,
     type ScreenerItem as ScreenerItem,
     type ScreenerItemList as ScreenerItemList,
+    type ScreenerRow as ScreenerRow,
+    type ScreenerRowList as ScreenerRowList,
     type ScreenerGetScreenerResponse as ScreenerGetScreenerResponse,
+    type ScreenerSearchScreenerResponse as ScreenerSearchScreenerResponse,
     type ScreenerGetScreenerParams as ScreenerGetScreenerParams,
+    type ScreenerSearchScreenerParams as ScreenerSearchScreenerParams,
   };
 
   export {

@@ -113,11 +113,20 @@ export {
 } from './saved-screeners';
 export {
   Screener,
+  type FieldLookback,
+  type FieldPeriod,
+  type FieldRef,
+  type FieldType,
+  type ScreenerColumn,
   type ScreenerFilter,
   type ScreenerItem,
   type ScreenerItemList,
+  type ScreenerRow,
+  type ScreenerRowList,
   type ScreenerGetScreenerResponse,
+  type ScreenerSearchScreenerResponse,
   type ScreenerGetScreenerParams,
+  type ScreenerSearchScreenerParams,
 } from './screener';
 export { V1, type APIDecimal64, type SecurityIDSource, type SecurityType } from './v1';
 export {
