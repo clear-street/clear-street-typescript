@@ -558,14 +558,23 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/screener.ts">FieldLookback</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">FieldPeriod</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">FieldRef</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">FieldType</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">ScreenerColumn</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">ScreenerFilter</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">ScreenerItem</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">ScreenerItemList</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">ScreenerRow</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">ScreenerRowList</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">ScreenerGetScreenerResponse</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">ScreenerSearchScreenerResponse</a></code>
 
 Methods:
 
 - <code title="get /active/v1/screener">client.active.v1.screener.<a href="./src/resources/active/v1/screener.ts">getScreener</a>({ ...params }) -> ScreenerGetScreenerResponse</code>
+- <code title="post /active/v1/screener">client.active.v1.screener.<a href="./src/resources/active/v1/screener.ts">searchScreener</a>({ ...params }) -> ScreenerSearchScreenerResponse</code>
 
 ### Version
 
