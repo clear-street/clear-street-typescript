@@ -336,14 +336,11 @@ export interface ScreenerGetScreenerParams {
    */
   filter?: { [key: string]: string };
 
-  /**
-   * Number of items to return per page (default: 100, max: 10000)
-   */
   page_size?: number;
 
   /**
-   * Token for retrieving the next page of results. Contains encoded pagination
-   * state.
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
    */
   page_token?: string;
 
