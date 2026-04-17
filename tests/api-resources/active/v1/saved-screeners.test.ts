@@ -49,8 +49,8 @@ describe('resource savedScreeners', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listScreeners', async () => {
-    const responsePromise = client.active.v1.savedScreeners.listScreeners();
+  test.skip('getScreeners', async () => {
+    const responsePromise = client.active.v1.savedScreeners.getScreeners();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,8 +61,8 @@ describe('resource savedScreeners', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('updateScreener', async () => {
-    const responsePromise = client.active.v1.savedScreeners.updateScreener(
+  test.skip('replaceScreener', async () => {
+    const responsePromise = client.active.v1.savedScreeners.replaceScreener(
       '550e8400-e29b-41d4-a716-446655440000',
       {},
     );

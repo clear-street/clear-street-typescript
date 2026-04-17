@@ -22,14 +22,16 @@ export class Orders extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.accounts.orders.cancelAllOrders(0);
+   *   await client.active.v1.accounts.orders.cancelAllOpenOrders(
+   *     0,
+   *   );
    * ```
    */
-  cancelAllOrders(
+  cancelAllOpenOrders(
     accountID: number,
-    params: OrderCancelAllOrdersParams | null | undefined = {},
+    params: OrderCancelAllOpenOrdersParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<OrderCancelAllOrdersResponse> {
+  ): APIPromise<OrderCancelAllOpenOrdersResponse> {
     const { security_id, security_id_source, security_type, side, type } = params ?? {};
     return this._client.delete(path`/active/v1/accounts/${accountID}/orders`, {
       query: { security_id, security_id_source, security_type, side, type },
@@ -43,17 +45,17 @@ export class Orders extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.accounts.orders.cancelOrder(
+   *   await client.active.v1.accounts.orders.cancelOpenOrder(
    *     'order_id',
    *     { account_id: 0 },
    *   );
    * ```
    */
-  cancelOrder(
+  cancelOpenOrder(
     orderID: string,
-    params: OrderCancelOrderParams,
+    params: OrderCancelOpenOrderParams,
     options?: RequestOptions,
-  ): APIPromise<OrderCancelOrderResponse> {
+  ): APIPromise<OrderCancelOpenOrderResponse> {
     const { account_id } = params;
     return this._client.delete(path`/active/v1/accounts/${account_id}/orders/${orderID}`, options);
   }
@@ -542,11 +544,11 @@ export interface VwapStrategy extends BaseStrategyParams {
   min_percent?: V1API.APIDecimal64 | null;
 }
 
-export interface OrderCancelAllOrdersResponse extends Shared.BaseResponse {
+export interface OrderCancelAllOpenOrdersResponse extends Shared.BaseResponse {
   data: OrderList;
 }
 
-export interface OrderCancelOrderResponse extends Shared.BaseResponse {
+export interface OrderCancelOpenOrderResponse extends Shared.BaseResponse {
   /**
    * A trading order with its current state and execution details.
    *
@@ -587,7 +589,7 @@ export interface OrderSubmitOrdersResponse extends Shared.BaseResponse {
   data: OrderList;
 }
 
-export interface OrderCancelAllOrdersParams {
+export interface OrderCancelAllOpenOrdersParams {
   /**
    * Filter by security ID(s). Accepts single value or indexed array.
    *
@@ -633,7 +635,7 @@ export interface OrderCancelAllOrdersParams {
   type?: 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT' | 'TRAILING_STOP' | 'TRAILING_STOP_LIMIT' | 'OTHER';
 }
 
-export interface OrderCancelOrderParams {
+export interface OrderCancelOpenOrderParams {
   /**
    * Account identifier
    */
@@ -967,14 +969,14 @@ export declare namespace Orders {
     type TwapStrategy as TwapStrategy,
     type Urgency as Urgency,
     type VwapStrategy as VwapStrategy,
-    type OrderCancelAllOrdersResponse as OrderCancelAllOrdersResponse,
-    type OrderCancelOrderResponse as OrderCancelOrderResponse,
+    type OrderCancelAllOpenOrdersResponse as OrderCancelAllOpenOrdersResponse,
+    type OrderCancelOpenOrderResponse as OrderCancelOpenOrderResponse,
     type OrderGetOrderByIDResponse as OrderGetOrderByIDResponse,
     type OrderGetOrdersResponse as OrderGetOrdersResponse,
     type OrderReplaceOrderResponse as OrderReplaceOrderResponse,
     type OrderSubmitOrdersResponse as OrderSubmitOrdersResponse,
-    type OrderCancelAllOrdersParams as OrderCancelAllOrdersParams,
-    type OrderCancelOrderParams as OrderCancelOrderParams,
+    type OrderCancelAllOpenOrdersParams as OrderCancelAllOpenOrdersParams,
+    type OrderCancelOpenOrderParams as OrderCancelOpenOrderParams,
     type OrderGetOrderByIDParams as OrderGetOrderByIDParams,
     type OrderGetOrdersParams as OrderGetOrdersParams,
     type OrderReplaceOrderParams as OrderReplaceOrderParams,

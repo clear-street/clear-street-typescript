@@ -103,8 +103,8 @@ Types:
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">TwapStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">Urgency</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">VwapStrategy</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderCancelAllOrdersResponse</a></code>
-- <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderCancelOrderResponse</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderCancelAllOpenOrdersResponse</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderCancelOpenOrderResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderGetOrderByIDResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderGetOrdersResponse</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderReplaceOrderResponse</a></code>
@@ -112,8 +112,8 @@ Types:
 
 Methods:
 
-- <code title="delete /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">cancelAllOrders</a>(accountID, { ...params }) -> OrderCancelAllOrdersResponse</code>
-- <code title="delete /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">cancelOrder</a>(orderID, { ...params }) -> OrderCancelOrderResponse</code>
+- <code title="delete /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">cancelAllOpenOrders</a>(accountID, { ...params }) -> OrderCancelAllOpenOrdersResponse</code>
+- <code title="delete /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">cancelOpenOrder</a>(orderID, { ...params }) -> OrderCancelOpenOrderResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">getOrderByID</a>(orderID, { ...params }) -> OrderGetOrderByIDResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">getOrders</a>(accountID, { ...params }) -> OrderGetOrdersResponse</code>
 - <code title="patch /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">replaceOrder</a>(orderID, { ...params }) -> OrderReplaceOrderResponse</code>
@@ -543,16 +543,16 @@ Types:
 - <code><a href="./src/resources/active/v1/saved-screeners.ts">ScreenerEntryList</a></code>
 - <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerCreateScreenerResponse</a></code>
 - <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerGetScreenerByIDResponse</a></code>
-- <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerListScreenersResponse</a></code>
-- <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerUpdateScreenerResponse</a></code>
+- <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerGetScreenersResponse</a></code>
+- <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerReplaceScreenerResponse</a></code>
 
 Methods:
 
 - <code title="post /active/v1/saved-screeners">client.active.v1.savedScreeners.<a href="./src/resources/active/v1/saved-screeners.ts">createScreener</a>({ ...params }) -> SavedScreenerCreateScreenerResponse</code>
 - <code title="delete /active/v1/saved-screeners/{screener_id}">client.active.v1.savedScreeners.<a href="./src/resources/active/v1/saved-screeners.ts">deleteScreener</a>(screenerID) -> void</code>
 - <code title="get /active/v1/saved-screeners/{screener_id}">client.active.v1.savedScreeners.<a href="./src/resources/active/v1/saved-screeners.ts">getScreenerByID</a>(screenerID) -> SavedScreenerGetScreenerByIDResponse</code>
-- <code title="get /active/v1/saved-screeners">client.active.v1.savedScreeners.<a href="./src/resources/active/v1/saved-screeners.ts">listScreeners</a>() -> SavedScreenerListScreenersResponse</code>
-- <code title="put /active/v1/saved-screeners/{screener_id}">client.active.v1.savedScreeners.<a href="./src/resources/active/v1/saved-screeners.ts">updateScreener</a>(screenerID, { ...params }) -> SavedScreenerUpdateScreenerResponse</code>
+- <code title="get /active/v1/saved-screeners">client.active.v1.savedScreeners.<a href="./src/resources/active/v1/saved-screeners.ts">getScreeners</a>() -> SavedScreenerGetScreenersResponse</code>
+- <code title="put /active/v1/saved-screeners/{screener_id}">client.active.v1.savedScreeners.<a href="./src/resources/active/v1/saved-screeners.ts">replaceScreener</a>(screenerID, { ...params }) -> SavedScreenerReplaceScreenerResponse</code>
 
 ### Screener
 
