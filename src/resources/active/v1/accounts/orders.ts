@@ -13,6 +13,8 @@ import { path } from '../../../../internal/utils/path';
  */
 export class Orders extends APIResource {
   /**
+   * Cancel all orders for an account
+   *
    * All filter parameters can be used independently or combined. The only constraint
    * is that `security_id` and `security_id_source` must be provided together if
    * either is specified.
@@ -57,7 +59,7 @@ export class Orders extends APIResource {
   }
 
   /**
-   * Get order by ID
+   * Get Order By ID
    *
    * @example
    * ```ts

@@ -12,6 +12,8 @@ import { path } from '../../../internal/utils/path';
  */
 export class SavedScreeners extends APIResource {
   /**
+   * Create a saved screener configuration.
+   *
    * Persists a screener configuration for the authenticated user.
    *
    * @example
@@ -28,6 +30,8 @@ export class SavedScreeners extends APIResource {
   }
 
   /**
+   * Delete a saved screener configuration.
+   *
    * Deletes the screener configuration for the authenticated user.
    *
    * @example
@@ -45,6 +49,8 @@ export class SavedScreeners extends APIResource {
   }
 
   /**
+   * Get a saved screener configuration by ID.
+   *
    * Returns a single screener configuration for the authenticated user.
    *
    * @example
@@ -63,6 +69,8 @@ export class SavedScreeners extends APIResource {
   }
 
   /**
+   * List saved screener configurations.
+   *
    * Returns all screener configurations for the authenticated user.
    *
    * @example
@@ -76,6 +84,8 @@ export class SavedScreeners extends APIResource {
   }
 
   /**
+   * Update a saved screener configuration.
+   *
    * Replaces the screener configuration for the authenticated user. If `name` is
    * null, the existing name is preserved.
    *

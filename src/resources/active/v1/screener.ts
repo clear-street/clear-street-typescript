@@ -13,6 +13,8 @@ import { RequestOptions } from '../../../internal/request-options';
  */
 export class Screener extends APIResource {
   /**
+   * Screen instruments.
+   *
    * Searches for instruments matching specified criteria.
    *
    * @example
@@ -29,6 +31,8 @@ export class Screener extends APIResource {
   }
 
   /**
+   * Search instruments using structured filters.
+   *
    * Returns a columnar response where each row is an array of column objects. Each
    * column contains a human-readable name, a field reference, an optional type hint
    * (e.g. `CURR_USD`, `PERCENT`), and the value.

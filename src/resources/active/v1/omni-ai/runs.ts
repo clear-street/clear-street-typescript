@@ -32,6 +32,8 @@ export class Runs extends APIResource {
   }
 
   /**
+   * Get run status and events.
+   *
    * Poll for the current status of a run and any new events since the last poll.
    *
    * @example
@@ -47,6 +49,8 @@ export class Runs extends APIResource {
   }
 
   /**
+   * Start a new assistant run.
+   *
    * Begins an agentic conversation run. If thread_id is provided, continues an
    * existing conversation; otherwise creates a new thread.
    *
