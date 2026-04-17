@@ -5,20 +5,20 @@ import * as OmniAIAPI from './omni-ai';
 import * as ScreenerAPI from '../screener';
 import * as V1API from '../v1';
 import * as OrdersAPI from '../accounts/orders';
-import * as ResponsesAPI from './responses';
+import * as FeedbackAPI from './feedback';
+import { Feedback, FeedbackCreateFeedbackParams, FeedbackCreateFeedbackResponse } from './feedback';
+import * as RunsAPI from './runs';
 import {
-  ResponseCancelResponseParams,
-  ResponseCancelResponseResponse,
-  ResponseGetResponseParams,
-  ResponseGetResponseResponse,
-  Responses,
-} from './responses';
-import * as MessagesAPI from './messages/messages';
-import { MessageGetMessageParams, MessageGetMessageResponse, Messages } from './messages/messages';
+  RunCancelRunParams,
+  RunCancelRunResponse,
+  RunGetRunParams,
+  RunGetRunResponse,
+  RunStartRunParams,
+  RunStartRunResponse,
+  Runs,
+} from './runs';
 import * as ThreadsAPI from './threads/threads';
 import {
-  ThreadCreateThreadParams,
-  ThreadCreateThreadResponse,
   ThreadGetThreadParams,
   ThreadGetThreadResponse,
   ThreadListThreadsParams,
@@ -27,62 +27,205 @@ import {
 } from './threads/threads';
 
 export class OmniAI extends APIResource {
-  messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
-  responses: ResponsesAPI.Responses = new ResponsesAPI.Responses(this._client);
+  feedback: FeedbackAPI.Feedback = new FeedbackAPI.Feedback(this._client);
+  runs: RunsAPI.Runs = new RunsAPI.Runs(this._client);
   threads: ThreadsAPI.Threads = new ThreadsAPI.Threads(this._client);
 }
 
-export interface CancelResponsePayload {
+export interface ActionButton {
+  button_id: string;
+
+  label: string;
+
+  /**
+   * Send a follow-up prompt as the next user message
+   */
+  action?: ButtonAction | null;
+}
+
+/**
+ * Send a follow-up prompt as the next user message
+ */
+export type ButtonAction = ButtonAction.Prompt | ButtonAction.StructuredAction;
+
+export namespace ButtonAction {
+  /**
+   * Send a follow-up prompt as the next user message
+   */
+  export interface Prompt extends OmniAIAPI.PromptButtonAction {
+    action_type: 'prompt';
+  }
+
+  /**
+   * Trigger a structured action already present in the same message
+   */
+  export interface StructuredAction extends OmniAIAPI.StructuredActionButtonAction {
+    action_type: 'structured_action';
+  }
+}
+
+export interface CancelRunResponse {
   canceled: boolean;
 }
 
 /**
- * Chart payload content part.
+ * Capability allowlist for structured actions.
+ *
+ * Clients declare which capabilities they support when starting a run. Omni AI
+ * will only emit structured actions that match the declared capabilities.
  */
-export interface ContentPartChartPayload {
-  payload: unknown;
-}
+export type Capability = 'NAVIGATE' | 'OPEN_CHAT_WINDOW' | 'PREFILL_ORDER' | 'OPEN_CHART' | 'OPEN_SCREENER';
 
 /**
- * Escape-hatch custom payload content part.
+ * Chart for a specific ticker symbol
  */
-export interface ContentPartCustomPayload {
-  payload: unknown;
-}
+export type ChartKind = ChartKind.SymbolChart | ChartKind.DataChart;
 
-/**
- * Structured action content part.
- */
-export interface ContentPartStructuredActionPayload {
+export namespace ChartKind {
   /**
-   * Structured actions that Omni AI can return to clients.
-   *
-   * These actions provide machine-readable instructions for the client to execute,
-   * such as prefilling an order ticket, opening a chart, or navigating to a route.
+   * Chart for a specific ticker symbol
    */
-  action: StructuredAction;
+  export interface SymbolChart extends OmniAIAPI.SymbolChart {
+    chart_type: 'symbol_chart';
+  }
 
-  action_id: string;
+  /**
+   * Chart built from explicit data series
+   */
+  export interface DataChart extends OmniAIAPI.DataChart {
+    chart_type: 'data_chart';
+  }
+}
+
+export interface ChartPoint {
+  x: string;
+
+  y: number;
+}
+
+export interface ChartSeries {
+  name: string;
+
+  points: Array<ChartPoint>;
 }
 
 /**
- * Suggested actions payload content part.
+ * A single content part.
  */
-export interface ContentPartSuggestedActionsPayload {
-  payload: unknown;
+export type ContentPart =
+  | ContentPart.Text
+  | ContentPart.PrefillOrder
+  | ContentPart.OpenChart
+  | ContentPart.OpenScreener
+  | ContentPart.OpenChatWindow
+  | ContentPart.Navigate
+  | ContentPart.Thinking
+  | ContentPart.Chart
+  | ContentPart.SuggestedActions
+  | ContentPart.Type;
+
+export namespace ContentPart {
+  /**
+   * Plain text content
+   */
+  export interface Text extends OmniAIAPI.ContentPartText {
+    type: 'text';
+  }
+
+  /**
+   * Prefill an order ticket for user confirmation
+   */
+  export interface PrefillOrder extends OmniAIAPI.PrefillOrderAction {
+    action_type: 'prefill_order';
+
+    type?: 'structured_action';
+  }
+
+  /**
+   * Open a chart for a symbol
+   */
+  export interface OpenChart extends OmniAIAPI.OpenChartAction {
+    action_type: 'open_chart';
+
+    type?: 'structured_action';
+  }
+
+  /**
+   * Open a stock screener with filters
+   */
+  export interface OpenScreener extends OmniAIAPI.OpenScreenerAction {
+    action_type: 'open_screener';
+
+    type?: 'structured_action';
+  }
+
+  /**
+   * Open a chat window
+   */
+  export interface OpenChatWindow extends OmniAIAPI.OpenChatWindowAction {
+    action_type: 'open_chat_window';
+
+    type?: 'structured_action';
+  }
+
+  /**
+   * Navigate to a client route
+   */
+  export interface Navigate extends OmniAIAPI.NavigateAction {
+    action_type: 'navigate';
+
+    type?: 'structured_action';
+  }
+
+  /**
+   * Model reasoning/thinking content and tool call status indicators
+   */
+  export interface Thinking extends OmniAIAPI.ContentPartThinking {
+    type: 'thinking';
+  }
+
+  /**
+   * Typed inline chart (symbol or data-driven)
+   */
+  export interface Chart extends OmniAIAPI.ContentPartChart {
+    type: 'chart';
+  }
+
+  /**
+   * Message-level follow-up action buttons
+   */
+  export interface SuggestedActions extends OmniAIAPI.ContentPartSuggestedActions {
+    type: 'suggested_actions';
+  }
+
+  /**
+   * Custom/extensible content
+   */
+  export interface Type {
+    type: 'custom';
+  }
 }
 
-/**
- * Text content part.
- */
-export interface ContentPartTextPayload {
+export interface ContentPartChart {
+  chart_id: string;
+
+  action_buttons?: Array<ActionButton>;
+
+  /**
+   * Chart for a specific ticker symbol
+   */
+  chart_kind?: ChartKind | null;
+}
+
+export interface ContentPartSuggestedActions {
+  action_buttons: Array<ActionButton>;
+}
+
+export interface ContentPartText {
   text: string;
 }
 
-/**
- * Thinking content part shown on dynamic response polling.
- */
-export interface ContentPartThinkingPayload {
+export interface ContentPartThinking {
   thoughts: Array<string>;
 }
 
@@ -92,137 +235,85 @@ export interface CreateFeedbackResponse {
   feedback_id?: string | null;
 }
 
-/**
- * Response payload for continuing a thread with a new message.
- */
-export interface CreateMessageResponse {
-  response_id: string;
-
-  thread_id: string;
-
-  user_message_id: string;
+export interface DataChart {
+  series: Array<ChartSeries>;
 }
 
-/**
- * Response payload for thread creation.
- */
-export interface CreateThreadResponse {
-  response_id: string;
+export interface GetRunResponse {
+  events: Array<unknown>;
 
-  thread_id: string;
+  run: Run;
 
-  user_message_id: string;
+  next_page_token?: string | null;
 }
 
-/**
- * Shared sanitized error payload.
- */
-export interface ErrorStatus {
-  code: string;
-
-  message: string;
-
-  details?: unknown | null;
+export interface GetThreadResponse {
+  thread: Thread;
 }
 
-/**
- * Final immutable message.
- */
+export interface ListMessagesResponse {
+  messages: Array<Message>;
+
+  next_page_token?: string | null;
+}
+
+export interface ListThreadsResponse {
+  threads: Array<Thread>;
+
+  next_page_token?: string | null;
+}
+
 export interface Message {
-  id: string;
-
   /**
-   * Finalized immutable message content container. Never includes thinking parts.
+   * Denormalized text content for search/display
    */
-  content: MessageContent;
+  content_text: string;
 
   created_at: string;
 
-  /**
-   * Immutable terminal outcome for a finalized assistant message.
-   */
-  outcome: MessageOutcome;
-
-  /**
-   * Finalized message role in the public contract.
-   */
   role: MessageRole;
 
   seq: number;
 
-  thread_id: string;
+  id?: string | null;
+
+  author_user_id?: string | null;
 
   /**
-   * Shared sanitized error payload.
+   * Parsed content parts (text, thinking, and structured actions)
    */
-  error?: ErrorStatus | null;
+  content?: MessageContent | null;
+
+  metadata?: unknown | null;
+
+  run_id?: string | null;
+
+  thread_id?: string | null;
 }
 
 /**
- * Finalized immutable message content container. Never includes thinking parts.
+ * Message content containing text and structured action parts.
  */
 export interface MessageContent {
-  parts: Array<MessageContentPart>;
+  parts: Array<ContentPart>;
 }
 
+export type MessageRole = 'UNSPECIFIED' | 'SYSTEM' | 'USER' | 'ASSISTANT' | 'TOOL';
+
 /**
- * Final immutable content part visible on persisted messages.
+ * Action to navigate to a client route.
  */
-export type MessageContentPart =
-  | MessageContentPart.UnionMember0
-  | MessageContentPart.UnionMember1
-  | MessageContentPart.UnionMember2
-  | MessageContentPart.UnionMember3
-  | MessageContentPart.UnionMember4;
-
-export namespace MessageContentPart {
+export interface NavigateAction {
   /**
-   * Text content part.
+   * Route path or key
    */
-  export interface UnionMember0 extends OmniAIAPI.ContentPartTextPayload {
-    type: 'text';
-  }
+  route: string;
 
   /**
-   * Structured action content part.
+   * Route parameters
    */
-  export interface UnionMember1 extends OmniAIAPI.ContentPartStructuredActionPayload {
-    type: 'structured_action';
-  }
-
-  /**
-   * Chart payload content part.
-   */
-  export interface UnionMember2 extends OmniAIAPI.ContentPartChartPayload {
-    type: 'chart';
-  }
-
-  /**
-   * Suggested actions payload content part.
-   */
-  export interface UnionMember3 extends OmniAIAPI.ContentPartSuggestedActionsPayload {
-    type: 'suggested_actions';
-  }
-
-  /**
-   * Escape-hatch custom payload content part.
-   */
-  export interface UnionMember4 extends OmniAIAPI.ContentPartCustomPayload {
-    type: 'custom';
-  }
+  params?: unknown;
 }
-
-export type MessageList = Array<Message>;
-
-/**
- * Immutable terminal outcome for a finalized assistant message.
- */
-export type MessageOutcome = 'completed' | 'errored' | 'canceled';
-
-/**
- * Finalized message role in the public contract.
- */
-export type MessageRole = 'USER' | 'ASSISTANT';
 
 /**
  * Action to open a chart for a symbol.
@@ -242,6 +333,26 @@ export interface OpenChartAction {
    * Chart timeframe (e.g., "1D", "1W", "1M", "3M", "1Y", "5Y")
    */
   timeframe?: string | null;
+}
+
+/**
+ * Action to open a chat window.
+ */
+export interface OpenChatWindowAction {
+  /**
+   * Additional configuration
+   */
+  extras?: unknown;
+
+  /**
+   * Thread ID to open (None to open a new chat window)
+   */
+  thread_id?: string | null;
+
+  /**
+   * Window title
+   */
+  title?: string | null;
 }
 
 /**
@@ -354,100 +465,37 @@ export interface PrefillOrderAction {
   account_id?: number | null;
 }
 
-/**
- * Dynamic pollable response.
- */
-export interface Response {
-  id: string;
-
-  /**
-   * Dynamic lifecycle status for a pollable response.
-   */
-  status: ResponseStatus;
-
-  thread_id: string;
-
-  user_message_id: string;
-
-  /**
-   * Dynamic response content container. May include thinking parts.
-   */
-  content?: ResponseContent | null;
-
-  /**
-   * Shared sanitized error payload.
-   */
-  error?: ErrorStatus | null;
-
-  output_message_id?: string | null;
+export interface PromptButtonAction {
+  prompt: string;
 }
 
-/**
- * Dynamic response content container. May include thinking parts.
- */
-export interface ResponseContent {
-  parts: Array<ResponseContentPart>;
+export interface Run {
+  created_at: string;
+
+  status: RunStatus;
+
+  id?: string | null;
+
+  capabilities?: Array<Capability>;
+
+  ended_at?: string | null;
+
+  error?: unknown | null;
+
+  started_at?: string | null;
+
+  thread_id?: string | null;
 }
 
-/**
- * Dynamic content part visible on a pollable response.
- */
-export type ResponseContentPart =
-  | ResponseContentPart.UnionMember0
-  | ResponseContentPart.UnionMember1
-  | ResponseContentPart.UnionMember2
-  | ResponseContentPart.UnionMember3
-  | ResponseContentPart.UnionMember4
-  | ResponseContentPart.UnionMember5;
+export type RunStatus = 'UNSPECIFIED' | 'QUEUED' | 'RUNNING' | 'SUCCEEDED' | 'FAILED' | 'CANCELED';
 
-export namespace ResponseContentPart {
-  /**
-   * Text content part.
-   */
-  export interface UnionMember0 extends OmniAIAPI.ContentPartTextPayload {
-    type: 'text';
-  }
+export interface StartRunResponse {
+  run: Run;
 
-  /**
-   * Thinking content part shown on dynamic response polling.
-   */
-  export interface UnionMember1 extends OmniAIAPI.ContentPartThinkingPayload {
-    type: 'thinking';
-  }
+  thread: Thread;
 
-  /**
-   * Structured action content part.
-   */
-  export interface UnionMember2 extends OmniAIAPI.ContentPartStructuredActionPayload {
-    type: 'structured_action';
-  }
-
-  /**
-   * Chart payload content part.
-   */
-  export interface UnionMember3 extends OmniAIAPI.ContentPartChartPayload {
-    type: 'chart';
-  }
-
-  /**
-   * Suggested actions payload content part.
-   */
-  export interface UnionMember4 extends OmniAIAPI.ContentPartSuggestedActionsPayload {
-    type: 'suggested_actions';
-  }
-
-  /**
-   * Escape-hatch custom payload content part.
-   */
-  export interface UnionMember5 extends OmniAIAPI.ContentPartCustomPayload {
-    type: 'custom';
-  }
+  user_message: Message;
 }
-
-/**
- * Dynamic lifecycle status for a pollable response.
- */
-export type ResponseStatus = 'queued' | 'running' | 'succeeded' | 'failed' | 'canceled';
 
 /**
  * Structured actions that Omni AI can return to clients.
@@ -458,7 +506,9 @@ export type ResponseStatus = 'queued' | 'running' | 'succeeded' | 'failed' | 'ca
 export type StructuredAction =
   | StructuredAction.PrefillOrder
   | StructuredAction.OpenChart
-  | StructuredAction.OpenScreener;
+  | StructuredAction.OpenScreener
+  | StructuredAction.OpenChatWindow
+  | StructuredAction.Navigate;
 
 export namespace StructuredAction {
   /**
@@ -481,82 +531,114 @@ export namespace StructuredAction {
   export interface OpenScreener extends OmniAIAPI.OpenScreenerAction {
     action_type: 'open_screener';
   }
+
+  /**
+   * Open a chat window
+   */
+  export interface OpenChatWindow extends OmniAIAPI.OpenChatWindowAction {
+    action_type: 'open_chat_window';
+  }
+
+  /**
+   * Navigate to a client route
+   */
+  export interface Navigate extends OmniAIAPI.NavigateAction {
+    action_type: 'navigate';
+  }
 }
 
-/**
- * Thread metadata returned by list/get thread endpoints.
- */
+export interface StructuredActionButtonAction {
+  action_id?: string | null;
+}
+
+export interface SymbolChart {
+  symbol: string;
+
+  timeframe?: string | null;
+}
+
 export interface Thread {
-  id: string;
+  account_id: string;
 
   created_at: string;
 
   description: string;
 
+  owner_user_id: string;
+
   title: string;
 
   updated_at: string;
+
+  id?: string | null;
+
+  metadata?: unknown | null;
 }
 
-export type ThreadList = Array<Thread>;
-
-OmniAI.Messages = Messages;
-OmniAI.Responses = Responses;
+OmniAI.Feedback = Feedback;
+OmniAI.Runs = Runs;
 OmniAI.Threads = Threads;
 
 export declare namespace OmniAI {
   export {
-    type CancelResponsePayload as CancelResponsePayload,
-    type ContentPartChartPayload as ContentPartChartPayload,
-    type ContentPartCustomPayload as ContentPartCustomPayload,
-    type ContentPartStructuredActionPayload as ContentPartStructuredActionPayload,
-    type ContentPartSuggestedActionsPayload as ContentPartSuggestedActionsPayload,
-    type ContentPartTextPayload as ContentPartTextPayload,
-    type ContentPartThinkingPayload as ContentPartThinkingPayload,
+    type ActionButton as ActionButton,
+    type ButtonAction as ButtonAction,
+    type CancelRunResponse as CancelRunResponse,
+    type Capability as Capability,
+    type ChartKind as ChartKind,
+    type ChartPoint as ChartPoint,
+    type ChartSeries as ChartSeries,
+    type ContentPart as ContentPart,
+    type ContentPartChart as ContentPartChart,
+    type ContentPartSuggestedActions as ContentPartSuggestedActions,
+    type ContentPartText as ContentPartText,
+    type ContentPartThinking as ContentPartThinking,
     type CreateFeedbackResponse as CreateFeedbackResponse,
-    type CreateMessageResponse as CreateMessageResponse,
-    type CreateThreadResponse as CreateThreadResponse,
-    type ErrorStatus as ErrorStatus,
+    type DataChart as DataChart,
+    type GetRunResponse as GetRunResponse,
+    type GetThreadResponse as GetThreadResponse,
+    type ListMessagesResponse as ListMessagesResponse,
+    type ListThreadsResponse as ListThreadsResponse,
     type Message as Message,
     type MessageContent as MessageContent,
-    type MessageContentPart as MessageContentPart,
-    type MessageList as MessageList,
-    type MessageOutcome as MessageOutcome,
     type MessageRole as MessageRole,
+    type NavigateAction as NavigateAction,
     type OpenChartAction as OpenChartAction,
+    type OpenChatWindowAction as OpenChatWindowAction,
     type OpenScreenerAction as OpenScreenerAction,
     type OrderPayload as OrderPayload,
     type OrderStrategyType as OrderStrategyType,
     type PrefillOrderAction as PrefillOrderAction,
-    type Response as Response,
-    type ResponseContent as ResponseContent,
-    type ResponseContentPart as ResponseContentPart,
-    type ResponseStatus as ResponseStatus,
+    type PromptButtonAction as PromptButtonAction,
+    type Run as Run,
+    type RunStatus as RunStatus,
+    type StartRunResponse as StartRunResponse,
     type StructuredAction as StructuredAction,
+    type StructuredActionButtonAction as StructuredActionButtonAction,
+    type SymbolChart as SymbolChart,
     type Thread as Thread,
-    type ThreadList as ThreadList,
   };
 
   export {
-    Messages as Messages,
-    type MessageGetMessageResponse as MessageGetMessageResponse,
-    type MessageGetMessageParams as MessageGetMessageParams,
+    Feedback as Feedback,
+    type FeedbackCreateFeedbackResponse as FeedbackCreateFeedbackResponse,
+    type FeedbackCreateFeedbackParams as FeedbackCreateFeedbackParams,
   };
 
   export {
-    Responses as Responses,
-    type ResponseCancelResponseResponse as ResponseCancelResponseResponse,
-    type ResponseGetResponseResponse as ResponseGetResponseResponse,
-    type ResponseCancelResponseParams as ResponseCancelResponseParams,
-    type ResponseGetResponseParams as ResponseGetResponseParams,
+    Runs as Runs,
+    type RunCancelRunResponse as RunCancelRunResponse,
+    type RunGetRunResponse as RunGetRunResponse,
+    type RunStartRunResponse as RunStartRunResponse,
+    type RunCancelRunParams as RunCancelRunParams,
+    type RunGetRunParams as RunGetRunParams,
+    type RunStartRunParams as RunStartRunParams,
   };
 
   export {
     Threads as Threads,
-    type ThreadCreateThreadResponse as ThreadCreateThreadResponse,
     type ThreadGetThreadResponse as ThreadGetThreadResponse,
     type ThreadListThreadsResponse as ThreadListThreadsResponse,
-    type ThreadCreateThreadParams as ThreadCreateThreadParams,
     type ThreadGetThreadParams as ThreadGetThreadParams,
     type ThreadListThreadsParams as ThreadListThreadsParams,
   };
