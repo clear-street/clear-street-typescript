@@ -2,41 +2,34 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as Shared from '../../../../shared';
-import * as OmniAIAPI from '../omni-ai';
+import * as OmniAIAPI from '../../omni-ai/omni-ai';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
 /**
- * AI assistant for conversational trading interactions.
+ * Deprecated /iris/* routes. Use /omni-ai/* instead.
  */
 export class Messages extends APIResource {
   /**
-   * List messages in a thread.
+   * **Deprecated**: Use `GET /omni-ai/threads/{thread_id}/messages` instead.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.active.v1.omniAI.threads.messages.listMessages(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
+   * @deprecated
    */
-  listMessages(
+  listMessagesDeprecated(
     threadID: string,
-    query: MessageListMessagesParams,
+    query: MessageListMessagesDeprecatedParams,
     options?: RequestOptions,
-  ): APIPromise<MessageListMessagesResponse> {
-    return this._client.get(path`/active/v1/omni-ai/threads/${threadID}/messages`, { query, ...options });
+  ): APIPromise<MessageListMessagesDeprecatedResponse> {
+    return this._client.get(path`/active/v1/iris/threads/${threadID}/messages`, { query, ...options });
   }
 }
 
-export interface MessageListMessagesResponse extends Shared.BaseResponse {
+export interface MessageListMessagesDeprecatedResponse extends Shared.BaseResponse {
   data: OmniAIAPI.ListMessagesResponse;
 }
 
-export interface MessageListMessagesParams {
+export interface MessageListMessagesDeprecatedParams {
   /**
    * Account ID for the request
    */
@@ -60,7 +53,7 @@ export interface MessageListMessagesParams {
 
 export declare namespace Messages {
   export {
-    type MessageListMessagesResponse as MessageListMessagesResponse,
-    type MessageListMessagesParams as MessageListMessagesParams,
+    type MessageListMessagesDeprecatedResponse as MessageListMessagesDeprecatedResponse,
+    type MessageListMessagesDeprecatedParams as MessageListMessagesDeprecatedParams,
   };
 }

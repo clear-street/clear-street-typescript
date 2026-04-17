@@ -7,13 +7,15 @@ const client = new ClearStreet({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource response', () => {
+describe('resource feedback', () => {
   // Mock server tests are disabled
-  test.skip('getThreadResponse: only required params', async () => {
-    const responsePromise = client.active.v1.omniAI.threads.response.getThreadResponse(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
-    );
+  test.skip('createFeedback: only required params', async () => {
+    const responsePromise = client.active.v1.omniAI.feedback.createFeedback({
+      account_id: 'account_id',
+      message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      score: 0,
+      thread_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,10 +26,14 @@ describe('resource response', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getThreadResponse: required and optional params', async () => {
-    const response = await client.active.v1.omniAI.threads.response.getThreadResponse(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
-    );
+  test.skip('createFeedback: required and optional params', async () => {
+    const response = await client.active.v1.omniAI.feedback.createFeedback({
+      account_id: 'account_id',
+      message_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      score: 0,
+      thread_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      comment: 'comment',
+      metadata: {},
+    });
   });
 });
