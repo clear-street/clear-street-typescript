@@ -76,10 +76,10 @@ export class SavedScreeners extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.savedScreeners.listScreeners();
+   *   await client.active.v1.savedScreeners.getScreeners();
    * ```
    */
-  listScreeners(options?: RequestOptions): APIPromise<SavedScreenerListScreenersResponse> {
+  getScreeners(options?: RequestOptions): APIPromise<SavedScreenerGetScreenersResponse> {
     return this._client.get('/active/v1/saved-screeners', options);
   }
 
@@ -92,16 +92,16 @@ export class SavedScreeners extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.active.v1.savedScreeners.updateScreener(
+   *   await client.active.v1.savedScreeners.replaceScreener(
    *     '550e8400-e29b-41d4-a716-446655440000',
    *   );
    * ```
    */
-  updateScreener(
+  replaceScreener(
     screenerID: string,
-    body: SavedScreenerUpdateScreenerParams,
+    body: SavedScreenerReplaceScreenerParams,
     options?: RequestOptions,
-  ): APIPromise<SavedScreenerUpdateScreenerResponse> {
+  ): APIPromise<SavedScreenerReplaceScreenerResponse> {
     return this._client.put(path`/active/v1/saved-screeners/${screenerID}`, { body, ...options });
   }
 }
@@ -187,11 +187,11 @@ export interface SavedScreenerGetScreenerByIDResponse extends Shared.BaseRespons
   data: ScreenerEntry;
 }
 
-export interface SavedScreenerListScreenersResponse extends Shared.BaseResponse {
+export interface SavedScreenerGetScreenersResponse extends Shared.BaseResponse {
   data: ScreenerEntryList;
 }
 
-export interface SavedScreenerUpdateScreenerResponse extends Shared.BaseResponse {
+export interface SavedScreenerReplaceScreenerResponse extends Shared.BaseResponse {
   /**
    * A saved screener configuration entry
    */
@@ -225,7 +225,7 @@ export interface SavedScreenerCreateScreenerParams {
   sort_direction?: 'ASC' | 'DESC' | null;
 }
 
-export interface SavedScreenerUpdateScreenerParams {
+export interface SavedScreenerReplaceScreenerParams {
   /**
    * List of field names to include when running this screener
    */
@@ -259,9 +259,9 @@ export declare namespace SavedScreeners {
     type ScreenerEntryList as ScreenerEntryList,
     type SavedScreenerCreateScreenerResponse as SavedScreenerCreateScreenerResponse,
     type SavedScreenerGetScreenerByIDResponse as SavedScreenerGetScreenerByIDResponse,
-    type SavedScreenerListScreenersResponse as SavedScreenerListScreenersResponse,
-    type SavedScreenerUpdateScreenerResponse as SavedScreenerUpdateScreenerResponse,
+    type SavedScreenerGetScreenersResponse as SavedScreenerGetScreenersResponse,
+    type SavedScreenerReplaceScreenerResponse as SavedScreenerReplaceScreenerResponse,
     type SavedScreenerCreateScreenerParams as SavedScreenerCreateScreenerParams,
-    type SavedScreenerUpdateScreenerParams as SavedScreenerUpdateScreenerParams,
+    type SavedScreenerReplaceScreenerParams as SavedScreenerReplaceScreenerParams,
   };
 }

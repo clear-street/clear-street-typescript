@@ -106,10 +106,10 @@ export {
   type ScreenerEntryList,
   type SavedScreenerCreateScreenerResponse,
   type SavedScreenerGetScreenerByIDResponse,
-  type SavedScreenerListScreenersResponse,
-  type SavedScreenerUpdateScreenerResponse,
+  type SavedScreenerGetScreenersResponse,
+  type SavedScreenerReplaceScreenerResponse,
   type SavedScreenerCreateScreenerParams,
-  type SavedScreenerUpdateScreenerParams,
+  type SavedScreenerReplaceScreenerParams,
 } from './saved-screeners';
 export {
   Screener,

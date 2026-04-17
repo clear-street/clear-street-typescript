@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource orders', () => {
   // Mock server tests are disabled
-  test.skip('cancelAllOrders', async () => {
-    const responsePromise = client.active.v1.accounts.orders.cancelAllOrders(0);
+  test.skip('cancelAllOpenOrders', async () => {
+    const responsePromise = client.active.v1.accounts.orders.cancelAllOpenOrders(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,10 +21,10 @@ describe('resource orders', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('cancelAllOrders: request options and params are passed correctly', async () => {
+  test.skip('cancelAllOpenOrders: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.active.v1.accounts.orders.cancelAllOrders(
+      client.active.v1.accounts.orders.cancelAllOpenOrders(
         0,
         {
           security_id: ['string'],
@@ -39,8 +39,8 @@ describe('resource orders', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('cancelOrder: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.orders.cancelOrder('order_id', { account_id: 0 });
+  test.skip('cancelOpenOrder: only required params', async () => {
+    const responsePromise = client.active.v1.accounts.orders.cancelOpenOrder('order_id', { account_id: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,8 +51,8 @@ describe('resource orders', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('cancelOrder: required and optional params', async () => {
-    const response = await client.active.v1.accounts.orders.cancelOrder('order_id', { account_id: 0 });
+  test.skip('cancelOpenOrder: required and optional params', async () => {
+    const response = await client.active.v1.accounts.orders.cancelOpenOrder('order_id', { account_id: 0 });
   });
 
   // Mock server tests are disabled

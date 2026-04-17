@@ -33,9 +33,9 @@ import {
   SavedScreenerCreateScreenerResponse,
   SavedScreenerFilter,
   SavedScreenerGetScreenerByIDResponse,
-  SavedScreenerListScreenersResponse,
-  SavedScreenerUpdateScreenerParams,
-  SavedScreenerUpdateScreenerResponse,
+  SavedScreenerGetScreenersResponse,
+  SavedScreenerReplaceScreenerParams,
+  SavedScreenerReplaceScreenerResponse,
   SavedScreeners,
   ScreenerEntry,
   ScreenerEntryList,
@@ -377,10 +377,10 @@ export declare namespace V1 {
     type ScreenerEntryList as ScreenerEntryList,
     type SavedScreenerCreateScreenerResponse as SavedScreenerCreateScreenerResponse,
     type SavedScreenerGetScreenerByIDResponse as SavedScreenerGetScreenerByIDResponse,
-    type SavedScreenerListScreenersResponse as SavedScreenerListScreenersResponse,
-    type SavedScreenerUpdateScreenerResponse as SavedScreenerUpdateScreenerResponse,
+    type SavedScreenerGetScreenersResponse as SavedScreenerGetScreenersResponse,
+    type SavedScreenerReplaceScreenerResponse as SavedScreenerReplaceScreenerResponse,
     type SavedScreenerCreateScreenerParams as SavedScreenerCreateScreenerParams,
-    type SavedScreenerUpdateScreenerParams as SavedScreenerUpdateScreenerParams,
+    type SavedScreenerReplaceScreenerParams as SavedScreenerReplaceScreenerParams,
   };
 
   export {
