@@ -12,6 +12,8 @@ import { RequestOptions } from '../../../../../internal/request-options';
  */
 export class Contracts extends APIResource {
   /**
+   * List options contracts.
+   *
    * Returns options contracts for a given underlier with options-specific metadata.
    * Exactly one underlier identifier must be provided.
    *
