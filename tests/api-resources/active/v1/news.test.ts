@@ -34,6 +34,7 @@ describe('resource news', () => {
           page_size: 1,
           page_token: 'U3RhaW5sZXNzIHJvY2tz',
           search_query: 'search_query',
+          sectors: ['BASIC_MATERIALS'],
           security_id: ['string'],
           security_id_source: ['string'],
           to: 'to',

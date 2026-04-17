@@ -160,6 +160,23 @@ export interface NewsGetNewsParams {
   search_query?: string;
 
   /**
+   * Comma-separated sector values to filter by.
+   */
+  sectors?: Array<
+    | 'BASIC_MATERIALS'
+    | 'COMMUNICATION_SERVICES'
+    | 'CONSUMER_CYCLICAL'
+    | 'CONSUMER_DEFENSIVE'
+    | 'ENERGY'
+    | 'FINANCIAL_SERVICES'
+    | 'HEALTHCARE'
+    | 'INDUSTRIALS'
+    | 'REAL_ESTATE'
+    | 'TECHNOLOGY'
+    | 'UTILITIES'
+  >;
+
+  /**
    * Filter by security ID(s). Accepts single value or indexed array.
    *
    * Examples:
