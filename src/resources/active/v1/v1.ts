@@ -100,49 +100,40 @@ import {
   OptionsContract,
   OptionsContractList,
 } from './instruments/instruments';
-import * as IrisAPI from './iris/iris';
-import { Iris } from './iris/iris';
 import * as MarketDataAPI from './market-data/market-data';
 import { MarketData } from './market-data/market-data';
 import * as OmniAIAPI from './omni-ai/omni-ai';
 import {
-  ActionButton,
-  ButtonAction,
-  CancelRunResponse,
-  Capability,
-  ChartKind,
-  ChartPoint,
-  ChartSeries,
-  ContentPart,
-  ContentPartChart,
-  ContentPartSuggestedActions,
-  ContentPartText,
-  ContentPartThinking,
+  CancelResponsePayload,
+  ContentPartChartPayload,
+  ContentPartCustomPayload,
+  ContentPartStructuredActionPayload,
+  ContentPartSuggestedActionsPayload,
+  ContentPartTextPayload,
+  ContentPartThinkingPayload,
   CreateFeedbackResponse,
-  DataChart,
-  GetRunResponse,
-  GetThreadResponse,
-  ListMessagesResponse,
-  ListThreadsResponse,
+  CreateMessageResponse,
+  CreateThreadResponse,
+  ErrorStatus,
   Message,
   MessageContent,
+  MessageContentPart,
+  MessageList,
+  MessageOutcome,
   MessageRole,
-  NavigateAction,
   OmniAI,
   OpenChartAction,
-  OpenChatWindowAction,
   OpenScreenerAction,
   OrderPayload,
   OrderStrategyType,
   PrefillOrderAction,
-  PromptButtonAction,
-  Run,
-  RunStatus,
-  StartRunResponse,
+  Response,
+  ResponseContent,
+  ResponseContentPart,
+  ResponseStatus,
   StructuredAction,
-  StructuredActionButtonAction,
-  SymbolChart,
   Thread,
+  ThreadList,
 } from './omni-ai/omni-ai';
 import * as WatchlistsAPI from './watchlists/watchlists';
 import {
@@ -163,7 +154,6 @@ export class V1 extends APIResource {
   calendars: CalendarsAPI.Calendars = new CalendarsAPI.Calendars(this._client);
   clock: ClockAPI.Clock = new ClockAPI.Clock(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
-  iris: IrisAPI.Iris = new IrisAPI.Iris(this._client);
   marketData: MarketDataAPI.MarketData = new MarketDataAPI.MarketData(this._client);
   news: NewsAPI.News = new NewsAPI.News(this._client);
   omniAI: OmniAIAPI.OmniAI = new OmniAIAPI.OmniAI(this._client);
@@ -241,7 +231,6 @@ V1.APIKeys = APIKeys;
 V1.Calendars = Calendars;
 V1.Clock = Clock;
 V1.Instruments = Instruments;
-V1.Iris = Iris;
 V1.MarketData = MarketData;
 V1.News = News;
 V1.OmniAI = OmniAI;
@@ -316,8 +305,6 @@ export declare namespace V1 {
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
   };
 
-  export { Iris as Iris };
-
   export { MarketData as MarketData };
 
   export {
@@ -332,42 +319,35 @@ export declare namespace V1 {
 
   export {
     OmniAI as OmniAI,
-    type ActionButton as ActionButton,
-    type ButtonAction as ButtonAction,
-    type CancelRunResponse as CancelRunResponse,
-    type Capability as Capability,
-    type ChartKind as ChartKind,
-    type ChartPoint as ChartPoint,
-    type ChartSeries as ChartSeries,
-    type ContentPart as ContentPart,
-    type ContentPartChart as ContentPartChart,
-    type ContentPartSuggestedActions as ContentPartSuggestedActions,
-    type ContentPartText as ContentPartText,
-    type ContentPartThinking as ContentPartThinking,
+    type CancelResponsePayload as CancelResponsePayload,
+    type ContentPartChartPayload as ContentPartChartPayload,
+    type ContentPartCustomPayload as ContentPartCustomPayload,
+    type ContentPartStructuredActionPayload as ContentPartStructuredActionPayload,
+    type ContentPartSuggestedActionsPayload as ContentPartSuggestedActionsPayload,
+    type ContentPartTextPayload as ContentPartTextPayload,
+    type ContentPartThinkingPayload as ContentPartThinkingPayload,
     type CreateFeedbackResponse as CreateFeedbackResponse,
-    type DataChart as DataChart,
-    type GetRunResponse as GetRunResponse,
-    type GetThreadResponse as GetThreadResponse,
-    type ListMessagesResponse as ListMessagesResponse,
-    type ListThreadsResponse as ListThreadsResponse,
+    type CreateMessageResponse as CreateMessageResponse,
+    type CreateThreadResponse as CreateThreadResponse,
+    type ErrorStatus as ErrorStatus,
     type Message as Message,
     type MessageContent as MessageContent,
+    type MessageContentPart as MessageContentPart,
+    type MessageList as MessageList,
+    type MessageOutcome as MessageOutcome,
     type MessageRole as MessageRole,
-    type NavigateAction as NavigateAction,
     type OpenChartAction as OpenChartAction,
-    type OpenChatWindowAction as OpenChatWindowAction,
     type OpenScreenerAction as OpenScreenerAction,
     type OrderPayload as OrderPayload,
     type OrderStrategyType as OrderStrategyType,
     type PrefillOrderAction as PrefillOrderAction,
-    type PromptButtonAction as PromptButtonAction,
-    type Run as Run,
-    type RunStatus as RunStatus,
-    type StartRunResponse as StartRunResponse,
+    type Response as Response,
+    type ResponseContent as ResponseContent,
+    type ResponseContentPart as ResponseContentPart,
+    type ResponseStatus as ResponseStatus,
     type StructuredAction as StructuredAction,
-    type StructuredActionButtonAction as StructuredActionButtonAction,
-    type SymbolChart as SymbolChart,
     type Thread as Thread,
+    type ThreadList as ThreadList,
   };
 
   export {
