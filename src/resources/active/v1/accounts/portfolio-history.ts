@@ -67,11 +67,6 @@ export interface PortfolioHistorySegment {
   bought_notional?: string | null;
 
   /**
-   * Quantity bought MTM
-   */
-  bought_quantity?: string | null;
-
-  /**
    * Sum of the profit and loss from intraday trading activities for the trading day.
    */
   day_pnl?: string | null;
@@ -91,11 +86,6 @@ export interface PortfolioHistorySegment {
    * Amount sold MTM
    */
   sold_notional?: string | null;
-
-  /**
-   * Quantity sold MTM
-   */
-  sold_quantity?: string | null;
 }
 
 export interface PortfolioHistoryGetPortfolioHistoryResponse extends Shared.BaseResponse {

@@ -368,6 +368,54 @@ Methods:
 
 - <code title="get /active/v1/instruments/venues">client.active.v1.instruments.venues.<a href="./src/resources/active/v1/instruments/venues.ts">getVenues</a>() -> VenueGetVenuesResponse</code>
 
+### Iris
+
+#### Feedback
+
+Types:
+
+- <code><a href="./src/resources/active/v1/iris/feedback.ts">FeedbackCreateFeedbackDeprecatedResponse</a></code>
+
+Methods:
+
+- <code title="post /active/v1/iris/feedback">client.active.v1.iris.feedback.<a href="./src/resources/active/v1/iris/feedback.ts">createFeedbackDeprecated</a>({ ...params }) -> FeedbackCreateFeedbackDeprecatedResponse</code>
+
+#### Runs
+
+Types:
+
+- <code><a href="./src/resources/active/v1/iris/runs.ts">RunCancelRunDeprecatedResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">RunGetRunDeprecatedResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/runs.ts">RunStartRunDeprecatedResponse</a></code>
+
+Methods:
+
+- <code title="delete /active/v1/iris/runs/{run_id}">client.active.v1.iris.runs.<a href="./src/resources/active/v1/iris/runs.ts">cancelRunDeprecated</a>(runID, { ...params }) -> RunCancelRunDeprecatedResponse</code>
+- <code title="get /active/v1/iris/runs/{run_id}">client.active.v1.iris.runs.<a href="./src/resources/active/v1/iris/runs.ts">getRunDeprecated</a>(runID, { ...params }) -> RunGetRunDeprecatedResponse</code>
+- <code title="post /active/v1/iris/runs">client.active.v1.iris.runs.<a href="./src/resources/active/v1/iris/runs.ts">startRunDeprecated</a>({ ...params }) -> RunStartRunDeprecatedResponse</code>
+
+#### Threads
+
+Types:
+
+- <code><a href="./src/resources/active/v1/iris/threads/threads.ts">ThreadGetThreadDeprecatedResponse</a></code>
+- <code><a href="./src/resources/active/v1/iris/threads/threads.ts">ThreadListThreadsDeprecatedResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/iris/threads/{thread_id}">client.active.v1.iris.threads.<a href="./src/resources/active/v1/iris/threads/threads.ts">getThreadDeprecated</a>(threadID, { ...params }) -> ThreadGetThreadDeprecatedResponse</code>
+- <code title="get /active/v1/iris/threads">client.active.v1.iris.threads.<a href="./src/resources/active/v1/iris/threads/threads.ts">listThreadsDeprecated</a>({ ...params }) -> ThreadListThreadsDeprecatedResponse</code>
+
+##### Messages
+
+Types:
+
+- <code><a href="./src/resources/active/v1/iris/threads/messages.ts">MessageListMessagesDeprecatedResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/iris/threads/{thread_id}/messages">client.active.v1.iris.threads.messages.<a href="./src/resources/active/v1/iris/threads/messages.ts">listMessagesDeprecated</a>(threadID, { ...params }) -> MessageListMessagesDeprecatedResponse</code>
+
 ### MarketData
 
 #### Snapshot
@@ -403,79 +451,76 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CancelResponsePayload</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartChartPayload</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartCustomPayload</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartStructuredActionPayload</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartSuggestedActionsPayload</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartTextPayload</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartThinkingPayload</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ActionButton</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ButtonAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CancelRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Capability</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ChartKind</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ChartPoint</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ChartSeries</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPart</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartChart</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartSuggestedActions</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartText</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartThinking</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CreateFeedbackResponse</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CreateMessageResponse</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CreateThreadResponse</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ErrorStatus</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">DataChart</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">GetRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">GetThreadResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ListMessagesResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ListThreadsResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Message</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">MessageContent</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">MessageContentPart</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">MessageList</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">MessageOutcome</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">MessageRole</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">NavigateAction</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OpenChartAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OpenChatWindowAction</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OpenScreenerAction</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OrderPayload</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OrderStrategyType</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PrefillOrderAction</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Response</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ResponseContent</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ResponseContentPart</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ResponseStatus</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PromptButtonAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Run</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">RunStatus</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">StartRunResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">StructuredAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">StructuredActionButtonAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">SymbolChart</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Thread</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ThreadList</a></code>
 
-#### Messages
-
-Types:
-
-- <code><a href="./src/resources/active/v1/omni-ai/messages/messages.ts">MessageGetMessageResponse</a></code>
-
-Methods:
-
-- <code title="get /active/v1/omni-ai/messages/{message_id}">client.active.v1.omniAI.messages.<a href="./src/resources/active/v1/omni-ai/messages/messages.ts">getMessage</a>(messageID, { ...params }) -> MessageGetMessageResponse</code>
-
-##### Feedback
+#### Feedback
 
 Types:
 
-- <code><a href="./src/resources/active/v1/omni-ai/messages/feedback.ts">FeedbackCreateFeedbackResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/feedback.ts">FeedbackCreateFeedbackResponse</a></code>
 
 Methods:
 
-- <code title="post /active/v1/omni-ai/messages/{message_id}/feedback">client.active.v1.omniAI.messages.feedback.<a href="./src/resources/active/v1/omni-ai/messages/feedback.ts">createFeedback</a>(messageID, { ...params }) -> FeedbackCreateFeedbackResponse</code>
+- <code title="post /active/v1/omni-ai/feedback">client.active.v1.omniAI.feedback.<a href="./src/resources/active/v1/omni-ai/feedback.ts">createFeedback</a>({ ...params }) -> FeedbackCreateFeedbackResponse</code>
 
-#### Responses
+#### Runs
 
 Types:
 
-- <code><a href="./src/resources/active/v1/omni-ai/responses.ts">ResponseCancelResponseResponse</a></code>
-- <code><a href="./src/resources/active/v1/omni-ai/responses.ts">ResponseGetResponseResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/runs.ts">RunCancelRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/runs.ts">RunGetRunResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/runs.ts">RunStartRunResponse</a></code>
 
 Methods:
 
-- <code title="delete /active/v1/omni-ai/responses/{response_id}">client.active.v1.omniAI.responses.<a href="./src/resources/active/v1/omni-ai/responses.ts">cancelResponse</a>(responseID, { ...params }) -> ResponseCancelResponseResponse</code>
-- <code title="get /active/v1/omni-ai/responses/{response_id}">client.active.v1.omniAI.responses.<a href="./src/resources/active/v1/omni-ai/responses.ts">getResponse</a>(responseID, { ...params }) -> ResponseGetResponseResponse</code>
+- <code title="delete /active/v1/omni-ai/runs/{run_id}">client.active.v1.omniAI.runs.<a href="./src/resources/active/v1/omni-ai/runs.ts">cancelRun</a>(runID, { ...params }) -> RunCancelRunResponse</code>
+- <code title="get /active/v1/omni-ai/runs/{run_id}">client.active.v1.omniAI.runs.<a href="./src/resources/active/v1/omni-ai/runs.ts">getRun</a>(runID, { ...params }) -> RunGetRunResponse</code>
+- <code title="post /active/v1/omni-ai/runs">client.active.v1.omniAI.runs.<a href="./src/resources/active/v1/omni-ai/runs.ts">startRun</a>({ ...params }) -> RunStartRunResponse</code>
 
 #### Threads
 
 Types:
 
-- <code><a href="./src/resources/active/v1/omni-ai/threads/threads.ts">ThreadCreateThreadResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/threads/threads.ts">ThreadGetThreadResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/threads/threads.ts">ThreadListThreadsResponse</a></code>
 
 Methods:
 
-- <code title="post /active/v1/omni-ai/threads">client.active.v1.omniAI.threads.<a href="./src/resources/active/v1/omni-ai/threads/threads.ts">createThread</a>({ ...params }) -> ThreadCreateThreadResponse</code>
 - <code title="get /active/v1/omni-ai/threads/{thread_id}">client.active.v1.omniAI.threads.<a href="./src/resources/active/v1/omni-ai/threads/threads.ts">getThread</a>(threadID, { ...params }) -> ThreadGetThreadResponse</code>
 - <code title="get /active/v1/omni-ai/threads">client.active.v1.omniAI.threads.<a href="./src/resources/active/v1/omni-ai/threads/threads.ts">listThreads</a>({ ...params }) -> ThreadListThreadsResponse</code>
 
@@ -483,23 +528,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/omni-ai/threads/messages.ts">MessageCreateMessageResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/threads/messages.ts">MessageListMessagesResponse</a></code>
 
 Methods:
 
-- <code title="post /active/v1/omni-ai/threads/{thread_id}/messages">client.active.v1.omniAI.threads.messages.<a href="./src/resources/active/v1/omni-ai/threads/messages.ts">createMessage</a>(threadID, { ...params }) -> MessageCreateMessageResponse</code>
 - <code title="get /active/v1/omni-ai/threads/{thread_id}/messages">client.active.v1.omniAI.threads.messages.<a href="./src/resources/active/v1/omni-ai/threads/messages.ts">listMessages</a>(threadID, { ...params }) -> MessageListMessagesResponse</code>
-
-##### Response
-
-Types:
-
-- <code><a href="./src/resources/active/v1/omni-ai/threads/response.ts">ResponseGetThreadResponseResponse</a></code>
-
-Methods:
-
-- <code title="get /active/v1/omni-ai/threads/{thread_id}/response">client.active.v1.omniAI.threads.response.<a href="./src/resources/active/v1/omni-ai/threads/response.ts">getThreadResponse</a>(threadID, { ...params }) -> ResponseGetThreadResponseResponse</code>
 
 ### SavedScreeners
 
