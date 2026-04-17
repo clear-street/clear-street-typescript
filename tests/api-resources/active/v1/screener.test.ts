@@ -37,4 +37,16 @@ describe('resource screener', () => {
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
+
+  // Mock server tests are disabled
+  test.skip('searchScreener', async () => {
+    const responsePromise = client.active.v1.screener.searchScreener({});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
 });

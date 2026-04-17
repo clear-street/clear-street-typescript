@@ -501,6 +501,11 @@ export interface OptionsContract {
   symbol: string;
 
   /**
+   * Open interest (number of outstanding contracts), if available
+   */
+  open_interest?: number | null;
+
+  /**
    * OEMS instrument ID of the underlying instrument, if resolvable
    */
   underlier_instrument_id?: string | null;
@@ -569,10 +574,6 @@ export interface InstrumentGetInstrumentsParams {
    */
   is_threshold_security?: boolean;
 
-  /**
-   * The number of items to return per page (only used when page_token is not
-   * provided)
-   */
   page_size?: number;
 
   /**

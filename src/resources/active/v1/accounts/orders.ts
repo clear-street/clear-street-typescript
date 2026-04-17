@@ -651,10 +651,6 @@ export interface OrderGetOrdersParams {
    */
   from?: string;
 
-  /**
-   * The number of items to return per page (only used when page_token is not
-   * provided)
-   */
   page_size?: number;
 
   /**
@@ -698,9 +694,9 @@ export interface OrderGetOrdersParams {
     | 'OTHER';
 
   /**
-   * Filter by order status
+   * Comma-separated order statuses to filter by
    */
-  status?:
+  status?: Array<
     | 'PENDING_NEW'
     | 'NEW'
     | 'PARTIALLY_FILLED'
@@ -715,7 +711,8 @@ export interface OrderGetOrdersParams {
     | 'STOPPED'
     | 'SUSPENDED'
     | 'CALCULATED'
-    | 'OTHER';
+    | 'OTHER'
+  >;
 
   /**
    * Filter by symbol

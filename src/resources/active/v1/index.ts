@@ -29,6 +29,7 @@ export {
   type AccountPatchAccountByIDParams,
 } from './accounts/index';
 export { Calendars } from './calendars/index';
+export { Clock, type ClockDetail, type ClockGetClockResponse } from './clock';
 export {
   Instruments,
   type AnalystRating,
@@ -48,7 +49,6 @@ export {
   type InstrumentGetInstrumentByIDParams,
   type InstrumentGetInstrumentsParams,
 } from './instruments/index';
-export { Iris } from './iris/index';
 export { MarketData } from './market-data/index';
 export {
   News,
@@ -61,42 +61,35 @@ export {
 } from './news';
 export {
   OmniAI,
-  type ActionButton,
-  type ButtonAction,
-  type CancelRunResponse,
-  type Capability,
-  type ChartKind,
-  type ChartPoint,
-  type ChartSeries,
-  type ContentPart,
-  type ContentPartChart,
-  type ContentPartSuggestedActions,
-  type ContentPartText,
-  type ContentPartThinking,
+  type CancelResponsePayload,
+  type ContentPartChartPayload,
+  type ContentPartCustomPayload,
+  type ContentPartStructuredActionPayload,
+  type ContentPartSuggestedActionsPayload,
+  type ContentPartTextPayload,
+  type ContentPartThinkingPayload,
   type CreateFeedbackResponse,
-  type DataChart,
-  type GetRunResponse,
-  type GetThreadResponse,
-  type ListMessagesResponse,
-  type ListThreadsResponse,
+  type CreateMessageResponse,
+  type CreateThreadResponse,
+  type ErrorStatus,
   type Message,
   type MessageContent,
+  type MessageContentPart,
+  type MessageList,
+  type MessageOutcome,
   type MessageRole,
-  type NavigateAction,
   type OpenChartAction,
-  type OpenChatWindowAction,
   type OpenScreenerAction,
   type OrderPayload,
   type OrderStrategyType,
   type PrefillOrderAction,
-  type PromptButtonAction,
-  type Run,
-  type RunStatus,
-  type StartRunResponse,
+  type Response,
+  type ResponseContent,
+  type ResponseContentPart,
+  type ResponseStatus,
   type StructuredAction,
-  type StructuredActionButtonAction,
-  type SymbolChart,
   type Thread,
+  type ThreadList,
 } from './omni-ai/index';
 export {
   SavedScreeners,
@@ -112,11 +105,20 @@ export {
 } from './saved-screeners';
 export {
   Screener,
+  type FieldLookback,
+  type FieldPeriod,
+  type FieldRef,
+  type FieldType,
+  type ScreenerColumn,
   type ScreenerFilter,
   type ScreenerItem,
   type ScreenerItemList,
+  type ScreenerRow,
+  type ScreenerRowList,
   type ScreenerGetScreenerResponse,
+  type ScreenerSearchScreenerResponse,
   type ScreenerGetScreenerParams,
+  type ScreenerSearchScreenerParams,
 } from './screener';
 export { V1, type APIDecimal64, type SecurityIDSource, type SecurityType } from './v1';
 export {

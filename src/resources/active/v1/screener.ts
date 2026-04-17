@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as ScreenerAPI from './screener';
 import * as Shared from '../../shared';
 import * as V1API from './v1';
 import * as InstrumentsAPI from './instruments/instruments';
@@ -26,6 +27,89 @@ export class Screener extends APIResource {
   ): APIPromise<ScreenerGetScreenerResponse> {
     return this._client.get('/active/v1/screener', { query, ...options });
   }
+
+  /**
+   * Returns a columnar response where each row is an array of column objects. Each
+   * column contains a human-readable name, a field reference, an optional type hint
+   * (e.g. `CURR_USD`, `PERCENT`), and the value.
+   *
+   * Use `field_filter` to select which columns appear in each row. When omitted, the
+   * default field set is returned.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.screener.searchScreener();
+   * ```
+   */
+  searchScreener(
+    body: ScreenerSearchScreenerParams,
+    options?: RequestOptions,
+  ): APIPromise<ScreenerSearchScreenerResponse> {
+    return this._client.post('/active/v1/screener', { body, ...options });
+  }
+}
+
+/**
+ * Historical lookback window for price/change fields.
+ */
+export type FieldLookback = 'ONE_WEEK' | 'ONE_MONTH' | 'THREE_MONTHS' | 'SIX_MONTHS' | 'YTD' | 'ONE_YEAR';
+
+/**
+ * Reporting period for financial data fields.
+ */
+export type FieldPeriod = 'QUARTER' | 'TTM';
+
+/**
+ * A reference to a screener field.
+ */
+export interface FieldRef {
+  /**
+   * The field name.
+   */
+  name: string;
+
+  /**
+   * Optional historical lookback window.
+   */
+  lookback?: FieldLookback | null;
+
+  /**
+   * Optional reporting period (e.g. quarter or TTM).
+   */
+  period?: FieldPeriod | null;
+
+  /**
+   * The data type of the field value. Present only in responses.
+   */
+  value_type?: FieldType | null;
+}
+
+/**
+ * The data type of a screener field value.
+ */
+export type FieldType = 'DECIMAL' | 'INTEGER' | 'STRING' | 'ANALYST_RATING' | 'DATE';
+
+/**
+ * A single column in the screener search response.
+ */
+export interface ScreenerColumn {
+  /**
+   * Field reference (same shape as filter/sort field references)
+   */
+  field: FieldRef;
+
+  /**
+   * Human-readable display name for this field
+   */
+  name: string;
+
+  value: number | string | null;
+
+  /**
+   * Value format hint: "CURR_USD", "PERCENT", etc. Omitted when not applicable.
+   */
+  type?: string | null;
 }
 
 /**
@@ -53,16 +137,6 @@ export interface ScreenerFilter {
  */
 export interface ScreenerItem {
   /**
-   * The count of buy analyst ratings
-   */
-  buy_ratings: number;
-
-  /**
-   * The count of hold analyst ratings
-   */
-  hold_ratings: number;
-
-  /**
    * The latest price for the instrument
    */
   price: string;
@@ -76,21 +150,6 @@ export interface ScreenerItem {
    * The source of the security identifier
    */
   security_id_source: V1API.SecurityIDSource;
-
-  /**
-   * The count of sell analyst ratings
-   */
-  sell_ratings: number;
-
-  /**
-   * The count of strong buy analyst ratings
-   */
-  strong_buy_ratings: number;
-
-  /**
-   * The count of strong sell analyst ratings
-   */
-  strong_sell_ratings: number;
 
   /**
    * The trading symbol for the instrument
@@ -108,16 +167,6 @@ export interface ScreenerItem {
   consensus_price_target?: string | null;
 
   /**
-   * The highest analyst price target
-   */
-  consensus_price_target_high?: string | null;
-
-  /**
-   * The lowest analyst price target
-   */
-  consensus_price_target_low?: string | null;
-
-  /**
    * The consensus analyst rating
    */
   consensus_rating?: InstrumentsAPI.AnalystRating | null;
@@ -128,9 +177,29 @@ export interface ScreenerItem {
   country_of_issue?: string | null;
 
   /**
+   * The TTM debt-to-equity ratio
+   */
+  debt_to_equity_ttm?: string | null;
+
+  /**
    * A detailed description of the instrument or company
    */
   description?: string | null;
+
+  /**
+   * The TTM dividend yield percent
+   */
+  dividend_yield_ttm?: string | null;
+
+  /**
+   * The TTM earnings per share
+   */
+  earnings_per_share_ttm?: string | null;
+
+  /**
+   * The MIC code of the primary listing exchange
+   */
+  exchange?: string | null;
 
   /**
    * The highest price over the last 52 weeks
@@ -233,6 +302,11 @@ export interface ScreenerItem {
   prev_day_close?: string | null;
 
   /**
+   * The TTM price-to-earnings ratio
+   */
+  price_to_earnings_ttm?: string | null;
+
+  /**
    * The business sector of the instrument's issuer
    */
   sector?: string | null;
@@ -273,31 +347,6 @@ export interface ScreenerItem {
   three_months_ago_open?: string | null;
 
   /**
-   * The TTM debt-to-equity ratio
-   */
-  ttm_debt_to_equity?: string | null;
-
-  /**
-   * The TTM dividend yield percent
-   */
-  ttm_dividend_yield?: string | null;
-
-  /**
-   * The TTM earnings per share
-   */
-  ttm_earnings_per_share?: string | null;
-
-  /**
-   * The TTM price-to-earnings ratio
-   */
-  ttm_price_to_earnings?: string | null;
-
-  /**
-   * The MIC code of the primary listing venue
-   */
-  venue?: string | null;
-
-  /**
    * The latest trading volume for the instrument
    */
   volume?: string | null;
@@ -320,8 +369,19 @@ export interface ScreenerItem {
 
 export type ScreenerItemList = Array<ScreenerItem>;
 
+/**
+ * A single row of screener columns for one instrument.
+ */
+export type ScreenerRow = Array<ScreenerColumn>;
+
+export type ScreenerRowList = Array<ScreenerRow>;
+
 export interface ScreenerGetScreenerResponse extends Shared.BaseResponse {
   data: ScreenerItemList;
+}
+
+export interface ScreenerSearchScreenerResponse extends Shared.BaseResponse {
+  data: ScreenerRowList;
 }
 
 export interface ScreenerGetScreenerParams {
@@ -336,14 +396,11 @@ export interface ScreenerGetScreenerParams {
    */
   filter?: { [key: string]: string };
 
-  /**
-   * Number of items to return per page (default: 100, max: 10000)
-   */
   page_size?: number;
 
   /**
-   * Token for retrieving the next page of results. Contains encoded pagination
-   * state.
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
    */
   page_token?: string;
 
@@ -358,12 +415,187 @@ export interface ScreenerGetScreenerParams {
   sort_direction?: 'ASC' | 'DESC';
 }
 
+export interface ScreenerSearchScreenerParams {
+  /**
+   * Subset of fields to include in the response.
+   */
+  field_filter?: Array<FieldRef> | null;
+
+  /**
+   * Filter conditions to apply.
+   */
+  filters?: Array<ScreenerSearchScreenerParams.Filter> | null;
+
+  /**
+   * Maximum number of results per page.
+   */
+  page_size?: number | null;
+
+  /**
+   * Opaque token for cursor-based pagination.
+   */
+  page_token?: string | null;
+
+  /**
+   * Field to sort results by.
+   */
+  sort_by?: FieldRef | null;
+
+  /**
+   * Whether string sorts should be case-sensitive (default: false).
+   */
+  sort_case_sensitive?: boolean | null;
+
+  /**
+   * Sort direction (defaults to DESC).
+   */
+  sort_direction?: 'ASC' | 'DESC';
+
+  /**
+   * Multi-field sort specifications. When present, takes precedence over
+   * sort_by/sort_direction.
+   */
+  sorts?: Array<ScreenerSearchScreenerParams.Sort> | null;
+}
+
+export namespace ScreenerSearchScreenerParams {
+  /**
+   * A single filter condition.
+   */
+  export interface Filter {
+    /**
+     * The field to filter on.
+     */
+    left: ScreenerAPI.FieldRef;
+
+    /**
+     * The operator and optional arguments.
+     */
+    op: Filter.Op;
+
+    /**
+     * The value(s) to compare against.
+     */
+    right: Array<Filter.Right>;
+  }
+
+  export namespace Filter {
+    /**
+     * The operator and optional arguments.
+     */
+    export interface Op {
+      /**
+       * The operator to apply.
+       */
+      name:
+        | 'LT'
+        | 'LTE'
+        | 'GT'
+        | 'GTE'
+        | 'EQ'
+        | 'BETWEEN'
+        | 'NOT_BETWEEN'
+        | 'ONE_OF'
+        | 'REGEX'
+        | 'BEGINS_WITH'
+        | 'ENDS_WITH'
+        | 'CONTAINS'
+        | 'IS_NULL'
+        | 'IS_NOT_NULL';
+
+      /**
+       * Optional arguments that modify operator behavior.
+       */
+      args?: Array<
+        'LEFT_INCLUSIVE' | 'RIGHT_INCLUSIVE' | 'LEFT_EXCLUSIVE' | 'RIGHT_EXCLUSIVE' | 'CASE_INSENSITIVE'
+      >;
+    }
+
+    /**
+     * A filter value: either a literal or a variable reference.
+     */
+    export interface Right {
+      value?: number | string | null;
+
+      /**
+       * A variable reference.
+       */
+      variable?: Right.Variable | null;
+    }
+
+    export namespace Right {
+      /**
+       * A variable reference.
+       */
+      export interface Variable {
+        /**
+         * The variable name.
+         */
+        name: string;
+
+        /**
+         * Optional historical lookback window.
+         */
+        lookback?: ScreenerAPI.FieldLookback | null;
+
+        /**
+         * Optional arithmetic modifier.
+         */
+        modifier?: Variable.Modifier | null;
+
+        /**
+         * Optional reporting period.
+         */
+        period?: ScreenerAPI.FieldPeriod | null;
+      }
+
+      export namespace Variable {
+        /**
+         * Optional arithmetic modifier.
+         */
+        export interface Modifier {
+          args: Array<number | string>;
+
+          /**
+           * The modifier operation.
+           */
+          name: 'ADD' | 'SUB';
+        }
+      }
+    }
+  }
+
+  /**
+   * A sort specification pairing a field with a direction.
+   */
+  export interface Sort {
+    /**
+     * The field to sort by.
+     */
+    field: ScreenerAPI.FieldRef;
+
+    /**
+     * Sort direction (defaults to DESC).
+     */
+    direction?: 'ASC' | 'DESC';
+  }
+}
+
 export declare namespace Screener {
   export {
+    type FieldLookback as FieldLookback,
+    type FieldPeriod as FieldPeriod,
+    type FieldRef as FieldRef,
+    type FieldType as FieldType,
+    type ScreenerColumn as ScreenerColumn,
     type ScreenerFilter as ScreenerFilter,
     type ScreenerItem as ScreenerItem,
     type ScreenerItemList as ScreenerItemList,
+    type ScreenerRow as ScreenerRow,
+    type ScreenerRowList as ScreenerRowList,
     type ScreenerGetScreenerResponse as ScreenerGetScreenerResponse,
+    type ScreenerSearchScreenerResponse as ScreenerSearchScreenerResponse,
     type ScreenerGetScreenerParams as ScreenerGetScreenerParams,
+    type ScreenerSearchScreenerParams as ScreenerSearchScreenerParams,
   };
 }

@@ -146,10 +146,6 @@ export interface NewsGetNewsParams {
    */
   news_type?: 'NEWS' | 'PRESS_RELEASE';
 
-  /**
-   * The number of items to return per page (only used when page_token is not
-   * provided)
-   */
   page_size?: number;
 
   /**

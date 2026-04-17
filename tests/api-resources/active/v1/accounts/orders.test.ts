@@ -97,7 +97,7 @@ describe('resource orders', () => {
           security_id: ['string'],
           security_id_source: ['string'],
           security_type: 'COMMON_STOCK',
-          status: 'PENDING_NEW',
+          status: ['PENDING_NEW'],
           symbol: 'symbol',
           to: '2019-12-27T18:11:19.117Z',
         },

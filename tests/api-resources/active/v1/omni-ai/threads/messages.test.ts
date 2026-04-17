@@ -9,10 +9,37 @@ const client = new ClearStreet({
 
 describe('resource messages', () => {
   // Mock server tests are disabled
+  test.skip('createMessage: only required params', async () => {
+    const responsePromise = client.active.v1.omniAI.threads.messages.createMessage(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 19816, text: 'Compare that to AMD.' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('createMessage: required and optional params', async () => {
+    const response = await client.active.v1.omniAI.threads.messages.createMessage(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: 19816,
+        text: 'Compare that to AMD.',
+        capabilities: ['PREFILL_ORDER'],
+      },
+    );
+  });
+
+  // Mock server tests are disabled
   test.skip('listMessages: only required params', async () => {
     const responsePromise = client.active.v1.omniAI.threads.messages.listMessages(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id' },
+      { account_id: 0 },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,10 +55,9 @@ describe('resource messages', () => {
     const response = await client.active.v1.omniAI.threads.messages.listMessages(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
-        account_id: 'account_id',
-        after_seq: 0,
-        page_size: 0,
-        page_token: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        account_id: 0,
+        page_size: 1,
+        page_token: 'U3RhaW5sZXNzIHJvY2tz',
       },
     );
   });
