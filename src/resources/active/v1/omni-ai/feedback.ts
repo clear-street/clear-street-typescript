@@ -11,6 +11,8 @@ import { RequestOptions } from '../../../../internal/request-options';
  */
 export class Feedback extends APIResource {
   /**
+   * Create feedback on a message.
+   *
    * Submit user feedback (thumbs up/down, rating, comment) for an assistant message.
    *
    * @example

@@ -23,7 +23,7 @@ export class Watchlists extends APIResource {
   items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
 
   /**
-   * Create a new watchlist
+   * Create Watchlist
    *
    * @example
    * ```ts

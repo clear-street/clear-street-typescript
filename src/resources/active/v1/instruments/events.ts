@@ -13,6 +13,8 @@ import { path } from '../../../../internal/utils/path';
  */
 export class Events extends APIResource {
   /**
+   * List instrument events across all securities.
+   *
    * Retrieves all instrument events grouped by date.
    *
    * @example

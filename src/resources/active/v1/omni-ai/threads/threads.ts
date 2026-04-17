@@ -36,6 +36,8 @@ export class Threads extends APIResource {
   }
 
   /**
+   * List conversation threads.
+   *
    * Retrieves threads for the authenticated user.
    *
    * @example

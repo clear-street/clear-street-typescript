@@ -13,6 +13,8 @@ import { path } from '../../../../internal/utils/path';
  */
 export class Positions extends APIResource {
   /**
+   * Delete a position within an account for an instrument.
+   *
    * Retrieves all positions for the specified trading account.
    *
    * @example
@@ -37,6 +39,8 @@ export class Positions extends APIResource {
   }
 
   /**
+   * Delete all positions within an account.
+   *
    * Closes all positions for the specified trading account.
    *
    * @example
