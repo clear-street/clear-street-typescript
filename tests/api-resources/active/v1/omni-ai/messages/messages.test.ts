@@ -9,10 +9,10 @@ const client = new ClearStreet({
 
 describe('resource messages', () => {
   // Mock server tests are disabled
-  test.skip('listMessagesDeprecated: only required params', async () => {
-    const responsePromise = client.active.v1.iris.threads.messages.listMessagesDeprecated(
+  test.skip('getMessage: only required params', async () => {
+    const responsePromise = client.active.v1.omniAI.messages.getMessage(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id' },
+      { account_id: 0 },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,15 +24,10 @@ describe('resource messages', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listMessagesDeprecated: required and optional params', async () => {
-    const response = await client.active.v1.iris.threads.messages.listMessagesDeprecated(
+  test.skip('getMessage: required and optional params', async () => {
+    const response = await client.active.v1.omniAI.messages.getMessage(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        account_id: 'account_id',
-        after_seq: 0,
-        page_size: 0,
-        page_token: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      },
+      { account_id: 0 },
     );
   });
 });
