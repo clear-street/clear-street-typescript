@@ -131,7 +131,12 @@ export {
   type ScreenerSearchScreenerParams,
 } from './screener';
 export { V1, type APIDecimal64, type SecurityIDSource, type SecurityType } from './v1';
-export { VersionResource, type Version, type VersionGetVersionResponse } from './version';
+export {
+  VersionResource,
+  type Version,
+  type VersionGetVersionResponse,
+  type VersionUpdateVersionResponse,
+} from './version';
 export {
   Watchlists,
   type WatchlistDetail,
