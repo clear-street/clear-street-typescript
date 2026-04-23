@@ -68,19 +68,6 @@ import {
   PositionType,
   Positions,
 } from './positions';
-import * as LocatesAPI from './locates/locates';
-import {
-  LocateCreateLocateRequestParams,
-  LocateCreateLocateRequestResponse,
-  LocateGetLocateRequestsParams,
-  LocateGetLocateRequestsResponse,
-  LocateOrder,
-  LocateOrderList,
-  LocateOrderStatus,
-  LocateUpdateLocateRequestParams,
-  LocateUpdateLocateRequestResponse,
-  Locates,
-} from './locates/locates';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -90,7 +77,6 @@ import { path } from '../../../../internal/utils/path';
  */
 export class Accounts extends APIResource {
   balances: BalancesAPI.Balances = new BalancesAPI.Balances(this._client);
-  locates: LocatesAPI.Locates = new LocatesAPI.Locates(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
   portfolioHistory: PortfolioHistoryAPI.PortfolioHistory = new PortfolioHistoryAPI.PortfolioHistory(
     this._client,
@@ -290,7 +276,6 @@ export interface AccountPatchAccountByIDParams {
 }
 
 Accounts.Balances = Balances;
-Accounts.Locates = Locates;
 Accounts.Orders = Orders;
 Accounts.PortfolioHistory = PortfolioHistory;
 Accounts.Positions = Positions;
@@ -321,19 +306,6 @@ export declare namespace Accounts {
     type MarginType as MarginType,
     type BalanceGetAccountBalancesResponse as BalanceGetAccountBalancesResponse,
     type BalanceGetAccountBalancesParams as BalanceGetAccountBalancesParams,
-  };
-
-  export {
-    Locates as Locates,
-    type LocateOrder as LocateOrder,
-    type LocateOrderList as LocateOrderList,
-    type LocateOrderStatus as LocateOrderStatus,
-    type LocateCreateLocateRequestResponse as LocateCreateLocateRequestResponse,
-    type LocateGetLocateRequestsResponse as LocateGetLocateRequestsResponse,
-    type LocateUpdateLocateRequestResponse as LocateUpdateLocateRequestResponse,
-    type LocateCreateLocateRequestParams as LocateCreateLocateRequestParams,
-    type LocateGetLocateRequestsParams as LocateGetLocateRequestsParams,
-    type LocateUpdateLocateRequestParams as LocateUpdateLocateRequestParams,
   };
 
   export {

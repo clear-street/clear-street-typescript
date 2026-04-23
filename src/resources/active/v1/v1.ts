@@ -59,7 +59,7 @@ import {
   ScreenerSearchScreenerResponse,
 } from './screener';
 import * as VersionAPI from './version';
-import { Version, VersionGetVersionResponse, VersionResource, VersionUpdateVersionResponse } from './version';
+import { Version, VersionGetVersionResponse, VersionResource } from './version';
 import * as WsAPI from './ws';
 import { Ws } from './ws';
 import * as AccountsAPI from './accounts/accounts';
@@ -405,7 +405,6 @@ export declare namespace V1 {
     VersionResource as VersionResource,
     type Version as Version,
     type VersionGetVersionResponse as VersionGetVersionResponse,
-    type VersionUpdateVersionResponse as VersionUpdateVersionResponse,
   };
 
   export {

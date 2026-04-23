@@ -28,22 +28,6 @@ import {
   InstrumentEventsData,
   InstrumentSplitEvent,
 } from './events';
-import * as ReportingAPI from './reporting';
-import {
-  Reporting,
-  ReportingGetInstrumentReportingParams,
-  ReportingGetInstrumentReportingResponse,
-} from './reporting';
-import * as VenuesAPI from './venues';
-import {
-  DisplayType,
-  GtdAccepts,
-  Venue,
-  VenueGetVenuesResponse,
-  VenueList,
-  VenueSession,
-  Venues,
-} from './venues';
 import * as OptionsAPI from './options/options';
 import { Options } from './options/options';
 import { APIPromise } from '../../../../core/api-promise';
@@ -59,8 +43,6 @@ export class Instruments extends APIResource {
   );
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
   options: OptionsAPI.Options = new OptionsAPI.Options(this._client);
-  reporting: ReportingAPI.Reporting = new ReportingAPI.Reporting(this._client);
-  venues: VenuesAPI.Venues = new VenuesAPI.Venues(this._client);
 
   /**
    * Retrieves detailed information for a specific instrument.
@@ -620,8 +602,6 @@ export interface InstrumentGetInstrumentsParams {
 Instruments.AnalystReporting = AnalystReporting;
 Instruments.Events = Events;
 Instruments.Options = Options;
-Instruments.Reporting = Reporting;
-Instruments.Venues = Venues;
 
 export declare namespace Instruments {
   export {
@@ -669,20 +649,4 @@ export declare namespace Instruments {
   };
 
   export { Options as Options };
-
-  export {
-    Reporting as Reporting,
-    type ReportingGetInstrumentReportingResponse as ReportingGetInstrumentReportingResponse,
-    type ReportingGetInstrumentReportingParams as ReportingGetInstrumentReportingParams,
-  };
-
-  export {
-    Venues as Venues,
-    type DisplayType as DisplayType,
-    type GtdAccepts as GtdAccepts,
-    type Venue as Venue,
-    type VenueList as VenueList,
-    type VenueSession as VenueSession,
-    type VenueGetVenuesResponse as VenueGetVenuesResponse,
-  };
 }
