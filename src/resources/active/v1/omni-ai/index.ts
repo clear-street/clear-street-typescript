@@ -1,9 +1,30 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export {
+  EntitlementAgreements,
+  type EntitlementAgreementResource,
+  type EntitlementAgreementResourceList,
+  type EntitlementAgreementListEntitlementAgreementsResponse,
+} from './entitlement-agreements';
+export {
+  Entitlements,
+  type DeleteEntitlementResponse,
+  type EntitlementResource,
+  type EntitlementResourceList,
+  type EntitlementCreateEntitlementsResponse,
+  type EntitlementDeleteEntitlementResponse,
+  type EntitlementListEntitlementsResponse,
+  type EntitlementCreateEntitlementsParams,
+  type EntitlementListEntitlementsParams,
+} from './entitlements';
 export { Messages, type MessageGetMessageResponse, type MessageGetMessageParams } from './messages/index';
 export {
   OmniAI,
+  type ActionButton,
   type CancelResponsePayload,
+  type ChartPayload,
+  type ChartPoint,
+  type ChartSeries,
   type ContentPartChartPayload,
   type ContentPartCustomPayload,
   type ContentPartStructuredActionPayload,
@@ -13,6 +34,7 @@ export {
   type CreateFeedbackResponse,
   type CreateMessageResponse,
   type CreateThreadResponse,
+  type DataChart,
   type ErrorStatus,
   type Message,
   type MessageContent,
@@ -21,15 +43,20 @@ export {
   type MessageOutcome,
   type MessageRole,
   type OpenChartAction,
+  type OpenEntitlementConsentAction,
   type OpenScreenerAction,
   type OrderPayload,
   type OrderStrategyType,
   type PrefillOrderAction,
+  type PromptButtonAction,
   type Response,
   type ResponseContent,
   type ResponseContentPart,
   type ResponseStatus,
   type StructuredAction,
+  type StructuredActionButtonAction,
+  type SuggestedActionsPayload,
+  type SymbolChart,
   type Thread,
   type ThreadList,
 } from './omni-ai';

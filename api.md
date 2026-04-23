@@ -403,7 +403,11 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ActionButton</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CancelResponsePayload</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ChartPayload</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ChartPoint</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ChartSeries</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartChartPayload</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartCustomPayload</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ContentPartStructuredActionPayload</a></code>
@@ -413,6 +417,7 @@ Types:
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CreateFeedbackResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CreateMessageResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">CreateThreadResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">DataChart</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ErrorStatus</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Message</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">MessageContent</a></code>
@@ -421,17 +426,51 @@ Types:
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">MessageOutcome</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">MessageRole</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OpenChartAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OpenEntitlementConsentAction</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OpenScreenerAction</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OrderPayload</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OrderStrategyType</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PrefillOrderAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PromptButtonAction</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Response</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ResponseContent</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ResponseContentPart</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ResponseStatus</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">StructuredAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">StructuredActionButtonAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">SuggestedActionsPayload</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">SymbolChart</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Thread</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ThreadList</a></code>
+
+#### EntitlementAgreements
+
+Types:
+
+- <code><a href="./src/resources/active/v1/omni-ai/entitlement-agreements.ts">EntitlementAgreementResource</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/entitlement-agreements.ts">EntitlementAgreementResourceList</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/entitlement-agreements.ts">EntitlementAgreementListEntitlementAgreementsResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/omni-ai/entitlement-agreements">client.active.v1.omniAI.entitlementAgreements.<a href="./src/resources/active/v1/omni-ai/entitlement-agreements.ts">listEntitlementAgreements</a>() -> EntitlementAgreementListEntitlementAgreementsResponse</code>
+
+#### Entitlements
+
+Types:
+
+- <code><a href="./src/resources/active/v1/omni-ai/entitlements.ts">DeleteEntitlementResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/entitlements.ts">EntitlementResource</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/entitlements.ts">EntitlementResourceList</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/entitlements.ts">EntitlementCreateEntitlementsResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/entitlements.ts">EntitlementDeleteEntitlementResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/entitlements.ts">EntitlementListEntitlementsResponse</a></code>
+
+Methods:
+
+- <code title="post /active/v1/omni-ai/entitlements">client.active.v1.omniAI.entitlements.<a href="./src/resources/active/v1/omni-ai/entitlements.ts">createEntitlements</a>({ ...params }) -> EntitlementCreateEntitlementsResponse</code>
+- <code title="delete /active/v1/omni-ai/entitlements/{entitlement_id}">client.active.v1.omniAI.entitlements.<a href="./src/resources/active/v1/omni-ai/entitlements.ts">deleteEntitlement</a>(entitlementID) -> EntitlementDeleteEntitlementResponse</code>
+- <code title="get /active/v1/omni-ai/entitlements">client.active.v1.omniAI.entitlements.<a href="./src/resources/active/v1/omni-ai/entitlements.ts">listEntitlements</a>({ ...params }) -> EntitlementListEntitlementsResponse</code>
 
 #### Messages
 
