@@ -5,6 +5,25 @@ import * as OmniAIAPI from './omni-ai';
 import * as ScreenerAPI from '../screener';
 import * as V1API from '../v1';
 import * as OrdersAPI from '../accounts/orders';
+import * as EntitlementAgreementsAPI from './entitlement-agreements';
+import {
+  EntitlementAgreementListEntitlementAgreementsResponse,
+  EntitlementAgreementResource,
+  EntitlementAgreementResourceList,
+  EntitlementAgreements,
+} from './entitlement-agreements';
+import * as EntitlementsAPI from './entitlements';
+import {
+  DeleteEntitlementResponse,
+  EntitlementCreateEntitlementsParams,
+  EntitlementCreateEntitlementsResponse,
+  EntitlementDeleteEntitlementResponse,
+  EntitlementListEntitlementsParams,
+  EntitlementListEntitlementsResponse,
+  EntitlementResource,
+  EntitlementResourceList,
+  Entitlements,
+} from './entitlements';
 import * as ResponsesAPI from './responses';
 import {
   ResponseCancelResponseParams,
@@ -27,9 +46,37 @@ import {
 } from './threads/threads';
 
 export class OmniAI extends APIResource {
+  entitlementAgreements: EntitlementAgreementsAPI.EntitlementAgreements =
+    new EntitlementAgreementsAPI.EntitlementAgreements(this._client);
+  entitlements: EntitlementsAPI.Entitlements = new EntitlementsAPI.Entitlements(this._client);
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
   responses: ResponsesAPI.Responses = new ResponsesAPI.Responses(this._client);
   threads: ThreadsAPI.Threads = new ThreadsAPI.Threads(this._client);
+}
+
+/**
+ * Button metadata shared by chart and suggested-actions payloads.
+ */
+export interface ActionButton {
+  /**
+   * Stable button identifier within the content part.
+   */
+  buttonId: string;
+
+  /**
+   * User-visible label.
+   */
+  label: string;
+
+  /**
+   * Follow-up prompt to submit as the next user message.
+   */
+  prompt?: PromptButtonAction | null;
+
+  /**
+   * Structured action in the same message to execute on click.
+   */
+  structuredAction?: StructuredActionButtonAction | null;
 }
 
 export interface CancelResponsePayload {
@@ -37,10 +84,56 @@ export interface CancelResponsePayload {
 }
 
 /**
+ * Typed chart payload rendered inline in assistant content.
+ */
+export interface ChartPayload {
+  /**
+   * Stable chart identifier scoped to the content part.
+   */
+  chartId: string;
+
+  /**
+   * Buttons associated with this chart.
+   */
+  actionButtons?: Array<ActionButton>;
+
+  /**
+   * Explicit series-driven chart definition.
+   */
+  dataChart?: DataChart | null;
+
+  /**
+   * Symbol-driven chart definition.
+   */
+  symbolChart?: SymbolChart | null;
+}
+
+/**
+ * Single chart coordinate.
+ */
+export interface ChartPoint {
+  x: string;
+
+  y: number;
+}
+
+/**
+ * Named data series within a chart.
+ */
+export interface ChartSeries {
+  name: string;
+
+  points?: Array<ChartPoint>;
+}
+
+/**
  * Chart payload content part.
  */
 export interface ContentPartChartPayload {
-  payload: unknown;
+  /**
+   * Typed chart payload rendered inline in assistant content.
+   */
+  payload: ChartPayload;
 }
 
 /**
@@ -69,7 +162,10 @@ export interface ContentPartStructuredActionPayload {
  * Suggested actions payload content part.
  */
 export interface ContentPartSuggestedActionsPayload {
-  payload: unknown;
+  /**
+   * Suggested follow-up buttons rendered at the end of an assistant message.
+   */
+  payload: SuggestedActionsPayload;
 }
 
 /**
@@ -112,6 +208,13 @@ export interface CreateThreadResponse {
   thread_id: string;
 
   user_message_id: string;
+}
+
+/**
+ * Chart represented by explicit data series.
+ */
+export interface DataChart {
+  series?: Array<ChartSeries>;
 }
 
 /**
@@ -245,6 +348,19 @@ export interface OpenChartAction {
 }
 
 /**
+ * Action to open entitlement consent flow for one or more accounts.
+ */
+export interface OpenEntitlementConsentAction {
+  agreement_key: string;
+
+  reason: string;
+
+  requested_entitlement_codes: Array<string>;
+
+  trading_account_ids: Array<number>;
+}
+
+/**
  * Action to open a stock screener with filters.
  */
 export interface OpenScreenerAction {
@@ -355,6 +471,16 @@ export interface PrefillOrderAction {
 }
 
 /**
+ * Prompt-style button behavior.
+ */
+export interface PromptButtonAction {
+  /**
+   * Prompt text to submit as the next user turn.
+   */
+  prompt: string;
+}
+
+/**
  * Dynamic pollable response.
  */
 export interface Response {
@@ -458,7 +584,8 @@ export type ResponseStatus = 'queued' | 'running' | 'succeeded' | 'failed' | 'ca
 export type StructuredAction =
   | StructuredAction.PrefillOrder
   | StructuredAction.OpenChart
-  | StructuredAction.OpenScreener;
+  | StructuredAction.OpenScreener
+  | StructuredAction.OpenEntitlementConsent;
 
 export namespace StructuredAction {
   /**
@@ -481,6 +608,42 @@ export namespace StructuredAction {
   export interface OpenScreener extends OmniAIAPI.OpenScreenerAction {
     action_type: 'open_screener';
   }
+
+  /**
+   * Open entitlement consent flow
+   */
+  export interface OpenEntitlementConsent extends OmniAIAPI.OpenEntitlementConsentAction {
+    action_type: 'open_entitlement_consent';
+  }
+}
+
+/**
+ * Structured-action button behavior.
+ */
+export interface StructuredActionButtonAction {
+  /**
+   * UUID of a `structured_action` content part in the same message.
+   */
+  actionId?: string | null;
+}
+
+/**
+ * Suggested follow-up buttons rendered at the end of an assistant message.
+ */
+export interface SuggestedActionsPayload {
+  /**
+   * Ordered message-level buttons.
+   */
+  actionButtons?: Array<ActionButton>;
+}
+
+/**
+ * Chart for a single symbol and timeframe.
+ */
+export interface SymbolChart {
+  symbol: string;
+
+  timeframe?: string | null;
 }
 
 /**
@@ -500,13 +663,19 @@ export interface Thread {
 
 export type ThreadList = Array<Thread>;
 
+OmniAI.EntitlementAgreements = EntitlementAgreements;
+OmniAI.Entitlements = Entitlements;
 OmniAI.Messages = Messages;
 OmniAI.Responses = Responses;
 OmniAI.Threads = Threads;
 
 export declare namespace OmniAI {
   export {
+    type ActionButton as ActionButton,
     type CancelResponsePayload as CancelResponsePayload,
+    type ChartPayload as ChartPayload,
+    type ChartPoint as ChartPoint,
+    type ChartSeries as ChartSeries,
     type ContentPartChartPayload as ContentPartChartPayload,
     type ContentPartCustomPayload as ContentPartCustomPayload,
     type ContentPartStructuredActionPayload as ContentPartStructuredActionPayload,
@@ -516,6 +685,7 @@ export declare namespace OmniAI {
     type CreateFeedbackResponse as CreateFeedbackResponse,
     type CreateMessageResponse as CreateMessageResponse,
     type CreateThreadResponse as CreateThreadResponse,
+    type DataChart as DataChart,
     type ErrorStatus as ErrorStatus,
     type Message as Message,
     type MessageContent as MessageContent,
@@ -524,17 +694,41 @@ export declare namespace OmniAI {
     type MessageOutcome as MessageOutcome,
     type MessageRole as MessageRole,
     type OpenChartAction as OpenChartAction,
+    type OpenEntitlementConsentAction as OpenEntitlementConsentAction,
     type OpenScreenerAction as OpenScreenerAction,
     type OrderPayload as OrderPayload,
     type OrderStrategyType as OrderStrategyType,
     type PrefillOrderAction as PrefillOrderAction,
+    type PromptButtonAction as PromptButtonAction,
     type Response as Response,
     type ResponseContent as ResponseContent,
     type ResponseContentPart as ResponseContentPart,
     type ResponseStatus as ResponseStatus,
     type StructuredAction as StructuredAction,
+    type StructuredActionButtonAction as StructuredActionButtonAction,
+    type SuggestedActionsPayload as SuggestedActionsPayload,
+    type SymbolChart as SymbolChart,
     type Thread as Thread,
     type ThreadList as ThreadList,
+  };
+
+  export {
+    EntitlementAgreements as EntitlementAgreements,
+    type EntitlementAgreementResource as EntitlementAgreementResource,
+    type EntitlementAgreementResourceList as EntitlementAgreementResourceList,
+    type EntitlementAgreementListEntitlementAgreementsResponse as EntitlementAgreementListEntitlementAgreementsResponse,
+  };
+
+  export {
+    Entitlements as Entitlements,
+    type DeleteEntitlementResponse as DeleteEntitlementResponse,
+    type EntitlementResource as EntitlementResource,
+    type EntitlementResourceList as EntitlementResourceList,
+    type EntitlementCreateEntitlementsResponse as EntitlementCreateEntitlementsResponse,
+    type EntitlementDeleteEntitlementResponse as EntitlementDeleteEntitlementResponse,
+    type EntitlementListEntitlementsResponse as EntitlementListEntitlementsResponse,
+    type EntitlementCreateEntitlementsParams as EntitlementCreateEntitlementsParams,
+    type EntitlementListEntitlementsParams as EntitlementListEntitlementsParams,
   };
 
   export {

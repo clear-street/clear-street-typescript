@@ -18,7 +18,7 @@ import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
 /**
- * Thread-centric AI assistant for conversational trading. Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+ * Thread-centric AI assistant for conversational trading. Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
  */
 export class Threads extends APIResource {
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
@@ -126,7 +126,7 @@ export interface ThreadCreateThreadParams {
    */
   type: 'instant' | 'deep_insights';
 
-  capabilities?: Array<'PREFILL_ORDER' | 'OPEN_CHART' | 'OPEN_SCREENER'>;
+  capabilities?: Array<'PREFILL_ORDER' | 'OPEN_CHART' | 'OPEN_SCREENER' | 'OPEN_ENTITLEMENT_CONSENT'>;
 
   /**
    * Deep-insights target payload.
