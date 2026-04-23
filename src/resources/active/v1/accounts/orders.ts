@@ -216,7 +216,7 @@ export interface DmaStrategy {
  */
 export interface Order {
   /**
-   * Client-provided unique identifier for this order
+   * Engine-assigned unique identifier for this order (UUID).
    */
   id: string;
 
@@ -224,6 +224,11 @@ export interface Order {
    * Account placing the order
    */
   account_id: number;
+
+  /**
+   * Client-provided identifier echoed back (FIX tag 11).
+   */
+  client_order_id: string;
 
   /**
    * Timestamp when order was created (UTC)
