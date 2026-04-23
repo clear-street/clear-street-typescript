@@ -27,18 +27,6 @@ export {
   type BalanceGetAccountBalancesParams,
 } from './balances';
 export {
-  Locates,
-  type LocateOrder,
-  type LocateOrderList,
-  type LocateOrderStatus,
-  type LocateCreateLocateRequestResponse,
-  type LocateGetLocateRequestsResponse,
-  type LocateUpdateLocateRequestResponse,
-  type LocateCreateLocateRequestParams,
-  type LocateGetLocateRequestsParams,
-  type LocateUpdateLocateRequestParams,
-} from './locates/index';
-export {
   Orders,
   type ApStrategy,
   type BaseStrategyParams,

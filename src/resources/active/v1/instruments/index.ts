@@ -43,17 +43,3 @@ export {
   type InstrumentGetInstrumentsParams,
 } from './instruments';
 export { Options } from './options/index';
-export {
-  Reporting,
-  type ReportingGetInstrumentReportingResponse,
-  type ReportingGetInstrumentReportingParams,
-} from './reporting';
-export {
-  Venues,
-  type DisplayType,
-  type GtdAccepts,
-  type Venue,
-  type VenueList,
-  type VenueSession,
-  type VenueGetVenuesResponse,
-} from './venues';
