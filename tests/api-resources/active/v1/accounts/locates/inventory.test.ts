@@ -7,10 +7,12 @@ const client = new ClearStreet({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource version', () => {
+describe('resource inventory', () => {
   // Mock server tests are disabled
-  test.skip('getVersion', async () => {
-    const responsePromise = client.active.v1.version.getVersion();
+  test.skip('getLocateInventory: only required params', async () => {
+    const responsePromise = client.active.v1.accounts.locates.inventory.getLocateInventory(0, {
+      symbol: 'symbol',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,14 +23,9 @@ describe('resource version', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('updateVersion', async () => {
-    const responsePromise = client.active.v1.version.updateVersion();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
+  test.skip('getLocateInventory: required and optional params', async () => {
+    const response = await client.active.v1.accounts.locates.inventory.getLocateInventory(0, {
+      symbol: 'symbol',
+    });
   });
 });

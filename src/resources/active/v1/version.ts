@@ -21,6 +21,19 @@ export class VersionResource extends APIResource {
   getVersion(options?: RequestOptions): APIPromise<VersionGetVersionResponse> {
     return this._client.get('/active/v1/version', options);
   }
+
+  /**
+   * Allows clients to set their preferred API version.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.version.updateVersion();
+   * ```
+   */
+  updateVersion(options?: RequestOptions): APIPromise<VersionUpdateVersionResponse> {
+    return this._client.patch('/active/v1/version', options);
+  }
 }
 
 /**
@@ -40,6 +53,17 @@ export interface VersionGetVersionResponse extends Shared.BaseResponse {
   data: Version;
 }
 
+export interface VersionUpdateVersionResponse extends Shared.BaseResponse {
+  /**
+   * API version information
+   */
+  data: Version;
+}
+
 export declare namespace VersionResource {
-  export { type Version as Version, type VersionGetVersionResponse as VersionGetVersionResponse };
+  export {
+    type Version as Version,
+    type VersionGetVersionResponse as VersionGetVersionResponse,
+    type VersionUpdateVersionResponse as VersionUpdateVersionResponse,
+  };
 }

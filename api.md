@@ -53,6 +53,35 @@ Methods:
 
 - <code title="get /active/v1/accounts/{account_id}/balances">client.active.v1.accounts.balances.<a href="./src/resources/active/v1/accounts/balances.ts">getAccountBalances</a>(accountID, { ...params }) -> BalanceGetAccountBalancesResponse</code>
 
+#### Locates
+
+Types:
+
+- <code><a href="./src/resources/active/v1/accounts/locates/locates.ts">LocateOrder</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/locates.ts">LocateOrderList</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/locates.ts">LocateOrderStatus</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/locates.ts">LocateCreateLocateRequestResponse</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/locates.ts">LocateGetLocateRequestsResponse</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/locates.ts">LocateUpdateLocateRequestResponse</a></code>
+
+Methods:
+
+- <code title="post /active/v1/accounts/{account_id}/locates">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates/locates.ts">createLocateRequest</a>(accountID, [ ...body ]) -> LocateCreateLocateRequestResponse</code>
+- <code title="get /active/v1/accounts/{account_id}/locates">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates/locates.ts">getLocateRequests</a>(accountID, { ...params }) -> LocateGetLocateRequestsResponse</code>
+- <code title="patch /active/v1/accounts/{account_id}/locates">client.active.v1.accounts.locates.<a href="./src/resources/active/v1/accounts/locates/locates.ts">updateLocateRequest</a>(accountID, { ...params }) -> LocateUpdateLocateRequestResponse</code>
+
+##### Inventory
+
+Types:
+
+- <code><a href="./src/resources/active/v1/accounts/locates/inventory.ts">LocateInventoryItem</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/inventory.ts">LocateInventoryItemList</a></code>
+- <code><a href="./src/resources/active/v1/accounts/locates/inventory.ts">InventoryGetLocateInventoryResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/accounts/{account_id}/locates/inventory">client.active.v1.accounts.locates.inventory.<a href="./src/resources/active/v1/accounts/locates/inventory.ts">getLocateInventory</a>(accountID, { ...params }) -> InventoryGetLocateInventoryResponse</code>
+
 #### Orders
 
 Types:
@@ -142,6 +171,44 @@ Methods:
 
 ### Calendars
 
+#### Dividends
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendCalendarEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendCalendarEventList</a></code>
+- <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendFrequency</a></code>
+- <code><a href="./src/resources/active/v1/calendars/dividends.ts">DividendGetDividendsCalendarResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/dividends">client.active.v1.calendars.dividends.<a href="./src/resources/active/v1/calendars/dividends.ts">getDividendsCalendar</a>({ ...params }) -> DividendGetDividendsCalendarResponse</code>
+
+#### Earnings
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/earnings.ts">EarningsCalendarEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/earnings.ts">EarningsCalendarEventList</a></code>
+- <code><a href="./src/resources/active/v1/calendars/earnings.ts">EarningGetEarningsCalendarResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/earnings">client.active.v1.calendars.earnings.<a href="./src/resources/active/v1/calendars/earnings.ts">getEarningsCalendar</a>({ ...params }) -> EarningGetEarningsCalendarResponse</code>
+
+#### Economic
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicCalendarEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicCalendarEventList</a></code>
+- <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicEventImpact</a></code>
+- <code><a href="./src/resources/active/v1/calendars/economic.ts">EconomicGetEconomicCalendarResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/economic">client.active.v1.calendars.economic.<a href="./src/resources/active/v1/calendars/economic.ts">getEconomicCalendar</a>({ ...params }) -> EconomicGetEconomicCalendarResponse</code>
+
 #### MarketHours
 
 Types:
@@ -159,6 +226,42 @@ Types:
 Methods:
 
 - <code title="get /active/v1/calendars/market-hours">client.active.v1.calendars.marketHours.<a href="./src/resources/active/v1/calendars/market-hours.ts">getMarketHoursCalendar</a>({ ...params }) -> MarketHourGetMarketHoursCalendarResponse</code>
+
+#### MergersAcquisitions
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/mergers-acquisitions.ts">MergersAcquisitionsEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/mergers-acquisitions.ts">MergersAcquisitionsEventList</a></code>
+- <code><a href="./src/resources/active/v1/calendars/mergers-acquisitions.ts">MergersAcquisitionGetMergersAndAcquisitionsCalendarResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/mergers-acquisitions">client.active.v1.calendars.mergersAcquisitions.<a href="./src/resources/active/v1/calendars/mergers-acquisitions.ts">getMergersAndAcquisitionsCalendar</a>({ ...params }) -> MergersAcquisitionGetMergersAndAcquisitionsCalendarResponse</code>
+
+#### Splits
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/splits.ts">StockSplitEvent</a></code>
+- <code><a href="./src/resources/active/v1/calendars/splits.ts">StockSplitEventList</a></code>
+- <code><a href="./src/resources/active/v1/calendars/splits.ts">SplitGetSplitsCalendarResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/splits">client.active.v1.calendars.splits.<a href="./src/resources/active/v1/calendars/splits.ts">getSplitsCalendar</a>({ ...params }) -> SplitGetSplitsCalendarResponse</code>
+
+#### Summary
+
+Types:
+
+- <code><a href="./src/resources/active/v1/calendars/summary.ts">CalendarDateSummary</a></code>
+- <code><a href="./src/resources/active/v1/calendars/summary.ts">CalendarDateSummaryList</a></code>
+- <code><a href="./src/resources/active/v1/calendars/summary.ts">SummaryGetCalendarSummaryResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/calendars/summary">client.active.v1.calendars.summary.<a href="./src/resources/active/v1/calendars/summary.ts">getCalendarSummary</a>({ ...params }) -> SummaryGetCalendarSummaryResponse</code>
 
 ### Clock
 
@@ -239,6 +342,31 @@ Types:
 Methods:
 
 - <code title="get /active/v1/instruments/options/contracts">client.active.v1.instruments.options.contracts.<a href="./src/resources/active/v1/instruments/options/contracts.ts">getOptionContracts</a>({ ...params }) -> ContractGetOptionContractsResponse</code>
+
+#### Reporting
+
+Types:
+
+- <code><a href="./src/resources/active/v1/instruments/reporting.ts">ReportingGetInstrumentReportingResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/instruments/{security_id_source}/{security_id}/reporting">client.active.v1.instruments.reporting.<a href="./src/resources/active/v1/instruments/reporting.ts">getInstrumentReporting</a>(securityID, { ...params }) -> ReportingGetInstrumentReportingResponse</code>
+
+#### Venues
+
+Types:
+
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">DisplayType</a></code>
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">GtdAccepts</a></code>
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">Venue</a></code>
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">VenueList</a></code>
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">VenueSession</a></code>
+- <code><a href="./src/resources/active/v1/instruments/venues.ts">VenueGetVenuesResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/instruments/venues">client.active.v1.instruments.venues.<a href="./src/resources/active/v1/instruments/venues.ts">getVenues</a>() -> VenueGetVenuesResponse</code>
 
 ### MarketData
 
@@ -460,10 +588,12 @@ Types:
 
 - <code><a href="./src/resources/active/v1/version.ts">Version</a></code>
 - <code><a href="./src/resources/active/v1/version.ts">VersionGetVersionResponse</a></code>
+- <code><a href="./src/resources/active/v1/version.ts">VersionUpdateVersionResponse</a></code>
 
 Methods:
 
 - <code title="get /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">getVersion</a>() -> VersionGetVersionResponse</code>
+- <code title="patch /active/v1/version">client.active.v1.version.<a href="./src/resources/active/v1/version.ts">updateVersion</a>() -> VersionUpdateVersionResponse</code>
 
 ### Watchlists
 
