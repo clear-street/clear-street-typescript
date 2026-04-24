@@ -9,7 +9,7 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
 /**
- * Retrieve details and lists of tradable instruments.
+ * Search and manage saved screeners.
  */
 export class Screener extends APIResource {
   /**

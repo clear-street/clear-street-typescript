@@ -9,7 +9,7 @@ import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 /**
- * Retrieve details and lists of tradable instruments.
+ * Create and manage watchlists.
  */
 export class Items extends APIResource {
   /**
