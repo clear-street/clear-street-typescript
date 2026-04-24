@@ -141,6 +141,12 @@ export interface ScreenerFilter {
  */
 export interface ScreenerItem {
   /**
+   * The OEMS instrument ID (`instrument.instruments.id`). Always present regardless
+   * of `field_filter`.
+   */
+  instrument_id: string;
+
+  /**
    * The latest price for the instrument
    */
   price: string;
