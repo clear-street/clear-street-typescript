@@ -7,7 +7,7 @@ import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 /**
- * Manage trading accounts and view balances.
+ * Manage trading accounts, balances, and portfolio history.
  */
 export class Balances extends APIResource {
   /**

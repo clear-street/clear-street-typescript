@@ -7,7 +7,7 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
 /**
- * Retrieve details and lists of tradable instruments.
+ * Retrieve market news and related instrument metadata.
  */
 export class News extends APIResource {
   /**

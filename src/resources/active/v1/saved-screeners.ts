@@ -8,7 +8,7 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 /**
- * Retrieve details and lists of tradable instruments.
+ * Search and manage saved screeners.
  */
 export class SavedScreeners extends APIResource {
   /**

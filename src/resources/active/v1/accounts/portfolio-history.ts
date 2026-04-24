@@ -7,7 +7,7 @@ import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 /**
- * Manage trading accounts and view balances.
+ * Manage trading accounts, balances, and portfolio history.
  */
 export class PortfolioHistory extends APIResource {
   /**
@@ -78,7 +78,8 @@ export interface PortfolioHistorySegment {
   net_pnl?: string | null;
 
   /**
-   * Sum of the profit and loss from the previous trading day.
+   * P&L attributable to start-of-day (carried) positions from market movement during
+   * this trading day.
    */
   position_pnl?: string | null;
 
