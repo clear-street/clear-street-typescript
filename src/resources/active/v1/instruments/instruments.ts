@@ -28,6 +28,12 @@ import {
   InstrumentEventsData,
   InstrumentSplitEvent,
 } from './events';
+import * as FundamentalsAPI from './fundamentals';
+import {
+  FundamentalGetInstrumentFundamentalsResponse,
+  Fundamentals,
+  InstrumentFundamentals,
+} from './fundamentals';
 import * as OptionsAPI from './options/options';
 import { Options } from './options/options';
 import { APIPromise } from '../../../../core/api-promise';
@@ -42,6 +48,7 @@ export class Instruments extends APIResource {
     this._client,
   );
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
+  fundamentals: FundamentalsAPI.Fundamentals = new FundamentalsAPI.Fundamentals(this._client);
   options: OptionsAPI.Options = new OptionsAPI.Options(this._client);
 
   /**
@@ -601,6 +608,7 @@ export interface InstrumentGetInstrumentsParams {
 
 Instruments.AnalystReporting = AnalystReporting;
 Instruments.Events = Events;
+Instruments.Fundamentals = Fundamentals;
 Instruments.Options = Options;
 
 export declare namespace Instruments {
@@ -646,6 +654,12 @@ export declare namespace Instruments {
     type EventGetInstrumentEventsResponse as EventGetInstrumentEventsResponse,
     type EventGetAllInstrumentEventsParams as EventGetAllInstrumentEventsParams,
     type EventGetInstrumentEventsParams as EventGetInstrumentEventsParams,
+  };
+
+  export {
+    Fundamentals as Fundamentals,
+    type InstrumentFundamentals as InstrumentFundamentals,
+    type FundamentalGetInstrumentFundamentalsResponse as FundamentalGetInstrumentFundamentalsResponse,
   };
 
   export { Options as Options };

@@ -228,6 +228,17 @@ Methods:
 - <code title="get /active/v1/instruments/events">client.active.v1.instruments.events.<a href="./src/resources/active/v1/instruments/events.ts">getAllInstrumentEvents</a>({ ...params }) -> EventGetAllInstrumentEventsResponse</code>
 - <code title="get /active/v1/instruments/{security_id_source}/{security_id}/events">client.active.v1.instruments.events.<a href="./src/resources/active/v1/instruments/events.ts">getInstrumentEvents</a>(securityID, { ...params }) -> EventGetInstrumentEventsResponse</code>
 
+#### Fundamentals
+
+Types:
+
+- <code><a href="./src/resources/active/v1/instruments/fundamentals.ts">InstrumentFundamentals</a></code>
+- <code><a href="./src/resources/active/v1/instruments/fundamentals.ts">FundamentalGetInstrumentFundamentalsResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/instruments/{id}/fundamentals">client.active.v1.instruments.fundamentals.<a href="./src/resources/active/v1/instruments/fundamentals.ts">getInstrumentFundamentals</a>(id) -> FundamentalGetInstrumentFundamentalsResponse</code>
+
 #### Options
 
 ##### Contracts
@@ -241,6 +252,18 @@ Methods:
 - <code title="get /active/v1/instruments/options/contracts">client.active.v1.instruments.options.contracts.<a href="./src/resources/active/v1/instruments/options/contracts.ts">getOptionContracts</a>({ ...params }) -> ContractGetOptionContractsResponse</code>
 
 ### MarketData
+
+#### DailySummary
+
+Types:
+
+- <code><a href="./src/resources/active/v1/market-data/daily-summary.ts">DailySummary</a></code>
+- <code><a href="./src/resources/active/v1/market-data/daily-summary.ts">DailySummaryList</a></code>
+- <code><a href="./src/resources/active/v1/market-data/daily-summary.ts">DailySummaryGetDailySummariesResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/market-data/daily-summary">client.active.v1.marketData.dailySummary.<a href="./src/resources/active/v1/market-data/daily-summary.ts">getDailySummaries</a>({ ...params }) -> DailySummaryGetDailySummariesResponse</code>
 
 #### Snapshot
 
