@@ -24,6 +24,11 @@ export {
   type EventGetInstrumentEventsParams,
 } from './events';
 export {
+  Fundamentals,
+  type InstrumentFundamentals,
+  type FundamentalGetInstrumentFundamentalsResponse,
+} from './fundamentals';
+export {
   Instruments,
   type AnalystRating,
   type ContractType,
