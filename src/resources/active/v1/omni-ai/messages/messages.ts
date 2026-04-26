@@ -31,11 +31,7 @@ export class Messages extends APIResource {
    *   );
    * ```
    */
-  getMessage(
-    messageID: string,
-    query: MessageGetMessageParams,
-    options?: RequestOptions,
-  ): APIPromise<MessageGetMessageResponse> {
+  getMessage(messageID: string, query: MessageGetMessageParams, options?: RequestOptions): APIPromise<MessageGetMessageResponse> {
     return this._client.get(path`/active/v1/omni-ai/messages/${messageID}`, { query, ...options });
   }
 }
@@ -59,12 +55,12 @@ Messages.Feedback = Feedback;
 export declare namespace Messages {
   export {
     type MessageGetMessageResponse as MessageGetMessageResponse,
-    type MessageGetMessageParams as MessageGetMessageParams,
+    type MessageGetMessageParams as MessageGetMessageParams
   };
 
   export {
     Feedback as Feedback,
     type FeedbackCreateFeedbackResponse as FeedbackCreateFeedbackResponse,
-    type FeedbackCreateFeedbackParams as FeedbackCreateFeedbackParams,
+    type FeedbackCreateFeedbackParams as FeedbackCreateFeedbackParams
   };
 }

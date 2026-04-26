@@ -2,19 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as MarketHoursAPI from './market-hours';
-import {
-  DayType,
-  MarketHourGetMarketHoursCalendarParams,
-  MarketHourGetMarketHoursCalendarResponse,
-  MarketHours,
-  MarketHoursDetail,
-  MarketHoursDetailList,
-  MarketSessionType,
-  MarketStatus,
-  MarketType,
-  SessionSchedule,
-  TradingSessions,
-} from './market-hours';
+import { DayType, MarketHourGetMarketHoursCalendarParams, MarketHourGetMarketHoursCalendarResponse, MarketHours, MarketHoursDetail, MarketHoursDetailList, MarketSessionType, MarketStatus, MarketType, SessionSchedule, TradingSessions } from './market-hours';
 
 export class Calendars extends APIResource {
   marketHours: MarketHoursAPI.MarketHours = new MarketHoursAPI.MarketHours(this._client);
@@ -34,6 +22,6 @@ export declare namespace Calendars {
     type SessionSchedule as SessionSchedule,
     type TradingSessions as TradingSessions,
     type MarketHourGetMarketHoursCalendarResponse as MarketHourGetMarketHoursCalendarResponse,
-    type MarketHourGetMarketHoursCalendarParams as MarketHourGetMarketHoursCalendarParams,
+    type MarketHourGetMarketHoursCalendarParams as MarketHourGetMarketHoursCalendarParams
   };
 }

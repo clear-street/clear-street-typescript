@@ -28,16 +28,9 @@ export class Responses extends APIResource {
    *   );
    * ```
    */
-  cancelResponse(
-    responseID: string,
-    params: ResponseCancelResponseParams,
-    options?: RequestOptions,
-  ): APIPromise<ResponseCancelResponseResponse> {
-    const { account_id } = params;
-    return this._client.delete(path`/active/v1/omni-ai/responses/${responseID}`, {
-      query: { account_id },
-      ...options,
-    });
+  cancelResponse(responseID: string, params: ResponseCancelResponseParams, options?: RequestOptions): APIPromise<ResponseCancelResponseResponse> {
+    const { account_id } = params
+    return this._client.delete(path`/active/v1/omni-ai/responses/${responseID}`, { query: { account_id }, ...options });
   }
 
   /**
@@ -60,11 +53,7 @@ export class Responses extends APIResource {
    *   );
    * ```
    */
-  getResponse(
-    responseID: string,
-    query: ResponseGetResponseParams,
-    options?: RequestOptions,
-  ): APIPromise<ResponseGetResponseResponse> {
+  getResponse(responseID: string, query: ResponseGetResponseParams, options?: RequestOptions): APIPromise<ResponseGetResponseResponse> {
     return this._client.get(path`/active/v1/omni-ai/responses/${responseID}`, { query, ...options });
   }
 }
@@ -99,6 +88,6 @@ export declare namespace Responses {
     type ResponseCancelResponseResponse as ResponseCancelResponseResponse,
     type ResponseGetResponseResponse as ResponseGetResponseResponse,
     type ResponseCancelResponseParams as ResponseCancelResponseParams,
-    type ResponseGetResponseParams as ResponseGetResponseParams,
+    type ResponseGetResponseParams as ResponseGetResponseParams
   };
 }

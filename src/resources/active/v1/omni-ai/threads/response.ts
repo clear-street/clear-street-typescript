@@ -30,11 +30,7 @@ export class Response extends APIResource {
    *   );
    * ```
    */
-  getThreadResponse(
-    threadID: string,
-    query: ResponseGetThreadResponseParams,
-    options?: RequestOptions,
-  ): APIPromise<ResponseGetThreadResponseResponse> {
+  getThreadResponse(threadID: string, query: ResponseGetThreadResponseParams, options?: RequestOptions): APIPromise<ResponseGetThreadResponseResponse> {
     return this._client.get(path`/active/v1/omni-ai/threads/${threadID}/response`, { query, ...options });
   }
 }
@@ -56,6 +52,6 @@ export interface ResponseGetThreadResponseParams {
 export declare namespace Response {
   export {
     type ResponseGetThreadResponseResponse as ResponseGetThreadResponseResponse,
-    type ResponseGetThreadResponseParams as ResponseGetThreadResponseParams,
+    type ResponseGetThreadResponseParams as ResponseGetThreadResponseParams
   };
 }

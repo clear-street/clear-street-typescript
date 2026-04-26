@@ -4,36 +4,11 @@ import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as V1API from '../v1';
 import * as AnalystReportingAPI from './analyst-reporting';
-import {
-  AnalystDistribution,
-  AnalystReporting,
-  AnalystReportingGetInstrumentAnalystConsensusParams,
-  AnalystReportingGetInstrumentAnalystConsensusResponse,
-  InstrumentAnalystConsensus,
-  PriceTarget,
-} from './analyst-reporting';
+import { AnalystDistribution, AnalystReporting, AnalystReportingGetInstrumentAnalystConsensusParams, AnalystReportingGetInstrumentAnalystConsensusResponse, InstrumentAnalystConsensus, PriceTarget } from './analyst-reporting';
 import * as EventsAPI from './events';
-import {
-  AllEventsEventType,
-  EventGetAllInstrumentEventsParams,
-  EventGetAllInstrumentEventsResponse,
-  EventGetInstrumentEventsParams,
-  EventGetInstrumentEventsResponse,
-  Events,
-  InstrumentAllEventsData,
-  InstrumentDividendEvent,
-  InstrumentEventEnvelope,
-  InstrumentEventIpoItem,
-  InstrumentEventsByDate,
-  InstrumentEventsData,
-  InstrumentSplitEvent,
-} from './events';
+import { AllEventsEventType, EventGetAllInstrumentEventsParams, EventGetAllInstrumentEventsResponse, EventGetInstrumentEventsParams, EventGetInstrumentEventsResponse, Events, InstrumentAllEventsData, InstrumentDividendEvent, InstrumentEventEnvelope, InstrumentEventIpoItem, InstrumentEventsByDate, InstrumentEventsData, InstrumentSplitEvent } from './events';
 import * as FundamentalsAPI from './fundamentals';
-import {
-  FundamentalGetInstrumentFundamentalsResponse,
-  Fundamentals,
-  InstrumentFundamentals,
-} from './fundamentals';
+import { FundamentalGetInstrumentFundamentalsResponse, Fundamentals, InstrumentFundamentals } from './fundamentals';
 import * as OptionsAPI from './options/options';
 import { Options } from './options/options';
 import { APIPromise } from '../../../../core/api-promise';
@@ -44,9 +19,7 @@ import { path } from '../../../../internal/utils/path';
  * Retrieve details and lists of tradable instruments.
  */
 export class Instruments extends APIResource {
-  analystReporting: AnalystReportingAPI.AnalystReporting = new AnalystReportingAPI.AnalystReporting(
-    this._client,
-  );
+  analystReporting: AnalystReportingAPI.AnalystReporting = new AnalystReportingAPI.AnalystReporting(this._client);
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
   fundamentals: FundamentalsAPI.Fundamentals = new FundamentalsAPI.Fundamentals(this._client);
   options: OptionsAPI.Options = new OptionsAPI.Options(this._client);
@@ -63,16 +36,9 @@ export class Instruments extends APIResource {
    *   );
    * ```
    */
-  getInstrumentByID(
-    securityID: string,
-    params: InstrumentGetInstrumentByIDParams,
-    options?: RequestOptions,
-  ): APIPromise<InstrumentGetInstrumentByIDResponse> {
-    const { security_id_source, ...query } = params;
-    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}`, {
-      query,
-      ...options,
-    });
+  getInstrumentByID(securityID: string, params: InstrumentGetInstrumentByIDParams, options?: RequestOptions): APIPromise<InstrumentGetInstrumentByIDResponse> {
+    const { security_id_source, ...query } = params
+    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}`, { query, ...options });
   }
 
   /**
@@ -84,10 +50,7 @@ export class Instruments extends APIResource {
    *   await client.active.v1.instruments.getInstruments();
    * ```
    */
-  getInstruments(
-    query: InstrumentGetInstrumentsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<InstrumentGetInstrumentsResponse> {
+  getInstruments(query: InstrumentGetInstrumentsParams | null | undefined = {}, options?: RequestOptions): APIPromise<InstrumentGetInstrumentsResponse> {
     return this._client.get('/active/v1/instruments', { query, ...options });
   }
 }
@@ -95,17 +58,17 @@ export class Instruments extends APIResource {
 /**
  * Analyst rating category
  */
-export type AnalystRating = 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SELL';
+export type AnalystRating = 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SELL'
 
 /**
  * The type of options contract
  */
-export type ContractType = 'CALL' | 'PUT';
+export type ContractType = 'CALL' | 'PUT'
 
 /**
  * The exercise style of an options contract
  */
-export type ExerciseStyle = 'AMERICAN' | 'EUROPEAN';
+export type ExerciseStyle = 'AMERICAN' | 'EUROPEAN'
 
 /**
  * Represents a tradable financial instrument, including supplemental information
@@ -322,7 +285,7 @@ export interface InstrumentCore {
   strike_price?: string | null;
 }
 
-export type InstrumentCoreList = Array<InstrumentCore>;
+export type InstrumentCoreList = Array<InstrumentCore>
 
 /**
  * Represents instrument earnings data
@@ -413,7 +376,7 @@ export interface InstrumentSecurityID {
 /**
  * The listing type of an options contract
  */
-export type ListingType = 'STANDARD' | 'FLEX' | 'OTC';
+export type ListingType = 'STANDARD' | 'FLEX' | 'OTC'
 
 /**
  * An options contract with options-specific metadata
@@ -500,7 +463,7 @@ export interface OptionsContract {
   underlier_instrument_id?: string | null;
 }
 
-export type OptionsContractList = Array<OptionsContract>;
+export type OptionsContractList = Array<OptionsContract>
 
 export interface InstrumentGetInstrumentByIDResponse extends Shared.BaseResponse {
   /**
@@ -595,15 +558,7 @@ export interface InstrumentGetInstrumentsParams {
   /**
    * Filter by security type. If omitted, returns all types.
    */
-  security_type?:
-    | 'COMMON_STOCK'
-    | 'PREFERRED_STOCK'
-    | 'CORPORATE_BOND'
-    | 'OPTION'
-    | 'FUTURE'
-    | 'WARRANT'
-    | 'CASH'
-    | 'OTHER';
+  security_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'CORPORATE_BOND' | 'OPTION' | 'FUTURE' | 'WARRANT' | 'CASH' | 'OTHER';
 }
 
 Instruments.AnalystReporting = AnalystReporting;
@@ -628,7 +583,7 @@ export declare namespace Instruments {
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
-    type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
+    type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams
   };
 
   export {
@@ -637,7 +592,7 @@ export declare namespace Instruments {
     type InstrumentAnalystConsensus as InstrumentAnalystConsensus,
     type PriceTarget as PriceTarget,
     type AnalystReportingGetInstrumentAnalystConsensusResponse as AnalystReportingGetInstrumentAnalystConsensusResponse,
-    type AnalystReportingGetInstrumentAnalystConsensusParams as AnalystReportingGetInstrumentAnalystConsensusParams,
+    type AnalystReportingGetInstrumentAnalystConsensusParams as AnalystReportingGetInstrumentAnalystConsensusParams
   };
 
   export {
@@ -653,14 +608,16 @@ export declare namespace Instruments {
     type EventGetAllInstrumentEventsResponse as EventGetAllInstrumentEventsResponse,
     type EventGetInstrumentEventsResponse as EventGetInstrumentEventsResponse,
     type EventGetAllInstrumentEventsParams as EventGetAllInstrumentEventsParams,
-    type EventGetInstrumentEventsParams as EventGetInstrumentEventsParams,
+    type EventGetInstrumentEventsParams as EventGetInstrumentEventsParams
   };
 
   export {
     Fundamentals as Fundamentals,
     type InstrumentFundamentals as InstrumentFundamentals,
-    type FundamentalGetInstrumentFundamentalsResponse as FundamentalGetInstrumentFundamentalsResponse,
+    type FundamentalGetInstrumentFundamentalsResponse as FundamentalGetInstrumentFundamentalsResponse
   };
 
-  export { Options as Options };
+  export {
+    Options as Options
+  };
 }

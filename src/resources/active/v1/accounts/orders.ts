@@ -27,16 +27,9 @@ export class Orders extends APIResource {
    *   );
    * ```
    */
-  cancelAllOpenOrders(
-    accountID: number,
-    params: OrderCancelAllOpenOrdersParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<OrderCancelAllOpenOrdersResponse> {
-    const { security_id, security_id_source, security_type, side, type } = params ?? {};
-    return this._client.delete(path`/active/v1/accounts/${accountID}/orders`, {
-      query: { security_id, security_id_source, security_type, side, type },
-      ...options,
-    });
+  cancelAllOpenOrders(accountID: number, params: OrderCancelAllOpenOrdersParams | null | undefined = {}, options?: RequestOptions): APIPromise<OrderCancelAllOpenOrdersResponse> {
+    const { security_id, security_id_source, security_type, side, type } = params ?? {}
+    return this._client.delete(path`/active/v1/accounts/${accountID}/orders`, { query: { security_id, security_id_source, security_type, side, type }, ...options });
   }
 
   /**
@@ -51,12 +44,8 @@ export class Orders extends APIResource {
    *   );
    * ```
    */
-  cancelOpenOrder(
-    orderID: string,
-    params: OrderCancelOpenOrderParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderCancelOpenOrderResponse> {
-    const { account_id } = params;
+  cancelOpenOrder(orderID: string, params: OrderCancelOpenOrderParams, options?: RequestOptions): APIPromise<OrderCancelOpenOrderResponse> {
+    const { account_id } = params
     return this._client.delete(path`/active/v1/accounts/${account_id}/orders/${orderID}`, options);
   }
 
@@ -72,12 +61,8 @@ export class Orders extends APIResource {
    *   );
    * ```
    */
-  getOrderByID(
-    orderID: string,
-    params: OrderGetOrderByIDParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderGetOrderByIDResponse> {
-    const { account_id } = params;
+  getOrderByID(orderID: string, params: OrderGetOrderByIDParams, options?: RequestOptions): APIPromise<OrderGetOrderByIDResponse> {
+    const { account_id } = params
     return this._client.get(path`/active/v1/accounts/${account_id}/orders/${orderID}`, options);
   }
 
@@ -90,11 +75,7 @@ export class Orders extends APIResource {
    *   await client.active.v1.accounts.orders.getOrders(0);
    * ```
    */
-  getOrders(
-    accountID: number,
-    query: OrderGetOrdersParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<OrderGetOrdersResponse> {
+  getOrders(accountID: number, query: OrderGetOrdersParams | null | undefined = {}, options?: RequestOptions): APIPromise<OrderGetOrdersResponse> {
     return this._client.get(path`/active/v1/accounts/${accountID}/orders`, { query, ...options });
   }
 
@@ -110,16 +91,9 @@ export class Orders extends APIResource {
    *   );
    * ```
    */
-  replaceOrder(
-    orderID: string,
-    params: OrderReplaceOrderParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderReplaceOrderResponse> {
-    const { account_id, ...body } = params;
-    return this._client.patch(path`/active/v1/accounts/${account_id}/orders/${orderID}`, {
-      body,
-      ...options,
-    });
+  replaceOrder(orderID: string, params: OrderReplaceOrderParams, options?: RequestOptions): APIPromise<OrderReplaceOrderResponse> {
+    const { account_id, ...body } = params
+    return this._client.patch(path`/active/v1/accounts/${account_id}/orders/${orderID}`, { body, ...options });
   }
 
   /**
@@ -142,12 +116,8 @@ export class Orders extends APIResource {
    * });
    * ```
    */
-  submitOrders(
-    accountID: number,
-    params: OrderSubmitOrdersParams,
-    options?: RequestOptions,
-  ): APIPromise<OrderSubmitOrdersResponse> {
-    const { body } = params;
+  submitOrders(accountID: number, params: OrderSubmitOrdersParams, options?: RequestOptions): APIPromise<OrderSubmitOrdersResponse> {
+    const { body } = params
     return this._client.post(path`/active/v1/accounts/${accountID}/orders`, { body: body, ...options });
   }
 }
@@ -358,27 +328,12 @@ export interface Order {
   trailing_watermark_ts?: string | null;
 }
 
-export type OrderList = Array<Order>;
+export type OrderList = Array<Order>
 
 /**
  * Order status
  */
-export type OrderStatus =
-  | 'PENDING_NEW'
-  | 'NEW'
-  | 'PARTIALLY_FILLED'
-  | 'FILLED'
-  | 'CANCELED'
-  | 'REJECTED'
-  | 'EXPIRED'
-  | 'PENDING_CANCEL'
-  | 'PENDING_REPLACE'
-  | 'REPLACED'
-  | 'DONE_FOR_DAY'
-  | 'STOPPED'
-  | 'SUSPENDED'
-  | 'CALCULATED'
-  | 'OTHER';
+export type OrderStatus = 'PENDING_NEW' | 'NEW' | 'PARTIALLY_FILLED' | 'FILLED' | 'CANCELED' | 'REJECTED' | 'EXPIRED' | 'PENDING_CANCEL' | 'PENDING_REPLACE' | 'REPLACED' | 'DONE_FOR_DAY' | 'STOPPED' | 'SUSPENDED' | 'CALCULATED' | 'OTHER'
 
 /**
  * Execution strategy for an order
@@ -386,14 +341,7 @@ export type OrderStatus =
  * Defines advanced routing and execution logic beyond simple order types. The
  * strategy type determines which parameters are available and required.
  */
-export type OrderStrategy =
-  | OrderStrategy.Sor
-  | OrderStrategy.Vwap
-  | OrderStrategy.Twap
-  | OrderStrategy.Ap
-  | OrderStrategy.Pov
-  | OrderStrategy.Dark
-  | OrderStrategy.Dma;
+export type OrderStrategy = OrderStrategy.Sor | OrderStrategy.Vwap | OrderStrategy.Twap | OrderStrategy.Ap | OrderStrategy.Pov | OrderStrategy.Dark | OrderStrategy.Dma
 
 export namespace OrderStrategy {
   /**
@@ -449,14 +397,7 @@ export namespace OrderStrategy {
 /**
  * Order type
  */
-export type OrderType =
-  | 'MARKET'
-  | 'LIMIT'
-  | 'STOP'
-  | 'STOP_LIMIT'
-  | 'TRAILING_STOP'
-  | 'TRAILING_STOP_LIMIT'
-  | 'OTHER';
+export type OrderType = 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT' | 'TRAILING_STOP' | 'TRAILING_STOP_LIMIT' | 'OTHER'
 
 /**
  * Percentage of Volume strategy
@@ -471,7 +412,7 @@ export interface PovStrategy extends BaseStrategyParams {
 /**
  * Side of an order
  */
-export type Side = 'BUY' | 'SELL' | 'SELL_SHORT' | 'OTHER';
+export type Side = 'BUY' | 'SELL' | 'SELL_SHORT' | 'OTHER'
 
 /**
  * Base parameters common to most algorithmic strategies
@@ -496,23 +437,12 @@ export interface SorStrategy {
 /**
  * Time in force
  */
-export type TimeInForce =
-  | 'DAY'
-  | 'GOOD_TILL_CANCEL'
-  | 'IMMEDIATE_OR_CANCEL'
-  | 'FILL_OR_KILL'
-  | 'GOOD_TILL_DATE'
-  | 'AT_THE_OPENING'
-  | 'AT_THE_CLOSE'
-  | 'GOOD_TILL_CROSSING'
-  | 'GOOD_THROUGH_CROSSING'
-  | 'AT_CROSSING'
-  | 'OTHER';
+export type TimeInForce = 'DAY' | 'GOOD_TILL_CANCEL' | 'IMMEDIATE_OR_CANCEL' | 'FILL_OR_KILL' | 'GOOD_TILL_DATE' | 'AT_THE_OPENING' | 'AT_THE_CLOSE' | 'GOOD_TILL_CROSSING' | 'GOOD_THROUGH_CROSSING' | 'AT_CROSSING' | 'OTHER'
 
 /**
  * Trailing offset type for trailing stop orders.
  */
-export type TrailingOffsetType = 'PRICE' | 'PERCENT_BPS';
+export type TrailingOffsetType = 'PRICE' | 'PERCENT_BPS'
 
 /**
  * Time Weighted Average Price strategy
@@ -532,7 +462,7 @@ export interface TwapStrategy extends BaseStrategyParams {
 /**
  * Urgency level for algorithmic execution
  */
-export type Urgency = 'SUPER_PASSIVE' | 'PASSIVE' | 'MODERATE' | 'AGGRESSIVE' | 'SUPER_AGGRESSIVE';
+export type Urgency = 'SUPER_PASSIVE' | 'PASSIVE' | 'MODERATE' | 'AGGRESSIVE' | 'SUPER_AGGRESSIVE'
 
 /**
  * Volume Weighted Average Price strategy
@@ -619,15 +549,7 @@ export interface OrderCancelAllOpenOrdersParams {
   /**
    * Filter by security type (e.g., COMMON_STOCK, OPTION)
    */
-  security_type?:
-    | 'COMMON_STOCK'
-    | 'PREFERRED_STOCK'
-    | 'CORPORATE_BOND'
-    | 'OPTION'
-    | 'FUTURE'
-    | 'WARRANT'
-    | 'CASH'
-    | 'OTHER';
+  security_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'CORPORATE_BOND' | 'OPTION' | 'FUTURE' | 'WARRANT' | 'CASH' | 'OTHER';
 
   /**
    * Filter by order side (BUY or SELL)
@@ -692,36 +614,12 @@ export interface OrderGetOrdersParams {
   /**
    * Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
    */
-  security_type?:
-    | 'COMMON_STOCK'
-    | 'PREFERRED_STOCK'
-    | 'CORPORATE_BOND'
-    | 'OPTION'
-    | 'FUTURE'
-    | 'WARRANT'
-    | 'CASH'
-    | 'OTHER';
+  security_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'CORPORATE_BOND' | 'OPTION' | 'FUTURE' | 'WARRANT' | 'CASH' | 'OTHER';
 
   /**
    * Comma-separated order statuses to filter by
    */
-  status?: Array<
-    | 'PENDING_NEW'
-    | 'NEW'
-    | 'PARTIALLY_FILLED'
-    | 'FILLED'
-    | 'CANCELED'
-    | 'REJECTED'
-    | 'EXPIRED'
-    | 'PENDING_CANCEL'
-    | 'PENDING_REPLACE'
-    | 'REPLACED'
-    | 'DONE_FOR_DAY'
-    | 'STOPPED'
-    | 'SUSPENDED'
-    | 'CALCULATED'
-    | 'OTHER'
-  >;
+  status?: Array<'PENDING_NEW' | 'NEW' | 'PARTIALLY_FILLED' | 'FILLED' | 'CANCELED' | 'REJECTED' | 'EXPIRED' | 'PENDING_CANCEL' | 'PENDING_REPLACE' | 'REPLACED' | 'DONE_FOR_DAY' | 'STOPPED' | 'SUSPENDED' | 'CALCULATED' | 'OTHER'>;
 
   /**
    * Filter by symbol
@@ -985,6 +883,6 @@ export declare namespace Orders {
     type OrderGetOrderByIDParams as OrderGetOrderByIDParams,
     type OrderGetOrdersParams as OrderGetOrdersParams,
     type OrderReplaceOrderParams as OrderReplaceOrderParams,
-    type OrderSubmitOrdersParams as OrderSubmitOrdersParams,
+    type OrderSubmitOrdersParams as OrderSubmitOrdersParams
   };
 }

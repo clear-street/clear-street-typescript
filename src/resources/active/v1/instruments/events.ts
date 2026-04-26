@@ -23,10 +23,7 @@ export class Events extends APIResource {
    *   await client.active.v1.instruments.events.getAllInstrumentEvents();
    * ```
    */
-  getAllInstrumentEvents(
-    query: EventGetAllInstrumentEventsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<EventGetAllInstrumentEventsResponse> {
+  getAllInstrumentEvents(query: EventGetAllInstrumentEventsParams | null | undefined = {}, options?: RequestOptions): APIPromise<EventGetAllInstrumentEventsResponse> {
     return this._client.get('/active/v1/instruments/events', { query, ...options });
   }
 
@@ -48,23 +45,16 @@ export class Events extends APIResource {
    *   );
    * ```
    */
-  getInstrumentEvents(
-    securityID: string,
-    params: EventGetInstrumentEventsParams,
-    options?: RequestOptions,
-  ): APIPromise<EventGetInstrumentEventsResponse> {
-    const { security_id_source, ...query } = params;
-    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}/events`, {
-      query,
-      ...options,
-    });
+  getInstrumentEvents(securityID: string, params: EventGetInstrumentEventsParams, options?: RequestOptions): APIPromise<EventGetInstrumentEventsResponse> {
+    const { security_id_source, ...query } = params
+    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}/events`, { query, ...options });
   }
 }
 
 /**
  * Event types supported by the all-events endpoint.
  */
-export type AllEventsEventType = 'EARNINGS' | 'DIVIDEND' | 'STOCK_SPLIT' | 'IPO';
+export type AllEventsEventType = 'EARNINGS' | 'DIVIDEND' | 'STOCK_SPLIT' | 'IPO'
 
 /**
  * All-events payload grouped by date.
@@ -379,6 +369,6 @@ export declare namespace Events {
     type EventGetAllInstrumentEventsResponse as EventGetAllInstrumentEventsResponse,
     type EventGetInstrumentEventsResponse as EventGetInstrumentEventsResponse,
     type EventGetAllInstrumentEventsParams as EventGetAllInstrumentEventsParams,
-    type EventGetInstrumentEventsParams as EventGetInstrumentEventsParams,
+    type EventGetInstrumentEventsParams as EventGetInstrumentEventsParams
   };
 }

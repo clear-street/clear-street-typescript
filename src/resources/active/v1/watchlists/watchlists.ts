@@ -4,13 +4,7 @@ import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as InstrumentsAPI from '../instruments/instruments';
 import * as ItemsAPI from './items';
-import {
-  AddWatchlistItemData,
-  ItemAddWatchlistItemParams,
-  ItemAddWatchlistItemResponse,
-  ItemDeleteWatchlistItemParams,
-  Items,
-} from './items';
+import { AddWatchlistItemData, ItemAddWatchlistItemParams, ItemAddWatchlistItemResponse, ItemDeleteWatchlistItemParams, Items } from './items';
 import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -33,10 +27,7 @@ export class Watchlists extends APIResource {
    *   });
    * ```
    */
-  createWatchlist(
-    body: WatchlistCreateWatchlistParams,
-    options?: RequestOptions,
-  ): APIPromise<WatchlistCreateWatchlistResponse> {
+  createWatchlist(body: WatchlistCreateWatchlistParams, options?: RequestOptions): APIPromise<WatchlistCreateWatchlistResponse> {
     return this._client.post('/active/v1/watchlists', { body, ...options });
   }
 
@@ -51,10 +42,7 @@ export class Watchlists extends APIResource {
    * ```
    */
   deleteWatchlist(watchlistID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/active/v1/watchlists/${watchlistID}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/active/v1/watchlists/${watchlistID}`, { ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 
   /**
@@ -68,10 +56,7 @@ export class Watchlists extends APIResource {
    *   );
    * ```
    */
-  getWatchlistByID(
-    watchlistID: string,
-    options?: RequestOptions,
-  ): APIPromise<WatchlistGetWatchlistByIDResponse> {
+  getWatchlistByID(watchlistID: string, options?: RequestOptions): APIPromise<WatchlistGetWatchlistByIDResponse> {
     return this._client.get(path`/active/v1/watchlists/${watchlistID}`, options);
   }
 
@@ -134,7 +119,7 @@ export interface WatchlistEntry {
   name: string;
 }
 
-export type WatchlistEntryList = Array<WatchlistEntry>;
+export type WatchlistEntryList = Array<WatchlistEntry>
 
 /**
  * A single item in a watchlist
@@ -197,7 +182,7 @@ export declare namespace Watchlists {
     type WatchlistCreateWatchlistResponse as WatchlistCreateWatchlistResponse,
     type WatchlistGetWatchlistByIDResponse as WatchlistGetWatchlistByIDResponse,
     type WatchlistGetWatchlistsResponse as WatchlistGetWatchlistsResponse,
-    type WatchlistCreateWatchlistParams as WatchlistCreateWatchlistParams,
+    type WatchlistCreateWatchlistParams as WatchlistCreateWatchlistParams
   };
 
   export {
@@ -205,6 +190,6 @@ export declare namespace Watchlists {
     type AddWatchlistItemData as AddWatchlistItemData,
     type ItemAddWatchlistItemResponse as ItemAddWatchlistItemResponse,
     type ItemAddWatchlistItemParams as ItemAddWatchlistItemParams,
-    type ItemDeleteWatchlistItemParams as ItemDeleteWatchlistItemParams,
+    type ItemDeleteWatchlistItemParams as ItemDeleteWatchlistItemParams
   };
 }

@@ -6,48 +6,18 @@ import * as ScreenerAPI from '../screener';
 import * as V1API from '../v1';
 import * as OrdersAPI from '../accounts/orders';
 import * as EntitlementAgreementsAPI from './entitlement-agreements';
-import {
-  EntitlementAgreementListEntitlementAgreementsResponse,
-  EntitlementAgreementResource,
-  EntitlementAgreementResourceList,
-  EntitlementAgreements,
-} from './entitlement-agreements';
+import { EntitlementAgreementListEntitlementAgreementsResponse, EntitlementAgreementResource, EntitlementAgreementResourceList, EntitlementAgreements } from './entitlement-agreements';
 import * as EntitlementsAPI from './entitlements';
-import {
-  DeleteEntitlementResponse,
-  EntitlementCreateEntitlementsParams,
-  EntitlementCreateEntitlementsResponse,
-  EntitlementDeleteEntitlementResponse,
-  EntitlementListEntitlementsParams,
-  EntitlementListEntitlementsResponse,
-  EntitlementResource,
-  EntitlementResourceList,
-  Entitlements,
-} from './entitlements';
+import { DeleteEntitlementResponse, EntitlementCreateEntitlementsParams, EntitlementCreateEntitlementsResponse, EntitlementDeleteEntitlementResponse, EntitlementListEntitlementsParams, EntitlementListEntitlementsResponse, EntitlementResource, EntitlementResourceList, Entitlements } from './entitlements';
 import * as ResponsesAPI from './responses';
-import {
-  ResponseCancelResponseParams,
-  ResponseCancelResponseResponse,
-  ResponseGetResponseParams,
-  ResponseGetResponseResponse,
-  Responses,
-} from './responses';
+import { ResponseCancelResponseParams, ResponseCancelResponseResponse, ResponseGetResponseParams, ResponseGetResponseResponse, Responses } from './responses';
 import * as MessagesAPI from './messages/messages';
 import { MessageGetMessageParams, MessageGetMessageResponse, Messages } from './messages/messages';
 import * as ThreadsAPI from './threads/threads';
-import {
-  ThreadCreateThreadParams,
-  ThreadCreateThreadResponse,
-  ThreadGetThreadParams,
-  ThreadGetThreadResponse,
-  ThreadListThreadsParams,
-  ThreadListThreadsResponse,
-  Threads,
-} from './threads/threads';
+import { ThreadCreateThreadParams, ThreadCreateThreadResponse, ThreadGetThreadParams, ThreadGetThreadResponse, ThreadListThreadsParams, ThreadListThreadsResponse, Threads } from './threads/threads';
 
 export class OmniAI extends APIResource {
-  entitlementAgreements: EntitlementAgreementsAPI.EntitlementAgreements =
-    new EntitlementAgreementsAPI.EntitlementAgreements(this._client);
+  entitlementAgreements: EntitlementAgreementsAPI.EntitlementAgreements = new EntitlementAgreementsAPI.EntitlementAgreements(this._client);
   entitlements: EntitlementsAPI.Entitlements = new EntitlementsAPI.Entitlements(this._client);
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
   responses: ResponsesAPI.Responses = new ResponsesAPI.Responses(this._client);
@@ -271,12 +241,7 @@ export interface MessageContent {
 /**
  * Final immutable content part visible on persisted messages.
  */
-export type MessageContentPart =
-  | MessageContentPart.UnionMember0
-  | MessageContentPart.UnionMember1
-  | MessageContentPart.UnionMember2
-  | MessageContentPart.UnionMember3
-  | MessageContentPart.UnionMember4;
+export type MessageContentPart = MessageContentPart.UnionMember0 | MessageContentPart.UnionMember1 | MessageContentPart.UnionMember2 | MessageContentPart.UnionMember3 | MessageContentPart.UnionMember4
 
 export namespace MessageContentPart {
   /**
@@ -315,17 +280,17 @@ export namespace MessageContentPart {
   }
 }
 
-export type MessageList = Array<Message>;
+export type MessageList = Array<Message>
 
 /**
  * Immutable terminal outcome for a finalized assistant message.
  */
-export type MessageOutcome = 'completed' | 'errored' | 'canceled';
+export type MessageOutcome = 'completed' | 'errored' | 'canceled'
 
 /**
  * Finalized message role in the public contract.
  */
-export type MessageRole = 'USER' | 'ASSISTANT';
+export type MessageRole = 'USER' | 'ASSISTANT'
 
 /**
  * Action to open a chart for a symbol.
@@ -449,7 +414,7 @@ export interface OrderPayload {
  * This is a simplified enum compared to the full OrderStrategy with params,
  * suitable for indicating the desired strategy without full configuration.
  */
-export type OrderStrategyType = 'SOR' | 'VWAP' | 'TWAP' | 'DARK' | 'DMA' | 'AP' | 'POV';
+export type OrderStrategyType = 'SOR' | 'VWAP' | 'TWAP' | 'DARK' | 'DMA' | 'AP' | 'POV'
 
 /**
  * Action to prefill order details for user confirmation.
@@ -518,13 +483,7 @@ export interface ResponseContent {
 /**
  * Dynamic content part visible on a pollable response.
  */
-export type ResponseContentPart =
-  | ResponseContentPart.UnionMember0
-  | ResponseContentPart.UnionMember1
-  | ResponseContentPart.UnionMember2
-  | ResponseContentPart.UnionMember3
-  | ResponseContentPart.UnionMember4
-  | ResponseContentPart.UnionMember5;
+export type ResponseContentPart = ResponseContentPart.UnionMember0 | ResponseContentPart.UnionMember1 | ResponseContentPart.UnionMember2 | ResponseContentPart.UnionMember3 | ResponseContentPart.UnionMember4 | ResponseContentPart.UnionMember5
 
 export namespace ResponseContentPart {
   /**
@@ -573,7 +532,7 @@ export namespace ResponseContentPart {
 /**
  * Dynamic lifecycle status for a pollable response.
  */
-export type ResponseStatus = 'queued' | 'running' | 'succeeded' | 'failed' | 'canceled';
+export type ResponseStatus = 'queued' | 'running' | 'succeeded' | 'failed' | 'canceled'
 
 /**
  * Structured actions that Omni AI can return to clients.
@@ -581,11 +540,7 @@ export type ResponseStatus = 'queued' | 'running' | 'succeeded' | 'failed' | 'ca
  * These actions provide machine-readable instructions for the client to execute,
  * such as prefilling an order ticket, opening a chart, or navigating to a route.
  */
-export type StructuredAction =
-  | StructuredAction.PrefillOrder
-  | StructuredAction.OpenChart
-  | StructuredAction.OpenScreener
-  | StructuredAction.OpenEntitlementConsent;
+export type StructuredAction = StructuredAction.PrefillOrder | StructuredAction.OpenChart | StructuredAction.OpenScreener | StructuredAction.OpenEntitlementConsent
 
 export namespace StructuredAction {
   /**
@@ -661,7 +616,7 @@ export interface Thread {
   updated_at: string;
 }
 
-export type ThreadList = Array<Thread>;
+export type ThreadList = Array<Thread>
 
 OmniAI.EntitlementAgreements = EntitlementAgreements;
 OmniAI.Entitlements = Entitlements;
@@ -709,14 +664,14 @@ export declare namespace OmniAI {
     type SuggestedActionsPayload as SuggestedActionsPayload,
     type SymbolChart as SymbolChart,
     type Thread as Thread,
-    type ThreadList as ThreadList,
+    type ThreadList as ThreadList
   };
 
   export {
     EntitlementAgreements as EntitlementAgreements,
     type EntitlementAgreementResource as EntitlementAgreementResource,
     type EntitlementAgreementResourceList as EntitlementAgreementResourceList,
-    type EntitlementAgreementListEntitlementAgreementsResponse as EntitlementAgreementListEntitlementAgreementsResponse,
+    type EntitlementAgreementListEntitlementAgreementsResponse as EntitlementAgreementListEntitlementAgreementsResponse
   };
 
   export {
@@ -728,13 +683,13 @@ export declare namespace OmniAI {
     type EntitlementDeleteEntitlementResponse as EntitlementDeleteEntitlementResponse,
     type EntitlementListEntitlementsResponse as EntitlementListEntitlementsResponse,
     type EntitlementCreateEntitlementsParams as EntitlementCreateEntitlementsParams,
-    type EntitlementListEntitlementsParams as EntitlementListEntitlementsParams,
+    type EntitlementListEntitlementsParams as EntitlementListEntitlementsParams
   };
 
   export {
     Messages as Messages,
     type MessageGetMessageResponse as MessageGetMessageResponse,
-    type MessageGetMessageParams as MessageGetMessageParams,
+    type MessageGetMessageParams as MessageGetMessageParams
   };
 
   export {
@@ -742,7 +697,7 @@ export declare namespace OmniAI {
     type ResponseCancelResponseResponse as ResponseCancelResponseResponse,
     type ResponseGetResponseResponse as ResponseGetResponseResponse,
     type ResponseCancelResponseParams as ResponseCancelResponseParams,
-    type ResponseGetResponseParams as ResponseGetResponseParams,
+    type ResponseGetResponseParams as ResponseGetResponseParams
   };
 
   export {
@@ -752,6 +707,6 @@ export declare namespace OmniAI {
     type ThreadListThreadsResponse as ThreadListThreadsResponse,
     type ThreadCreateThreadParams as ThreadCreateThreadParams,
     type ThreadGetThreadParams as ThreadGetThreadParams,
-    type ThreadListThreadsParams as ThreadListThreadsParams,
+    type ThreadListThreadsParams as ThreadListThreadsParams
   };
 }
