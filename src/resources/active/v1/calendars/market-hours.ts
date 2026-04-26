@@ -22,10 +22,7 @@ export class MarketHours extends APIResource {
    *   );
    * ```
    */
-  getMarketHoursCalendar(
-    query: MarketHourGetMarketHoursCalendarParams,
-    options?: RequestOptions,
-  ): APIPromise<MarketHourGetMarketHoursCalendarResponse> {
+  getMarketHoursCalendar(query: MarketHourGetMarketHoursCalendarParams, options?: RequestOptions): APIPromise<MarketHourGetMarketHoursCalendarResponse> {
     return this._client.get('/active/v1/calendars/market-hours', { query, ...options });
   }
 }
@@ -33,7 +30,7 @@ export class MarketHours extends APIResource {
 /**
  * Day type for market hours - indicates the type of trading day
  */
-export type DayType = 'TRADING_DAY' | 'EARLY_CLOSE' | 'HOLIDAY' | 'WEEKEND';
+export type DayType = 'TRADING_DAY' | 'EARLY_CLOSE' | 'HOLIDAY' | 'WEEKEND'
 
 /**
  * Comprehensive market hours information for a specific market and date
@@ -80,12 +77,12 @@ export interface MarketHoursDetail {
   today_sessions: TradingSessions;
 }
 
-export type MarketHoursDetailList = Array<MarketHoursDetail>;
+export type MarketHoursDetailList = Array<MarketHoursDetail>
 
 /**
  * Session type for market hours
  */
-export type MarketSessionType = 'pre_market' | 'regular' | 'after_hours';
+export type MarketSessionType = 'pre_market' | 'regular' | 'after_hours'
 
 /**
  * Market status information
@@ -110,7 +107,7 @@ export interface MarketStatus {
 /**
  * Market type for market hours calendar endpoint
  */
-export type MarketType = 'us_equities' | 'us_options';
+export type MarketType = 'us_equities' | 'us_options'
 
 /**
  * Session schedule with open and close timestamps
@@ -185,6 +182,6 @@ export declare namespace MarketHours {
     type SessionSchedule as SessionSchedule,
     type TradingSessions as TradingSessions,
     type MarketHourGetMarketHoursCalendarResponse as MarketHourGetMarketHoursCalendarResponse,
-    type MarketHourGetMarketHoursCalendarParams as MarketHourGetMarketHoursCalendarParams,
+    type MarketHourGetMarketHoursCalendarParams as MarketHourGetMarketHoursCalendarParams
   };
 }

@@ -14,6 +14,6 @@ export declare namespace Options {
   export {
     Contracts as Contracts,
     type ContractGetOptionContractsResponse as ContractGetOptionContractsResponse,
-    type ContractGetOptionContractsParams as ContractGetOptionContractsParams,
+    type ContractGetOptionContractsParams as ContractGetOptionContractsParams
   };
 }

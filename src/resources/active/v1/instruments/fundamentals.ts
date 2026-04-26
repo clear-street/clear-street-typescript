@@ -21,10 +21,7 @@ export class Fundamentals extends APIResource {
    *   );
    * ```
    */
-  getInstrumentFundamentals(
-    id: string,
-    options?: RequestOptions,
-  ): APIPromise<FundamentalGetInstrumentFundamentalsResponse> {
+  getInstrumentFundamentals(id: string, options?: RequestOptions): APIPromise<FundamentalGetInstrumentFundamentalsResponse> {
     return this._client.get(path`/active/v1/instruments/${id}/fundamentals`, options);
   }
 }
@@ -115,6 +112,6 @@ export interface FundamentalGetInstrumentFundamentalsResponse extends Shared.Bas
 export declare namespace Fundamentals {
   export {
     type InstrumentFundamentals as InstrumentFundamentals,
-    type FundamentalGetInstrumentFundamentalsResponse as FundamentalGetInstrumentFundamentalsResponse,
+    type FundamentalGetInstrumentFundamentalsResponse as FundamentalGetInstrumentFundamentalsResponse
   };
 }

@@ -23,10 +23,7 @@ export class Contracts extends APIResource {
    *   await client.active.v1.instruments.options.contracts.getOptionContracts();
    * ```
    */
-  getOptionContracts(
-    query: ContractGetOptionContractsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ContractGetOptionContractsResponse> {
+  getOptionContracts(query: ContractGetOptionContractsParams | null | undefined = {}, options?: RequestOptions): APIPromise<ContractGetOptionContractsResponse> {
     return this._client.get('/active/v1/instruments/options/contracts', { query, ...options });
   }
 }
@@ -80,6 +77,6 @@ export interface ContractGetOptionContractsParams {
 export declare namespace Contracts {
   export {
     type ContractGetOptionContractsResponse as ContractGetOptionContractsResponse,
-    type ContractGetOptionContractsParams as ContractGetOptionContractsParams,
+    type ContractGetOptionContractsParams as ContractGetOptionContractsParams
   };
 }

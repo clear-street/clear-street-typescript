@@ -27,11 +27,7 @@ export class Feedback extends APIResource {
    *   );
    * ```
    */
-  createFeedback(
-    messageID: string,
-    body: FeedbackCreateFeedbackParams,
-    options?: RequestOptions,
-  ): APIPromise<FeedbackCreateFeedbackResponse> {
+  createFeedback(messageID: string, body: FeedbackCreateFeedbackParams, options?: RequestOptions): APIPromise<FeedbackCreateFeedbackResponse> {
     return this._client.post(path`/active/v1/omni-ai/messages/${messageID}/feedback`, { body, ...options });
   }
 }
@@ -65,6 +61,6 @@ export interface FeedbackCreateFeedbackParams {
 export declare namespace Feedback {
   export {
     type FeedbackCreateFeedbackResponse as FeedbackCreateFeedbackResponse,
-    type FeedbackCreateFeedbackParams as FeedbackCreateFeedbackParams,
+    type FeedbackCreateFeedbackParams as FeedbackCreateFeedbackParams
   };
 }

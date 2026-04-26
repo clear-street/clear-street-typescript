@@ -18,9 +18,6 @@ export class Ws extends APIResource {
    * ```
    */
   websocketHandler(options?: RequestOptions): APIPromise<void> {
-    return this._client.get('/active/v1/ws', {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.get('/active/v1/ws', { ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }

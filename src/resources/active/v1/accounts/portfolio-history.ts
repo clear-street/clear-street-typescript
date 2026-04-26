@@ -22,11 +22,7 @@ export class PortfolioHistory extends APIResource {
    *   );
    * ```
    */
-  getPortfolioHistory(
-    accountID: number,
-    query: PortfolioHistoryGetPortfolioHistoryParams,
-    options?: RequestOptions,
-  ): APIPromise<PortfolioHistoryGetPortfolioHistoryResponse> {
+  getPortfolioHistory(accountID: number, query: PortfolioHistoryGetPortfolioHistoryParams, options?: RequestOptions): APIPromise<PortfolioHistoryGetPortfolioHistoryResponse> {
     return this._client.get(path`/active/v1/accounts/${accountID}/portfolio-history`, { query, ...options });
   }
 }
@@ -104,6 +100,6 @@ export declare namespace PortfolioHistory {
     type PortfolioHistoryResponse as PortfolioHistoryResponse,
     type PortfolioHistorySegment as PortfolioHistorySegment,
     type PortfolioHistoryGetPortfolioHistoryResponse as PortfolioHistoryGetPortfolioHistoryResponse,
-    type PortfolioHistoryGetPortfolioHistoryParams as PortfolioHistoryGetPortfolioHistoryParams,
+    type PortfolioHistoryGetPortfolioHistoryParams as PortfolioHistoryGetPortfolioHistoryParams
   };
 }

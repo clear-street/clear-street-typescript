@@ -4,13 +4,7 @@ import { APIResource } from '../../../../../core/resource';
 import * as Shared from '../../../../shared';
 import * as OmniAIAPI from '../omni-ai';
 import * as MessagesAPI from './messages';
-import {
-  MessageCreateMessageParams,
-  MessageCreateMessageResponse,
-  MessageListMessagesParams,
-  MessageListMessagesResponse,
-  Messages,
-} from './messages';
+import { MessageCreateMessageParams, MessageCreateMessageResponse, MessageListMessagesParams, MessageListMessagesResponse, Messages } from './messages';
 import * as ResponseAPI from './response';
 import { Response, ResponseGetThreadResponseParams, ResponseGetThreadResponseResponse } from './response';
 import { APIPromise } from '../../../../../core/api-promise';
@@ -46,10 +40,7 @@ export class Threads extends APIResource {
    *   });
    * ```
    */
-  createThread(
-    body: ThreadCreateThreadParams,
-    options?: RequestOptions,
-  ): APIPromise<ThreadCreateThreadResponse> {
+  createThread(body: ThreadCreateThreadParams, options?: RequestOptions): APIPromise<ThreadCreateThreadResponse> {
     return this._client.post('/active/v1/omni-ai/threads', { body, ...options });
   }
 
@@ -69,11 +60,7 @@ export class Threads extends APIResource {
    *   );
    * ```
    */
-  getThread(
-    threadID: string,
-    query: ThreadGetThreadParams,
-    options?: RequestOptions,
-  ): APIPromise<ThreadGetThreadResponse> {
+  getThread(threadID: string, query: ThreadGetThreadParams, options?: RequestOptions): APIPromise<ThreadGetThreadResponse> {
     return this._client.get(path`/active/v1/omni-ai/threads/${threadID}`, { query, ...options });
   }
 
@@ -92,10 +79,7 @@ export class Threads extends APIResource {
    *   });
    * ```
    */
-  listThreads(
-    query: ThreadListThreadsParams,
-    options?: RequestOptions,
-  ): APIPromise<ThreadListThreadsResponse> {
+  listThreads(query: ThreadListThreadsParams, options?: RequestOptions): APIPromise<ThreadListThreadsResponse> {
     return this._client.get('/active/v1/omni-ai/threads', { query, ...options });
   }
 }
@@ -184,7 +168,7 @@ export declare namespace Threads {
     type ThreadListThreadsResponse as ThreadListThreadsResponse,
     type ThreadCreateThreadParams as ThreadCreateThreadParams,
     type ThreadGetThreadParams as ThreadGetThreadParams,
-    type ThreadListThreadsParams as ThreadListThreadsParams,
+    type ThreadListThreadsParams as ThreadListThreadsParams
   };
 
   export {
@@ -192,12 +176,12 @@ export declare namespace Threads {
     type MessageCreateMessageResponse as MessageCreateMessageResponse,
     type MessageListMessagesResponse as MessageListMessagesResponse,
     type MessageCreateMessageParams as MessageCreateMessageParams,
-    type MessageListMessagesParams as MessageListMessagesParams,
+    type MessageListMessagesParams as MessageListMessagesParams
   };
 
   export {
     Response as Response,
     type ResponseGetThreadResponseResponse as ResponseGetThreadResponseResponse,
-    type ResponseGetThreadResponseParams as ResponseGetThreadResponseParams,
+    type ResponseGetThreadResponseParams as ResponseGetThreadResponseParams
   };
 }
