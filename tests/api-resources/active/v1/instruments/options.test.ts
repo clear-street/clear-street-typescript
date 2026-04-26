@@ -4,10 +4,10 @@ import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
-describe('resource contracts', () => {
+describe('resource options', () => {
   // Mock server tests are disabled
-  test.skip('getOptionContracts', async () => {
-    const responsePromise = client.active.v1.instruments.options.contracts.getOptionContracts();
+  test.skip('contracts', async () => {
+    const responsePromise = client.active.v1.instruments.options.contracts();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,9 +18,9 @@ describe('resource contracts', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getOptionContracts: request options and params are passed correctly', async () => {
+  test.skip('contracts: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.active.v1.instruments.options.contracts.getOptionContracts({
+    await expect(client.active.v1.instruments.options.contracts({
     contract_type: 'CALL',
     expiry: '2019-12-27',
     page_size: 1,

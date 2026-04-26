@@ -9,8 +9,8 @@ import * as EventsAPI from './events';
 import { AllEventsEventType, EventGetAllInstrumentEventsParams, EventGetAllInstrumentEventsResponse, EventGetInstrumentEventsParams, EventGetInstrumentEventsResponse, Events, InstrumentAllEventsData, InstrumentDividendEvent, InstrumentEventEnvelope, InstrumentEventIpoItem, InstrumentEventsByDate, InstrumentEventsData, InstrumentSplitEvent } from './events';
 import * as FundamentalsAPI from './fundamentals';
 import { FundamentalGetInstrumentFundamentalsResponse, Fundamentals, InstrumentFundamentals } from './fundamentals';
-import * as OptionsAPI from './options/options';
-import { Options } from './options/options';
+import * as OptionsAPI from './options';
+import { OptionContractsParams, OptionContractsResponse, Options } from './options';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -52,6 +52,28 @@ export class Instruments extends APIResource {
    */
   getInstruments(query: InstrumentGetInstrumentsParams | null | undefined = {}, options?: RequestOptions): APIPromise<InstrumentGetInstrumentsResponse> {
     return this._client.get('/active/v1/instruments', { query, ...options });
+  }
+
+  /**
+   * Fast in-memory typeahead search over the loaded instrument universe.
+   *
+   * Supports three independent match dimensions in a single `q` parameter: ticker
+   * symbol (exact > prefix > substring), alt-id exact (CUSIP / ISIN / OPRA root /
+   * CMS), and company name (token + character-trigram). Results are ranked by a
+   * composite score that includes ADV (log-scaled), listing status, marginable / ETB
+   * flags, and OTC / restricted / liquidation-only penalties. Defaults to the
+   * `EQUITY` asset class (common stock + ETFs + exchange-traded mutual funds); pass
+   * `asset_class=OPTION` for option chains.
+   *
+   * @example
+   * ```ts
+   * const response = await client.active.v1.instruments.search({
+   *   q: 'q',
+   * });
+   * ```
+   */
+  search(query: InstrumentSearchParams, options?: RequestOptions): APIPromise<InstrumentSearchResponse> {
+    return this._client.get('/active/v1/instruments/search', { query, ...options });
   }
 }
 
@@ -255,6 +277,11 @@ export interface InstrumentCore {
   venue: string;
 
   /**
+   * Average daily share volume from the security definition.
+   */
+  adv?: string | null;
+
+  /**
    * The expiration date for options instruments
    */
   expiry?: string | null;
@@ -268,6 +295,18 @@ export interface InstrumentCore {
    * The full name of the instrument or its issuer
    */
   name?: string | null;
+
+  /**
+   * Notional ADV (`adv × previous_close`). The primary liquidity signal used by
+   * `/instruments/search` ranking. Computed at response time so it stays consistent
+   * with whatever `adv` and `previous_close` show.
+   */
+  notional_adv?: string | null;
+
+  /**
+   * Last close price from the security definition.
+   */
+  previous_close?: string | null;
 
   /**
    * The type of security (e.g., Common Stock, ETF)
@@ -476,6 +515,10 @@ export interface InstrumentGetInstrumentsResponse extends Shared.BaseResponse {
   data: InstrumentCoreList;
 }
 
+export interface InstrumentSearchResponse extends Shared.BaseResponse {
+  data: InstrumentCoreList;
+}
+
 export interface InstrumentGetInstrumentByIDParams {
   /**
    * Path param: Security identifier source
@@ -561,6 +604,52 @@ export interface InstrumentGetInstrumentsParams {
   security_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'CORPORATE_BOND' | 'OPTION' | 'FUTURE' | 'WARRANT' | 'CASH' | 'OTHER';
 }
 
+export interface InstrumentSearchParams {
+  /**
+   * Search term applied case-insensitively to ticker symbols, alt-IDs
+   * (CUSIP/ISIN/OPRA-root/CMS), and company names.
+   */
+  q: string;
+
+  /**
+   * Comma-separated asset classes (EQUITY|OPTION|WARRANT|BOND|FX|OTHER). Defaults to
+   * EQUITY.
+   */
+  asset_class?: string;
+
+  /**
+   * Optional listing-country filter (e.g., US).
+   */
+  country?: string;
+
+  /**
+   * Optional ISO currency filter (e.g., USD).
+   */
+  currency?: string;
+
+  /**
+   * Opaque continuation cursor for show-more paging — pass the `next_page_token`
+   * from a prior response. Same wire format as `page_token` on other paginated
+   * endpoints.
+   */
+  cursor?: string;
+
+  /**
+   * Include inactive instruments. Default false.
+   */
+  include_inactive?: boolean;
+
+  /**
+   * Include restricted instruments. Default true (penalized in ranking).
+   */
+  include_restricted?: boolean;
+
+  /**
+   * Maximum hits to return. Bounded [1, 100]. Default 20.
+   */
+  limit?: number;
+}
+
 Instruments.AnalystReporting = AnalystReporting;
 Instruments.Events = Events;
 Instruments.Fundamentals = Fundamentals;
@@ -582,8 +671,10 @@ export declare namespace Instruments {
     type OptionsContractList as OptionsContractList,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
+    type InstrumentSearchResponse as InstrumentSearchResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
-    type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams
+    type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
+    type InstrumentSearchParams as InstrumentSearchParams
   };
 
   export {
@@ -618,6 +709,8 @@ export declare namespace Instruments {
   };
 
   export {
-    Options as Options
+    Options as Options,
+    type OptionContractsResponse as OptionContractsResponse,
+    type OptionContractsParams as OptionContractsParams
   };
 }

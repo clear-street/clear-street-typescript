@@ -9,12 +9,12 @@ import * as EntitlementAgreementsAPI from './entitlement-agreements';
 import { EntitlementAgreementListEntitlementAgreementsResponse, EntitlementAgreementResource, EntitlementAgreementResourceList, EntitlementAgreements } from './entitlement-agreements';
 import * as EntitlementsAPI from './entitlements';
 import { DeleteEntitlementResponse, EntitlementCreateEntitlementsParams, EntitlementCreateEntitlementsResponse, EntitlementDeleteEntitlementResponse, EntitlementListEntitlementsParams, EntitlementListEntitlementsResponse, EntitlementResource, EntitlementResourceList, Entitlements } from './entitlements';
+import * as MessagesAPI from './messages';
+import { MessageFeedbackParams, MessageFeedbackResponse, MessageGetMessageParams, MessageGetMessageResponse, Messages } from './messages';
 import * as ResponsesAPI from './responses';
 import { ResponseCancelResponseParams, ResponseCancelResponseResponse, ResponseGetResponseParams, ResponseGetResponseResponse, Responses } from './responses';
-import * as MessagesAPI from './messages/messages';
-import { MessageGetMessageParams, MessageGetMessageResponse, Messages } from './messages/messages';
 import * as ThreadsAPI from './threads/threads';
-import { ThreadCreateThreadParams, ThreadCreateThreadResponse, ThreadGetThreadParams, ThreadGetThreadResponse, ThreadListThreadsParams, ThreadListThreadsResponse, Threads } from './threads/threads';
+import { ThreadCreateThreadParams, ThreadCreateThreadResponse, ThreadGetThreadParams, ThreadGetThreadResponse, ThreadListThreadsParams, ThreadListThreadsResponse, ThreadResponseParams, ThreadResponseResponse, Threads } from './threads/threads';
 
 export class OmniAI extends APIResource {
   entitlementAgreements: EntitlementAgreementsAPI.EntitlementAgreements = new EntitlementAgreementsAPI.EntitlementAgreements(this._client);
@@ -688,7 +688,9 @@ export declare namespace OmniAI {
 
   export {
     Messages as Messages,
+    type MessageFeedbackResponse as MessageFeedbackResponse,
     type MessageGetMessageResponse as MessageGetMessageResponse,
+    type MessageFeedbackParams as MessageFeedbackParams,
     type MessageGetMessageParams as MessageGetMessageParams
   };
 
@@ -705,8 +707,10 @@ export declare namespace OmniAI {
     type ThreadCreateThreadResponse as ThreadCreateThreadResponse,
     type ThreadGetThreadResponse as ThreadGetThreadResponse,
     type ThreadListThreadsResponse as ThreadListThreadsResponse,
+    type ThreadResponseResponse as ThreadResponseResponse,
     type ThreadCreateThreadParams as ThreadCreateThreadParams,
     type ThreadGetThreadParams as ThreadGetThreadParams,
-    type ThreadListThreadsParams as ThreadListThreadsParams
+    type ThreadListThreadsParams as ThreadListThreadsParams,
+    type ThreadResponseParams as ThreadResponseParams
   };
 }
