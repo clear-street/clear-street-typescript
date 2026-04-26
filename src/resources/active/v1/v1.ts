@@ -13,21 +13,25 @@ import * as ScreenerAPI from './screener';
 import { FieldLookback, FieldPeriod, FieldRef, FieldType, Screener, ScreenerColumn, ScreenerFilter, ScreenerGetScreenerParams, ScreenerGetScreenerResponse, ScreenerItem, ScreenerItemList, ScreenerRow, ScreenerRowList, ScreenerSearchScreenerParams, ScreenerSearchScreenerResponse } from './screener';
 import * as VersionAPI from './version';
 import { Version, VersionGetVersionResponse, VersionResource } from './version';
-import * as WsAPI from './ws';
-import { Ws } from './ws';
 import * as AccountsAPI from './accounts/accounts';
 import { Account, AccountGetAccountByIDResponse, AccountGetAccountsParams, AccountGetAccountsResponse, AccountKind, AccountList, AccountPatchAccountByIDParams, AccountPatchAccountByIDResponse, AccountSettings, AccountStatus, AccountSubkind, Accounts, RiskSettings } from './accounts/accounts';
 import * as CalendarsAPI from './calendars/calendars';
 import { Calendars } from './calendars/calendars';
 import * as InstrumentsAPI from './instruments/instruments';
-import { AnalystRating, ContractType, ExerciseStyle, Instrument, InstrumentCore, InstrumentCoreList, InstrumentEarnings, InstrumentGetInstrumentByIDParams, InstrumentGetInstrumentByIDResponse, InstrumentGetInstrumentsParams, InstrumentGetInstrumentsResponse, InstrumentQuote, InstrumentSecurityID, Instruments, ListingType, OptionsContract, OptionsContractList } from './instruments/instruments';
+import { AnalystRating, ContractType, ExerciseStyle, Instrument, InstrumentCore, InstrumentCoreList, InstrumentEarnings, InstrumentGetInstrumentByIDParams, InstrumentGetInstrumentByIDResponse, InstrumentGetInstrumentsParams, InstrumentGetInstrumentsResponse, InstrumentQuote, InstrumentSearchParams, InstrumentSearchResponse, InstrumentSecurityID, Instruments, ListingType, OptionsContract, OptionsContractList } from './instruments/instruments';
 import * as MarketDataAPI from './market-data/market-data';
 import { MarketData } from './market-data/market-data';
 import * as OmniAIAPI from './omni-ai/omni-ai';
 import { ActionButton, CancelResponsePayload, ChartPayload, ChartPoint, ChartSeries, ContentPartChartPayload, ContentPartCustomPayload, ContentPartStructuredActionPayload, ContentPartSuggestedActionsPayload, ContentPartTextPayload, ContentPartThinkingPayload, CreateFeedbackResponse, CreateMessageResponse, CreateThreadResponse, DataChart, ErrorStatus, Message, MessageContent, MessageContentPart, MessageList, MessageOutcome, MessageRole, OmniAI, OpenChartAction, OpenEntitlementConsentAction, OpenScreenerAction, OrderPayload, OrderStrategyType, PrefillOrderAction, PromptButtonAction, Response, ResponseContent, ResponseContentPart, ResponseStatus, StructuredAction, StructuredActionButtonAction, SuggestedActionsPayload, SymbolChart, Thread, ThreadList } from './omni-ai/omni-ai';
 import * as WatchlistsAPI from './watchlists/watchlists';
 import { WatchlistCreateWatchlistParams, WatchlistCreateWatchlistResponse, WatchlistDetail, WatchlistEntry, WatchlistEntryList, WatchlistGetWatchlistByIDResponse, WatchlistGetWatchlistsResponse, WatchlistItemEntry, Watchlists } from './watchlists/watchlists';
+import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
+import { RequestOptions } from '../../../internal/request-options';
 
+/**
+ * Active Websocket.
+ */
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
@@ -41,7 +45,18 @@ export class V1 extends APIResource {
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
   watchlists: WatchlistsAPI.Watchlists = new WatchlistsAPI.Watchlists(this._client);
-  ws: WsAPI.Ws = new WsAPI.Ws(this._client);
+
+  /**
+   * Upgrade the HTTP connection to a WebSocket and echo incoming messages.
+   *
+   * @example
+   * ```ts
+   * await client.active.v1.ws();
+   * ```
+   */
+  ws(options?: RequestOptions): APIPromise<void> {
+    return this._client.get('/active/v1/ws', { ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+  }
 }
 
 /**
@@ -71,7 +86,6 @@ V1.SavedScreeners = SavedScreeners;
 V1.Screener = Screener;
 V1.VersionResource = VersionResource;
 V1.Watchlists = Watchlists;
-V1.Ws = Ws;
 
 export declare namespace V1 {
   export {
@@ -136,8 +150,10 @@ export declare namespace V1 {
     type OptionsContractList as OptionsContractList,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
+    type InstrumentSearchResponse as InstrumentSearchResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
-    type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams
+    type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
+    type InstrumentSearchParams as InstrumentSearchParams
   };
 
   export {
@@ -244,9 +260,5 @@ export declare namespace V1 {
     type WatchlistGetWatchlistByIDResponse as WatchlistGetWatchlistByIDResponse,
     type WatchlistGetWatchlistsResponse as WatchlistGetWatchlistsResponse,
     type WatchlistCreateWatchlistParams as WatchlistCreateWatchlistParams
-  };
-
-  export {
-    Ws as Ws
   };
 }

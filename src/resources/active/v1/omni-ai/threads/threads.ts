@@ -5,8 +5,6 @@ import * as Shared from '../../../../shared';
 import * as OmniAIAPI from '../omni-ai';
 import * as MessagesAPI from './messages';
 import { MessageCreateMessageParams, MessageCreateMessageResponse, MessageListMessagesParams, MessageListMessagesResponse, Messages } from './messages';
-import * as ResponseAPI from './response';
-import { Response, ResponseGetThreadResponseParams, ResponseGetThreadResponseResponse } from './response';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
@@ -16,7 +14,6 @@ import { path } from '../../../../../internal/utils/path';
  */
 export class Threads extends APIResource {
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
-  response: ResponseAPI.Response = new ResponseAPI.Response(this._client);
 
   /**
    * Create a new conversation thread.
@@ -82,6 +79,29 @@ export class Threads extends APIResource {
   listThreads(query: ThreadListThreadsParams, options?: RequestOptions): APIPromise<ThreadListThreadsResponse> {
     return this._client.get('/active/v1/omni-ai/threads', { query, ...options });
   }
+
+  /**
+   * Get the active response for a thread.
+   *
+   * Convenience endpoint to look up the currently active response for a thread
+   * without knowing the `response_id`. Useful when reloading a thread whose last
+   * finalized message is a `USER` message — this indicates an assistant turn is
+   * likely in progress.
+   *
+   * Returns **404** if no active response exists (the thread is idle).
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.active.v1.omniAI.threads.response(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 0 },
+   *   );
+   * ```
+   */
+  response(threadID: string, query: ThreadResponseParams, options?: RequestOptions): APIPromise<ThreadResponseResponse> {
+    return this._client.get(path`/active/v1/omni-ai/threads/${threadID}/response`, { query, ...options });
+  }
 }
 
 export interface ThreadCreateThreadResponse extends Shared.BaseResponse {
@@ -100,6 +120,13 @@ export interface ThreadGetThreadResponse extends Shared.BaseResponse {
 
 export interface ThreadListThreadsResponse extends Shared.BaseResponse {
   data: OmniAIAPI.ThreadList;
+}
+
+export interface ThreadResponseResponse extends Shared.BaseResponse {
+  /**
+   * Dynamic pollable response.
+   */
+  data: OmniAIAPI.Response;
 }
 
 export interface ThreadCreateThreadParams {
@@ -158,17 +185,25 @@ export interface ThreadListThreadsParams {
   page_token?: string;
 }
 
+export interface ThreadResponseParams {
+  /**
+   * Account ID for the request
+   */
+  account_id: number;
+}
+
 Threads.Messages = Messages;
-Threads.Response = Response;
 
 export declare namespace Threads {
   export {
     type ThreadCreateThreadResponse as ThreadCreateThreadResponse,
     type ThreadGetThreadResponse as ThreadGetThreadResponse,
     type ThreadListThreadsResponse as ThreadListThreadsResponse,
+    type ThreadResponseResponse as ThreadResponseResponse,
     type ThreadCreateThreadParams as ThreadCreateThreadParams,
     type ThreadGetThreadParams as ThreadGetThreadParams,
-    type ThreadListThreadsParams as ThreadListThreadsParams
+    type ThreadListThreadsParams as ThreadListThreadsParams,
+    type ThreadResponseParams as ThreadResponseParams
   };
 
   export {
@@ -177,11 +212,5 @@ export declare namespace Threads {
     type MessageListMessagesResponse as MessageListMessagesResponse,
     type MessageCreateMessageParams as MessageCreateMessageParams,
     type MessageListMessagesParams as MessageListMessagesParams
-  };
-
-  export {
-    Response as Response,
-    type ResponseGetThreadResponseResponse as ResponseGetThreadResponseResponse,
-    type ResponseGetThreadResponseParams as ResponseGetThreadResponseParams
   };
 }

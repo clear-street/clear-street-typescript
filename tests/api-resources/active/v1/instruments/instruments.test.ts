@@ -54,4 +54,30 @@ describe('resource instruments', () => {
       .rejects
       .toThrow(ClearStreet.NotFoundError);
   });
+
+  // Mock server tests are disabled
+  test.skip('search: only required params', async () => {
+    const responsePromise = client.active.v1.instruments.search({ q: 'q' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('search: required and optional params', async () => {
+    const response = await client.active.v1.instruments.search({
+    q: 'q',
+    asset_class: 'asset_class',
+    country: 'country',
+    currency: 'currency',
+    cursor: 'cursor',
+    include_inactive: true,
+    include_restricted: true,
+    limit: 0,
+  });
+  });
 });

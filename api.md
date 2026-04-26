@@ -16,6 +16,10 @@ Types:
 - <code><a href="./src/resources/active/v1/v1.ts">SecurityIDSource</a></code>
 - <code><a href="./src/resources/active/v1/v1.ts">SecurityType</a></code>
 
+Methods:
+
+- <code title="get /active/v1/ws">client.active.v1.<a href="./src/resources/active/v1/v1.ts">ws</a>() -> void</code>
+
 ### Accounts
 
 Types:
@@ -189,11 +193,13 @@ Types:
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">OptionsContractList</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentGetInstrumentByIDResponse</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentGetInstrumentsResponse</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentSearchResponse</a></code>
 
 Methods:
 
 - <code title="get /active/v1/instruments/{security_id_source}/{security_id}">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">getInstrumentByID</a>(securityID, { ...params }) -> InstrumentGetInstrumentByIDResponse</code>
 - <code title="get /active/v1/instruments">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">getInstruments</a>({ ...params }) -> InstrumentGetInstrumentsResponse</code>
+- <code title="get /active/v1/instruments/search">client.active.v1.instruments.<a href="./src/resources/active/v1/instruments/instruments.ts">search</a>({ ...params }) -> InstrumentSearchResponse</code>
 
 #### AnalystReporting
 
@@ -241,15 +247,13 @@ Methods:
 
 #### Options
 
-##### Contracts
-
 Types:
 
-- <code><a href="./src/resources/active/v1/instruments/options/contracts.ts">ContractGetOptionContractsResponse</a></code>
+- <code><a href="./src/resources/active/v1/instruments/options.ts">OptionContractsResponse</a></code>
 
 Methods:
 
-- <code title="get /active/v1/instruments/options/contracts">client.active.v1.instruments.options.contracts.<a href="./src/resources/active/v1/instruments/options/contracts.ts">getOptionContracts</a>({ ...params }) -> ContractGetOptionContractsResponse</code>
+- <code title="get /active/v1/instruments/options/contracts">client.active.v1.instruments.options.<a href="./src/resources/active/v1/instruments/options.ts">contracts</a>({ ...params }) -> OptionContractsResponse</code>
 
 ### MarketData
 
@@ -371,21 +375,13 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/omni-ai/messages/messages.ts">MessageGetMessageResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/messages.ts">MessageFeedbackResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/messages.ts">MessageGetMessageResponse</a></code>
 
 Methods:
 
-- <code title="get /active/v1/omni-ai/messages/{message_id}">client.active.v1.omniAI.messages.<a href="./src/resources/active/v1/omni-ai/messages/messages.ts">getMessage</a>(messageID, { ...params }) -> MessageGetMessageResponse</code>
-
-##### Feedback
-
-Types:
-
-- <code><a href="./src/resources/active/v1/omni-ai/messages/feedback.ts">FeedbackCreateFeedbackResponse</a></code>
-
-Methods:
-
-- <code title="post /active/v1/omni-ai/messages/{message_id}/feedback">client.active.v1.omniAI.messages.feedback.<a href="./src/resources/active/v1/omni-ai/messages/feedback.ts">createFeedback</a>(messageID, { ...params }) -> FeedbackCreateFeedbackResponse</code>
+- <code title="post /active/v1/omni-ai/messages/{message_id}/feedback">client.active.v1.omniAI.messages.<a href="./src/resources/active/v1/omni-ai/messages.ts">feedback</a>(messageID, { ...params }) -> MessageFeedbackResponse</code>
+- <code title="get /active/v1/omni-ai/messages/{message_id}">client.active.v1.omniAI.messages.<a href="./src/resources/active/v1/omni-ai/messages.ts">getMessage</a>(messageID, { ...params }) -> MessageGetMessageResponse</code>
 
 #### Responses
 
@@ -406,12 +402,14 @@ Types:
 - <code><a href="./src/resources/active/v1/omni-ai/threads/threads.ts">ThreadCreateThreadResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/threads/threads.ts">ThreadGetThreadResponse</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/threads/threads.ts">ThreadListThreadsResponse</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/threads/threads.ts">ThreadResponseResponse</a></code>
 
 Methods:
 
 - <code title="post /active/v1/omni-ai/threads">client.active.v1.omniAI.threads.<a href="./src/resources/active/v1/omni-ai/threads/threads.ts">createThread</a>({ ...params }) -> ThreadCreateThreadResponse</code>
 - <code title="get /active/v1/omni-ai/threads/{thread_id}">client.active.v1.omniAI.threads.<a href="./src/resources/active/v1/omni-ai/threads/threads.ts">getThread</a>(threadID, { ...params }) -> ThreadGetThreadResponse</code>
 - <code title="get /active/v1/omni-ai/threads">client.active.v1.omniAI.threads.<a href="./src/resources/active/v1/omni-ai/threads/threads.ts">listThreads</a>({ ...params }) -> ThreadListThreadsResponse</code>
+- <code title="get /active/v1/omni-ai/threads/{thread_id}/response">client.active.v1.omniAI.threads.<a href="./src/resources/active/v1/omni-ai/threads/threads.ts">response</a>(threadID, { ...params }) -> ThreadResponseResponse</code>
 
 ##### Messages
 
@@ -424,16 +422,6 @@ Methods:
 
 - <code title="post /active/v1/omni-ai/threads/{thread_id}/messages">client.active.v1.omniAI.threads.messages.<a href="./src/resources/active/v1/omni-ai/threads/messages.ts">createMessage</a>(threadID, { ...params }) -> MessageCreateMessageResponse</code>
 - <code title="get /active/v1/omni-ai/threads/{thread_id}/messages">client.active.v1.omniAI.threads.messages.<a href="./src/resources/active/v1/omni-ai/threads/messages.ts">listMessages</a>(threadID, { ...params }) -> MessageListMessagesResponse</code>
-
-##### Response
-
-Types:
-
-- <code><a href="./src/resources/active/v1/omni-ai/threads/response.ts">ResponseGetThreadResponseResponse</a></code>
-
-Methods:
-
-- <code title="get /active/v1/omni-ai/threads/{thread_id}/response">client.active.v1.omniAI.threads.response.<a href="./src/resources/active/v1/omni-ai/threads/response.ts">getThreadResponse</a>(threadID, { ...params }) -> ResponseGetThreadResponseResponse</code>
 
 ### SavedScreeners
 
@@ -518,9 +506,3 @@ Methods:
 
 - <code title="post /active/v1/watchlists/{watchlist_id}/items">client.active.v1.watchlists.items.<a href="./src/resources/active/v1/watchlists/items.ts">addWatchlistItem</a>(watchlistID, { ...params }) -> ItemAddWatchlistItemResponse</code>
 - <code title="delete /active/v1/watchlists/{watchlist_id}/items/{item_id}">client.active.v1.watchlists.items.<a href="./src/resources/active/v1/watchlists/items.ts">deleteWatchlistItem</a>(itemID, { ...params }) -> void</code>
-
-### Ws
-
-Methods:
-
-- <code title="get /active/v1/ws">client.active.v1.ws.<a href="./src/resources/active/v1/ws.ts">websocketHandler</a>() -> void</code>
