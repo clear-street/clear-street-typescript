@@ -18,7 +18,7 @@ import { Account, AccountGetAccountByIDResponse, AccountGetAccountsParams, Accou
 import * as CalendarsAPI from './calendars/calendars';
 import { Calendars } from './calendars/calendars';
 import * as InstrumentsAPI from './instruments/instruments';
-import { AnalystRating, ContractType, ExerciseStyle, Instrument, InstrumentCore, InstrumentCoreList, InstrumentEarnings, InstrumentGetInstrumentByIDParams, InstrumentGetInstrumentByIDResponse, InstrumentGetInstrumentsParams, InstrumentGetInstrumentsResponse, InstrumentQuote, InstrumentSearchParams, InstrumentSearchResponse, InstrumentSecurityID, Instruments, ListingType, OptionsContract, OptionsContractList } from './instruments/instruments';
+import { AnalystRating, ContractType, ExerciseStyle, FiscalPeriodType, Instrument, InstrumentCore, InstrumentCoreList, InstrumentEarnings, InstrumentGetInstrumentByIDParams, InstrumentGetInstrumentByIDResponse, InstrumentGetInstrumentsParams, InstrumentGetInstrumentsResponse, InstrumentQuote, InstrumentSearchParams, InstrumentSearchResponse, InstrumentSecurityID, Instruments, ListingType, OptionsContract, OptionsContractList } from './instruments/instruments';
 import * as MarketDataAPI from './market-data/market-data';
 import { MarketData } from './market-data/market-data';
 import * as OmniAIAPI from './omni-ai/omni-ai';
@@ -139,6 +139,7 @@ export declare namespace V1 {
     type AnalystRating as AnalystRating,
     type ContractType as ContractType,
     type ExerciseStyle as ExerciseStyle,
+    type FiscalPeriodType as FiscalPeriodType,
     type Instrument as Instrument,
     type InstrumentCore as InstrumentCore,
     type InstrumentCoreList as InstrumentCoreList,
