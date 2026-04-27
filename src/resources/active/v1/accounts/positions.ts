@@ -144,6 +144,11 @@ export interface Position {
   market_price?: string | null;
 
   /**
+   * OEMS instrument identifier of the underlying instrument, if resolvable
+   */
+  underlier_instrument_id?: string | null;
+
+  /**
    * The total unrealized profit or loss for this position based on current market
    * value
    */
