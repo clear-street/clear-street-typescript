@@ -32,9 +32,16 @@ export class BalanceSheets extends APIResource {
    *   );
    * ```
    */
-  getInstrumentBalanceSheetStatements(securityID: string, params: BalanceSheetGetInstrumentBalanceSheetStatementsParams, options?: RequestOptions): APIPromise<BalanceSheetGetInstrumentBalanceSheetStatementsResponse> {
-    const { security_id_source, ...query } = params
-    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}/balance-sheets`, { query, ...options });
+  getInstrumentBalanceSheetStatements(
+    securityID: string,
+    params: BalanceSheetGetInstrumentBalanceSheetStatementsParams,
+    options?: RequestOptions,
+  ): APIPromise<BalanceSheetGetInstrumentBalanceSheetStatementsResponse> {
+    const { security_id_source, ...query } = params;
+    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}/balance-sheets`, {
+      query,
+      ...options,
+    });
   }
 }
 
@@ -333,7 +340,7 @@ export interface InstrumentBalanceSheetStatement {
   treasury_stock?: string | null;
 }
 
-export type InstrumentBalanceSheetStatementList = Array<InstrumentBalanceSheetStatement>
+export type InstrumentBalanceSheetStatementList = Array<InstrumentBalanceSheetStatement>;
 
 export interface BalanceSheetGetInstrumentBalanceSheetStatementsResponse extends Shared.BaseResponse {
   data: InstrumentBalanceSheetStatementList;
@@ -372,6 +379,6 @@ export declare namespace BalanceSheets {
     type InstrumentBalanceSheetStatement as InstrumentBalanceSheetStatement,
     type InstrumentBalanceSheetStatementList as InstrumentBalanceSheetStatementList,
     type BalanceSheetGetInstrumentBalanceSheetStatementsResponse as BalanceSheetGetInstrumentBalanceSheetStatementsResponse,
-    type BalanceSheetGetInstrumentBalanceSheetStatementsParams as BalanceSheetGetInstrumentBalanceSheetStatementsParams
+    type BalanceSheetGetInstrumentBalanceSheetStatementsParams as BalanceSheetGetInstrumentBalanceSheetStatementsParams,
   };
 }

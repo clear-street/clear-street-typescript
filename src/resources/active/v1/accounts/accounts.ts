@@ -3,13 +3,71 @@
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as BalancesAPI from './balances';
-import { AccountBalances, AccountBalancesSod, BalanceGetAccountBalancesParams, BalanceGetAccountBalancesResponse, Balances, MarginDetails, MarginDetailsUsage, MarginTopContributor, MarginType } from './balances';
+import {
+  AccountBalances,
+  AccountBalancesSod,
+  BalanceGetAccountBalancesParams,
+  BalanceGetAccountBalancesResponse,
+  Balances,
+  MarginDetails,
+  MarginDetailsUsage,
+  MarginTopContributor,
+  MarginType,
+} from './balances';
 import * as OrdersAPI from './orders';
-import { ApStrategy, BaseStrategyParams, DarkStrategy, DmaStrategy, Order, OrderCancelAllOpenOrdersParams, OrderCancelAllOpenOrdersResponse, OrderCancelOpenOrderParams, OrderCancelOpenOrderResponse, OrderGetOrderByIDParams, OrderGetOrderByIDResponse, OrderGetOrdersParams, OrderGetOrdersResponse, OrderList, OrderReplaceOrderParams, OrderReplaceOrderResponse, OrderStatus, OrderStrategy, OrderSubmitOrdersParams, OrderSubmitOrdersResponse, OrderType, Orders, PovStrategy, Side, SorStrategy, TimeInForce, TrailingOffsetType, TwapStrategy, Urgency, VwapStrategy } from './orders';
+import {
+  ApStrategy,
+  BaseStrategyParams,
+  DarkStrategy,
+  DmaStrategy,
+  Order,
+  OrderCancelAllOpenOrdersParams,
+  OrderCancelAllOpenOrdersResponse,
+  OrderCancelOpenOrderParams,
+  OrderCancelOpenOrderResponse,
+  OrderGetOrderByIDParams,
+  OrderGetOrderByIDResponse,
+  OrderGetOrdersParams,
+  OrderGetOrdersResponse,
+  OrderList,
+  OrderReplaceOrderParams,
+  OrderReplaceOrderResponse,
+  OrderStatus,
+  OrderStrategy,
+  OrderSubmitOrdersParams,
+  OrderSubmitOrdersResponse,
+  OrderType,
+  Orders,
+  PovStrategy,
+  Side,
+  SorStrategy,
+  TimeInForce,
+  TrailingOffsetType,
+  TwapStrategy,
+  Urgency,
+  VwapStrategy,
+} from './orders';
 import * as PortfolioHistoryAPI from './portfolio-history';
-import { PortfolioHistory, PortfolioHistoryGetPortfolioHistoryParams, PortfolioHistoryGetPortfolioHistoryResponse, PortfolioHistoryResponse, PortfolioHistorySegment } from './portfolio-history';
+import {
+  PortfolioHistory,
+  PortfolioHistoryGetPortfolioHistoryParams,
+  PortfolioHistoryGetPortfolioHistoryResponse,
+  PortfolioHistoryResponse,
+  PortfolioHistorySegment,
+} from './portfolio-history';
 import * as PositionsAPI from './positions';
-import { Position, PositionClosePositionParams, PositionClosePositionResponse, PositionClosePositionsParams, PositionClosePositionsResponse, PositionGetPositionsParams, PositionGetPositionsResponse, PositionList, PositionType, Positions } from './positions';
+import {
+  Position,
+  PositionClosePositionParams,
+  PositionClosePositionResponse,
+  PositionClosePositionsParams,
+  PositionClosePositionsResponse,
+  PositionGetPositionsParams,
+  PositionGetPositionsResponse,
+  PositionList,
+  PositionType,
+  Positions,
+} from './positions';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -20,7 +78,9 @@ import { path } from '../../../../internal/utils/path';
 export class Accounts extends APIResource {
   balances: BalancesAPI.Balances = new BalancesAPI.Balances(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
-  portfolioHistory: PortfolioHistoryAPI.PortfolioHistory = new PortfolioHistoryAPI.PortfolioHistory(this._client);
+  portfolioHistory: PortfolioHistoryAPI.PortfolioHistory = new PortfolioHistoryAPI.PortfolioHistory(
+    this._client,
+  );
   positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
 
   /**
@@ -45,7 +105,10 @@ export class Accounts extends APIResource {
    *   await client.active.v1.accounts.getAccounts();
    * ```
    */
-  getAccounts(query: AccountGetAccountsParams | null | undefined = {}, options?: RequestOptions): APIPromise<AccountGetAccountsResponse> {
+  getAccounts(
+    query: AccountGetAccountsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AccountGetAccountsResponse> {
     return this._client.get('/active/v1/accounts', { query, ...options });
   }
 
@@ -58,7 +121,11 @@ export class Accounts extends APIResource {
    *   await client.active.v1.accounts.patchAccountByID(0);
    * ```
    */
-  patchAccountByID(accountID: number, body: AccountPatchAccountByIDParams, options?: RequestOptions): APIPromise<AccountPatchAccountByIDResponse> {
+  patchAccountByID(
+    accountID: number,
+    body: AccountPatchAccountByIDParams,
+    options?: RequestOptions,
+  ): APIPromise<AccountPatchAccountByIDResponse> {
     return this._client.patch(path`/active/v1/accounts/${accountID}`, { body, ...options });
   }
 }
@@ -116,9 +183,9 @@ export interface Account {
 /**
  * Account kind classification
  */
-export type AccountKind = 'HOUSE' | 'PAB' | 'CUSTOMER' | 'COUNTERPARTY' | 'OTHER'
+export type AccountKind = 'HOUSE' | 'PAB' | 'CUSTOMER' | 'COUNTERPARTY' | 'OTHER';
 
-export type AccountList = Array<Account>
+export type AccountList = Array<Account>;
 
 export interface AccountSettings {
   /**
@@ -130,12 +197,41 @@ export interface AccountSettings {
 /**
  * Account status
  */
-export type AccountStatus = 'ACTIVE' | 'INACTIVE' | 'CLOSED'
+export type AccountStatus = 'ACTIVE' | 'INACTIVE' | 'CLOSED';
 
 /**
  * Account sub-kind classification providing more granular categorization
  */
-export type AccountSubkind = 'AFFILIATE' | 'ALLOCATION' | 'ARRANGING' | 'BANK' | 'BLOCK_TRADING' | 'CARRY_BROKER' | 'CASH' | 'CLIENT' | 'COLLATERAL' | 'COURTESY_MASTER' | 'CROSS' | 'DEPOSIT' | 'DVP' | 'ERROR' | 'EXECUTION' | 'FACILITATION' | 'FUNDING_SOURCE' | 'HEDGE' | 'MARGIN' | 'MUTUAL_FUND' | 'OPERATING' | 'OTHER' | 'RELATED_MASTER' | 'REPO' | 'SECURITIES_LENDING' | 'SHADOW_AWAY' | 'TRADING' | 'TRIPARTY_COLLATERAL_AWAY' | 'UNKNOWN'
+export type AccountSubkind =
+  | 'AFFILIATE'
+  | 'ALLOCATION'
+  | 'ARRANGING'
+  | 'BANK'
+  | 'BLOCK_TRADING'
+  | 'CARRY_BROKER'
+  | 'CASH'
+  | 'CLIENT'
+  | 'COLLATERAL'
+  | 'COURTESY_MASTER'
+  | 'CROSS'
+  | 'DEPOSIT'
+  | 'DVP'
+  | 'ERROR'
+  | 'EXECUTION'
+  | 'FACILITATION'
+  | 'FUNDING_SOURCE'
+  | 'HEDGE'
+  | 'MARGIN'
+  | 'MUTUAL_FUND'
+  | 'OPERATING'
+  | 'OTHER'
+  | 'RELATED_MASTER'
+  | 'REPO'
+  | 'SECURITIES_LENDING'
+  | 'SHADOW_AWAY'
+  | 'TRADING'
+  | 'TRIPARTY_COLLATERAL_AWAY'
+  | 'UNKNOWN';
 
 /**
  * Risk settings for an account
@@ -197,7 +293,7 @@ export declare namespace Accounts {
     type AccountGetAccountsResponse as AccountGetAccountsResponse,
     type AccountPatchAccountByIDResponse as AccountPatchAccountByIDResponse,
     type AccountGetAccountsParams as AccountGetAccountsParams,
-    type AccountPatchAccountByIDParams as AccountPatchAccountByIDParams
+    type AccountPatchAccountByIDParams as AccountPatchAccountByIDParams,
   };
 
   export {
@@ -209,7 +305,7 @@ export declare namespace Accounts {
     type MarginTopContributor as MarginTopContributor,
     type MarginType as MarginType,
     type BalanceGetAccountBalancesResponse as BalanceGetAccountBalancesResponse,
-    type BalanceGetAccountBalancesParams as BalanceGetAccountBalancesParams
+    type BalanceGetAccountBalancesParams as BalanceGetAccountBalancesParams,
   };
 
   export {
@@ -242,7 +338,7 @@ export declare namespace Accounts {
     type OrderGetOrderByIDParams as OrderGetOrderByIDParams,
     type OrderGetOrdersParams as OrderGetOrdersParams,
     type OrderReplaceOrderParams as OrderReplaceOrderParams,
-    type OrderSubmitOrdersParams as OrderSubmitOrdersParams
+    type OrderSubmitOrdersParams as OrderSubmitOrdersParams,
   };
 
   export {
@@ -250,7 +346,7 @@ export declare namespace Accounts {
     type PortfolioHistoryResponse as PortfolioHistoryResponse,
     type PortfolioHistorySegment as PortfolioHistorySegment,
     type PortfolioHistoryGetPortfolioHistoryResponse as PortfolioHistoryGetPortfolioHistoryResponse,
-    type PortfolioHistoryGetPortfolioHistoryParams as PortfolioHistoryGetPortfolioHistoryParams
+    type PortfolioHistoryGetPortfolioHistoryParams as PortfolioHistoryGetPortfolioHistoryParams,
   };
 
   export {
@@ -263,6 +359,6 @@ export declare namespace Accounts {
     type PositionGetPositionsResponse as PositionGetPositionsResponse,
     type PositionClosePositionParams as PositionClosePositionParams,
     type PositionClosePositionsParams as PositionClosePositionsParams,
-    type PositionGetPositionsParams as PositionGetPositionsParams
+    type PositionGetPositionsParams as PositionGetPositionsParams,
   };
 }

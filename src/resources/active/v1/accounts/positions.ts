@@ -26,9 +26,16 @@ export class Positions extends APIResource {
    *   );
    * ```
    */
-  closePosition(securityID: string, params: PositionClosePositionParams, options?: RequestOptions): APIPromise<PositionClosePositionResponse> {
-    const { account_id, security_id_source, ...body } = params
-    return this._client.delete(path`/active/v1/accounts/${account_id}/positions/${security_id_source}/${securityID}`, { body, ...options });
+  closePosition(
+    securityID: string,
+    params: PositionClosePositionParams,
+    options?: RequestOptions,
+  ): APIPromise<PositionClosePositionResponse> {
+    const { account_id, security_id_source, ...body } = params;
+    return this._client.delete(
+      path`/active/v1/accounts/${account_id}/positions/${security_id_source}/${securityID}`,
+      { body, ...options },
+    );
   }
 
   /**
@@ -44,7 +51,11 @@ export class Positions extends APIResource {
    *   );
    * ```
    */
-  closePositions(accountID: number, body: PositionClosePositionsParams | null | undefined = {}, options?: RequestOptions): APIPromise<PositionClosePositionsResponse> {
+  closePositions(
+    accountID: number,
+    body: PositionClosePositionsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PositionClosePositionsResponse> {
     return this._client.delete(path`/active/v1/accounts/${accountID}/positions`, { body, ...options });
   }
 
@@ -57,7 +68,11 @@ export class Positions extends APIResource {
    *   await client.active.v1.accounts.positions.getPositions(0);
    * ```
    */
-  getPositions(accountID: number, query: PositionGetPositionsParams | null | undefined = {}, options?: RequestOptions): APIPromise<PositionGetPositionsResponse> {
+  getPositions(
+    accountID: number,
+    query: PositionGetPositionsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PositionGetPositionsResponse> {
     return this._client.get(path`/active/v1/accounts/${accountID}/positions`, { query, ...options });
   }
 }
@@ -161,12 +176,12 @@ export interface Position {
   unrealized_pnl_pct?: string | null;
 }
 
-export type PositionList = Array<Position>
+export type PositionList = Array<Position>;
 
 /**
  * Position type classification
  */
-export type PositionType = 'LONG' | 'SHORT' | 'LONG_CALL' | 'SHORT_CALL' | 'LONG_PUT' | 'SHORT_PUT'
+export type PositionType = 'LONG' | 'SHORT' | 'LONG_CALL' | 'SHORT_CALL' | 'LONG_PUT' | 'SHORT_PUT';
 
 export interface PositionClosePositionResponse extends Shared.BaseResponse {
   data: OrdersAPI.OrderList;
@@ -234,7 +249,14 @@ export interface PositionGetPositionsParams {
   /**
    * Field to sort by
    */
-  sort_by?: 'SYMBOL' | 'INSTRUMENT_TYPE' | 'QUANTITY' | 'MARKET_VALUE' | 'POSITION_TYPE' | 'UNREALIZED_PNL' | 'DAILY_UNREALIZED_PNL';
+  sort_by?:
+    | 'SYMBOL'
+    | 'INSTRUMENT_TYPE'
+    | 'QUANTITY'
+    | 'MARKET_VALUE'
+    | 'POSITION_TYPE'
+    | 'UNREALIZED_PNL'
+    | 'DAILY_UNREALIZED_PNL';
 
   /**
    * Sort direction
@@ -252,6 +274,6 @@ export declare namespace Positions {
     type PositionGetPositionsResponse as PositionGetPositionsResponse,
     type PositionClosePositionParams as PositionClosePositionParams,
     type PositionClosePositionsParams as PositionClosePositionsParams,
-    type PositionGetPositionsParams as PositionGetPositionsParams
+    type PositionGetPositionsParams as PositionGetPositionsParams,
   };
 }

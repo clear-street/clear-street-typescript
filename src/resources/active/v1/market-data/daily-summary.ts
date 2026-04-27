@@ -31,7 +31,10 @@ export class DailySummary extends APIResource {
    *   );
    * ```
    */
-  getDailySummaries(query: DailySummaryGetDailySummariesParams, options?: RequestOptions): APIPromise<DailySummaryGetDailySummariesResponse> {
+  getDailySummaries(
+    query: DailySummaryGetDailySummariesParams,
+    options?: RequestOptions,
+  ): APIPromise<DailySummaryGetDailySummariesResponse> {
     return this._client.get('/active/v1/market-data/daily-summary', { query, ...options });
   }
 }
@@ -90,7 +93,7 @@ export interface DailySummary {
   volume?: number | null;
 }
 
-export type DailySummaryList = Array<DailySummary>
+export type DailySummaryList = Array<DailySummary>;
 
 export interface DailySummaryGetDailySummariesResponse extends Shared.BaseResponse {
   data: DailySummaryList;
@@ -108,6 +111,6 @@ export declare namespace DailySummary {
     type DailySummary as DailySummary,
     type DailySummaryList as DailySummaryList,
     type DailySummaryGetDailySummariesResponse as DailySummaryGetDailySummariesResponse,
-    type DailySummaryGetDailySummariesParams as DailySummaryGetDailySummariesParams
+    type DailySummaryGetDailySummariesParams as DailySummaryGetDailySummariesParams,
   };
 }

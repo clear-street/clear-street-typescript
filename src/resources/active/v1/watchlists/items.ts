@@ -22,7 +22,11 @@ export class Items extends APIResource {
    *   );
    * ```
    */
-  addWatchlistItem(watchlistID: string, body: ItemAddWatchlistItemParams, options?: RequestOptions): APIPromise<ItemAddWatchlistItemResponse> {
+  addWatchlistItem(
+    watchlistID: string,
+    body: ItemAddWatchlistItemParams,
+    options?: RequestOptions,
+  ): APIPromise<ItemAddWatchlistItemResponse> {
     return this._client.post(path`/active/v1/watchlists/${watchlistID}/items`, { body, ...options });
   }
 
@@ -40,8 +44,12 @@ export class Items extends APIResource {
    *   );
    * ```
    */
-  deleteWatchlistItem(itemID: string, params: ItemDeleteWatchlistItemParams, options?: RequestOptions): APIPromise<unknown> {
-    const { watchlist_id } = params
+  deleteWatchlistItem(
+    itemID: string,
+    params: ItemDeleteWatchlistItemParams,
+    options?: RequestOptions,
+  ): APIPromise<unknown> {
+    const { watchlist_id } = params;
     return this._client.delete(path`/active/v1/watchlists/${watchlist_id}/items/${itemID}`, options);
   }
 }
@@ -63,7 +71,7 @@ export interface ItemAddWatchlistItemResponse extends Shared.BaseResponse {
   data: AddWatchlistItemData;
 }
 
-export type ItemDeleteWatchlistItemResponse = unknown
+export type ItemDeleteWatchlistItemResponse = unknown;
 
 export interface ItemAddWatchlistItemParams {
   /**
@@ -95,6 +103,6 @@ export declare namespace Items {
     type ItemAddWatchlistItemResponse as ItemAddWatchlistItemResponse,
     type ItemDeleteWatchlistItemResponse as ItemDeleteWatchlistItemResponse,
     type ItemAddWatchlistItemParams as ItemAddWatchlistItemParams,
-    type ItemDeleteWatchlistItemParams as ItemDeleteWatchlistItemParams
+    type ItemDeleteWatchlistItemParams as ItemDeleteWatchlistItemParams,
   };
 }

@@ -28,9 +28,16 @@ export class CashFlowStatements extends APIResource {
    *   );
    * ```
    */
-  getInstrumentCashFlowStatements(securityID: string, params: CashFlowStatementGetInstrumentCashFlowStatementsParams, options?: RequestOptions): APIPromise<CashFlowStatementGetInstrumentCashFlowStatementsResponse> {
-    const { security_id_source, ...query } = params
-    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}/cash-flow-statements`, { query, ...options });
+  getInstrumentCashFlowStatements(
+    securityID: string,
+    params: CashFlowStatementGetInstrumentCashFlowStatementsParams,
+    options?: RequestOptions,
+  ): APIPromise<CashFlowStatementGetInstrumentCashFlowStatementsResponse> {
+    const { security_id_source, ...query } = params;
+    return this._client.get(
+      path`/active/v1/instruments/${security_id_source}/${securityID}/cash-flow-statements`,
+      { query, ...options },
+    );
   }
 }
 
@@ -264,7 +271,7 @@ export interface InstrumentCashFlowStatement {
   stock_based_compensation?: string | null;
 }
 
-export type InstrumentCashFlowStatementList = Array<InstrumentCashFlowStatement>
+export type InstrumentCashFlowStatementList = Array<InstrumentCashFlowStatement>;
 
 export interface CashFlowStatementGetInstrumentCashFlowStatementsResponse extends Shared.BaseResponse {
   data: InstrumentCashFlowStatementList;
@@ -303,6 +310,6 @@ export declare namespace CashFlowStatements {
     type InstrumentCashFlowStatement as InstrumentCashFlowStatement,
     type InstrumentCashFlowStatementList as InstrumentCashFlowStatementList,
     type CashFlowStatementGetInstrumentCashFlowStatementsResponse as CashFlowStatementGetInstrumentCashFlowStatementsResponse,
-    type CashFlowStatementGetInstrumentCashFlowStatementsParams as CashFlowStatementGetInstrumentCashFlowStatementsParams
+    type CashFlowStatementGetInstrumentCashFlowStatementsParams as CashFlowStatementGetInstrumentCashFlowStatementsParams,
   };
 }

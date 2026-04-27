@@ -31,7 +31,11 @@ export class Messages extends APIResource {
    *   );
    * ```
    */
-  createMessage(threadID: string, body: MessageCreateMessageParams, options?: RequestOptions): APIPromise<MessageCreateMessageResponse> {
+  createMessage(
+    threadID: string,
+    body: MessageCreateMessageParams,
+    options?: RequestOptions,
+  ): APIPromise<MessageCreateMessageResponse> {
     return this._client.post(path`/active/v1/omni-ai/threads/${threadID}/messages`, { body, ...options });
   }
 
@@ -54,7 +58,11 @@ export class Messages extends APIResource {
    *   );
    * ```
    */
-  listMessages(threadID: string, query: MessageListMessagesParams, options?: RequestOptions): APIPromise<MessageListMessagesResponse> {
+  listMessages(
+    threadID: string,
+    query: MessageListMessagesParams,
+    options?: RequestOptions,
+  ): APIPromise<MessageListMessagesResponse> {
     return this._client.get(path`/active/v1/omni-ai/threads/${threadID}/messages`, { query, ...options });
   }
 }
@@ -98,6 +106,6 @@ export declare namespace Messages {
     type MessageCreateMessageResponse as MessageCreateMessageResponse,
     type MessageListMessagesResponse as MessageListMessagesResponse,
     type MessageCreateMessageParams as MessageCreateMessageParams,
-    type MessageListMessagesParams as MessageListMessagesParams
+    type MessageListMessagesParams as MessageListMessagesParams,
   };
 }

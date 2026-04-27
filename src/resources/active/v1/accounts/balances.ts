@@ -21,7 +21,11 @@ export class Balances extends APIResource {
    *   );
    * ```
    */
-  getAccountBalances(accountID: number, query: BalanceGetAccountBalancesParams | null | undefined = {}, options?: RequestOptions): APIPromise<BalanceGetAccountBalancesResponse> {
+  getAccountBalances(
+    accountID: number,
+    query: BalanceGetAccountBalancesParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BalanceGetAccountBalancesResponse> {
     return this._client.get(path`/active/v1/accounts/${accountID}/balances`, { query, ...options });
   }
 }
@@ -252,7 +256,16 @@ export interface MarginTopContributor {
 /**
  * An account's margin type
  */
-export type MarginType = 'OTHER' | 'NONE' | 'PORTFOLIO_MARGIN' | 'RISK_BASED_HAIRCUT_BROKER_DEALER' | 'REG_T' | 'RISK_BASED_HAIRCUT_MARKET_MAKER' | 'CIRO' | 'FUTURES_NLV' | 'FUTURES_TOT_EQ'
+export type MarginType =
+  | 'OTHER'
+  | 'NONE'
+  | 'PORTFOLIO_MARGIN'
+  | 'RISK_BASED_HAIRCUT_BROKER_DEALER'
+  | 'REG_T'
+  | 'RISK_BASED_HAIRCUT_MARKET_MAKER'
+  | 'CIRO'
+  | 'FUTURES_NLV'
+  | 'FUTURES_TOT_EQ';
 
 export interface BalanceGetAccountBalancesResponse extends Shared.BaseResponse {
   /**
@@ -277,6 +290,6 @@ export declare namespace Balances {
     type MarginTopContributor as MarginTopContributor,
     type MarginType as MarginType,
     type BalanceGetAccountBalancesResponse as BalanceGetAccountBalancesResponse,
-    type BalanceGetAccountBalancesParams as BalanceGetAccountBalancesParams
+    type BalanceGetAccountBalancesParams as BalanceGetAccountBalancesParams,
   };
 }
