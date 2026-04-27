@@ -9,7 +9,7 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
 /**
- * Retrieve details and lists of tradable instruments.
+ * Search and manage saved screeners.
  */
 export class Screener extends APIResource {
   /**
@@ -23,10 +23,7 @@ export class Screener extends APIResource {
    *   await client.active.v1.screener.getScreener();
    * ```
    */
-  getScreener(
-    query: ScreenerGetScreenerParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ScreenerGetScreenerResponse> {
+  getScreener(query: ScreenerGetScreenerParams | null | undefined = {}, options?: RequestOptions): APIPromise<ScreenerGetScreenerResponse> {
     return this._client.get('/active/v1/screener', { query, ...options });
   }
 
@@ -46,10 +43,7 @@ export class Screener extends APIResource {
    *   await client.active.v1.screener.searchScreener();
    * ```
    */
-  searchScreener(
-    body: ScreenerSearchScreenerParams,
-    options?: RequestOptions,
-  ): APIPromise<ScreenerSearchScreenerResponse> {
+  searchScreener(body: ScreenerSearchScreenerParams, options?: RequestOptions): APIPromise<ScreenerSearchScreenerResponse> {
     return this._client.post('/active/v1/screener', { body, ...options });
   }
 }
@@ -57,12 +51,12 @@ export class Screener extends APIResource {
 /**
  * Historical lookback window for price/change fields.
  */
-export type FieldLookback = 'ONE_WEEK' | 'ONE_MONTH' | 'THREE_MONTHS' | 'SIX_MONTHS' | 'YTD' | 'ONE_YEAR';
+export type FieldLookback = 'ONE_WEEK' | 'ONE_MONTH' | 'THREE_MONTHS' | 'SIX_MONTHS' | 'YTD' | 'ONE_YEAR'
 
 /**
  * Reporting period for financial data fields.
  */
-export type FieldPeriod = 'QUARTER' | 'TTM';
+export type FieldPeriod = 'QUARTER' | 'TTM'
 
 /**
  * A reference to a screener field.
@@ -92,7 +86,7 @@ export interface FieldRef {
 /**
  * The data type of a screener field value.
  */
-export type FieldType = 'DECIMAL' | 'INTEGER' | 'STRING' | 'ANALYST_RATING' | 'DATE';
+export type FieldType = 'DECIMAL' | 'INTEGER' | 'STRING' | 'ANALYST_RATING' | 'DATE'
 
 /**
  * A single column in the screener search response.
@@ -140,6 +134,12 @@ export interface ScreenerFilter {
  * An instrument returned by the screener
  */
 export interface ScreenerItem {
+  /**
+   * The OEMS instrument ID (`instrument.instruments.id`). Always present regardless
+   * of `field_filter`.
+   */
+  instrument_id: string;
+
   /**
    * The latest price for the instrument
    */
@@ -371,14 +371,14 @@ export interface ScreenerItem {
   ytd_change_pct?: string | null;
 }
 
-export type ScreenerItemList = Array<ScreenerItem>;
+export type ScreenerItemList = Array<ScreenerItem>
 
 /**
  * A single row of screener columns for one instrument.
  */
-export type ScreenerRow = Array<ScreenerColumn>;
+export type ScreenerRow = Array<ScreenerColumn>
 
-export type ScreenerRowList = Array<ScreenerRow>;
+export type ScreenerRowList = Array<ScreenerRow>
 
 export interface ScreenerGetScreenerResponse extends Shared.BaseResponse {
   data: ScreenerItemList;
@@ -491,28 +491,12 @@ export namespace ScreenerSearchScreenerParams {
       /**
        * The operator to apply.
        */
-      name:
-        | 'LT'
-        | 'LTE'
-        | 'GT'
-        | 'GTE'
-        | 'EQ'
-        | 'BETWEEN'
-        | 'NOT_BETWEEN'
-        | 'ONE_OF'
-        | 'REGEX'
-        | 'BEGINS_WITH'
-        | 'ENDS_WITH'
-        | 'CONTAINS'
-        | 'IS_NULL'
-        | 'IS_NOT_NULL';
+      name: 'LT' | 'LTE' | 'GT' | 'GTE' | 'EQ' | 'BETWEEN' | 'NOT_BETWEEN' | 'ONE_OF' | 'REGEX' | 'BEGINS_WITH' | 'ENDS_WITH' | 'CONTAINS' | 'IS_NULL' | 'IS_NOT_NULL';
 
       /**
        * Optional arguments that modify operator behavior.
        */
-      args?: Array<
-        'LEFT_INCLUSIVE' | 'RIGHT_INCLUSIVE' | 'LEFT_EXCLUSIVE' | 'RIGHT_EXCLUSIVE' | 'CASE_INSENSITIVE'
-      >;
+      args?: Array<'LEFT_INCLUSIVE' | 'RIGHT_INCLUSIVE' | 'LEFT_EXCLUSIVE' | 'RIGHT_EXCLUSIVE' | 'CASE_INSENSITIVE'>;
     }
 
     /**
@@ -600,6 +584,6 @@ export declare namespace Screener {
     type ScreenerGetScreenerResponse as ScreenerGetScreenerResponse,
     type ScreenerSearchScreenerResponse as ScreenerSearchScreenerResponse,
     type ScreenerGetScreenerParams as ScreenerGetScreenerParams,
-    type ScreenerSearchScreenerParams as ScreenerSearchScreenerParams,
+    type ScreenerSearchScreenerParams as ScreenerSearchScreenerParams
   };
 }

@@ -7,7 +7,7 @@ import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 /**
- * Manage trading accounts and view balances.
+ * Manage trading accounts, balances, and portfolio history.
  */
 export class PortfolioHistory extends APIResource {
   /**
@@ -22,11 +22,7 @@ export class PortfolioHistory extends APIResource {
    *   );
    * ```
    */
-  getPortfolioHistory(
-    accountID: number,
-    query: PortfolioHistoryGetPortfolioHistoryParams,
-    options?: RequestOptions,
-  ): APIPromise<PortfolioHistoryGetPortfolioHistoryResponse> {
+  getPortfolioHistory(accountID: number, query: PortfolioHistoryGetPortfolioHistoryParams, options?: RequestOptions): APIPromise<PortfolioHistoryGetPortfolioHistoryResponse> {
     return this._client.get(path`/active/v1/accounts/${accountID}/portfolio-history`, { query, ...options });
   }
 }
@@ -78,7 +74,8 @@ export interface PortfolioHistorySegment {
   net_pnl?: string | null;
 
   /**
-   * Sum of the profit and loss from the previous trading day.
+   * P&L attributable to start-of-day (carried) positions from market movement during
+   * this trading day.
    */
   position_pnl?: string | null;
 
@@ -103,6 +100,6 @@ export declare namespace PortfolioHistory {
     type PortfolioHistoryResponse as PortfolioHistoryResponse,
     type PortfolioHistorySegment as PortfolioHistorySegment,
     type PortfolioHistoryGetPortfolioHistoryResponse as PortfolioHistoryGetPortfolioHistoryResponse,
-    type PortfolioHistoryGetPortfolioHistoryParams as PortfolioHistoryGetPortfolioHistoryParams,
+    type PortfolioHistoryGetPortfolioHistoryParams as PortfolioHistoryGetPortfolioHistoryParams
   };
 }

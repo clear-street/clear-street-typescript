@@ -85,7 +85,7 @@ export interface APIKeyListEntry {
   revoked_at?: string | null;
 }
 
-export type APIKeyListEntryList = Array<APIKeyListEntry>;
+export type APIKeyListEntryList = Array<APIKeyListEntry>
 
 export interface Revocation {
   id: string;
@@ -93,7 +93,7 @@ export interface Revocation {
   revoked_at: string;
 }
 
-export type RevocationList = Array<Revocation>;
+export type RevocationList = Array<Revocation>
 
 export interface APIKeyCreateResponse extends Shared.BaseResponse {
   data: APIKey;
@@ -126,6 +126,6 @@ export declare namespace APIKeys {
     type APIKeyListResponse as APIKeyListResponse,
     type APIKeyRevokeResponse as APIKeyRevokeResponse,
     type APIKeyRevokeAllResponse as APIKeyRevokeAllResponse,
-    type APIKeyCreateParams as APIKeyCreateParams,
+    type APIKeyCreateParams as APIKeyCreateParams
   };
 }

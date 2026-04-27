@@ -15,6 +15,6 @@ export declare namespace Active {
     V1 as V1,
     type APIDecimal64 as APIDecimal64,
     type SecurityIDSource as SecurityIDSource,
-    type SecurityType as SecurityType,
+    type SecurityType as SecurityType
   };
 }

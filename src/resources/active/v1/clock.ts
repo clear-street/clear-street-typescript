@@ -40,5 +40,8 @@ export interface ClockGetClockResponse extends Shared.BaseResponse {
 }
 
 export declare namespace Clock {
-  export { type ClockDetail as ClockDetail, type ClockGetClockResponse as ClockGetClockResponse };
+  export {
+    type ClockDetail as ClockDetail,
+    type ClockGetClockResponse as ClockGetClockResponse
+  };
 }

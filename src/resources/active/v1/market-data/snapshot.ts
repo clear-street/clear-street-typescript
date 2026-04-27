@@ -18,10 +18,7 @@ export class Snapshot extends APIResource {
    *   await client.active.v1.marketData.snapshot.getSnapshots();
    * ```
    */
-  getSnapshots(
-    query: SnapshotGetSnapshotsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<SnapshotGetSnapshotsResponse> {
+  getSnapshots(query: SnapshotGetSnapshotsParams | null | undefined = {}, options?: RequestOptions): APIPromise<SnapshotGetSnapshotsResponse> {
     return this._client.get('/active/v1/market-data/snapshot', { query, ...options });
   }
 }
@@ -61,7 +58,7 @@ export interface MarketDataSnapshot {
   session?: SnapshotSession | null;
 }
 
-export type MarketDataSnapshotList = Array<MarketDataSnapshot>;
+export type MarketDataSnapshotList = Array<MarketDataSnapshot>
 
 /**
  * Last-trade fields for a market data snapshot.
@@ -163,6 +160,6 @@ export declare namespace Snapshot {
     type SnapshotQuote as SnapshotQuote,
     type SnapshotSession as SnapshotSession,
     type SnapshotGetSnapshotsResponse as SnapshotGetSnapshotsResponse,
-    type SnapshotGetSnapshotsParams as SnapshotGetSnapshotsParams,
+    type SnapshotGetSnapshotsParams as SnapshotGetSnapshotsParams
   };
 }

@@ -9,7 +9,7 @@ import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 /**
- * Retrieve details and lists of tradable instruments.
+ * Create and manage watchlists.
  */
 export class Items extends APIResource {
   /**
@@ -23,11 +23,7 @@ export class Items extends APIResource {
    *   );
    * ```
    */
-  addWatchlistItem(
-    watchlistID: string,
-    body: ItemAddWatchlistItemParams,
-    options?: RequestOptions,
-  ): APIPromise<ItemAddWatchlistItemResponse> {
+  addWatchlistItem(watchlistID: string, body: ItemAddWatchlistItemParams, options?: RequestOptions): APIPromise<ItemAddWatchlistItemResponse> {
     return this._client.post(path`/active/v1/watchlists/${watchlistID}/items`, { body, ...options });
   }
 
@@ -42,16 +38,9 @@ export class Items extends APIResource {
    * );
    * ```
    */
-  deleteWatchlistItem(
-    itemID: string,
-    params: ItemDeleteWatchlistItemParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    const { watchlist_id } = params;
-    return this._client.delete(path`/active/v1/watchlists/${watchlist_id}/items/${itemID}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  deleteWatchlistItem(itemID: string, params: ItemDeleteWatchlistItemParams, options?: RequestOptions): APIPromise<void> {
+    const { watchlist_id } = params
+    return this._client.delete(path`/active/v1/watchlists/${watchlist_id}/items/${itemID}`, { ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 }
 
@@ -101,6 +90,6 @@ export declare namespace Items {
     type AddWatchlistItemData as AddWatchlistItemData,
     type ItemAddWatchlistItemResponse as ItemAddWatchlistItemResponse,
     type ItemAddWatchlistItemParams as ItemAddWatchlistItemParams,
-    type ItemDeleteWatchlistItemParams as ItemDeleteWatchlistItemParams,
+    type ItemDeleteWatchlistItemParams as ItemDeleteWatchlistItemParams
   };
 }

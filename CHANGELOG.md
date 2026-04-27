@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.51.0 (2026-04-26)
+
+Full Changelog: [v0.50.0...v0.51.0](https://github.com/clear-street/clear-street-typescript/compare/v0.50.0...v0.51.0)
+
+### Features
+
+* **api:** api update ([5282649](https://github.com/clear-street/clear-street-typescript/commit/5282649af392783ceb65727f8f11f0cdbddc88be))
+* **api:** api update ([183c53c](https://github.com/clear-street/clear-street-typescript/commit/183c53ce76f4de4600405c08103a4075c3c3de38))
+* **api:** api update ([d6051d3](https://github.com/clear-street/clear-street-typescript/commit/d6051d34fae2d120d73bb88090d45d01edad7121))
+* **api:** api update ([b8d5590](https://github.com/clear-street/clear-street-typescript/commit/b8d55908b828367c182f23978ebf1d2c2afdcff0))
+* **api:** api update ([dd164e2](https://github.com/clear-street/clear-street-typescript/commit/dd164e2aec44f638caa204fdee91a9b0fa21da13))
+
+
+### Chores
+
+* **formatter:** run prettier and eslint separately ([b1492c2](https://github.com/clear-street/clear-street-typescript/commit/b1492c2dcbeb962d4f8652dbd593f5b9890486c3))
+
 ## 0.50.0 (2026-04-23)
 
 Full Changelog: [v0.49.0...v0.50.0](https://github.com/clear-street/clear-street-typescript/compare/v0.49.0...v0.50.0)

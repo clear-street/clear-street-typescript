@@ -2,15 +2,12 @@
 
 import ClearStreet from '@clear-street-internal/sdk';
 
-const client = new ClearStreet({
-  apiKey: 'My API Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new ClearStreet({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
-describe('resource venues', () => {
+describe('resource v1', () => {
   // Mock server tests are disabled
-  test.skip('getVenues', async () => {
-    const responsePromise = client.active.v1.instruments.venues.getVenues();
+  test.skip('ws', async () => {
+    const responsePromise = client.active.v1.ws();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

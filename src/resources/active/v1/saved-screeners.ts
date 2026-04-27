@@ -8,7 +8,7 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 /**
- * Retrieve details and lists of tradable instruments.
+ * Search and manage saved screeners.
  */
 export class SavedScreeners extends APIResource {
   /**
@@ -22,10 +22,7 @@ export class SavedScreeners extends APIResource {
    *   await client.active.v1.savedScreeners.createScreener();
    * ```
    */
-  createScreener(
-    body: SavedScreenerCreateScreenerParams,
-    options?: RequestOptions,
-  ): APIPromise<SavedScreenerCreateScreenerResponse> {
+  createScreener(body: SavedScreenerCreateScreenerParams, options?: RequestOptions): APIPromise<SavedScreenerCreateScreenerResponse> {
     return this._client.post('/active/v1/saved-screeners', { body, ...options });
   }
 
@@ -42,10 +39,7 @@ export class SavedScreeners extends APIResource {
    * ```
    */
   deleteScreener(screenerID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/active/v1/saved-screeners/${screenerID}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+    return this._client.delete(path`/active/v1/saved-screeners/${screenerID}`, { ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
   }
 
   /**
@@ -61,10 +55,7 @@ export class SavedScreeners extends APIResource {
    *   );
    * ```
    */
-  getScreenerByID(
-    screenerID: string,
-    options?: RequestOptions,
-  ): APIPromise<SavedScreenerGetScreenerByIDResponse> {
+  getScreenerByID(screenerID: string, options?: RequestOptions): APIPromise<SavedScreenerGetScreenerByIDResponse> {
     return this._client.get(path`/active/v1/saved-screeners/${screenerID}`, options);
   }
 
@@ -97,11 +88,7 @@ export class SavedScreeners extends APIResource {
    *   );
    * ```
    */
-  replaceScreener(
-    screenerID: string,
-    body: SavedScreenerReplaceScreenerParams,
-    options?: RequestOptions,
-  ): APIPromise<SavedScreenerReplaceScreenerResponse> {
+  replaceScreener(screenerID: string, body: SavedScreenerReplaceScreenerParams, options?: RequestOptions): APIPromise<SavedScreenerReplaceScreenerResponse> {
     return this._client.put(path`/active/v1/saved-screeners/${screenerID}`, { body, ...options });
   }
 }
@@ -171,7 +158,7 @@ export interface ScreenerEntry {
   sort_direction?: string | null;
 }
 
-export type ScreenerEntryList = Array<ScreenerEntry>;
+export type ScreenerEntryList = Array<ScreenerEntry>
 
 export interface SavedScreenerCreateScreenerResponse extends Shared.BaseResponse {
   /**
@@ -262,6 +249,6 @@ export declare namespace SavedScreeners {
     type SavedScreenerGetScreenersResponse as SavedScreenerGetScreenersResponse,
     type SavedScreenerReplaceScreenerResponse as SavedScreenerReplaceScreenerResponse,
     type SavedScreenerCreateScreenerParams as SavedScreenerCreateScreenerParams,
-    type SavedScreenerReplaceScreenerParams as SavedScreenerReplaceScreenerParams,
+    type SavedScreenerReplaceScreenerParams as SavedScreenerReplaceScreenerParams
   };
 }
