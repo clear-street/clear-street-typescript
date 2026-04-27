@@ -5,10 +5,16 @@ import * as Shared from '../../../shared';
 import * as V1API from '../v1';
 import * as AnalystReportingAPI from './analyst-reporting';
 import { AnalystDistribution, AnalystReporting, AnalystReportingGetInstrumentAnalystConsensusParams, AnalystReportingGetInstrumentAnalystConsensusResponse, InstrumentAnalystConsensus, PriceTarget } from './analyst-reporting';
+import * as BalanceSheetsAPI from './balance-sheets';
+import { BalanceSheetGetInstrumentBalanceSheetStatementsParams, BalanceSheetGetInstrumentBalanceSheetStatementsResponse, BalanceSheets, InstrumentBalanceSheetStatement, InstrumentBalanceSheetStatementList } from './balance-sheets';
+import * as CashFlowStatementsAPI from './cash-flow-statements';
+import { CashFlowStatementGetInstrumentCashFlowStatementsParams, CashFlowStatementGetInstrumentCashFlowStatementsResponse, CashFlowStatements, InstrumentCashFlowStatement, InstrumentCashFlowStatementList } from './cash-flow-statements';
 import * as EventsAPI from './events';
 import { AllEventsEventType, EventGetAllInstrumentEventsParams, EventGetAllInstrumentEventsResponse, EventGetInstrumentEventsParams, EventGetInstrumentEventsResponse, Events, InstrumentAllEventsData, InstrumentDividendEvent, InstrumentEventEnvelope, InstrumentEventIpoItem, InstrumentEventsByDate, InstrumentEventsData, InstrumentSplitEvent } from './events';
 import * as FundamentalsAPI from './fundamentals';
 import { FundamentalGetInstrumentFundamentalsResponse, Fundamentals, InstrumentFundamentals } from './fundamentals';
+import * as IncomeStatementsAPI from './income-statements';
+import { IncomeStatementGetInstrumentIncomeStatementsParams, IncomeStatementGetInstrumentIncomeStatementsResponse, IncomeStatements, InstrumentIncomeStatement, InstrumentIncomeStatementList } from './income-statements';
 import * as OptionsAPI from './options';
 import { OptionContractsParams, OptionContractsResponse, Options } from './options';
 import { APIPromise } from '../../../../core/api-promise';
@@ -20,8 +26,11 @@ import { path } from '../../../../internal/utils/path';
  */
 export class Instruments extends APIResource {
   analystReporting: AnalystReportingAPI.AnalystReporting = new AnalystReportingAPI.AnalystReporting(this._client);
+  balanceSheets: BalanceSheetsAPI.BalanceSheets = new BalanceSheetsAPI.BalanceSheets(this._client);
+  cashFlowStatements: CashFlowStatementsAPI.CashFlowStatements = new CashFlowStatementsAPI.CashFlowStatements(this._client);
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
   fundamentals: FundamentalsAPI.Fundamentals = new FundamentalsAPI.Fundamentals(this._client);
+  incomeStatements: IncomeStatementsAPI.IncomeStatements = new IncomeStatementsAPI.IncomeStatements(this._client);
   options: OptionsAPI.Options = new OptionsAPI.Options(this._client);
 
   /**
@@ -91,6 +100,11 @@ export type ContractType = 'CALL' | 'PUT'
  * The exercise style of an options contract
  */
 export type ExerciseStyle = 'AMERICAN' | 'EUROPEAN'
+
+/**
+ * Fiscal period type for earnings reports
+ */
+export type FiscalPeriodType = 'QUARTERLY' | 'ANNUAL' | 'TTM' | 'BIANNUAL'
 
 /**
  * Represents a tradable financial instrument, including supplemental information
@@ -651,8 +665,11 @@ export interface InstrumentSearchParams {
 }
 
 Instruments.AnalystReporting = AnalystReporting;
+Instruments.BalanceSheets = BalanceSheets;
+Instruments.CashFlowStatements = CashFlowStatements;
 Instruments.Events = Events;
 Instruments.Fundamentals = Fundamentals;
+Instruments.IncomeStatements = IncomeStatements;
 Instruments.Options = Options;
 
 export declare namespace Instruments {
@@ -660,6 +677,7 @@ export declare namespace Instruments {
     type AnalystRating as AnalystRating,
     type ContractType as ContractType,
     type ExerciseStyle as ExerciseStyle,
+    type FiscalPeriodType as FiscalPeriodType,
     type Instrument as Instrument,
     type InstrumentCore as InstrumentCore,
     type InstrumentCoreList as InstrumentCoreList,
@@ -687,6 +705,22 @@ export declare namespace Instruments {
   };
 
   export {
+    BalanceSheets as BalanceSheets,
+    type InstrumentBalanceSheetStatement as InstrumentBalanceSheetStatement,
+    type InstrumentBalanceSheetStatementList as InstrumentBalanceSheetStatementList,
+    type BalanceSheetGetInstrumentBalanceSheetStatementsResponse as BalanceSheetGetInstrumentBalanceSheetStatementsResponse,
+    type BalanceSheetGetInstrumentBalanceSheetStatementsParams as BalanceSheetGetInstrumentBalanceSheetStatementsParams
+  };
+
+  export {
+    CashFlowStatements as CashFlowStatements,
+    type InstrumentCashFlowStatement as InstrumentCashFlowStatement,
+    type InstrumentCashFlowStatementList as InstrumentCashFlowStatementList,
+    type CashFlowStatementGetInstrumentCashFlowStatementsResponse as CashFlowStatementGetInstrumentCashFlowStatementsResponse,
+    type CashFlowStatementGetInstrumentCashFlowStatementsParams as CashFlowStatementGetInstrumentCashFlowStatementsParams
+  };
+
+  export {
     Events as Events,
     type AllEventsEventType as AllEventsEventType,
     type InstrumentAllEventsData as InstrumentAllEventsData,
@@ -706,6 +740,14 @@ export declare namespace Instruments {
     Fundamentals as Fundamentals,
     type InstrumentFundamentals as InstrumentFundamentals,
     type FundamentalGetInstrumentFundamentalsResponse as FundamentalGetInstrumentFundamentalsResponse
+  };
+
+  export {
+    IncomeStatements as IncomeStatements,
+    type InstrumentIncomeStatement as InstrumentIncomeStatement,
+    type InstrumentIncomeStatementList as InstrumentIncomeStatementList,
+    type IncomeStatementGetInstrumentIncomeStatementsResponse as IncomeStatementGetInstrumentIncomeStatementsResponse,
+    type IncomeStatementGetInstrumentIncomeStatementsParams as IncomeStatementGetInstrumentIncomeStatementsParams
   };
 
   export {

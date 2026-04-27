@@ -120,7 +120,7 @@ describe('resource orders', () => {
 
   // Mock server tests are disabled
   test.skip('submitOrders: only required params', async () => {
-    const responsePromise = client.active.v1.accounts.orders.submitOrders(0, { body: [{
+    const responsePromise = client.active.v1.accounts.orders.submitOrders(0, { orders: [{
     legs: [{
     instrument_type: 'OPTION',
     ratio: 'ratio',
@@ -151,7 +151,7 @@ describe('resource orders', () => {
 
   // Mock server tests are disabled
   test.skip('submitOrders: required and optional params', async () => {
-    const response = await client.active.v1.accounts.orders.submitOrders(0, { body: [{
+    const response = await client.active.v1.accounts.orders.submitOrders(0, { orders: [{
     legs: [{
     instrument_type: 'OPTION',
     ratio: 'ratio',
