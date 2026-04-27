@@ -363,6 +363,11 @@ export interface OpenScreenerAction {
  */
 export interface OrderPayload {
   /**
+   * Type of security
+   */
+  instrument_type: V1API.SecurityType;
+
+  /**
    * Order type
    */
   order_type: OrdersAPI.OrderType;
@@ -371,11 +376,6 @@ export interface OrderPayload {
    * Quantity (shares for stocks, contracts for options)
    */
   quantity: string;
-
-  /**
-   * Type of security
-   */
-  security_type: V1API.SecurityType;
 
   /**
    * Order side
