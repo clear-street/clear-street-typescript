@@ -128,7 +128,7 @@ export class Orders extends APIResource {
    * @example
    * ```ts
    * const response = await client.active.v1.accounts.orders.submitOrders(0, {
-   *   orders: [
+   *   body: [
    *     {
    *       legs: [
    *         { ... },
@@ -147,8 +147,8 @@ export class Orders extends APIResource {
     params: OrderSubmitOrdersParams,
     options?: RequestOptions,
   ): APIPromise<OrderSubmitOrdersResponse> {
-    const { orders } = params;
-    return this._client.post(path`/active/v1/accounts/${accountID}/orders`, { body: orders, ...options });
+    const { body } = params;
+    return this._client.post(path`/active/v1/accounts/${accountID}/orders`, { body: body, ...options });
   }
 }
 
@@ -762,7 +762,7 @@ export interface OrderReplaceOrderParams {
 }
 
 export interface OrderSubmitOrdersParams {
-  orders: Array<OrderSubmitOrdersParams.NewOrderMultilegRequest | OrderSubmitOrdersParams.NewOrderRequest>;
+  body: Array<OrderSubmitOrdersParams.NewOrderMultilegRequest | OrderSubmitOrdersParams.NewOrderRequest>;
 }
 
 export namespace OrderSubmitOrdersParams {
