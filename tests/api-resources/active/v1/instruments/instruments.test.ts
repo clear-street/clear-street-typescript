@@ -40,6 +40,7 @@ describe('resource instruments', () => {
     await expect(client.active.v1.instruments.getInstruments({
     easy_to_borrow: true,
     id_filter: 'id_filter',
+    instrument_type: 'COMMON_STOCK',
     is_liquidation_only: true,
     is_marginable: true,
     is_restricted: true,
@@ -49,7 +50,6 @@ describe('resource instruments', () => {
     page_token: 'U3RhaW5sZXNzIHJvY2tz',
     security_id: ['string'],
     security_id_source: ['string'],
-    security_type: 'COMMON_STOCK',
   }, { path: '/_stainless_unknown_path' }))
       .rejects
       .toThrow(ClearStreet.NotFoundError);

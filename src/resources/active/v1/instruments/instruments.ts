@@ -287,6 +287,11 @@ export interface InstrumentCore {
   expiry?: string | null;
 
   /**
+   * The type of security (e.g., Common Stock, ETF)
+   */
+  instrument_type?: V1API.SecurityType | null;
+
+  /**
    * The percent of a long position's value you must post as margin
    */
   long_margin_rate?: string | null;
@@ -307,11 +312,6 @@ export interface InstrumentCore {
    * Last close price from the security definition.
    */
   previous_close?: string | null;
-
-  /**
-   * The type of security (e.g., Common Stock, ETF)
-   */
-  security_type?: V1API.SecurityType | null;
 
   /**
    * The percent of a short position's value you must post as margin
@@ -539,10 +539,15 @@ export interface InstrumentGetInstrumentsParams {
 
   /**
    * Filter IDs to those containing this substring. For options, and when
-   * security_type is omitted and no security_id/security_id_source filters are
+   * instrument_type is omitted and no security_id/security_id_source filters are
    * provided, this is required.
    */
   id_filter?: string;
+
+  /**
+   * Filter by instrument type. If omitted, returns all types.
+   */
+  instrument_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'CORPORATE_BOND' | 'OPTION' | 'FUTURE' | 'WARRANT' | 'CASH' | 'OTHER';
 
   /**
    * Filter by liquidation only status
@@ -597,11 +602,6 @@ export interface InstrumentGetInstrumentsParams {
    * - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
    */
   security_id_source?: Array<string>;
-
-  /**
-   * Filter by security type. If omitted, returns all types.
-   */
-  security_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'CORPORATE_BOND' | 'OPTION' | 'FUTURE' | 'WARRANT' | 'CASH' | 'OTHER';
 }
 
 export interface InstrumentSearchParams {

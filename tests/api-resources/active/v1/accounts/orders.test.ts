@@ -21,9 +21,9 @@ describe('resource orders', () => {
   test.skip('cancelAllOpenOrders: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(client.active.v1.accounts.orders.cancelAllOpenOrders(0, {
+    instrument_type: 'COMMON_STOCK',
     security_id: ['string'],
     security_id_source: ['string'],
-    security_type: 'COMMON_STOCK',
     side: 'BUY',
     type: 'MARKET',
   }, { path: '/_stainless_unknown_path' }))
@@ -82,11 +82,11 @@ describe('resource orders', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(client.active.v1.accounts.orders.getOrders(0, {
     from: '2019-12-27T18:11:19.117Z',
+    instrument_type: 'COMMON_STOCK',
     page_size: 1,
     page_token: 'U3RhaW5sZXNzIHJvY2tz',
     security_id: ['string'],
     security_id_source: ['string'],
-    security_type: 'COMMON_STOCK',
     status: ['PENDING_NEW'],
     symbol: 'symbol',
     to: '2019-12-27T18:11:19.117Z',
@@ -122,19 +122,19 @@ describe('resource orders', () => {
   test.skip('submitOrders: only required params', async () => {
     const responsePromise = client.active.v1.accounts.orders.submitOrders(0, { body: [{
     legs: [{
+    instrument_type: 'OPTION',
     ratio: 'ratio',
     security: '0193bb84-447a-706f-996f-097254663f02',
-    security_type: 'OPTION',
     side: 'BUY',
   }, {
+    instrument_type: 'OPTION',
     ratio: 'ratio',
     security: '0193bb84-4db4-78ec-b4fd-cba8be61cf8a',
-    security_type: 'OPTION',
     side: 'SELL',
   }, {
+    instrument_type: 'OPTION',
     ratio: 'ratio',
     security: '0193bb84-5264-7f20-8fd3-35df82cd6ef0',
-    security_type: 'OPTION',
     side: 'BUY',
   }],
     order_type: 'LIMIT',
@@ -153,23 +153,23 @@ describe('resource orders', () => {
   test.skip('submitOrders: required and optional params', async () => {
     const response = await client.active.v1.accounts.orders.submitOrders(0, { body: [{
     legs: [{
+    instrument_type: 'OPTION',
     ratio: 'ratio',
     security: '0193bb84-447a-706f-996f-097254663f02',
-    security_type: 'OPTION',
     side: 'BUY',
     id: '1',
     position_effect: 'OPEN',
   }, {
+    instrument_type: 'OPTION',
     ratio: 'ratio',
     security: '0193bb84-4db4-78ec-b4fd-cba8be61cf8a',
-    security_type: 'OPTION',
     side: 'SELL',
     id: '2',
     position_effect: 'OPEN',
   }, {
+    instrument_type: 'OPTION',
     ratio: 'ratio',
     security: '0193bb84-5264-7f20-8fd3-35df82cd6ef0',
-    security_type: 'OPTION',
     side: 'BUY',
     id: '3',
     position_effect: 'OPEN',

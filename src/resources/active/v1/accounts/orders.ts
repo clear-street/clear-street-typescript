@@ -28,8 +28,8 @@ export class Orders extends APIResource {
    * ```
    */
   cancelAllOpenOrders(accountID: number, params: OrderCancelAllOpenOrdersParams | null | undefined = {}, options?: RequestOptions): APIPromise<OrderCancelAllOpenOrdersResponse> {
-    const { security_id, security_id_source, security_type, side, type } = params ?? {}
-    return this._client.delete(path`/active/v1/accounts/${accountID}/orders`, { query: { security_id, security_id_source, security_type, side, type }, ...options });
+    const { instrument_type, security_id, security_id_source, side, type } = params ?? {}
+    return this._client.delete(path`/active/v1/accounts/${accountID}/orders`, { query: { instrument_type, security_id, security_id_source, side, type }, ...options });
   }
 
   /**
@@ -211,6 +211,11 @@ export interface Order {
   filled_quantity: string;
 
   /**
+   * Type of security
+   */
+  instrument_type: V1API.SecurityType;
+
+  /**
    * Remaining unfilled quantity
    */
   leaves_quantity: string;
@@ -235,11 +240,6 @@ export interface Order {
    * The source of the security identifier
    */
   security_id_source: V1API.SecurityIDSource;
-
-  /**
-   * Type of security
-   */
-  security_type: V1API.SecurityType;
 
   /**
    * Side of the order (BUY, SELL, SELL_SHORT)
@@ -526,6 +526,11 @@ export interface OrderSubmitOrdersResponse extends Shared.BaseResponse {
 
 export interface OrderCancelAllOpenOrdersParams {
   /**
+   * Filter by instrument type (e.g., COMMON_STOCK, OPTION)
+   */
+  instrument_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'CORPORATE_BOND' | 'OPTION' | 'FUTURE' | 'WARRANT' | 'CASH' | 'OTHER';
+
+  /**
    * Filter by security ID(s). Accepts single value or indexed array.
    *
    * Examples:
@@ -545,11 +550,6 @@ export interface OrderCancelAllOpenOrdersParams {
    * - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
    */
   security_id_source?: Array<string>;
-
-  /**
-   * Filter by security type (e.g., COMMON_STOCK, OPTION)
-   */
-  security_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'CORPORATE_BOND' | 'OPTION' | 'FUTURE' | 'WARRANT' | 'CASH' | 'OTHER';
 
   /**
    * Filter by order side (BUY or SELL)
@@ -582,6 +582,11 @@ export interface OrderGetOrdersParams {
    */
   from?: string;
 
+  /**
+   * Instrument type filter (e.g., COMMON_STOCK, OPTION)
+   */
+  instrument_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'CORPORATE_BOND' | 'OPTION' | 'FUTURE' | 'WARRANT' | 'CASH' | 'OTHER';
+
   page_size?: number;
 
   /**
@@ -610,11 +615,6 @@ export interface OrderGetOrdersParams {
    * - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
    */
   security_id_source?: Array<string>;
-
-  /**
-   * Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
-   */
-  security_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'CORPORATE_BOND' | 'OPTION' | 'FUTURE' | 'WARRANT' | 'CASH' | 'OTHER';
 
   /**
    * Comma-separated order statuses to filter by
@@ -706,6 +706,11 @@ export namespace OrderSubmitOrdersParams {
      */
     export interface Leg {
       /**
+       * Security type for the leg.
+       */
+      instrument_type: V1API.SecurityType;
+
+      /**
        * Ratio for the leg.
        */
       ratio: string;
@@ -714,11 +719,6 @@ export namespace OrderSubmitOrdersParams {
        * Security identifier for the leg.
        */
       security: string | Leg.SecurityIDPair;
-
-      /**
-       * Security type for the leg.
-       */
-      security_type: V1API.SecurityType;
 
       /**
        * Leg side.
@@ -753,6 +753,11 @@ export namespace OrderSubmitOrdersParams {
    */
   export interface NewOrderRequest {
     /**
+     * Type of security
+     */
+    instrument_type: V1API.SecurityType;
+
+    /**
      * Type of order
      */
     order_type: OrdersAPI.OrderType;
@@ -762,11 +767,6 @@ export namespace OrderSubmitOrdersParams {
      * For OPTION (single-leg): contracts (must be an integer)
      */
     quantity: string;
-
-    /**
-     * Type of security
-     */
-    security_type: V1API.SecurityType;
 
     /**
      * Side of the order
@@ -807,7 +807,7 @@ export namespace OrderSubmitOrdersParams {
     limit_price?: string | null;
 
     /**
-     * Required when security_type is OPTION. Specifies whether the order opens or
+     * Required when instrument_type is OPTION. Specifies whether the order opens or
      * closes a position.
      */
     position_effect?: 'OPEN' | 'CLOSE';
@@ -837,7 +837,7 @@ export namespace OrderSubmitOrdersParams {
      * Trading symbol. For equities, use the ticker symbol (e.g., "AAPL"). For options,
      * use the OSI symbol (e.g., "AAPL 250117C00190000"). If provided without
      * security_id, the system will derive security_id and source based on
-     * security_type (CMS for equities, OPRA for options).
+     * instrument_type (CMS for equities, OPRA for options).
      */
     symbol?: string | null;
 

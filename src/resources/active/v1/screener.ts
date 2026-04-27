@@ -231,6 +231,11 @@ export interface ScreenerItem {
   industry?: string | null;
 
   /**
+   * The type of instrument
+   */
+  instrument_type?: string | null;
+
+  /**
    * The date the instrument was first listed
    */
   list_date?: string | null;
@@ -314,11 +319,6 @@ export interface ScreenerItem {
    * The business sector of the instrument's issuer
    */
   sector?: string | null;
-
-  /**
-   * The type of security
-   */
-  security_type?: string | null;
 
   /**
    * Percent change from six months ago close to previous day close
