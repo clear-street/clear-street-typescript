@@ -1,30 +1,150 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as APIKeysAPI from './api-keys';
-import { APIKey, APIKeyCreateParams, APIKeyCreateResponse, APIKeyListEntry, APIKeyListEntryList, APIKeyListResponse, APIKeyRevokeAllResponse, APIKeyRevokeResponse, APIKeys, Revocation, RevocationList } from './api-keys';
 import * as ClockAPI from './clock';
 import { Clock, ClockDetail, ClockGetClockResponse } from './clock';
 import * as NewsAPI from './news';
-import { News, NewsGetNewsParams, NewsGetNewsResponse, NewsInstrument, NewsItem, NewsItemList, NewsType } from './news';
+import {
+  News,
+  NewsGetNewsParams,
+  NewsGetNewsResponse,
+  NewsInstrument,
+  NewsItem,
+  NewsItemList,
+  NewsType,
+} from './news';
 import * as SavedScreenersAPI from './saved-screeners';
-import { SavedScreenerCreateScreenerParams, SavedScreenerCreateScreenerResponse, SavedScreenerFilter, SavedScreenerGetScreenerByIDResponse, SavedScreenerGetScreenersResponse, SavedScreenerReplaceScreenerParams, SavedScreenerReplaceScreenerResponse, SavedScreeners, ScreenerEntry, ScreenerEntryList } from './saved-screeners';
+import {
+  SavedScreenerCreateScreenerParams,
+  SavedScreenerCreateScreenerResponse,
+  SavedScreenerFilter,
+  SavedScreenerGetScreenerByIDResponse,
+  SavedScreenerGetScreenersResponse,
+  SavedScreenerReplaceScreenerParams,
+  SavedScreenerReplaceScreenerResponse,
+  SavedScreeners,
+  ScreenerEntry,
+  ScreenerEntryList,
+} from './saved-screeners';
 import * as ScreenerAPI from './screener';
-import { FieldLookback, FieldPeriod, FieldRef, FieldType, Screener, ScreenerColumn, ScreenerFilter, ScreenerGetScreenerParams, ScreenerGetScreenerResponse, ScreenerItem, ScreenerItemList, ScreenerRow, ScreenerRowList, ScreenerSearchScreenerParams, ScreenerSearchScreenerResponse } from './screener';
+import {
+  FieldLookback,
+  FieldPeriod,
+  FieldRef,
+  FieldType,
+  Screener,
+  ScreenerColumn,
+  ScreenerFilter,
+  ScreenerGetScreenerParams,
+  ScreenerGetScreenerResponse,
+  ScreenerItem,
+  ScreenerItemList,
+  ScreenerRow,
+  ScreenerRowList,
+  ScreenerSearchScreenerParams,
+  ScreenerSearchScreenerResponse,
+} from './screener';
 import * as VersionAPI from './version';
 import { Version, VersionGetVersionResponse, VersionResource } from './version';
 import * as AccountsAPI from './accounts/accounts';
-import { Account, AccountGetAccountByIDResponse, AccountGetAccountsParams, AccountGetAccountsResponse, AccountKind, AccountList, AccountPatchAccountByIDParams, AccountPatchAccountByIDResponse, AccountSettings, AccountStatus, AccountSubkind, Accounts, RiskSettings } from './accounts/accounts';
+import {
+  Account,
+  AccountGetAccountByIDResponse,
+  AccountGetAccountsParams,
+  AccountGetAccountsResponse,
+  AccountKind,
+  AccountList,
+  AccountPatchAccountByIDParams,
+  AccountPatchAccountByIDResponse,
+  AccountSettings,
+  AccountStatus,
+  AccountSubkind,
+  Accounts,
+  RiskSettings,
+} from './accounts/accounts';
 import * as CalendarsAPI from './calendars/calendars';
 import { Calendars } from './calendars/calendars';
 import * as InstrumentsAPI from './instruments/instruments';
-import { AnalystRating, ContractType, ExerciseStyle, FiscalPeriodType, Instrument, InstrumentCore, InstrumentCoreList, InstrumentEarnings, InstrumentGetInstrumentByIDParams, InstrumentGetInstrumentByIDResponse, InstrumentGetInstrumentsParams, InstrumentGetInstrumentsResponse, InstrumentQuote, InstrumentSearchParams, InstrumentSearchResponse, InstrumentSecurityID, Instruments, ListingType, OptionsContract, OptionsContractList } from './instruments/instruments';
+import {
+  AnalystRating,
+  ContractType,
+  ExerciseStyle,
+  FiscalPeriodType,
+  Instrument,
+  InstrumentCore,
+  InstrumentCoreList,
+  InstrumentEarnings,
+  InstrumentGetInstrumentByIDParams,
+  InstrumentGetInstrumentByIDResponse,
+  InstrumentGetInstrumentsParams,
+  InstrumentGetInstrumentsResponse,
+  InstrumentQuote,
+  InstrumentSearchParams,
+  InstrumentSearchResponse,
+  InstrumentSecurityID,
+  Instruments,
+  ListingType,
+  OptionsContract,
+  OptionsContractList,
+} from './instruments/instruments';
 import * as MarketDataAPI from './market-data/market-data';
 import { MarketData } from './market-data/market-data';
 import * as OmniAIAPI from './omni-ai/omni-ai';
-import { ActionButton, CancelResponsePayload, ChartPayload, ChartPoint, ChartSeries, ContentPartChartPayload, ContentPartCustomPayload, ContentPartStructuredActionPayload, ContentPartSuggestedActionsPayload, ContentPartTextPayload, ContentPartThinkingPayload, CreateFeedbackResponse, CreateMessageResponse, CreateThreadResponse, DataChart, ErrorStatus, Message, MessageContent, MessageContentPart, MessageList, MessageOutcome, MessageRole, OmniAI, OpenChartAction, OpenEntitlementConsentAction, OpenScreenerAction, OrderPayload, OrderStrategyType, PrefillOrderAction, PromptButtonAction, Response, ResponseContent, ResponseContentPart, ResponseStatus, StructuredAction, StructuredActionButtonAction, SuggestedActionsPayload, SymbolChart, Thread, ThreadList } from './omni-ai/omni-ai';
+import {
+  ActionButton,
+  CancelResponsePayload,
+  ChartPayload,
+  ChartPoint,
+  ChartSeries,
+  ContentPartChartPayload,
+  ContentPartCustomPayload,
+  ContentPartStructuredActionPayload,
+  ContentPartSuggestedActionsPayload,
+  ContentPartTextPayload,
+  ContentPartThinkingPayload,
+  CreateFeedbackResponse,
+  CreateMessageResponse,
+  CreateThreadResponse,
+  DataChart,
+  ErrorStatus,
+  Message,
+  MessageContent,
+  MessageContentPart,
+  MessageList,
+  MessageOutcome,
+  MessageRole,
+  OmniAI,
+  OpenChartAction,
+  OpenEntitlementConsentAction,
+  OpenScreenerAction,
+  OrderPayload,
+  OrderStrategyType,
+  PrefillOrderAction,
+  PromptButtonAction,
+  Response,
+  ResponseContent,
+  ResponseContentPart,
+  ResponseStatus,
+  StructuredAction,
+  StructuredActionButtonAction,
+  SuggestedActionsPayload,
+  SymbolChart,
+  Thread,
+  ThreadList,
+} from './omni-ai/omni-ai';
 import * as WatchlistsAPI from './watchlists/watchlists';
-import { WatchlistCreateWatchlistParams, WatchlistCreateWatchlistResponse, WatchlistDeleteWatchlistResponse, WatchlistDetail, WatchlistEntry, WatchlistEntryList, WatchlistGetWatchlistByIDResponse, WatchlistGetWatchlistsResponse, WatchlistItemEntry, Watchlists } from './watchlists/watchlists';
+import {
+  WatchlistCreateWatchlistParams,
+  WatchlistCreateWatchlistResponse,
+  WatchlistDeleteWatchlistResponse,
+  WatchlistDetail,
+  WatchlistEntry,
+  WatchlistEntryList,
+  WatchlistGetWatchlistByIDResponse,
+  WatchlistGetWatchlistsResponse,
+  WatchlistItemEntry,
+  Watchlists,
+} from './watchlists/watchlists';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -34,7 +154,6 @@ import { RequestOptions } from '../../../internal/request-options';
  */
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
-  apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
   calendars: CalendarsAPI.Calendars = new CalendarsAPI.Calendars(this._client);
   clock: ClockAPI.Clock = new ClockAPI.Clock(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
@@ -55,27 +174,76 @@ export class V1 extends APIResource {
    * ```
    */
   ws(options?: RequestOptions): APIPromise<void> {
-    return this._client.get('/active/v1/ws', { ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+    return this._client.get('/active/v1/ws', {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 }
 
 /**
  * A decimal number represented as a string.
  */
-export type APIDecimal64 = string
+export type APIDecimal64 = string;
 
 /**
  * Security identifier source
  */
-export type SecurityIDSource = 'CMS' | 'CLST' | 'OPRA' | 'FIGI' | 'CUSIP' | 'CURRENCY' | 'FMP' | 'OEMS' | 'SEDOL' | 'QUIK' | 'ISIN' | 'RIC' | 'COUNTRY' | 'EXCHANGE' | 'CTA' | 'BLOOMBERG' | 'WERTPAPIER' | 'DUTCH' | 'VALOREN' | 'SICOVAM' | 'BELGIAN' | 'COMMON' | 'CLEARING_HOUSE' | 'ISDA_FPML_SPECIFICATION' | 'ISDA_FPML_URL' | 'LETTER_OF_CREDIT' | 'MARKETPLACE_ASSIGNED_IDENTIFIER' | 'MARKIT_RED_ENTITY_CLIP' | 'MARKIT_RED_PAIR_CLIP' | 'CFTC' | 'ISDA_COMMODITY_REFERENCE_PRICE' | 'LEGAL_ENTITY_IDENTIFIER' | 'SYNTHETIC' | 'FIDESSA_INSTRUMENT_MNEMONIC' | 'INDEX_NAME' | 'UNIFORM_SYMBOL' | 'DIGITAL_TOKEN_IDENTIFIER' | 'MASSIVE' | 'OTHER'
+export type SecurityIDSource =
+  | 'CMS'
+  | 'CLST'
+  | 'OPRA'
+  | 'FIGI'
+  | 'CUSIP'
+  | 'CURRENCY'
+  | 'FMP'
+  | 'OEMS'
+  | 'SEDOL'
+  | 'QUIK'
+  | 'ISIN'
+  | 'RIC'
+  | 'COUNTRY'
+  | 'EXCHANGE'
+  | 'CTA'
+  | 'BLOOMBERG'
+  | 'WERTPAPIER'
+  | 'DUTCH'
+  | 'VALOREN'
+  | 'SICOVAM'
+  | 'BELGIAN'
+  | 'COMMON'
+  | 'CLEARING_HOUSE'
+  | 'ISDA_FPML_SPECIFICATION'
+  | 'ISDA_FPML_URL'
+  | 'LETTER_OF_CREDIT'
+  | 'MARKETPLACE_ASSIGNED_IDENTIFIER'
+  | 'MARKIT_RED_ENTITY_CLIP'
+  | 'MARKIT_RED_PAIR_CLIP'
+  | 'CFTC'
+  | 'ISDA_COMMODITY_REFERENCE_PRICE'
+  | 'LEGAL_ENTITY_IDENTIFIER'
+  | 'SYNTHETIC'
+  | 'FIDESSA_INSTRUMENT_MNEMONIC'
+  | 'INDEX_NAME'
+  | 'UNIFORM_SYMBOL'
+  | 'DIGITAL_TOKEN_IDENTIFIER'
+  | 'MASSIVE'
+  | 'OTHER';
 
 /**
  * Security type
  */
-export type SecurityType = 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'CORPORATE_BOND' | 'OPTION' | 'FUTURE' | 'WARRANT' | 'CASH' | 'OTHER'
+export type SecurityType =
+  | 'COMMON_STOCK'
+  | 'PREFERRED_STOCK'
+  | 'CORPORATE_BOND'
+  | 'OPTION'
+  | 'FUTURE'
+  | 'WARRANT'
+  | 'CASH'
+  | 'OTHER';
 
 V1.Accounts = Accounts;
-V1.APIKeys = APIKeys;
 V1.Calendars = Calendars;
 V1.Clock = Clock;
 V1.Instruments = Instruments;
@@ -91,7 +259,7 @@ export declare namespace V1 {
   export {
     type APIDecimal64 as APIDecimal64,
     type SecurityIDSource as SecurityIDSource,
-    type SecurityType as SecurityType
+    type SecurityType as SecurityType,
   };
 
   export {
@@ -107,31 +275,15 @@ export declare namespace V1 {
     type AccountGetAccountsResponse as AccountGetAccountsResponse,
     type AccountPatchAccountByIDResponse as AccountPatchAccountByIDResponse,
     type AccountGetAccountsParams as AccountGetAccountsParams,
-    type AccountPatchAccountByIDParams as AccountPatchAccountByIDParams
+    type AccountPatchAccountByIDParams as AccountPatchAccountByIDParams,
   };
 
-  export {
-    APIKeys as APIKeys,
-    type APIKey as APIKey,
-    type APIKeyListEntry as APIKeyListEntry,
-    type APIKeyListEntryList as APIKeyListEntryList,
-    type Revocation as Revocation,
-    type RevocationList as RevocationList,
-    type APIKeyCreateResponse as APIKeyCreateResponse,
-    type APIKeyListResponse as APIKeyListResponse,
-    type APIKeyRevokeResponse as APIKeyRevokeResponse,
-    type APIKeyRevokeAllResponse as APIKeyRevokeAllResponse,
-    type APIKeyCreateParams as APIKeyCreateParams
-  };
-
-  export {
-    Calendars as Calendars
-  };
+  export { Calendars as Calendars };
 
   export {
     Clock as Clock,
     type ClockDetail as ClockDetail,
-    type ClockGetClockResponse as ClockGetClockResponse
+    type ClockGetClockResponse as ClockGetClockResponse,
   };
 
   export {
@@ -154,12 +306,10 @@ export declare namespace V1 {
     type InstrumentSearchResponse as InstrumentSearchResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
-    type InstrumentSearchParams as InstrumentSearchParams
+    type InstrumentSearchParams as InstrumentSearchParams,
   };
 
-  export {
-    MarketData as MarketData
-  };
+  export { MarketData as MarketData };
 
   export {
     News as News,
@@ -168,7 +318,7 @@ export declare namespace V1 {
     type NewsItemList as NewsItemList,
     type NewsType as NewsType,
     type NewsGetNewsResponse as NewsGetNewsResponse,
-    type NewsGetNewsParams as NewsGetNewsParams
+    type NewsGetNewsParams as NewsGetNewsParams,
   };
 
   export {
@@ -211,7 +361,7 @@ export declare namespace V1 {
     type SuggestedActionsPayload as SuggestedActionsPayload,
     type SymbolChart as SymbolChart,
     type Thread as Thread,
-    type ThreadList as ThreadList
+    type ThreadList as ThreadList,
   };
 
   export {
@@ -224,7 +374,7 @@ export declare namespace V1 {
     type SavedScreenerGetScreenersResponse as SavedScreenerGetScreenersResponse,
     type SavedScreenerReplaceScreenerResponse as SavedScreenerReplaceScreenerResponse,
     type SavedScreenerCreateScreenerParams as SavedScreenerCreateScreenerParams,
-    type SavedScreenerReplaceScreenerParams as SavedScreenerReplaceScreenerParams
+    type SavedScreenerReplaceScreenerParams as SavedScreenerReplaceScreenerParams,
   };
 
   export {
@@ -242,13 +392,13 @@ export declare namespace V1 {
     type ScreenerGetScreenerResponse as ScreenerGetScreenerResponse,
     type ScreenerSearchScreenerResponse as ScreenerSearchScreenerResponse,
     type ScreenerGetScreenerParams as ScreenerGetScreenerParams,
-    type ScreenerSearchScreenerParams as ScreenerSearchScreenerParams
+    type ScreenerSearchScreenerParams as ScreenerSearchScreenerParams,
   };
 
   export {
     VersionResource as VersionResource,
     type Version as Version,
-    type VersionGetVersionResponse as VersionGetVersionResponse
+    type VersionGetVersionResponse as VersionGetVersionResponse,
   };
 
   export {
@@ -261,6 +411,6 @@ export declare namespace V1 {
     type WatchlistDeleteWatchlistResponse as WatchlistDeleteWatchlistResponse,
     type WatchlistGetWatchlistByIDResponse as WatchlistGetWatchlistByIDResponse,
     type WatchlistGetWatchlistsResponse as WatchlistGetWatchlistsResponse,
-    type WatchlistCreateWatchlistParams as WatchlistCreateWatchlistParams
+    type WatchlistCreateWatchlistParams as WatchlistCreateWatchlistParams,
   };
 }

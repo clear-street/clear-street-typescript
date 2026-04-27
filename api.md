@@ -123,27 +123,6 @@ Methods:
 - <code title="delete /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">closePositions</a>(accountID, { ...params }) -> PositionClosePositionsResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
 
-### APIKeys
-
-Types:
-
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKey</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKeyListEntry</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKeyListEntryList</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">Revocation</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">RevocationList</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKeyCreateResponse</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKeyListResponse</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKeyRevokeResponse</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKeyRevokeAllResponse</a></code>
-
-Methods:
-
-- <code title="post /active/v1/api_keys">client.active.v1.apiKeys.<a href="./src/resources/active/v1/api-keys.ts">create</a>({ ...params }) -> APIKeyCreateResponse</code>
-- <code title="get /active/v1/api_keys">client.active.v1.apiKeys.<a href="./src/resources/active/v1/api-keys.ts">list</a>() -> APIKeyListResponse</code>
-- <code title="delete /active/v1/api_keys/{id}">client.active.v1.apiKeys.<a href="./src/resources/active/v1/api-keys.ts">revoke</a>(id) -> APIKeyRevokeResponse</code>
-- <code title="delete /active/v1/api_keys">client.active.v1.apiKeys.<a href="./src/resources/active/v1/api-keys.ts">revokeAll</a>() -> APIKeyRevokeAllResponse</code>
-
 ### Calendars
 
 #### MarketHours

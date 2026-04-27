@@ -19,7 +19,10 @@ export class News extends APIResource {
    * const response = await client.active.v1.news.getNews();
    * ```
    */
-  getNews(query: NewsGetNewsParams | null | undefined = {}, options?: RequestOptions): APIPromise<NewsGetNewsResponse> {
+  getNews(
+    query: NewsGetNewsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<NewsGetNewsResponse> {
     return this._client.get('/active/v1/news', { query, ...options });
   }
 }
@@ -104,12 +107,12 @@ export interface NewsItem {
   text?: string | null;
 }
 
-export type NewsItemList = Array<NewsItem>
+export type NewsItemList = Array<NewsItem>;
 
 /**
  * News item classification.
  */
-export type NewsType = 'NEWS' | 'PRESS_RELEASE'
+export type NewsType = 'NEWS' | 'PRESS_RELEASE';
 
 export interface NewsGetNewsResponse extends Shared.BaseResponse {
   data: NewsItemList;
@@ -159,7 +162,19 @@ export interface NewsGetNewsParams {
   /**
    * Comma-separated sector values to filter by.
    */
-  sectors?: Array<'BASIC_MATERIALS' | 'COMMUNICATION_SERVICES' | 'CONSUMER_CYCLICAL' | 'CONSUMER_DEFENSIVE' | 'ENERGY' | 'FINANCIAL_SERVICES' | 'HEALTHCARE' | 'INDUSTRIALS' | 'REAL_ESTATE' | 'TECHNOLOGY' | 'UTILITIES'>;
+  sectors?: Array<
+    | 'BASIC_MATERIALS'
+    | 'COMMUNICATION_SERVICES'
+    | 'CONSUMER_CYCLICAL'
+    | 'CONSUMER_DEFENSIVE'
+    | 'ENERGY'
+    | 'FINANCIAL_SERVICES'
+    | 'HEALTHCARE'
+    | 'INDUSTRIALS'
+    | 'REAL_ESTATE'
+    | 'TECHNOLOGY'
+    | 'UTILITIES'
+  >;
 
   /**
    * Filter by security ID(s). Accepts single value or indexed array.
@@ -195,6 +210,6 @@ export declare namespace News {
     type NewsItemList as NewsItemList,
     type NewsType as NewsType,
     type NewsGetNewsResponse as NewsGetNewsResponse,
-    type NewsGetNewsParams as NewsGetNewsParams
+    type NewsGetNewsParams as NewsGetNewsParams,
   };
 }

@@ -27,7 +27,11 @@ export class Messages extends APIResource {
    *   );
    * ```
    */
-  feedback(messageID: string, body: MessageFeedbackParams, options?: RequestOptions): APIPromise<MessageFeedbackResponse> {
+  feedback(
+    messageID: string,
+    body: MessageFeedbackParams,
+    options?: RequestOptions,
+  ): APIPromise<MessageFeedbackResponse> {
     return this._client.post(path`/active/v1/omni-ai/messages/${messageID}/feedback`, { body, ...options });
   }
 
@@ -47,7 +51,11 @@ export class Messages extends APIResource {
    *   );
    * ```
    */
-  getMessage(messageID: string, query: MessageGetMessageParams, options?: RequestOptions): APIPromise<MessageGetMessageResponse> {
+  getMessage(
+    messageID: string,
+    query: MessageGetMessageParams,
+    options?: RequestOptions,
+  ): APIPromise<MessageGetMessageResponse> {
     return this._client.get(path`/active/v1/omni-ai/messages/${messageID}`, { query, ...options });
   }
 }
@@ -97,6 +105,6 @@ export declare namespace Messages {
     type MessageFeedbackResponse as MessageFeedbackResponse,
     type MessageGetMessageResponse as MessageGetMessageResponse,
     type MessageFeedbackParams as MessageFeedbackParams,
-    type MessageGetMessageParams as MessageGetMessageParams
+    type MessageGetMessageParams as MessageGetMessageParams,
   };
 }

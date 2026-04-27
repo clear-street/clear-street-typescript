@@ -25,7 +25,10 @@ export class Entitlements extends APIResource {
    *   );
    * ```
    */
-  createEntitlements(body: EntitlementCreateEntitlementsParams, options?: RequestOptions): APIPromise<EntitlementCreateEntitlementsResponse> {
+  createEntitlements(
+    body: EntitlementCreateEntitlementsParams,
+    options?: RequestOptions,
+  ): APIPromise<EntitlementCreateEntitlementsResponse> {
     return this._client.post('/active/v1/omni-ai/entitlements', { body, ...options });
   }
 
@@ -40,7 +43,10 @@ export class Entitlements extends APIResource {
    *   );
    * ```
    */
-  deleteEntitlement(entitlementID: string, options?: RequestOptions): APIPromise<EntitlementDeleteEntitlementResponse> {
+  deleteEntitlement(
+    entitlementID: string,
+    options?: RequestOptions,
+  ): APIPromise<EntitlementDeleteEntitlementResponse> {
     return this._client.delete(path`/active/v1/omni-ai/entitlements/${entitlementID}`, options);
   }
 
@@ -53,7 +59,10 @@ export class Entitlements extends APIResource {
    *   await client.active.v1.omniAI.entitlements.listEntitlements();
    * ```
    */
-  listEntitlements(query: EntitlementListEntitlementsParams | null | undefined = {}, options?: RequestOptions): APIPromise<EntitlementListEntitlementsResponse> {
+  listEntitlements(
+    query: EntitlementListEntitlementsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EntitlementListEntitlementsResponse> {
     return this._client.get('/active/v1/omni-ai/entitlements', { query, ...options });
   }
 }
@@ -76,7 +85,7 @@ export interface EntitlementResource {
   trading_account_id: number;
 }
 
-export type EntitlementResourceList = Array<EntitlementResource>
+export type EntitlementResourceList = Array<EntitlementResource>;
 
 export interface EntitlementCreateEntitlementsResponse extends Shared.BaseResponse {
   data: EntitlementResourceList;
@@ -111,6 +120,6 @@ export declare namespace Entitlements {
     type EntitlementDeleteEntitlementResponse as EntitlementDeleteEntitlementResponse,
     type EntitlementListEntitlementsResponse as EntitlementListEntitlementsResponse,
     type EntitlementCreateEntitlementsParams as EntitlementCreateEntitlementsParams,
-    type EntitlementListEntitlementsParams as EntitlementListEntitlementsParams
+    type EntitlementListEntitlementsParams as EntitlementListEntitlementsParams,
   };
 }

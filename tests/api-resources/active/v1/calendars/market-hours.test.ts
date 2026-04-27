@@ -2,7 +2,10 @@
 
 import ClearStreet from '@clear-street-internal/sdk';
 
-const client = new ClearStreet({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new ClearStreet({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource marketHours', () => {
   // Mock server tests are disabled
@@ -19,6 +22,9 @@ describe('resource marketHours', () => {
 
   // Mock server tests are disabled
   test.skip('getMarketHoursCalendar: required and optional params', async () => {
-    const response = await client.active.v1.calendars.marketHours.getMarketHoursCalendar({ date: 'date', market: 'us_equities' });
+    const response = await client.active.v1.calendars.marketHours.getMarketHoursCalendar({
+      date: 'date',
+      market: 'us_equities',
+    });
   });
 });

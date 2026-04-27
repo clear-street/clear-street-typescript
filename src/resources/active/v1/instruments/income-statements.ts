@@ -30,9 +30,16 @@ export class IncomeStatements extends APIResource {
    *   );
    * ```
    */
-  getInstrumentIncomeStatements(securityID: string, params: IncomeStatementGetInstrumentIncomeStatementsParams, options?: RequestOptions): APIPromise<IncomeStatementGetInstrumentIncomeStatementsResponse> {
-    const { security_id_source, ...query } = params
-    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}/income-statements`, { query, ...options });
+  getInstrumentIncomeStatements(
+    securityID: string,
+    params: IncomeStatementGetInstrumentIncomeStatementsParams,
+    options?: RequestOptions,
+  ): APIPromise<IncomeStatementGetInstrumentIncomeStatementsResponse> {
+    const { security_id_source, ...query } = params;
+    return this._client.get(
+      path`/active/v1/instruments/${security_id_source}/${securityID}/income-statements`,
+      { query, ...options },
+    );
   }
 }
 
@@ -226,7 +233,7 @@ export interface InstrumentIncomeStatement {
   weighted_average_shs_out_dil?: string | null;
 }
 
-export type InstrumentIncomeStatementList = Array<InstrumentIncomeStatement>
+export type InstrumentIncomeStatementList = Array<InstrumentIncomeStatement>;
 
 export interface IncomeStatementGetInstrumentIncomeStatementsResponse extends Shared.BaseResponse {
   data: InstrumentIncomeStatementList;
@@ -265,6 +272,6 @@ export declare namespace IncomeStatements {
     type InstrumentIncomeStatement as InstrumentIncomeStatement,
     type InstrumentIncomeStatementList as InstrumentIncomeStatementList,
     type IncomeStatementGetInstrumentIncomeStatementsResponse as IncomeStatementGetInstrumentIncomeStatementsResponse,
-    type IncomeStatementGetInstrumentIncomeStatementsParams as IncomeStatementGetInstrumentIncomeStatementsParams
+    type IncomeStatementGetInstrumentIncomeStatementsParams as IncomeStatementGetInstrumentIncomeStatementsParams,
   };
 }

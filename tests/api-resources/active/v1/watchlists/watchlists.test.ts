@@ -2,7 +2,10 @@
 
 import ClearStreet from '@clear-street-internal/sdk';
 
-const client = new ClearStreet({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new ClearStreet({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource watchlists', () => {
   // Mock server tests are disabled
@@ -24,7 +27,9 @@ describe('resource watchlists', () => {
 
   // Mock server tests are disabled
   test.skip('deleteWatchlist', async () => {
-    const responsePromise = client.active.v1.watchlists.deleteWatchlist('550e8400-e29b-41d4-a716-446655440000');
+    const responsePromise = client.active.v1.watchlists.deleteWatchlist(
+      '550e8400-e29b-41d4-a716-446655440000',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,7 +41,9 @@ describe('resource watchlists', () => {
 
   // Mock server tests are disabled
   test.skip('getWatchlistByID', async () => {
-    const responsePromise = client.active.v1.watchlists.getWatchlistByID('550e8400-e29b-41d4-a716-446655440000');
+    const responsePromise = client.active.v1.watchlists.getWatchlistByID(
+      '550e8400-e29b-41d4-a716-446655440000',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
