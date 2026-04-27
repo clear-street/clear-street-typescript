@@ -24,7 +24,7 @@ import { MarketData } from './market-data/market-data';
 import * as OmniAIAPI from './omni-ai/omni-ai';
 import { ActionButton, CancelResponsePayload, ChartPayload, ChartPoint, ChartSeries, ContentPartChartPayload, ContentPartCustomPayload, ContentPartStructuredActionPayload, ContentPartSuggestedActionsPayload, ContentPartTextPayload, ContentPartThinkingPayload, CreateFeedbackResponse, CreateMessageResponse, CreateThreadResponse, DataChart, ErrorStatus, Message, MessageContent, MessageContentPart, MessageList, MessageOutcome, MessageRole, OmniAI, OpenChartAction, OpenEntitlementConsentAction, OpenScreenerAction, OrderPayload, OrderStrategyType, PrefillOrderAction, PromptButtonAction, Response, ResponseContent, ResponseContentPart, ResponseStatus, StructuredAction, StructuredActionButtonAction, SuggestedActionsPayload, SymbolChart, Thread, ThreadList } from './omni-ai/omni-ai';
 import * as WatchlistsAPI from './watchlists/watchlists';
-import { WatchlistCreateWatchlistParams, WatchlistCreateWatchlistResponse, WatchlistDetail, WatchlistEntry, WatchlistEntryList, WatchlistGetWatchlistByIDResponse, WatchlistGetWatchlistsResponse, WatchlistItemEntry, Watchlists } from './watchlists/watchlists';
+import { WatchlistCreateWatchlistParams, WatchlistCreateWatchlistResponse, WatchlistDeleteWatchlistResponse, WatchlistDetail, WatchlistEntry, WatchlistEntryList, WatchlistGetWatchlistByIDResponse, WatchlistGetWatchlistsResponse, WatchlistItemEntry, Watchlists } from './watchlists/watchlists';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -257,6 +257,7 @@ export declare namespace V1 {
     type WatchlistEntryList as WatchlistEntryList,
     type WatchlistItemEntry as WatchlistItemEntry,
     type WatchlistCreateWatchlistResponse as WatchlistCreateWatchlistResponse,
+    type WatchlistDeleteWatchlistResponse as WatchlistDeleteWatchlistResponse,
     type WatchlistGetWatchlistByIDResponse as WatchlistGetWatchlistByIDResponse,
     type WatchlistGetWatchlistsResponse as WatchlistGetWatchlistsResponse,
     type WatchlistCreateWatchlistParams as WatchlistCreateWatchlistParams
