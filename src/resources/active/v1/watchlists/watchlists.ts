@@ -4,9 +4,8 @@ import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as InstrumentsAPI from '../instruments/instruments';
 import * as ItemsAPI from './items';
-import { AddWatchlistItemData, ItemAddWatchlistItemParams, ItemAddWatchlistItemResponse, ItemDeleteWatchlistItemParams, Items } from './items';
+import { AddWatchlistItemData, ItemAddWatchlistItemParams, ItemAddWatchlistItemResponse, ItemDeleteWatchlistItemParams, ItemDeleteWatchlistItemResponse, Items } from './items';
 import { APIPromise } from '../../../../core/api-promise';
-import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -36,13 +35,14 @@ export class Watchlists extends APIResource {
    *
    * @example
    * ```ts
-   * await client.active.v1.watchlists.deleteWatchlist(
-   *   '550e8400-e29b-41d4-a716-446655440000',
-   * );
+   * const response =
+   *   await client.active.v1.watchlists.deleteWatchlist(
+   *     '550e8400-e29b-41d4-a716-446655440000',
+   *   );
    * ```
    */
-  deleteWatchlist(watchlistID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/active/v1/watchlists/${watchlistID}`, { ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+  deleteWatchlist(watchlistID: string, options?: RequestOptions): APIPromise<unknown> {
+    return this._client.delete(path`/active/v1/watchlists/${watchlistID}`, options);
   }
 
   /**
@@ -153,6 +153,8 @@ export interface WatchlistCreateWatchlistResponse extends Shared.BaseResponse {
   data: WatchlistEntry;
 }
 
+export type WatchlistDeleteWatchlistResponse = unknown
+
 export interface WatchlistGetWatchlistByIDResponse extends Shared.BaseResponse {
   /**
    * Detailed watchlist with all items
@@ -180,6 +182,7 @@ export declare namespace Watchlists {
     type WatchlistEntryList as WatchlistEntryList,
     type WatchlistItemEntry as WatchlistItemEntry,
     type WatchlistCreateWatchlistResponse as WatchlistCreateWatchlistResponse,
+    type WatchlistDeleteWatchlistResponse as WatchlistDeleteWatchlistResponse,
     type WatchlistGetWatchlistByIDResponse as WatchlistGetWatchlistByIDResponse,
     type WatchlistGetWatchlistsResponse as WatchlistGetWatchlistsResponse,
     type WatchlistCreateWatchlistParams as WatchlistCreateWatchlistParams
@@ -189,6 +192,7 @@ export declare namespace Watchlists {
     Items as Items,
     type AddWatchlistItemData as AddWatchlistItemData,
     type ItemAddWatchlistItemResponse as ItemAddWatchlistItemResponse,
+    type ItemDeleteWatchlistItemResponse as ItemDeleteWatchlistItemResponse,
     type ItemAddWatchlistItemParams as ItemAddWatchlistItemParams,
     type ItemDeleteWatchlistItemParams as ItemDeleteWatchlistItemParams
   };

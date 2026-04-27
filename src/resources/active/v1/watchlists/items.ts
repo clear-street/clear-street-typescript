@@ -4,7 +4,6 @@ import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as V1API from '../v1';
 import { APIPromise } from '../../../../core/api-promise';
-import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -32,15 +31,18 @@ export class Items extends APIResource {
    *
    * @example
    * ```ts
-   * await client.active.v1.watchlists.items.deleteWatchlistItem(
-   *   '660e8400-e29b-41d4-a716-446655440001',
-   *   { watchlist_id: '550e8400-e29b-41d4-a716-446655440000' },
-   * );
+   * const response =
+   *   await client.active.v1.watchlists.items.deleteWatchlistItem(
+   *     '660e8400-e29b-41d4-a716-446655440001',
+   *     {
+   *       watchlist_id: '550e8400-e29b-41d4-a716-446655440000',
+   *     },
+   *   );
    * ```
    */
-  deleteWatchlistItem(itemID: string, params: ItemDeleteWatchlistItemParams, options?: RequestOptions): APIPromise<void> {
+  deleteWatchlistItem(itemID: string, params: ItemDeleteWatchlistItemParams, options?: RequestOptions): APIPromise<unknown> {
     const { watchlist_id } = params
-    return this._client.delete(path`/active/v1/watchlists/${watchlist_id}/items/${itemID}`, { ...options, headers: buildHeaders([{Accept: '*/*'}, options?.headers]) });
+    return this._client.delete(path`/active/v1/watchlists/${watchlist_id}/items/${itemID}`, options);
   }
 }
 
@@ -60,6 +62,8 @@ export interface ItemAddWatchlistItemResponse extends Shared.BaseResponse {
    */
   data: AddWatchlistItemData;
 }
+
+export type ItemDeleteWatchlistItemResponse = unknown
 
 export interface ItemAddWatchlistItemParams {
   /**
@@ -89,6 +93,7 @@ export declare namespace Items {
   export {
     type AddWatchlistItemData as AddWatchlistItemData,
     type ItemAddWatchlistItemResponse as ItemAddWatchlistItemResponse,
+    type ItemDeleteWatchlistItemResponse as ItemDeleteWatchlistItemResponse,
     type ItemAddWatchlistItemParams as ItemAddWatchlistItemParams,
     type ItemDeleteWatchlistItemParams as ItemDeleteWatchlistItemParams
   };
