@@ -19,4 +19,5 @@ export {
   type WatchlistGetWatchlistByIDResponse,
   type WatchlistGetWatchlistsResponse,
   type WatchlistCreateWatchlistParams,
+  type WatchlistGetWatchlistsParams,
 } from './watchlists';

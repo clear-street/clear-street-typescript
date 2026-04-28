@@ -82,8 +82,11 @@ export class Watchlists extends APIResource {
    *   await client.active.v1.watchlists.getWatchlists();
    * ```
    */
-  getWatchlists(options?: RequestOptions): APIPromise<WatchlistGetWatchlistsResponse> {
-    return this._client.get('/active/v1/watchlists', options);
+  getWatchlists(
+    query: WatchlistGetWatchlistsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<WatchlistGetWatchlistsResponse> {
+    return this._client.get('/active/v1/watchlists', { query, ...options });
   }
 }
 
@@ -186,6 +189,16 @@ export interface WatchlistCreateWatchlistParams {
   name: string;
 }
 
+export interface WatchlistGetWatchlistsParams {
+  page_size?: number;
+
+  /**
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
+   */
+  page_token?: string;
+}
+
 Watchlists.Items = Items;
 
 export declare namespace Watchlists {
@@ -199,6 +212,7 @@ export declare namespace Watchlists {
     type WatchlistGetWatchlistByIDResponse as WatchlistGetWatchlistByIDResponse,
     type WatchlistGetWatchlistsResponse as WatchlistGetWatchlistsResponse,
     type WatchlistCreateWatchlistParams as WatchlistCreateWatchlistParams,
+    type WatchlistGetWatchlistsParams as WatchlistGetWatchlistsParams,
   };
 
   export {
