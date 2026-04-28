@@ -441,6 +441,11 @@ export interface OrderPayload {
   limit_price?: string | null;
 
   /**
+   * Existing order identifier. Required for cancel actions.
+   */
+  order_id?: string | null;
+
+  /**
    * Stop price (required for STOP and STOP_LIMIT orders)
    */
   stop_price?: string | null;
@@ -468,15 +473,20 @@ export type OrderStrategyType = 'SOR' | 'VWAP' | 'TWAP' | 'DARK' | 'DMA' | 'AP' 
  */
 export interface PrefillOrderAction {
   /**
+   * Order operation represented by this prefill action.
+   */
+  action_type: PrefillOrderActionType;
+
+  /**
    * The orders to prefill
    */
   orders: Array<OrderPayload>;
-
-  /**
-   * Account to prefill for (if known from context)
-   */
-  account_id?: number | null;
 }
+
+/**
+ * Operation represented by a prefill order action.
+ */
+export type PrefillOrderActionType = 'NEW' | 'CANCEL';
 
 /**
  * Prompt-style button behavior.
@@ -599,29 +609,41 @@ export namespace StructuredAction {
   /**
    * Prefill an order ticket for user confirmation
    */
-  export interface PrefillOrder extends OmniAIAPI.PrefillOrderAction {
-    action_type: 'prefill_order';
+  export interface PrefillOrder {
+    /**
+     * Prefill an order ticket for user confirmation
+     */
+    prefill_order: OmniAIAPI.PrefillOrderAction;
   }
 
   /**
    * Open a chart for a symbol
    */
-  export interface OpenChart extends OmniAIAPI.OpenChartAction {
-    action_type: 'open_chart';
+  export interface OpenChart {
+    /**
+     * Open a chart for a symbol
+     */
+    open_chart: OmniAIAPI.OpenChartAction;
   }
 
   /**
    * Open a stock screener with filters
    */
-  export interface OpenScreener extends OmniAIAPI.OpenScreenerAction {
-    action_type: 'open_screener';
+  export interface OpenScreener {
+    /**
+     * Open a stock screener with filters
+     */
+    open_screener: OmniAIAPI.OpenScreenerAction;
   }
 
   /**
    * Open entitlement consent flow
    */
-  export interface OpenEntitlementConsent extends OmniAIAPI.OpenEntitlementConsentAction {
-    action_type: 'open_entitlement_consent';
+  export interface OpenEntitlementConsent {
+    /**
+     * Open entitlement consent flow
+     */
+    open_entitlement_consent: OmniAIAPI.OpenEntitlementConsentAction;
   }
 }
 
@@ -707,6 +729,7 @@ export declare namespace OmniAI {
     type OrderPayload as OrderPayload,
     type OrderStrategyType as OrderStrategyType,
     type PrefillOrderAction as PrefillOrderAction,
+    type PrefillOrderActionType as PrefillOrderActionType,
     type PromptButtonAction as PromptButtonAction,
     type Response as Response,
     type ResponseContent as ResponseContent,
