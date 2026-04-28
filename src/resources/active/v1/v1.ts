@@ -141,6 +141,7 @@ import {
   WatchlistEntry,
   WatchlistEntryList,
   WatchlistGetWatchlistByIDResponse,
+  WatchlistGetWatchlistsParams,
   WatchlistGetWatchlistsResponse,
   WatchlistItemEntry,
   Watchlists,
@@ -412,5 +413,6 @@ export declare namespace V1 {
     type WatchlistGetWatchlistByIDResponse as WatchlistGetWatchlistByIDResponse,
     type WatchlistGetWatchlistsResponse as WatchlistGetWatchlistsResponse,
     type WatchlistCreateWatchlistParams as WatchlistCreateWatchlistParams,
+    type WatchlistGetWatchlistsParams as WatchlistGetWatchlistsParams,
   };
 }

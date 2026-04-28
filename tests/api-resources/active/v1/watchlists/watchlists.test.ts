@@ -64,4 +64,15 @@ describe('resource watchlists', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
+
+  // Mock server tests are disabled
+  test.skip('getWatchlists: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.active.v1.watchlists.getWatchlists(
+        { page_size: 1, page_token: 'U3RhaW5sZXNzIHJvY2tz' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
 });
