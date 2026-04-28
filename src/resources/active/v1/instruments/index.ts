@@ -9,6 +9,20 @@ export {
   type AnalystReportingGetInstrumentAnalystConsensusParams,
 } from './analyst-reporting';
 export {
+  BalanceSheets,
+  type InstrumentBalanceSheetStatement,
+  type InstrumentBalanceSheetStatementList,
+  type BalanceSheetGetInstrumentBalanceSheetStatementsResponse,
+  type BalanceSheetGetInstrumentBalanceSheetStatementsParams,
+} from './balance-sheets';
+export {
+  CashFlowStatements,
+  type InstrumentCashFlowStatement,
+  type InstrumentCashFlowStatementList,
+  type CashFlowStatementGetInstrumentCashFlowStatementsResponse,
+  type CashFlowStatementGetInstrumentCashFlowStatementsParams,
+} from './cash-flow-statements';
+export {
   Events,
   type AllEventsEventType,
   type InstrumentAllEventsData,
@@ -29,10 +43,18 @@ export {
   type FundamentalGetInstrumentFundamentalsResponse,
 } from './fundamentals';
 export {
+  IncomeStatements,
+  type InstrumentIncomeStatement,
+  type InstrumentIncomeStatementList,
+  type IncomeStatementGetInstrumentIncomeStatementsResponse,
+  type IncomeStatementGetInstrumentIncomeStatementsParams,
+} from './income-statements';
+export {
   Instruments,
   type AnalystRating,
   type ContractType,
   type ExerciseStyle,
+  type FiscalPeriodType,
   type Instrument,
   type InstrumentCore,
   type InstrumentCoreList,

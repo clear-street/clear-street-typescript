@@ -1,20 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as APIKeysAPI from './api-keys';
-import {
-  APIKey,
-  APIKeyCreateParams,
-  APIKeyCreateResponse,
-  APIKeyListEntry,
-  APIKeyListEntryList,
-  APIKeyListResponse,
-  APIKeyRevokeAllResponse,
-  APIKeyRevokeResponse,
-  APIKeys,
-  Revocation,
-  RevocationList,
-} from './api-keys';
 import * as ClockAPI from './clock';
 import { Clock, ClockDetail, ClockGetClockResponse } from './clock';
 import * as NewsAPI from './news';
@@ -83,6 +69,7 @@ import {
   AnalystRating,
   ContractType,
   ExerciseStyle,
+  FiscalPeriodType,
   Instrument,
   InstrumentCore,
   InstrumentCoreList,
@@ -167,7 +154,6 @@ import { RequestOptions } from '../../../internal/request-options';
  */
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
-  apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
   calendars: CalendarsAPI.Calendars = new CalendarsAPI.Calendars(this._client);
   clock: ClockAPI.Clock = new ClockAPI.Clock(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
@@ -258,7 +244,6 @@ export type SecurityType =
   | 'OTHER';
 
 V1.Accounts = Accounts;
-V1.APIKeys = APIKeys;
 V1.Calendars = Calendars;
 V1.Clock = Clock;
 V1.Instruments = Instruments;
@@ -293,20 +278,6 @@ export declare namespace V1 {
     type AccountPatchAccountByIDParams as AccountPatchAccountByIDParams,
   };
 
-  export {
-    APIKeys as APIKeys,
-    type APIKey as APIKey,
-    type APIKeyListEntry as APIKeyListEntry,
-    type APIKeyListEntryList as APIKeyListEntryList,
-    type Revocation as Revocation,
-    type RevocationList as RevocationList,
-    type APIKeyCreateResponse as APIKeyCreateResponse,
-    type APIKeyListResponse as APIKeyListResponse,
-    type APIKeyRevokeResponse as APIKeyRevokeResponse,
-    type APIKeyRevokeAllResponse as APIKeyRevokeAllResponse,
-    type APIKeyCreateParams as APIKeyCreateParams,
-  };
-
   export { Calendars as Calendars };
 
   export {
@@ -320,6 +291,7 @@ export declare namespace V1 {
     type AnalystRating as AnalystRating,
     type ContractType as ContractType,
     type ExerciseStyle as ExerciseStyle,
+    type FiscalPeriodType as FiscalPeriodType,
     type Instrument as Instrument,
     type InstrumentCore as InstrumentCore,
     type InstrumentCoreList as InstrumentCoreList,
