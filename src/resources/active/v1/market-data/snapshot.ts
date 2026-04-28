@@ -129,7 +129,7 @@ export interface SnapshotGetSnapshotsResponse extends Shared.BaseResponse {
 
 export interface SnapshotGetSnapshotsParams {
   /**
-   * Comma-separated OEMS instrument UUIDs
+   * Comma-separated OEMS instrument UUIDs.
    */
   ids?: string;
 
