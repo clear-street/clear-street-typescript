@@ -54,6 +54,7 @@ export {
   type OrderPayload,
   type OrderStrategyType,
   type PrefillOrderAction,
+  type PrefillOrderActionType,
   type PromptButtonAction,
   type Response,
   type ResponseContent,

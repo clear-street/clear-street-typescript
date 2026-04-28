@@ -346,6 +346,7 @@ Types:
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OrderPayload</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OrderStrategyType</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PrefillOrderAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PrefillOrderActionType</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PromptButtonAction</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Response</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ResponseContent</a></code>
