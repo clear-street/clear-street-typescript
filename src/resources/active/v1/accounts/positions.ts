@@ -138,6 +138,11 @@ export interface Position {
   closing_price?: string | null;
 
   /**
+   * The market date associated with `closing_price`
+   */
+  closing_price_date?: string | null;
+
+  /**
    * The total cost basis for this position
    */
   cost_basis?: string | null;
