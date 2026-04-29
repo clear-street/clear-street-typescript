@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.53.1 (2026-04-29)
+
+Full Changelog: [v0.53.0...v0.53.1](https://github.com/clear-street/clear-street-typescript/compare/v0.53.0...v0.53.1)
+
 ## 0.53.0 (2026-04-29)
 
 Full Changelog: [v0.52.0...v0.53.0](https://github.com/clear-street/clear-street-typescript/compare/v0.52.0...v0.53.0)
