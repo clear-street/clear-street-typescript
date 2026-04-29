@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.53.0 (2026-04-29)
+
+Full Changelog: [v0.52.0...v0.53.0](https://github.com/clear-street/clear-street-typescript/compare/v0.52.0...v0.53.0)
+
+### Features
+
+* **api:** api update ([d189dac](https://github.com/clear-street/clear-street-typescript/commit/d189dac5f89b7d3731f8f79e90f8555eb46024ec))
+* **api:** api update ([c243d54](https://github.com/clear-street/clear-street-typescript/commit/c243d54e53fd8385a5eca7aa8c2aeccf29b968c0))
+* **api:** api update ([a15f924](https://github.com/clear-street/clear-street-typescript/commit/a15f9241bd6137c832c60961f4a178a9c4266635))
+* **api:** api update ([6245e71](https://github.com/clear-street/clear-street-typescript/commit/6245e71fc843200f4bf010fad44c48fc2b0425bb))
+* **api:** api update ([7c92fc3](https://github.com/clear-street/clear-street-typescript/commit/7c92fc3e1dbaa26080af24baa0b4aecf66a3341c))
+* **api:** api update ([8c162c7](https://github.com/clear-street/clear-street-typescript/commit/8c162c74d5bdf642dfd419c2192631c37aaa33fa))
+* **api:** api update ([a727f5c](https://github.com/clear-street/clear-street-typescript/commit/a727f5c411d71cf518b528036e10aca2bdad1d0a))
+* **api:** manual updates ([7f8481d](https://github.com/clear-street/clear-street-typescript/commit/7f8481da7b091df78abc76b1ecc68caf2ab709d2))
+* support setting headers via env ([6eaa314](https://github.com/clear-street/clear-street-typescript/commit/6eaa3143a68385bea6e7303dd722c324e117c5b3))
+
+
+### Chores
+
+* **format:** run eslint and prettier separately ([972aa6d](https://github.com/clear-street/clear-street-typescript/commit/972aa6d4c293241b7fc4044450aa25664202bff3))
+
 ## 0.52.0 (2026-04-27)
 
 Full Changelog: [v0.51.0...v0.52.0](https://github.com/clear-street/clear-street-typescript/compare/v0.51.0...v0.52.0)

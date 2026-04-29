@@ -7,12 +7,13 @@ const client = new ClearStreet({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource dailySummary', () => {
+describe('resource incomeStatements', () => {
   // Mock server tests are disabled
-  test.skip('getDailySummaries: only required params', async () => {
-    const responsePromise = client.active.v1.marketData.dailySummary.getDailySummaries({
-      instrument_ids: 'instrument_ids',
-    });
+  test.skip('getInstrumentIncomeStatements: only required params', async () => {
+    const responsePromise = client.active.v1.instruments.incomeStatements.getInstrumentIncomeStatements(
+      'security_id',
+      { security_id_source: 'CMS' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,9 +24,16 @@ describe('resource dailySummary', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getDailySummaries: required and optional params', async () => {
-    const response = await client.active.v1.marketData.dailySummary.getDailySummaries({
-      instrument_ids: 'instrument_ids',
-    });
+  test.skip('getInstrumentIncomeStatements: required and optional params', async () => {
+    const response = await client.active.v1.instruments.incomeStatements.getInstrumentIncomeStatements(
+      'security_id',
+      {
+        security_id_source: 'CMS',
+        from_date: 'from_date',
+        page_size: 1,
+        page_token: 'U3RhaW5sZXNzIHJvY2tz',
+        to_date: 'to_date',
+      },
+    );
   });
 });

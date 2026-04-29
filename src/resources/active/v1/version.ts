@@ -41,8 +41,5 @@ export interface VersionGetVersionResponse extends Shared.BaseResponse {
 }
 
 export declare namespace VersionResource {
-  export {
-    type Version as Version,
-    type VersionGetVersionResponse as VersionGetVersionResponse
-  };
+  export { type Version as Version, type VersionGetVersionResponse as VersionGetVersionResponse };
 }

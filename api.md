@@ -92,7 +92,7 @@ Methods:
 - <code title="get /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">getOrderByID</a>(orderID, { ...params }) -> OrderGetOrderByIDResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">getOrders</a>(accountID, { ...params }) -> OrderGetOrdersResponse</code>
 - <code title="patch /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">replaceOrder</a>(orderID, { ...params }) -> OrderReplaceOrderResponse</code>
-- <code title="post /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">submitOrders</a>(accountID, [ ...body ]) -> OrderSubmitOrdersResponse</code>
+- <code title="post /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/resources/active/v1/accounts/orders.ts">submitOrders</a>(accountID, [ ...orders ]) -> OrderSubmitOrdersResponse</code>
 
 #### PortfolioHistory
 
@@ -122,27 +122,6 @@ Methods:
 - <code title="delete /active/v1/accounts/{account_id}/positions/{security_id_source}/{security_id}">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">closePosition</a>(securityID, { ...params }) -> PositionClosePositionResponse</code>
 - <code title="delete /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">closePositions</a>(accountID, { ...params }) -> PositionClosePositionsResponse</code>
 - <code title="get /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/resources/active/v1/accounts/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
-
-### APIKeys
-
-Types:
-
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKey</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKeyListEntry</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKeyListEntryList</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">Revocation</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">RevocationList</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKeyCreateResponse</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKeyListResponse</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKeyRevokeResponse</a></code>
-- <code><a href="./src/resources/active/v1/api-keys.ts">APIKeyRevokeAllResponse</a></code>
-
-Methods:
-
-- <code title="post /active/v1/api_keys">client.active.v1.apiKeys.<a href="./src/resources/active/v1/api-keys.ts">create</a>({ ...params }) -> APIKeyCreateResponse</code>
-- <code title="get /active/v1/api_keys">client.active.v1.apiKeys.<a href="./src/resources/active/v1/api-keys.ts">list</a>() -> APIKeyListResponse</code>
-- <code title="delete /active/v1/api_keys/{id}">client.active.v1.apiKeys.<a href="./src/resources/active/v1/api-keys.ts">revoke</a>(id) -> APIKeyRevokeResponse</code>
-- <code title="delete /active/v1/api_keys">client.active.v1.apiKeys.<a href="./src/resources/active/v1/api-keys.ts">revokeAll</a>() -> APIKeyRevokeAllResponse</code>
 
 ### Calendars
 
@@ -182,6 +161,7 @@ Types:
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">AnalystRating</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">ContractType</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">ExerciseStyle</a></code>
+- <code><a href="./src/resources/active/v1/instruments/instruments.ts">FiscalPeriodType</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">Instrument</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentCore</a></code>
 - <code><a href="./src/resources/active/v1/instruments/instruments.ts">InstrumentCoreList</a></code>
@@ -214,6 +194,30 @@ Methods:
 
 - <code title="get /active/v1/instruments/{security_id_source}/{security_id}/analyst-reporting">client.active.v1.instruments.analystReporting.<a href="./src/resources/active/v1/instruments/analyst-reporting.ts">getInstrumentAnalystConsensus</a>(securityID, { ...params }) -> AnalystReportingGetInstrumentAnalystConsensusResponse</code>
 
+#### BalanceSheets
+
+Types:
+
+- <code><a href="./src/resources/active/v1/instruments/balance-sheets.ts">InstrumentBalanceSheetStatement</a></code>
+- <code><a href="./src/resources/active/v1/instruments/balance-sheets.ts">InstrumentBalanceSheetStatementList</a></code>
+- <code><a href="./src/resources/active/v1/instruments/balance-sheets.ts">BalanceSheetGetInstrumentBalanceSheetStatementsResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/instruments/{security_id_source}/{security_id}/balance-sheets">client.active.v1.instruments.balanceSheets.<a href="./src/resources/active/v1/instruments/balance-sheets.ts">getInstrumentBalanceSheetStatements</a>(securityID, { ...params }) -> BalanceSheetGetInstrumentBalanceSheetStatementsResponse</code>
+
+#### CashFlowStatements
+
+Types:
+
+- <code><a href="./src/resources/active/v1/instruments/cash-flow-statements.ts">InstrumentCashFlowStatement</a></code>
+- <code><a href="./src/resources/active/v1/instruments/cash-flow-statements.ts">InstrumentCashFlowStatementList</a></code>
+- <code><a href="./src/resources/active/v1/instruments/cash-flow-statements.ts">CashFlowStatementGetInstrumentCashFlowStatementsResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/instruments/{security_id_source}/{security_id}/cash-flow-statements">client.active.v1.instruments.cashFlowStatements.<a href="./src/resources/active/v1/instruments/cash-flow-statements.ts">getInstrumentCashFlowStatements</a>(securityID, { ...params }) -> CashFlowStatementGetInstrumentCashFlowStatementsResponse</code>
+
 #### Events
 
 Types:
@@ -244,6 +248,18 @@ Types:
 Methods:
 
 - <code title="get /active/v1/instruments/{id}/fundamentals">client.active.v1.instruments.fundamentals.<a href="./src/resources/active/v1/instruments/fundamentals.ts">getInstrumentFundamentals</a>(id) -> FundamentalGetInstrumentFundamentalsResponse</code>
+
+#### IncomeStatements
+
+Types:
+
+- <code><a href="./src/resources/active/v1/instruments/income-statements.ts">InstrumentIncomeStatement</a></code>
+- <code><a href="./src/resources/active/v1/instruments/income-statements.ts">InstrumentIncomeStatementList</a></code>
+- <code><a href="./src/resources/active/v1/instruments/income-statements.ts">IncomeStatementGetInstrumentIncomeStatementsResponse</a></code>
+
+Methods:
+
+- <code title="get /active/v1/instruments/{security_id_source}/{security_id}/income-statements">client.active.v1.instruments.incomeStatements.<a href="./src/resources/active/v1/instruments/income-statements.ts">getInstrumentIncomeStatements</a>(securityID, { ...params }) -> IncomeStatementGetInstrumentIncomeStatementsResponse</code>
 
 #### Options
 
@@ -330,6 +346,7 @@ Types:
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OrderPayload</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">OrderStrategyType</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PrefillOrderAction</a></code>
+- <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PrefillOrderActionType</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">PromptButtonAction</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">Response</a></code>
 - <code><a href="./src/resources/active/v1/omni-ai/omni-ai.ts">ResponseContent</a></code>
@@ -494,7 +511,7 @@ Methods:
 - <code title="post /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists/watchlists.ts">createWatchlist</a>({ ...params }) -> WatchlistCreateWatchlistResponse</code>
 - <code title="delete /active/v1/watchlists/{watchlist_id}">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists/watchlists.ts">deleteWatchlist</a>(watchlistID) -> unknown</code>
 - <code title="get /active/v1/watchlists/{watchlist_id}">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists/watchlists.ts">getWatchlistByID</a>(watchlistID) -> WatchlistGetWatchlistByIDResponse</code>
-- <code title="get /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists/watchlists.ts">getWatchlists</a>() -> WatchlistGetWatchlistsResponse</code>
+- <code title="get /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/resources/active/v1/watchlists/watchlists.ts">getWatchlists</a>({ ...params }) -> WatchlistGetWatchlistsResponse</code>
 
 #### Items
 

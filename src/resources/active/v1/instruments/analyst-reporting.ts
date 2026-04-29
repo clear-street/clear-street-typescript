@@ -24,9 +24,16 @@ export class AnalystReporting extends APIResource {
    *   );
    * ```
    */
-  getInstrumentAnalystConsensus(securityID: string, params: AnalystReportingGetInstrumentAnalystConsensusParams, options?: RequestOptions): APIPromise<AnalystReportingGetInstrumentAnalystConsensusResponse> {
-    const { security_id_source, ...query } = params
-    return this._client.get(path`/active/v1/instruments/${security_id_source}/${securityID}/analyst-reporting`, { query, ...options });
+  getInstrumentAnalystConsensus(
+    securityID: string,
+    params: AnalystReportingGetInstrumentAnalystConsensusParams,
+    options?: RequestOptions,
+  ): APIPromise<AnalystReportingGetInstrumentAnalystConsensusResponse> {
+    const { security_id_source, ...query } = params;
+    return this._client.get(
+      path`/active/v1/instruments/${security_id_source}/${securityID}/analyst-reporting`,
+      { query, ...options },
+    );
   }
 }
 
@@ -140,6 +147,6 @@ export declare namespace AnalystReporting {
     type InstrumentAnalystConsensus as InstrumentAnalystConsensus,
     type PriceTarget as PriceTarget,
     type AnalystReportingGetInstrumentAnalystConsensusResponse as AnalystReportingGetInstrumentAnalystConsensusResponse,
-    type AnalystReportingGetInstrumentAnalystConsensusParams as AnalystReportingGetInstrumentAnalystConsensusParams
+    type AnalystReportingGetInstrumentAnalystConsensusParams as AnalystReportingGetInstrumentAnalystConsensusParams,
   };
 }
