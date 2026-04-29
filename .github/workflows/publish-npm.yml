@@ -31,6 +31,5 @@ jobs:
         run: |
           bash ./bin/publish-npm
         env:
-          
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.CLEAR_STREET_NPM_TOKEN || secrets.NPM_TOKEN }}
