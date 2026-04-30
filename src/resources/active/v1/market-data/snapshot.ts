@@ -41,6 +41,12 @@ export interface MarketDataSnapshot {
   symbol: string;
 
   /**
+   * Cumulative traded volume reported on the most recent trade, in shares for
+   * equities or contracts for options. Absent when no trade is available.
+   */
+  cumulative_volume?: number | null;
+
+  /**
    * Most recent quote if available.
    */
   last_quote?: SnapshotQuote | null;
