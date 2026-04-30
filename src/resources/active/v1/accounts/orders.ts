@@ -328,6 +328,17 @@ export interface Order {
   limit_price?: string | null;
 
   /**
+   * Parent order queue state, present when the order is awaiting release or
+   * released.
+   */
+  queue_state?: QueueState | null;
+
+  /**
+   * Scheduled release time for orders awaiting release.
+   */
+  releases_at?: string | null;
+
+  /**
    * Stop price (for STOP and STOP_LIMIT orders)
    */
   stop_price?: string | null;
@@ -467,6 +478,11 @@ export interface PovStrategy extends BaseStrategyParams {
    */
   target_percent: V1API.APIDecimal64;
 }
+
+/**
+ * Parent order queue or hold state.
+ */
+export type QueueState = 'AWAITING_RELEASE' | 'RELEASED';
 
 /**
  * Side of an order
@@ -967,6 +983,7 @@ export declare namespace Orders {
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
     type PovStrategy as PovStrategy,
+    type QueueState as QueueState,
     type Side as Side,
     type SorStrategy as SorStrategy,
     type TimeInForce as TimeInForce,

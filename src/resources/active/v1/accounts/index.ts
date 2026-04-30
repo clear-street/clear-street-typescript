@@ -38,6 +38,7 @@ export {
   type OrderStrategy,
   type OrderType,
   type PovStrategy,
+  type QueueState,
   type Side,
   type SorStrategy,
   type TimeInForce,
