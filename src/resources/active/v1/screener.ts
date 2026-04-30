@@ -95,6 +95,79 @@ export interface FieldRef {
 export type FieldType = 'DECIMAL' | 'INTEGER' | 'STRING' | 'ANALYST_RATING' | 'DATE';
 
 /**
+ * Operator specification with optional behavioral arguments.
+ */
+export interface FilterOpSpec {
+  /**
+   * The operator to apply.
+   */
+  name: FilterOperator;
+
+  /**
+   * Optional arguments that modify operator behavior.
+   */
+  args?: Array<OperatorArg>;
+}
+
+/**
+ * Operator for screener search filters.
+ */
+export type FilterOperator =
+  | 'LT'
+  | 'LTE'
+  | 'GT'
+  | 'GTE'
+  | 'EQ'
+  | 'BETWEEN'
+  | 'NOT_BETWEEN'
+  | 'ONE_OF'
+  | 'REGEX'
+  | 'BEGINS_WITH'
+  | 'ENDS_WITH'
+  | 'CONTAINS'
+  | 'IS_NULL'
+  | 'IS_NOT_NULL';
+
+/**
+ * A filter value: either a literal or a variable reference.
+ */
+export interface FilterValue {
+  value?: number | string | null;
+
+  /**
+   * A variable reference.
+   */
+  variable?: Variable | null;
+}
+
+/**
+ * Arithmetic modifier applied to a variable value.
+ */
+export interface Modifier {
+  args: Array<number | string>;
+
+  /**
+   * The modifier operation.
+   */
+  name: ModifierOp;
+}
+
+/**
+ * Modifier operation applied to a variable.
+ */
+export type ModifierOp = 'ADD' | 'SUB';
+
+/**
+ * Argument that modifies operator behavior.
+ */
+export type OperatorArg =
+  | 'LEFT_INCLUSIVE'
+  | 'RIGHT_INCLUSIVE'
+  | 'LEFT_EXCLUSIVE'
+  | 'RIGHT_EXCLUSIVE'
+  | 'CASE_INSENSITIVE';
+
+/**
  * A single column in the screener search response.
  */
 export interface ScreenerColumn {
@@ -386,6 +459,58 @@ export type ScreenerRow = Array<ScreenerColumn>;
 
 export type ScreenerRowList = Array<ScreenerRow>;
 
+/**
+ * A single filter condition.
+ *
+ * When `op` and `right` are both absent, the filter is "unenabled": it persists a
+ * `left` field reference without applying any predicate. Unenabled filters are
+ * skipped during search execution but still round-trip through save/load so
+ * callers can preserve draft state.
+ */
+export interface SearchFilter {
+  /**
+   * The field to filter on.
+   */
+  left: FieldRef;
+
+  /**
+   * The operator and optional arguments. Omit together with `right` for an unenabled
+   * filter.
+   */
+  op?: FilterOpSpec | null;
+
+  /**
+   * The value(s) to compare against. Omit together with `op` for an unenabled
+   * filter.
+   */
+  right?: Array<FilterValue> | null;
+}
+
+/**
+ * A variable reference (field or built-in like `today`).
+ */
+export interface Variable {
+  /**
+   * The variable name.
+   */
+  name: string;
+
+  /**
+   * Optional historical lookback window.
+   */
+  lookback?: FieldLookback | null;
+
+  /**
+   * Optional arithmetic modifier.
+   */
+  modifier?: Modifier | null;
+
+  /**
+   * Optional reporting period.
+   */
+  period?: FieldPeriod | null;
+}
+
 export interface ScreenerGetScreenerResponse extends Shared.BaseResponse {
   data: ScreenerItemList;
 }
@@ -434,7 +559,7 @@ export interface ScreenerSearchScreenerParams {
   /**
    * Filter conditions to apply.
    */
-  filters?: Array<ScreenerSearchScreenerParams.Filter> | null;
+  filters?: Array<SearchFilter> | null;
 
   /**
    * Maximum number of results per page.
@@ -470,112 +595,6 @@ export interface ScreenerSearchScreenerParams {
 
 export namespace ScreenerSearchScreenerParams {
   /**
-   * A single filter condition.
-   */
-  export interface Filter {
-    /**
-     * The field to filter on.
-     */
-    left: ScreenerAPI.FieldRef;
-
-    /**
-     * The operator and optional arguments.
-     */
-    op: Filter.Op;
-
-    /**
-     * The value(s) to compare against.
-     */
-    right: Array<Filter.Right>;
-  }
-
-  export namespace Filter {
-    /**
-     * The operator and optional arguments.
-     */
-    export interface Op {
-      /**
-       * The operator to apply.
-       */
-      name:
-        | 'LT'
-        | 'LTE'
-        | 'GT'
-        | 'GTE'
-        | 'EQ'
-        | 'BETWEEN'
-        | 'NOT_BETWEEN'
-        | 'ONE_OF'
-        | 'REGEX'
-        | 'BEGINS_WITH'
-        | 'ENDS_WITH'
-        | 'CONTAINS'
-        | 'IS_NULL'
-        | 'IS_NOT_NULL';
-
-      /**
-       * Optional arguments that modify operator behavior.
-       */
-      args?: Array<
-        'LEFT_INCLUSIVE' | 'RIGHT_INCLUSIVE' | 'LEFT_EXCLUSIVE' | 'RIGHT_EXCLUSIVE' | 'CASE_INSENSITIVE'
-      >;
-    }
-
-    /**
-     * A filter value: either a literal or a variable reference.
-     */
-    export interface Right {
-      value?: number | string | null;
-
-      /**
-       * A variable reference.
-       */
-      variable?: Right.Variable | null;
-    }
-
-    export namespace Right {
-      /**
-       * A variable reference.
-       */
-      export interface Variable {
-        /**
-         * The variable name.
-         */
-        name: string;
-
-        /**
-         * Optional historical lookback window.
-         */
-        lookback?: ScreenerAPI.FieldLookback | null;
-
-        /**
-         * Optional arithmetic modifier.
-         */
-        modifier?: Variable.Modifier | null;
-
-        /**
-         * Optional reporting period.
-         */
-        period?: ScreenerAPI.FieldPeriod | null;
-      }
-
-      export namespace Variable {
-        /**
-         * Optional arithmetic modifier.
-         */
-        export interface Modifier {
-          args: Array<number | string>;
-
-          /**
-           * The modifier operation.
-           */
-          name: 'ADD' | 'SUB';
-        }
-      }
-    }
-  }
-
-  /**
    * A sort specification pairing a field with a direction.
    */
   export interface Sort {
@@ -597,12 +616,20 @@ export declare namespace Screener {
     type FieldPeriod as FieldPeriod,
     type FieldRef as FieldRef,
     type FieldType as FieldType,
+    type FilterOpSpec as FilterOpSpec,
+    type FilterOperator as FilterOperator,
+    type FilterValue as FilterValue,
+    type Modifier as Modifier,
+    type ModifierOp as ModifierOp,
+    type OperatorArg as OperatorArg,
     type ScreenerColumn as ScreenerColumn,
     type ScreenerFilter as ScreenerFilter,
     type ScreenerItem as ScreenerItem,
     type ScreenerItemList as ScreenerItemList,
     type ScreenerRow as ScreenerRow,
     type ScreenerRowList as ScreenerRowList,
+    type SearchFilter as SearchFilter,
+    type Variable as Variable,
     type ScreenerGetScreenerResponse as ScreenerGetScreenerResponse,
     type ScreenerSearchScreenerResponse as ScreenerSearchScreenerResponse,
     type ScreenerGetScreenerParams as ScreenerGetScreenerParams,
