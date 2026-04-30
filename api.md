@@ -444,7 +444,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerFilter</a></code>
 - <code><a href="./src/resources/active/v1/saved-screeners.ts">ScreenerEntry</a></code>
 - <code><a href="./src/resources/active/v1/saved-screeners.ts">ScreenerEntryList</a></code>
 - <code><a href="./src/resources/active/v1/saved-screeners.ts">SavedScreenerCreateScreenerResponse</a></code>
@@ -468,12 +467,20 @@ Types:
 - <code><a href="./src/resources/active/v1/screener.ts">FieldPeriod</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">FieldRef</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">FieldType</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">FilterOpSpec</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">FilterOperator</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">FilterValue</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">Modifier</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">ModifierOp</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">OperatorArg</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">ScreenerColumn</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">ScreenerFilter</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">ScreenerItem</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">ScreenerItemList</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">ScreenerRow</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">ScreenerRowList</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">SearchFilter</a></code>
+- <code><a href="./src/resources/active/v1/screener.ts">Variable</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">ScreenerGetScreenerResponse</a></code>
 - <code><a href="./src/resources/active/v1/screener.ts">ScreenerSearchScreenerResponse</a></code>
 

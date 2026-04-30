@@ -18,7 +18,7 @@ export class PortfolioHistory extends APIResource {
    * const response =
    *   await client.active.v1.accounts.portfolioHistory.getPortfolioHistory(
    *     0,
-   *     { end_date: '2019-12-27', start_date: '2019-12-27' },
+   *     { start_date: '2019-12-27' },
    *   );
    * ```
    */
@@ -94,9 +94,12 @@ export interface PortfolioHistoryGetPortfolioHistoryResponse extends Shared.Base
 }
 
 export interface PortfolioHistoryGetPortfolioHistoryParams {
-  end_date: string;
-
   start_date: string;
+
+  /**
+   * Defaults to today in America/New_York when omitted.
+   */
+  end_date?: string;
 }
 
 export declare namespace PortfolioHistory {

@@ -17,7 +17,6 @@ import * as SavedScreenersAPI from './saved-screeners';
 import {
   SavedScreenerCreateScreenerParams,
   SavedScreenerCreateScreenerResponse,
-  SavedScreenerFilter,
   SavedScreenerGetScreenerByIDResponse,
   SavedScreenerGetScreenersResponse,
   SavedScreenerReplaceScreenerParams,
@@ -32,6 +31,12 @@ import {
   FieldPeriod,
   FieldRef,
   FieldType,
+  FilterOpSpec,
+  FilterOperator,
+  FilterValue,
+  Modifier,
+  ModifierOp,
+  OperatorArg,
   Screener,
   ScreenerColumn,
   ScreenerFilter,
@@ -43,6 +48,8 @@ import {
   ScreenerRowList,
   ScreenerSearchScreenerParams,
   ScreenerSearchScreenerResponse,
+  SearchFilter,
+  Variable,
 } from './screener';
 import * as VersionAPI from './version';
 import { Version, VersionGetVersionResponse, VersionResource } from './version';
@@ -369,7 +376,6 @@ export declare namespace V1 {
 
   export {
     SavedScreeners as SavedScreeners,
-    type SavedScreenerFilter as SavedScreenerFilter,
     type ScreenerEntry as ScreenerEntry,
     type ScreenerEntryList as ScreenerEntryList,
     type SavedScreenerCreateScreenerResponse as SavedScreenerCreateScreenerResponse,
@@ -386,12 +392,20 @@ export declare namespace V1 {
     type FieldPeriod as FieldPeriod,
     type FieldRef as FieldRef,
     type FieldType as FieldType,
+    type FilterOpSpec as FilterOpSpec,
+    type FilterOperator as FilterOperator,
+    type FilterValue as FilterValue,
+    type Modifier as Modifier,
+    type ModifierOp as ModifierOp,
+    type OperatorArg as OperatorArg,
     type ScreenerColumn as ScreenerColumn,
     type ScreenerFilter as ScreenerFilter,
     type ScreenerItem as ScreenerItem,
     type ScreenerItemList as ScreenerItemList,
     type ScreenerRow as ScreenerRow,
     type ScreenerRowList as ScreenerRowList,
+    type SearchFilter as SearchFilter,
+    type Variable as Variable,
     type ScreenerGetScreenerResponse as ScreenerGetScreenerResponse,
     type ScreenerSearchScreenerResponse as ScreenerSearchScreenerResponse,
     type ScreenerGetScreenerParams as ScreenerGetScreenerParams,
