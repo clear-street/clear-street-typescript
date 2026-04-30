@@ -11,7 +11,6 @@ describe('resource portfolioHistory', () => {
   // Mock server tests are disabled
   test.skip('getPortfolioHistory: only required params', async () => {
     const responsePromise = client.active.v1.accounts.portfolioHistory.getPortfolioHistory(0, {
-      end_date: '2019-12-27',
       start_date: '2019-12-27',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,8 +25,8 @@ describe('resource portfolioHistory', () => {
   // Mock server tests are disabled
   test.skip('getPortfolioHistory: required and optional params', async () => {
     const response = await client.active.v1.accounts.portfolioHistory.getPortfolioHistory(0, {
-      end_date: '2019-12-27',
       start_date: '2019-12-27',
+      end_date: '2019-12-27',
     });
   });
 });

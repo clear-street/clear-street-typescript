@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as ScreenerAPI from './screener';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -107,67 +108,26 @@ export class SavedScreeners extends APIResource {
 }
 
 /**
- * A single filter criterion for a screener
- */
-export interface SavedScreenerFilter {
-  /**
-   * The field name to filter on
-   */
-  field_name: string;
-
-  /**
-   * The filter operation (lt, lte, gt, gte, eq, rgx, bw, ew)
-   */
-  operation: string;
-
-  /**
-   * The filter value
-   */
-  value: string;
-}
-
-/**
  * A saved screener configuration entry
  */
 export interface ScreenerEntry {
-  /**
-   * Unique identifier for this screener
-   */
   id: string;
 
-  /**
-   * When this screener was created
-   */
   created_at: string;
 
-  /**
-   * Filter criteria for this screener
-   */
-  filters: Array<SavedScreenerFilter>;
+  filters: Array<ScreenerAPI.SearchFilter>;
 
-  /**
-   * The name of this screener configuration
-   */
   name: string;
 
-  /**
-   * When this screener was last updated
-   */
   updated_at: string;
 
-  /**
-   * List of field names to include when running this screener
-   */
-  field_filter?: Array<string> | null;
+  field_filter?: Array<ScreenerAPI.FieldRef> | null;
 
   /**
-   * Field name to sort results by
+   * A reference to a screener field.
    */
-  sort_by?: string | null;
+  sort_by?: ScreenerAPI.FieldRef | null;
 
-  /**
-   * Sort direction for results
-   */
   sort_direction?: string | null;
 }
 
@@ -200,14 +160,14 @@ export interface SavedScreenerReplaceScreenerResponse extends Shared.BaseRespons
 
 export interface SavedScreenerCreateScreenerParams {
   /**
-   * List of field names to include when running this screener
+   * Structured field references to include when running this screener
    */
-  field_filter?: Array<string> | null;
+  field_filter?: Array<ScreenerAPI.FieldRef> | null;
 
   /**
-   * Filter criteria for this screener
+   * Structured search filter criteria
    */
-  filters?: Array<SavedScreenerFilter> | null;
+  filters?: Array<ScreenerAPI.SearchFilter> | null;
 
   /**
    * The name for this screener configuration
@@ -215,9 +175,9 @@ export interface SavedScreenerCreateScreenerParams {
   name?: string | null;
 
   /**
-   * Field name to sort results by
+   * Structured field reference to sort results by
    */
-  sort_by?: string | null;
+  sort_by?: ScreenerAPI.FieldRef | null;
 
   /**
    * Sort direction for results
@@ -227,14 +187,14 @@ export interface SavedScreenerCreateScreenerParams {
 
 export interface SavedScreenerReplaceScreenerParams {
   /**
-   * List of field names to include when running this screener
+   * Structured field references to include when running this screener
    */
-  field_filter?: Array<string> | null;
+  field_filter?: Array<ScreenerAPI.FieldRef> | null;
 
   /**
-   * Filter criteria for this screener
+   * Structured search filter criteria
    */
-  filters?: Array<SavedScreenerFilter> | null;
+  filters?: Array<ScreenerAPI.SearchFilter> | null;
 
   /**
    * The name for this screener configuration
@@ -242,9 +202,9 @@ export interface SavedScreenerReplaceScreenerParams {
   name?: string | null;
 
   /**
-   * Field name to sort results by
+   * Structured field reference to sort results by
    */
-  sort_by?: string | null;
+  sort_by?: ScreenerAPI.FieldRef | null;
 
   /**
    * Sort direction for results
@@ -254,7 +214,6 @@ export interface SavedScreenerReplaceScreenerParams {
 
 export declare namespace SavedScreeners {
   export {
-    type SavedScreenerFilter as SavedScreenerFilter,
     type ScreenerEntry as ScreenerEntry,
     type ScreenerEntryList as ScreenerEntryList,
     type SavedScreenerCreateScreenerResponse as SavedScreenerCreateScreenerResponse,
