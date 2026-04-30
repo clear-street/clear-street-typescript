@@ -47,8 +47,8 @@ export class DailySummary extends APIResource {
  *
  * - Unresolvable `instrument_id` → all other fields `None` (including `symbol`).
  * - Resolvable `instrument_id` with no realtime cache entry → `symbol` populated,
- *   OHLV/price/`quote_date` `None`.
- * - `quote_date` reflects the session the OHLV represents (today during trading
+ *   OHLV/`trade_date` `None`.
+ * - `trade_date` reflects the session the OHLV represents (today during trading
  *   hours, the last trading date during weekends/holidays).
  */
 export interface DailySummary {
@@ -56,11 +56,6 @@ export interface DailySummary {
    * OEMS instrument identifier. Always populated; echoes the request ID.
    */
   instrument_id: string;
-
-  /**
-   * Current market price.
-   */
-  current_price?: string | null;
 
   /**
    * Session high.
@@ -78,14 +73,14 @@ export interface DailySummary {
   open?: string | null;
 
   /**
-   * Session date the OHLV represents, US/Eastern.
-   */
-  quote_date?: string | null;
-
-  /**
    * Display symbol for the security. `None` for unresolvable IDs.
    */
   symbol?: string | null;
+
+  /**
+   * Session date the OHLV represents, US/Eastern.
+   */
+  trade_date?: string | null;
 
   /**
    * Session cumulative trading volume.
