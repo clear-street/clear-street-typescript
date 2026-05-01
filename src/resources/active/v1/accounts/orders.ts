@@ -318,6 +318,11 @@ export interface Order {
   expires_at?: string | null;
 
   /**
+   * Whether the order is eligible for extended-hours trading.
+   */
+  extended_hours?: boolean | null;
+
+  /**
    * Limit offset for trailing stop-limit orders (signed)
    */
   limit_offset?: string | null;
