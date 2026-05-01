@@ -321,6 +321,11 @@ export interface InstrumentCore {
   is_threshold_security: boolean;
 
   /**
+   * Indicates if the instrument is tradable
+   */
+  is_tradable: boolean;
+
+  /**
    * @deprecated Deprecated. Use `security_ids`.
    *
    * A primary security identifier for this instrument.
