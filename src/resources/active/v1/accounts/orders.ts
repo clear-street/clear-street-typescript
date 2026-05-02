@@ -372,6 +372,13 @@ export interface Order {
    * Trailing watermark timestamp for trailing orders
    */
   trailing_watermark_ts?: string | null;
+
+  /**
+   * OEMS instrument ID of the option's underlying instrument. Populated only for
+   * OPTIONS orders; `null` for non-options and for options whose underlier cannot be
+   * resolved from the instrument cache.
+   */
+  underlying_instrument_id?: string | null;
 }
 
 export type OrderList = Array<Order>;
@@ -753,6 +760,12 @@ export interface OrderGetOrdersParams {
    * The end date and time for the query range, inclusive (ISO 8601 format)
    */
   to?: string;
+
+  /**
+   * Comma-separated OEMS instrument UUIDs. Matches options orders whose resolved
+   * underlier is any of the given IDs.
+   */
+  underlying_instrument_ids?: string;
 }
 
 export interface OrderReplaceOrderParams {
