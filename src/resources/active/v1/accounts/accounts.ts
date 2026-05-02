@@ -161,6 +161,11 @@ export interface Account {
   open_date: string;
 
   /**
+   * The options level of the account
+   */
+  options_level: number;
+
+  /**
    * The short name of the account
    */
   short_name: string;
