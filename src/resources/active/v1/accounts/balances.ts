@@ -110,6 +110,11 @@ export interface AccountBalances {
   unsettled_debits: string;
 
   /**
+   * The amount of cash currently available to withdraw.
+   */
+  withdrawable_cash: string;
+
+  /**
    * Margin-account-only details.
    */
   margin_details?: MarginDetails | null;
