@@ -238,6 +238,12 @@ export interface MarginDetailsUsage {
 
 export interface MarginTopContributor {
   /**
+   * Day-trade buying power consumed by fills against this underlying on the current
+   * trade date. Populated only for pattern day trader accounts.
+   */
+  day_trade_buying_power_usage: string;
+
+  /**
    * Initial margin requirement attributable to this underlying.
    */
   initial_margin_requirement: string;
