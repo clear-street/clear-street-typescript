@@ -318,6 +318,11 @@ export interface Order {
   expires_at?: string | null;
 
   /**
+   * Whether the order is eligible for extended-hours trading.
+   */
+  extended_hours?: boolean | null;
+
+  /**
    * Limit offset for trailing stop-limit orders (signed)
    */
   limit_offset?: string | null;
@@ -326,6 +331,17 @@ export interface Order {
    * Limit price (for LIMIT and STOP_LIMIT orders)
    */
   limit_price?: string | null;
+
+  /**
+   * Parent order queue state, present when the order is awaiting release or
+   * released.
+   */
+  queue_state?: QueueState | null;
+
+  /**
+   * Scheduled release time for orders awaiting release.
+   */
+  releases_at?: string | null;
 
   /**
    * Stop price (for STOP and STOP_LIMIT orders)
@@ -356,6 +372,13 @@ export interface Order {
    * Trailing watermark timestamp for trailing orders
    */
   trailing_watermark_ts?: string | null;
+
+  /**
+   * OEMS instrument ID of the option's underlying instrument. Populated only for
+   * OPTIONS orders; `null` for non-options and for options whose underlier cannot be
+   * resolved from the instrument cache.
+   */
+  underlying_instrument_id?: string | null;
 }
 
 export type OrderList = Array<Order>;
@@ -467,6 +490,11 @@ export interface PovStrategy extends BaseStrategyParams {
    */
   target_percent: V1API.APIDecimal64;
 }
+
+/**
+ * Parent order queue or hold state.
+ */
+export type QueueState = 'AWAITING_RELEASE' | 'RELEASED';
 
 /**
  * Side of an order
@@ -732,6 +760,12 @@ export interface OrderGetOrdersParams {
    * The end date and time for the query range, inclusive (ISO 8601 format)
    */
   to?: string;
+
+  /**
+   * Comma-separated OEMS instrument UUIDs. Matches options orders whose resolved
+   * underlier is any of the given IDs.
+   */
+  underlying_instrument_ids?: string;
 }
 
 export interface OrderReplaceOrderParams {
@@ -967,6 +1001,7 @@ export declare namespace Orders {
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
     type PovStrategy as PovStrategy,
+    type QueueState as QueueState,
     type Side as Side,
     type SorStrategy as SorStrategy,
     type TimeInForce as TimeInForce,

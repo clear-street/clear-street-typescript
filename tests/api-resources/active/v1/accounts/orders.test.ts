@@ -100,6 +100,7 @@ describe('resource orders', () => {
           status: ['PENDING_NEW'],
           symbol: 'symbol',
           to: '2019-12-27T18:11:19.117Z',
+          underlying_instrument_ids: 'underlying_instrument_ids',
         },
         { path: '/_stainless_unknown_path' },
       ),

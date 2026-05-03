@@ -39,6 +39,7 @@ import {
   OrderType,
   Orders,
   PovStrategy,
+  QueueState,
   Side,
   SorStrategy,
   TimeInForce,
@@ -158,6 +159,11 @@ export interface Account {
    * The date the account was opened
    */
   open_date: string;
+
+  /**
+   * The options level of the account
+   */
+  options_level: number;
 
   /**
    * The short name of the account
@@ -320,6 +326,7 @@ export declare namespace Accounts {
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
     type PovStrategy as PovStrategy,
+    type QueueState as QueueState,
     type Side as Side,
     type SorStrategy as SorStrategy,
     type TimeInForce as TimeInForce,
