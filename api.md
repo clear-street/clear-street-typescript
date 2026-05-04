@@ -71,6 +71,7 @@ Types:
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">OrderType</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">PovStrategy</a></code>
+- <code><a href="./src/resources/active/v1/accounts/orders.ts">QueueState</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">Side</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">SorStrategy</a></code>
 - <code><a href="./src/resources/active/v1/accounts/orders.ts">TimeInForce</a></code>

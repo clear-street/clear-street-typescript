@@ -110,6 +110,11 @@ export interface AccountBalances {
   unsettled_debits: string;
 
   /**
+   * The amount of cash currently available to withdraw.
+   */
+  withdrawable_cash: string;
+
+  /**
    * Margin-account-only details.
    */
   margin_details?: MarginDetails | null;
@@ -232,6 +237,12 @@ export interface MarginDetailsUsage {
 }
 
 export interface MarginTopContributor {
+  /**
+   * Day-trade buying power consumed by fills against this underlying on the current
+   * trade date. Populated only for pattern day trader accounts.
+   */
+  day_trade_buying_power_usage: string;
+
   /**
    * Initial margin requirement attributable to this underlying.
    */
