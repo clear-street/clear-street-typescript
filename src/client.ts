@@ -17,7 +17,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Active } from './resources/active/active';
+import { APIDecimal64, SecurityType, V1 } from './resources/v1/v1';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -32,7 +32,7 @@ import {
 import { isEmptyObj } from './internal/utils/values';
 
 const environments = {
-  production: 'https://api-active.clearstreet.io',
+  production: 'https://api.clearstreet.com',
   staging: 'https://oems-api-gw.dev-public.clst.co',
 };
 type Environment = keyof typeof environments;
@@ -47,7 +47,7 @@ export interface ClientOptions {
    * Specifies the environment to use for the API.
    *
    * Each environment maps to a different base URL:
-   * - `production` corresponds to `https://api-active.clearstreet.io`
+   * - `production` corresponds to `https://api.clearstreet.com`
    * - `staging` corresponds to `https://oems-api-gw.dev-public.clst.co`
    */
   environment?: Environment | undefined;
@@ -144,7 +144,7 @@ export class ClearStreet {
    *
    * @param {string | null | undefined} [opts.apiKey]
    * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
-   * @param {string} [opts.baseURL=process.env['CLEAR_STREET_BASE_URL'] ?? https://api-active.clearstreet.io] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['CLEAR_STREET_BASE_URL'] ?? https://api.clearstreet.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -753,15 +753,18 @@ export class ClearStreet {
 
   static toFile = Uploads.toFile;
 
-  active: API.Active = new API.Active(this);
+  /**
+   * Active Websocket.
+   */
+  v1: API.V1 = new API.V1(this);
 }
 
-ClearStreet.Active = Active;
+ClearStreet.V1 = V1;
 
 export declare namespace ClearStreet {
   export type RequestOptions = Opts.RequestOptions;
 
-  export { Active as Active };
+  export { V1 as V1, type APIDecimal64 as APIDecimal64, type SecurityType as SecurityType };
 
   export type APIError = API.APIError;
   export type BaseResponse = API.BaseResponse;
