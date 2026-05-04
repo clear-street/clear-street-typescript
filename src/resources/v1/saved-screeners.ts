@@ -1,0 +1,226 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
+import * as ScreenerAPI from './screener';
+import { APIPromise } from '../../core/api-promise';
+import { buildHeaders } from '../../internal/headers';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
+
+/**
+ * Search and manage saved screeners.
+ */
+export class SavedScreeners extends APIResource {
+  /**
+   * Create a saved screener configuration.
+   *
+   * Persists a screener configuration for the authenticated user.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.savedScreeners.createScreener();
+   * ```
+   */
+  createScreener(
+    body: SavedScreenerCreateScreenerParams,
+    options?: RequestOptions,
+  ): APIPromise<SavedScreenerCreateScreenerResponse> {
+    return this._client.post('/v1/saved-screeners', { body, ...options });
+  }
+
+  /**
+   * Delete a saved screener configuration.
+   *
+   * Deletes the screener configuration for the authenticated user.
+   *
+   * @example
+   * ```ts
+   * await client.v1.savedScreeners.deleteScreener(
+   *   '550e8400-e29b-41d4-a716-446655440000',
+   * );
+   * ```
+   */
+  deleteScreener(screenerID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/v1/saved-screeners/${screenerID}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Get a saved screener configuration by ID.
+   *
+   * Returns a single screener configuration for the authenticated user.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.savedScreeners.getScreenerByID(
+   *     '550e8400-e29b-41d4-a716-446655440000',
+   *   );
+   * ```
+   */
+  getScreenerByID(
+    screenerID: string,
+    options?: RequestOptions,
+  ): APIPromise<SavedScreenerGetScreenerByIDResponse> {
+    return this._client.get(path`/v1/saved-screeners/${screenerID}`, options);
+  }
+
+  /**
+   * List saved screener configurations.
+   *
+   * Returns all screener configurations for the authenticated user.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.savedScreeners.getScreeners();
+   * ```
+   */
+  getScreeners(options?: RequestOptions): APIPromise<SavedScreenerGetScreenersResponse> {
+    return this._client.get('/v1/saved-screeners', options);
+  }
+
+  /**
+   * Update a saved screener configuration.
+   *
+   * Replaces the screener configuration for the authenticated user. If `name` is
+   * null, the existing name is preserved.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.savedScreeners.replaceScreener(
+   *     '550e8400-e29b-41d4-a716-446655440000',
+   *   );
+   * ```
+   */
+  replaceScreener(
+    screenerID: string,
+    body: SavedScreenerReplaceScreenerParams,
+    options?: RequestOptions,
+  ): APIPromise<SavedScreenerReplaceScreenerResponse> {
+    return this._client.put(path`/v1/saved-screeners/${screenerID}`, { body, ...options });
+  }
+}
+
+/**
+ * A saved screener configuration entry
+ */
+export interface ScreenerEntry {
+  id: string;
+
+  created_at: string;
+
+  filters: Array<ScreenerAPI.SearchFilter>;
+
+  name: string;
+
+  updated_at: string;
+
+  field_filter?: Array<ScreenerAPI.FieldRef> | null;
+
+  /**
+   * A reference to a screener field.
+   */
+  sort_by?: ScreenerAPI.FieldRef | null;
+
+  sort_direction?: string | null;
+}
+
+export type ScreenerEntryList = Array<ScreenerEntry>;
+
+export interface SavedScreenerCreateScreenerResponse extends Shared.BaseResponse {
+  /**
+   * A saved screener configuration entry
+   */
+  data: ScreenerEntry;
+}
+
+export interface SavedScreenerGetScreenerByIDResponse extends Shared.BaseResponse {
+  /**
+   * A saved screener configuration entry
+   */
+  data: ScreenerEntry;
+}
+
+export interface SavedScreenerGetScreenersResponse extends Shared.BaseResponse {
+  data: ScreenerEntryList;
+}
+
+export interface SavedScreenerReplaceScreenerResponse extends Shared.BaseResponse {
+  /**
+   * A saved screener configuration entry
+   */
+  data: ScreenerEntry;
+}
+
+export interface SavedScreenerCreateScreenerParams {
+  /**
+   * Structured field references to include when running this screener
+   */
+  field_filter?: Array<ScreenerAPI.FieldRef> | null;
+
+  /**
+   * Structured search filter criteria
+   */
+  filters?: Array<ScreenerAPI.SearchFilter> | null;
+
+  /**
+   * The name for this screener configuration
+   */
+  name?: string | null;
+
+  /**
+   * Structured field reference to sort results by
+   */
+  sort_by?: ScreenerAPI.FieldRef | null;
+
+  /**
+   * Sort direction for results
+   */
+  sort_direction?: 'ASC' | 'DESC' | null;
+}
+
+export interface SavedScreenerReplaceScreenerParams {
+  /**
+   * Structured field references to include when running this screener
+   */
+  field_filter?: Array<ScreenerAPI.FieldRef> | null;
+
+  /**
+   * Structured search filter criteria
+   */
+  filters?: Array<ScreenerAPI.SearchFilter> | null;
+
+  /**
+   * The name for this screener configuration
+   */
+  name?: string | null;
+
+  /**
+   * Structured field reference to sort results by
+   */
+  sort_by?: ScreenerAPI.FieldRef | null;
+
+  /**
+   * Sort direction for results
+   */
+  sort_direction?: 'ASC' | 'DESC' | null;
+}
+
+export declare namespace SavedScreeners {
+  export {
+    type ScreenerEntry as ScreenerEntry,
+    type ScreenerEntryList as ScreenerEntryList,
+    type SavedScreenerCreateScreenerResponse as SavedScreenerCreateScreenerResponse,
+    type SavedScreenerGetScreenerByIDResponse as SavedScreenerGetScreenerByIDResponse,
+    type SavedScreenerGetScreenersResponse as SavedScreenerGetScreenersResponse,
+    type SavedScreenerReplaceScreenerResponse as SavedScreenerReplaceScreenerResponse,
+    type SavedScreenerCreateScreenerParams as SavedScreenerCreateScreenerParams,
+    type SavedScreenerReplaceScreenerParams as SavedScreenerReplaceScreenerParams,
+  };
+}

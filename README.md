@@ -27,7 +27,7 @@ const client = new ClearStreet({
   environment: 'staging', // defaults to 'production'
 });
 
-const response = await client.active.v1.accounts.getAccounts();
+const response = await client.v1.accounts.getAccounts();
 ```
 
 ### Request & Response types
@@ -43,8 +43,7 @@ const client = new ClearStreet({
   environment: 'staging', // defaults to 'production'
 });
 
-const response: ClearStreet.Active.V1.AccountGetAccountsResponse =
-  await client.active.v1.accounts.getAccounts();
+const response: ClearStreet.V1.AccountGetAccountsResponse = await client.v1.accounts.getAccounts();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -57,7 +56,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const response = await client.active.v1.accounts.getAccounts().catch(async (err) => {
+const response = await client.v1.accounts.getAccounts().catch(async (err) => {
   if (err instanceof ClearStreet.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -97,7 +96,7 @@ const client = new ClearStreet({
 });
 
 // Or, configure per-request:
-await client.active.v1.accounts.getAccounts({
+await client.v1.accounts.getAccounts({
   maxRetries: 5,
 });
 ```
@@ -114,7 +113,7 @@ const client = new ClearStreet({
 });
 
 // Override per-request:
-await client.active.v1.accounts.getAccounts({
+await client.v1.accounts.getAccounts({
   timeout: 5 * 1000,
 });
 ```
@@ -137,13 +136,11 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new ClearStreet();
 
-const response = await client.active.v1.accounts.getAccounts().asResponse();
+const response = await client.v1.accounts.getAccounts().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.active.v1.accounts
-  .getAccounts()
-  .withResponse();
+const { data: response, response: raw } = await client.v1.accounts.getAccounts().withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(response);
 ```
@@ -225,7 +222,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.active.v1.accounts.getAccounts({
+client.v1.accounts.getAccounts({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
