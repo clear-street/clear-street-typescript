@@ -450,17 +450,9 @@ export interface InstrumentGetInstrumentsParams {
   instrument_ids?: Array<string>;
 
   /**
-   * Filter by instrument type. If omitted, returns all types.
+   * Filter by instrument type. If omitted, returns all supported instrument types.
    */
-  instrument_type?:
-    | 'COMMON_STOCK'
-    | 'PREFERRED_STOCK'
-    | 'CORPORATE_BOND'
-    | 'OPTION'
-    | 'FUTURE'
-    | 'WARRANT'
-    | 'CASH'
-    | 'OTHER';
+  instrument_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'OPTION' | 'CASH' | 'OTHER';
 
   /**
    * Filter by liquidation only status
