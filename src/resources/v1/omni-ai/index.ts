@@ -52,7 +52,6 @@ export {
   type OpenEntitlementConsentAction,
   type OpenScreenerAction,
   type OrderPayload,
-  type OrderStrategyType,
   type PrefillOrderAction,
   type PrefillOrderActionType,
   type PromptButtonAction,
