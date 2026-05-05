@@ -118,15 +118,16 @@ export class Instruments extends APIResource {
   }
 
   /**
-   * Fast in-memory typeahead search over the loaded instrument universe.
+   * Search instruments by symbol, alternate identifier, or company name.
    *
-   * Supports three independent match dimensions in a single `q` parameter: ticker
-   * symbol (exact > prefix > substring), alt-id exact (CUSIP / ISIN / OPRA root /
-   * CMS), and company name (token + character-trigram). Results are ranked by a
-   * composite score that includes ADV (log-scaled), listing status, marginable / ETB
-   * flags, and OTC / restricted / liquidation-only penalties. Defaults to the
-   * `EQUITY` asset class (common stock + ETFs + exchange-traded mutual funds); pass
-   * `asset_class=OPTION` for option chains.
+   * The `q` parameter is case-insensitive and supports ticker symbols, alternate
+   * identifiers such as CUSIP, ISIN, OPRA root, and CMS identifiers, and company
+   * names for non-option instruments. Results are ranked by match quality plus
+   * instrument quality signals including log-scaled ADV, listing status,
+   * marginability, easy-to-borrow status, and OTC, restricted, and liquidation-only
+   * penalties. Defaults to the `EQUITY` asset class (common stocks, preferred
+   * shares, ADRs, ETFs, and exchange-traded mutual funds). Pass `asset_class=OPTION`
+   * to search option contracts by symbol or alternate identifier.
    *
    * @example
    * ```ts
@@ -492,8 +493,9 @@ export interface InstrumentGetInstrumentsParams {
 
 export interface InstrumentSearchInstrumentsParams {
   /**
-   * Search term applied case-insensitively to ticker symbols, alt-IDs
-   * (CUSIP/ISIN/OPRA-root/CMS), and company names.
+   * Search term applied case-insensitively to ticker symbols, alternate identifiers
+   * (CUSIP, ISIN, OPRA root, CMS), and company names for non-option instruments.
+   * Option searches match symbols and alternate identifiers.
    */
   q: string;
 
