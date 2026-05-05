@@ -178,7 +178,7 @@ export interface Account {
 /**
  * Account kind classification
  */
-export type AccountKind = 'HOUSE' | 'PAB' | 'CUSTOMER' | 'COUNTERPARTY' | 'OTHER';
+export type AccountKind = 'CUSTOMER' | 'OTHER';
 
 export type AccountList = Array<Account>;
 
@@ -197,36 +197,7 @@ export type AccountStatus = 'ACTIVE' | 'INACTIVE' | 'CLOSED';
 /**
  * Account sub-kind classification providing more granular categorization
  */
-export type AccountSubkind =
-  | 'AFFILIATE'
-  | 'ALLOCATION'
-  | 'ARRANGING'
-  | 'BANK'
-  | 'BLOCK_TRADING'
-  | 'CARRY_BROKER'
-  | 'CASH'
-  | 'CLIENT'
-  | 'COLLATERAL'
-  | 'COURTESY_MASTER'
-  | 'CROSS'
-  | 'DEPOSIT'
-  | 'DVP'
-  | 'ERROR'
-  | 'EXECUTION'
-  | 'FACILITATION'
-  | 'FUNDING_SOURCE'
-  | 'HEDGE'
-  | 'MARGIN'
-  | 'MUTUAL_FUND'
-  | 'OPERATING'
-  | 'OTHER'
-  | 'RELATED_MASTER'
-  | 'REPO'
-  | 'SECURITIES_LENDING'
-  | 'SHADOW_AWAY'
-  | 'TRADING'
-  | 'TRIPARTY_COLLATERAL_AWAY'
-  | 'UNKNOWN';
+export type AccountSubkind = 'CASH' | 'MARGIN' | 'OTHER';
 
 /**
  * Risk settings for an account
