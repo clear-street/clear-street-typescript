@@ -123,7 +123,6 @@ import {
   OpenEntitlementConsentAction,
   OpenScreenerAction,
   OrderPayload,
-  OrderStrategyType,
   PrefillOrderAction,
   PrefillOrderActionType,
   PromptButtonAction,
@@ -189,11 +188,6 @@ export class V1 extends APIResource {
 }
 
 /**
- * A decimal number represented as a string.
- */
-export type APIDecimal64 = string;
-
-/**
  * Security type
  */
 export type SecurityType =
@@ -219,7 +213,7 @@ V1.VersionResource = VersionResource;
 V1.Watchlists = Watchlists;
 
 export declare namespace V1 {
-  export { type APIDecimal64 as APIDecimal64, type SecurityType as SecurityType };
+  export { type SecurityType as SecurityType };
 
   export {
     Accounts as Accounts,
@@ -306,7 +300,6 @@ export declare namespace V1 {
     type OpenEntitlementConsentAction as OpenEntitlementConsentAction,
     type OpenScreenerAction as OpenScreenerAction,
     type OrderPayload as OrderPayload,
-    type OrderStrategyType as OrderStrategyType,
     type PrefillOrderAction as PrefillOrderAction,
     type PrefillOrderActionType as PrefillOrderActionType,
     type PromptButtonAction as PromptButtonAction,

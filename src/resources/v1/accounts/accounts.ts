@@ -16,10 +16,6 @@ import {
 } from './balances';
 import * as OrdersAPI from './orders';
 import {
-  ApStrategy,
-  BaseStrategyParams,
-  DarkStrategy,
-  DmaStrategy,
   Order,
   OrderCancelAllOpenOrdersParams,
   OrderCancelAllOpenOrdersResponse,
@@ -33,20 +29,14 @@ import {
   OrderReplaceOrderParams,
   OrderReplaceOrderResponse,
   OrderStatus,
-  OrderStrategy,
   OrderSubmitOrdersParams,
   OrderSubmitOrdersResponse,
   OrderType,
   Orders,
-  PovStrategy,
   QueueState,
   Side,
-  SorStrategy,
   TimeInForce,
   TrailingOffsetType,
-  TwapStrategy,
-  Urgency,
-  VwapStrategy,
 } from './orders';
 import * as PortfolioHistoryAPI from './portfolio-history';
 import {
@@ -315,24 +305,14 @@ export declare namespace Accounts {
 
   export {
     Orders as Orders,
-    type ApStrategy as ApStrategy,
-    type BaseStrategyParams as BaseStrategyParams,
-    type DarkStrategy as DarkStrategy,
-    type DmaStrategy as DmaStrategy,
     type Order as Order,
     type OrderList as OrderList,
     type OrderStatus as OrderStatus,
-    type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
-    type PovStrategy as PovStrategy,
     type QueueState as QueueState,
     type Side as Side,
-    type SorStrategy as SorStrategy,
     type TimeInForce as TimeInForce,
     type TrailingOffsetType as TrailingOffsetType,
-    type TwapStrategy as TwapStrategy,
-    type Urgency as Urgency,
-    type VwapStrategy as VwapStrategy,
     type OrderCancelAllOpenOrdersResponse as OrderCancelAllOpenOrdersResponse,
     type OrderCancelOpenOrderResponse as OrderCancelOpenOrderResponse,
     type OrderGetOrderByIDResponse as OrderGetOrderByIDResponse,
