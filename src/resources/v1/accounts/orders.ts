@@ -553,7 +553,17 @@ export interface OrderReplaceOrderParams {
   /**
    * Body param: New time in force for the order
    */
-  time_in_force?: TimeInForce;
+  time_in_force?:
+    | 'DAY'
+    | 'GOOD_TILL_CANCEL'
+    | 'IMMEDIATE_OR_CANCEL'
+    | 'FILL_OR_KILL'
+    | 'GOOD_TILL_DATE'
+    | 'AT_THE_OPENING'
+    | 'AT_THE_CLOSE'
+    | 'GOOD_TILL_CROSSING'
+    | 'GOOD_THROUGH_CROSSING'
+    | 'AT_CROSSING';
 }
 
 export interface OrderSubmitOrdersParams {
@@ -573,12 +583,22 @@ export namespace OrderSubmitOrdersParams {
     /**
      * Type of order (currently MARKET or LIMIT for multileg strategy submission)
      */
-    order_type: OrdersAPI.OrderType;
+    order_type: 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT' | 'TRAILING_STOP' | 'TRAILING_STOP_LIMIT';
 
     /**
      * Time in force
      */
-    time_in_force: OrdersAPI.TimeInForce;
+    time_in_force:
+      | 'DAY'
+      | 'GOOD_TILL_CANCEL'
+      | 'IMMEDIATE_OR_CANCEL'
+      | 'FILL_OR_KILL'
+      | 'GOOD_TILL_DATE'
+      | 'AT_THE_OPENING'
+      | 'AT_THE_CLOSE'
+      | 'GOOD_TILL_CROSSING'
+      | 'GOOD_THROUGH_CROSSING'
+      | 'AT_CROSSING';
 
     /**
      * Optional client-provided unique ID (idempotency). Required to be unique per
@@ -646,7 +666,7 @@ export namespace OrderSubmitOrdersParams {
     /**
      * Type of order
      */
-    order_type: OrdersAPI.OrderType;
+    order_type: 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT' | 'TRAILING_STOP' | 'TRAILING_STOP_LIMIT';
 
     /**
      * Quantity to trade. For COMMON_STOCK: shares (may be fractional if supported).
@@ -662,7 +682,17 @@ export namespace OrderSubmitOrdersParams {
     /**
      * Time in force
      */
-    time_in_force: OrdersAPI.TimeInForce;
+    time_in_force:
+      | 'DAY'
+      | 'GOOD_TILL_CANCEL'
+      | 'IMMEDIATE_OR_CANCEL'
+      | 'FILL_OR_KILL'
+      | 'GOOD_TILL_DATE'
+      | 'AT_THE_OPENING'
+      | 'AT_THE_CLOSE'
+      | 'GOOD_TILL_CROSSING'
+      | 'GOOD_THROUGH_CROSSING'
+      | 'AT_CROSSING';
 
     /**
      * Optional client-provided unique ID (idempotency). Required to be unique per
