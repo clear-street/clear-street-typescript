@@ -54,17 +54,17 @@ export class Responses extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.omniAI.responses.getResponse(
+   *   await client.v1.omniAI.responses.getResponseByID(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 0 },
    *   );
    * ```
    */
-  getResponse(
+  getResponseByID(
     responseID: string,
-    query: ResponseGetResponseParams,
+    query: ResponseGetResponseByIDParams,
     options?: RequestOptions,
-  ): APIPromise<ResponseGetResponseResponse> {
+  ): APIPromise<ResponseGetResponseByIDResponse> {
     return this._client.get(path`/v1/omni-ai/responses/${responseID}`, { query, ...options });
   }
 }
@@ -73,7 +73,7 @@ export interface ResponseCancelResponseResponse extends Shared.BaseResponse {
   data: OmniAIAPI.CancelResponsePayload;
 }
 
-export interface ResponseGetResponseResponse extends Shared.BaseResponse {
+export interface ResponseGetResponseByIDResponse extends Shared.BaseResponse {
   /**
    * Dynamic pollable response.
    */
@@ -87,7 +87,7 @@ export interface ResponseCancelResponseParams {
   account_id: number;
 }
 
-export interface ResponseGetResponseParams {
+export interface ResponseGetResponseByIDParams {
   /**
    * Account ID for the request
    */
@@ -97,8 +97,8 @@ export interface ResponseGetResponseParams {
 export declare namespace Responses {
   export {
     type ResponseCancelResponseResponse as ResponseCancelResponseResponse,
-    type ResponseGetResponseResponse as ResponseGetResponseResponse,
+    type ResponseGetResponseByIDResponse as ResponseGetResponseByIDResponse,
     type ResponseCancelResponseParams as ResponseCancelResponseParams,
-    type ResponseGetResponseParams as ResponseGetResponseParams,
+    type ResponseGetResponseByIDParams as ResponseGetResponseByIDParams,
   };
 }

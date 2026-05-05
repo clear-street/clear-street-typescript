@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource v1', () => {
   // Mock server tests are disabled
-  test.skip('ws', async () => {
-    const responsePromise = client.v1.ws();
+  test.skip('websocketHandler', async () => {
+    const responsePromise = client.v1.websocketHandler();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

@@ -3,11 +3,11 @@
 export {
   Accounts,
   type Account,
-  type AccountKind,
   type AccountList,
   type AccountSettings,
   type AccountStatus,
-  type AccountSubkind,
+  type AccountSubtype,
+  type AccountType,
   type RiskSettings,
   type AccountGetAccountByIDResponse,
   type AccountGetAccountsResponse,
@@ -32,10 +32,10 @@ export {
   type OptionsContractList,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
-  type InstrumentSearchResponse,
+  type InstrumentSearchInstrumentsResponse,
   type InstrumentGetInstrumentByIDParams,
   type InstrumentGetInstrumentsParams,
-  type InstrumentSearchParams,
+  type InstrumentSearchInstrumentsParams,
 } from './instruments/index';
 export { MarketData } from './market-data/index';
 export {

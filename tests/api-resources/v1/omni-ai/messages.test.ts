@@ -9,8 +9,29 @@ const client = new ClearStreet({
 
 describe('resource messages', () => {
   // Mock server tests are disabled
-  test.skip('feedback: only required params', async () => {
-    const responsePromise = client.v1.omniAI.messages.feedback('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  test.skip('getMessageByID: only required params', async () => {
+    const responsePromise = client.v1.omniAI.messages.getMessageByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 0,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getMessageByID: required and optional params', async () => {
+    const response = await client.v1.omniAI.messages.getMessageByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 0,
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('submitFeedback: only required params', async () => {
+    const responsePromise = client.v1.omniAI.messages.submitFeedback('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: 0,
       score: 0,
     });
@@ -24,33 +45,12 @@ describe('resource messages', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('feedback: required and optional params', async () => {
-    const response = await client.v1.omniAI.messages.feedback('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  test.skip('submitFeedback: required and optional params', async () => {
+    const response = await client.v1.omniAI.messages.submitFeedback('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: 0,
       score: 0,
       comment: 'comment',
       metadata: {},
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('getMessage: only required params', async () => {
-    const responsePromise = client.v1.omniAI.messages.getMessage('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('getMessage: required and optional params', async () => {
-    const response = await client.v1.omniAI.messages.getMessage('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
     });
   });
 });

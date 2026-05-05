@@ -54,13 +54,13 @@ export class Entitlements extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.omniAI.entitlements.listEntitlements();
+   *   await client.v1.omniAI.entitlements.getEntitlements();
    * ```
    */
-  listEntitlements(
-    query: EntitlementListEntitlementsParams | null | undefined = {},
+  getEntitlements(
+    query: EntitlementGetEntitlementsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<EntitlementListEntitlementsResponse> {
+  ): APIPromise<EntitlementGetEntitlementsResponse> {
     return this._client.get('/v1/omni-ai/entitlements', { query, ...options });
   }
 }
@@ -93,7 +93,7 @@ export interface EntitlementDeleteEntitlementResponse extends Shared.BaseRespons
   data: DeleteEntitlementResponse;
 }
 
-export interface EntitlementListEntitlementsResponse extends Shared.BaseResponse {
+export interface EntitlementGetEntitlementsResponse extends Shared.BaseResponse {
   data: EntitlementResourceList;
 }
 
@@ -105,7 +105,7 @@ export interface EntitlementCreateEntitlementsParams {
   trading_account_ids: Array<number>;
 }
 
-export interface EntitlementListEntitlementsParams {
+export interface EntitlementGetEntitlementsParams {
   trading_account_id?: number;
 }
 
@@ -116,8 +116,8 @@ export declare namespace Entitlements {
     type EntitlementResourceList as EntitlementResourceList,
     type EntitlementCreateEntitlementsResponse as EntitlementCreateEntitlementsResponse,
     type EntitlementDeleteEntitlementResponse as EntitlementDeleteEntitlementResponse,
-    type EntitlementListEntitlementsResponse as EntitlementListEntitlementsResponse,
+    type EntitlementGetEntitlementsResponse as EntitlementGetEntitlementsResponse,
     type EntitlementCreateEntitlementsParams as EntitlementCreateEntitlementsParams,
-    type EntitlementListEntitlementsParams as EntitlementListEntitlementsParams,
+    type EntitlementGetEntitlementsParams as EntitlementGetEntitlementsParams,
   };
 }

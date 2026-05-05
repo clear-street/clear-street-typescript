@@ -7,7 +7,7 @@ import * as V1API from '../v1';
 import * as OrdersAPI from '../accounts/orders';
 import * as EntitlementAgreementsAPI from './entitlement-agreements';
 import {
-  EntitlementAgreementListEntitlementAgreementsResponse,
+  EntitlementAgreementGetEntitlementAgreementsResponse,
   EntitlementAgreementResource,
   EntitlementAgreementResourceList,
   EntitlementAgreements,
@@ -18,38 +18,38 @@ import {
   EntitlementCreateEntitlementsParams,
   EntitlementCreateEntitlementsResponse,
   EntitlementDeleteEntitlementResponse,
-  EntitlementListEntitlementsParams,
-  EntitlementListEntitlementsResponse,
+  EntitlementGetEntitlementsParams,
+  EntitlementGetEntitlementsResponse,
   EntitlementResource,
   EntitlementResourceList,
   Entitlements,
 } from './entitlements';
 import * as MessagesAPI from './messages';
 import {
-  MessageFeedbackParams,
-  MessageFeedbackResponse,
-  MessageGetMessageParams,
-  MessageGetMessageResponse,
+  MessageGetMessageByIDParams,
+  MessageGetMessageByIDResponse,
+  MessageSubmitFeedbackParams,
+  MessageSubmitFeedbackResponse,
   Messages,
 } from './messages';
 import * as ResponsesAPI from './responses';
 import {
   ResponseCancelResponseParams,
   ResponseCancelResponseResponse,
-  ResponseGetResponseParams,
-  ResponseGetResponseResponse,
+  ResponseGetResponseByIDParams,
+  ResponseGetResponseByIDResponse,
   Responses,
 } from './responses';
 import * as ThreadsAPI from './threads/threads';
 import {
   ThreadCreateThreadParams,
   ThreadCreateThreadResponse,
-  ThreadGetThreadParams,
-  ThreadGetThreadResponse,
-  ThreadListThreadsParams,
-  ThreadListThreadsResponse,
-  ThreadResponseParams,
-  ThreadResponseResponse,
+  ThreadGetThreadByIDParams,
+  ThreadGetThreadByIDResponse,
+  ThreadGetThreadResponseParams,
+  ThreadGetThreadResponseResponse,
+  ThreadGetThreadsParams,
+  ThreadGetThreadsResponse,
   Threads,
 } from './threads/threads';
 
@@ -733,7 +733,7 @@ export declare namespace OmniAI {
     EntitlementAgreements as EntitlementAgreements,
     type EntitlementAgreementResource as EntitlementAgreementResource,
     type EntitlementAgreementResourceList as EntitlementAgreementResourceList,
-    type EntitlementAgreementListEntitlementAgreementsResponse as EntitlementAgreementListEntitlementAgreementsResponse,
+    type EntitlementAgreementGetEntitlementAgreementsResponse as EntitlementAgreementGetEntitlementAgreementsResponse,
   };
 
   export {
@@ -743,36 +743,36 @@ export declare namespace OmniAI {
     type EntitlementResourceList as EntitlementResourceList,
     type EntitlementCreateEntitlementsResponse as EntitlementCreateEntitlementsResponse,
     type EntitlementDeleteEntitlementResponse as EntitlementDeleteEntitlementResponse,
-    type EntitlementListEntitlementsResponse as EntitlementListEntitlementsResponse,
+    type EntitlementGetEntitlementsResponse as EntitlementGetEntitlementsResponse,
     type EntitlementCreateEntitlementsParams as EntitlementCreateEntitlementsParams,
-    type EntitlementListEntitlementsParams as EntitlementListEntitlementsParams,
+    type EntitlementGetEntitlementsParams as EntitlementGetEntitlementsParams,
   };
 
   export {
     Messages as Messages,
-    type MessageFeedbackResponse as MessageFeedbackResponse,
-    type MessageGetMessageResponse as MessageGetMessageResponse,
-    type MessageFeedbackParams as MessageFeedbackParams,
-    type MessageGetMessageParams as MessageGetMessageParams,
+    type MessageGetMessageByIDResponse as MessageGetMessageByIDResponse,
+    type MessageSubmitFeedbackResponse as MessageSubmitFeedbackResponse,
+    type MessageGetMessageByIDParams as MessageGetMessageByIDParams,
+    type MessageSubmitFeedbackParams as MessageSubmitFeedbackParams,
   };
 
   export {
     Responses as Responses,
     type ResponseCancelResponseResponse as ResponseCancelResponseResponse,
-    type ResponseGetResponseResponse as ResponseGetResponseResponse,
+    type ResponseGetResponseByIDResponse as ResponseGetResponseByIDResponse,
     type ResponseCancelResponseParams as ResponseCancelResponseParams,
-    type ResponseGetResponseParams as ResponseGetResponseParams,
+    type ResponseGetResponseByIDParams as ResponseGetResponseByIDParams,
   };
 
   export {
     Threads as Threads,
     type ThreadCreateThreadResponse as ThreadCreateThreadResponse,
-    type ThreadGetThreadResponse as ThreadGetThreadResponse,
-    type ThreadListThreadsResponse as ThreadListThreadsResponse,
-    type ThreadResponseResponse as ThreadResponseResponse,
+    type ThreadGetThreadByIDResponse as ThreadGetThreadByIDResponse,
+    type ThreadGetThreadResponseResponse as ThreadGetThreadResponseResponse,
+    type ThreadGetThreadsResponse as ThreadGetThreadsResponse,
     type ThreadCreateThreadParams as ThreadCreateThreadParams,
-    type ThreadGetThreadParams as ThreadGetThreadParams,
-    type ThreadListThreadsParams as ThreadListThreadsParams,
-    type ThreadResponseParams as ThreadResponseParams,
+    type ThreadGetThreadByIDParams as ThreadGetThreadByIDParams,
+    type ThreadGetThreadResponseParams as ThreadGetThreadResponseParams,
+    type ThreadGetThreadsParams as ThreadGetThreadsParams,
   };
 }

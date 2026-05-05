@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource options', () => {
   // Mock server tests are disabled
-  test.skip('contracts', async () => {
-    const responsePromise = client.v1.instruments.options.contracts();
+  test.skip('getOptionContracts', async () => {
+    const responsePromise = client.v1.instruments.options.getOptionContracts();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,17 +21,17 @@ describe('resource options', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('contracts: request options and params are passed correctly', async () => {
+  test.skip('getOptionContracts: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.instruments.options.contracts(
+      client.v1.instruments.options.getOptionContracts(
         {
           contract_type: 'CALL',
           expiry: '2019-12-27',
           page_size: 1,
           page_token: 'U3RhaW5sZXNzIHJvY2tz',
           underlier: 'underlier',
-          underlier_instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          underlying_instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         },
         { path: '/_stainless_unknown_path' },
       ),

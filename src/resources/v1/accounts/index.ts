@@ -3,11 +3,11 @@
 export {
   Accounts,
   type Account,
-  type AccountKind,
   type AccountList,
   type AccountSettings,
   type AccountStatus,
-  type AccountSubkind,
+  type AccountSubtype,
+  type AccountType,
   type RiskSettings,
   type AccountGetAccountByIDResponse,
   type AccountGetAccountsResponse,
