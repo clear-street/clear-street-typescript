@@ -449,20 +449,7 @@ export interface OrderPayload {
    * Stop price (required for STOP and STOP_LIMIT orders)
    */
   stop_price?: string | null;
-
-  /**
-   * Execution strategy (simplified enum, not the full strategy params for now)
-   */
-  strategy?: OrderStrategyType | null;
 }
-
-/**
- * Simplified order strategy type for prefill actions.
- *
- * This is a simplified enum compared to the full OrderStrategy with params,
- * suitable for indicating the desired strategy without full configuration.
- */
-export type OrderStrategyType = 'SOR' | 'VWAP' | 'TWAP' | 'DARK' | 'DMA' | 'AP' | 'POV';
 
 /**
  * Action to prefill order details for user confirmation.
@@ -727,7 +714,6 @@ export declare namespace OmniAI {
     type OpenEntitlementConsentAction as OpenEntitlementConsentAction,
     type OpenScreenerAction as OpenScreenerAction,
     type OrderPayload as OrderPayload,
-    type OrderStrategyType as OrderStrategyType,
     type PrefillOrderAction as PrefillOrderAction,
     type PrefillOrderActionType as PrefillOrderActionType,
     type PromptButtonAction as PromptButtonAction,

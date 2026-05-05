@@ -75,7 +75,6 @@ export {
   type OpenEntitlementConsentAction,
   type OpenScreenerAction,
   type OrderPayload,
-  type OrderStrategyType,
   type PrefillOrderAction,
   type PrefillOrderActionType,
   type PromptButtonAction,
@@ -126,7 +125,7 @@ export {
   type ScreenerGetScreenerParams,
   type ScreenerSearchScreenerParams,
 } from './screener';
-export { V1, type APIDecimal64, type SecurityType } from './v1';
+export { V1, type SecurityType } from './v1';
 export { VersionResource, type Version, type VersionGetVersionResponse } from './version';
 export {
   Watchlists,

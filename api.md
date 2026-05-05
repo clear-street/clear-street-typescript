@@ -10,7 +10,6 @@ Types:
 
 Types:
 
-- <code><a href="./src/resources/v1/v1.ts">APIDecimal64</a></code>
 - <code><a href="./src/resources/v1/v1.ts">SecurityType</a></code>
 
 Methods:
@@ -58,24 +57,14 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/accounts/orders.ts">ApStrategy</a></code>
-- <code><a href="./src/resources/v1/accounts/orders.ts">BaseStrategyParams</a></code>
-- <code><a href="./src/resources/v1/accounts/orders.ts">DarkStrategy</a></code>
-- <code><a href="./src/resources/v1/accounts/orders.ts">DmaStrategy</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">Order</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">OrderList</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">OrderStatus</a></code>
-- <code><a href="./src/resources/v1/accounts/orders.ts">OrderStrategy</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">OrderType</a></code>
-- <code><a href="./src/resources/v1/accounts/orders.ts">PovStrategy</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">QueueState</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">Side</a></code>
-- <code><a href="./src/resources/v1/accounts/orders.ts">SorStrategy</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">TimeInForce</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">TrailingOffsetType</a></code>
-- <code><a href="./src/resources/v1/accounts/orders.ts">TwapStrategy</a></code>
-- <code><a href="./src/resources/v1/accounts/orders.ts">Urgency</a></code>
-- <code><a href="./src/resources/v1/accounts/orders.ts">VwapStrategy</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">OrderCancelAllOpenOrdersResponse</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">OrderCancelOpenOrderResponse</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">OrderGetOrderByIDResponse</a></code>
@@ -340,7 +329,6 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenEntitlementConsentAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenScreenerAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OrderPayload</a></code>
-- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OrderStrategyType</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillOrderAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillOrderActionType</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PromptButtonAction</a></code>

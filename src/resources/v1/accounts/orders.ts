@@ -143,61 +143,6 @@ export class Orders extends APIResource {
 }
 
 /**
- * Arrival Price strategy
- */
-export interface ApStrategy extends BaseStrategyParams {
-  /**
-   * Maximum percentage of market volume to participate in (0-100)
-   */
-  max_percent?: V1API.APIDecimal64 | null;
-
-  /**
-   * Minimum percentage of market volume to participate in (0-100)
-   */
-  min_percent?: V1API.APIDecimal64 | null;
-}
-
-/**
- * Base parameters common to most algorithmic strategies
- */
-export interface BaseStrategyParams {
-  /**
-   * UTC timestamp to end execution (defaults to market close)
-   */
-  end_at?: string | null;
-
-  /**
-   * UTC timestamp to start execution (defaults to order placement time)
-   */
-  start_at?: string | null;
-
-  /**
-   * Urgency level for execution aggressiveness
-   */
-  urgency?: Urgency;
-}
-
-/**
- * Dark Pool strategy
- */
-export interface DarkStrategy extends BaseStrategyParams {
-  /**
-   * Maximum percentage of market volume to participate in (0-100)
-   */
-  max_percent?: V1API.APIDecimal64 | null;
-}
-
-/**
- * Direct Market Access strategy
- */
-export interface DmaStrategy {
-  /**
-   * Destination exchange (MIC code)
-   */
-  destination: string;
-}
-
-/**
  * A trading order with its current state and execution details.
  *
  * This is the unified API representation of an order across its lifecycle,
@@ -333,11 +278,6 @@ export interface Order {
   stop_price?: string | null;
 
   /**
-   * Execution strategy for this order
-   */
-  strategy?: OrderStrategy | null;
-
-  /**
    * Trailing offset amount for trailing orders
    */
   trailing_offset_amt?: string | null;
@@ -388,72 +328,6 @@ export type OrderStatus =
   | 'OTHER';
 
 /**
- * Execution strategy for an order
- *
- * Defines advanced routing and execution logic beyond simple order types. The
- * strategy type determines which parameters are available and required.
- */
-export type OrderStrategy =
-  | OrderStrategy.Sor
-  | OrderStrategy.Vwap
-  | OrderStrategy.Twap
-  | OrderStrategy.Ap
-  | OrderStrategy.Pov
-  | OrderStrategy.Dark
-  | OrderStrategy.Dma;
-
-export namespace OrderStrategy {
-  /**
-   * Smart Order Router (default) - routes to best available venue
-   */
-  export interface Sor extends OrdersAPI.BaseStrategyParams {
-    type: 'SOR';
-  }
-
-  /**
-   * Volume Weighted Average Price - matches VWAP over a period
-   */
-  export interface Vwap extends OrdersAPI.VwapStrategy {
-    type: 'VWAP';
-  }
-
-  /**
-   * Time Weighted Average Price - spreads execution evenly over time
-   */
-  export interface Twap extends OrdersAPI.TwapStrategy {
-    type: 'TWAP';
-  }
-
-  /**
-   * Arrival Price - aims to match price at order placement time
-   */
-  export interface Ap extends OrdersAPI.ApStrategy {
-    type: 'AP';
-  }
-
-  /**
-   * Percentage of Volume - participates as a percentage of market volume
-   */
-  export interface Pov extends OrdersAPI.PovStrategy {
-    type: 'POV';
-  }
-
-  /**
-   * Dark Pool - routes to dark pool venues
-   */
-  export interface Dark extends OrdersAPI.DarkStrategy {
-    type: 'DARK';
-  }
-
-  /**
-   * Direct Market Access - sends directly to a specified exchange
-   */
-  export interface Dma extends OrdersAPI.DmaStrategy {
-    type: 'DMA';
-  }
-}
-
-/**
  * Order type
  */
 export type OrderType =
@@ -466,16 +340,6 @@ export type OrderType =
   | 'OTHER';
 
 /**
- * Percentage of Volume strategy
- */
-export interface PovStrategy extends BaseStrategyParams {
-  /**
-   * Target percentage of market volume to participate in (0-100)
-   */
-  target_percent: V1API.APIDecimal64;
-}
-
-/**
  * Parent order queue or hold state.
  */
 export type QueueState = 'AWAITING_RELEASE' | 'RELEASED';
@@ -484,26 +348,6 @@ export type QueueState = 'AWAITING_RELEASE' | 'RELEASED';
  * Side of an order
  */
 export type Side = 'BUY' | 'SELL' | 'SELL_SHORT' | 'OTHER';
-
-/**
- * Base parameters common to most algorithmic strategies
- */
-export interface SorStrategy {
-  /**
-   * UTC timestamp to end execution (defaults to market close)
-   */
-  end_at?: string | null;
-
-  /**
-   * UTC timestamp to start execution (defaults to order placement time)
-   */
-  start_at?: string | null;
-
-  /**
-   * Urgency level for execution aggressiveness
-   */
-  urgency?: Urgency;
-}
 
 /**
  * Time in force
@@ -525,41 +369,6 @@ export type TimeInForce =
  * Trailing offset type for trailing stop orders.
  */
 export type TrailingOffsetType = 'PRICE' | 'PERCENT_BPS';
-
-/**
- * Time Weighted Average Price strategy
- */
-export interface TwapStrategy extends BaseStrategyParams {
-  /**
-   * Maximum percentage of market volume to participate in (0-50)
-   */
-  max_percent?: V1API.APIDecimal64 | null;
-
-  /**
-   * Minimum percentage of market volume to participate in (0-100)
-   */
-  min_percent?: V1API.APIDecimal64 | null;
-}
-
-/**
- * Urgency level for algorithmic execution
- */
-export type Urgency = 'SUPER_PASSIVE' | 'PASSIVE' | 'MODERATE' | 'AGGRESSIVE' | 'SUPER_AGGRESSIVE';
-
-/**
- * Volume Weighted Average Price strategy
- */
-export interface VwapStrategy extends BaseStrategyParams {
-  /**
-   * Maximum percentage of market volume to participate in (0-50)
-   */
-  max_percent?: V1API.APIDecimal64 | null;
-
-  /**
-   * Minimum percentage of market volume to participate in (0-100)
-   */
-  min_percent?: V1API.APIDecimal64 | null;
-}
 
 export interface OrderCancelAllOpenOrdersResponse extends Shared.BaseResponse {
   data: OrderList;
@@ -615,15 +424,7 @@ export interface OrderCancelAllOpenOrdersParams {
   /**
    * Filter by instrument type (e.g., COMMON_STOCK, OPTION)
    */
-  instrument_type?:
-    | 'COMMON_STOCK'
-    | 'PREFERRED_STOCK'
-    | 'CORPORATE_BOND'
-    | 'OPTION'
-    | 'FUTURE'
-    | 'WARRANT'
-    | 'CASH'
-    | 'OTHER';
+  instrument_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'OPTION' | 'CASH' | 'OTHER';
 
   /**
    * Filter by order side (BUY or SELL)
@@ -664,15 +465,7 @@ export interface OrderGetOrdersParams {
   /**
    * Instrument type filter (e.g., COMMON_STOCK, OPTION)
    */
-  instrument_type?:
-    | 'COMMON_STOCK'
-    | 'PREFERRED_STOCK'
-    | 'CORPORATE_BOND'
-    | 'OPTION'
-    | 'FUTURE'
-    | 'WARRANT'
-    | 'CASH'
-    | 'OTHER';
+  instrument_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'OPTION' | 'CASH' | 'OTHER';
 
   page_size?: number;
 
@@ -744,7 +537,17 @@ export interface OrderReplaceOrderParams {
   /**
    * Body param: New time in force for the order
    */
-  time_in_force?: TimeInForce;
+  time_in_force?:
+    | 'DAY'
+    | 'GOOD_TILL_CANCEL'
+    | 'IMMEDIATE_OR_CANCEL'
+    | 'FILL_OR_KILL'
+    | 'GOOD_TILL_DATE'
+    | 'AT_THE_OPENING'
+    | 'AT_THE_CLOSE'
+    | 'GOOD_TILL_CROSSING'
+    | 'GOOD_THROUGH_CROSSING'
+    | 'AT_CROSSING';
 }
 
 export interface OrderSubmitOrdersParams {
@@ -764,12 +567,22 @@ export namespace OrderSubmitOrdersParams {
     /**
      * Type of order (currently MARKET or LIMIT for multileg strategy submission)
      */
-    order_type: OrdersAPI.OrderType;
+    order_type: 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT' | 'TRAILING_STOP' | 'TRAILING_STOP_LIMIT';
 
     /**
      * Time in force
      */
-    time_in_force: OrdersAPI.TimeInForce;
+    time_in_force:
+      | 'DAY'
+      | 'GOOD_TILL_CANCEL'
+      | 'IMMEDIATE_OR_CANCEL'
+      | 'FILL_OR_KILL'
+      | 'GOOD_TILL_DATE'
+      | 'AT_THE_OPENING'
+      | 'AT_THE_CLOSE'
+      | 'GOOD_TILL_CROSSING'
+      | 'GOOD_THROUGH_CROSSING'
+      | 'AT_CROSSING';
 
     /**
      * Optional client-provided unique ID (idempotency). Required to be unique per
@@ -837,7 +650,7 @@ export namespace OrderSubmitOrdersParams {
     /**
      * Type of order
      */
-    order_type: OrdersAPI.OrderType;
+    order_type: 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT' | 'TRAILING_STOP' | 'TRAILING_STOP_LIMIT';
 
     /**
      * Quantity to trade. For COMMON_STOCK: shares (may be fractional if supported).
@@ -853,7 +666,17 @@ export namespace OrderSubmitOrdersParams {
     /**
      * Time in force
      */
-    time_in_force: OrdersAPI.TimeInForce;
+    time_in_force:
+      | 'DAY'
+      | 'GOOD_TILL_CANCEL'
+      | 'IMMEDIATE_OR_CANCEL'
+      | 'FILL_OR_KILL'
+      | 'GOOD_TILL_DATE'
+      | 'AT_THE_OPENING'
+      | 'AT_THE_CLOSE'
+      | 'GOOD_TILL_CROSSING'
+      | 'GOOD_THROUGH_CROSSING'
+      | 'AT_CROSSING';
 
     /**
      * Optional client-provided unique ID (idempotency). Required to be unique per
@@ -874,7 +697,7 @@ export namespace OrderSubmitOrdersParams {
     extended_hours?: boolean | null;
 
     /**
-     * OEMS instrument UUID. Either `symbol` or `instrument_id` must be provided.
+     * OEMS instrument UUID
      */
     instrument_id?: string | null;
 
@@ -900,11 +723,6 @@ export namespace OrderSubmitOrdersParams {
     stop_price?: string | null;
 
     /**
-     * Execution strategy/router. Defaults to SOR where applicable.
-     */
-    strategy?: OrdersAPI.OrderStrategy | null;
-
-    /**
      * Trading symbol. For equities, use the ticker symbol (e.g., "AAPL"). For options,
      * use the OSI symbol (e.g., "AAPL 250117C00190000"). Either `symbol` or
      * `instrument_id` must be provided.
@@ -925,24 +743,14 @@ export namespace OrderSubmitOrdersParams {
 
 export declare namespace Orders {
   export {
-    type ApStrategy as ApStrategy,
-    type BaseStrategyParams as BaseStrategyParams,
-    type DarkStrategy as DarkStrategy,
-    type DmaStrategy as DmaStrategy,
     type Order as Order,
     type OrderList as OrderList,
     type OrderStatus as OrderStatus,
-    type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
-    type PovStrategy as PovStrategy,
     type QueueState as QueueState,
     type Side as Side,
-    type SorStrategy as SorStrategy,
     type TimeInForce as TimeInForce,
     type TrailingOffsetType as TrailingOffsetType,
-    type TwapStrategy as TwapStrategy,
-    type Urgency as Urgency,
-    type VwapStrategy as VwapStrategy,
     type OrderCancelAllOpenOrdersResponse as OrderCancelAllOpenOrdersResponse,
     type OrderCancelOpenOrderResponse as OrderCancelOpenOrderResponse,
     type OrderGetOrderByIDResponse as OrderGetOrderByIDResponse,
