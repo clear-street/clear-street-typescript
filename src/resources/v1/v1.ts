@@ -190,15 +190,7 @@ export class V1 extends APIResource {
 /**
  * Security type
  */
-export type SecurityType =
-  | 'COMMON_STOCK'
-  | 'PREFERRED_STOCK'
-  | 'CORPORATE_BOND'
-  | 'OPTION'
-  | 'FUTURE'
-  | 'WARRANT'
-  | 'CASH'
-  | 'OTHER';
+export type SecurityType = 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'OPTION' | 'CASH' | 'OTHER';
 
 V1.Accounts = Accounts;
 V1.Calendars = Calendars;
