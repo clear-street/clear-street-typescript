@@ -280,12 +280,12 @@ export interface Order {
   /**
    * Trailing offset amount for trailing orders
    */
-  trailing_offset_amt?: string | null;
+  trailing_offset?: string | null;
 
   /**
    * Trailing offset type for trailing orders
    */
-  trailing_offset_amt_type?: TrailingOffsetType | null;
+  trailing_offset_type?: TrailingOffsetType | null;
 
   /**
    * Trailing watermark price for trailing orders
@@ -368,7 +368,7 @@ export type TimeInForce =
 /**
  * Trailing offset type for trailing stop orders.
  */
-export type TrailingOffsetType = 'PRICE' | 'PERCENT_BPS';
+export type TrailingOffsetType = 'PRICE' | 'BPS';
 
 export interface OrderCancelAllOpenOrdersResponse extends Shared.BaseResponse {
   data: OrderList;
@@ -732,12 +732,12 @@ export namespace OrderSubmitOrdersParams {
     /**
      * Trailing offset amount (required for trailing orders)
      */
-    trailing_offset_amt?: string | null;
+    trailing_offset?: string | null;
 
     /**
      * Trailing offset type (PRICE or PERCENT_BPS)
      */
-    trailing_offset_amt_type?: OrdersAPI.TrailingOffsetType | null;
+    trailing_offset_type?: OrdersAPI.TrailingOffsetType | null;
   }
 }
 
