@@ -874,7 +874,7 @@ export namespace OrderSubmitOrdersParams {
     extended_hours?: boolean | null;
 
     /**
-     * OEMS instrument UUID. Either `symbol` or `instrument_id` must be provided.
+     * OEMS instrument UUID
      */
     instrument_id?: string | null;
 
