@@ -36,8 +36,8 @@ describe('resource messages', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listMessages: only required params', async () => {
-    const responsePromise = client.v1.omniAI.threads.messages.listMessages(
+  test.skip('getMessages: only required params', async () => {
+    const responsePromise = client.v1.omniAI.threads.messages.getMessages(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 0 },
     );
@@ -51,8 +51,8 @@ describe('resource messages', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listMessages: required and optional params', async () => {
-    const response = await client.v1.omniAI.threads.messages.listMessages(
+  test.skip('getMessages: required and optional params', async () => {
+    const response = await client.v1.omniAI.threads.messages.getMessages(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: 0,

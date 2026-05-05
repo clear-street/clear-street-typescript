@@ -12,29 +12,6 @@ import { path } from '../../../internal/utils/path';
  */
 export class Messages extends APIResource {
   /**
-   * Create feedback on a finalized assistant message.
-   *
-   * Attaches a score and optional comment to a finalized assistant message. Feedback
-   * is only valid for messages with role `ASSISTANT` that have reached a terminal
-   * outcome.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.omniAI.messages.feedback(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   { account_id: 0, score: 0 },
-   * );
-   * ```
-   */
-  feedback(
-    messageID: string,
-    body: MessageFeedbackParams,
-    options?: RequestOptions,
-  ): APIPromise<MessageFeedbackResponse> {
-    return this._client.post(path`/v1/omni-ai/messages/${messageID}/feedback`, { body, ...options });
-  }
-
-  /**
    * Get a finalized message by ID.
    *
    * Returns a single finalized message. Returns **404** if the message belongs to an
@@ -43,33 +20,65 @@ export class Messages extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.omniAI.messages.getMessage(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   { account_id: 0 },
-   * );
+   * const response =
+   *   await client.v1.omniAI.messages.getMessageByID(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 0 },
+   *   );
    * ```
    */
-  getMessage(
+  getMessageByID(
     messageID: string,
-    query: MessageGetMessageParams,
+    query: MessageGetMessageByIDParams,
     options?: RequestOptions,
-  ): APIPromise<MessageGetMessageResponse> {
+  ): APIPromise<MessageGetMessageByIDResponse> {
     return this._client.get(path`/v1/omni-ai/messages/${messageID}`, { query, ...options });
+  }
+
+  /**
+   * Submit feedback on a finalized assistant message.
+   *
+   * Attaches a score and optional comment to a finalized assistant message. Feedback
+   * is only valid for messages with role `ASSISTANT` that have reached a terminal
+   * outcome.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.omniAI.messages.submitFeedback(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 0, score: 0 },
+   *   );
+   * ```
+   */
+  submitFeedback(
+    messageID: string,
+    body: MessageSubmitFeedbackParams,
+    options?: RequestOptions,
+  ): APIPromise<MessageSubmitFeedbackResponse> {
+    return this._client.post(path`/v1/omni-ai/messages/${messageID}/feedback`, { body, ...options });
   }
 }
 
-export interface MessageFeedbackResponse extends Shared.BaseResponse {
-  data: OmniAIAPI.CreateFeedbackResponse;
-}
-
-export interface MessageGetMessageResponse extends Shared.BaseResponse {
+export interface MessageGetMessageByIDResponse extends Shared.BaseResponse {
   /**
    * Final immutable message.
    */
   data: OmniAIAPI.Message;
 }
 
-export interface MessageFeedbackParams {
+export interface MessageSubmitFeedbackResponse extends Shared.BaseResponse {
+  data: OmniAIAPI.CreateFeedbackResponse;
+}
+
+export interface MessageGetMessageByIDParams {
+  /**
+   * Account ID for the request
+   */
+  account_id: number;
+}
+
+export interface MessageSubmitFeedbackParams {
   /**
    * Account ID for the request
    */
@@ -91,18 +100,11 @@ export interface MessageFeedbackParams {
   metadata?: unknown | null;
 }
 
-export interface MessageGetMessageParams {
-  /**
-   * Account ID for the request
-   */
-  account_id: number;
-}
-
 export declare namespace Messages {
   export {
-    type MessageFeedbackResponse as MessageFeedbackResponse,
-    type MessageGetMessageResponse as MessageGetMessageResponse,
-    type MessageFeedbackParams as MessageFeedbackParams,
-    type MessageGetMessageParams as MessageGetMessageParams,
+    type MessageGetMessageByIDResponse as MessageGetMessageByIDResponse,
+    type MessageSubmitFeedbackResponse as MessageSubmitFeedbackResponse,
+    type MessageGetMessageByIDParams as MessageGetMessageByIDParams,
+    type MessageSubmitFeedbackParams as MessageSubmitFeedbackParams,
   };
 }

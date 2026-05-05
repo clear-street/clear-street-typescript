@@ -3,18 +3,18 @@
 export {
   Messages,
   type MessageCreateMessageResponse,
-  type MessageListMessagesResponse,
+  type MessageGetMessagesResponse,
   type MessageCreateMessageParams,
-  type MessageListMessagesParams,
+  type MessageGetMessagesParams,
 } from './messages';
 export {
   Threads,
   type ThreadCreateThreadResponse,
-  type ThreadGetThreadResponse,
-  type ThreadListThreadsResponse,
-  type ThreadResponseResponse,
+  type ThreadGetThreadByIDResponse,
+  type ThreadGetThreadResponseResponse,
+  type ThreadGetThreadsResponse,
   type ThreadCreateThreadParams,
-  type ThreadGetThreadParams,
-  type ThreadListThreadsParams,
-  type ThreadResponseParams,
+  type ThreadGetThreadByIDParams,
+  type ThreadGetThreadResponseParams,
+  type ThreadGetThreadsParams,
 } from './threads';

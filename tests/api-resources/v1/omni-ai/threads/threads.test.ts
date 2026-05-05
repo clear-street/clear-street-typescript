@@ -33,8 +33,8 @@ describe('resource threads', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getThread: only required params', async () => {
-    const responsePromise = client.v1.omniAI.threads.getThread('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  test.skip('getThreadByID: only required params', async () => {
+    const responsePromise = client.v1.omniAI.threads.getThreadByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: 0,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -47,15 +47,18 @@ describe('resource threads', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getThread: required and optional params', async () => {
-    const response = await client.v1.omniAI.threads.getThread('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+  test.skip('getThreadByID: required and optional params', async () => {
+    const response = await client.v1.omniAI.threads.getThreadByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: 0,
     });
   });
 
   // Mock server tests are disabled
-  test.skip('listThreads: only required params', async () => {
-    const responsePromise = client.v1.omniAI.threads.listThreads({ account_id: 0 });
+  test.skip('getThreadResponse: only required params', async () => {
+    const responsePromise = client.v1.omniAI.threads.getThreadResponse(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 0 },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,32 +69,31 @@ describe('resource threads', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listThreads: required and optional params', async () => {
-    const response = await client.v1.omniAI.threads.listThreads({
+  test.skip('getThreadResponse: required and optional params', async () => {
+    const response = await client.v1.omniAI.threads.getThreadResponse(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 0 },
+    );
+  });
+
+  // Mock server tests are disabled
+  test.skip('getThreads: only required params', async () => {
+    const responsePromise = client.v1.omniAI.threads.getThreads({ account_id: 0 });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getThreads: required and optional params', async () => {
+    const response = await client.v1.omniAI.threads.getThreads({
       account_id: 0,
       page_size: 1,
       page_token: 'U3RhaW5sZXNzIHJvY2tz',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('response: only required params', async () => {
-    const responsePromise = client.v1.omniAI.threads.response('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('response: required and optional params', async () => {
-    const response = await client.v1.omniAI.threads.response('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
     });
   });
 });

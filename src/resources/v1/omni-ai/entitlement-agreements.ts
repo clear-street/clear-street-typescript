@@ -15,12 +15,12 @@ export class EntitlementAgreements extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.omniAI.entitlementAgreements.listEntitlementAgreements();
+   *   await client.v1.omniAI.entitlementAgreements.getEntitlementAgreements();
    * ```
    */
-  listEntitlementAgreements(
+  getEntitlementAgreements(
     options?: RequestOptions,
-  ): APIPromise<EntitlementAgreementListEntitlementAgreementsResponse> {
+  ): APIPromise<EntitlementAgreementGetEntitlementAgreementsResponse> {
     return this._client.get('/v1/omni-ai/entitlement-agreements', options);
   }
 }
@@ -43,7 +43,7 @@ export interface EntitlementAgreementResource {
 
 export type EntitlementAgreementResourceList = Array<EntitlementAgreementResource>;
 
-export interface EntitlementAgreementListEntitlementAgreementsResponse extends Shared.BaseResponse {
+export interface EntitlementAgreementGetEntitlementAgreementsResponse extends Shared.BaseResponse {
   data: EntitlementAgreementResourceList;
 }
 
@@ -51,6 +51,6 @@ export declare namespace EntitlementAgreements {
   export {
     type EntitlementAgreementResource as EntitlementAgreementResource,
     type EntitlementAgreementResourceList as EntitlementAgreementResourceList,
-    type EntitlementAgreementListEntitlementAgreementsResponse as EntitlementAgreementListEntitlementAgreementsResponse,
+    type EntitlementAgreementGetEntitlementAgreementsResponse as EntitlementAgreementGetEntitlementAgreementsResponse,
   };
 }

@@ -9,8 +9,8 @@ const client = new ClearStreet({
 
 describe('resource entitlementAgreements', () => {
   // Mock server tests are disabled
-  test.skip('listEntitlementAgreements', async () => {
-    const responsePromise = client.v1.omniAI.entitlementAgreements.listEntitlementAgreements();
+  test.skip('getEntitlementAgreements', async () => {
+    const responsePromise = client.v1.omniAI.entitlementAgreements.getEntitlementAgreements();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

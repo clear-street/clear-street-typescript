@@ -7,8 +7,8 @@ import * as MessagesAPI from './messages';
 import {
   MessageCreateMessageParams,
   MessageCreateMessageResponse,
-  MessageListMessagesParams,
-  MessageListMessagesResponse,
+  MessageGetMessagesParams,
+  MessageGetMessagesResponse,
   Messages,
 } from './messages';
 import { APIPromise } from '../../../../core/api-promise';
@@ -59,39 +59,19 @@ export class Threads extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.omniAI.threads.getThread(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   { account_id: 0 },
-   * );
+   * const response =
+   *   await client.v1.omniAI.threads.getThreadByID(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 0 },
+   *   );
    * ```
    */
-  getThread(
+  getThreadByID(
     threadID: string,
-    query: ThreadGetThreadParams,
+    query: ThreadGetThreadByIDParams,
     options?: RequestOptions,
-  ): APIPromise<ThreadGetThreadResponse> {
+  ): APIPromise<ThreadGetThreadByIDResponse> {
     return this._client.get(path`/v1/omni-ai/threads/${threadID}`, { query, ...options });
-  }
-
-  /**
-   * List conversation threads.
-   *
-   * Returns thread metadata ordered by most recently created first. Use `page_size`
-   * and `page_token` for pagination. Thread objects contain only metadata (title,
-   * timestamps) — use the messages endpoint for conversation history.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.omniAI.threads.listThreads(
-   *   { account_id: 0 },
-   * );
-   * ```
-   */
-  listThreads(
-    query: ThreadListThreadsParams,
-    options?: RequestOptions,
-  ): APIPromise<ThreadListThreadsResponse> {
-    return this._client.get('/v1/omni-ai/threads', { query, ...options });
   }
 
   /**
@@ -106,18 +86,37 @@ export class Threads extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.omniAI.threads.response(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   { account_id: 0 },
-   * );
+   * const response =
+   *   await client.v1.omniAI.threads.getThreadResponse(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 0 },
+   *   );
    * ```
    */
-  response(
+  getThreadResponse(
     threadID: string,
-    query: ThreadResponseParams,
+    query: ThreadGetThreadResponseParams,
     options?: RequestOptions,
-  ): APIPromise<ThreadResponseResponse> {
+  ): APIPromise<ThreadGetThreadResponseResponse> {
     return this._client.get(path`/v1/omni-ai/threads/${threadID}/response`, { query, ...options });
+  }
+
+  /**
+   * List conversation threads.
+   *
+   * Returns thread metadata ordered by most recently created first. Use `page_size`
+   * and `page_token` for pagination. Thread objects contain only metadata (title,
+   * timestamps) — use the messages endpoint for conversation history.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.omniAI.threads.getThreads({
+   *   account_id: 0,
+   * });
+   * ```
+   */
+  getThreads(query: ThreadGetThreadsParams, options?: RequestOptions): APIPromise<ThreadGetThreadsResponse> {
+    return this._client.get('/v1/omni-ai/threads', { query, ...options });
   }
 }
 
@@ -128,22 +127,22 @@ export interface ThreadCreateThreadResponse extends Shared.BaseResponse {
   data: OmniAIAPI.CreateThreadResponse;
 }
 
-export interface ThreadGetThreadResponse extends Shared.BaseResponse {
+export interface ThreadGetThreadByIDResponse extends Shared.BaseResponse {
   /**
    * Thread metadata returned by list/get thread endpoints.
    */
   data: OmniAIAPI.Thread;
 }
 
-export interface ThreadListThreadsResponse extends Shared.BaseResponse {
-  data: OmniAIAPI.ThreadList;
-}
-
-export interface ThreadResponseResponse extends Shared.BaseResponse {
+export interface ThreadGetThreadResponseResponse extends Shared.BaseResponse {
   /**
    * Dynamic pollable response.
    */
   data: OmniAIAPI.Response;
+}
+
+export interface ThreadGetThreadsResponse extends Shared.BaseResponse {
+  data: OmniAIAPI.ThreadList;
 }
 
 export interface ThreadCreateThreadParams {
@@ -180,14 +179,21 @@ export namespace ThreadCreateThreadParams {
   }
 }
 
-export interface ThreadGetThreadParams {
+export interface ThreadGetThreadByIDParams {
   /**
    * Account ID for the request
    */
   account_id: number;
 }
 
-export interface ThreadListThreadsParams {
+export interface ThreadGetThreadResponseParams {
+  /**
+   * Account ID for the request
+   */
+  account_id: number;
+}
+
+export interface ThreadGetThreadsParams {
   /**
    * Account ID for the request
    */
@@ -202,32 +208,25 @@ export interface ThreadListThreadsParams {
   page_token?: string;
 }
 
-export interface ThreadResponseParams {
-  /**
-   * Account ID for the request
-   */
-  account_id: number;
-}
-
 Threads.Messages = Messages;
 
 export declare namespace Threads {
   export {
     type ThreadCreateThreadResponse as ThreadCreateThreadResponse,
-    type ThreadGetThreadResponse as ThreadGetThreadResponse,
-    type ThreadListThreadsResponse as ThreadListThreadsResponse,
-    type ThreadResponseResponse as ThreadResponseResponse,
+    type ThreadGetThreadByIDResponse as ThreadGetThreadByIDResponse,
+    type ThreadGetThreadResponseResponse as ThreadGetThreadResponseResponse,
+    type ThreadGetThreadsResponse as ThreadGetThreadsResponse,
     type ThreadCreateThreadParams as ThreadCreateThreadParams,
-    type ThreadGetThreadParams as ThreadGetThreadParams,
-    type ThreadListThreadsParams as ThreadListThreadsParams,
-    type ThreadResponseParams as ThreadResponseParams,
+    type ThreadGetThreadByIDParams as ThreadGetThreadByIDParams,
+    type ThreadGetThreadResponseParams as ThreadGetThreadResponseParams,
+    type ThreadGetThreadsParams as ThreadGetThreadsParams,
   };
 
   export {
     Messages as Messages,
     type MessageCreateMessageResponse as MessageCreateMessageResponse,
-    type MessageListMessagesResponse as MessageListMessagesResponse,
+    type MessageGetMessagesResponse as MessageGetMessagesResponse,
     type MessageCreateMessageParams as MessageCreateMessageParams,
-    type MessageListMessagesParams as MessageListMessagesParams,
+    type MessageGetMessagesParams as MessageGetMessagesParams,
   };
 }

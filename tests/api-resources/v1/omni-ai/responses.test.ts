@@ -31,10 +31,11 @@ describe('resource responses', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getResponse: only required params', async () => {
-    const responsePromise = client.v1.omniAI.responses.getResponse('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
-    });
+  test.skip('getResponseByID: only required params', async () => {
+    const responsePromise = client.v1.omniAI.responses.getResponseByID(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 0 },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,9 +46,10 @@ describe('resource responses', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getResponse: required and optional params', async () => {
-    const response = await client.v1.omniAI.responses.getResponse('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
-    });
+  test.skip('getResponseByID: required and optional params', async () => {
+    const response = await client.v1.omniAI.responses.getResponseByID(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 0 },
+    );
   });
 });
