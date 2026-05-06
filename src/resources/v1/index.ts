@@ -64,6 +64,8 @@ export {
   type CreateMessageResponse,
   type CreateThreadResponse,
   type DataChart,
+  type EntitlementAgreementKey,
+  type EntitlementCode,
   type ErrorStatus,
   type Message,
   type MessageContent,

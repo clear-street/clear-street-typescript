@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as OmniAIAPI from './omni-ai';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
@@ -28,13 +29,16 @@ export class EntitlementAgreements extends APIResource {
 export interface EntitlementAgreementResource {
   agreement_id: string;
 
-  agreement_key: string;
+  /**
+   * Stable entitlement agreement family key.
+   */
+  agreement_key: OmniAIAPI.EntitlementAgreementKey;
 
   document_content: string;
 
   document_sha256: string;
 
-  entitlement_codes: Array<string>;
+  entitlement_codes: Array<OmniAIAPI.EntitlementCode>;
 
   title: string;
 
