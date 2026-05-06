@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as OrdersAPI from '../accounts/orders';
 import * as InstrumentsAPI from './instruments';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
@@ -31,7 +32,7 @@ export class BalanceSheets extends APIResource {
    * ```
    */
   getInstrumentBalanceSheetStatements(
-    instrumentID: string,
+    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
     query: BalanceSheetGetInstrumentBalanceSheetStatementsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BalanceSheetGetInstrumentBalanceSheetStatementsResponse> {

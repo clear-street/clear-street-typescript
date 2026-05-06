@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as OrdersAPI from '../accounts/orders';
 import * as InstrumentsAPI from './instruments';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
@@ -29,7 +30,7 @@ export class IncomeStatements extends APIResource {
    * ```
    */
   getInstrumentIncomeStatements(
-    instrumentID: string,
+    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
     query: IncomeStatementGetInstrumentIncomeStatementsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IncomeStatementGetInstrumentIncomeStatementsResponse> {

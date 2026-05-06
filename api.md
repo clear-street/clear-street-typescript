@@ -57,11 +57,17 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/accounts/orders.ts">CancelOrderRequest</a></code>
+- <code><a href="./src/resources/v1/accounts/orders.ts">InstrumentIDOrSymbol</a></code>
+- <code><a href="./src/resources/v1/accounts/orders.ts">NewOrderRequest</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">Order</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">OrderList</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">OrderStatus</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">OrderType</a></code>
+- <code><a href="./src/resources/v1/accounts/orders.ts">PositionEffect</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">QueueState</a></code>
+- <code><a href="./src/resources/v1/accounts/orders.ts">RequestOrderType</a></code>
+- <code><a href="./src/resources/v1/accounts/orders.ts">RequestTimeInForce</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">Side</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">TimeInForce</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">TrailingOffsetType</a></code>
@@ -330,9 +336,9 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenChartAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenEntitlementConsentAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenScreenerAction</a></code>
-- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OrderPayload</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillCancelOrderAction</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillNewOrderAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillOrderAction</a></code>
-- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillOrderActionType</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PromptButtonAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">Response</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ResponseContent</a></code>
