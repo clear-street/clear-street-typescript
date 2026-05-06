@@ -1,26 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../core/resource';
-import * as V1API from '../../../v1/v1';
+import { APIResource } from '../../../../../core/resource';
 
-export class Exercises extends APIResource {}
-
-/**
- * The action a caller wants `oems-csc` to take against an options position.
- *
- * Maps onto FIX `PosTransType` (tag 709) + `PosMaintAction` (tag 712) +
- * `ContraryInstructionIndicator` (tag 719) per `oems-csc`'s `classify_action`.
- */
-export type ExerciseAction = 'EXERCISE' | 'DO_NOT_EXERCISE' | 'CONTRARY_EXERCISE';
+export class Instructions extends APIResource {}
 
 /**
  * The API representation of a single CSC instruction, combining the caller's
  * request with the `oems-csc` lifecycle state.
  */
-export interface ExerciseInstruction {
+export interface PositionInstruction {
   /**
    * Stable server-assigned id for the instruction (the engine instruction UUID).
-   * Used as the `{exercise_id}` path parameter on DELETE.
+   * Used as the `{instruction_id}` path parameter on DELETE.
    */
   id: string;
 
@@ -30,15 +21,15 @@ export interface ExerciseInstruction {
   account_id: number;
 
   /**
-   * The instruction type as understood by this API.
-   */
-  action: ExerciseAction;
-
-  /**
-   * Caller-supplied correlation id (echoed from the submit request, or the
+   * Caller-supplied instruction id (echoed from the submit request, or the
    * server-generated fallback when the caller omitted one).
    */
-  client_exercise_id: string;
+  instruction_id: string;
+
+  /**
+   * The instruction type as understood by this API.
+   */
+  instruction_type: PositionInstructionType;
 
   /**
    * OEMS instrument identifier the instruction is for.
@@ -46,24 +37,20 @@ export interface ExerciseInstruction {
   instrument_id: string;
 
   /**
+   * OSI option symbol (e.g. `AAPL 280121C00195000`). Display-only; resolved from the
+   * instrument cache.
+   */
+  osi: string;
+
+  /**
    * Quantity of contracts.
    */
   quantity: string;
 
   /**
-   * Security identifier (display-only; resolved from the instrument cache).
-   */
-  security_id: string;
-
-  /**
-   * Security identifier source (display-only).
-   */
-  security_id_source: V1API.SecurityIDSource;
-
-  /**
    * Current lifecycle status.
    */
-  status: ExerciseStatus;
+  status: PositionInstructionStatus;
 
   /**
    * Trading symbol resolved from the instrument cache. Empty if the instrument
@@ -97,16 +84,16 @@ export interface ExerciseInstruction {
   updated_at?: string | null;
 }
 
-export type ExerciseInstructionList = Array<ExerciseInstruction>;
+export type PositionInstructionList = Array<PositionInstruction>;
 
 /**
- * Public Active API lifecycle status for an exercise instruction.
+ * Public Active API lifecycle status for a position instruction.
  *
  * Maps 1:1 to the `oems-csc` wire enum while keeping the REST schema stable:
  * api-gw owns serialization, OpenAPI generation, and the `Unknown` fallback for
  * missing or unrecognized gRPC values.
  */
-export type ExerciseStatus =
+export type PositionInstructionStatus =
   | 'SENT'
   | 'ACCEPTED'
   | 'REJECTED'
@@ -116,11 +103,20 @@ export type ExerciseStatus =
   | 'CANCEL_FAILED'
   | 'UNKNOWN';
 
-export declare namespace Exercises {
+/**
+ * The instruction type a caller wants `oems-csc` to take against an options
+ * position.
+ *
+ * Maps onto FIX `PosTransType` (tag 709) + `PosMaintAction` (tag 712) +
+ * `ContraryInstructionIndicator` (tag 719) per `oems-csc`'s `classify_action`.
+ */
+export type PositionInstructionType = 'EXERCISE' | 'DO_NOT_EXERCISE' | 'CONTRARY_EXERCISE';
+
+export declare namespace Instructions {
   export {
-    type ExerciseAction as ExerciseAction,
-    type ExerciseInstruction as ExerciseInstruction,
-    type ExerciseInstructionList as ExerciseInstructionList,
-    type ExerciseStatus as ExerciseStatus,
+    type PositionInstruction as PositionInstruction,
+    type PositionInstructionList as PositionInstructionList,
+    type PositionInstructionStatus as PositionInstructionStatus,
+    type PositionInstructionType as PositionInstructionType,
   };
 }

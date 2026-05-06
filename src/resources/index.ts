@@ -2,4 +2,4 @@
 
 export * from './shared';
 export { Active } from './active/active';
-export { V1, type SecurityIDSource, type SecurityType } from './v1/v1';
+export { V1, type SecurityType } from './v1/v1';

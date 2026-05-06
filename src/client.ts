@@ -18,7 +18,7 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { Active } from './resources/active/active';
-import { SecurityIDSource, SecurityType, V1 } from './resources/v1/v1';
+import { SecurityType, V1 } from './resources/v1/v1';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -769,7 +769,7 @@ export declare namespace ClearStreet {
 
   export { Active as Active };
 
-  export { V1 as V1, type SecurityIDSource as SecurityIDSource, type SecurityType as SecurityType };
+  export { V1 as V1, type SecurityType as SecurityType };
 
   export type APIError = API.APIError;
   export type BaseResponse = API.BaseResponse;
