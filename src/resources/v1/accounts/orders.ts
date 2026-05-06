@@ -143,121 +143,6 @@ export class Orders extends APIResource {
 }
 
 /**
- * Request to cancel an existing order
- *
- * Note: In the API, order cancellation is done via DELETE request without a body.
- * The order_id and account_id come from the URL path parameters.
- */
-export interface CancelOrderRequest {
-  /**
-   * Account ID (from path parameter)
-   */
-  account_id: number;
-
-  /**
-   * Order ID to cancel (from path parameter)
-   */
-  order_id: string;
-}
-
-/**
- * OEMS instrument UUID
- */
-export type InstrumentIDOrSymbol = string;
-
-/**
- * Request to submit a new order (PlaceOrderRequest from spec)
- */
-export interface NewOrderRequest {
-  /**
-   * Type of security
-   */
-  instrument_type: V1API.SecurityType;
-
-  /**
-   * Type of order
-   */
-  order_type: RequestOrderType;
-
-  /**
-   * Quantity to trade. For COMMON_STOCK: shares (may be fractional if supported).
-   * For OPTION (single-leg): contracts (must be an integer)
-   */
-  quantity: string;
-
-  /**
-   * Side of the order
-   */
-  side: Side;
-
-  /**
-   * Time in force
-   */
-  time_in_force: RequestTimeInForce;
-
-  /**
-   * Optional client-provided unique ID (idempotency). Required to be unique per
-   * account.
-   */
-  id?: string | null;
-
-  /**
-   * The timestamp when the order should expire (UTC). Required when time_in_force is
-   * GOOD_TILL_DATE.
-   */
-  expires_at?: string | null;
-
-  /**
-   * Allow trading outside regular trading hours. Some brokers disallow options
-   * outside RTH.
-   */
-  extended_hours?: boolean | null;
-
-  /**
-   * OEMS instrument UUID
-   */
-  instrument_id?: InstrumentIDOrSymbol | null;
-
-  /**
-   * Limit offset for trailing stop-limit orders (signed)
-   */
-  limit_offset?: string | null;
-
-  /**
-   * Limit price (required for LIMIT and STOP_LIMIT orders)
-   */
-  limit_price?: string | null;
-
-  /**
-   * Required when instrument_type is OPTION. Specifies whether the order opens or
-   * closes a position.
-   */
-  position_effect?: PositionEffect;
-
-  /**
-   * Stop price (required for STOP and STOP_LIMIT orders)
-   */
-  stop_price?: string | null;
-
-  /**
-   * Trading symbol. For equities, use the ticker symbol (e.g., "AAPL"). For options,
-   * use the OSI symbol (e.g., "AAPL 250117C00190000"). Either `symbol` or
-   * `instrument_id` must be provided.
-   */
-  symbol?: string | null;
-
-  /**
-   * Trailing offset amount (required for trailing orders)
-   */
-  trailing_offset?: string | null;
-
-  /**
-   * Trailing offset type (PRICE or PERCENT_BPS)
-   */
-  trailing_offset_type?: TrailingOffsetType | null;
-}
-
-/**
  * A trading order with its current state and execution details.
  *
  * This is the unified API representation of an order across its lifecycle,
@@ -455,40 +340,9 @@ export type OrderType =
   | 'OTHER';
 
 /**
- * Position effect for options orders
- */
-export type PositionEffect = 'OPEN' | 'CLOSE';
-
-/**
  * Parent order queue or hold state.
  */
 export type QueueState = 'AWAITING_RELEASE' | 'RELEASED';
-
-/**
- * Strict order-type enum for order submission/replacement requests.
- */
-export type RequestOrderType =
-  | 'MARKET'
-  | 'LIMIT'
-  | 'STOP'
-  | 'STOP_LIMIT'
-  | 'TRAILING_STOP'
-  | 'TRAILING_STOP_LIMIT';
-
-/**
- * Strict time-in-force enum for order submission/replacement requests.
- */
-export type RequestTimeInForce =
-  | 'DAY'
-  | 'GOOD_TILL_CANCEL'
-  | 'IMMEDIATE_OR_CANCEL'
-  | 'FILL_OR_KILL'
-  | 'GOOD_TILL_DATE'
-  | 'AT_THE_OPENING'
-  | 'AT_THE_CLOSE'
-  | 'GOOD_TILL_CROSSING'
-  | 'GOOD_THROUGH_CROSSING'
-  | 'AT_CROSSING';
 
 /**
  * Side of an order
@@ -683,11 +537,21 @@ export interface OrderReplaceOrderParams {
   /**
    * Body param: New time in force for the order
    */
-  time_in_force?: RequestTimeInForce;
+  time_in_force?:
+    | 'DAY'
+    | 'GOOD_TILL_CANCEL'
+    | 'IMMEDIATE_OR_CANCEL'
+    | 'FILL_OR_KILL'
+    | 'GOOD_TILL_DATE'
+    | 'AT_THE_OPENING'
+    | 'AT_THE_CLOSE'
+    | 'GOOD_TILL_CROSSING'
+    | 'GOOD_THROUGH_CROSSING'
+    | 'AT_CROSSING';
 }
 
 export interface OrderSubmitOrdersParams {
-  orders: Array<OrderSubmitOrdersParams.NewOrderMultilegRequest | NewOrderRequest>;
+  orders: Array<OrderSubmitOrdersParams.NewOrderMultilegRequest | OrderSubmitOrdersParams.NewOrderRequest>;
 }
 
 export namespace OrderSubmitOrdersParams {
@@ -703,12 +567,22 @@ export namespace OrderSubmitOrdersParams {
     /**
      * Type of order (currently MARKET or LIMIT for multileg strategy submission)
      */
-    order_type: OrdersAPI.RequestOrderType;
+    order_type: 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT' | 'TRAILING_STOP' | 'TRAILING_STOP_LIMIT';
 
     /**
      * Time in force
      */
-    time_in_force: OrdersAPI.RequestTimeInForce;
+    time_in_force:
+      | 'DAY'
+      | 'GOOD_TILL_CANCEL'
+      | 'IMMEDIATE_OR_CANCEL'
+      | 'FILL_OR_KILL'
+      | 'GOOD_TILL_DATE'
+      | 'AT_THE_OPENING'
+      | 'AT_THE_CLOSE'
+      | 'GOOD_TILL_CROSSING'
+      | 'GOOD_THROUGH_CROSSING'
+      | 'AT_CROSSING';
 
     /**
      * Optional client-provided unique ID (idempotency). Required to be unique per
@@ -760,24 +634,120 @@ export namespace OrderSubmitOrdersParams {
       /**
        * Optional leg position effect.
        */
-      position_effect?: OrdersAPI.PositionEffect | null;
+      position_effect?: 'OPEN' | 'CLOSE' | null;
     }
+  }
+
+  /**
+   * Single-leg order request
+   */
+  export interface NewOrderRequest {
+    /**
+     * Type of security
+     */
+    instrument_type: V1API.SecurityType;
+
+    /**
+     * Type of order
+     */
+    order_type: 'MARKET' | 'LIMIT' | 'STOP' | 'STOP_LIMIT' | 'TRAILING_STOP' | 'TRAILING_STOP_LIMIT';
+
+    /**
+     * Quantity to trade. For COMMON_STOCK: shares (may be fractional if supported).
+     * For OPTION (single-leg): contracts (must be an integer)
+     */
+    quantity: string;
+
+    /**
+     * Side of the order
+     */
+    side: OrdersAPI.Side;
+
+    /**
+     * Time in force
+     */
+    time_in_force:
+      | 'DAY'
+      | 'GOOD_TILL_CANCEL'
+      | 'IMMEDIATE_OR_CANCEL'
+      | 'FILL_OR_KILL'
+      | 'GOOD_TILL_DATE'
+      | 'AT_THE_OPENING'
+      | 'AT_THE_CLOSE'
+      | 'GOOD_TILL_CROSSING'
+      | 'GOOD_THROUGH_CROSSING'
+      | 'AT_CROSSING';
+
+    /**
+     * Optional client-provided unique ID (idempotency). Required to be unique per
+     * account.
+     */
+    id?: string | null;
+
+    /**
+     * The timestamp when the order should expire (UTC). Required when time_in_force is
+     * GOOD_TILL_DATE.
+     */
+    expires_at?: string | null;
+
+    /**
+     * Allow trading outside regular trading hours. Some brokers disallow options
+     * outside RTH.
+     */
+    extended_hours?: boolean | null;
+
+    /**
+     * OEMS instrument UUID
+     */
+    instrument_id?: string | null;
+
+    /**
+     * Limit offset for trailing stop-limit orders (signed)
+     */
+    limit_offset?: string | null;
+
+    /**
+     * Limit price (required for LIMIT and STOP_LIMIT orders)
+     */
+    limit_price?: string | null;
+
+    /**
+     * Required when instrument_type is OPTION. Specifies whether the order opens or
+     * closes a position.
+     */
+    position_effect?: 'OPEN' | 'CLOSE';
+
+    /**
+     * Stop price (required for STOP and STOP_LIMIT orders)
+     */
+    stop_price?: string | null;
+
+    /**
+     * Trading symbol. For equities, use the ticker symbol (e.g., "AAPL"). For options,
+     * use the OSI symbol (e.g., "AAPL 250117C00190000"). Either `symbol` or
+     * `instrument_id` must be provided.
+     */
+    symbol?: string | null;
+
+    /**
+     * Trailing offset amount (required for trailing orders)
+     */
+    trailing_offset?: string | null;
+
+    /**
+     * Trailing offset type (PRICE or PERCENT_BPS)
+     */
+    trailing_offset_type?: OrdersAPI.TrailingOffsetType | null;
   }
 }
 
 export declare namespace Orders {
   export {
-    type CancelOrderRequest as CancelOrderRequest,
-    type InstrumentIDOrSymbol as InstrumentIDOrSymbol,
-    type NewOrderRequest as NewOrderRequest,
     type Order as Order,
     type OrderList as OrderList,
     type OrderStatus as OrderStatus,
     type OrderType as OrderType,
-    type PositionEffect as PositionEffect,
     type QueueState as QueueState,
-    type RequestOrderType as RequestOrderType,
-    type RequestTimeInForce as RequestTimeInForce,
     type Side as Side,
     type TimeInForce as TimeInForce,
     type TrailingOffsetType as TrailingOffsetType,

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as OrdersAPI from '../accounts/orders';
 import * as InstrumentsAPI from './instruments';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
@@ -62,7 +61,7 @@ export interface OptionGetOptionContractsParams {
   /**
    * OEMS instrument UUID or symbol of the underlying equity/index
    */
-  underlying_instrument_id?: OrdersAPI.InstrumentIDOrSymbol;
+  underlying_instrument_id?: string;
 }
 
 export declare namespace Options {

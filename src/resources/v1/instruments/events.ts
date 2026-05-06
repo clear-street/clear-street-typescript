@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as OrdersAPI from '../accounts/orders';
 import * as InstrumentsAPI from './instruments';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
@@ -48,7 +47,7 @@ export class Events extends APIResource {
    * ```
    */
   getInstrumentEvents(
-    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
+    instrumentID: string,
     query: EventGetInstrumentEventsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EventGetInstrumentEventsResponse> {

@@ -3,7 +3,6 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as V1API from '../v1';
-import * as OrdersAPI from '../accounts/orders';
 import * as AnalystReportingAPI from './analyst-reporting';
 import {
   AnalystDistribution,
@@ -95,7 +94,7 @@ export class Instruments extends APIResource {
    * ```
    */
   getInstrumentByID(
-    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
+    instrumentID: string,
     query: InstrumentGetInstrumentByIDParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstrumentGetInstrumentByIDResponse> {
