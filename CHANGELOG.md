@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.58.0 (2026-05-06)
+
+Full Changelog: [v0.57.0...v0.58.0](https://github.com/clear-street/clear-street-typescript/compare/v0.57.0...v0.58.0)
+
+### Features
+
+* **api:** api update ([c4a7846](https://github.com/clear-street/clear-street-typescript/commit/c4a7846bb1c2e9f97e2cd89ad606700f503636c5))
+* **api:** api update ([8f2fabf](https://github.com/clear-street/clear-street-typescript/commit/8f2fabf32c75cc57ad2d76627d6dcb86961a5e0d))
+* **api:** manual updates ([93dd283](https://github.com/clear-street/clear-street-typescript/commit/93dd283ca9781008c4bcde5918c6997c737bbee6))
+
+
+### Performance Improvements
+
+* **ACTIVE-4584:** reduce option index memory ([aef367d](https://github.com/clear-street/clear-street-typescript/commit/aef367dd8629690ff4ba2eeeea91e1749c24fc8d))
+
 ## 0.57.0 (2026-05-05)
 
 Full Changelog: [v0.56.0...v0.57.0](https://github.com/clear-street/clear-street-typescript/compare/v0.56.0...v0.57.0)
