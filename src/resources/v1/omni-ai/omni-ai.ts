@@ -226,6 +226,16 @@ export interface DataChart {
 }
 
 /**
+ * Stable entitlement agreement family key.
+ */
+export type EntitlementAgreementKey = 'omni_account_data_access';
+
+/**
+ * Stable entitlement code granted by an agreement.
+ */
+export type EntitlementCode = 'omni.account_data';
+
+/**
  * Shared sanitized error payload.
  */
 export interface ErrorStatus {
@@ -359,11 +369,14 @@ export interface OpenChartAction {
  * Action to open entitlement consent flow for one or more accounts.
  */
 export interface OpenEntitlementConsentAction {
-  agreement_key: string;
+  /**
+   * Stable entitlement agreement family key.
+   */
+  agreement_key: EntitlementAgreementKey;
 
   reason: string;
 
-  requested_entitlement_codes: Array<string>;
+  requested_entitlement_codes: Array<EntitlementCode>;
 
   trading_account_ids: Array<number>;
 }
@@ -671,8 +684,6 @@ export interface Thread {
 
   created_at: string;
 
-  description: string;
-
   title: string;
 
   updated_at: string;
@@ -703,6 +714,8 @@ export declare namespace OmniAI {
     type CreateMessageResponse as CreateMessageResponse,
     type CreateThreadResponse as CreateThreadResponse,
     type DataChart as DataChart,
+    type EntitlementAgreementKey as EntitlementAgreementKey,
+    type EntitlementCode as EntitlementCode,
     type ErrorStatus as ErrorStatus,
     type Message as Message,
     type MessageContent as MessageContent,

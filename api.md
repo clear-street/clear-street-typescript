@@ -318,6 +318,8 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">CreateMessageResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">CreateThreadResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">DataChart</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">EntitlementAgreementKey</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">EntitlementCode</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ErrorStatus</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">Message</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">MessageContent</a></code>
