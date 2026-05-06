@@ -7,10 +7,10 @@ const client = new ClearStreet({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource exercises', () => {
+describe('resource instructions', () => {
   // Mock server tests are disabled
-  test.skip('cancelExercise: only required params', async () => {
-    const responsePromise = client.v1.accounts.exercises.cancelExercise(
+  test.skip('cancelPositionInstruction: only required params', async () => {
+    const responsePromise = client.v1.accounts.positions.instructions.cancelPositionInstruction(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 0 },
     );
@@ -24,16 +24,16 @@ describe('resource exercises', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('cancelExercise: required and optional params', async () => {
-    const response = await client.v1.accounts.exercises.cancelExercise(
+  test.skip('cancelPositionInstruction: required and optional params', async () => {
+    const response = await client.v1.accounts.positions.instructions.cancelPositionInstruction(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 0 },
     );
   });
 
   // Mock server tests are disabled
-  test.skip('getExercises', async () => {
-    const responsePromise = client.v1.accounts.exercises.getExercises(0);
+  test.skip('getPositionInstructions', async () => {
+    const responsePromise = client.v1.accounts.positions.instructions.getPositionInstructions(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,10 +44,10 @@ describe('resource exercises', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getExercises: request options and params are passed correctly', async () => {
+  test.skip('getPositionInstructions: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.accounts.exercises.getExercises(
+      client.v1.accounts.positions.instructions.getPositionInstructions(
         0,
         { instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
         { path: '/_stainless_unknown_path' },
@@ -56,11 +56,11 @@ describe('resource exercises', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('submitExercises: only required params', async () => {
-    const responsePromise = client.v1.accounts.exercises.submitExercises(0, {
-      exercises: [
+  test.skip('submitPositionInstructions: only required params', async () => {
+    const responsePromise = client.v1.accounts.positions.instructions.submitPositionInstructions(0, {
+      instructions: [
         {
-          action: 'EXERCISE',
+          instruction_type: 'EXERCISE',
           instrument_id: '0195f6d0-a1b2-7c3d-8e4f-5a6b7c8d9e02',
           quantity: '1',
         },
@@ -76,14 +76,14 @@ describe('resource exercises', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('submitExercises: required and optional params', async () => {
-    const response = await client.v1.accounts.exercises.submitExercises(0, {
-      exercises: [
+  test.skip('submitPositionInstructions: required and optional params', async () => {
+    const response = await client.v1.accounts.positions.instructions.submitPositionInstructions(0, {
+      instructions: [
         {
-          action: 'EXERCISE',
+          instruction_type: 'EXERCISE',
           instrument_id: '0195f6d0-a1b2-7c3d-8e4f-5a6b7c8d9e02',
           quantity: '1',
-          client_exercise_id: 'ui-20260424-001',
+          instruction_id: 'ui-20260424-001',
         },
       ],
     });

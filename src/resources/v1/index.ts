@@ -125,7 +125,7 @@ export {
   type ScreenerGetScreenerParams,
   type ScreenerSearchScreenerParams,
 } from './screener';
-export { V1, type SecurityIDSource, type SecurityType } from './v1';
+export { V1, type SecurityType } from './v1';
 export { VersionResource, type Version, type VersionGetVersionResponse } from './version';
 export {
   Watchlists,

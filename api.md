@@ -12,20 +12,21 @@ Types:
 
 ### Accounts
 
-#### Exercises
+#### Positions
+
+##### Instructions
 
 Types:
 
-- <code><a href="./src/resources/active/v1/accounts/exercises.ts">ExerciseAction</a></code>
-- <code><a href="./src/resources/active/v1/accounts/exercises.ts">ExerciseInstruction</a></code>
-- <code><a href="./src/resources/active/v1/accounts/exercises.ts">ExerciseInstructionList</a></code>
-- <code><a href="./src/resources/active/v1/accounts/exercises.ts">ExerciseStatus</a></code>
+- <code><a href="./src/resources/active/v1/accounts/positions/instructions.ts">PositionInstruction</a></code>
+- <code><a href="./src/resources/active/v1/accounts/positions/instructions.ts">PositionInstructionList</a></code>
+- <code><a href="./src/resources/active/v1/accounts/positions/instructions.ts">PositionInstructionStatus</a></code>
+- <code><a href="./src/resources/active/v1/accounts/positions/instructions.ts">PositionInstructionType</a></code>
 
 # V1
 
 Types:
 
-- <code><a href="./src/resources/v1/v1.ts">SecurityIDSource</a></code>
 - <code><a href="./src/resources/v1/v1.ts">SecurityType</a></code>
 
 Methods:
@@ -68,20 +69,6 @@ Types:
 Methods:
 
 - <code title="get /v1/accounts/{account_id}/balances">client.v1.accounts.balances.<a href="./src/resources/v1/accounts/balances.ts">getAccountBalances</a>(accountID, { ...params }) -> BalanceGetAccountBalancesResponse</code>
-
-### Exercises
-
-Types:
-
-- <code><a href="./src/resources/v1/accounts/exercises.ts">ExerciseCancelExerciseResponse</a></code>
-- <code><a href="./src/resources/v1/accounts/exercises.ts">ExerciseGetExercisesResponse</a></code>
-- <code><a href="./src/resources/v1/accounts/exercises.ts">ExerciseSubmitExercisesResponse</a></code>
-
-Methods:
-
-- <code title="delete /v1/accounts/{account_id}/exercises/{exercise_id}">client.v1.accounts.exercises.<a href="./src/resources/v1/accounts/exercises.ts">cancelExercise</a>(exerciseID, { ...params }) -> ExerciseCancelExerciseResponse</code>
-- <code title="get /v1/accounts/{account_id}/exercises">client.v1.accounts.exercises.<a href="./src/resources/v1/accounts/exercises.ts">getExercises</a>(accountID, { ...params }) -> ExerciseGetExercisesResponse</code>
-- <code title="post /v1/accounts/{account_id}/exercises">client.v1.accounts.exercises.<a href="./src/resources/v1/accounts/exercises.ts">submitExercises</a>(accountID, [ ...exercises ]) -> ExerciseSubmitExercisesResponse</code>
 
 ### Orders
 
@@ -127,18 +114,32 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/accounts/positions.ts">Position</a></code>
-- <code><a href="./src/resources/v1/accounts/positions.ts">PositionList</a></code>
-- <code><a href="./src/resources/v1/accounts/positions.ts">PositionType</a></code>
-- <code><a href="./src/resources/v1/accounts/positions.ts">PositionClosePositionResponse</a></code>
-- <code><a href="./src/resources/v1/accounts/positions.ts">PositionClosePositionsResponse</a></code>
-- <code><a href="./src/resources/v1/accounts/positions.ts">PositionGetPositionsResponse</a></code>
+- <code><a href="./src/resources/v1/accounts/positions/positions.ts">Position</a></code>
+- <code><a href="./src/resources/v1/accounts/positions/positions.ts">PositionList</a></code>
+- <code><a href="./src/resources/v1/accounts/positions/positions.ts">PositionType</a></code>
+- <code><a href="./src/resources/v1/accounts/positions/positions.ts">PositionClosePositionResponse</a></code>
+- <code><a href="./src/resources/v1/accounts/positions/positions.ts">PositionClosePositionsResponse</a></code>
+- <code><a href="./src/resources/v1/accounts/positions/positions.ts">PositionGetPositionsResponse</a></code>
 
 Methods:
 
-- <code title="delete /v1/accounts/{account_id}/positions/{instrument_id}">client.v1.accounts.positions.<a href="./src/resources/v1/accounts/positions.ts">closePosition</a>(instrumentID, { ...params }) -> PositionClosePositionResponse</code>
-- <code title="delete /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/resources/v1/accounts/positions.ts">closePositions</a>(accountID, { ...params }) -> PositionClosePositionsResponse</code>
-- <code title="get /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/resources/v1/accounts/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
+- <code title="delete /v1/accounts/{account_id}/positions/{instrument_id}">client.v1.accounts.positions.<a href="./src/resources/v1/accounts/positions/positions.ts">closePosition</a>(instrumentID, { ...params }) -> PositionClosePositionResponse</code>
+- <code title="delete /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/resources/v1/accounts/positions/positions.ts">closePositions</a>(accountID, { ...params }) -> PositionClosePositionsResponse</code>
+- <code title="get /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/resources/v1/accounts/positions/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
+
+#### Instructions
+
+Types:
+
+- <code><a href="./src/resources/v1/accounts/positions/instructions.ts">InstructionCancelPositionInstructionResponse</a></code>
+- <code><a href="./src/resources/v1/accounts/positions/instructions.ts">InstructionGetPositionInstructionsResponse</a></code>
+- <code><a href="./src/resources/v1/accounts/positions/instructions.ts">InstructionSubmitPositionInstructionsResponse</a></code>
+
+Methods:
+
+- <code title="delete /v1/accounts/{account_id}/positions/instructions/{instruction_id}">client.v1.accounts.positions.instructions.<a href="./src/resources/v1/accounts/positions/instructions.ts">cancelPositionInstruction</a>(instructionID, { ...params }) -> InstructionCancelPositionInstructionResponse</code>
+- <code title="get /v1/accounts/{account_id}/positions/instructions">client.v1.accounts.positions.instructions.<a href="./src/resources/v1/accounts/positions/instructions.ts">getPositionInstructions</a>(accountID, { ...params }) -> InstructionGetPositionInstructionsResponse</code>
+- <code title="post /v1/accounts/{account_id}/positions/instructions">client.v1.accounts.positions.instructions.<a href="./src/resources/v1/accounts/positions/instructions.ts">submitPositionInstructions</a>(accountID, [ ...instructions ]) -> InstructionSubmitPositionInstructionsResponse</code>
 
 ## Calendars
 

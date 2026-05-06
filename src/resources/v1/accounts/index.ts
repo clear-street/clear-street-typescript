@@ -27,15 +27,6 @@ export {
   type BalanceGetAccountBalancesParams,
 } from './balances';
 export {
-  Exercises,
-  type ExerciseCancelExerciseResponse,
-  type ExerciseGetExercisesResponse,
-  type ExerciseSubmitExercisesResponse,
-  type ExerciseCancelExerciseParams,
-  type ExerciseGetExercisesParams,
-  type ExerciseSubmitExercisesParams,
-} from './exercises';
-export {
   Orders,
   type Order,
   type OrderList,
@@ -76,4 +67,4 @@ export {
   type PositionClosePositionParams,
   type PositionClosePositionsParams,
   type PositionGetPositionsParams,
-} from './positions';
+} from './positions/index';

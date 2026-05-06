@@ -1,27 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as ExercisesAPI from './exercises';
-import {
-  ExerciseAction,
-  ExerciseInstruction,
-  ExerciseInstructionList,
-  ExerciseStatus,
-  Exercises,
-} from './exercises';
+import * as PositionsAPI from './positions/positions';
+import { Positions } from './positions/positions';
 
 export class Accounts extends APIResource {
-  exercises: ExercisesAPI.Exercises = new ExercisesAPI.Exercises(this._client);
+  positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
 }
 
-Accounts.Exercises = Exercises;
+Accounts.Positions = Positions;
 
 export declare namespace Accounts {
-  export {
-    Exercises as Exercises,
-    type ExerciseAction as ExerciseAction,
-    type ExerciseInstruction as ExerciseInstruction,
-    type ExerciseInstructionList as ExerciseInstructionList,
-    type ExerciseStatus as ExerciseStatus,
-  };
+  export { Positions as Positions };
 }

@@ -14,16 +14,6 @@ import {
   MarginTopContributor,
   MarginType,
 } from './balances';
-import * as ExercisesAPI from './exercises';
-import {
-  ExerciseCancelExerciseParams,
-  ExerciseCancelExerciseResponse,
-  ExerciseGetExercisesParams,
-  ExerciseGetExercisesResponse,
-  ExerciseSubmitExercisesParams,
-  ExerciseSubmitExercisesResponse,
-  Exercises,
-} from './exercises';
 import * as OrdersAPI from './orders';
 import {
   Order,
@@ -56,7 +46,7 @@ import {
   PortfolioHistoryResponse,
   PortfolioHistorySegment,
 } from './portfolio-history';
-import * as PositionsAPI from './positions';
+import * as PositionsAPI from './positions/positions';
 import {
   Position,
   PositionClosePositionParams,
@@ -68,7 +58,7 @@ import {
   PositionList,
   PositionType,
   Positions,
-} from './positions';
+} from './positions/positions';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -78,7 +68,6 @@ import { path } from '../../../internal/utils/path';
  */
 export class Accounts extends APIResource {
   balances: BalancesAPI.Balances = new BalancesAPI.Balances(this._client);
-  exercises: ExercisesAPI.Exercises = new ExercisesAPI.Exercises(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
   portfolioHistory: PortfolioHistoryAPI.PortfolioHistory = new PortfolioHistoryAPI.PortfolioHistory(
     this._client,
@@ -253,7 +242,6 @@ export interface AccountPatchAccountByIDParams {
 }
 
 Accounts.Balances = Balances;
-Accounts.Exercises = Exercises;
 Accounts.Orders = Orders;
 Accounts.PortfolioHistory = PortfolioHistory;
 Accounts.Positions = Positions;
@@ -284,16 +272,6 @@ export declare namespace Accounts {
     type MarginType as MarginType,
     type BalanceGetAccountBalancesResponse as BalanceGetAccountBalancesResponse,
     type BalanceGetAccountBalancesParams as BalanceGetAccountBalancesParams,
-  };
-
-  export {
-    Exercises as Exercises,
-    type ExerciseCancelExerciseResponse as ExerciseCancelExerciseResponse,
-    type ExerciseGetExercisesResponse as ExerciseGetExercisesResponse,
-    type ExerciseSubmitExercisesResponse as ExerciseSubmitExercisesResponse,
-    type ExerciseCancelExerciseParams as ExerciseCancelExerciseParams,
-    type ExerciseGetExercisesParams as ExerciseGetExercisesParams,
-    type ExerciseSubmitExercisesParams as ExerciseSubmitExercisesParams,
   };
 
   export {
