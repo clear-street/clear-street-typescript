@@ -6,10 +6,26 @@ Types:
 - <code><a href="./src/resources/shared.ts">BaseResponse</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseMetadata</a></code>
 
+# Active
+
+## V1
+
+### Accounts
+
+#### Exercises
+
+Types:
+
+- <code><a href="./src/resources/active/v1/accounts/exercises.ts">ExerciseAction</a></code>
+- <code><a href="./src/resources/active/v1/accounts/exercises.ts">ExerciseInstruction</a></code>
+- <code><a href="./src/resources/active/v1/accounts/exercises.ts">ExerciseInstructionList</a></code>
+- <code><a href="./src/resources/active/v1/accounts/exercises.ts">ExerciseStatus</a></code>
+
 # V1
 
 Types:
 
+- <code><a href="./src/resources/v1/v1.ts">SecurityIDSource</a></code>
 - <code><a href="./src/resources/v1/v1.ts">SecurityType</a></code>
 
 Methods:
@@ -52,6 +68,20 @@ Types:
 Methods:
 
 - <code title="get /v1/accounts/{account_id}/balances">client.v1.accounts.balances.<a href="./src/resources/v1/accounts/balances.ts">getAccountBalances</a>(accountID, { ...params }) -> BalanceGetAccountBalancesResponse</code>
+
+### Exercises
+
+Types:
+
+- <code><a href="./src/resources/v1/accounts/exercises.ts">ExerciseCancelExerciseResponse</a></code>
+- <code><a href="./src/resources/v1/accounts/exercises.ts">ExerciseGetExercisesResponse</a></code>
+- <code><a href="./src/resources/v1/accounts/exercises.ts">ExerciseSubmitExercisesResponse</a></code>
+
+Methods:
+
+- <code title="delete /v1/accounts/{account_id}/exercises/{exercise_id}">client.v1.accounts.exercises.<a href="./src/resources/v1/accounts/exercises.ts">cancelExercise</a>(exerciseID, { ...params }) -> ExerciseCancelExerciseResponse</code>
+- <code title="get /v1/accounts/{account_id}/exercises">client.v1.accounts.exercises.<a href="./src/resources/v1/accounts/exercises.ts">getExercises</a>(accountID, { ...params }) -> ExerciseGetExercisesResponse</code>
+- <code title="post /v1/accounts/{account_id}/exercises">client.v1.accounts.exercises.<a href="./src/resources/v1/accounts/exercises.ts">submitExercises</a>(accountID, [ ...exercises ]) -> ExerciseSubmitExercisesResponse</code>
 
 ### Orders
 
