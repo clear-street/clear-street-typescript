@@ -166,12 +166,119 @@ export type FiscalPeriodType = 'QUARTERLY' | 'ANNUAL' | 'TTM' | 'BIANNUAL';
 /**
  * Represents a tradable financial instrument.
  */
-export interface Instrument extends InstrumentCore {
+export interface Instrument {
+  /**
+   * Unique OEMS instrument identifier (UUID)
+   */
+  id: string;
+
+  /**
+   * The ISO country code of the instrument's issue
+   */
+  country_of_issue: string;
+
+  /**
+   * The ISO currency code in which the instrument is traded
+   */
+  currency: string;
+
+  /**
+   * Indicates if the instrument is classified as Easy-To-Borrow
+   */
+  easy_to_borrow: boolean;
+
+  /**
+   * Indicates if the instrument is liquidation only and cannot be bought
+   */
+  is_liquidation_only: boolean;
+
+  /**
+   * Indicates if the instrument is marginable
+   */
+  is_marginable: boolean;
+
+  /**
+   * Indicates if the instrument is restricted from trading
+   */
+  is_restricted: boolean;
+
+  /**
+   * Indicates if short selling is prohibited for the instrument
+   */
+  is_short_prohibited: boolean;
+
+  /**
+   * Indicates if the instrument is on the Regulation SHO Threshold Security List
+   */
+  is_threshold_security: boolean;
+
+  /**
+   * Indicates if the instrument is tradable
+   */
+  is_tradable: boolean;
+
+  /**
+   * The trading symbol for the instrument
+   */
+  symbol: string;
+
+  /**
+   * The MIC code of the primary listing venue
+   */
+  venue: string;
+
+  /**
+   * Average daily share volume from the security definition.
+   */
+  adv?: string | null;
+
+  /**
+   * The expiration date for options instruments
+   */
+  expiry?: string | null;
+
+  /**
+   * The type of security (e.g., Common Stock, ETF)
+   */
+  instrument_type?: V1API.SecurityType | null;
+
+  /**
+   * The percent of a long position's value you must post as margin
+   */
+  long_margin_rate?: string | null;
+
+  /**
+   * The full name of the instrument or its issuer
+   */
+  name?: string | null;
+
+  /**
+   * Notional ADV (`adv × previous_close`). The primary liquidity signal used by
+   * `/instruments/search` ranking. Computed at response time so it stays consistent
+   * with whatever `adv` and `previous_close` show.
+   */
+  notional_adv?: string | null;
+
   /**
    * Available options expiration dates for this instrument. Present only when
    * `include_options_expiry_dates=true` in the request.
    */
   options_expiry_dates?: Array<string> | null;
+
+  /**
+   * Last close price from the security definition.
+   */
+  previous_close?: string | null;
+
+  /**
+   * The percent of a short position's value you must post as margin
+   */
+  short_margin_rate?: string | null;
+
+  /**
+   * The strike price for options instruments
+   */
+  strike_price?: string | null;
 }
 
 export interface InstrumentCore {
