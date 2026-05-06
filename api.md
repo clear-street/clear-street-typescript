@@ -6,23 +6,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">BaseResponse</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseMetadata</a></code>
 
-# Active
-
-## V1
-
-### Accounts
-
-#### Positions
-
-##### Instructions
-
-Types:
-
-- <code><a href="./src/resources/active/v1/accounts/positions/instructions.ts">PositionInstruction</a></code>
-- <code><a href="./src/resources/active/v1/accounts/positions/instructions.ts">PositionInstructionList</a></code>
-- <code><a href="./src/resources/active/v1/accounts/positions/instructions.ts">PositionInstructionStatus</a></code>
-- <code><a href="./src/resources/active/v1/accounts/positions/instructions.ts">PositionInstructionType</a></code>
-
 # V1
 
 Types:
@@ -74,11 +57,17 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/accounts/orders.ts">CancelOrderRequest</a></code>
+- <code><a href="./src/resources/v1/accounts/orders.ts">InstrumentIDOrSymbol</a></code>
+- <code><a href="./src/resources/v1/accounts/orders.ts">NewOrderRequest</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">Order</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">OrderList</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">OrderStatus</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">OrderType</a></code>
+- <code><a href="./src/resources/v1/accounts/orders.ts">PositionEffect</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">QueueState</a></code>
+- <code><a href="./src/resources/v1/accounts/orders.ts">RequestOrderType</a></code>
+- <code><a href="./src/resources/v1/accounts/orders.ts">RequestTimeInForce</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">Side</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">TimeInForce</a></code>
 - <code><a href="./src/resources/v1/accounts/orders.ts">TrailingOffsetType</a></code>
@@ -114,32 +103,18 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/accounts/positions/positions.ts">Position</a></code>
-- <code><a href="./src/resources/v1/accounts/positions/positions.ts">PositionList</a></code>
-- <code><a href="./src/resources/v1/accounts/positions/positions.ts">PositionType</a></code>
-- <code><a href="./src/resources/v1/accounts/positions/positions.ts">PositionClosePositionResponse</a></code>
-- <code><a href="./src/resources/v1/accounts/positions/positions.ts">PositionClosePositionsResponse</a></code>
-- <code><a href="./src/resources/v1/accounts/positions/positions.ts">PositionGetPositionsResponse</a></code>
+- <code><a href="./src/resources/v1/accounts/positions.ts">Position</a></code>
+- <code><a href="./src/resources/v1/accounts/positions.ts">PositionList</a></code>
+- <code><a href="./src/resources/v1/accounts/positions.ts">PositionType</a></code>
+- <code><a href="./src/resources/v1/accounts/positions.ts">PositionClosePositionResponse</a></code>
+- <code><a href="./src/resources/v1/accounts/positions.ts">PositionClosePositionsResponse</a></code>
+- <code><a href="./src/resources/v1/accounts/positions.ts">PositionGetPositionsResponse</a></code>
 
 Methods:
 
-- <code title="delete /v1/accounts/{account_id}/positions/{instrument_id}">client.v1.accounts.positions.<a href="./src/resources/v1/accounts/positions/positions.ts">closePosition</a>(instrumentID, { ...params }) -> PositionClosePositionResponse</code>
-- <code title="delete /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/resources/v1/accounts/positions/positions.ts">closePositions</a>(accountID, { ...params }) -> PositionClosePositionsResponse</code>
-- <code title="get /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/resources/v1/accounts/positions/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
-
-#### Instructions
-
-Types:
-
-- <code><a href="./src/resources/v1/accounts/positions/instructions.ts">InstructionCancelPositionInstructionResponse</a></code>
-- <code><a href="./src/resources/v1/accounts/positions/instructions.ts">InstructionGetPositionInstructionsResponse</a></code>
-- <code><a href="./src/resources/v1/accounts/positions/instructions.ts">InstructionSubmitPositionInstructionsResponse</a></code>
-
-Methods:
-
-- <code title="delete /v1/accounts/{account_id}/positions/instructions/{instruction_id}">client.v1.accounts.positions.instructions.<a href="./src/resources/v1/accounts/positions/instructions.ts">cancelPositionInstruction</a>(instructionID, { ...params }) -> InstructionCancelPositionInstructionResponse</code>
-- <code title="get /v1/accounts/{account_id}/positions/instructions">client.v1.accounts.positions.instructions.<a href="./src/resources/v1/accounts/positions/instructions.ts">getPositionInstructions</a>(accountID, { ...params }) -> InstructionGetPositionInstructionsResponse</code>
-- <code title="post /v1/accounts/{account_id}/positions/instructions">client.v1.accounts.positions.instructions.<a href="./src/resources/v1/accounts/positions/instructions.ts">submitPositionInstructions</a>(accountID, [ ...instructions ]) -> InstructionSubmitPositionInstructionsResponse</code>
+- <code title="delete /v1/accounts/{account_id}/positions/{instrument_id}">client.v1.accounts.positions.<a href="./src/resources/v1/accounts/positions.ts">closePosition</a>(instrumentID, { ...params }) -> PositionClosePositionResponse</code>
+- <code title="delete /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/resources/v1/accounts/positions.ts">closePositions</a>(accountID, { ...params }) -> PositionClosePositionsResponse</code>
+- <code title="get /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/resources/v1/accounts/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
 
 ## Calendars
 
@@ -349,6 +324,8 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">CreateMessageResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">CreateThreadResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">DataChart</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">EntitlementAgreementKey</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">EntitlementCode</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ErrorStatus</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">Message</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">MessageContent</a></code>
@@ -359,9 +336,9 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenChartAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenEntitlementConsentAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenScreenerAction</a></code>
-- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OrderPayload</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillCancelOrderAction</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillNewOrderAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillOrderAction</a></code>
-- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillOrderActionType</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PromptButtonAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">Response</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ResponseContent</a></code>

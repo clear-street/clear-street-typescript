@@ -28,11 +28,17 @@ export {
 } from './balances';
 export {
   Orders,
+  type CancelOrderRequest,
+  type InstrumentIDOrSymbol,
+  type NewOrderRequest,
   type Order,
   type OrderList,
   type OrderStatus,
   type OrderType,
+  type PositionEffect,
   type QueueState,
+  type RequestOrderType,
+  type RequestTimeInForce,
   type Side,
   type TimeInForce,
   type TrailingOffsetType,
@@ -67,4 +73,4 @@ export {
   type PositionClosePositionParams,
   type PositionClosePositionsParams,
   type PositionGetPositionsParams,
-} from './positions/index';
+} from './positions';

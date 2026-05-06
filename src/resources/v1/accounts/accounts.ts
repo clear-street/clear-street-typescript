@@ -16,6 +16,9 @@ import {
 } from './balances';
 import * as OrdersAPI from './orders';
 import {
+  CancelOrderRequest,
+  InstrumentIDOrSymbol,
+  NewOrderRequest,
   Order,
   OrderCancelAllOpenOrdersParams,
   OrderCancelAllOpenOrdersResponse,
@@ -33,7 +36,10 @@ import {
   OrderSubmitOrdersResponse,
   OrderType,
   Orders,
+  PositionEffect,
   QueueState,
+  RequestOrderType,
+  RequestTimeInForce,
   Side,
   TimeInForce,
   TrailingOffsetType,
@@ -46,7 +52,7 @@ import {
   PortfolioHistoryResponse,
   PortfolioHistorySegment,
 } from './portfolio-history';
-import * as PositionsAPI from './positions/positions';
+import * as PositionsAPI from './positions';
 import {
   Position,
   PositionClosePositionParams,
@@ -58,7 +64,7 @@ import {
   PositionList,
   PositionType,
   Positions,
-} from './positions/positions';
+} from './positions';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -276,11 +282,17 @@ export declare namespace Accounts {
 
   export {
     Orders as Orders,
+    type CancelOrderRequest as CancelOrderRequest,
+    type InstrumentIDOrSymbol as InstrumentIDOrSymbol,
+    type NewOrderRequest as NewOrderRequest,
     type Order as Order,
     type OrderList as OrderList,
     type OrderStatus as OrderStatus,
     type OrderType as OrderType,
+    type PositionEffect as PositionEffect,
     type QueueState as QueueState,
+    type RequestOrderType as RequestOrderType,
+    type RequestTimeInForce as RequestTimeInForce,
     type Side as Side,
     type TimeInForce as TimeInForce,
     type TrailingOffsetType as TrailingOffsetType,
