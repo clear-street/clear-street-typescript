@@ -188,6 +188,50 @@ export class V1 extends APIResource {
 }
 
 /**
+ * Security identifier source
+ */
+export type SecurityIDSource =
+  | 'CMS'
+  | 'CLST'
+  | 'OPRA'
+  | 'FIGI'
+  | 'CUSIP'
+  | 'CURRENCY'
+  | 'FMP'
+  | 'OEMS'
+  | 'SEDOL'
+  | 'QUIK'
+  | 'ISIN'
+  | 'RIC'
+  | 'COUNTRY'
+  | 'EXCHANGE'
+  | 'CTA'
+  | 'BLOOMBERG'
+  | 'WERTPAPIER'
+  | 'DUTCH'
+  | 'VALOREN'
+  | 'SICOVAM'
+  | 'BELGIAN'
+  | 'COMMON'
+  | 'CLEARING_HOUSE'
+  | 'ISDA_FPML_SPECIFICATION'
+  | 'ISDA_FPML_URL'
+  | 'LETTER_OF_CREDIT'
+  | 'MARKETPLACE_ASSIGNED_IDENTIFIER'
+  | 'MARKIT_RED_ENTITY_CLIP'
+  | 'MARKIT_RED_PAIR_CLIP'
+  | 'CFTC'
+  | 'ISDA_COMMODITY_REFERENCE_PRICE'
+  | 'LEGAL_ENTITY_IDENTIFIER'
+  | 'SYNTHETIC'
+  | 'FIDESSA_INSTRUMENT_MNEMONIC'
+  | 'INDEX_NAME'
+  | 'UNIFORM_SYMBOL'
+  | 'DIGITAL_TOKEN_IDENTIFIER'
+  | 'MASSIVE'
+  | 'OTHER';
+
+/**
  * Security type
  */
 export type SecurityType = 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'OPTION' | 'CASH' | 'OTHER';
@@ -205,7 +249,7 @@ V1.VersionResource = VersionResource;
 V1.Watchlists = Watchlists;
 
 export declare namespace V1 {
-  export { type SecurityType as SecurityType };
+  export { type SecurityIDSource as SecurityIDSource, type SecurityType as SecurityType };
 
   export {
     Accounts as Accounts,
