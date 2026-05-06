@@ -68,8 +68,8 @@ describe('resource instruments', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('search: only required params', async () => {
-    const responsePromise = client.v1.instruments.search({ q: 'q' });
+  test.skip('searchInstruments: only required params', async () => {
+    const responsePromise = client.v1.instruments.searchInstruments({ q: 'q' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -80,16 +80,16 @@ describe('resource instruments', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('search: required and optional params', async () => {
-    const response = await client.v1.instruments.search({
+  test.skip('searchInstruments: required and optional params', async () => {
+    const response = await client.v1.instruments.searchInstruments({
       q: 'q',
       asset_class: 'asset_class',
       country: 'country',
       currency: 'currency',
-      cursor: 'cursor',
       include_inactive: true,
       include_restricted: true,
-      limit: 0,
+      page_size: 1,
+      page_token: 'U3RhaW5sZXNzIHJvY2tz',
     });
   });
 });

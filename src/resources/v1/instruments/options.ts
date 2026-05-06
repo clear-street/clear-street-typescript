@@ -19,22 +19,22 @@ export class Options extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.instruments.options.contracts();
+   *   await client.v1.instruments.options.getOptionContracts();
    * ```
    */
-  contracts(
-    query: OptionContractsParams | null | undefined = {},
+  getOptionContracts(
+    query: OptionGetOptionContractsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<OptionContractsResponse> {
+  ): APIPromise<OptionGetOptionContractsResponse> {
     return this._client.get('/v1/instruments/options/contracts', { query, ...options });
   }
 }
 
-export interface OptionContractsResponse extends Shared.BaseResponse {
+export interface OptionGetOptionContractsResponse extends Shared.BaseResponse {
   data: InstrumentsAPI.OptionsContractList;
 }
 
-export interface OptionContractsParams {
+export interface OptionGetOptionContractsParams {
   /**
    * Filter by contract type: CALL or PUT
    */
@@ -61,12 +61,12 @@ export interface OptionContractsParams {
   /**
    * OEMS instrument UUID or symbol of the underlying equity/index
    */
-  underlier_instrument_id?: string;
+  underlying_instrument_id?: string;
 }
 
 export declare namespace Options {
   export {
-    type OptionContractsResponse as OptionContractsResponse,
-    type OptionContractsParams as OptionContractsParams,
+    type OptionGetOptionContractsResponse as OptionGetOptionContractsResponse,
+    type OptionGetOptionContractsParams as OptionGetOptionContractsParams,
   };
 }

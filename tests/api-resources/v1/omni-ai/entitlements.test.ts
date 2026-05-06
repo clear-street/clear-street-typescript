@@ -46,8 +46,8 @@ describe('resource entitlements', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listEntitlements', async () => {
-    const responsePromise = client.v1.omniAI.entitlements.listEntitlements();
+  test.skip('getEntitlements', async () => {
+    const responsePromise = client.v1.omniAI.entitlements.getEntitlements();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -58,10 +58,10 @@ describe('resource entitlements', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listEntitlements: request options and params are passed correctly', async () => {
+  test.skip('getEntitlements: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.omniAI.entitlements.listEntitlements(
+      client.v1.omniAI.entitlements.getEntitlements(
         { trading_account_id: 0 },
         { path: '/_stainless_unknown_path' },
       ),

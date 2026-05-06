@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as OmniAIAPI from './omni-ai';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -54,13 +55,13 @@ export class Entitlements extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.omniAI.entitlements.listEntitlements();
+   *   await client.v1.omniAI.entitlements.getEntitlements();
    * ```
    */
-  listEntitlements(
-    query: EntitlementListEntitlementsParams | null | undefined = {},
+  getEntitlements(
+    query: EntitlementGetEntitlementsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<EntitlementListEntitlementsResponse> {
+  ): APIPromise<EntitlementGetEntitlementsResponse> {
     return this._client.get('/v1/omni-ai/entitlements', { query, ...options });
   }
 }
@@ -74,7 +75,10 @@ export interface DeleteEntitlementResponse {
 export interface EntitlementResource {
   agreement_id: string;
 
-  entitlement_code: string;
+  /**
+   * Stable entitlement code granted by an agreement.
+   */
+  entitlement_code: OmniAIAPI.EntitlementCode;
 
   entitlement_id: string;
 
@@ -93,19 +97,19 @@ export interface EntitlementDeleteEntitlementResponse extends Shared.BaseRespons
   data: DeleteEntitlementResponse;
 }
 
-export interface EntitlementListEntitlementsResponse extends Shared.BaseResponse {
+export interface EntitlementGetEntitlementsResponse extends Shared.BaseResponse {
   data: EntitlementResourceList;
 }
 
 export interface EntitlementCreateEntitlementsParams {
   agreement_id: string;
 
-  requested_entitlement_codes: Array<string>;
+  requested_entitlement_codes: Array<OmniAIAPI.EntitlementCode>;
 
   trading_account_ids: Array<number>;
 }
 
-export interface EntitlementListEntitlementsParams {
+export interface EntitlementGetEntitlementsParams {
   trading_account_id?: number;
 }
 
@@ -116,8 +120,8 @@ export declare namespace Entitlements {
     type EntitlementResourceList as EntitlementResourceList,
     type EntitlementCreateEntitlementsResponse as EntitlementCreateEntitlementsResponse,
     type EntitlementDeleteEntitlementResponse as EntitlementDeleteEntitlementResponse,
-    type EntitlementListEntitlementsResponse as EntitlementListEntitlementsResponse,
+    type EntitlementGetEntitlementsResponse as EntitlementGetEntitlementsResponse,
     type EntitlementCreateEntitlementsParams as EntitlementCreateEntitlementsParams,
-    type EntitlementListEntitlementsParams as EntitlementListEntitlementsParams,
+    type EntitlementGetEntitlementsParams as EntitlementGetEntitlementsParams,
   };
 }

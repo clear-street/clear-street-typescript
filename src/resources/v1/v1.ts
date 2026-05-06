@@ -59,13 +59,13 @@ import {
   AccountGetAccountByIDResponse,
   AccountGetAccountsParams,
   AccountGetAccountsResponse,
-  AccountKind,
   AccountList,
   AccountPatchAccountByIDParams,
   AccountPatchAccountByIDResponse,
   AccountSettings,
   AccountStatus,
-  AccountSubkind,
+  AccountSubtype,
+  AccountType,
   Accounts,
   RiskSettings,
 } from './accounts/accounts';
@@ -85,8 +85,8 @@ import {
   InstrumentGetInstrumentByIDResponse,
   InstrumentGetInstrumentsParams,
   InstrumentGetInstrumentsResponse,
-  InstrumentSearchParams,
-  InstrumentSearchResponse,
+  InstrumentSearchInstrumentsParams,
+  InstrumentSearchInstrumentsResponse,
   Instruments,
   ListingType,
   OptionsContract,
@@ -111,6 +111,8 @@ import {
   CreateMessageResponse,
   CreateThreadResponse,
   DataChart,
+  EntitlementAgreementKey,
+  EntitlementCode,
   ErrorStatus,
   Message,
   MessageContent,
@@ -176,10 +178,10 @@ export class V1 extends APIResource {
    *
    * @example
    * ```ts
-   * await client.v1.ws();
+   * await client.v1.websocketHandler();
    * ```
    */
-  ws(options?: RequestOptions): APIPromise<void> {
+  websocketHandler(options?: RequestOptions): APIPromise<void> {
     return this._client.get('/v1/ws', {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -210,11 +212,11 @@ export declare namespace V1 {
   export {
     Accounts as Accounts,
     type Account as Account,
-    type AccountKind as AccountKind,
     type AccountList as AccountList,
     type AccountSettings as AccountSettings,
     type AccountStatus as AccountStatus,
-    type AccountSubkind as AccountSubkind,
+    type AccountSubtype as AccountSubtype,
+    type AccountType as AccountType,
     type RiskSettings as RiskSettings,
     type AccountGetAccountByIDResponse as AccountGetAccountByIDResponse,
     type AccountGetAccountsResponse as AccountGetAccountsResponse,
@@ -246,10 +248,10 @@ export declare namespace V1 {
     type OptionsContractList as OptionsContractList,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
-    type InstrumentSearchResponse as InstrumentSearchResponse,
+    type InstrumentSearchInstrumentsResponse as InstrumentSearchInstrumentsResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
-    type InstrumentSearchParams as InstrumentSearchParams,
+    type InstrumentSearchInstrumentsParams as InstrumentSearchInstrumentsParams,
   };
 
   export { MarketData as MarketData };
@@ -281,6 +283,8 @@ export declare namespace V1 {
     type CreateMessageResponse as CreateMessageResponse,
     type CreateThreadResponse as CreateThreadResponse,
     type DataChart as DataChart,
+    type EntitlementAgreementKey as EntitlementAgreementKey,
+    type EntitlementCode as EntitlementCode,
     type ErrorStatus as ErrorStatus,
     type Message as Message,
     type MessageContent as MessageContent,

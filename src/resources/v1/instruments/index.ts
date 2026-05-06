@@ -64,9 +64,13 @@ export {
   type OptionsContractList,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
-  type InstrumentSearchResponse,
+  type InstrumentSearchInstrumentsResponse,
   type InstrumentGetInstrumentByIDParams,
   type InstrumentGetInstrumentsParams,
-  type InstrumentSearchParams,
+  type InstrumentSearchInstrumentsParams,
 } from './instruments';
-export { Options, type OptionContractsResponse, type OptionContractsParams } from './options';
+export {
+  Options,
+  type OptionGetOptionContractsResponse,
+  type OptionGetOptionContractsParams,
+} from './options';

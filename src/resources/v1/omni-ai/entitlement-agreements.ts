@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as OmniAIAPI from './omni-ai';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
@@ -15,12 +16,12 @@ export class EntitlementAgreements extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.omniAI.entitlementAgreements.listEntitlementAgreements();
+   *   await client.v1.omniAI.entitlementAgreements.getEntitlementAgreements();
    * ```
    */
-  listEntitlementAgreements(
+  getEntitlementAgreements(
     options?: RequestOptions,
-  ): APIPromise<EntitlementAgreementListEntitlementAgreementsResponse> {
+  ): APIPromise<EntitlementAgreementGetEntitlementAgreementsResponse> {
     return this._client.get('/v1/omni-ai/entitlement-agreements', options);
   }
 }
@@ -28,13 +29,16 @@ export class EntitlementAgreements extends APIResource {
 export interface EntitlementAgreementResource {
   agreement_id: string;
 
-  agreement_key: string;
+  /**
+   * Stable entitlement agreement family key.
+   */
+  agreement_key: OmniAIAPI.EntitlementAgreementKey;
 
   document_content: string;
 
   document_sha256: string;
 
-  entitlement_codes: Array<string>;
+  entitlement_codes: Array<OmniAIAPI.EntitlementCode>;
 
   title: string;
 
@@ -43,7 +47,7 @@ export interface EntitlementAgreementResource {
 
 export type EntitlementAgreementResourceList = Array<EntitlementAgreementResource>;
 
-export interface EntitlementAgreementListEntitlementAgreementsResponse extends Shared.BaseResponse {
+export interface EntitlementAgreementGetEntitlementAgreementsResponse extends Shared.BaseResponse {
   data: EntitlementAgreementResourceList;
 }
 
@@ -51,6 +55,6 @@ export declare namespace EntitlementAgreements {
   export {
     type EntitlementAgreementResource as EntitlementAgreementResource,
     type EntitlementAgreementResourceList as EntitlementAgreementResourceList,
-    type EntitlementAgreementListEntitlementAgreementsResponse as EntitlementAgreementListEntitlementAgreementsResponse,
+    type EntitlementAgreementGetEntitlementAgreementsResponse as EntitlementAgreementGetEntitlementAgreementsResponse,
   };
 }

@@ -52,17 +52,17 @@ export class Messages extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.omniAI.threads.messages.listMessages(
+   *   await client.v1.omniAI.threads.messages.getMessages(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: 0 },
    *   );
    * ```
    */
-  listMessages(
+  getMessages(
     threadID: string,
-    query: MessageListMessagesParams,
+    query: MessageGetMessagesParams,
     options?: RequestOptions,
-  ): APIPromise<MessageListMessagesResponse> {
+  ): APIPromise<MessageGetMessagesResponse> {
     return this._client.get(path`/v1/omni-ai/threads/${threadID}/messages`, { query, ...options });
   }
 }
@@ -74,7 +74,7 @@ export interface MessageCreateMessageResponse extends Shared.BaseResponse {
   data: OmniAIAPI.CreateMessageResponse;
 }
 
-export interface MessageListMessagesResponse extends Shared.BaseResponse {
+export interface MessageGetMessagesResponse extends Shared.BaseResponse {
   data: OmniAIAPI.MessageList;
 }
 
@@ -86,7 +86,7 @@ export interface MessageCreateMessageParams {
   capabilities?: Array<'PREFILL_ORDER' | 'OPEN_CHART' | 'OPEN_SCREENER' | 'OPEN_ENTITLEMENT_CONSENT'>;
 }
 
-export interface MessageListMessagesParams {
+export interface MessageGetMessagesParams {
   /**
    * Account ID for the request
    */
@@ -104,8 +104,8 @@ export interface MessageListMessagesParams {
 export declare namespace Messages {
   export {
     type MessageCreateMessageResponse as MessageCreateMessageResponse,
-    type MessageListMessagesResponse as MessageListMessagesResponse,
+    type MessageGetMessagesResponse as MessageGetMessagesResponse,
     type MessageCreateMessageParams as MessageCreateMessageParams,
-    type MessageListMessagesParams as MessageListMessagesParams,
+    type MessageGetMessagesParams as MessageGetMessagesParams,
   };
 }

@@ -4,7 +4,7 @@ export {
   EntitlementAgreements,
   type EntitlementAgreementResource,
   type EntitlementAgreementResourceList,
-  type EntitlementAgreementListEntitlementAgreementsResponse,
+  type EntitlementAgreementGetEntitlementAgreementsResponse,
 } from './entitlement-agreements';
 export {
   Entitlements,
@@ -13,16 +13,16 @@ export {
   type EntitlementResourceList,
   type EntitlementCreateEntitlementsResponse,
   type EntitlementDeleteEntitlementResponse,
-  type EntitlementListEntitlementsResponse,
+  type EntitlementGetEntitlementsResponse,
   type EntitlementCreateEntitlementsParams,
-  type EntitlementListEntitlementsParams,
+  type EntitlementGetEntitlementsParams,
 } from './entitlements';
 export {
   Messages,
-  type MessageFeedbackResponse,
-  type MessageGetMessageResponse,
-  type MessageFeedbackParams,
-  type MessageGetMessageParams,
+  type MessageGetMessageByIDResponse,
+  type MessageSubmitFeedbackResponse,
+  type MessageGetMessageByIDParams,
+  type MessageSubmitFeedbackParams,
 } from './messages';
 export {
   OmniAI,
@@ -41,6 +41,8 @@ export {
   type CreateMessageResponse,
   type CreateThreadResponse,
   type DataChart,
+  type EntitlementAgreementKey,
+  type EntitlementCode,
   type ErrorStatus,
   type Message,
   type MessageContent,
@@ -69,18 +71,18 @@ export {
 export {
   Responses,
   type ResponseCancelResponseResponse,
-  type ResponseGetResponseResponse,
+  type ResponseGetResponseByIDResponse,
   type ResponseCancelResponseParams,
-  type ResponseGetResponseParams,
+  type ResponseGetResponseByIDParams,
 } from './responses';
 export {
   Threads,
   type ThreadCreateThreadResponse,
-  type ThreadGetThreadResponse,
-  type ThreadListThreadsResponse,
-  type ThreadResponseResponse,
+  type ThreadGetThreadByIDResponse,
+  type ThreadGetThreadResponseResponse,
+  type ThreadGetThreadsResponse,
   type ThreadCreateThreadParams,
-  type ThreadGetThreadParams,
-  type ThreadListThreadsParams,
-  type ThreadResponseParams,
+  type ThreadGetThreadByIDParams,
+  type ThreadGetThreadResponseParams,
+  type ThreadGetThreadsParams,
 } from './threads/index';

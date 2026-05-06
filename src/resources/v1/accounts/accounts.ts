@@ -140,11 +140,6 @@ export interface Account {
   full_name: string;
 
   /**
-   * The type of account
-   */
-  kind: AccountKind;
-
-  /**
    * The date the account was opened
    */
   open_date: string;
@@ -167,18 +162,18 @@ export interface Account {
   /**
    * The sub-type of account
    */
-  subkind: AccountSubkind;
+  subtype: AccountSubtype;
+
+  /**
+   * The type of account
+   */
+  type: AccountType;
 
   /**
    * The date the account was closed, if applicable
    */
   close_date?: string | null;
 }
-
-/**
- * Account kind classification
- */
-export type AccountKind = 'CUSTOMER' | 'OTHER';
 
 export type AccountList = Array<Account>;
 
@@ -195,9 +190,14 @@ export interface AccountSettings {
 export type AccountStatus = 'ACTIVE' | 'INACTIVE' | 'CLOSED';
 
 /**
- * Account sub-kind classification providing more granular categorization
+ * Account subtype classification providing more granular categorization
  */
-export type AccountSubkind = 'CASH' | 'MARGIN' | 'OTHER';
+export type AccountSubtype = 'CASH' | 'MARGIN' | 'OTHER';
+
+/**
+ * Account type classification
+ */
+export type AccountType = 'CUSTOMER' | 'OTHER';
 
 /**
  * Risk settings for an account
@@ -249,11 +249,11 @@ Accounts.Positions = Positions;
 export declare namespace Accounts {
   export {
     type Account as Account,
-    type AccountKind as AccountKind,
     type AccountList as AccountList,
     type AccountSettings as AccountSettings,
     type AccountStatus as AccountStatus,
-    type AccountSubkind as AccountSubkind,
+    type AccountSubtype as AccountSubtype,
+    type AccountType as AccountType,
     type RiskSettings as RiskSettings,
     type AccountGetAccountByIDResponse as AccountGetAccountByIDResponse,
     type AccountGetAccountsResponse as AccountGetAccountsResponse,

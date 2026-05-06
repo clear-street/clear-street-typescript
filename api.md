@@ -14,18 +14,18 @@ Types:
 
 Methods:
 
-- <code title="get /v1/ws">client.v1.<a href="./src/resources/v1/v1.ts">ws</a>() -> void</code>
+- <code title="get /v1/ws">client.v1.<a href="./src/resources/v1/v1.ts">websocketHandler</a>() -> void</code>
 
 ## Accounts
 
 Types:
 
 - <code><a href="./src/resources/v1/accounts/accounts.ts">Account</a></code>
-- <code><a href="./src/resources/v1/accounts/accounts.ts">AccountKind</a></code>
 - <code><a href="./src/resources/v1/accounts/accounts.ts">AccountList</a></code>
 - <code><a href="./src/resources/v1/accounts/accounts.ts">AccountSettings</a></code>
 - <code><a href="./src/resources/v1/accounts/accounts.ts">AccountStatus</a></code>
-- <code><a href="./src/resources/v1/accounts/accounts.ts">AccountSubkind</a></code>
+- <code><a href="./src/resources/v1/accounts/accounts.ts">AccountSubtype</a></code>
+- <code><a href="./src/resources/v1/accounts/accounts.ts">AccountType</a></code>
 - <code><a href="./src/resources/v1/accounts/accounts.ts">RiskSettings</a></code>
 - <code><a href="./src/resources/v1/accounts/accounts.ts">AccountGetAccountByIDResponse</a></code>
 - <code><a href="./src/resources/v1/accounts/accounts.ts">AccountGetAccountsResponse</a></code>
@@ -158,13 +158,13 @@ Types:
 - <code><a href="./src/resources/v1/instruments/instruments.ts">OptionsContractList</a></code>
 - <code><a href="./src/resources/v1/instruments/instruments.ts">InstrumentGetInstrumentByIDResponse</a></code>
 - <code><a href="./src/resources/v1/instruments/instruments.ts">InstrumentGetInstrumentsResponse</a></code>
-- <code><a href="./src/resources/v1/instruments/instruments.ts">InstrumentSearchResponse</a></code>
+- <code><a href="./src/resources/v1/instruments/instruments.ts">InstrumentSearchInstrumentsResponse</a></code>
 
 Methods:
 
 - <code title="get /v1/instruments/{instrument_id}">client.v1.instruments.<a href="./src/resources/v1/instruments/instruments.ts">getInstrumentByID</a>(instrumentID, { ...params }) -> InstrumentGetInstrumentByIDResponse</code>
 - <code title="get /v1/instruments">client.v1.instruments.<a href="./src/resources/v1/instruments/instruments.ts">getInstruments</a>({ ...params }) -> InstrumentGetInstrumentsResponse</code>
-- <code title="get /v1/instruments/search">client.v1.instruments.<a href="./src/resources/v1/instruments/instruments.ts">search</a>({ ...params }) -> InstrumentSearchResponse</code>
+- <code title="get /v1/instruments/search">client.v1.instruments.<a href="./src/resources/v1/instruments/instruments.ts">searchInstruments</a>({ ...params }) -> InstrumentSearchInstrumentsResponse</code>
 
 ### AnalystReporting
 
@@ -250,11 +250,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/v1/instruments/options.ts">OptionContractsResponse</a></code>
+- <code><a href="./src/resources/v1/instruments/options.ts">OptionGetOptionContractsResponse</a></code>
 
 Methods:
 
-- <code title="get /v1/instruments/options/contracts">client.v1.instruments.options.<a href="./src/resources/v1/instruments/options.ts">contracts</a>({ ...params }) -> OptionContractsResponse</code>
+- <code title="get /v1/instruments/options/contracts">client.v1.instruments.options.<a href="./src/resources/v1/instruments/options.ts">getOptionContracts</a>({ ...params }) -> OptionGetOptionContractsResponse</code>
 
 ## MarketData
 
@@ -318,6 +318,8 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">CreateMessageResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">CreateThreadResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">DataChart</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">EntitlementAgreementKey</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">EntitlementCode</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ErrorStatus</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">Message</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">MessageContent</a></code>
@@ -349,11 +351,11 @@ Types:
 
 - <code><a href="./src/resources/v1/omni-ai/entitlement-agreements.ts">EntitlementAgreementResource</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlement-agreements.ts">EntitlementAgreementResourceList</a></code>
-- <code><a href="./src/resources/v1/omni-ai/entitlement-agreements.ts">EntitlementAgreementListEntitlementAgreementsResponse</a></code>
+- <code><a href="./src/resources/v1/omni-ai/entitlement-agreements.ts">EntitlementAgreementGetEntitlementAgreementsResponse</a></code>
 
 Methods:
 
-- <code title="get /v1/omni-ai/entitlement-agreements">client.v1.omniAI.entitlementAgreements.<a href="./src/resources/v1/omni-ai/entitlement-agreements.ts">listEntitlementAgreements</a>() -> EntitlementAgreementListEntitlementAgreementsResponse</code>
+- <code title="get /v1/omni-ai/entitlement-agreements">client.v1.omniAI.entitlementAgreements.<a href="./src/resources/v1/omni-ai/entitlement-agreements.ts">getEntitlementAgreements</a>() -> EntitlementAgreementGetEntitlementAgreementsResponse</code>
 
 ### Entitlements
 
@@ -364,65 +366,65 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementResourceList</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementCreateEntitlementsResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementDeleteEntitlementResponse</a></code>
-- <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementListEntitlementsResponse</a></code>
+- <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementGetEntitlementsResponse</a></code>
 
 Methods:
 
 - <code title="post /v1/omni-ai/entitlements">client.v1.omniAI.entitlements.<a href="./src/resources/v1/omni-ai/entitlements.ts">createEntitlements</a>({ ...params }) -> EntitlementCreateEntitlementsResponse</code>
 - <code title="delete /v1/omni-ai/entitlements/{entitlement_id}">client.v1.omniAI.entitlements.<a href="./src/resources/v1/omni-ai/entitlements.ts">deleteEntitlement</a>(entitlementID) -> EntitlementDeleteEntitlementResponse</code>
-- <code title="get /v1/omni-ai/entitlements">client.v1.omniAI.entitlements.<a href="./src/resources/v1/omni-ai/entitlements.ts">listEntitlements</a>({ ...params }) -> EntitlementListEntitlementsResponse</code>
+- <code title="get /v1/omni-ai/entitlements">client.v1.omniAI.entitlements.<a href="./src/resources/v1/omni-ai/entitlements.ts">getEntitlements</a>({ ...params }) -> EntitlementGetEntitlementsResponse</code>
 
 ### Messages
 
 Types:
 
-- <code><a href="./src/resources/v1/omni-ai/messages.ts">MessageFeedbackResponse</a></code>
-- <code><a href="./src/resources/v1/omni-ai/messages.ts">MessageGetMessageResponse</a></code>
+- <code><a href="./src/resources/v1/omni-ai/messages.ts">MessageGetMessageByIDResponse</a></code>
+- <code><a href="./src/resources/v1/omni-ai/messages.ts">MessageSubmitFeedbackResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/omni-ai/messages/{message_id}/feedback">client.v1.omniAI.messages.<a href="./src/resources/v1/omni-ai/messages.ts">feedback</a>(messageID, { ...params }) -> MessageFeedbackResponse</code>
-- <code title="get /v1/omni-ai/messages/{message_id}">client.v1.omniAI.messages.<a href="./src/resources/v1/omni-ai/messages.ts">getMessage</a>(messageID, { ...params }) -> MessageGetMessageResponse</code>
+- <code title="get /v1/omni-ai/messages/{message_id}">client.v1.omniAI.messages.<a href="./src/resources/v1/omni-ai/messages.ts">getMessageByID</a>(messageID, { ...params }) -> MessageGetMessageByIDResponse</code>
+- <code title="post /v1/omni-ai/messages/{message_id}/feedback">client.v1.omniAI.messages.<a href="./src/resources/v1/omni-ai/messages.ts">submitFeedback</a>(messageID, { ...params }) -> MessageSubmitFeedbackResponse</code>
 
 ### Responses
 
 Types:
 
 - <code><a href="./src/resources/v1/omni-ai/responses.ts">ResponseCancelResponseResponse</a></code>
-- <code><a href="./src/resources/v1/omni-ai/responses.ts">ResponseGetResponseResponse</a></code>
+- <code><a href="./src/resources/v1/omni-ai/responses.ts">ResponseGetResponseByIDResponse</a></code>
 
 Methods:
 
 - <code title="delete /v1/omni-ai/responses/{response_id}">client.v1.omniAI.responses.<a href="./src/resources/v1/omni-ai/responses.ts">cancelResponse</a>(responseID, { ...params }) -> ResponseCancelResponseResponse</code>
-- <code title="get /v1/omni-ai/responses/{response_id}">client.v1.omniAI.responses.<a href="./src/resources/v1/omni-ai/responses.ts">getResponse</a>(responseID, { ...params }) -> ResponseGetResponseResponse</code>
+- <code title="get /v1/omni-ai/responses/{response_id}">client.v1.omniAI.responses.<a href="./src/resources/v1/omni-ai/responses.ts">getResponseByID</a>(responseID, { ...params }) -> ResponseGetResponseByIDResponse</code>
 
 ### Threads
 
 Types:
 
 - <code><a href="./src/resources/v1/omni-ai/threads/threads.ts">ThreadCreateThreadResponse</a></code>
-- <code><a href="./src/resources/v1/omni-ai/threads/threads.ts">ThreadGetThreadResponse</a></code>
-- <code><a href="./src/resources/v1/omni-ai/threads/threads.ts">ThreadListThreadsResponse</a></code>
-- <code><a href="./src/resources/v1/omni-ai/threads/threads.ts">ThreadResponseResponse</a></code>
+- <code><a href="./src/resources/v1/omni-ai/threads/threads.ts">ThreadGetThreadByIDResponse</a></code>
+- <code><a href="./src/resources/v1/omni-ai/threads/threads.ts">ThreadGetThreadResponseResponse</a></code>
+- <code><a href="./src/resources/v1/omni-ai/threads/threads.ts">ThreadGetThreadsResponse</a></code>
 
 Methods:
 
 - <code title="post /v1/omni-ai/threads">client.v1.omniAI.threads.<a href="./src/resources/v1/omni-ai/threads/threads.ts">createThread</a>({ ...params }) -> ThreadCreateThreadResponse</code>
-- <code title="get /v1/omni-ai/threads/{thread_id}">client.v1.omniAI.threads.<a href="./src/resources/v1/omni-ai/threads/threads.ts">getThread</a>(threadID, { ...params }) -> ThreadGetThreadResponse</code>
-- <code title="get /v1/omni-ai/threads">client.v1.omniAI.threads.<a href="./src/resources/v1/omni-ai/threads/threads.ts">listThreads</a>({ ...params }) -> ThreadListThreadsResponse</code>
-- <code title="get /v1/omni-ai/threads/{thread_id}/response">client.v1.omniAI.threads.<a href="./src/resources/v1/omni-ai/threads/threads.ts">response</a>(threadID, { ...params }) -> ThreadResponseResponse</code>
+- <code title="get /v1/omni-ai/threads/{thread_id}">client.v1.omniAI.threads.<a href="./src/resources/v1/omni-ai/threads/threads.ts">getThreadByID</a>(threadID, { ...params }) -> ThreadGetThreadByIDResponse</code>
+- <code title="get /v1/omni-ai/threads/{thread_id}/response">client.v1.omniAI.threads.<a href="./src/resources/v1/omni-ai/threads/threads.ts">getThreadResponse</a>(threadID, { ...params }) -> ThreadGetThreadResponseResponse</code>
+- <code title="get /v1/omni-ai/threads">client.v1.omniAI.threads.<a href="./src/resources/v1/omni-ai/threads/threads.ts">getThreads</a>({ ...params }) -> ThreadGetThreadsResponse</code>
 
 #### Messages
 
 Types:
 
 - <code><a href="./src/resources/v1/omni-ai/threads/messages.ts">MessageCreateMessageResponse</a></code>
-- <code><a href="./src/resources/v1/omni-ai/threads/messages.ts">MessageListMessagesResponse</a></code>
+- <code><a href="./src/resources/v1/omni-ai/threads/messages.ts">MessageGetMessagesResponse</a></code>
 
 Methods:
 
 - <code title="post /v1/omni-ai/threads/{thread_id}/messages">client.v1.omniAI.threads.messages.<a href="./src/resources/v1/omni-ai/threads/messages.ts">createMessage</a>(threadID, { ...params }) -> MessageCreateMessageResponse</code>
-- <code title="get /v1/omni-ai/threads/{thread_id}/messages">client.v1.omniAI.threads.messages.<a href="./src/resources/v1/omni-ai/threads/messages.ts">listMessages</a>(threadID, { ...params }) -> MessageListMessagesResponse</code>
+- <code title="get /v1/omni-ai/threads/{thread_id}/messages">client.v1.omniAI.threads.messages.<a href="./src/resources/v1/omni-ai/threads/messages.ts">getMessages</a>(threadID, { ...params }) -> MessageGetMessagesResponse</code>
 
 ## SavedScreeners
 

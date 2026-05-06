@@ -59,7 +59,7 @@ import {
   InstrumentIncomeStatementList,
 } from './income-statements';
 import * as OptionsAPI from './options';
-import { OptionContractsParams, OptionContractsResponse, Options } from './options';
+import { OptionGetOptionContractsParams, OptionGetOptionContractsResponse, Options } from './options';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -130,12 +130,14 @@ export class Instruments extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.v1.instruments.search({
-   *   q: 'q',
-   * });
+   * const response =
+   *   await client.v1.instruments.searchInstruments({ q: 'q' });
    * ```
    */
-  search(query: InstrumentSearchParams, options?: RequestOptions): APIPromise<InstrumentSearchResponse> {
+  searchInstruments(
+    query: InstrumentSearchInstrumentsParams,
+    options?: RequestOptions,
+  ): APIPromise<InstrumentSearchInstrumentsResponse> {
     return this._client.get('/v1/instruments/search', { query, ...options });
   }
 }
@@ -404,7 +406,7 @@ export interface OptionsContract {
   /**
    * OEMS instrument ID of the underlying instrument, if resolvable
    */
-  underlier_instrument_id?: string | null;
+  underlying_instrument_id?: string | null;
 }
 
 export type OptionsContractList = Array<OptionsContract>;
@@ -420,7 +422,7 @@ export interface InstrumentGetInstrumentsResponse extends Shared.BaseResponse {
   data: InstrumentCoreList;
 }
 
-export interface InstrumentSearchResponse extends Shared.BaseResponse {
+export interface InstrumentSearchInstrumentsResponse extends Shared.BaseResponse {
   data: InstrumentCoreList;
 }
 
@@ -488,7 +490,7 @@ export interface InstrumentGetInstrumentsParams {
   page_token?: string;
 }
 
-export interface InstrumentSearchParams {
+export interface InstrumentSearchInstrumentsParams {
   /**
    * Search term applied case-insensitively to ticker symbols, alt-IDs
    * (CUSIP/ISIN/OPRA-root/CMS), and company names.
@@ -512,13 +514,6 @@ export interface InstrumentSearchParams {
   currency?: string;
 
   /**
-   * Opaque continuation cursor for show-more paging — pass the `next_page_token`
-   * from a prior response. Same wire format as `page_token` on other paginated
-   * endpoints.
-   */
-  cursor?: string;
-
-  /**
    * Include inactive instruments. Default false.
    */
   include_inactive?: boolean;
@@ -528,10 +523,13 @@ export interface InstrumentSearchParams {
    */
   include_restricted?: boolean;
 
+  page_size?: number;
+
   /**
-   * Maximum hits to return. Bounded [1, 100]. Default 20.
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
    */
-  limit?: number;
+  page_token?: string;
 }
 
 Instruments.AnalystReporting = AnalystReporting;
@@ -557,10 +555,10 @@ export declare namespace Instruments {
     type OptionsContractList as OptionsContractList,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
-    type InstrumentSearchResponse as InstrumentSearchResponse,
+    type InstrumentSearchInstrumentsResponse as InstrumentSearchInstrumentsResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
-    type InstrumentSearchParams as InstrumentSearchParams,
+    type InstrumentSearchInstrumentsParams as InstrumentSearchInstrumentsParams,
   };
 
   export {
@@ -620,7 +618,7 @@ export declare namespace Instruments {
 
   export {
     Options as Options,
-    type OptionContractsResponse as OptionContractsResponse,
-    type OptionContractsParams as OptionContractsParams,
+    type OptionGetOptionContractsResponse as OptionGetOptionContractsResponse,
+    type OptionGetOptionContractsParams as OptionGetOptionContractsParams,
   };
 }

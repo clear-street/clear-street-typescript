@@ -549,12 +549,14 @@ export interface ScreenerSearchScreenerParams {
   filters?: Array<SearchFilter> | null;
 
   /**
-   * Maximum number of results per page.
+   * The number of items to return per page (only used when page_token is not
+   * provided)
    */
   page_size?: number | null;
 
   /**
-   * Opaque token for cursor-based pagination.
+   * Token for retrieving the next page of results. Contains encoded pagination state
+   * (limit + offset). When provided, page_size is ignored.
    */
   page_token?: string | null;
 
