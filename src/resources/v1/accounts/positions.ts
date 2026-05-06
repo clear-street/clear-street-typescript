@@ -27,7 +27,7 @@ export class Positions extends APIResource {
    * ```
    */
   closePosition(
-    instrumentID: string,
+    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
     params: PositionClosePositionParams,
     options?: RequestOptions,
   ): APIPromise<PositionClosePositionResponse> {
