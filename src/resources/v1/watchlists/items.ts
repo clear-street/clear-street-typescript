@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as OrdersAPI from '../accounts/orders';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -80,7 +79,7 @@ export interface ItemAddWatchlistItemParams {
   /**
    * OEMS instrument UUID
    */
-  instrument_id: OrdersAPI.InstrumentIDOrSymbol;
+  instrument_id: string;
 }
 
 export interface ItemDeleteWatchlistItemParams {

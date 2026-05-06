@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as OmniAIAPI from './omni-ai';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -75,10 +74,7 @@ export interface DeleteEntitlementResponse {
 export interface EntitlementResource {
   agreement_id: string;
 
-  /**
-   * Stable entitlement code granted by an agreement.
-   */
-  entitlement_code: OmniAIAPI.EntitlementCode;
+  entitlement_code: string;
 
   entitlement_id: string;
 
@@ -104,7 +100,7 @@ export interface EntitlementGetEntitlementsResponse extends Shared.BaseResponse 
 export interface EntitlementCreateEntitlementsParams {
   agreement_id: string;
 
-  requested_entitlement_codes: Array<OmniAIAPI.EntitlementCode>;
+  requested_entitlement_codes: Array<string>;
 
   trading_account_ids: Array<number>;
 }

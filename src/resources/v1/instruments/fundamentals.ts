@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as OrdersAPI from '../accounts/orders';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -23,7 +22,7 @@ export class Fundamentals extends APIResource {
    * ```
    */
   getInstrumentFundamentals(
-    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
+    instrumentID: string,
     options?: RequestOptions,
   ): APIPromise<FundamentalGetInstrumentFundamentalsResponse> {
     return this._client.get(path`/v1/instruments/${instrumentID}/fundamentals`, options);

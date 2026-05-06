@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as OmniAIAPI from './omni-ai';
 import * as ScreenerAPI from '../screener';
+import * as V1API from '../v1';
 import * as OrdersAPI from '../accounts/orders';
 import * as EntitlementAgreementsAPI from './entitlement-agreements';
 import {
@@ -225,16 +226,6 @@ export interface DataChart {
 }
 
 /**
- * Stable entitlement agreement family key.
- */
-export type EntitlementAgreementKey = 'omni_account_data_access';
-
-/**
- * Stable entitlement code granted by an agreement.
- */
-export type EntitlementCode = 'omni.account_data';
-
-/**
  * Shared sanitized error payload.
  */
 export interface ErrorStatus {
@@ -368,14 +359,11 @@ export interface OpenChartAction {
  * Action to open entitlement consent flow for one or more accounts.
  */
 export interface OpenEntitlementConsentAction {
-  /**
-   * Stable entitlement agreement family key.
-   */
-  agreement_key: EntitlementAgreementKey;
+  agreement_key: string;
 
   reason: string;
 
-  requested_entitlement_codes: Array<EntitlementCode>;
+  requested_entitlement_codes: Array<string>;
 
   trading_account_ids: Array<number>;
 }
@@ -411,39 +399,81 @@ export interface OpenScreenerAction {
 }
 
 /**
+ * Order payload for prefilling an order ticket.
+ *
+ * This schema aligns with the NewOrderRequest schema used for order submission,
+ * containing the fields needed to prefill an order ticket or submit via API.
+ */
+export interface OrderPayload {
+  /**
+   * Type of security
+   */
+  instrument_type: V1API.SecurityType;
+
+  /**
+   * Order type
+   */
+  order_type: OrdersAPI.OrderType;
+
+  /**
+   * Quantity (shares for stocks, contracts for options)
+   */
+  quantity: string;
+
+  /**
+   * Order side
+   */
+  side: OrdersAPI.Side;
+
+  /**
+   * Trading symbol (e.g., "AAPL" for equities, OSI for options)
+   */
+  symbol: string;
+
+  /**
+   * Time in force
+   */
+  time_in_force: OrdersAPI.TimeInForce;
+
+  /**
+   * Limit price (required for LIMIT and STOP_LIMIT orders)
+   */
+  limit_price?: string | null;
+
+  /**
+   * Existing order identifier. Required for cancel actions.
+   */
+  order_id?: string | null;
+
+  /**
+   * Stop price (required for STOP and STOP_LIMIT orders)
+   */
+  stop_price?: string | null;
+}
+
+/**
  * Action to prefill order details for user confirmation.
  *
  * The user must review and authorize the order before submission to the trading
  * API. This action provides parsed order data that can be used to prefill an order
  * ticket UI or submitted directly via the orders API after user confirmation.
  */
-export type PrefillOrderAction = PrefillOrderAction.UnionMember0 | PrefillOrderAction.UnionMember1;
-
-export namespace PrefillOrderAction {
+export interface PrefillOrderAction {
   /**
-   * Create one or more new orders.
+   * Order operation represented by this prefill action.
    */
-  export interface UnionMember0 {
-    action_type: 'NEW';
-
-    /**
-     * Orders to prefill using the same shape accepted by the orders API.
-     */
-    orders: Array<OrdersAPI.NewOrderRequest>;
-  }
+  action_type: PrefillOrderActionType;
 
   /**
-   * Cancel one or more existing orders.
+   * The orders to prefill
    */
-  export interface UnionMember1 {
-    action_type: 'CANCEL';
-
-    /**
-     * Orders to cancel using the same identifiers required by the cancel-order API.
-     */
-    orders: Array<OrdersAPI.CancelOrderRequest>;
-  }
+  orders: Array<OrderPayload>;
 }
+
+/**
+ * Operation represented by a prefill order action.
+ */
+export type PrefillOrderActionType = 'NEW' | 'CANCEL';
 
 /**
  * Prompt-style button behavior.
@@ -641,6 +671,8 @@ export interface Thread {
 
   created_at: string;
 
+  description: string;
+
   title: string;
 
   updated_at: string;
@@ -671,8 +703,6 @@ export declare namespace OmniAI {
     type CreateMessageResponse as CreateMessageResponse,
     type CreateThreadResponse as CreateThreadResponse,
     type DataChart as DataChart,
-    type EntitlementAgreementKey as EntitlementAgreementKey,
-    type EntitlementCode as EntitlementCode,
     type ErrorStatus as ErrorStatus,
     type Message as Message,
     type MessageContent as MessageContent,
@@ -683,7 +713,9 @@ export declare namespace OmniAI {
     type OpenChartAction as OpenChartAction,
     type OpenEntitlementConsentAction as OpenEntitlementConsentAction,
     type OpenScreenerAction as OpenScreenerAction,
+    type OrderPayload as OrderPayload,
     type PrefillOrderAction as PrefillOrderAction,
+    type PrefillOrderActionType as PrefillOrderActionType,
     type PromptButtonAction as PromptButtonAction,
     type Response as Response,
     type ResponseContent as ResponseContent,
