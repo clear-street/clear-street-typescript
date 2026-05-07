@@ -6,23 +6,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">BaseResponse</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseMetadata</a></code>
 
-# Active
-
-## V1
-
-### Accounts
-
-#### Positions
-
-##### Instructions
-
-Types:
-
-- <code><a href="./src/resources/active/v1/accounts/positions/instructions.ts">PositionInstruction</a></code>
-- <code><a href="./src/resources/active/v1/accounts/positions/instructions.ts">PositionInstructionList</a></code>
-- <code><a href="./src/resources/active/v1/accounts/positions/instructions.ts">PositionInstructionStatus</a></code>
-- <code><a href="./src/resources/active/v1/accounts/positions/instructions.ts">PositionInstructionType</a></code>
-
 # V1
 
 Types:
@@ -137,6 +120,10 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/accounts/positions/instructions.ts">PositionInstruction</a></code>
+- <code><a href="./src/resources/v1/accounts/positions/instructions.ts">PositionInstructionList</a></code>
+- <code><a href="./src/resources/v1/accounts/positions/instructions.ts">PositionInstructionStatus</a></code>
+- <code><a href="./src/resources/v1/accounts/positions/instructions.ts">PositionInstructionType</a></code>
 - <code><a href="./src/resources/v1/accounts/positions/instructions.ts">InstructionCancelPositionInstructionResponse</a></code>
 - <code><a href="./src/resources/v1/accounts/positions/instructions.ts">InstructionGetPositionInstructionsResponse</a></code>
 - <code><a href="./src/resources/v1/accounts/positions/instructions.ts">InstructionSubmitPositionInstructionsResponse</a></code>

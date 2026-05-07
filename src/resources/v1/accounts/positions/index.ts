@@ -2,6 +2,10 @@
 
 export {
   Instructions,
+  type PositionInstruction,
+  type PositionInstructionList,
+  type PositionInstructionStatus,
+  type PositionInstructionType,
   type InstructionCancelPositionInstructionResponse,
   type InstructionGetPositionInstructionsResponse,
   type InstructionSubmitPositionInstructionsResponse,
