@@ -549,19 +549,14 @@ export interface InstrumentGetInstrumentsParams {
   easy_to_borrow?: boolean;
 
   /**
-   * Filter IDs to those containing this substring. For options, and when
-   * instrument_type is omitted and no instrument_ids filters are provided, this is
-   * required.
-   */
-  id_filter?: string;
-
-  /**
    * Comma-separated OEMS instrument UUIDs
    */
   instrument_ids?: Array<string>;
 
   /**
-   * Filter by instrument type. If omitted, returns all supported instrument types.
+   * Filter by instrument type. OPTION is not supported on this endpoint; use GET
+   * /instruments/options/contracts to list option contracts. If omitted, returns all
+   * supported instrument types except options.
    */
   instrument_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'OPTION' | 'CASH' | 'OTHER';
 

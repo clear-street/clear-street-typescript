@@ -362,6 +362,7 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ResponseContent</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ResponseContentPart</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ResponseStatus</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ScreenerFilter</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">StructuredAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">StructuredActionButtonAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">SuggestedActionsPayload</a></code>
@@ -449,55 +450,6 @@ Methods:
 
 - <code title="post /v1/omni-ai/threads/{thread_id}/messages">client.v1.omniAI.threads.messages.<a href="./src/resources/v1/omni-ai/threads/messages.ts">createMessage</a>(threadID, { ...params }) -> MessageCreateMessageResponse</code>
 - <code title="get /v1/omni-ai/threads/{thread_id}/messages">client.v1.omniAI.threads.messages.<a href="./src/resources/v1/omni-ai/threads/messages.ts">getMessages</a>(threadID, { ...params }) -> MessageGetMessagesResponse</code>
-
-## SavedScreeners
-
-Types:
-
-- <code><a href="./src/resources/v1/saved-screeners.ts">ScreenerEntry</a></code>
-- <code><a href="./src/resources/v1/saved-screeners.ts">ScreenerEntryList</a></code>
-- <code><a href="./src/resources/v1/saved-screeners.ts">SavedScreenerCreateScreenerResponse</a></code>
-- <code><a href="./src/resources/v1/saved-screeners.ts">SavedScreenerGetScreenerByIDResponse</a></code>
-- <code><a href="./src/resources/v1/saved-screeners.ts">SavedScreenerGetScreenersResponse</a></code>
-- <code><a href="./src/resources/v1/saved-screeners.ts">SavedScreenerReplaceScreenerResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/saved-screeners">client.v1.savedScreeners.<a href="./src/resources/v1/saved-screeners.ts">createScreener</a>({ ...params }) -> SavedScreenerCreateScreenerResponse</code>
-- <code title="delete /v1/saved-screeners/{screener_id}">client.v1.savedScreeners.<a href="./src/resources/v1/saved-screeners.ts">deleteScreener</a>(screenerID) -> void</code>
-- <code title="get /v1/saved-screeners/{screener_id}">client.v1.savedScreeners.<a href="./src/resources/v1/saved-screeners.ts">getScreenerByID</a>(screenerID) -> SavedScreenerGetScreenerByIDResponse</code>
-- <code title="get /v1/saved-screeners">client.v1.savedScreeners.<a href="./src/resources/v1/saved-screeners.ts">getScreeners</a>() -> SavedScreenerGetScreenersResponse</code>
-- <code title="put /v1/saved-screeners/{screener_id}">client.v1.savedScreeners.<a href="./src/resources/v1/saved-screeners.ts">replaceScreener</a>(screenerID, { ...params }) -> SavedScreenerReplaceScreenerResponse</code>
-
-## Screener
-
-Types:
-
-- <code><a href="./src/resources/v1/screener.ts">FieldLookback</a></code>
-- <code><a href="./src/resources/v1/screener.ts">FieldPeriod</a></code>
-- <code><a href="./src/resources/v1/screener.ts">FieldRef</a></code>
-- <code><a href="./src/resources/v1/screener.ts">FieldType</a></code>
-- <code><a href="./src/resources/v1/screener.ts">FilterOpSpec</a></code>
-- <code><a href="./src/resources/v1/screener.ts">FilterOperator</a></code>
-- <code><a href="./src/resources/v1/screener.ts">FilterValue</a></code>
-- <code><a href="./src/resources/v1/screener.ts">Modifier</a></code>
-- <code><a href="./src/resources/v1/screener.ts">ModifierOp</a></code>
-- <code><a href="./src/resources/v1/screener.ts">OperatorArg</a></code>
-- <code><a href="./src/resources/v1/screener.ts">ScreenerColumn</a></code>
-- <code><a href="./src/resources/v1/screener.ts">ScreenerFilter</a></code>
-- <code><a href="./src/resources/v1/screener.ts">ScreenerItem</a></code>
-- <code><a href="./src/resources/v1/screener.ts">ScreenerItemList</a></code>
-- <code><a href="./src/resources/v1/screener.ts">ScreenerRow</a></code>
-- <code><a href="./src/resources/v1/screener.ts">ScreenerRowList</a></code>
-- <code><a href="./src/resources/v1/screener.ts">SearchFilter</a></code>
-- <code><a href="./src/resources/v1/screener.ts">Variable</a></code>
-- <code><a href="./src/resources/v1/screener.ts">ScreenerGetScreenerResponse</a></code>
-- <code><a href="./src/resources/v1/screener.ts">ScreenerSearchScreenerResponse</a></code>
-
-Methods:
-
-- <code title="get /v1/screener">client.v1.screener.<a href="./src/resources/v1/screener.ts">getScreener</a>({ ...params }) -> ScreenerGetScreenerResponse</code>
-- <code title="post /v1/screener">client.v1.screener.<a href="./src/resources/v1/screener.ts">searchScreener</a>({ ...params }) -> ScreenerSearchScreenerResponse</code>
 
 ## Version
 
