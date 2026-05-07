@@ -52,7 +52,7 @@ import {
   PortfolioHistoryResponse,
   PortfolioHistorySegment,
 } from './portfolio-history';
-import * as PositionsAPI from './positions';
+import * as PositionsAPI from './positions/positions';
 import {
   Position,
   PositionClosePositionParams,
@@ -64,7 +64,7 @@ import {
   PositionList,
   PositionType,
   Positions,
-} from './positions';
+} from './positions/positions';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';

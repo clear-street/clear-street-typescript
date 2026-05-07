@@ -73,4 +73,4 @@ export {
   type PositionClosePositionParams,
   type PositionClosePositionsParams,
   type PositionGetPositionsParams,
-} from './positions';
+} from './positions/index';
