@@ -128,12 +128,6 @@ export interface PositionInstruction {
   instrument_id: string;
 
   /**
-   * OSI option symbol (e.g. `AAPL 280121C00195000`). Display-only; resolved from the
-   * instrument cache.
-   */
-  osi: string;
-
-  /**
    * Quantity of contracts.
    */
   quantity: string;
@@ -144,8 +138,9 @@ export interface PositionInstruction {
   status: PositionInstructionStatus;
 
   /**
-   * Trading symbol resolved from the instrument cache. Empty if the instrument
-   * cannot be resolved (e.g. expired option).
+   * Trading symbol resolved from the instrument cache (OSI for options, since
+   * exercises are options-only). Empty if the instrument cannot be resolved (e.g.
+   * expired option). Display-only.
    */
   symbol: string;
 
