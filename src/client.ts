@@ -17,6 +17,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import { Active } from './resources/active/active';
 import { SecurityType, V1 } from './resources/v1/v1';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -753,16 +754,20 @@ export class ClearStreet {
 
   static toFile = Uploads.toFile;
 
+  active: API.Active = new API.Active(this);
   /**
    * Active Websocket.
    */
   v1: API.V1 = new API.V1(this);
 }
 
+ClearStreet.Active = Active;
 ClearStreet.V1 = V1;
 
 export declare namespace ClearStreet {
   export type RequestOptions = Opts.RequestOptions;
+
+  export { Active as Active };
 
   export { V1 as V1, type SecurityType as SecurityType };
 
