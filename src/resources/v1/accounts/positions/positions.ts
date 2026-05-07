@@ -13,6 +13,10 @@ import {
   InstructionSubmitPositionInstructionsParams,
   InstructionSubmitPositionInstructionsResponse,
   Instructions,
+  PositionInstruction,
+  PositionInstructionList,
+  PositionInstructionStatus,
+  PositionInstructionType,
 } from './instructions';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -269,6 +273,10 @@ export declare namespace Positions {
 
   export {
     Instructions as Instructions,
+    type PositionInstruction as PositionInstruction,
+    type PositionInstructionList as PositionInstructionList,
+    type PositionInstructionStatus as PositionInstructionStatus,
+    type PositionInstructionType as PositionInstructionType,
     type InstructionCancelPositionInstructionResponse as InstructionCancelPositionInstructionResponse,
     type InstructionGetPositionInstructionsResponse as InstructionGetPositionInstructionsResponse,
     type InstructionSubmitPositionInstructionsResponse as InstructionSubmitPositionInstructionsResponse,
