@@ -393,6 +393,11 @@ export interface Order {
   stop_price?: string | null;
 
   /**
+   * Current trailing limit price computed by the trailing strategy
+   */
+  trailing_limit_px?: string | null;
+
+  /**
    * Trailing offset amount for trailing orders
    */
   trailing_offset?: string | null;
@@ -401,6 +406,11 @@ export interface Order {
    * Trailing offset type for trailing orders
    */
   trailing_offset_type?: TrailingOffsetType | null;
+
+  /**
+   * Current trailing stop price computed by the trailing strategy
+   */
+  trailing_stop_px?: string | null;
 
   /**
    * Trailing watermark price for trailing orders
