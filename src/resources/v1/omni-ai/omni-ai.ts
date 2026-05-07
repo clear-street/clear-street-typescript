@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as OmniAIAPI from './omni-ai';
-import * as ScreenerAPI from '../screener';
 import * as OrdersAPI from '../accounts/orders';
 import * as EntitlementAgreementsAPI from './entitlement-agreements';
 import {
@@ -387,7 +386,7 @@ export interface OpenScreenerAction {
   /**
    * Filter criteria for the screener
    */
-  filters: Array<ScreenerAPI.ScreenerFilter>;
+  filters: Array<ScreenerFilter>;
 
   /**
    * Optional field/column selection for screener results.
@@ -563,6 +562,26 @@ export namespace ResponseContentPart {
 export type ResponseStatus = 'queued' | 'running' | 'succeeded' | 'failed' | 'canceled';
 
 /**
+ * A single filter criterion for the screener.
+ */
+export interface ScreenerFilter {
+  /**
+   * Field to filter on (e.g., "market_cap", "sector", "price")
+   */
+  field: string;
+
+  /**
+   * Comparison operator (e.g., "eq", "gte", "lte", "in")
+   */
+  operator: string;
+
+  /**
+   * Filter value
+   */
+  value: unknown;
+}
+
+/**
  * Structured actions that Omni AI can return to clients.
  *
  * These actions provide machine-readable instructions for the client to execute,
@@ -703,6 +722,7 @@ export declare namespace OmniAI {
     type ResponseContent as ResponseContent,
     type ResponseContentPart as ResponseContentPart,
     type ResponseStatus as ResponseStatus,
+    type ScreenerFilter as ScreenerFilter,
     type StructuredAction as StructuredAction,
     type StructuredActionButtonAction as StructuredActionButtonAction,
     type SuggestedActionsPayload as SuggestedActionsPayload,

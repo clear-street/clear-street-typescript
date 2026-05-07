@@ -13,44 +13,6 @@ import {
   NewsItemList,
   NewsType,
 } from './news';
-import * as SavedScreenersAPI from './saved-screeners';
-import {
-  SavedScreenerCreateScreenerParams,
-  SavedScreenerCreateScreenerResponse,
-  SavedScreenerGetScreenerByIDResponse,
-  SavedScreenerGetScreenersResponse,
-  SavedScreenerReplaceScreenerParams,
-  SavedScreenerReplaceScreenerResponse,
-  SavedScreeners,
-  ScreenerEntry,
-  ScreenerEntryList,
-} from './saved-screeners';
-import * as ScreenerAPI from './screener';
-import {
-  FieldLookback,
-  FieldPeriod,
-  FieldRef,
-  FieldType,
-  FilterOpSpec,
-  FilterOperator,
-  FilterValue,
-  Modifier,
-  ModifierOp,
-  OperatorArg,
-  Screener,
-  ScreenerColumn,
-  ScreenerFilter,
-  ScreenerGetScreenerParams,
-  ScreenerGetScreenerResponse,
-  ScreenerItem,
-  ScreenerItemList,
-  ScreenerRow,
-  ScreenerRowList,
-  ScreenerSearchScreenerParams,
-  ScreenerSearchScreenerResponse,
-  SearchFilter,
-  Variable,
-} from './screener';
 import * as VersionAPI from './version';
 import { Version, VersionGetVersionResponse, VersionResource } from './version';
 import * as AccountsAPI from './accounts/accounts';
@@ -132,6 +94,7 @@ import {
   ResponseContent,
   ResponseContentPart,
   ResponseStatus,
+  ScreenerFilter,
   StructuredAction,
   StructuredActionButtonAction,
   SuggestedActionsPayload,
@@ -168,8 +131,6 @@ export class V1 extends APIResource {
   marketData: MarketDataAPI.MarketData = new MarketDataAPI.MarketData(this._client);
   news: NewsAPI.News = new NewsAPI.News(this._client);
   omniAI: OmniAIAPI.OmniAI = new OmniAIAPI.OmniAI(this._client);
-  savedScreeners: SavedScreenersAPI.SavedScreeners = new SavedScreenersAPI.SavedScreeners(this._client);
-  screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   version: VersionAPI.VersionResource = new VersionAPI.VersionResource(this._client);
   watchlists: WatchlistsAPI.Watchlists = new WatchlistsAPI.Watchlists(this._client);
 
@@ -201,8 +162,6 @@ V1.Instruments = Instruments;
 V1.MarketData = MarketData;
 V1.News = News;
 V1.OmniAI = OmniAI;
-V1.SavedScreeners = SavedScreeners;
-V1.Screener = Screener;
 V1.VersionResource = VersionResource;
 V1.Watchlists = Watchlists;
 
@@ -303,50 +262,13 @@ export declare namespace V1 {
     type ResponseContent as ResponseContent,
     type ResponseContentPart as ResponseContentPart,
     type ResponseStatus as ResponseStatus,
+    type ScreenerFilter as ScreenerFilter,
     type StructuredAction as StructuredAction,
     type StructuredActionButtonAction as StructuredActionButtonAction,
     type SuggestedActionsPayload as SuggestedActionsPayload,
     type SymbolChart as SymbolChart,
     type Thread as Thread,
     type ThreadList as ThreadList,
-  };
-
-  export {
-    SavedScreeners as SavedScreeners,
-    type ScreenerEntry as ScreenerEntry,
-    type ScreenerEntryList as ScreenerEntryList,
-    type SavedScreenerCreateScreenerResponse as SavedScreenerCreateScreenerResponse,
-    type SavedScreenerGetScreenerByIDResponse as SavedScreenerGetScreenerByIDResponse,
-    type SavedScreenerGetScreenersResponse as SavedScreenerGetScreenersResponse,
-    type SavedScreenerReplaceScreenerResponse as SavedScreenerReplaceScreenerResponse,
-    type SavedScreenerCreateScreenerParams as SavedScreenerCreateScreenerParams,
-    type SavedScreenerReplaceScreenerParams as SavedScreenerReplaceScreenerParams,
-  };
-
-  export {
-    Screener as Screener,
-    type FieldLookback as FieldLookback,
-    type FieldPeriod as FieldPeriod,
-    type FieldRef as FieldRef,
-    type FieldType as FieldType,
-    type FilterOpSpec as FilterOpSpec,
-    type FilterOperator as FilterOperator,
-    type FilterValue as FilterValue,
-    type Modifier as Modifier,
-    type ModifierOp as ModifierOp,
-    type OperatorArg as OperatorArg,
-    type ScreenerColumn as ScreenerColumn,
-    type ScreenerFilter as ScreenerFilter,
-    type ScreenerItem as ScreenerItem,
-    type ScreenerItemList as ScreenerItemList,
-    type ScreenerRow as ScreenerRow,
-    type ScreenerRowList as ScreenerRowList,
-    type SearchFilter as SearchFilter,
-    type Variable as Variable,
-    type ScreenerGetScreenerResponse as ScreenerGetScreenerResponse,
-    type ScreenerSearchScreenerResponse as ScreenerSearchScreenerResponse,
-    type ScreenerGetScreenerParams as ScreenerGetScreenerParams,
-    type ScreenerSearchScreenerParams as ScreenerSearchScreenerParams,
   };
 
   export {

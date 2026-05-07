@@ -61,6 +61,7 @@ export {
   type ResponseContent,
   type ResponseContentPart,
   type ResponseStatus,
+  type ScreenerFilter,
   type StructuredAction,
   type StructuredActionButtonAction,
   type SuggestedActionsPayload,
