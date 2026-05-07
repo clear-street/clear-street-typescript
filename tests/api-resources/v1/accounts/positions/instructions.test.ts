@@ -7,10 +7,13 @@ const client = new ClearStreet({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource instruments', () => {
+describe('resource instructions', () => {
   // Mock server tests are disabled
-  test.skip('getInstrumentByID', async () => {
-    const responsePromise = client.v1.instruments.getInstrumentByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+  test.skip('cancelPositionInstruction: only required params', async () => {
+    const responsePromise = client.v1.accounts.positions.instructions.cancelPositionInstruction(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 0 },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,54 +24,48 @@ describe('resource instruments', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getInstrumentByID: request options and params are passed correctly', async () => {
+  test.skip('cancelPositionInstruction: required and optional params', async () => {
+    const response = await client.v1.accounts.positions.instructions.cancelPositionInstruction(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 0 },
+    );
+  });
+
+  // Mock server tests are disabled
+  test.skip('getPositionInstructions', async () => {
+    const responsePromise = client.v1.accounts.positions.instructions.getPositionInstructions(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getPositionInstructions: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.v1.instruments.getInstrumentByID(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { include_options_expiry_dates: true },
+      client.v1.accounts.positions.instructions.getPositionInstructions(
+        0,
+        { instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
   // Mock server tests are disabled
-  test.skip('getInstruments', async () => {
-    const responsePromise = client.v1.instruments.getInstruments();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('getInstruments: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.v1.instruments.getInstruments(
+  test.skip('submitPositionInstructions: only required params', async () => {
+    const responsePromise = client.v1.accounts.positions.instructions.submitPositionInstructions(0, {
+      instructions: [
         {
-          easy_to_borrow: true,
-          instrument_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
-          instrument_type: 'COMMON_STOCK',
-          is_liquidation_only: true,
-          is_marginable: true,
-          is_restricted: true,
-          is_short_prohibited: true,
-          is_threshold_security: true,
-          page_size: 1,
-          page_token: 'U3RhaW5sZXNzIHJvY2tz',
+          instruction_type: 'EXERCISE',
+          instrument_id: '0195f6d0-a1b2-7c3d-8e4f-5a6b7c8d9e02',
+          quantity: '1',
         },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(ClearStreet.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('searchInstruments: only required params', async () => {
-    const responsePromise = client.v1.instruments.searchInstruments({ q: 'q' });
+      ],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -79,16 +76,16 @@ describe('resource instruments', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('searchInstruments: required and optional params', async () => {
-    const response = await client.v1.instruments.searchInstruments({
-      q: 'q',
-      asset_class: 'asset_class',
-      country: 'country',
-      currency: 'currency',
-      include_inactive: true,
-      include_restricted: true,
-      page_size: 1,
-      page_token: 'U3RhaW5sZXNzIHJvY2tz',
+  test.skip('submitPositionInstructions: required and optional params', async () => {
+    const response = await client.v1.accounts.positions.instructions.submitPositionInstructions(0, {
+      instructions: [
+        {
+          instruction_type: 'EXERCISE',
+          instrument_id: '0195f6d0-a1b2-7c3d-8e4f-5a6b7c8d9e02',
+          quantity: '1',
+          instruction_id: 'ui-20260424-001',
+        },
+      ],
     });
   });
 });
