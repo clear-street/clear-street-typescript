@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as OmniAIAPI from './omni-ai';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -50,6 +49,21 @@ export class Entitlements extends APIResource {
   }
 
   /**
+   * List current signable entitlement agreements for consent UX.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.omniAI.entitlements.getEntitlementAgreements();
+   * ```
+   */
+  getEntitlementAgreements(
+    options?: RequestOptions,
+  ): APIPromise<EntitlementGetEntitlementAgreementsResponse> {
+    return this._client.get('/v1/omni-ai/entitlement-agreements', options);
+  }
+
+  /**
    * List caller's active entitlement grants.
    *
    * @example
@@ -72,13 +86,44 @@ export interface DeleteEntitlementResponse {
   revoked: boolean;
 }
 
+/**
+ * Stable entitlement agreement family key.
+ */
+export type EntitlementAgreementKey = 'omni_account_data_access';
+
+export interface EntitlementAgreementResource {
+  agreement_id: string;
+
+  /**
+   * Stable entitlement agreement family key.
+   */
+  agreement_key: EntitlementAgreementKey;
+
+  document_content: string;
+
+  document_sha256: string;
+
+  entitlement_codes: Array<EntitlementCode>;
+
+  title: string;
+
+  version: number;
+}
+
+export type EntitlementAgreementResourceList = Array<EntitlementAgreementResource>;
+
+/**
+ * Stable entitlement code granted by an agreement.
+ */
+export type EntitlementCode = 'omni.account_data';
+
 export interface EntitlementResource {
   agreement_id: string;
 
   /**
    * Stable entitlement code granted by an agreement.
    */
-  entitlement_code: OmniAIAPI.EntitlementCode;
+  entitlement_code: EntitlementCode;
 
   entitlement_id: string;
 
@@ -97,6 +142,10 @@ export interface EntitlementDeleteEntitlementResponse extends Shared.BaseRespons
   data: DeleteEntitlementResponse;
 }
 
+export interface EntitlementGetEntitlementAgreementsResponse extends Shared.BaseResponse {
+  data: EntitlementAgreementResourceList;
+}
+
 export interface EntitlementGetEntitlementsResponse extends Shared.BaseResponse {
   data: EntitlementResourceList;
 }
@@ -104,7 +153,7 @@ export interface EntitlementGetEntitlementsResponse extends Shared.BaseResponse 
 export interface EntitlementCreateEntitlementsParams {
   agreement_id: string;
 
-  requested_entitlement_codes: Array<OmniAIAPI.EntitlementCode>;
+  requested_entitlement_codes: Array<EntitlementCode>;
 
   trading_account_ids: Array<number>;
 }
@@ -116,10 +165,15 @@ export interface EntitlementGetEntitlementsParams {
 export declare namespace Entitlements {
   export {
     type DeleteEntitlementResponse as DeleteEntitlementResponse,
+    type EntitlementAgreementKey as EntitlementAgreementKey,
+    type EntitlementAgreementResource as EntitlementAgreementResource,
+    type EntitlementAgreementResourceList as EntitlementAgreementResourceList,
+    type EntitlementCode as EntitlementCode,
     type EntitlementResource as EntitlementResource,
     type EntitlementResourceList as EntitlementResourceList,
     type EntitlementCreateEntitlementsResponse as EntitlementCreateEntitlementsResponse,
     type EntitlementDeleteEntitlementResponse as EntitlementDeleteEntitlementResponse,
+    type EntitlementGetEntitlementAgreementsResponse as EntitlementGetEntitlementAgreementsResponse,
     type EntitlementGetEntitlementsResponse as EntitlementGetEntitlementsResponse,
     type EntitlementCreateEntitlementsParams as EntitlementCreateEntitlementsParams,
     type EntitlementGetEntitlementsParams as EntitlementGetEntitlementsParams,

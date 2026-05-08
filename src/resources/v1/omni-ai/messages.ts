@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as OmniAIAPI from './omni-ai';
+import * as ThreadsAPI from './threads';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -60,15 +60,21 @@ export class Messages extends APIResource {
   }
 }
 
+export interface CreateFeedbackResponse {
+  created_at: string;
+
+  feedback_id?: string | null;
+}
+
 export interface MessageGetMessageByIDResponse extends Shared.BaseResponse {
   /**
    * Final immutable message.
    */
-  data: OmniAIAPI.Message;
+  data: ThreadsAPI.Message;
 }
 
 export interface MessageSubmitFeedbackResponse extends Shared.BaseResponse {
-  data: OmniAIAPI.CreateFeedbackResponse;
+  data: CreateFeedbackResponse;
 }
 
 export interface MessageGetMessageByIDParams {
@@ -102,6 +108,7 @@ export interface MessageSubmitFeedbackParams {
 
 export declare namespace Messages {
   export {
+    type CreateFeedbackResponse as CreateFeedbackResponse,
     type MessageGetMessageByIDResponse as MessageGetMessageByIDResponse,
     type MessageSubmitFeedbackResponse as MessageSubmitFeedbackResponse,
     type MessageGetMessageByIDParams as MessageGetMessageByIDParams,
