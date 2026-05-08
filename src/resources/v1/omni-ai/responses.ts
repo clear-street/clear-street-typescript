@@ -69,15 +69,125 @@ export class Responses extends APIResource {
   }
 }
 
+export interface CancelResponsePayload {
+  canceled: boolean;
+}
+
+/**
+ * Shared sanitized error payload.
+ */
+export interface ErrorStatus {
+  code: string;
+
+  message: string;
+
+  details?: unknown | null;
+}
+
+/**
+ * Dynamic pollable response.
+ */
+export interface Response {
+  id: string;
+
+  /**
+   * Dynamic lifecycle status for a pollable response.
+   */
+  status: ResponseStatus;
+
+  thread_id: string;
+
+  user_message_id: string;
+
+  /**
+   * Dynamic response content container. May include thinking parts.
+   */
+  content?: ResponseContent | null;
+
+  /**
+   * Shared sanitized error payload.
+   */
+  error?: ErrorStatus | null;
+
+  output_message_id?: string | null;
+}
+
+/**
+ * Dynamic response content container. May include thinking parts.
+ */
+export interface ResponseContent {
+  parts: Array<ResponseContentPart>;
+}
+
+/**
+ * Dynamic content part visible on a pollable response.
+ */
+export type ResponseContentPart =
+  | ResponseContentPart.UnionMember0
+  | ResponseContentPart.UnionMember1
+  | ResponseContentPart.UnionMember2
+  | ResponseContentPart.UnionMember3
+  | ResponseContentPart.UnionMember4
+  | ResponseContentPart.UnionMember5;
+
+export namespace ResponseContentPart {
+  /**
+   * Text content part.
+   */
+  export interface UnionMember0 extends OmniAIAPI.ContentPartTextPayload {
+    type: 'text';
+  }
+
+  /**
+   * Thinking content part shown on dynamic response polling.
+   */
+  export interface UnionMember1 extends OmniAIAPI.ContentPartThinkingPayload {
+    type: 'thinking';
+  }
+
+  /**
+   * Structured action content part.
+   */
+  export interface UnionMember2 extends OmniAIAPI.ContentPartStructuredActionPayload {
+    type: 'structured_action';
+  }
+
+  /**
+   * Chart payload content part.
+   */
+  export interface UnionMember3 extends OmniAIAPI.ContentPartChartPayload {
+    type: 'chart';
+  }
+
+  /**
+   * Suggested actions payload content part.
+   */
+  export interface UnionMember4 extends OmniAIAPI.ContentPartSuggestedActionsPayload {
+    type: 'suggested_actions';
+  }
+
+  /**
+   * Escape-hatch custom payload content part.
+   */
+  export interface UnionMember5 extends OmniAIAPI.ContentPartCustomPayload {
+    type: 'custom';
+  }
+}
+
+/**
+ * Dynamic lifecycle status for a pollable response.
+ */
+export type ResponseStatus = 'queued' | 'running' | 'succeeded' | 'failed' | 'canceled';
+
 export interface ResponseCancelResponseResponse extends Shared.BaseResponse {
-  data: OmniAIAPI.CancelResponsePayload;
+  data: CancelResponsePayload;
 }
 
 export interface ResponseGetResponseByIDResponse extends Shared.BaseResponse {
   /**
    * Dynamic pollable response.
    */
-  data: OmniAIAPI.Response;
+  data: Response;
 }
 
 export interface ResponseCancelResponseParams {
@@ -96,6 +206,12 @@ export interface ResponseGetResponseByIDParams {
 
 export declare namespace Responses {
   export {
+    type CancelResponsePayload as CancelResponsePayload,
+    type ErrorStatus as ErrorStatus,
+    type Response as Response,
+    type ResponseContent as ResponseContent,
+    type ResponseContentPart as ResponseContentPart,
+    type ResponseStatus as ResponseStatus,
     type ResponseCancelResponseResponse as ResponseCancelResponseResponse,
     type ResponseGetResponseByIDResponse as ResponseGetResponseByIDResponse,
     type ResponseCancelResponseParams as ResponseCancelResponseParams,
