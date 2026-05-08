@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.61.0 (2026-05-08)
+
+Full Changelog: [v0.60.0...v0.61.0](https://github.com/clear-street/clear-street-typescript/compare/v0.60.0...v0.61.0)
+
+### Features
+
+* **api:** api update ([90c1ada](https://github.com/clear-street/clear-street-typescript/commit/90c1ada041537d63cb397dc1070a8ad338e09df9))
+
+
+### Chores
+
+* redact api-key headers in debug logs ([e7dbb8f](https://github.com/clear-street/clear-street-typescript/commit/e7dbb8ff768d5d2c626cfdec663bf238a84f0a52))
+
 ## 0.60.0 (2026-05-07)
 
 Full Changelog: [v0.59.0...v0.60.0](https://github.com/clear-street/clear-street-typescript/compare/v0.59.0...v0.60.0)
