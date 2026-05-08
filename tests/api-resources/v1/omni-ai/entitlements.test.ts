@@ -46,6 +46,18 @@ describe('resource entitlements', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('getEntitlementAgreements', async () => {
+    const responsePromise = client.v1.omniAI.entitlements.getEntitlementAgreements();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
   test.skip('getEntitlements', async () => {
     const responsePromise = client.v1.omniAI.entitlements.getEntitlements();
     const rawResponse = await responsePromise.asResponse();

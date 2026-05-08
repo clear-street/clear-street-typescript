@@ -753,9 +753,6 @@ export class ClearStreet {
 
   static toFile = Uploads.toFile;
 
-  /**
-   * Active Websocket.
-   */
   v1: API.V1 = new API.V1(this);
 }
 
