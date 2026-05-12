@@ -1421,11 +1421,15 @@ export interface InstrumentDataGetInstrumentBalanceSheetStatementsParams {
    */
   from_date?: string;
 
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
   page_size?: number;
 
   /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
    */
   page_token?: string;
 
@@ -1441,11 +1445,15 @@ export interface InstrumentDataGetInstrumentCashFlowStatementsParams {
    */
   from_date?: string;
 
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
   page_size?: number;
 
   /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
    */
   page_token?: string;
 
@@ -1473,11 +1481,15 @@ export interface InstrumentDataGetInstrumentIncomeStatementsParams {
    */
   from_date?: string;
 
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
   page_size?: number;
 
   /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
    */
   page_token?: string;
 
