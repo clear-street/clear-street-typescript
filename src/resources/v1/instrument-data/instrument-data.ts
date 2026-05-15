@@ -936,6 +936,11 @@ export interface InstrumentEventEnvelope {
   name?: string | null;
 
   /**
+   * The currency used for reporting financial data.
+   */
+  reporting_currency?: string | null;
+
+  /**
    * Stock split payload when type is STOCK_SPLIT.
    */
   stock_split_event_data?: InstrumentSplitEvent | null;
@@ -1019,6 +1024,11 @@ export interface InstrumentEventsData {
    * Stock split events
    */
   splits: Array<InstrumentSplitEvent>;
+
+  /**
+   * The currency used for reporting financial data
+   */
+  reporting_currency?: string | null;
 }
 
 /**
@@ -1090,6 +1100,11 @@ export interface InstrumentFundamentals {
    * The price-to-earnings (P/E) ratio for the trailing twelve months (TTM)
    */
   price_to_earnings?: string | null;
+
+  /**
+   * The currency used for reporting financial data
+   */
+  reporting_currency?: string | null;
 
   /**
    * The business sector of the instrument's issuer
