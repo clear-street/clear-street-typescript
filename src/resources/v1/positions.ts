@@ -134,9 +134,6 @@ export class Positions extends APIResource {
    *   validation failures such as DNE/CEA on a non-expiry day, `503` if the clearing
    *   service is unavailable. No `data` is returned.
    *
-   * Pre-flight validation (unknown `instrument_id`, unencodable `quantity`)
-   * short-circuits the whole batch with a `4xx` before any row is submitted.
-   *
    * @example
    * ```ts
    * const response =
@@ -337,6 +334,22 @@ export type PositionInstructionList = Array<PositionInstruction>;
 
 /**
  * Lifecycle status of a position instruction.
+ *
+ * - `SENT`: accepted and forwarded to the clearing venue.
+ * - `ACCEPTED`: terminal — accepted by the clearing venue.
+ * - `REJECTED`: terminal rejection from the clearing venue; `rejection_reason`
+ *   carries the venue-reported detail.
+ * - `ENGINE_REJECTED`: terminal rejection raised before the instruction reached
+ *   the clearing venue; `rejection_reason` carries the detail. Typical causes:
+ *   duplicate `instruction_id`, `DO_NOT_EXERCISE` / `CONTRARY_EXERCISE` submitted
+ *   on a non-expiry day, insufficient position, or an instrument that does not
+ *   resolve.
+ * - `CANCEL_REQUESTED`: cancel accepted; final cancel state pending.
+ * - `CANCELLED`: terminal — cancel completed.
+ * - `CANCEL_FAILED`: cancel could not be completed; operator attention required.
+ *   `rejection_reason` carries the detail.
+ * - `UNKNOWN`: status could not be mapped from the upstream service. Not expected
+ *   in practice; surfaces a service version skew.
  */
 export type PositionInstructionStatus =
   | 'SENT'
