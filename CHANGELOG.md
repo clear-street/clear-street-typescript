@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.63.0 (2026-05-19)
+
+Full Changelog: [v0.62.0...v0.63.0](https://github.com/clear-street/clear-street-typescript/compare/v0.62.0...v0.63.0)
+
+### Features
+
+* **api:** api update ([4b7a087](https://github.com/clear-street/clear-street-typescript/commit/4b7a0873df3afbc47311a4ec45b3387b4f79883a))
+* **api:** api update ([0323def](https://github.com/clear-street/clear-street-typescript/commit/0323def5ba990b4bbc2f0522ebb6895c610d388f))
+* **api:** api update ([20b9ef3](https://github.com/clear-street/clear-street-typescript/commit/20b9ef3c8aa9a1cc737d6f6de32803b0b69cd645))
+* **api:** api update ([288c1de](https://github.com/clear-street/clear-street-typescript/commit/288c1decbbf1dcdbdf0b9e73408c3536245e95e5))
+* **api:** api update ([3ee5baf](https://github.com/clear-street/clear-street-typescript/commit/3ee5bafb07a2ce36bdc4fbf3a2839d5ef2ce8f55))
+* **api:** api update ([c6125fb](https://github.com/clear-street/clear-street-typescript/commit/c6125fb06e964e094903a7dbc07b9b834406e542))
+
+
+### Bug Fixes
+
+* **typescript:** upgrade tsc-multi so that it works with Node 26 ([1b75e3b](https://github.com/clear-street/clear-street-typescript/commit/1b75e3bb7dd887042fa046fdbe027b54f35b31fa))
+
+
+### Chores
+
+* **tests:** remove redundant File import ([09c0457](https://github.com/clear-street/clear-street-typescript/commit/09c0457a574bee3f3e06bfb025174b480c85bdc2))
+
 ## 0.62.0 (2026-05-08)
 
 Full Changelog: [v0.61.0...v0.62.0](https://github.com/clear-street/clear-street-typescript/compare/v0.61.0...v0.62.0)
