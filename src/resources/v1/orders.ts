@@ -120,19 +120,16 @@ export class Orders extends APIResource {
    *     {
    *       legs: [
    *         {
-   *           instrument_type: 'OPTION',
    *           ratio: 'ratio',
    *           security: '0193bb84-447a-706f-996f-097254663f02',
    *           side: 'BUY',
    *         },
    *         {
-   *           instrument_type: 'OPTION',
    *           ratio: 'ratio',
    *           security: '0193bb84-4db4-78ec-b4fd-cba8be61cf8a',
    *           side: 'SELL',
    *         },
    *         {
-   *           instrument_type: 'OPTION',
    *           ratio: 'ratio',
    *           security: '0193bb84-5264-7f20-8fd3-35df82cd6ef0',
    *           side: 'BUY',
@@ -182,11 +179,6 @@ export type InstrumentIDOrSymbol = string;
  * Request to submit a new order (PlaceOrderRequest from spec)
  */
 export interface NewOrderRequest {
-  /**
-   * Type of security
-   */
-  instrument_type: V1API.SecurityType;
-
   /**
    * Type of order
    */
@@ -242,8 +234,7 @@ export interface NewOrderRequest {
   limit_price?: string | null;
 
   /**
-   * Required when instrument_type is OPTION. Specifies whether the order opens or
-   * closes a position.
+   * Required for options. Specifies whether the order opens or closes a position.
    */
   position_effect?: PositionEffect;
 
@@ -759,11 +750,6 @@ export namespace OrderSubmitOrdersParams {
      * A single leg in a multileg strategy request.
      */
     export interface Leg {
-      /**
-       * Security type for the leg.
-       */
-      instrument_type: V1API.SecurityType;
-
       /**
        * Ratio for the leg.
        */
