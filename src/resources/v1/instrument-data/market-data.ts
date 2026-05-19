@@ -157,6 +157,11 @@ export interface SnapshotLastTrade {
    * Most recent last-sale eligible trade price.
    */
   price: string;
+
+  /**
+   * Share quantity of the most recent last-sale eligible trade.
+   */
+  size: number;
 }
 
 /**
