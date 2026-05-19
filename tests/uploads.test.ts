@@ -1,7 +1,6 @@
 import fs from 'fs';
 import type { ResponseLike } from '@clear-street-internal/sdk/internal/to-file';
 import { toFile } from '@clear-street-internal/sdk/core/uploads';
-import { File } from 'node:buffer';
 
 class MyClass {
   name: string = 'foo';
