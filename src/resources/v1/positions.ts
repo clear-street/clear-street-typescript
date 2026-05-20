@@ -14,10 +14,10 @@ import { path } from '../../internal/utils/path';
  */
 export class Positions extends APIResource {
   /**
-   * Cancel an outstanding exercise / DNE / CEA instruction by its server- assigned
-   * `id`. Returns the updated instruction with status `CANCEL_REQUESTED`; the
-   * terminal `CANCELLED` / `CANCEL_FAILED` state arrives asynchronously via
-   * subsequent GETs.
+   * Cancel an outstanding position instruction by its server-assigned `id`. Returns
+   * the updated instruction with status `CANCEL_REQUESTED`. The terminal `CANCELLED`
+   * or `CANCEL_FAILED` state arrives asynchronously and is observable via subsequent
+   * GETs.
    *
    * @example
    * ```ts
@@ -86,8 +86,8 @@ export class Positions extends APIResource {
   }
 
   /**
-   * Returns the current lifecycle state of exercise / DNE / CEA instructions for the
-   * account. Optionally filter by a specific instrument.
+   * Returns the current lifecycle state of the account's position instructions.
+   * Optionally filter by a specific contract.
    *
    * @example
    * ```ts
@@ -120,9 +120,19 @@ export class Positions extends APIResource {
   }
 
   /**
-   * Submit one or more option lifecycle instructions against the account. Each row
-   * is routed to `oems-csc` independently; per-row rejections are surfaced on the
-   * corresponding response entry without failing the batch.
+   * Submit one or more position instructions (Exercise, Do-Not-Exercise, Contrary
+   * Exercise Advice) against the account.
+   *
+   * Batch semantics:
+   *
+   * - **All rows accepted** → `200 OK`. Every row is in `data` with `status = SENT`.
+   * - **Partial success** → `207 Multi-Status`. `data` contains every row; rejected
+   *   rows carry `status = ENGINE_REJECTED` (or `REJECTED`) and `rejection_reason`.
+   *   The top-level `error` summarizes the batch failure.
+   * - **All rows rejected** → `4xx`/`5xx` error response. The HTTP status reflects
+   *   the underlying cause: `409` for duplicate `instruction_id`, `400` for
+   *   validation failures such as DNE/CEA on a non-expiry day, `503` if the clearing
+   *   service is unavailable. No `data` is returned.
    *
    * @example
    * ```ts
@@ -251,13 +261,11 @@ export interface Position {
 }
 
 /**
- * The API representation of a single CSC instruction, combining the caller's
- * request with the `oems-csc` lifecycle state.
+ * A position instruction and its current lifecycle state.
  */
 export interface PositionInstruction {
   /**
-   * Stable server-assigned id for the instruction (the engine instruction UUID).
-   * Used as the `{instruction_id}` path parameter on DELETE.
+   * Server-assigned id. Used as the path parameter on cancel.
    */
   id: string;
 
@@ -267,23 +275,23 @@ export interface PositionInstruction {
   account_id: number;
 
   /**
-   * Caller-supplied instruction id (echoed from the submit request, or the
-   * server-generated fallback when the caller omitted one).
+   * Caller-supplied idempotency key echoed from the submit request; the
+   * server-assigned fallback when none was supplied.
    */
   instruction_id: string;
 
   /**
-   * The instruction type as understood by this API.
+   * The action this instruction requests.
    */
   instruction_type: PositionInstructionType;
 
   /**
-   * OEMS instrument identifier the instruction is for.
+   * Identifier of the options contract this instruction acts on.
    */
   instrument_id: string;
 
   /**
-   * Quantity of contracts.
+   * Number of contracts included in the instruction.
    */
   quantity: string;
 
@@ -293,34 +301,31 @@ export interface PositionInstruction {
   status: PositionInstructionStatus;
 
   /**
-   * Trading symbol resolved from the instrument cache (OSI for options, since
-   * exercises are options-only). Empty if the instrument cannot be resolved (e.g.
-   * expired option). Display-only.
+   * Options symbol (OSI) for display.
    */
   symbol: string;
 
   /**
-   * Quantity accepted by OCC. Populated after `ACCEPTED`.
+   * Number of contracts accepted by the clearing venue. Populated once the
+   * instruction reaches `ACCEPTED`.
    */
   accepted_quantity?: string | null;
 
   /**
-   * Row creation timestamp surfaced from `oems-csc`.
+   * When the instruction was first accepted by the service.
    */
   created_at?: string | null;
 
   /**
-   * Inline error detail when a batch entry was rejected (omitted on success).
-   */
-  error?: string | null;
-
-  /**
-   * Reason text populated on terminal reject / cancel-failed statuses.
+   * Human-readable explanation populated on any non-success terminal status —
+   * `REJECTED`, `ENGINE_REJECTED`, or `CANCEL_FAILED`. On a `207 Multi-Status` batch
+   * submit the top-level `error` field summarizes the batch; per-row detail
+   * continues to live here.
    */
   rejection_reason?: string | null;
 
   /**
-   * Last update timestamp surfaced from `oems-csc`.
+   * When the instruction's lifecycle state last changed.
    */
   updated_at?: string | null;
 }
@@ -328,11 +333,23 @@ export interface PositionInstruction {
 export type PositionInstructionList = Array<PositionInstruction>;
 
 /**
- * Public Active API lifecycle status for a position instruction.
+ * Lifecycle status of a position instruction.
  *
- * Maps 1:1 to the `oems-csc` wire enum while keeping the REST schema stable:
- * api-gw owns serialization, OpenAPI generation, and the `Unknown` fallback for
- * missing or unrecognized gRPC values.
+ * - `SENT`: accepted and forwarded to the clearing venue.
+ * - `ACCEPTED`: terminal — accepted by the clearing venue.
+ * - `REJECTED`: terminal rejection from the clearing venue; `rejection_reason`
+ *   carries the venue-reported detail.
+ * - `ENGINE_REJECTED`: terminal rejection raised before the instruction reached
+ *   the clearing venue; `rejection_reason` carries the detail. Typical causes:
+ *   duplicate `instruction_id`, `DO_NOT_EXERCISE` / `CONTRARY_EXERCISE` submitted
+ *   on a non-expiry day, insufficient position, or an instrument that does not
+ *   resolve.
+ * - `CANCEL_REQUESTED`: cancel accepted; final cancel state pending.
+ * - `CANCELLED`: terminal — cancel completed.
+ * - `CANCEL_FAILED`: cancel could not be completed; operator attention required.
+ *   `rejection_reason` carries the detail.
+ * - `UNKNOWN`: status could not be mapped from the upstream service. Not expected
+ *   in practice; surfaces a service version skew.
  */
 export type PositionInstructionStatus =
   | 'SENT'
@@ -345,11 +362,7 @@ export type PositionInstructionStatus =
   | 'UNKNOWN';
 
 /**
- * The instruction type a caller wants `oems-csc` to take against an options
- * position.
- *
- * Maps onto FIX `PosTransType` (tag 709) + `PosMaintAction` (tag 712) +
- * `ContraryInstructionIndicator` (tag 719) per `oems-csc`'s `classify_action`.
+ * The action to take against an options position.
  */
 export type PositionInstructionType = 'EXERCISE' | 'DO_NOT_EXERCISE' | 'CONTRARY_EXERCISE';
 
@@ -362,8 +375,7 @@ export type PositionType = 'LONG' | 'SHORT' | 'LONG_CALL' | 'SHORT_CALL' | 'LONG
 
 export interface PositionCancelPositionInstructionResponse extends Shared.BaseResponse {
   /**
-   * The API representation of a single CSC instruction, combining the caller's
-   * request with the `oems-csc` lifecycle state.
+   * A position instruction and its current lifecycle state.
    */
   data: PositionInstruction;
 }
@@ -402,18 +414,23 @@ export interface PositionClosePositionParams {
   account_id: number;
 
   /**
-   * Body param
+   * Body param: Whether to cancel existing open orders for the position before
+   * submitting closing orders.
    */
   cancel_orders?: boolean | null;
 }
 
 export interface PositionClosePositionsParams {
+  /**
+   * Whether to cancel existing open orders for the position before submitting
+   * closing orders.
+   */
   cancel_orders?: boolean | null;
 }
 
 export interface PositionGetPositionInstructionsParams {
   /**
-   * Filter by OEMS instrument id or symbol (CMS / OSI).
+   * Limit results to a single contract. Accepts the instrument id or the OSI symbol.
    */
   instrument_id?: OrdersAPI.InstrumentIDOrSymbol;
 }
@@ -424,11 +441,15 @@ export interface PositionGetPositionsParams {
    */
   instrument_ids?: Array<string>;
 
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
   page_size?: number;
 
   /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
    */
   page_token?: string;
 
@@ -456,32 +477,30 @@ export interface PositionSubmitPositionInstructionsParams {
 
 export namespace PositionSubmitPositionInstructionsParams {
   /**
-   * One exercise / DNE / CEA instruction requested by a client.
+   * A position instruction to submit.
    *
-   * Cancel is not an instruction type — use
-   * `DELETE /accounts/{account_id}/positions/instructions/{instruction_id}`.
+   * Use `DELETE /accounts/{account_id}/positions/instructions/{instruction_id}` to
+   * cancel an outstanding instruction.
    */
   export interface Instruction {
     /**
-     * Instruction type.
+     * The action to take.
      */
     instruction_type: PositionsAPI.PositionInstructionType;
 
     /**
-     * OEMS instrument identifier. api-gw resolves this to `security_id` +
-     * `security_id_source` via the instrument cache before dispatching to `oems-csc`.
-     * Unknown ids return 404.
+     * Identifier of the options contract to act on. Unknown ids return 404.
      */
     instrument_id: string;
 
     /**
-     * Quantity of contracts to exercise / DNE / CEA.
+     * Number of contracts to include in the instruction.
      */
     quantity: string;
 
     /**
-     * Caller-supplied instruction id. Echoed back on the response and used as the FIX
-     * `pos_req_id` (tag 710) for idempotency. If omitted the server generates a UUID.
+     * Caller-supplied idempotency key. Echoed on the response. The server generates a
+     * unique id when omitted.
      */
     instruction_id?: string | null;
   }

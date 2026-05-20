@@ -936,6 +936,11 @@ export interface InstrumentEventEnvelope {
   name?: string | null;
 
   /**
+   * The currency used for reporting financial data.
+   */
+  reporting_currency?: string | null;
+
+  /**
    * Stock split payload when type is STOCK_SPLIT.
    */
   stock_split_event_data?: InstrumentSplitEvent | null;
@@ -1019,6 +1024,11 @@ export interface InstrumentEventsData {
    * Stock split events
    */
   splits: Array<InstrumentSplitEvent>;
+
+  /**
+   * The currency used for reporting financial data
+   */
+  reporting_currency?: string | null;
 }
 
 /**
@@ -1090,6 +1100,11 @@ export interface InstrumentFundamentals {
    * The price-to-earnings (P/E) ratio for the trailing twelve months (TTM)
    */
   price_to_earnings?: string | null;
+
+  /**
+   * The currency used for reporting financial data
+   */
+  reporting_currency?: string | null;
 
   /**
    * The business sector of the instrument's issuer
@@ -1421,11 +1436,15 @@ export interface InstrumentDataGetInstrumentBalanceSheetStatementsParams {
    */
   from_date?: string;
 
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
   page_size?: number;
 
   /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
    */
   page_token?: string;
 
@@ -1441,11 +1460,15 @@ export interface InstrumentDataGetInstrumentCashFlowStatementsParams {
    */
   from_date?: string;
 
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
   page_size?: number;
 
   /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
    */
   page_token?: string;
 
@@ -1473,11 +1496,15 @@ export interface InstrumentDataGetInstrumentIncomeStatementsParams {
    */
   from_date?: string;
 
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
   page_size?: number;
 
   /**
-   * Token for retrieving the next page of results. Contains encoded pagination state
-   * (limit + offset). When provided, page_size is ignored.
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
    */
   page_token?: string;
 
