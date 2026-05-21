@@ -127,11 +127,6 @@ export interface Instrument {
   easy_to_borrow: boolean;
 
   /**
-   * Indicates if the instrument supports fractional-quantity orders
-   */
-  is_fractionable: boolean;
-
-  /**
    * Indicates if the instrument is liquidation only and cannot be bought
    */
   is_liquidation_only: boolean;
@@ -245,11 +240,6 @@ export interface InstrumentCore {
    * Indicates if the instrument is classified as Easy-To-Borrow
    */
   easy_to_borrow: boolean;
-
-  /**
-   * Indicates if the instrument supports fractional-quantity orders
-   */
-  is_fractionable: boolean;
 
   /**
    * Indicates if the instrument is liquidation only and cannot be bought

@@ -203,7 +203,6 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">StructuredAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">StructuredActionButtonAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">SuggestedActionsPayload</a></code>
-- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">SymbolChart</a></code>
 
 ### Entitlements
 
