@@ -11,9 +11,9 @@ describe('resource entitlements', () => {
   // Mock server tests are disabled
   test.skip('createEntitlements: only required params', async () => {
     const responsePromise = client.v1.omniAI.entitlements.createEntitlements({
+      account_ids: [100019, 100021],
       agreement_id: '01JZ0000000000000000000000',
-      requested_entitlement_codes: ['omni.account_data'],
-      trading_account_ids: [100019, 100021],
+      entitlement_codes: ['omni.account_data'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,9 +27,9 @@ describe('resource entitlements', () => {
   // Mock server tests are disabled
   test.skip('createEntitlements: required and optional params', async () => {
     const response = await client.v1.omniAI.entitlements.createEntitlements({
+      account_ids: [100019, 100021],
       agreement_id: '01JZ0000000000000000000000',
-      requested_entitlement_codes: ['omni.account_data'],
-      trading_account_ids: [100019, 100021],
+      entitlement_codes: ['omni.account_data'],
     });
   });
 

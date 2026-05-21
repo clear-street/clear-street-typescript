@@ -204,7 +204,6 @@ import {
   StructuredAction,
   StructuredActionButtonAction,
   SuggestedActionsPayload,
-  SymbolChart,
 } from './omni-ai/omni-ai';
 
 export class V1 extends APIResource {
@@ -371,7 +370,6 @@ export declare namespace V1 {
     type StructuredAction as StructuredAction,
     type StructuredActionButtonAction as StructuredActionButtonAction,
     type SuggestedActionsPayload as SuggestedActionsPayload,
-    type SymbolChart as SymbolChart,
   };
 
   export {

@@ -7,7 +7,7 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 /**
- * Thread-centric AI assistant for conversational trading. Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+ * Thread-centric AI assistant for conversational trading. Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use account_ids.
  */
 export class Entitlements extends APIResource {
   /**
@@ -17,9 +17,9 @@ export class Entitlements extends APIResource {
    * ```ts
    * const response =
    *   await client.v1.omniAI.entitlements.createEntitlements({
+   *     account_ids: [100019, 100021],
    *     agreement_id: '01JZ0000000000000000000000',
-   *     requested_entitlement_codes: ['omni.account_data'],
-   *     trading_account_ids: [100019, 100021],
+   *     entitlement_codes: ['omni.account_data'],
    *   });
    * ```
    */
@@ -151,11 +151,11 @@ export interface EntitlementGetEntitlementsResponse extends Shared.BaseResponse 
 }
 
 export interface EntitlementCreateEntitlementsParams {
+  account_ids: Array<number>;
+
   agreement_id: string;
 
-  requested_entitlement_codes: Array<EntitlementCode>;
-
-  trading_account_ids: Array<number>;
+  entitlement_codes: Array<EntitlementCode>;
 }
 
 export interface EntitlementGetEntitlementsParams {
