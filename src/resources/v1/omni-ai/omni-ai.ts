@@ -120,11 +120,6 @@ export interface ChartPayload {
    * Explicit series-driven chart definition.
    */
   dataChart?: DataChart | null;
-
-  /**
-   * Symbol-driven chart definition.
-   */
-  symbolChart?: SymbolChart | null;
 }
 
 /**
@@ -232,16 +227,16 @@ export interface OpenChartAction {
  * Action to open entitlement consent flow for one or more accounts.
  */
 export interface OpenEntitlementConsentAction {
+  account_ids: Array<number>;
+
   /**
    * Stable entitlement agreement family key.
    */
   agreement_key: EntitlementsAPI.EntitlementAgreementKey;
 
+  entitlement_codes: Array<EntitlementsAPI.EntitlementCode>;
+
   reason: string;
-
-  requested_entitlement_codes: Array<EntitlementsAPI.EntitlementCode>;
-
-  trading_account_ids: Array<number>;
 }
 
 /**
@@ -425,15 +420,6 @@ export interface SuggestedActionsPayload {
   actionButtons?: Array<ActionButton>;
 }
 
-/**
- * Chart for a single symbol and timeframe.
- */
-export interface SymbolChart {
-  symbol: string;
-
-  timeframe?: string | null;
-}
-
 OmniAI.Entitlements = Entitlements;
 OmniAI.Messages = Messages;
 OmniAI.Responses = Responses;
@@ -463,7 +449,6 @@ export declare namespace OmniAI {
     type StructuredAction as StructuredAction,
     type StructuredActionButtonAction as StructuredActionButtonAction,
     type SuggestedActionsPayload as SuggestedActionsPayload,
-    type SymbolChart as SymbolChart,
   };
 
   export {

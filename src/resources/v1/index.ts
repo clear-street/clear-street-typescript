@@ -123,7 +123,6 @@ export {
   type StructuredAction,
   type StructuredActionButtonAction,
   type SuggestedActionsPayload,
-  type SymbolChart,
 } from './omni-ai/index';
 export {
   Orders,

@@ -46,7 +46,7 @@ export interface ResponseMetadata {
   request_id: string;
 
   /**
-   * Base64URL-encoded pagination token containing limit and offset
+   * Base64URL-encoded pagination token
    */
   next_page_token?: string | null;
 
@@ -56,7 +56,7 @@ export interface ResponseMetadata {
   page_number?: number | null;
 
   /**
-   * Base64URL-encoded pagination token containing limit and offset
+   * Base64URL-encoded pagination token
    */
   previous_page_token?: string | null;
 
