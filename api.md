@@ -77,6 +77,13 @@ Methods:
 - <code title="get /v1/clock">client.v1.calendar.<a href="./src/resources/v1/calendar.ts">getClock</a>() -> CalendarGetClockResponse</code>
 - <code title="get /v1/calendars/market-hours">client.v1.calendar.<a href="./src/resources/v1/calendar.ts">getMarketHoursCalendar</a>({ ...params }) -> CalendarGetMarketHoursCalendarResponse</code>
 
+## Executions
+
+Types:
+
+- <code><a href="./src/resources/v1/executions.ts">Execution</a></code>
+- <code><a href="./src/resources/v1/executions.ts">ExecutionList</a></code>
+
 ## InstrumentData
 
 Types:
@@ -308,6 +315,7 @@ Types:
 - <code><a href="./src/resources/v1/orders.ts">TrailingOffsetType</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderCancelAllOpenOrdersResponse</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderCancelOpenOrderResponse</a></code>
+- <code><a href="./src/resources/v1/orders.ts">OrderGetExecutionsResponse</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderGetOrderByIDResponse</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderGetOrdersResponse</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderReplaceOrderResponse</a></code>
@@ -317,6 +325,7 @@ Methods:
 
 - <code title="delete /v1/accounts/{account_id}/orders">client.v1.orders.<a href="./src/resources/v1/orders.ts">cancelAllOpenOrders</a>(accountID, { ...params }) -> OrderCancelAllOpenOrdersResponse</code>
 - <code title="delete /v1/accounts/{account_id}/orders/{order_id}">client.v1.orders.<a href="./src/resources/v1/orders.ts">cancelOpenOrder</a>(orderID, { ...params }) -> OrderCancelOpenOrderResponse</code>
+- <code title="get /v1/accounts/{account_id}/executions">client.v1.orders.<a href="./src/resources/v1/orders.ts">getExecutions</a>(accountID, { ...params }) -> OrderGetExecutionsResponse</code>
 - <code title="get /v1/accounts/{account_id}/orders/{order_id}">client.v1.orders.<a href="./src/resources/v1/orders.ts">getOrderByID</a>(orderID, { ...params }) -> OrderGetOrderByIDResponse</code>
 - <code title="get /v1/accounts/{account_id}/orders">client.v1.orders.<a href="./src/resources/v1/orders.ts">getOrders</a>(accountID, { ...params }) -> OrderGetOrdersResponse</code>
 - <code title="patch /v1/accounts/{account_id}/orders/{order_id}">client.v1.orders.<a href="./src/resources/v1/orders.ts">replaceOrder</a>(orderID, { ...params }) -> OrderReplaceOrderResponse</code>

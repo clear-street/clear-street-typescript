@@ -43,6 +43,7 @@ export {
   type CalendarGetMarketHoursCalendarResponse,
   type CalendarGetMarketHoursCalendarParams,
 } from './calendar';
+export { Executions, type Execution, type ExecutionList } from './executions';
 export {
   InstrumentData,
   type AllEventsEventType,
@@ -142,12 +143,14 @@ export {
   type TrailingOffsetType,
   type OrderCancelAllOpenOrdersResponse,
   type OrderCancelOpenOrderResponse,
+  type OrderGetExecutionsResponse,
   type OrderGetOrderByIDResponse,
   type OrderGetOrdersResponse,
   type OrderReplaceOrderResponse,
   type OrderSubmitOrdersResponse,
   type OrderCancelAllOpenOrdersParams,
   type OrderCancelOpenOrderParams,
+  type OrderGetExecutionsParams,
   type OrderGetOrderByIDParams,
   type OrderGetOrdersParams,
   type OrderReplaceOrderParams,
