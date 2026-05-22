@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as OrdersAPI from './orders';
 import * as Shared from '../shared';
+import * as ExecutionsAPI from './executions';
 import * as V1API from './v1';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -52,6 +53,23 @@ export class Orders extends APIResource {
   ): APIPromise<OrderCancelOpenOrderResponse> {
     const { account_id } = params;
     return this._client.delete(path`/v1/accounts/${account_id}/orders/${orderID}`, options);
+  }
+
+  /**
+   * Retrieves filled and partially-filled execution reports for the specified
+   * trading account, ordered by transaction time (nanosecond precision) descending.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.orders.getExecutions(0);
+   * ```
+   */
+  getExecutions(
+    accountID: number,
+    query: OrderGetExecutionsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OrderGetExecutionsResponse> {
+    return this._client.get(path`/v1/accounts/${accountID}/executions`, { query, ...options });
   }
 
   /**
@@ -545,6 +563,10 @@ export interface OrderCancelOpenOrderResponse extends Shared.BaseResponse {
   data: Order;
 }
 
+export interface OrderGetExecutionsResponse extends Shared.BaseResponse {
+  data: ExecutionsAPI.ExecutionList;
+}
+
 export interface OrderGetOrderByIDResponse extends Shared.BaseResponse {
   /**
    * A trading order with its current state and execution details.
@@ -602,6 +624,36 @@ export interface OrderCancelOpenOrderParams {
    * Account identifier
    */
   account_id: number;
+}
+
+export interface OrderGetExecutionsParams {
+  /**
+   * The start date and time for the query range, inclusive (ISO 8601 format)
+   */
+  from?: string;
+
+  /**
+   * Optional instrument to filter by. Accepts either a symbol (e.g. `AAPL`) or an
+   * OEMS instrument UUID.
+   */
+  instrument_id?: InstrumentIDOrSymbol;
+
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
+  page_size?: number;
+
+  /**
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
+   */
+  page_token?: string;
+
+  /**
+   * The end date and time for the query range, inclusive (ISO 8601 format)
+   */
+  to?: string;
 }
 
 export interface OrderGetOrderByIDParams {
@@ -796,12 +848,14 @@ export declare namespace Orders {
     type TrailingOffsetType as TrailingOffsetType,
     type OrderCancelAllOpenOrdersResponse as OrderCancelAllOpenOrdersResponse,
     type OrderCancelOpenOrderResponse as OrderCancelOpenOrderResponse,
+    type OrderGetExecutionsResponse as OrderGetExecutionsResponse,
     type OrderGetOrderByIDResponse as OrderGetOrderByIDResponse,
     type OrderGetOrdersResponse as OrderGetOrdersResponse,
     type OrderReplaceOrderResponse as OrderReplaceOrderResponse,
     type OrderSubmitOrdersResponse as OrderSubmitOrdersResponse,
     type OrderCancelAllOpenOrdersParams as OrderCancelAllOpenOrdersParams,
     type OrderCancelOpenOrderParams as OrderCancelOpenOrderParams,
+    type OrderGetExecutionsParams as OrderGetExecutionsParams,
     type OrderGetOrderByIDParams as OrderGetOrderByIDParams,
     type OrderGetOrdersParams as OrderGetOrdersParams,
     type OrderReplaceOrderParams as OrderReplaceOrderParams,

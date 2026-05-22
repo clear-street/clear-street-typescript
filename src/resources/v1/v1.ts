@@ -47,6 +47,8 @@ import {
   SessionSchedule,
   TradingSessions,
 } from './calendar';
+import * as ExecutionsAPI from './executions';
+import { Execution, ExecutionList, Executions } from './executions';
 import * as InstrumentsAPI from './instruments';
 import {
   ContractType,
@@ -77,6 +79,8 @@ import {
   OrderCancelAllOpenOrdersResponse,
   OrderCancelOpenOrderParams,
   OrderCancelOpenOrderResponse,
+  OrderGetExecutionsParams,
+  OrderGetExecutionsResponse,
   OrderGetOrderByIDParams,
   OrderGetOrderByIDResponse,
   OrderGetOrdersParams,
@@ -210,6 +214,7 @@ export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
   apiVersion: APIVersionAPI.APIVersion = new APIVersionAPI.APIVersion(this._client);
   calendar: CalendarAPI.Calendar = new CalendarAPI.Calendar(this._client);
+  executions: ExecutionsAPI.Executions = new ExecutionsAPI.Executions(this._client);
   instrumentData: InstrumentDataAPI.InstrumentData = new InstrumentDataAPI.InstrumentData(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
   omniAI: OmniAIAPI.OmniAI = new OmniAIAPI.OmniAI(this._client);
@@ -227,6 +232,7 @@ export type SecurityType = 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'OPTION' | 'CASH
 V1.Accounts = Accounts;
 V1.APIVersion = APIVersion;
 V1.Calendar = Calendar;
+V1.Executions = Executions;
 V1.InstrumentData = InstrumentData;
 V1.Instruments = Instruments;
 V1.OmniAI = OmniAI;
@@ -287,6 +293,8 @@ export declare namespace V1 {
     type CalendarGetMarketHoursCalendarResponse as CalendarGetMarketHoursCalendarResponse,
     type CalendarGetMarketHoursCalendarParams as CalendarGetMarketHoursCalendarParams,
   };
+
+  export { Executions as Executions, type Execution as Execution, type ExecutionList as ExecutionList };
 
   export {
     InstrumentData as InstrumentData,
@@ -390,12 +398,14 @@ export declare namespace V1 {
     type TrailingOffsetType as TrailingOffsetType,
     type OrderCancelAllOpenOrdersResponse as OrderCancelAllOpenOrdersResponse,
     type OrderCancelOpenOrderResponse as OrderCancelOpenOrderResponse,
+    type OrderGetExecutionsResponse as OrderGetExecutionsResponse,
     type OrderGetOrderByIDResponse as OrderGetOrderByIDResponse,
     type OrderGetOrdersResponse as OrderGetOrdersResponse,
     type OrderReplaceOrderResponse as OrderReplaceOrderResponse,
     type OrderSubmitOrdersResponse as OrderSubmitOrdersResponse,
     type OrderCancelAllOpenOrdersParams as OrderCancelAllOpenOrdersParams,
     type OrderCancelOpenOrderParams as OrderCancelOpenOrderParams,
+    type OrderGetExecutionsParams as OrderGetExecutionsParams,
     type OrderGetOrderByIDParams as OrderGetOrderByIDParams,
     type OrderGetOrdersParams as OrderGetOrdersParams,
     type OrderReplaceOrderParams as OrderReplaceOrderParams,
