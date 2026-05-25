@@ -33,7 +33,7 @@ import { isEmptyObj } from './internal/utils/values';
 
 const environments = {
   production: 'https://api.clearstreet.com',
-  staging: 'https://oems-api-gw.dev-public.clst.co',
+  dev: 'https://api-dev.clearstreet.com',
 };
 type Environment = keyof typeof environments;
 
@@ -48,7 +48,7 @@ export interface ClientOptions {
    *
    * Each environment maps to a different base URL:
    * - `production` corresponds to `https://api.clearstreet.com`
-   * - `staging` corresponds to `https://oems-api-gw.dev-public.clst.co`
+   * - `dev` corresponds to `https://api-dev.clearstreet.com`
    */
   environment?: Environment | undefined;
 
