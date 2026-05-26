@@ -142,6 +142,12 @@ export interface Instrument {
   is_marginable: boolean;
 
   /**
+   * Indicates if the instrument is a publicly traded partnership (PTP). PTP sales
+   * are subject to a 10% withholding tax for non-US tax residents.
+   */
+  is_ptp: boolean;
+
+  /**
    * Indicates if the instrument is restricted from trading
    */
   is_restricted: boolean;
@@ -260,6 +266,12 @@ export interface InstrumentCore {
    * Indicates if the instrument is marginable
    */
   is_marginable: boolean;
+
+  /**
+   * Indicates if the instrument is a publicly traded partnership (PTP). PTP sales
+   * are subject to a 10% withholding tax for non-US tax residents.
+   */
+  is_ptp: boolean;
 
   /**
    * Indicates if the instrument is restricted from trading
@@ -483,6 +495,11 @@ export interface InstrumentGetInstrumentsParams {
   is_marginable?: boolean;
 
   /**
+   * Filter by publicly traded partnership (PTP) status
+   */
+  is_ptp?: boolean;
+
+  /**
    * Filter by restricted status
    */
   is_restricted?: boolean;
@@ -572,6 +589,12 @@ export interface InstrumentSearchInstrumentsParams {
    * Include inactive instruments. Default false.
    */
   include_inactive?: boolean;
+
+  /**
+   * Include publicly traded partnership (PTP) instruments. Default true (penalized
+   * in ranking).
+   */
+  include_ptp?: boolean;
 
   /**
    * Include restricted instruments. Default true (penalized in ranking).
