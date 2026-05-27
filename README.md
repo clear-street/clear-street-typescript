@@ -24,7 +24,7 @@ import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
   apiKey: 'My API Key',
-  environment: 'staging', // defaults to 'production'
+  environment: 'dev', // defaults to 'production'
 });
 
 const response = await client.v1.accounts.getAccounts();
@@ -40,7 +40,7 @@ import ClearStreet from '@clear-street-internal/sdk';
 
 const client = new ClearStreet({
   apiKey: 'My API Key',
-  environment: 'staging', // defaults to 'production'
+  environment: 'dev', // defaults to 'production'
 });
 
 const response: ClearStreet.V1.AccountGetAccountsResponse = await client.v1.accounts.getAccounts();

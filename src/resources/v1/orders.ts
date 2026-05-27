@@ -55,6 +55,23 @@ export class Orders extends APIResource {
   }
 
   /**
+   * Retrieves filled and partially-filled execution reports for the specified
+   * trading account, ordered by transaction time (nanosecond precision) descending.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.orders.getExecutions(0);
+   * ```
+   */
+  getExecutions(
+    accountID: number,
+    query: OrderGetExecutionsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OrderGetExecutionsResponse> {
+    return this._client.get(path`/v1/accounts/${accountID}/executions`, { query, ...options });
+  }
+
+  /**
    * Get Order By ID
    *
    * @example
@@ -169,6 +186,53 @@ export interface CancelOrderRequest {
    */
   order_id: string;
 }
+
+/**
+ * Represents a single fill of an order for an account.
+ */
+export interface Execution {
+  /**
+   * Unique identifier for this execution report.
+   */
+  id: string;
+
+  /**
+   * OEMS instrument identifier.
+   */
+  instrument_id: string;
+
+  /**
+   * Identifier of the order this execution belongs to.
+   */
+  order_id: string;
+
+  /**
+   * Fill price.
+   */
+  price: string;
+
+  /**
+   * Filled quantity.
+   */
+  quantity: string;
+
+  /**
+   * Side of the fill.
+   */
+  side: Side;
+
+  /**
+   * Trading symbol.
+   */
+  symbol: string;
+
+  /**
+   * Transaction timestamp in nanosecond precision (UTC).
+   */
+  transaction_time: string;
+}
+
+export type ExecutionList = Array<Execution>;
 
 /**
  * OEMS instrument UUID
@@ -545,6 +609,10 @@ export interface OrderCancelOpenOrderResponse extends Shared.BaseResponse {
   data: Order;
 }
 
+export interface OrderGetExecutionsResponse extends Shared.BaseResponse {
+  data: ExecutionList;
+}
+
 export interface OrderGetOrderByIDResponse extends Shared.BaseResponse {
   /**
    * A trading order with its current state and execution details.
@@ -602,6 +670,36 @@ export interface OrderCancelOpenOrderParams {
    * Account identifier
    */
   account_id: number;
+}
+
+export interface OrderGetExecutionsParams {
+  /**
+   * The start date and time for the query range, inclusive (ISO 8601 format)
+   */
+  from?: string;
+
+  /**
+   * Optional instrument to filter by. Accepts either a symbol (e.g. `AAPL`) or an
+   * OEMS instrument UUID.
+   */
+  instrument_id?: InstrumentIDOrSymbol;
+
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
+  page_size?: number;
+
+  /**
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
+   */
+  page_token?: string;
+
+  /**
+   * The end date and time for the query range, inclusive (ISO 8601 format)
+   */
+  to?: string;
 }
 
 export interface OrderGetOrderByIDParams {
@@ -781,6 +879,8 @@ export namespace OrderSubmitOrdersParams {
 export declare namespace Orders {
   export {
     type CancelOrderRequest as CancelOrderRequest,
+    type Execution as Execution,
+    type ExecutionList as ExecutionList,
     type InstrumentIDOrSymbol as InstrumentIDOrSymbol,
     type NewOrderRequest as NewOrderRequest,
     type Order as Order,
@@ -796,12 +896,14 @@ export declare namespace Orders {
     type TrailingOffsetType as TrailingOffsetType,
     type OrderCancelAllOpenOrdersResponse as OrderCancelAllOpenOrdersResponse,
     type OrderCancelOpenOrderResponse as OrderCancelOpenOrderResponse,
+    type OrderGetExecutionsResponse as OrderGetExecutionsResponse,
     type OrderGetOrderByIDResponse as OrderGetOrderByIDResponse,
     type OrderGetOrdersResponse as OrderGetOrdersResponse,
     type OrderReplaceOrderResponse as OrderReplaceOrderResponse,
     type OrderSubmitOrdersResponse as OrderSubmitOrdersResponse,
     type OrderCancelAllOpenOrdersParams as OrderCancelAllOpenOrdersParams,
     type OrderCancelOpenOrderParams as OrderCancelOpenOrderParams,
+    type OrderGetExecutionsParams as OrderGetExecutionsParams,
     type OrderGetOrderByIDParams as OrderGetOrderByIDParams,
     type OrderGetOrdersParams as OrderGetOrdersParams,
     type OrderReplaceOrderParams as OrderReplaceOrderParams,
