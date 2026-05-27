@@ -43,7 +43,6 @@ export {
   type CalendarGetMarketHoursCalendarResponse,
   type CalendarGetMarketHoursCalendarParams,
 } from './calendar';
-export { Executions, type Execution, type ExecutionList } from './executions';
 export {
   InstrumentData,
   type AllEventsEventType,
@@ -128,6 +127,8 @@ export {
 export {
   Orders,
   type CancelOrderRequest,
+  type Execution,
+  type ExecutionList,
   type InstrumentIDOrSymbol,
   type NewOrderRequest,
   type Order,

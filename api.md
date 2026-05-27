@@ -77,13 +77,6 @@ Methods:
 - <code title="get /v1/clock">client.v1.calendar.<a href="./src/resources/v1/calendar.ts">getClock</a>() -> CalendarGetClockResponse</code>
 - <code title="get /v1/calendars/market-hours">client.v1.calendar.<a href="./src/resources/v1/calendar.ts">getMarketHoursCalendar</a>({ ...params }) -> CalendarGetMarketHoursCalendarResponse</code>
 
-## Executions
-
-Types:
-
-- <code><a href="./src/resources/v1/executions.ts">Execution</a></code>
-- <code><a href="./src/resources/v1/executions.ts">ExecutionList</a></code>
-
 ## InstrumentData
 
 Types:
@@ -300,6 +293,8 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v1/orders.ts">CancelOrderRequest</a></code>
+- <code><a href="./src/resources/v1/orders.ts">Execution</a></code>
+- <code><a href="./src/resources/v1/orders.ts">ExecutionList</a></code>
 - <code><a href="./src/resources/v1/orders.ts">InstrumentIDOrSymbol</a></code>
 - <code><a href="./src/resources/v1/orders.ts">NewOrderRequest</a></code>
 - <code><a href="./src/resources/v1/orders.ts">Order</a></code>
