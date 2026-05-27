@@ -3,7 +3,6 @@
 import { APIResource } from '../../core/resource';
 import * as OrdersAPI from './orders';
 import * as Shared from '../shared';
-import * as ExecutionsAPI from './executions';
 import * as V1API from './v1';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -187,6 +186,53 @@ export interface CancelOrderRequest {
    */
   order_id: string;
 }
+
+/**
+ * Represents a single fill of an order for an account.
+ */
+export interface Execution {
+  /**
+   * Unique identifier for this execution report.
+   */
+  id: string;
+
+  /**
+   * OEMS instrument identifier.
+   */
+  instrument_id: string;
+
+  /**
+   * Identifier of the order this execution belongs to.
+   */
+  order_id: string;
+
+  /**
+   * Fill price.
+   */
+  price: string;
+
+  /**
+   * Filled quantity.
+   */
+  quantity: string;
+
+  /**
+   * Side of the fill.
+   */
+  side: Side;
+
+  /**
+   * Trading symbol.
+   */
+  symbol: string;
+
+  /**
+   * Transaction timestamp in nanosecond precision (UTC).
+   */
+  transaction_time: string;
+}
+
+export type ExecutionList = Array<Execution>;
 
 /**
  * OEMS instrument UUID
@@ -564,7 +610,7 @@ export interface OrderCancelOpenOrderResponse extends Shared.BaseResponse {
 }
 
 export interface OrderGetExecutionsResponse extends Shared.BaseResponse {
-  data: ExecutionsAPI.ExecutionList;
+  data: ExecutionList;
 }
 
 export interface OrderGetOrderByIDResponse extends Shared.BaseResponse {
@@ -833,6 +879,8 @@ export namespace OrderSubmitOrdersParams {
 export declare namespace Orders {
   export {
     type CancelOrderRequest as CancelOrderRequest,
+    type Execution as Execution,
+    type ExecutionList as ExecutionList,
     type InstrumentIDOrSymbol as InstrumentIDOrSymbol,
     type NewOrderRequest as NewOrderRequest,
     type Order as Order,

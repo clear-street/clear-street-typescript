@@ -47,8 +47,6 @@ import {
   SessionSchedule,
   TradingSessions,
 } from './calendar';
-import * as ExecutionsAPI from './executions';
-import { Execution, ExecutionList, Executions } from './executions';
 import * as InstrumentsAPI from './instruments';
 import {
   ContractType,
@@ -72,6 +70,8 @@ import {
 import * as OrdersAPI from './orders';
 import {
   CancelOrderRequest,
+  Execution,
+  ExecutionList,
   InstrumentIDOrSymbol,
   NewOrderRequest,
   Order,
@@ -214,7 +214,6 @@ export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
   apiVersion: APIVersionAPI.APIVersion = new APIVersionAPI.APIVersion(this._client);
   calendar: CalendarAPI.Calendar = new CalendarAPI.Calendar(this._client);
-  executions: ExecutionsAPI.Executions = new ExecutionsAPI.Executions(this._client);
   instrumentData: InstrumentDataAPI.InstrumentData = new InstrumentDataAPI.InstrumentData(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
   omniAI: OmniAIAPI.OmniAI = new OmniAIAPI.OmniAI(this._client);
@@ -232,7 +231,6 @@ export type SecurityType = 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'OPTION' | 'CASH
 V1.Accounts = Accounts;
 V1.APIVersion = APIVersion;
 V1.Calendar = Calendar;
-V1.Executions = Executions;
 V1.InstrumentData = InstrumentData;
 V1.Instruments = Instruments;
 V1.OmniAI = OmniAI;
@@ -293,8 +291,6 @@ export declare namespace V1 {
     type CalendarGetMarketHoursCalendarResponse as CalendarGetMarketHoursCalendarResponse,
     type CalendarGetMarketHoursCalendarParams as CalendarGetMarketHoursCalendarParams,
   };
-
-  export { Executions as Executions, type Execution as Execution, type ExecutionList as ExecutionList };
 
   export {
     InstrumentData as InstrumentData,
@@ -383,6 +379,8 @@ export declare namespace V1 {
   export {
     Orders as Orders,
     type CancelOrderRequest as CancelOrderRequest,
+    type Execution as Execution,
+    type ExecutionList as ExecutionList,
     type InstrumentIDOrSymbol as InstrumentIDOrSymbol,
     type NewOrderRequest as NewOrderRequest,
     type Order as Order,
