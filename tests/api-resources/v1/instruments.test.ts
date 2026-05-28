@@ -55,7 +55,6 @@ describe('resource instruments', () => {
           is_liquidation_only: true,
           is_marginable: true,
           is_ptp: true,
-          is_restricted: true,
           is_short_prohibited: true,
           is_threshold_security: true,
           page_size: 1,
@@ -117,7 +116,6 @@ describe('resource instruments', () => {
       currency: 'currency',
       include_inactive: true,
       include_ptp: true,
-      include_restricted: true,
       page_size: 1,
       page_token: 'U3RhaW5sZXNzIHJvY2tz',
     });

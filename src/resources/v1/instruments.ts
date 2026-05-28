@@ -148,11 +148,6 @@ export interface Instrument {
   is_ptp: boolean;
 
   /**
-   * Indicates if the instrument is restricted from trading
-   */
-  is_restricted: boolean;
-
-  /**
    * Indicates if short selling is prohibited for the instrument
    */
   is_short_prohibited: boolean;
@@ -262,11 +257,6 @@ export interface InstrumentCore {
    * are subject to a 10% withholding tax for non-US tax residents.
    */
   is_ptp: boolean;
-
-  /**
-   * Indicates if the instrument is restricted from trading
-   */
-  is_restricted: boolean;
 
   /**
    * Indicates if short selling is prohibited for the instrument
@@ -383,11 +373,6 @@ export interface OptionsContract {
   is_marginable: boolean;
 
   /**
-   * Whether the contract is restricted from trading
-   */
-  is_restricted: boolean;
-
-  /**
    * Listing type
    */
   listing_type: ListingType;
@@ -471,11 +456,6 @@ export interface InstrumentGetInstrumentsParams {
    * Filter by publicly traded partnership (PTP) status
    */
   is_ptp?: boolean;
-
-  /**
-   * Filter by restricted status
-   */
-  is_restricted?: boolean;
 
   /**
    * Filter by short prohibited status
@@ -568,11 +548,6 @@ export interface InstrumentSearchInstrumentsParams {
    * in ranking).
    */
   include_ptp?: boolean;
-
-  /**
-   * Include restricted instruments. Default true (penalized in ranking).
-   */
-  include_restricted?: boolean;
 
   /**
    * The number of items to return per page. Only used when page_token is not
