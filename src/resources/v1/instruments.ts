@@ -458,13 +458,6 @@ export interface InstrumentGetInstrumentsParams {
   instrument_ids?: Array<string>;
 
   /**
-   * Filter by instrument type. OPTION is not supported on this endpoint; use GET
-   * /instruments/options/contracts to list option contracts. If omitted, returns all
-   * supported instrument types except options.
-   */
-  instrument_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'OPTION' | 'CASH' | 'OTHER';
-
-  /**
    * Filter by liquidation only status
    */
   is_liquidation_only?: boolean;
