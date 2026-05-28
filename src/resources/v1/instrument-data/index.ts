@@ -43,6 +43,7 @@ export {
   type DailySummaryList,
   type MarketDataSnapshot,
   type MarketDataSnapshotList,
+  type SnapshotGreeks,
   type SnapshotLastTrade,
   type SnapshotQuote,
   type SnapshotSession,

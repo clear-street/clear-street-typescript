@@ -127,6 +127,12 @@ export interface MarketDataSnapshot {
   cumulative_volume?: number | null;
 
   /**
+   * Theoretical price and Greeks for option instruments. `None` for equities, and
+   * for options whose Greeks have not yet been observed
+   */
+  greeks?: SnapshotGreeks | null;
+
+  /**
    * Most recent quote if available.
    */
   last_quote?: SnapshotQuote | null;
@@ -148,6 +154,52 @@ export interface MarketDataSnapshot {
 }
 
 export type MarketDataSnapshotList = Array<MarketDataSnapshot>;
+
+/**
+ * Theoretical price and Greeks for an options snapshot. All values are **per
+ * share** as published by RENG; no contract multiplier is applied.
+ */
+export interface SnapshotGreeks {
+  /**
+   * Delta: ∂V/∂S, range \[-1, 1\].
+   */
+  delta: string;
+
+  /**
+   * Gamma: ∂²V/∂S².
+   */
+  gamma: string;
+
+  /**
+   * Implied volatility, annualized (`0.20` == 20%).
+   */
+  iv: string;
+
+  /**
+   * Rho per 1.0 rate point.
+   */
+  rho: string;
+
+  /**
+   * Theoretical option price in USD per share.
+   */
+  theo_price: string;
+
+  /**
+   * Theta per trading day.
+   */
+  theta: string;
+
+  /**
+   * Event timestamp published by RENG.
+   */
+  timestamp: string;
+
+  /**
+   * Vega per 1.0 vol point.
+   */
+  vega: string;
+}
 
 /**
  * Last-trade fields for a market data snapshot.
@@ -242,6 +294,7 @@ export declare namespace MarketData {
     type DailySummaryList as DailySummaryList,
     type MarketDataSnapshot as MarketDataSnapshot,
     type MarketDataSnapshotList as MarketDataSnapshotList,
+    type SnapshotGreeks as SnapshotGreeks,
     type SnapshotLastTrade as SnapshotLastTrade,
     type SnapshotQuote as SnapshotQuote,
     type SnapshotSession as SnapshotSession,

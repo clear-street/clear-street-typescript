@@ -128,6 +128,7 @@ Types:
 - <code><a href="./src/resources/v1/instrument-data/market-data.ts">DailySummaryList</a></code>
 - <code><a href="./src/resources/v1/instrument-data/market-data.ts">MarketDataSnapshot</a></code>
 - <code><a href="./src/resources/v1/instrument-data/market-data.ts">MarketDataSnapshotList</a></code>
+- <code><a href="./src/resources/v1/instrument-data/market-data.ts">SnapshotGreeks</a></code>
 - <code><a href="./src/resources/v1/instrument-data/market-data.ts">SnapshotLastTrade</a></code>
 - <code><a href="./src/resources/v1/instrument-data/market-data.ts">SnapshotQuote</a></code>
 - <code><a href="./src/resources/v1/instrument-data/market-data.ts">SnapshotSession</a></code>
