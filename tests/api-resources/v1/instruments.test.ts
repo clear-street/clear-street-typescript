@@ -52,7 +52,6 @@ describe('resource instruments', () => {
         {
           easy_to_borrow: true,
           instrument_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
-          instrument_type: 'COMMON_STOCK',
           is_liquidation_only: true,
           is_marginable: true,
           is_ptp: true,
