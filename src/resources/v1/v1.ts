@@ -226,7 +226,7 @@ export class V1 extends APIResource {
 /**
  * Security type
  */
-export type SecurityType = 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'OPTION' | 'CASH' | 'OTHER';
+export type SecurityType = 'COMMON_STOCK' | 'OPTION' | 'CASH';
 
 V1.Accounts = Accounts;
 V1.APIVersion = APIVersion;

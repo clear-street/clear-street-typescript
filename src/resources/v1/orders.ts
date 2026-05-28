@@ -652,7 +652,7 @@ export interface OrderCancelAllOpenOrdersParams {
   /**
    * Filter by instrument type (e.g., COMMON_STOCK, OPTION)
    */
-  instrument_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'OPTION' | 'CASH' | 'OTHER';
+  instrument_type?: 'COMMON_STOCK' | 'OPTION' | 'CASH';
 
   /**
    * Filter by order side (BUY or SELL)
@@ -723,7 +723,7 @@ export interface OrderGetOrdersParams {
   /**
    * Instrument type filter (e.g., COMMON_STOCK, OPTION)
    */
-  instrument_type?: 'COMMON_STOCK' | 'PREFERRED_STOCK' | 'OPTION' | 'CASH' | 'OTHER';
+  instrument_type?: 'COMMON_STOCK' | 'OPTION' | 'CASH';
 
   /**
    * The number of items to return per page. Only used when page_token is not
