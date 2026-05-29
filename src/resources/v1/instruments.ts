@@ -178,6 +178,11 @@ export interface Instrument {
   adv?: string | null;
 
   /**
+   * The expiration date for options instruments
+   */
+  expiry?: string | null;
+
+  /**
    * The type of security (e.g., Common Stock, ETF)
    */
   instrument_type?: V1API.SecurityType | null;
@@ -214,6 +219,11 @@ export interface Instrument {
    * The percent of a short position's value you must post as margin
    */
   short_margin_rate?: string | null;
+
+  /**
+   * The strike price for options instruments
+   */
+  strike_price?: string | null;
 }
 
 export interface InstrumentCore {
@@ -289,6 +299,11 @@ export interface InstrumentCore {
   adv?: string | null;
 
   /**
+   * The expiration date for options instruments
+   */
+  expiry?: string | null;
+
+  /**
    * The type of security (e.g., Common Stock, ETF)
    */
   instrument_type?: V1API.SecurityType | null;
@@ -319,6 +334,11 @@ export interface InstrumentCore {
    * The percent of a short position's value you must post as margin
    */
   short_margin_rate?: string | null;
+
+  /**
+   * The strike price for options instruments
+   */
+  strike_price?: string | null;
 }
 
 export type InstrumentCoreList = Array<InstrumentCore>;
@@ -441,6 +461,11 @@ export interface InstrumentGetInstrumentsParams {
    * Comma-separated OEMS instrument UUIDs
    */
   instrument_ids?: Array<string>;
+
+  /**
+   * Filter by instrument type (e.g. COMMON_STOCK, OPTION)
+   */
+  instrument_type?: 'COMMON_STOCK' | 'OPTION' | 'CASH';
 
   /**
    * Filter by liquidation only status
