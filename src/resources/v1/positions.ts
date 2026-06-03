@@ -129,10 +129,12 @@ export class Positions extends APIResource {
    * - **Partial success** → `207 Multi-Status`. `data` contains every row; rejected
    *   rows carry `status = ENGINE_REJECTED` (or `REJECTED`) and `rejection_reason`.
    *   The top-level `error` summarizes the batch failure.
-   * - **All rows rejected** → `4xx`/`5xx` error response. The HTTP status reflects
-   *   the underlying cause: `409` for duplicate `instruction_id`, `400` for
-   *   validation failures such as DNE/CEA on a non-expiry day, `503` if the clearing
-   *   service is unavailable. No `data` is returned.
+   * - **All rows rejected** → `4xx`/`5xx`. The HTTP status reflects the aggregate
+   *   cause: `409` when every row was a duplicate, `400` for validation failures
+   *   like DNE/CEA on a non-expiry day, `503` if the clearing service is
+   *   unavailable. `data` still contains every row carrying
+   *   `status = ENGINE_REJECTED` and `rejection_reason` so callers can attribute
+   *   failures by `instruction_id`; the top-level `error` summarizes the batch.
    *
    * @example
    * ```ts
