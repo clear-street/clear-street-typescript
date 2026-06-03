@@ -6,10 +6,8 @@ import * as OrdersAPI from '../orders';
 import * as EntitlementsAPI from './entitlements';
 import {
   DeleteEntitlementResponse,
-  EntitlementAgreementKey,
   EntitlementAgreementResource,
   EntitlementAgreementResourceList,
-  EntitlementCode,
   EntitlementCreateEntitlementsParams,
   EntitlementCreateEntitlementsResponse,
   EntitlementDeleteEntitlementResponse,
@@ -204,6 +202,16 @@ export interface DataChart {
 }
 
 /**
+ * Stable entitlement agreement family key.
+ */
+export type EntitlementAgreementKey = 'omni_account_data_access';
+
+/**
+ * Stable entitlement code granted by an agreement.
+ */
+export type EntitlementCode = 'omni.account_data';
+
+/**
  * Action to open a chart for a symbol.
  */
 export interface OpenChartAction {
@@ -232,9 +240,9 @@ export interface OpenEntitlementConsentAction {
   /**
    * Stable entitlement agreement family key.
    */
-  agreement_key: EntitlementsAPI.EntitlementAgreementKey;
+  agreement_key: EntitlementAgreementKey;
 
-  entitlement_codes: Array<EntitlementsAPI.EntitlementCode>;
+  entitlement_codes: Array<EntitlementCode>;
 
   reason: string;
 }
@@ -438,6 +446,8 @@ export declare namespace OmniAI {
     type ContentPartTextPayload as ContentPartTextPayload,
     type ContentPartThinkingPayload as ContentPartThinkingPayload,
     type DataChart as DataChart,
+    type EntitlementAgreementKey as EntitlementAgreementKey,
+    type EntitlementCode as EntitlementCode,
     type OpenChartAction as OpenChartAction,
     type OpenEntitlementConsentAction as OpenEntitlementConsentAction,
     type OpenScreenerAction as OpenScreenerAction,
@@ -454,10 +464,8 @@ export declare namespace OmniAI {
   export {
     Entitlements as Entitlements,
     type DeleteEntitlementResponse as DeleteEntitlementResponse,
-    type EntitlementAgreementKey as EntitlementAgreementKey,
     type EntitlementAgreementResource as EntitlementAgreementResource,
     type EntitlementAgreementResourceList as EntitlementAgreementResourceList,
-    type EntitlementCode as EntitlementCode,
     type EntitlementResource as EntitlementResource,
     type EntitlementResourceList as EntitlementResourceList,
     type EntitlementCreateEntitlementsResponse as EntitlementCreateEntitlementsResponse,

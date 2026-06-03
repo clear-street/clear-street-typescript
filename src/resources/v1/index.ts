@@ -112,6 +112,8 @@ export {
   type ContentPartTextPayload,
   type ContentPartThinkingPayload,
   type DataChart,
+  type EntitlementAgreementKey,
+  type EntitlementCode,
   type OpenChartAction,
   type OpenEntitlementConsentAction,
   type OpenScreenerAction,

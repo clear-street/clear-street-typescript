@@ -193,6 +193,8 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ContentPartTextPayload</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ContentPartThinkingPayload</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">DataChart</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">EntitlementAgreementKey</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">EntitlementCode</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenChartAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenEntitlementConsentAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenScreenerAction</a></code>
@@ -210,10 +212,8 @@ Types:
 Types:
 
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">DeleteEntitlementResponse</a></code>
-- <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementAgreementKey</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementAgreementResource</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementAgreementResourceList</a></code>
-- <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementCode</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementResource</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementResourceList</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementCreateEntitlementsResponse</a></code>
@@ -374,8 +374,8 @@ Methods:
 
 - <code title="post /v1/watchlists/{watchlist_id}/items">client.v1.watchlist.<a href="./src/resources/v1/watchlist.ts">addWatchlistItem</a>(watchlistID, { ...params }) -> WatchlistAddWatchlistItemResponse</code>
 - <code title="post /v1/watchlists">client.v1.watchlist.<a href="./src/resources/v1/watchlist.ts">createWatchlist</a>({ ...params }) -> WatchlistCreateWatchlistResponse</code>
-- <code title="delete /v1/watchlists/{watchlist_id}">client.v1.watchlist.<a href="./src/resources/v1/watchlist.ts">deleteWatchlist</a>(watchlistID) -> unknown</code>
-- <code title="delete /v1/watchlists/{watchlist_id}/items/{item_id}">client.v1.watchlist.<a href="./src/resources/v1/watchlist.ts">deleteWatchlistItem</a>(itemID, { ...params }) -> unknown</code>
+- <code title="delete /v1/watchlists/{watchlist_id}">client.v1.watchlist.<a href="./src/resources/v1/watchlist.ts">deleteWatchlist</a>(watchlistID) -> WatchlistDeleteWatchlistResponse</code>
+- <code title="delete /v1/watchlists/{watchlist_id}/items/{item_id}">client.v1.watchlist.<a href="./src/resources/v1/watchlist.ts">deleteWatchlistItem</a>(itemID, { ...params }) -> WatchlistDeleteWatchlistItemResponse</code>
 - <code title="get /v1/watchlists/{watchlist_id}">client.v1.watchlist.<a href="./src/resources/v1/watchlist.ts">getWatchlistByID</a>(watchlistID) -> WatchlistGetWatchlistByIDResponse</code>
 - <code title="get /v1/watchlists">client.v1.watchlist.<a href="./src/resources/v1/watchlist.ts">getWatchlists</a>({ ...params }) -> WatchlistGetWatchlistsResponse</code>
 
