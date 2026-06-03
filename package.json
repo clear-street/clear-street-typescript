@@ -1,6 +1,6 @@
 {
   "name": "@clear-street/clearstreet",
-  "version": "0.71.0",
+  "version": "0.72.0",
   "description": "The official TypeScript library for the Clear Street API",
   "author": "Clear Street <support@clearstreet.io>",
   "types": "dist/index.d.ts",
@@ -14,7 +14,7 @@
   ],
   "private": false,
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "scripts": {
     "test": "./scripts/test",
