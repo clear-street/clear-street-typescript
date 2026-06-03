@@ -123,53 +123,53 @@ export interface ResponseContent {
  * Dynamic content part visible on a pollable response.
  */
 export type ResponseContentPart =
-  | ResponseContentPart.UnionMember0
-  | ResponseContentPart.UnionMember1
-  | ResponseContentPart.UnionMember2
-  | ResponseContentPart.UnionMember3
-  | ResponseContentPart.UnionMember4
-  | ResponseContentPart.UnionMember5;
+  | ResponseContentPart.ContentPartText
+  | ResponseContentPart.ContentPartThinking
+  | ResponseContentPart.ContentPartStructuredAction
+  | ResponseContentPart.ContentPartChart
+  | ResponseContentPart.ContentPartSuggestedActions
+  | ResponseContentPart.ContentPartCustom;
 
 export namespace ResponseContentPart {
   /**
    * Text content part.
    */
-  export interface UnionMember0 extends OmniAIAPI.ContentPartTextPayload {
+  export interface ContentPartText extends OmniAIAPI.ContentPartTextPayload {
     type: 'text';
   }
 
   /**
    * Thinking content part shown on dynamic response polling.
    */
-  export interface UnionMember1 extends OmniAIAPI.ContentPartThinkingPayload {
+  export interface ContentPartThinking extends OmniAIAPI.ContentPartThinkingPayload {
     type: 'thinking';
   }
 
   /**
    * Structured action content part.
    */
-  export interface UnionMember2 extends OmniAIAPI.ContentPartStructuredActionPayload {
+  export interface ContentPartStructuredAction extends OmniAIAPI.ContentPartStructuredActionPayload {
     type: 'structured_action';
   }
 
   /**
    * Chart payload content part.
    */
-  export interface UnionMember3 extends OmniAIAPI.ContentPartChartPayload {
+  export interface ContentPartChart extends OmniAIAPI.ContentPartChartPayload {
     type: 'chart';
   }
 
   /**
    * Suggested actions payload content part.
    */
-  export interface UnionMember4 extends OmniAIAPI.ContentPartSuggestedActionsPayload {
+  export interface ContentPartSuggestedActions extends OmniAIAPI.ContentPartSuggestedActionsPayload {
     type: 'suggested_actions';
   }
 
   /**
    * Escape-hatch custom payload content part.
    */
-  export interface UnionMember5 extends OmniAIAPI.ContentPartCustomPayload {
+  export interface ContentPartCustom extends OmniAIAPI.ContentPartCustomPayload {
     type: 'custom';
   }
 }

@@ -232,45 +232,45 @@ export interface MessageContent {
  * Final immutable content part visible on persisted messages.
  */
 export type MessageContentPart =
-  | MessageContentPart.UnionMember0
-  | MessageContentPart.UnionMember1
-  | MessageContentPart.UnionMember2
-  | MessageContentPart.UnionMember3
-  | MessageContentPart.UnionMember4;
+  | MessageContentPart.ContentPartText
+  | MessageContentPart.ContentPartStructuredAction
+  | MessageContentPart.ContentPartChart
+  | MessageContentPart.ContentPartSuggestedActions
+  | MessageContentPart.ContentPartCustom;
 
 export namespace MessageContentPart {
   /**
    * Text content part.
    */
-  export interface UnionMember0 extends OmniAIAPI.ContentPartTextPayload {
+  export interface ContentPartText extends OmniAIAPI.ContentPartTextPayload {
     type: 'text';
   }
 
   /**
    * Structured action content part.
    */
-  export interface UnionMember1 extends OmniAIAPI.ContentPartStructuredActionPayload {
+  export interface ContentPartStructuredAction extends OmniAIAPI.ContentPartStructuredActionPayload {
     type: 'structured_action';
   }
 
   /**
    * Chart payload content part.
    */
-  export interface UnionMember2 extends OmniAIAPI.ContentPartChartPayload {
+  export interface ContentPartChart extends OmniAIAPI.ContentPartChartPayload {
     type: 'chart';
   }
 
   /**
    * Suggested actions payload content part.
    */
-  export interface UnionMember3 extends OmniAIAPI.ContentPartSuggestedActionsPayload {
+  export interface ContentPartSuggestedActions extends OmniAIAPI.ContentPartSuggestedActionsPayload {
     type: 'suggested_actions';
   }
 
   /**
    * Escape-hatch custom payload content part.
    */
-  export interface UnionMember4 extends OmniAIAPI.ContentPartCustomPayload {
+  export interface ContentPartCustom extends OmniAIAPI.ContentPartCustomPayload {
     type: 'custom';
   }
 }

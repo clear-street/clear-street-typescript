@@ -1,6 +1,6 @@
 import fs from 'fs';
-import type { ResponseLike } from '@clear-street-internal/sdk/internal/to-file';
-import { toFile } from '@clear-street-internal/sdk/core/uploads';
+import type { ResponseLike } from '@clear-street/clearstreet/internal/to-file';
+import { toFile } from '@clear-street/clearstreet/core/uploads';
 
 class MyClass {
   name: string = 'foo';
@@ -96,7 +96,7 @@ describe('missing File error message', () => {
   });
 
   test('is thrown', async () => {
-    const uploads = await import('@clear-street-internal/sdk/core/uploads');
+    const uploads = await import('@clear-street/clearstreet/core/uploads');
     await expect(
       uploads.toFile(mockResponse({ url: 'https://example.com/my/audio.mp3' })),
     ).rejects.toMatchInlineSnapshot(

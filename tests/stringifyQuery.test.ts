@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { stringifyQuery } from '@clear-street-internal/sdk/internal/utils/query';
+import { stringifyQuery } from '@clear-street/clearstreet/internal/utils/query';
 
 describe(stringifyQuery, () => {
   for (const [input, expected] of [
