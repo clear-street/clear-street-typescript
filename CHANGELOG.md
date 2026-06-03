@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.72.0 (2026-06-03)
+
+Full Changelog: [v0.71.0...v0.72.0](https://github.com/clear-street/clear-street-typescript/compare/v0.71.0...v0.72.0)
+
+### Features
+
+* Publish SDK to npm ([ef1a576](https://github.com/clear-street/clear-street-typescript/commit/ef1a576c5792e94b68395a48f1c01633058c73ed))
+
 ## 0.71.0 (2026-06-03)
 
 Full Changelog: [v0.70.0...v0.71.0](https://github.com/clear-street/clear-street-typescript/compare/v0.70.0...v0.71.0)
