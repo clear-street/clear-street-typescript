@@ -772,7 +772,7 @@ export interface OrderGetOrdersParams {
    * Comma-separated OEMS instrument UUIDs. Matches options orders whose resolved
    * underlier is any of the given IDs.
    */
-  underlying_instrument_ids?: string;
+  underlying_instrument_ids?: Array<string>;
 }
 
 export interface OrderReplaceOrderParams {

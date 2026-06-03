@@ -1,5 +1,5 @@
 {
-  "name": "@clear-street-internal/sdk",
+  "name": "@clear-street/clearstreet",
   "version": "0.69.0",
   "description": "The official TypeScript library for the Clear Street API",
   "author": "Clear Street <support@clearstreet.io>",

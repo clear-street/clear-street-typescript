@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as OmniAIAPI from './omni-ai';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -86,24 +87,19 @@ export interface DeleteEntitlementResponse {
   revoked: boolean;
 }
 
-/**
- * Stable entitlement agreement family key.
- */
-export type EntitlementAgreementKey = 'omni_account_data_access';
-
 export interface EntitlementAgreementResource {
   agreement_id: string;
 
   /**
    * Stable entitlement agreement family key.
    */
-  agreement_key: EntitlementAgreementKey;
+  agreement_key: OmniAIAPI.EntitlementAgreementKey;
 
   document_content: string;
 
   document_sha256: string;
 
-  entitlement_codes: Array<EntitlementCode>;
+  entitlement_codes: Array<OmniAIAPI.EntitlementCode>;
 
   title: string;
 
@@ -112,18 +108,13 @@ export interface EntitlementAgreementResource {
 
 export type EntitlementAgreementResourceList = Array<EntitlementAgreementResource>;
 
-/**
- * Stable entitlement code granted by an agreement.
- */
-export type EntitlementCode = 'omni.account_data';
-
 export interface EntitlementResource {
   agreement_id: string;
 
   /**
    * Stable entitlement code granted by an agreement.
    */
-  entitlement_code: EntitlementCode;
+  entitlement_code: OmniAIAPI.EntitlementCode;
 
   entitlement_id: string;
 
@@ -155,7 +146,7 @@ export interface EntitlementCreateEntitlementsParams {
 
   agreement_id: string;
 
-  entitlement_codes: Array<EntitlementCode>;
+  entitlement_codes: Array<OmniAIAPI.EntitlementCode>;
 }
 
 export interface EntitlementGetEntitlementsParams {
@@ -165,10 +156,8 @@ export interface EntitlementGetEntitlementsParams {
 export declare namespace Entitlements {
   export {
     type DeleteEntitlementResponse as DeleteEntitlementResponse,
-    type EntitlementAgreementKey as EntitlementAgreementKey,
     type EntitlementAgreementResource as EntitlementAgreementResource,
     type EntitlementAgreementResourceList as EntitlementAgreementResourceList,
-    type EntitlementCode as EntitlementCode,
     type EntitlementResource as EntitlementResource,
     type EntitlementResourceList as EntitlementResourceList,
     type EntitlementCreateEntitlementsResponse as EntitlementCreateEntitlementsResponse,

@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import ClearStreet from '@clear-street-internal/sdk';
+import ClearStreet from '@clear-street/clearstreet';
 
 const client = new ClearStreet({
   apiKey: 'My API Key',
@@ -128,7 +128,7 @@ describe('resource orders', () => {
           status: ['PENDING_NEW'],
           symbol: 'symbol',
           to: '2019-12-27T18:11:19.117Z',
-          underlying_instrument_ids: 'underlying_instrument_ids',
+          underlying_instrument_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
         },
         { path: '/_stainless_unknown_path' },
       ),

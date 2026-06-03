@@ -58,7 +58,10 @@ export class Watchlist extends APIResource {
    * );
    * ```
    */
-  deleteWatchlist(watchlistID: string, options?: RequestOptions): APIPromise<unknown> {
+  deleteWatchlist(
+    watchlistID: string,
+    options?: RequestOptions,
+  ): APIPromise<WatchlistDeleteWatchlistResponse> {
     return this._client.delete(path`/v1/watchlists/${watchlistID}`, options);
   }
 
@@ -80,7 +83,7 @@ export class Watchlist extends APIResource {
     itemID: string,
     params: WatchlistDeleteWatchlistItemParams,
     options?: RequestOptions,
-  ): APIPromise<unknown> {
+  ): APIPromise<WatchlistDeleteWatchlistItemResponse> {
     const { watchlist_id } = params;
     return this._client.delete(path`/v1/watchlists/${watchlist_id}/items/${itemID}`, options);
   }
@@ -214,9 +217,13 @@ export interface WatchlistCreateWatchlistResponse extends Shared.BaseResponse {
   data: WatchlistEntry;
 }
 
-export type WatchlistDeleteWatchlistResponse = unknown;
+export interface WatchlistDeleteWatchlistResponse extends Shared.BaseResponse {
+  data: null;
+}
 
-export type WatchlistDeleteWatchlistItemResponse = unknown;
+export interface WatchlistDeleteWatchlistItemResponse extends Shared.BaseResponse {
+  data: null;
+}
 
 export interface WatchlistGetWatchlistByIDResponse extends Shared.BaseResponse {
   /**
