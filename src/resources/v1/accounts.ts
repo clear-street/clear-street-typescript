@@ -274,7 +274,7 @@ export interface AccountBalancesSod {
   asof?: string | null;
 
   /**
-   * Start-of-day day-trade buying power.
+   * @deprecated Start-of-day day-trade buying power.
    */
   day_trade_buying_power?: string | null;
 
@@ -320,7 +320,8 @@ export type AccountType = 'CUSTOMER' | 'OTHER';
 
 export interface MarginDetails {
   /**
-   * The number of day trades executed over the 5 most recent trading days.
+   * @deprecated The number of day trades executed over the 5 most recent trading
+   * days.
    */
   day_trade_count: number;
 
@@ -345,12 +346,14 @@ export interface MarginDetails {
   maintenance_margin_requirement: string;
 
   /**
-   * `true` if the account is currently flagged as a PDT, otherwise `false`.
+   * @deprecated `true` if the account is currently flagged as a PDT, otherwise
+   * `false`.
    */
   pattern_day_trader: boolean;
 
   /**
-   * The amount of day-trade buying power used during the current trading day.
+   * @deprecated The amount of day-trade buying power used during the current trading
+   * day.
    */
   day_trade_buying_power_usage?: string | null;
 
