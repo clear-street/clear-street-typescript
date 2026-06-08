@@ -238,7 +238,7 @@ export interface WatchlistGetWatchlistsResponse extends Shared.BaseResponse {
 
 export interface WatchlistAddWatchlistItemParams {
   /**
-   * OEMS instrument UUID
+   * Instrument identifier
    */
   instrument_id: OrdersAPI.InstrumentIDOrSymbol;
 }

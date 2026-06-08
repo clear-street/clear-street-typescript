@@ -540,7 +540,7 @@ export interface AccountPatchAccountByIDResponse extends Shared.BaseResponse {
 
 export interface AccountGetAccountBalancesParams {
   /**
-   * Limit the number of top margin contributors returned by the engine.
+   * Limit the number of top margin contributors returned.
    */
   top_margin_contributors_limit?: number;
 }

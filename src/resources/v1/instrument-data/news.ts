@@ -32,17 +32,17 @@ export class News extends APIResource {
  */
 export interface NewsInstrument {
   /**
-   * OEMS instrument UUID.
+   * Instrument identifier.
    */
   instrument_id: string;
 
   /**
-   * Instrument name/description, if available from instrument cache enrichment.
+   * Instrument name/description, if available.
    */
   name?: string | null;
 
   /**
-   * Trading symbol, if available from instrument cache enrichment.
+   * Trading symbol, if available.
    */
   symbol?: string | null;
 }
@@ -127,7 +127,7 @@ export interface NewsGetNewsParams {
   include_publishers?: string;
 
   /**
-   * Comma-delimited OEMS instrument UUIDs to filter by.
+   * Comma-delimited instrument identifiers to filter by.
    */
   instrument_ids?: Array<string>;
 

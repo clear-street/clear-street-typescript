@@ -179,7 +179,7 @@ export interface Position {
   available_quantity: string;
 
   /**
-   * OEMS instrument UUID
+   * Unique instrument identifier
    */
   instrument_id: string;
 
@@ -245,7 +245,7 @@ export interface Position {
   instrument_price?: string | null;
 
   /**
-   * OEMS instrument identifier of the underlying instrument, if resolvable
+   * Identifier of the underlying instrument, when available
    */
   underlying_instrument_id?: string | null;
 
@@ -337,21 +337,19 @@ export type PositionInstructionList = Array<PositionInstruction>;
 /**
  * Lifecycle status of a position instruction.
  *
- * - `SENT`: accepted and forwarded to the clearing venue.
+ * - `SENT`: accepted and submitted to the clearing venue.
  * - `ACCEPTED`: terminal — accepted by the clearing venue.
  * - `REJECTED`: terminal rejection from the clearing venue; `rejection_reason`
  *   carries the venue-reported detail.
- * - `ENGINE_REJECTED`: terminal rejection raised before the instruction reached
- *   the clearing venue; `rejection_reason` carries the detail. Typical causes:
- *   duplicate `instruction_id`, `DO_NOT_EXERCISE` / `CONTRARY_EXERCISE` submitted
- *   on a non-expiry day, insufficient position, or an instrument that does not
- *   resolve.
+ * - `ENGINE_REJECTED`: terminal rejection from validation; `rejection_reason`
+ *   carries the detail. Typical causes: duplicate `instruction_id`,
+ *   `DO_NOT_EXERCISE` / `CONTRARY_EXERCISE` submitted on a non-expiry day,
+ *   insufficient position, or an invalid instrument.
  * - `CANCEL_REQUESTED`: cancel accepted; final cancel state pending.
  * - `CANCELLED`: terminal — cancel completed.
  * - `CANCEL_FAILED`: cancel could not be completed; operator attention required.
  *   `rejection_reason` carries the detail.
- * - `UNKNOWN`: status could not be mapped from the upstream service. Not expected
- *   in practice; surfaces a service version skew.
+ * - `UNKNOWN`: status could not be determined.
  */
 export type PositionInstructionStatus =
   | 'SENT'
@@ -439,7 +437,7 @@ export interface PositionGetPositionInstructionsParams {
 
 export interface PositionGetPositionsParams {
   /**
-   * Comma-separated OEMS instrument UUIDs
+   * Comma-separated instrument identifiers
    */
   instrument_ids?: Array<string>;
 
