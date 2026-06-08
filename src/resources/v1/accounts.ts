@@ -336,6 +336,11 @@ export interface MarginDetails {
   initial_margin_requirement: string;
 
   /**
+   * Intraday session margin calculation details.
+   */
+  intraday_details: MarginSessionDetails;
+
+  /**
    * Maintenance margin excess for trade-date balances.
    */
   maintenance_margin_excess: string;
@@ -344,6 +349,11 @@ export interface MarginDetails {
    * Maintenance margin requirement for trade-date balances.
    */
   maintenance_margin_requirement: string;
+
+  /**
+   * Overnight session margin calculation details.
+   */
+  overnight_details: MarginSessionDetails;
 
   /**
    * @deprecated `true` if the account is currently flagged as a PDT, otherwise
@@ -378,6 +388,18 @@ export interface MarginDetailsUsage {
    * The amount of margin that is currently being utilized.
    */
   used: string;
+}
+
+export interface MarginSessionDetails {
+  /**
+   * Maximum buying power available in the account during the session.
+   */
+  buying_power: string;
+
+  /**
+   * Effective multiplier for margin calculations during the session.
+   */
+  multiplier?: string | null;
 }
 
 export interface MarginTopContributor {
@@ -568,6 +590,7 @@ export declare namespace Accounts {
     type AccountType as AccountType,
     type MarginDetails as MarginDetails,
     type MarginDetailsUsage as MarginDetailsUsage,
+    type MarginSessionDetails as MarginSessionDetails,
     type MarginTopContributor as MarginTopContributor,
     type MarginType as MarginType,
     type PortfolioHistoryResponse as PortfolioHistoryResponse,
