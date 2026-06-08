@@ -921,8 +921,7 @@ export interface InstrumentEventEnvelope {
   earnings_event_data?: InstrumentEarnings | null;
 
   /**
-   * OEMS instrument identifier, when the instrument is found in the instrument
-   * cache.
+   * Instrument identifier, when available.
    */
   instrument_id?: string | null;
 
@@ -1017,7 +1016,7 @@ export interface InstrumentEventsData {
   earnings: Array<InstrumentEarnings>;
 
   /**
-   * OEMS instrument UUID from the request
+   * Instrument identifier
    */
   instrument_id: string;
 
@@ -1408,7 +1407,7 @@ export interface InstrumentDataGetAllInstrumentEventsParams {
   from_date?: string;
 
   /**
-   * Filter by OEMS instrument ID(s). Comma-delimited list of UUIDs. Example:
+   * Filter by instrument ID(s). Comma-delimited list of UUIDs. Example:
    * `instrument_ids=550e8400-e29b-41d4-a716-446655440000`.
    */
   instrument_ids?: Array<string>;

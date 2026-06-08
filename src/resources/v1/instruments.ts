@@ -70,11 +70,9 @@ export class Instruments extends APIResource {
    * Search instruments by symbol, alternate identifier, or company name.
    *
    * The `q` parameter is case-insensitive and supports ticker symbols, alternate
-   * identifiers such as CUSIP, ISIN, OPRA root, and CMS identifiers, and company
-   * names for non-option instruments. Results are ranked by match quality plus
-   * instrument quality signals including log-scaled ADV, listing status,
-   * marginability, easy-to-borrow status, and OTC, restricted, and liquidation-only
-   * penalties. Defaults to the `EQUITY` asset class (common stocks, preferred
+   * identifiers such as CUSIP, ISIN, and OPRA root, and company names for non-option
+   * instruments. Results are ranked by match quality plus instrument quality signals
+   * and relevance. Defaults to the `EQUITY` asset class (common stocks, preferred
    * shares, ADRs, ETFs, and exchange-traded mutual funds). Pass `asset_class=OPTION`
    * to search option contracts: by full OSI symbol, by an OSI prefix (root +
    * `YYMMDD` expiry, e.g. `AAPL 261217`), or by a root-scoped phrase such as
@@ -109,7 +107,7 @@ export type ExerciseStyle = 'AMERICAN' | 'EUROPEAN';
  */
 export interface Instrument {
   /**
-   * Unique OEMS instrument identifier (UUID)
+   * Unique instrument identifier (UUID)
    */
   id: string;
 
@@ -200,9 +198,7 @@ export interface Instrument {
   name?: string | null;
 
   /**
-   * Notional ADV (`adv × previous_close`). The primary liquidity signal used by
-   * `/instruments/search` ranking. Computed at response time so it stays consistent
-   * with whatever `adv` and `previous_close` show.
+   * Notional average daily volume (ADV multiplied by previous close price).
    */
   notional_adv?: string | null;
 
@@ -230,7 +226,7 @@ export interface Instrument {
 
 export interface InstrumentCore {
   /**
-   * Unique OEMS instrument identifier (UUID)
+   * Unique instrument identifier (UUID)
    */
   id: string;
 
@@ -321,9 +317,7 @@ export interface InstrumentCore {
   name?: string | null;
 
   /**
-   * Notional ADV (`adv × previous_close`). The primary liquidity signal used by
-   * `/instruments/search` ranking. Computed at response time so it stays consistent
-   * with whatever `adv` and `previous_close` show.
+   * Notional average daily volume (ADV multiplied by previous close price).
    */
   notional_adv?: string | null;
 
@@ -355,7 +349,7 @@ export type ListingType = 'STANDARD' | 'FLEX' | 'OTC';
  */
 export interface OptionsContract {
   /**
-   * OEMS instrument identifier
+   * Instrument identifier
    */
   id: string;
 
@@ -420,7 +414,7 @@ export interface OptionsContract {
   open_interest?: number | null;
 
   /**
-   * OEMS instrument ID of the underlying instrument, if resolvable
+   * Instrument ID of the underlying instrument, when available
    */
   underlying_instrument_id?: string | null;
 }
@@ -460,7 +454,7 @@ export interface InstrumentGetInstrumentsParams {
   easy_to_borrow?: boolean;
 
   /**
-   * Comma-separated OEMS instrument UUIDs
+   * Comma-separated instrument identifiers
    */
   instrument_ids?: Array<string>;
 
@@ -536,7 +530,7 @@ export interface InstrumentGetOptionContractsParams {
   underlier?: string;
 
   /**
-   * OEMS instrument UUID or symbol of the underlying equity/index
+   * Instrument identifier or symbol of the underlying equity/index
    */
   underlying_instrument_id?: OrdersAPI.InstrumentIDOrSymbol;
 }
@@ -544,8 +538,8 @@ export interface InstrumentGetOptionContractsParams {
 export interface InstrumentSearchInstrumentsParams {
   /**
    * Search term applied case-insensitively to ticker symbols, alternate identifiers
-   * (CUSIP, ISIN, OPRA root, CMS), and company names for non-option instruments.
-   * Option searches match symbols and alternate identifiers.
+   * (CUSIP, ISIN, OPRA root), and company names for non-option instruments. Option
+   * searches match symbols and alternate identifiers.
    */
   q: string;
 
