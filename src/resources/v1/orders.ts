@@ -197,7 +197,7 @@ export interface Execution {
   id: string;
 
   /**
-   * OEMS instrument identifier.
+   * Unique instrument identifier.
    */
   instrument_id: string;
 
@@ -235,7 +235,7 @@ export interface Execution {
 export type ExecutionList = Array<Execution>;
 
 /**
- * OEMS instrument UUID
+ * Instrument identifier
  */
 export type InstrumentIDOrSymbol = string;
 
@@ -283,7 +283,7 @@ export interface NewOrderRequest {
   extended_hours?: boolean | null;
 
   /**
-   * OEMS instrument UUID
+   * Instrument identifier
    */
   instrument_id?: InstrumentIDOrSymbol | null;
 
@@ -344,7 +344,7 @@ export interface Order {
   account_id: number;
 
   /**
-   * Client-provided identifier echoed back (FIX tag 11).
+   * Client-provided identifier echoed back.
    */
   client_order_id: string;
 
@@ -359,7 +359,7 @@ export interface Order {
   filled_quantity: string;
 
   /**
-   * OEMS instrument UUID for the traded instrument.
+   * Instrument identifier for the traded instrument.
    */
   instrument_id: string;
 
@@ -491,9 +491,9 @@ export interface Order {
   trailing_watermark_ts?: string | null;
 
   /**
-   * OEMS instrument ID of the option's underlying instrument. Populated only for
-   * OPTIONS orders; `null` for non-options and for options whose underlier cannot be
-   * resolved from the instrument cache.
+   * Instrument ID of the option's underlying instrument. Populated only for options
+   * orders; `null` for non-options and for options whose underlier cannot be
+   * resolved.
    */
   underlying_instrument_id?: string | null;
 }
@@ -645,7 +645,7 @@ export interface OrderSubmitOrdersResponse extends Shared.BaseResponse {
 
 export interface OrderCancelAllOpenOrdersParams {
   /**
-   * Comma-separated OEMS instrument UUIDs
+   * Comma-separated instrument identifiers
    */
   instrument_ids?: Array<string>;
 
@@ -680,7 +680,7 @@ export interface OrderGetExecutionsParams {
 
   /**
    * Optional instrument to filter by. Accepts either a symbol (e.g. `AAPL`) or an
-   * OEMS instrument UUID.
+   * instrument identifier.
    */
   instrument_id?: InstrumentIDOrSymbol;
 
@@ -716,7 +716,7 @@ export interface OrderGetOrdersParams {
   from?: string;
 
   /**
-   * Comma-separated OEMS instrument UUIDs
+   * Comma-separated instrument identifiers
    */
   instrument_ids?: Array<string>;
 
@@ -769,7 +769,7 @@ export interface OrderGetOrdersParams {
   to?: string;
 
   /**
-   * Comma-separated OEMS instrument UUIDs. Matches options orders whose resolved
+   * Comma-separated instrument identifiers. Matches options orders whose resolved
    * underlier is any of the given IDs.
    */
   underlying_instrument_ids?: Array<string>;

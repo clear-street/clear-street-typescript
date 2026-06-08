@@ -10,18 +10,13 @@ import { RequestOptions } from '../../../internal/request-options';
  */
 export class MarketData extends APIResource {
   /**
-   * Returns the most recent OHLV and current price for the requested OEMS
-   * instruments. Backed by the in-memory Polygon snapshot cache.
+   * Returns the most recent open, high, low, volume (OHLV) and current price for the
+   * requested instruments.
    *
    * Response contract: every request returns one row per **unique** `instrument_id`,
    * in first-seen request order. Unresolvable IDs come back with `symbol = null` and
-   * every market-data field `null`; resolvable IDs with no cache entry come back
+   * every market-data field `null`; resolvable IDs with no available data come back
    * with `symbol` populated but market-data fields `null`.
-   *
-   * **Note (temporary):** ID resolution currently goes through the supplemental
-   * screener (OEMS instrument_id → FMP fmp_symbol → metadata_id → realtime cache).
-   * Removed when the market-data service serves daily aggregates directly, or when
-   * Polygon symbology is loaded into the instrument cache.
    *
    * @example
    * ```ts
@@ -69,7 +64,7 @@ export class MarketData extends APIResource {
  */
 export interface DailySummary {
   /**
-   * OEMS instrument identifier. Always populated; echoes the request ID.
+   * Unique instrument identifier. Always populated; echoes the request ID.
    */
   instrument_id: string;
 
@@ -111,7 +106,7 @@ export type DailySummaryList = Array<DailySummary>;
  */
 export interface MarketDataSnapshot {
   /**
-   * OEMS instrument identifier.
+   * Unique instrument identifier.
    */
   instrument_id: string;
 
@@ -157,7 +152,7 @@ export type MarketDataSnapshotList = Array<MarketDataSnapshot>;
 
 /**
  * Theoretical price and Greeks for an options snapshot. All values are **per
- * share** as published by RENG; no contract multiplier is applied.
+ * share**; no contract multiplier is applied.
  */
 export interface SnapshotGreeks {
   /**
@@ -191,7 +186,7 @@ export interface SnapshotGreeks {
   theta: string;
 
   /**
-   * Event timestamp published by RENG.
+   * Timestamp when the Greeks were calculated.
    */
   timestamp: string;
 
@@ -276,14 +271,14 @@ export interface MarketDataGetSnapshotsResponse extends Shared.BaseResponse {
 
 export interface MarketDataGetDailySummariesParams {
   /**
-   * Comma-separated OEMS instrument UUIDs (required, 1..=100)
+   * Comma-separated instrument identifiers (required, 1..=100)
    */
   instrument_ids: string;
 }
 
 export interface MarketDataGetSnapshotsParams {
   /**
-   * Comma-separated OEMS instrument UUIDs.
+   * Comma-separated instrument identifiers.
    */
   instrument_ids?: Array<string>;
 }

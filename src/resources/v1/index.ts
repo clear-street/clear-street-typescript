@@ -13,6 +13,7 @@ export {
   type AccountType,
   type MarginDetails,
   type MarginDetailsUsage,
+  type MarginSessionDetails,
   type MarginTopContributor,
   type MarginType,
   type PortfolioHistoryResponse,
