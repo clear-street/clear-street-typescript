@@ -8,8 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource instruments', () => {
-  // Mock server tests are disabled
-  test.skip('getInstrumentByID', async () => {
+  test('getInstrumentByID', async () => {
     const responsePromise = client.v1.instruments.getInstrumentByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -20,8 +19,7 @@ describe('resource instruments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstrumentByID: request options and params are passed correctly', async () => {
+  test('getInstrumentByID: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instruments.getInstrumentByID(
@@ -32,8 +30,7 @@ describe('resource instruments', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstruments', async () => {
+  test('getInstruments', async () => {
     const responsePromise = client.v1.instruments.getInstruments();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -44,8 +41,7 @@ describe('resource instruments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstruments: request options and params are passed correctly', async () => {
+  test('getInstruments: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instruments.getInstruments(
@@ -66,8 +62,7 @@ describe('resource instruments', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('getOptionContracts', async () => {
+  test('getOptionContracts', async () => {
     const responsePromise = client.v1.instruments.getOptionContracts();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -78,8 +73,7 @@ describe('resource instruments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getOptionContracts: request options and params are passed correctly', async () => {
+  test('getOptionContracts: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instruments.getOptionContracts(
@@ -96,8 +90,7 @@ describe('resource instruments', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('searchInstruments: only required params', async () => {
+  test('searchInstruments: only required params', async () => {
     const responsePromise = client.v1.instruments.searchInstruments({ q: 'q' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -108,8 +101,7 @@ describe('resource instruments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('searchInstruments: required and optional params', async () => {
+  test('searchInstruments: required and optional params', async () => {
     const response = await client.v1.instruments.searchInstruments({
       q: 'q',
       asset_class: 'asset_class',

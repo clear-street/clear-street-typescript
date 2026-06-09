@@ -8,8 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource instrumentData', () => {
-  // Mock server tests are disabled
-  test.skip('getAllInstrumentEvents', async () => {
+  test('getAllInstrumentEvents', async () => {
     const responsePromise = client.v1.instrumentData.getAllInstrumentEvents();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -20,8 +19,7 @@ describe('resource instrumentData', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getAllInstrumentEvents: request options and params are passed correctly', async () => {
+  test('getAllInstrumentEvents: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.getAllInstrumentEvents(
@@ -36,8 +34,7 @@ describe('resource instrumentData', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstrumentAnalystConsensus', async () => {
+  test('getInstrumentAnalystConsensus', async () => {
     const responsePromise = client.v1.instrumentData.getInstrumentAnalystConsensus(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     );
@@ -50,8 +47,7 @@ describe('resource instrumentData', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstrumentAnalystConsensus: request options and params are passed correctly', async () => {
+  test('getInstrumentAnalystConsensus: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.getInstrumentAnalystConsensus(
@@ -62,8 +58,7 @@ describe('resource instrumentData', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstrumentBalanceSheetStatements', async () => {
+  test('getInstrumentBalanceSheetStatements', async () => {
     const responsePromise = client.v1.instrumentData.getInstrumentBalanceSheetStatements(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     );
@@ -76,8 +71,7 @@ describe('resource instrumentData', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstrumentBalanceSheetStatements: request options and params are passed correctly', async () => {
+  test('getInstrumentBalanceSheetStatements: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.getInstrumentBalanceSheetStatements(
@@ -93,8 +87,7 @@ describe('resource instrumentData', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstrumentCashFlowStatements', async () => {
+  test('getInstrumentCashFlowStatements', async () => {
     const responsePromise = client.v1.instrumentData.getInstrumentCashFlowStatements(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     );
@@ -107,8 +100,7 @@ describe('resource instrumentData', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstrumentCashFlowStatements: request options and params are passed correctly', async () => {
+  test('getInstrumentCashFlowStatements: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.getInstrumentCashFlowStatements(
@@ -124,8 +116,7 @@ describe('resource instrumentData', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstrumentEvents', async () => {
+  test('getInstrumentEvents', async () => {
     const responsePromise = client.v1.instrumentData.getInstrumentEvents(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     );
@@ -138,8 +129,7 @@ describe('resource instrumentData', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstrumentEvents: request options and params are passed correctly', async () => {
+  test('getInstrumentEvents: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.getInstrumentEvents(
@@ -150,8 +140,7 @@ describe('resource instrumentData', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstrumentFundamentals', async () => {
+  test('getInstrumentFundamentals', async () => {
     const responsePromise = client.v1.instrumentData.getInstrumentFundamentals(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     );
@@ -164,8 +153,7 @@ describe('resource instrumentData', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstrumentIncomeStatements', async () => {
+  test('getInstrumentIncomeStatements', async () => {
     const responsePromise = client.v1.instrumentData.getInstrumentIncomeStatements(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     );
@@ -178,8 +166,7 @@ describe('resource instrumentData', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getInstrumentIncomeStatements: request options and params are passed correctly', async () => {
+  test('getInstrumentIncomeStatements: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.getInstrumentIncomeStatements(

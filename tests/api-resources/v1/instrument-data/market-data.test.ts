@@ -8,8 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource marketData', () => {
-  // Mock server tests are disabled
-  test.skip('getDailySummaries: only required params', async () => {
+  test('getDailySummaries: only required params', async () => {
     const responsePromise = client.v1.instrumentData.marketData.getDailySummaries({
       instrument_ids: 'instrument_ids',
     });
@@ -22,15 +21,13 @@ describe('resource marketData', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getDailySummaries: required and optional params', async () => {
+  test('getDailySummaries: required and optional params', async () => {
     const response = await client.v1.instrumentData.marketData.getDailySummaries({
       instrument_ids: 'instrument_ids',
     });
   });
 
-  // Mock server tests are disabled
-  test.skip('getSnapshots', async () => {
+  test('getSnapshots', async () => {
     const responsePromise = client.v1.instrumentData.marketData.getSnapshots();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -41,8 +38,7 @@ describe('resource marketData', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getSnapshots: request options and params are passed correctly', async () => {
+  test('getSnapshots: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.marketData.getSnapshots(

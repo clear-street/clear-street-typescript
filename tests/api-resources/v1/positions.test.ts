@@ -8,8 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource positions', () => {
-  // Mock server tests are disabled
-  test.skip('cancelPositionInstruction: only required params', async () => {
+  test('cancelPositionInstruction: only required params', async () => {
     const responsePromise = client.v1.positions.cancelPositionInstruction(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 0 },
@@ -23,16 +22,14 @@ describe('resource positions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('cancelPositionInstruction: required and optional params', async () => {
+  test('cancelPositionInstruction: required and optional params', async () => {
     const response = await client.v1.positions.cancelPositionInstruction(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 0 },
     );
   });
 
-  // Mock server tests are disabled
-  test.skip('closePosition: only required params', async () => {
+  test('closePosition: only required params', async () => {
     const responsePromise = client.v1.positions.closePosition('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: 0,
     });
@@ -45,16 +42,14 @@ describe('resource positions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('closePosition: required and optional params', async () => {
+  test('closePosition: required and optional params', async () => {
     const response = await client.v1.positions.closePosition('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: 0,
       cancel_orders: false,
     });
   });
 
-  // Mock server tests are disabled
-  test.skip('closePositions', async () => {
+  test('closePositions', async () => {
     const responsePromise = client.v1.positions.closePositions(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -65,16 +60,14 @@ describe('resource positions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('closePositions: request options and params are passed correctly', async () => {
+  test('closePositions: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.positions.closePositions(0, { cancel_orders: false }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('getPositionInstructions', async () => {
+  test('getPositionInstructions', async () => {
     const responsePromise = client.v1.positions.getPositionInstructions(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -85,8 +78,7 @@ describe('resource positions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getPositionInstructions: request options and params are passed correctly', async () => {
+  test('getPositionInstructions: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.positions.getPositionInstructions(
@@ -97,8 +89,7 @@ describe('resource positions', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('getPositions', async () => {
+  test('getPositions', async () => {
     const responsePromise = client.v1.positions.getPositions(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -109,8 +100,7 @@ describe('resource positions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getPositions: request options and params are passed correctly', async () => {
+  test('getPositions: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.positions.getPositions(
@@ -127,8 +117,7 @@ describe('resource positions', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('submitPositionInstructions: only required params', async () => {
+  test('submitPositionInstructions: only required params', async () => {
     const responsePromise = client.v1.positions.submitPositionInstructions(0, {
       instructions: [
         {
@@ -147,8 +136,7 @@ describe('resource positions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('submitPositionInstructions: required and optional params', async () => {
+  test('submitPositionInstructions: required and optional params', async () => {
     const response = await client.v1.positions.submitPositionInstructions(0, {
       instructions: [
         {

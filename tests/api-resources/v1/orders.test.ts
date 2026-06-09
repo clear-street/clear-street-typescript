@@ -8,8 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource orders', () => {
-  // Mock server tests are disabled
-  test.skip('cancelAllOpenOrders', async () => {
+  test('cancelAllOpenOrders', async () => {
     const responsePromise = client.v1.orders.cancelAllOpenOrders(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -20,8 +19,7 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('cancelAllOpenOrders: request options and params are passed correctly', async () => {
+  test('cancelAllOpenOrders: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.orders.cancelAllOpenOrders(
@@ -37,8 +35,7 @@ describe('resource orders', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('cancelOpenOrder: only required params', async () => {
+  test('cancelOpenOrder: only required params', async () => {
     const responsePromise = client.v1.orders.cancelOpenOrder('order_id', { account_id: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -49,13 +46,11 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('cancelOpenOrder: required and optional params', async () => {
+  test('cancelOpenOrder: required and optional params', async () => {
     const response = await client.v1.orders.cancelOpenOrder('order_id', { account_id: 0 });
   });
 
-  // Mock server tests are disabled
-  test.skip('getExecutions', async () => {
+  test('getExecutions', async () => {
     const responsePromise = client.v1.orders.getExecutions(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -66,8 +61,7 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getExecutions: request options and params are passed correctly', async () => {
+  test('getExecutions: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.orders.getExecutions(
@@ -84,8 +78,7 @@ describe('resource orders', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('getOrderByID: only required params', async () => {
+  test('getOrderByID: only required params', async () => {
     const responsePromise = client.v1.orders.getOrderByID('order_id', { account_id: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -96,13 +89,11 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getOrderByID: required and optional params', async () => {
+  test('getOrderByID: required and optional params', async () => {
     const response = await client.v1.orders.getOrderByID('order_id', { account_id: 0 });
   });
 
-  // Mock server tests are disabled
-  test.skip('getOrders', async () => {
+  test('getOrders', async () => {
     const responsePromise = client.v1.orders.getOrders(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -113,8 +104,7 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getOrders: request options and params are passed correctly', async () => {
+  test('getOrders: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.orders.getOrders(
@@ -135,8 +125,7 @@ describe('resource orders', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('replaceOrder: only required params', async () => {
+  test('replaceOrder: only required params', async () => {
     const responsePromise = client.v1.orders.replaceOrder('order_id', { account_id: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -147,8 +136,7 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('replaceOrder: required and optional params', async () => {
+  test('replaceOrder: required and optional params', async () => {
     const response = await client.v1.orders.replaceOrder('order_id', {
       account_id: 0,
       limit_price: '150.50',
@@ -158,8 +146,7 @@ describe('resource orders', () => {
     });
   });
 
-  // Mock server tests are disabled
-  test.skip('submitOrders: only required params', async () => {
+  test('submitOrders: only required params', async () => {
     const responsePromise = client.v1.orders.submitOrders(0, {
       orders: [
         {
@@ -194,8 +181,7 @@ describe('resource orders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('submitOrders: required and optional params', async () => {
+  test('submitOrders: required and optional params', async () => {
     const response = await client.v1.orders.submitOrders(0, {
       orders: [
         {

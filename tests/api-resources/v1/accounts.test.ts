@@ -8,8 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource accounts', () => {
-  // Mock server tests are disabled
-  test.skip('getAccountBalances', async () => {
+  test('getAccountBalances', async () => {
     const responsePromise = client.v1.accounts.getAccountBalances(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -20,8 +19,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getAccountBalances: request options and params are passed correctly', async () => {
+  test('getAccountBalances: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.accounts.getAccountBalances(
@@ -32,8 +30,7 @@ describe('resource accounts', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('getAccountByID', async () => {
+  test('getAccountByID', async () => {
     const responsePromise = client.v1.accounts.getAccountByID(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -44,8 +41,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getAccounts', async () => {
+  test('getAccounts', async () => {
     const responsePromise = client.v1.accounts.getAccounts();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -56,8 +52,7 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getAccounts: request options and params are passed correctly', async () => {
+  test('getAccounts: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.accounts.getAccounts(
@@ -67,8 +62,7 @@ describe('resource accounts', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  // Mock server tests are disabled
-  test.skip('getPortfolioHistory: only required params', async () => {
+  test('getPortfolioHistory: only required params', async () => {
     const responsePromise = client.v1.accounts.getPortfolioHistory(0, { start_date: '2019-12-27' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -79,16 +73,14 @@ describe('resource accounts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getPortfolioHistory: required and optional params', async () => {
+  test('getPortfolioHistory: required and optional params', async () => {
     const response = await client.v1.accounts.getPortfolioHistory(0, {
       start_date: '2019-12-27',
       end_date: '2019-12-27',
     });
   });
 
-  // Mock server tests are disabled
-  test.skip('patchAccountByID', async () => {
+  test('patchAccountByID', async () => {
     const responsePromise = client.v1.accounts.patchAccountByID(0, {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
