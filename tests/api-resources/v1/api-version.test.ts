@@ -8,8 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource apiVersion', () => {
-  // Mock server tests are disabled
-  test.skip('getVersion', async () => {
+  test('getVersion', async () => {
     const responsePromise = client.v1.apiVersion.getVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

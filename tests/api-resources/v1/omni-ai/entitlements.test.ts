@@ -8,8 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource entitlements', () => {
-  // Mock server tests are disabled
-  test.skip('createEntitlements: only required params', async () => {
+  test('createEntitlements: only required params', async () => {
     const responsePromise = client.v1.omniAI.entitlements.createEntitlements({
       account_ids: [100019, 100021],
       agreement_id: '01JZ0000000000000000000000',
@@ -24,8 +23,7 @@ describe('resource entitlements', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('createEntitlements: required and optional params', async () => {
+  test('createEntitlements: required and optional params', async () => {
     const response = await client.v1.omniAI.entitlements.createEntitlements({
       account_ids: [100019, 100021],
       agreement_id: '01JZ0000000000000000000000',
@@ -33,8 +31,7 @@ describe('resource entitlements', () => {
     });
   });
 
-  // Mock server tests are disabled
-  test.skip('deleteEntitlement', async () => {
+  test('deleteEntitlement', async () => {
     const responsePromise = client.v1.omniAI.entitlements.deleteEntitlement('entitlement_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -45,8 +42,7 @@ describe('resource entitlements', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getEntitlementAgreements', async () => {
+  test('getEntitlementAgreements', async () => {
     const responsePromise = client.v1.omniAI.entitlements.getEntitlementAgreements();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -57,8 +53,7 @@ describe('resource entitlements', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getEntitlements', async () => {
+  test('getEntitlements', async () => {
     const responsePromise = client.v1.omniAI.entitlements.getEntitlements();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -69,8 +64,7 @@ describe('resource entitlements', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getEntitlements: request options and params are passed correctly', async () => {
+  test('getEntitlements: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.omniAI.entitlements.getEntitlements(

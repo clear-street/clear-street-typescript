@@ -8,7 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource websocket', () => {
-  // Mock server tests are disabled
+  // websocket upgrade endpoint is currently not modeled correctly for stainless
   test.skip('websocketHandler', async () => {
     const responsePromise = client.v1.websocket.websocketHandler();
     const rawResponse = await responsePromise.asResponse();
