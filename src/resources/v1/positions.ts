@@ -89,6 +89,12 @@ export class Positions extends APIResource {
    * Returns the current lifecycle state of the account's position instructions.
    * Optionally filter by a specific contract.
    *
+   * Note: instructions that fail pre-acceptance validation on `POST` — duplicates,
+   * `DO_NOT_EXERCISE` / `CONTRARY_EXERCISE` on a non-expiry day, insufficient
+   * position, or an unresolvable instrument — are rejected (with `status = REJECTED`
+   * and a `rejection_reason`) without being persisted, so they surface only in the
+   * `POST` response and never appear in this list.
+   *
    * @example
    * ```ts
    * const response =
@@ -127,14 +133,14 @@ export class Positions extends APIResource {
    *
    * - **All rows accepted** → `200 OK`. Every row is in `data` with `status = SENT`.
    * - **Partial success** → `207 Multi-Status`. `data` contains every row; rejected
-   *   rows carry `status = ENGINE_REJECTED` (or `REJECTED`) and `rejection_reason`.
-   *   The top-level `error` summarizes the batch failure.
+   *   rows carry `status = REJECTED` and `rejection_reason`. The top-level `error`
+   *   summarizes the batch failure.
    * - **All rows rejected** → `4xx`/`5xx`. The HTTP status reflects the aggregate
    *   cause: `409` when every row was a duplicate, `400` for validation failures
    *   like DNE/CEA on a non-expiry day, `503` if the clearing service is
-   *   unavailable. `data` still contains every row carrying
-   *   `status = ENGINE_REJECTED` and `rejection_reason` so callers can attribute
-   *   failures by `instruction_id`; the top-level `error` summarizes the batch.
+   *   unavailable. `data` still contains every row carrying `status = REJECTED` and
+   *   `rejection_reason` so callers can attribute failures by `instruction_id`; the
+   *   top-level `error` summarizes the batch.
    *
    * @example
    * ```ts
@@ -320,9 +326,9 @@ export interface PositionInstruction {
 
   /**
    * Human-readable explanation populated on any non-success terminal status —
-   * `REJECTED`, `ENGINE_REJECTED`, or `CANCEL_FAILED`. On a `207 Multi-Status` batch
-   * submit the top-level `error` field summarizes the batch; per-row detail
-   * continues to live here.
+   * `REJECTED` or `CANCEL_FAILED`. On a `207 Multi-Status` batch submit the
+   * top-level `error` field summarizes the batch; per-row detail continues to live
+   * here.
    */
   rejection_reason?: string | null;
 
@@ -339,12 +345,11 @@ export type PositionInstructionList = Array<PositionInstruction>;
  *
  * - `SENT`: accepted and submitted to the clearing venue.
  * - `ACCEPTED`: terminal — accepted by the clearing venue.
- * - `REJECTED`: terminal rejection from the clearing venue; `rejection_reason`
- *   carries the venue-reported detail.
- * - `ENGINE_REJECTED`: terminal rejection from validation; `rejection_reason`
- *   carries the detail. Typical causes: duplicate `instruction_id`,
- *   `DO_NOT_EXERCISE` / `CONTRARY_EXERCISE` submitted on a non-expiry day,
- *   insufficient position, or an invalid instrument.
+ * - `REJECTED`: terminal rejection; `rejection_reason` carries the detail. Covers
+ *   both venue-reported rejections and rejections raised before the instruction
+ *   reached the clearing venue (e.g. duplicate `instruction_id`, `DO_NOT_EXERCISE`
+ *   / `CONTRARY_EXERCISE` submitted on a non-expiry day, insufficient position, or
+ *   an instrument that does not resolve).
  * - `CANCEL_REQUESTED`: cancel accepted; final cancel state pending.
  * - `CANCELLED`: terminal — cancel completed.
  * - `CANCEL_FAILED`: cancel could not be completed; operator attention required.
@@ -355,7 +360,6 @@ export type PositionInstructionStatus =
   | 'SENT'
   | 'ACCEPTED'
   | 'REJECTED'
-  | 'ENGINE_REJECTED'
   | 'CANCEL_REQUESTED'
   | 'CANCELLED'
   | 'CANCEL_FAILED'
