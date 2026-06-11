@@ -8,8 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource calendar', () => {
-  // Mock server tests are disabled
-  test.skip('getClock', async () => {
+  test('getClock', async () => {
     const responsePromise = client.v1.calendar.getClock();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -20,8 +19,7 @@ describe('resource calendar', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getMarketHoursCalendar: only required params', async () => {
+  test('getMarketHoursCalendar: only required params', async () => {
     const responsePromise = client.v1.calendar.getMarketHoursCalendar({ date: 'date' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -32,8 +30,7 @@ describe('resource calendar', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getMarketHoursCalendar: required and optional params', async () => {
+  test('getMarketHoursCalendar: required and optional params', async () => {
     const response = await client.v1.calendar.getMarketHoursCalendar({ date: 'date', market: 'us_equities' });
   });
 });

@@ -8,8 +8,7 @@ const client = new ClearStreet({
 });
 
 describe('resource news', () => {
-  // Mock server tests are disabled
-  test.skip('getNews', async () => {
+  test('getNews', async () => {
     const responsePromise = client.v1.instrumentData.news.getNews();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -20,8 +19,7 @@ describe('resource news', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Mock server tests are disabled
-  test.skip('getNews: request options and params are passed correctly', async () => {
+  test('getNews: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.news.getNews(

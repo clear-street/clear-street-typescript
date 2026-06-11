@@ -201,4 +201,3 @@ export {
   type WatchlistDeleteWatchlistItemParams,
   type WatchlistGetWatchlistsParams,
 } from './watchlist';
-export { Websocket } from './websocket';

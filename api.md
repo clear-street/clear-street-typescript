@@ -379,9 +379,3 @@ Methods:
 - <code title="delete /v1/watchlists/{watchlist_id}/items/{item_id}">client.v1.watchlist.<a href="./src/resources/v1/watchlist.ts">deleteWatchlistItem</a>(itemID, { ...params }) -> WatchlistDeleteWatchlistItemResponse</code>
 - <code title="get /v1/watchlists/{watchlist_id}">client.v1.watchlist.<a href="./src/resources/v1/watchlist.ts">getWatchlistByID</a>(watchlistID) -> WatchlistGetWatchlistByIDResponse</code>
 - <code title="get /v1/watchlists">client.v1.watchlist.<a href="./src/resources/v1/watchlist.ts">getWatchlists</a>({ ...params }) -> WatchlistGetWatchlistsResponse</code>
-
-## Websocket
-
-Methods:
-
-- <code title="get /v1/ws">client.v1.websocket.<a href="./src/resources/v1/websocket.ts">websocketHandler</a>() -> void</code>
