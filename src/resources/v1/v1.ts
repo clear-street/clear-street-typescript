@@ -144,8 +144,6 @@ import {
   WatchlistGetWatchlistsResponse,
   WatchlistItemEntry,
 } from './watchlist';
-import * as WebsocketAPI from './websocket';
-import { Websocket } from './websocket';
 import * as InstrumentDataAPI from './instrument-data/instrument-data';
 import {
   AllEventsEventType,
@@ -223,7 +221,6 @@ export class V1 extends APIResource {
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
   positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
   watchlist: WatchlistAPI.Watchlist = new WatchlistAPI.Watchlist(this._client);
-  websocket: WebsocketAPI.Websocket = new WebsocketAPI.Websocket(this._client);
 }
 
 /**
@@ -240,7 +237,6 @@ V1.OmniAI = OmniAI;
 V1.Orders = Orders;
 V1.Positions = Positions;
 V1.Watchlist = Watchlist;
-V1.Websocket = Websocket;
 
 export declare namespace V1 {
   export { type SecurityType as SecurityType };
@@ -457,6 +453,4 @@ export declare namespace V1 {
     type WatchlistDeleteWatchlistItemParams as WatchlistDeleteWatchlistItemParams,
     type WatchlistGetWatchlistsParams as WatchlistGetWatchlistsParams,
   };
-
-  export { Websocket as Websocket };
 }
