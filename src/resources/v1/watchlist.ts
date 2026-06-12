@@ -193,12 +193,14 @@ export interface WatchlistItemEntry {
   added_at: string;
 
   /**
-   * Price when the item was added
+   * Price when the item was added When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   added_price?: string | null;
 
   /**
-   * Instrument details
+   * Instrument details When a null/undefined value is observed, it indicates that
+   * there is no available data.
    */
   instrument?: InstrumentsAPI.Instrument | null;
 }

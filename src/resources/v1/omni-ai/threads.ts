@@ -216,7 +216,7 @@ export interface Message {
   thread_id: string;
 
   /**
-   * Shared sanitized error payload.
+   * When a null/undefined value is observed, it indicates it does not apply.
    */
   error?: ResponsesAPI.ErrorStatus | null;
 }

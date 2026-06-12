@@ -142,7 +142,8 @@ export interface Account {
   type: AccountType;
 
   /**
-   * The date the account was closed, if applicable
+   * The date the account was closed, if applicable When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   close_date?: string | null;
 }
@@ -232,17 +233,20 @@ export interface AccountBalances {
   withdrawable_cash: string;
 
   /**
-   * Margin-account-only details.
+   * Margin-account-only details. When a null/undefined value is observed, it
+   * indicates it does not apply.
    */
   margin_details?: MarginDetails | null;
 
   /**
-   * Applied multiplier for margin calculations.
+   * Applied multiplier for margin calculations. When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   multiplier?: string | null;
 
   /**
-   * The total market value of all short positions.
+   * The total market value of all short positions. When null/undefined, the value
+   * should be assumed to be zero. The field is omitted to simplify the response.
    */
   short_market_value?: string | null;
 }
@@ -269,27 +273,32 @@ export interface AccountBalancesSod {
   short_market_value: string;
 
   /**
-   * Timestamp for the start-of-day values.
+   * Timestamp for the start-of-day values. When a null/undefined value is observed,
+   * it indicates that there is no available data.
    */
   asof?: string | null;
 
   /**
-   * @deprecated Start-of-day day-trade buying power.
+   * @deprecated Start-of-day day-trade buying power. When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   day_trade_buying_power?: string | null;
 
   /**
-   * Start-of-day maintenance margin excess.
+   * Start-of-day maintenance margin excess. When a null/undefined value is observed,
+   * it indicates it does not apply.
    */
   maintenance_margin_excess?: string | null;
 
   /**
-   * Start-of-day maintenance margin requirement.
+   * Start-of-day maintenance margin requirement. When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   maintenance_margin_requirement?: string | null;
 
   /**
-   * Start-of-day trade cash.
+   * Start-of-day trade cash. When a null/undefined value is observed, it indicates
+   * it does not apply.
    */
   trade_cash?: string | null;
 }
@@ -298,7 +307,8 @@ export type AccountList = Array<Account>;
 
 export interface AccountSettings {
   /**
-   * Risk settings for the account
+   * Risk settings for the account When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   risk?: RiskSettings | null;
 }
@@ -363,7 +373,8 @@ export interface MarginDetails {
 
   /**
    * @deprecated The amount of day-trade buying power used during the current trading
-   * day.
+   * day. When null/undefined, the value should be assumed to be zero. The field is
+   * omitted to simplify the response.
    */
   day_trade_buying_power_usage?: string | null;
 
@@ -373,7 +384,8 @@ export interface MarginDetails {
   top_contributors?: Array<MarginTopContributor>;
 
   /**
-   * Current usage totals.
+   * Current usage totals. When a null/undefined value is observed, it indicates that
+   * there is no available data.
    */
   usage?: MarginDetailsUsage | null;
 }
@@ -507,7 +519,8 @@ export interface PortfolioHistorySegment {
  */
 export interface RiskSettings {
   /**
-   * The maximum notional value available to the account
+   * The maximum notional value available to the account When a null/undefined value
+   * is observed, it indicates that there is no available data.
    */
   max_notional?: string | null;
 }

@@ -414,7 +414,8 @@ export interface Order {
   venue: string;
 
   /**
-   * Average fill price across all executions
+   * Average fill price across all executions When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   average_fill_price?: string | null;
 
@@ -425,7 +426,8 @@ export interface Order {
 
   /**
    * Timestamp when the order will expire (UTC). Present when time_in_force is
-   * GOOD_TILL_DATE.
+   * GOOD_TILL_DATE. When a null/undefined value is observed, it indicates it does
+   * not apply.
    */
   expires_at?: string | null;
 
@@ -435,65 +437,78 @@ export interface Order {
   extended_hours?: boolean | null;
 
   /**
-   * Limit offset for trailing stop-limit orders (signed)
+   * Limit offset for trailing stop-limit orders (signed) When a null/undefined value
+   * is observed, it indicates it does not apply.
    */
   limit_offset?: string | null;
 
   /**
-   * Limit price (for LIMIT and STOP_LIMIT orders)
+   * Limit price (for LIMIT and STOP_LIMIT orders) When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   limit_price?: string | null;
 
   /**
    * Parent order queue state, present when the order is awaiting release or
-   * released.
+   * released. When a null/undefined value is observed, it indicates it does not
+   * apply.
    */
   queue_state?: QueueState | null;
 
   /**
-   * Scheduled release time for orders awaiting release.
+   * Scheduled release time for orders awaiting release. When a null/undefined value
+   * is observed, it indicates it does not apply.
    */
   releases_at?: string | null;
 
   /**
-   * Stop price (for STOP and STOP_LIMIT orders)
+   * Stop price (for STOP and STOP_LIMIT orders) When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   stop_price?: string | null;
 
   /**
-   * Current trailing limit price computed by the trailing strategy
+   * Current trailing limit price computed by the trailing strategy When a
+   * null/undefined value is observed, it indicates it does not apply.
    */
   trailing_limit_px?: string | null;
 
   /**
-   * Trailing offset amount for trailing orders
+   * Trailing offset amount for trailing orders When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   trailing_offset?: string | null;
 
   /**
-   * Trailing offset type for trailing orders
+   * Trailing offset type for trailing orders When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   trailing_offset_type?: TrailingOffsetType | null;
 
   /**
-   * Current trailing stop price computed by the trailing strategy
+   * Current trailing stop price computed by the trailing strategy When a
+   * null/undefined value is observed, it indicates it does not apply.
    */
   trailing_stop_px?: string | null;
 
   /**
-   * Trailing watermark price for trailing orders
+   * Trailing watermark price for trailing orders When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   trailing_watermark_px?: string | null;
 
   /**
-   * Trailing watermark timestamp for trailing orders
+   * Trailing watermark timestamp for trailing orders When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   trailing_watermark_ts?: string | null;
 
   /**
    * Instrument ID of the option's underlying instrument. Populated only for options
-   * orders; `null` for non-options and for options whose underlier cannot be
-   * resolved.
+   * orders. A `null` means one of two things: the order is not an option, so the
+   * field does not apply; or the order is an option whose underlier has not yet been
+   * resolved. When a null/undefined value is observed, it indicates it does not
+   * apply.
    */
   underlying_instrument_id?: string | null;
 }
