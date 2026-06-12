@@ -69,32 +69,38 @@ export interface DailySummary {
   instrument_id: string;
 
   /**
-   * Session high.
+   * Session high. When a null/undefined value is observed, it indicates that there
+   * is no available data.
    */
   high?: string | null;
 
   /**
-   * Session low.
+   * Session low. When a null/undefined value is observed, it indicates that there is
+   * no available data.
    */
   low?: string | null;
 
   /**
-   * Opening price for the session.
+   * Opening price for the session. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   open?: string | null;
 
   /**
-   * Display symbol for the security. `None` for unresolvable IDs.
+   * Display symbol for the security. `None` for unresolvable IDs. When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   symbol?: string | null;
 
   /**
-   * Session date the OHLV represents, US/Eastern.
+   * Session date the OHLV represents, US/Eastern. When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   trade_date?: string | null;
 
   /**
-   * Session cumulative trading volume.
+   * Session cumulative trading volume. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   volume?: number | null;
 }
@@ -117,33 +123,40 @@ export interface MarketDataSnapshot {
 
   /**
    * Cumulative traded volume reported on the most recent trade, in shares for
-   * equities or contracts for options. Absent when no trade is available.
+   * equities or contracts for options. Absent when no trade is available. When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   cumulative_volume?: number | null;
 
   /**
    * Theoretical price and Greeks for option instruments. `None` for equities, and
-   * for options whose Greeks have not yet been observed
+   * for options whose Greeks have not yet been observed When a null/undefined value
+   * is observed, it indicates that there is no available data.
    */
   greeks?: SnapshotGreeks | null;
 
   /**
-   * Most recent quote if available.
+   * Most recent quote if available. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   last_quote?: SnapshotQuote | null;
 
   /**
-   * Most recent last-sale trade if available.
+   * Most recent last-sale trade if available. When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   last_trade?: SnapshotLastTrade | null;
 
   /**
-   * Security name if available.
+   * Security name if available. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   name?: string | null;
 
   /**
-   * Session metrics computed from previous close and last trade, if available.
+   * Session metrics computed from previous close and last trade, if available. When
+   * a null/undefined value is observed, it indicates that there is no available
+   * data.
    */
   session?: SnapshotSession | null;
 }
@@ -231,12 +244,14 @@ export interface SnapshotQuote {
   midpoint: string;
 
   /**
-   * Size at the best ask, in shares.
+   * Size at the best ask, in shares. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   ask_size?: number | null;
 
   /**
-   * Size at the best bid, in shares.
+   * Size at the best bid, in shares. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   bid_size?: number | null;
 }

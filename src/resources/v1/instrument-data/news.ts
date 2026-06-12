@@ -37,12 +37,14 @@ export interface NewsInstrument {
   instrument_id: string;
 
   /**
-   * Instrument name/description, if available.
+   * Instrument name/description, if available. When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   name?: string | null;
 
   /**
-   * Trading symbol, if available.
+   * Trading symbol, if available. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   symbol?: string | null;
 }
@@ -82,17 +84,20 @@ export interface NewsItem {
   url: string;
 
   /**
-   * URL of an associated image if provided by the source.
+   * URL of an associated image if provided by the source. When a null/undefined
+   * value is observed, it indicates that there is no available data.
    */
   image_url?: string | null;
 
   /**
-   * The primary domain/site of the publisher.
+   * The primary domain/site of the publisher. When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   site?: string | null;
 
   /**
-   * The full or excerpted article body.
+   * The full or excerpted article body. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   text?: string | null;
 }

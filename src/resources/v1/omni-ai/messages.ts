@@ -63,6 +63,10 @@ export class Messages extends APIResource {
 export interface CreateFeedbackResponse {
   created_at: string;
 
+  /**
+   * When a null/undefined value is observed, it indicates that there is no available
+   * data.
+   */
   feedback_id?: string | null;
 }
 

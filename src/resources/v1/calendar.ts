@@ -124,7 +124,8 @@ export interface MarketStatus {
   is_open: boolean;
 
   /**
-   * Current session type if market is open, null if closed
+   * Current session type if market is open, null if closed When a null/undefined
+   * value is observed, it indicates it does not apply.
    */
   current_session?: MarketSessionType | null;
 }
@@ -150,12 +151,13 @@ export interface SessionSchedule {
 
   /**
    * ISO 8601 duration until session closes. Null if session is not currently open.
+   * When a null/undefined value is observed, it indicates it does not apply.
    */
   time_until_close?: string | null;
 
   /**
    * ISO 8601 duration until session opens. Null if session has already started or
-   * closed.
+   * closed. When a null/undefined value is observed, it indicates it does not apply.
    */
   time_until_open?: string | null;
 }
@@ -165,17 +167,20 @@ export interface SessionSchedule {
  */
 export interface TradingSessions {
   /**
-   * After-hours session schedule, null if not available
+   * After-hours session schedule, null if not available When a null/undefined value
+   * is observed, it indicates it does not apply.
    */
   after_hours?: SessionSchedule | null;
 
   /**
-   * Pre-market session schedule, null if not available
+   * Pre-market session schedule, null if not available When a null/undefined value
+   * is observed, it indicates it does not apply.
    */
   pre_market?: SessionSchedule | null;
 
   /**
-   * Regular trading session schedule, null if holiday/weekend
+   * Regular trading session schedule, null if holiday/weekend When a null/undefined
+   * value is observed, it indicates it does not apply.
    */
   regular?: SessionSchedule | null;
 }

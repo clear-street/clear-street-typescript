@@ -81,6 +81,9 @@ export interface ErrorStatus {
 
   message: string;
 
+  /**
+   * When a null/undefined value is observed, it indicates it does not apply.
+   */
   details?: unknown | null;
 }
 
@@ -100,15 +103,19 @@ export interface Response {
   user_message_id: string;
 
   /**
-   * Dynamic response content container. May include thinking parts.
+   * When a null/undefined value is observed, it indicates that there is no available
+   * data.
    */
   content?: ResponseContent | null;
 
   /**
-   * Shared sanitized error payload.
+   * When a null/undefined value is observed, it indicates it does not apply.
    */
   error?: ErrorStatus | null;
 
+  /**
+   * When a null/undefined value is observed, it indicates it does not apply.
+   */
   output_message_id?: string | null;
 }
 

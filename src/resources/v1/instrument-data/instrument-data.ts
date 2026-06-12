@@ -264,17 +264,20 @@ export interface InstrumentAnalystConsensus {
   date: string;
 
   /**
-   * Count of individual analyst recommendations by category
+   * Count of individual analyst recommendations by category When a null/undefined
+   * value is observed, it indicates that there is no available data.
    */
   distribution?: AnalystDistribution | null;
 
   /**
-   * Aggregated analyst price target statistics
+   * Aggregated analyst price target statistics When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   price_target?: PriceTarget | null;
 
   /**
-   * Consensus analyst rating
+   * Consensus analyst rating When a null/undefined value is observed, it indicates
+   * that there is no available data.
    */
   rating?: AnalystRating | null;
 }
@@ -823,35 +826,41 @@ export interface InstrumentDividendEvent {
   ex_date: string;
 
   /**
-   * The declaration date of the dividend
+   * The declaration date of the dividend When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   declaration_date?: string | null;
 
   /**
-   * The dividend amount per share.
+   * The dividend amount per share. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   dividend_amount?: string | null;
 
   /**
-   * The dividend yield as a percentage of the stock price.
+   * The dividend yield as a percentage of the stock price. When a null/undefined
+   * value is observed, it indicates that there is no available data.
    */
   dividend_yield?: string | null;
 
   /**
-   * The frequency of the dividend payments (e.g., "Quarterly", "Annual").
+   * The frequency of the dividend payments (e.g., "Quarterly", "Annual"). When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   frequency?: string | null;
 
   /**
    * The payment date is the date on which a declared stock dividend is scheduled to
-   * be paid.
+   * be paid. When a null/undefined value is observed, it indicates that there is no
+   * available data.
    */
   payment_date?: string | null;
 
   /**
    * The record date, set by a company's board of directors, is when a company
    * compiles a list of shareholders of the stock for which it has declared a
-   * dividend.
+   * dividend. When a null/undefined value is observed, it indicates that there is no
+   * available data.
    */
   record_date?: string | null;
 }
@@ -866,32 +875,38 @@ export interface InstrumentEarnings {
   date: string;
 
   /**
-   * The actual earnings per share (EPS) for the period
+   * The actual earnings per share (EPS) for the period When a null/undefined value
+   * is observed, it indicates that there is no available data.
    */
   eps_actual?: string | null;
 
   /**
-   * The estimated earnings per share (EPS) for the period
+   * The estimated earnings per share (EPS) for the period When a null/undefined
+   * value is observed, it indicates that there is no available data.
    */
   eps_estimate?: string | null;
 
   /**
-   * The percentage difference between actual and estimated EPS
+   * The percentage difference between actual and estimated EPS When a null/undefined
+   * value is observed, it indicates that there is no available data.
    */
   eps_surprise_percent?: string | null;
 
   /**
-   * The actual total revenue for the period
+   * The actual total revenue for the period When a null/undefined value is observed,
+   * it indicates that there is no available data.
    */
   revenue_actual?: string | null;
 
   /**
-   * The estimated total revenue for the period
+   * The estimated total revenue for the period When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   revenue_estimate?: string | null;
 
   /**
-   * The percentage difference between actual and estimated revenue
+   * The percentage difference between actual and estimated revenue When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   revenue_surprise_percent?: string | null;
 }
@@ -911,37 +926,44 @@ export interface InstrumentEventEnvelope {
   type: AllEventsEventType;
 
   /**
-   * Dividend payload when type is DIVIDEND.
+   * Dividend payload when type is DIVIDEND. When a null/undefined value is observed,
+   * it indicates it does not apply.
    */
   dividend_event_data?: InstrumentDividendEvent | null;
 
   /**
-   * Earnings payload when type is EARNINGS.
+   * Earnings payload when type is EARNINGS. When a null/undefined value is observed,
+   * it indicates it does not apply.
    */
   earnings_event_data?: InstrumentEarnings | null;
 
   /**
-   * Instrument identifier, when available.
+   * Instrument identifier, when available. When a null/undefined value is observed,
+   * it indicates that there is no available data.
    */
   instrument_id?: string | null;
 
   /**
-   * IPO payload when type is IPO.
+   * IPO payload when type is IPO. When a null/undefined value is observed, it
+   * indicates it does not apply.
    */
   ipo_event_data?: InstrumentEventIpoItem | null;
 
   /**
-   * Instrument name associated with the event, when available.
+   * Instrument name associated with the event, when available. When a null/undefined
+   * value is observed, it indicates that there is no available data.
    */
   name?: string | null;
 
   /**
-   * The currency used for reporting financial data.
+   * The currency used for reporting financial data. When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   reporting_currency?: string | null;
 
   /**
-   * Stock split payload when type is STOCK_SPLIT.
+   * Stock split payload when type is STOCK_SPLIT. When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   stock_split_event_data?: InstrumentSplitEvent | null;
 }
@@ -951,37 +973,44 @@ export interface InstrumentEventEnvelope {
  */
 export interface InstrumentEventIpoItem {
   /**
-   * IPO action.
+   * IPO action. When a null/undefined value is observed, it indicates that there is
+   * no available data.
    */
   actions?: string | null;
 
   /**
-   * IPO announced timestamp.
+   * IPO announced timestamp. When a null/undefined value is observed, it indicates
+   * that there is no available data.
    */
   announced_at?: string | null;
 
   /**
-   * IPO company name.
+   * IPO company name. When a null/undefined value is observed, it indicates that
+   * there is no available data.
    */
   company?: string | null;
 
   /**
-   * IPO exchange.
+   * IPO exchange. When a null/undefined value is observed, it indicates that there
+   * is no available data.
    */
   exchange?: string | null;
 
   /**
-   * IPO market cap.
+   * IPO market cap. When a null/undefined value is observed, it indicates that there
+   * is no available data.
    */
   market_cap?: string | null;
 
   /**
-   * IPO price range.
+   * IPO price range. When a null/undefined value is observed, it indicates that
+   * there is no available data.
    */
   price_range?: string | null;
 
   /**
-   * IPO shares offered.
+   * IPO shares offered. When a null/undefined value is observed, it indicates that
+   * there is no available data.
    */
   shares?: string | null;
 }
@@ -1026,7 +1055,8 @@ export interface InstrumentEventsData {
   splits: Array<InstrumentSplitEvent>;
 
   /**
-   * The currency used for reporting financial data
+   * The currency used for reporting financial data When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   reporting_currency?: string | null;
 }
@@ -1036,78 +1066,93 @@ export interface InstrumentEventsData {
  */
 export interface InstrumentFundamentals {
   /**
-   * The average daily trading volume over the past 30 days
+   * The average daily trading volume over the past 30 days When a null/undefined
+   * value is observed, it indicates that there is no available data.
    */
   average_volume?: number | null;
 
   /**
    * The beta value, measuring the instrument's volatility relative to the overall
-   * market
+   * market When a null/undefined value is observed, it indicates that there is no
+   * available data.
    */
   beta?: string | null;
 
   /**
-   * A detailed description of the instrument or company
+   * A detailed description of the instrument or company When a null/undefined value
+   * is observed, it indicates that there is no available data.
    */
   description?: string | null;
 
   /**
-   * The trailing twelve months (TTM) dividend yield
+   * The trailing twelve months (TTM) dividend yield When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   dividend_yield?: string | null;
 
   /**
-   * The trailing twelve months (TTM) earnings per share
+   * The trailing twelve months (TTM) earnings per share When a null/undefined value
+   * is observed, it indicates that there is no available data.
    */
   earnings_per_share?: string | null;
 
   /**
-   * The highest price over the last 52 weeks
+   * The highest price over the last 52 weeks When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   fifty_two_week_high?: string | null;
 
   /**
-   * The lowest price over the last 52 weeks
+   * The lowest price over the last 52 weeks When a null/undefined value is observed,
+   * it indicates that there is no available data.
    */
   fifty_two_week_low?: string | null;
 
   /**
-   * The specific industry of the instrument's issuer
+   * The specific industry of the instrument's issuer When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   industry?: string | null;
 
   /**
-   * The date the instrument was first listed
+   * The date the instrument was first listed When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   list_date?: string | null;
 
   /**
-   * URL to a representative logo image for the instrument or issuer
+   * URL to a representative logo image for the instrument or issuer When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   logo_url?: string | null;
 
   /**
-   * The total market capitalization
+   * The total market capitalization When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   market_cap?: string | null;
 
   /**
-   * The closing price from the previous trading day
+   * The closing price from the previous trading day When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   previous_close?: string | null;
 
   /**
-   * The price-to-earnings (P/E) ratio for the trailing twelve months (TTM)
+   * The price-to-earnings (P/E) ratio for the trailing twelve months (TTM) When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   price_to_earnings?: string | null;
 
   /**
-   * The currency used for reporting financial data
+   * The currency used for reporting financial data When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   reporting_currency?: string | null;
 
   /**
-   * The business sector of the instrument's issuer
+   * The business sector of the instrument's issuer When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   sector?: string | null;
 }
