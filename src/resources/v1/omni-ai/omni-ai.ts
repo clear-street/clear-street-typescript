@@ -90,12 +90,14 @@ export interface ActionButton {
   label: string;
 
   /**
-   * Follow-up prompt to submit as the next user message.
+   * Follow-up prompt to submit as the next user message. When a null/undefined value
+   * is observed, it indicates it does not apply.
    */
   prompt?: PromptButtonAction | null;
 
   /**
-   * Structured action in the same message to execute on click.
+   * Structured action in the same message to execute on click. When a null/undefined
+   * value is observed, it indicates it does not apply.
    */
   structuredAction?: StructuredActionButtonAction | null;
 }
@@ -115,7 +117,8 @@ export interface ChartPayload {
   actionButtons?: Array<ActionButton>;
 
   /**
-   * Explicit series-driven chart definition.
+   * Explicit series-driven chart definition. When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   dataChart?: DataChart | null;
 }
@@ -221,12 +224,14 @@ export interface OpenChartAction {
   symbol: string;
 
   /**
-   * Additional chart configuration (indicators, overlays, etc.)
+   * Additional chart configuration (indicators, overlays, etc.) When a
+   * null/undefined value is observed, it indicates it does not apply.
    */
   extras?: unknown;
 
   /**
-   * Chart timeframe (e.g., "1D", "1W", "1M", "3M", "1Y", "5Y")
+   * Chart timeframe (e.g., "1D", "1W", "1M", "3M", "1Y", "5Y") When a null/undefined
+   * value is observed, it indicates it does not apply.
    */
   timeframe?: string | null;
 }
@@ -257,22 +262,26 @@ export interface OpenScreenerAction {
   filters: Array<ScreenerFilter>;
 
   /**
-   * Optional field/column selection for screener results.
+   * Optional field/column selection for screener results. When a null/undefined
+   * value is observed, it indicates it does not apply.
    */
   field_filter?: Array<string> | null;
 
   /**
-   * Optional page size.
+   * Optional page size. When a null/undefined value is observed, it indicates it
+   * does not apply.
    */
   page_size?: number | null;
 
   /**
-   * Optional sort field for screener rows.
+   * Optional sort field for screener rows. When a null/undefined value is observed,
+   * it indicates it does not apply.
    */
   sort_by?: string | null;
 
   /**
-   * Optional sort direction (`ASC` or `DESC`).
+   * Optional sort direction (`ASC` or `DESC`). When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   sort_direction?: string | null;
 }
@@ -413,7 +422,8 @@ export namespace StructuredAction {
  */
 export interface StructuredActionButtonAction {
   /**
-   * UUID of a `structured_action` content part in the same message.
+   * UUID of a `structured_action` content part in the same message. When a
+   * null/undefined value is observed, it indicates it does not apply.
    */
   actionId?: string | null;
 }

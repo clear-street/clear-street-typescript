@@ -215,55 +215,66 @@ export interface Position {
   symbol: string;
 
   /**
-   * The average price paid per share or contract for this position
+   * The average price paid per share or contract for this position When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   avg_price?: string | null;
 
   /**
-   * The closing price used to value the position for the last trading day
+   * The closing price used to value the position for the last trading day When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   closing_price?: string | null;
 
   /**
-   * The market date associated with `closing_price`
+   * The market date associated with `closing_price` When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   closing_price_date?: string | null;
 
   /**
-   * The total cost basis for this position
+   * The total cost basis for this position When a null/undefined value is observed,
+   * it indicates that there is no available data.
    */
   cost_basis?: string | null;
 
   /**
    * The unrealized profit or loss for this position relative to the previous close
+   * When a null/undefined value is observed, it indicates that there is no available
+   * data.
    */
   daily_unrealized_pnl?: string | null;
 
   /**
    * The unrealized profit/loss for the position for the current day, expressed as a
-   * percentage of the baseline value (range: 0-100).
+   * percentage of the baseline value (range: 0-100). When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   daily_unrealized_pnl_pct?: string | null;
 
   /**
-   * The current market price of the instrument
+   * The current market price of the instrument When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   instrument_price?: string | null;
 
   /**
-   * Identifier of the underlying instrument, when available
+   * Identifier of the underlying instrument, when available When a null/undefined
+   * value is observed, it indicates it does not apply.
    */
   underlying_instrument_id?: string | null;
 
   /**
    * The total unrealized profit or loss for this position based on current market
-   * value
+   * value When a null/undefined value is observed, it indicates that there is no
+   * available data.
    */
   unrealized_pnl?: string | null;
 
   /**
    * The unrealized profit/loss for the position, expressed as a percentage of the
-   * position's cost basis (range: 0-100).
+   * position's cost basis (range: 0-100). When a null/undefined value is observed,
+   * it indicates that there is no available data.
    */
   unrealized_pnl_pct?: string | null;
 }
@@ -315,12 +326,14 @@ export interface PositionInstruction {
 
   /**
    * Number of contracts accepted by the clearing venue. Populated once the
-   * instruction reaches `ACCEPTED`.
+   * instruction reaches `ACCEPTED`. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   accepted_quantity?: string | null;
 
   /**
-   * When the instruction was first accepted by the service.
+   * When the instruction was first accepted by the service. When a null/undefined
+   * value is observed, it indicates that there is no available data.
    */
   created_at?: string | null;
 
@@ -328,12 +341,13 @@ export interface PositionInstruction {
    * Human-readable explanation populated on any non-success terminal status —
    * `REJECTED` or `CANCEL_FAILED`. On a `207 Multi-Status` batch submit the
    * top-level `error` field summarizes the batch; per-row detail continues to live
-   * here.
+   * here. When a null/undefined value is observed, it indicates it does not apply.
    */
   rejection_reason?: string | null;
 
   /**
-   * When the instruction's lifecycle state last changed.
+   * When the instruction's lifecycle state last changed. When a null/undefined value
+   * is observed, it indicates that there is no available data.
    */
   updated_at?: string | null;
 }

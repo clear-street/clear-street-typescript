@@ -173,53 +173,63 @@ export interface Instrument {
   venue: string;
 
   /**
-   * Average daily share volume from the security definition.
+   * Average daily share volume from the security definition. When a null/undefined
+   * value is observed, it indicates that there is no available data.
    */
   adv?: string | null;
 
   /**
-   * The expiration date for options instruments
+   * The expiration date for options instruments When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   expiry?: string | null;
 
   /**
-   * The type of security (e.g., Common Stock, ETF)
+   * The type of security (e.g., Common Stock, ETF) When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   instrument_type?: V1API.SecurityType | null;
 
   /**
-   * The percent of a long position's value you must post as margin
+   * The percent of a long position's value you must post as margin When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   long_margin_rate?: string | null;
 
   /**
-   * The full name of the instrument or its issuer
+   * The full name of the instrument or its issuer When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   name?: string | null;
 
   /**
-   * Notional average daily volume (ADV multiplied by previous close price).
+   * Notional average daily volume (ADV multiplied by previous close price). When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   notional_adv?: string | null;
 
   /**
    * Available options expiration dates for this instrument. Present only when
-   * `include_options_expiry_dates=true` in the request.
+   * `include_options_expiry_dates=true` in the request. When a null/undefined value
+   * is observed, it indicates it does not apply.
    */
   options_expiry_dates?: Array<string> | null;
 
   /**
-   * Last close price from the security definition.
+   * Last close price from the security definition. When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   previous_close?: string | null;
 
   /**
-   * The percent of a short position's value you must post as margin
+   * The percent of a short position's value you must post as margin When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   short_margin_rate?: string | null;
 
   /**
-   * The strike price for options instruments
+   * The strike price for options instruments When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   strike_price?: string | null;
 }
@@ -292,47 +302,56 @@ export interface InstrumentCore {
   venue: string;
 
   /**
-   * Average daily share volume from the security definition.
+   * Average daily share volume from the security definition. When a null/undefined
+   * value is observed, it indicates that there is no available data.
    */
   adv?: string | null;
 
   /**
-   * The expiration date for options instruments
+   * The expiration date for options instruments When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   expiry?: string | null;
 
   /**
-   * The type of security (e.g., Common Stock, ETF)
+   * The type of security (e.g., Common Stock, ETF) When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   instrument_type?: V1API.SecurityType | null;
 
   /**
-   * The percent of a long position's value you must post as margin
+   * The percent of a long position's value you must post as margin When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   long_margin_rate?: string | null;
 
   /**
-   * The full name of the instrument or its issuer
+   * The full name of the instrument or its issuer When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   name?: string | null;
 
   /**
-   * Notional average daily volume (ADV multiplied by previous close price).
+   * Notional average daily volume (ADV multiplied by previous close price). When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   notional_adv?: string | null;
 
   /**
-   * Last close price from the security definition.
+   * Last close price from the security definition. When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   previous_close?: string | null;
 
   /**
-   * The percent of a short position's value you must post as margin
+   * The percent of a short position's value you must post as margin When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   short_margin_rate?: string | null;
 
   /**
-   * The strike price for options instruments
+   * The strike price for options instruments When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   strike_price?: string | null;
 }
@@ -409,12 +428,14 @@ export interface OptionsContract {
   symbol: string;
 
   /**
-   * Open interest (number of outstanding contracts), if available
+   * Open interest (number of outstanding contracts), if available When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
   open_interest?: number | null;
 
   /**
-   * Instrument ID of the underlying instrument, when available
+   * Instrument ID of the underlying instrument, when available When a null/undefined
+   * value is observed, it indicates that there is no available data.
    */
   underlying_instrument_id?: string | null;
 }
