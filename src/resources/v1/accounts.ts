@@ -168,6 +168,16 @@ export interface AccountBalances {
   currency: string;
 
   /**
+   * Difference between current equity and start-of-day equity.
+   */
+  daily_change: string;
+
+  /**
+   * Total profit or loss since start of day.
+   */
+  daily_pnl: string;
+
+  /**
    * Realized profit or loss since start of day.
    */
   daily_realized_pnl: string;
@@ -216,6 +226,11 @@ export interface AccountBalances {
    * Trade-date effective cash.
    */
   trade_cash: string;
+
+  /**
+   * Total unrealized profit or loss across all open positions.
+   */
+  unrealized_pnl: string;
 
   /**
    * Trade-date unsettled cash credits.
