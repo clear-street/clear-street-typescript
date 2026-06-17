@@ -125,6 +125,37 @@ import {
   PositionType,
   Positions,
 } from './positions';
+import * as ScreenerAPI from './screener';
+import {
+  FieldLookback,
+  FieldPeriod,
+  FieldRef,
+  FieldType,
+  FilterOpSpec,
+  FilterOperator,
+  FilterValue,
+  Modifier,
+  ModifierOp,
+  OperatorArg,
+  Screener,
+  ScreenerColumn,
+  ScreenerCreateScreenerParams,
+  ScreenerCreateScreenerResponse,
+  ScreenerEntry,
+  ScreenerEntryList,
+  ScreenerFilter,
+  ScreenerGetScreenerByIDResponse,
+  ScreenerGetScreenersResponse,
+  ScreenerReplaceScreenerParams,
+  ScreenerReplaceScreenerResponse,
+  ScreenerRow,
+  ScreenerRowList,
+  ScreenerSearchScreenerParams,
+  ScreenerSearchScreenerResponse,
+  SearchFilter,
+  SortSpec,
+  Variable,
+} from './screener';
 import * as WatchlistAPI from './watchlist';
 import {
   AddWatchlistItemData,
@@ -205,7 +236,6 @@ import {
   PrefillNewOrderAction,
   PrefillOrderAction,
   PromptButtonAction,
-  ScreenerFilter,
   StructuredAction,
   StructuredActionButtonAction,
   SuggestedActionsPayload,
@@ -220,6 +250,7 @@ export class V1 extends APIResource {
   omniAI: OmniAIAPI.OmniAI = new OmniAIAPI.OmniAI(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
   positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
+  screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   watchlist: WatchlistAPI.Watchlist = new WatchlistAPI.Watchlist(this._client);
 }
 
@@ -227,6 +258,11 @@ export class V1 extends APIResource {
  * Security type
  */
 export type SecurityType = 'COMMON_STOCK' | 'OPTION' | 'CASH';
+
+/**
+ * Sort direction sorted results
+ */
+export type SortDirection = 'ASC' | 'DESC';
 
 V1.Accounts = Accounts;
 V1.APIVersion = APIVersion;
@@ -236,10 +272,11 @@ V1.Instruments = Instruments;
 V1.OmniAI = OmniAI;
 V1.Orders = Orders;
 V1.Positions = Positions;
+V1.Screener = Screener;
 V1.Watchlist = Watchlist;
 
 export declare namespace V1 {
-  export { type SecurityType as SecurityType };
+  export { type SecurityType as SecurityType, type SortDirection as SortDirection };
 
   export {
     Accounts as Accounts,
@@ -372,7 +409,6 @@ export declare namespace V1 {
     type PrefillNewOrderAction as PrefillNewOrderAction,
     type PrefillOrderAction as PrefillOrderAction,
     type PromptButtonAction as PromptButtonAction,
-    type ScreenerFilter as ScreenerFilter,
     type StructuredAction as StructuredAction,
     type StructuredActionButtonAction as StructuredActionButtonAction,
     type SuggestedActionsPayload as SuggestedActionsPayload,
@@ -433,6 +469,37 @@ export declare namespace V1 {
     type PositionGetPositionInstructionsParams as PositionGetPositionInstructionsParams,
     type PositionGetPositionsParams as PositionGetPositionsParams,
     type PositionSubmitPositionInstructionsParams as PositionSubmitPositionInstructionsParams,
+  };
+
+  export {
+    Screener as Screener,
+    type FieldLookback as FieldLookback,
+    type FieldPeriod as FieldPeriod,
+    type FieldRef as FieldRef,
+    type FieldType as FieldType,
+    type FilterOpSpec as FilterOpSpec,
+    type FilterOperator as FilterOperator,
+    type FilterValue as FilterValue,
+    type Modifier as Modifier,
+    type ModifierOp as ModifierOp,
+    type OperatorArg as OperatorArg,
+    type ScreenerColumn as ScreenerColumn,
+    type ScreenerEntry as ScreenerEntry,
+    type ScreenerEntryList as ScreenerEntryList,
+    type ScreenerFilter as ScreenerFilter,
+    type ScreenerRow as ScreenerRow,
+    type ScreenerRowList as ScreenerRowList,
+    type SearchFilter as SearchFilter,
+    type SortSpec as SortSpec,
+    type Variable as Variable,
+    type ScreenerCreateScreenerResponse as ScreenerCreateScreenerResponse,
+    type ScreenerGetScreenerByIDResponse as ScreenerGetScreenerByIDResponse,
+    type ScreenerGetScreenersResponse as ScreenerGetScreenersResponse,
+    type ScreenerReplaceScreenerResponse as ScreenerReplaceScreenerResponse,
+    type ScreenerSearchScreenerResponse as ScreenerSearchScreenerResponse,
+    type ScreenerCreateScreenerParams as ScreenerCreateScreenerParams,
+    type ScreenerReplaceScreenerParams as ScreenerReplaceScreenerParams,
+    type ScreenerSearchScreenerParams as ScreenerSearchScreenerParams,
   };
 
   export {

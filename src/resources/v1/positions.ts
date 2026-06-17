@@ -239,6 +239,12 @@ export interface Position {
   cost_basis?: string | null;
 
   /**
+   * The realized profit or loss for this position for the current day When a
+   * null/undefined value is observed, it indicates that there is no available data.
+   */
+  daily_realized_pnl?: string | null;
+
+  /**
    * The unrealized profit or loss for this position relative to the previous close
    * When a null/undefined value is observed, it indicates that there is no available
    * data.
@@ -481,7 +487,8 @@ export interface PositionGetPositionsParams {
     | 'MARKET_VALUE'
     | 'POSITION_TYPE'
     | 'UNREALIZED_PNL'
-    | 'DAILY_UNREALIZED_PNL';
+    | 'DAILY_UNREALIZED_PNL'
+    | 'DAILY_REALIZED_PNL';
 
   /**
    * Sort direction

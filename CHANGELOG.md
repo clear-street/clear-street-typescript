@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.78.0 (2026-06-17)
+
+Full Changelog: [v0.77.0...v0.78.0](https://github.com/clear-street/clear-street-typescript/compare/v0.77.0...v0.78.0)
+
+### Features
+
+* **api:** api update ([011c207](https://github.com/clear-street/clear-street-typescript/commit/011c207ba119bcf48d6c356a90c618c57f1601a1))
+* **api:** api update ([1e3195a](https://github.com/clear-street/clear-street-typescript/commit/1e3195a79326daf1fd9b3d9691cc08ec64bfaa5c))
+* **api:** api update ([ac482a6](https://github.com/clear-street/clear-street-typescript/commit/ac482a698ada3a4fe501fbf35a85343028432f85))
+
+
+### Bug Fixes
+
+* **client:** send content-type header for requests with an omitted optional body ([9c11728](https://github.com/clear-street/clear-street-typescript/commit/9c1172855d7673b22ee6a5885da451595187eb8d))
+
 ## 0.77.0 (2026-06-12)
 
 Full Changelog: [v0.76.0...v0.77.0](https://github.com/clear-street/clear-street-typescript/compare/v0.76.0...v0.77.0)
