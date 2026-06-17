@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as OmniAIAPI from './omni-ai';
 import * as OrdersAPI from '../orders';
+import * as ScreenerAPI from '../screener';
 import * as EntitlementsAPI from './entitlements';
 import {
   DeleteEntitlementResponse,
@@ -259,11 +260,16 @@ export interface OpenScreenerAction {
   /**
    * Filter criteria for the screener
    */
-  filters: Array<ScreenerFilter>;
+  filters: Array<ScreenerAPI.ScreenerFilter>;
 
   /**
    * Optional field/column selection for screener results. When a null/undefined
    * value is observed, it indicates it does not apply.
+   */
+  columns?: Array<string> | null;
+
+  /**
+   * @deprecated Deprecated: use `columns` instead. Mirrors `columns`.
    */
   field_filter?: Array<string> | null;
 
@@ -341,26 +347,6 @@ export interface PromptButtonAction {
    * Prompt text to submit as the next user turn.
    */
   prompt: string;
-}
-
-/**
- * A single filter criterion for the screener.
- */
-export interface ScreenerFilter {
-  /**
-   * Field to filter on (e.g., "market_cap", "sector", "price")
-   */
-  field: string;
-
-  /**
-   * Comparison operator (e.g., "eq", "gte", "lte", "in")
-   */
-  operator: string;
-
-  /**
-   * Filter value
-   */
-  value: unknown;
 }
 
 /**
@@ -465,7 +451,6 @@ export declare namespace OmniAI {
     type PrefillNewOrderAction as PrefillNewOrderAction,
     type PrefillOrderAction as PrefillOrderAction,
     type PromptButtonAction as PromptButtonAction,
-    type ScreenerFilter as ScreenerFilter,
     type StructuredAction as StructuredAction,
     type StructuredActionButtonAction as StructuredActionButtonAction,
     type SuggestedActionsPayload as SuggestedActionsPayload,

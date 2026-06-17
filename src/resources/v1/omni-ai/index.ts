@@ -44,7 +44,6 @@ export {
   type PrefillNewOrderAction,
   type PrefillOrderAction,
   type PromptButtonAction,
-  type ScreenerFilter,
   type StructuredAction,
   type StructuredActionButtonAction,
   type SuggestedActionsPayload,
