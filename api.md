@@ -11,6 +11,7 @@ Types:
 Types:
 
 - <code><a href="./src/resources/v1/v1.ts">SecurityType</a></code>
+- <code><a href="./src/resources/v1/v1.ts">SortDirection</a></code>
 
 ## Accounts
 
@@ -203,7 +204,6 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillNewOrderAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillOrderAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PromptButtonAction</a></code>
-- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ScreenerFilter</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">StructuredAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">StructuredActionButtonAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">SuggestedActionsPayload</a></code>
@@ -354,6 +354,44 @@ Methods:
 - <code title="get /v1/accounts/{account_id}/positions/instructions">client.v1.positions.<a href="./src/resources/v1/positions.ts">getPositionInstructions</a>(accountID, { ...params }) -> PositionGetPositionInstructionsResponse</code>
 - <code title="get /v1/accounts/{account_id}/positions">client.v1.positions.<a href="./src/resources/v1/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
 - <code title="post /v1/accounts/{account_id}/positions/instructions">client.v1.positions.<a href="./src/resources/v1/positions.ts">submitPositionInstructions</a>(accountID, [ ...instructions ]) -> PositionSubmitPositionInstructionsResponse</code>
+
+## Screener
+
+Types:
+
+- <code><a href="./src/resources/v1/screener.ts">FieldLookback</a></code>
+- <code><a href="./src/resources/v1/screener.ts">FieldPeriod</a></code>
+- <code><a href="./src/resources/v1/screener.ts">FieldRef</a></code>
+- <code><a href="./src/resources/v1/screener.ts">FieldType</a></code>
+- <code><a href="./src/resources/v1/screener.ts">FilterOpSpec</a></code>
+- <code><a href="./src/resources/v1/screener.ts">FilterOperator</a></code>
+- <code><a href="./src/resources/v1/screener.ts">FilterValue</a></code>
+- <code><a href="./src/resources/v1/screener.ts">Modifier</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ModifierOp</a></code>
+- <code><a href="./src/resources/v1/screener.ts">OperatorArg</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerColumn</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerEntry</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerEntryList</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerFilter</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerRow</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerRowList</a></code>
+- <code><a href="./src/resources/v1/screener.ts">SearchFilter</a></code>
+- <code><a href="./src/resources/v1/screener.ts">SortSpec</a></code>
+- <code><a href="./src/resources/v1/screener.ts">Variable</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerCreateScreenerResponse</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerGetScreenerByIDResponse</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerGetScreenersResponse</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerReplaceScreenerResponse</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerSearchScreenerResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/saved-screeners">client.v1.screener.<a href="./src/resources/v1/screener.ts">createScreener</a>({ ...params }) -> ScreenerCreateScreenerResponse</code>
+- <code title="delete /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/resources/v1/screener.ts">deleteScreener</a>(screenerID) -> void</code>
+- <code title="get /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/resources/v1/screener.ts">getScreenerByID</a>(screenerID) -> ScreenerGetScreenerByIDResponse</code>
+- <code title="get /v1/saved-screeners">client.v1.screener.<a href="./src/resources/v1/screener.ts">getScreeners</a>() -> ScreenerGetScreenersResponse</code>
+- <code title="put /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/resources/v1/screener.ts">replaceScreener</a>(screenerID, { ...params }) -> ScreenerReplaceScreenerResponse</code>
+- <code title="post /v1/screener">client.v1.screener.<a href="./src/resources/v1/screener.ts">searchScreener</a>({ ...params }) -> ScreenerSearchScreenerResponse</code>
 
 ## Watchlist
 
