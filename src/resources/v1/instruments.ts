@@ -179,8 +179,8 @@ export interface Instrument {
   adv?: string | null;
 
   /**
-   * The expiration date for options instruments When a null/undefined value is
-   * observed, it indicates it does not apply.
+   * @deprecated Deprecated. Always null. When a null/undefined value is observed, it
+   * indicates it does not apply.
    */
   expiry?: string | null;
 
@@ -228,8 +228,8 @@ export interface Instrument {
   short_margin_rate?: string | null;
 
   /**
-   * The strike price for options instruments When a null/undefined value is
-   * observed, it indicates it does not apply.
+   * @deprecated Deprecated. Always null. When a null/undefined value is observed, it
+   * indicates it does not apply.
    */
   strike_price?: string | null;
 }
@@ -308,8 +308,8 @@ export interface InstrumentCore {
   adv?: string | null;
 
   /**
-   * The expiration date for options instruments When a null/undefined value is
-   * observed, it indicates it does not apply.
+   * @deprecated Deprecated. Always null. When a null/undefined value is observed, it
+   * indicates it does not apply.
    */
   expiry?: string | null;
 
@@ -350,8 +350,8 @@ export interface InstrumentCore {
   short_margin_rate?: string | null;
 
   /**
-   * The strike price for options instruments When a null/undefined value is
-   * observed, it indicates it does not apply.
+   * @deprecated Deprecated. Always null. When a null/undefined value is observed, it
+   * indicates it does not apply.
    */
   strike_price?: string | null;
 }
@@ -475,7 +475,8 @@ export interface InstrumentGetInstrumentsParams {
   easy_to_borrow?: boolean;
 
   /**
-   * Comma-separated instrument identifiers
+   * Comma-separated instrument identifiers: unique identifiers or symbols (symbol
+   * for equities, OSI for options)
    */
   instrument_ids?: Array<string>;
 
