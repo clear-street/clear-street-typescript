@@ -741,6 +741,12 @@ export interface OrderGetOrdersParams {
   instrument_type?: 'COMMON_STOCK' | 'OPTION' | 'CASH';
 
   /**
+   * Comma-separated order IDs to filter by. When provided, only orders whose order
+   * ID is in this set are returned.
+   */
+  order_ids?: Array<string>;
+
+  /**
    * The number of items to return per page. Only used when page_token is not
    * provided.
    */
