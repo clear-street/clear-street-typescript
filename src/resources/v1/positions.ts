@@ -454,7 +454,8 @@ export interface PositionClosePositionsParams {
 
 export interface PositionGetPositionInstructionsParams {
   /**
-   * Limit results to a single contract. Accepts the instrument id or the OSI symbol.
+   * Limit results to a single contract. Instrument ID (UUID) or symbol (equity
+   * ticker or OSI option symbol).
    */
   instrument_id?: OrdersAPI.InstrumentIDOrSymbol;
 }

@@ -140,9 +140,9 @@ describe('resource orders', () => {
   test('replaceOrder: required and optional params', async () => {
     const response = await client.v1.orders.replaceOrder('order_id', {
       account_id: 0,
-      limit_price: '150.50',
-      quantity: '125',
-      stop_price: '148.00',
+      limit_price: '49.00',
+      quantity: '1',
+      stop_price: '52.00',
       time_in_force: 'DAY',
     });
   });
@@ -151,24 +151,9 @@ describe('resource orders', () => {
     const responsePromise = client.v1.orders.submitOrders(0, {
       orders: [
         {
-          legs: [
-            {
-              ratio: 'ratio',
-              security: '0193bb84-447a-706f-996f-097254663f02',
-              side: 'BUY',
-            },
-            {
-              ratio: 'ratio',
-              security: '0193bb84-4db4-78ec-b4fd-cba8be61cf8a',
-              side: 'SELL',
-            },
-            {
-              ratio: 'ratio',
-              security: '0193bb84-5264-7f20-8fd3-35df82cd6ef0',
-              side: 'BUY',
-            },
-          ],
           order_type: 'LIMIT',
+          quantity: '1',
+          side: 'BUY',
           time_in_force: 'DAY',
         },
       ],
@@ -186,34 +171,21 @@ describe('resource orders', () => {
     const response = await client.v1.orders.submitOrders(0, {
       orders: [
         {
-          legs: [
-            {
-              ratio: 'ratio',
-              security: '0193bb84-447a-706f-996f-097254663f02',
-              side: 'BUY',
-              id: '1',
-              position_effect: 'OPEN',
-            },
-            {
-              ratio: 'ratio',
-              security: '0193bb84-4db4-78ec-b4fd-cba8be61cf8a',
-              side: 'SELL',
-              id: '2',
-              position_effect: 'OPEN',
-            },
-            {
-              ratio: 'ratio',
-              security: '0193bb84-5264-7f20-8fd3-35df82cd6ef0',
-              side: 'BUY',
-              id: '3',
-              position_effect: 'OPEN',
-            },
-          ],
           order_type: 'LIMIT',
-          time_in_force: 'DAY',
-          id: 'my-mleg-ref-20251001-001',
-          limit_price: '0.50',
           quantity: '1',
+          side: 'BUY',
+          time_in_force: 'DAY',
+          id: 'my-ref-id-20251001-002',
+          expires_at: '2025-10-15T16:00:00.000000000Z',
+          extended_hours: true,
+          instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          limit_offset: '0.50',
+          limit_price: '48.00',
+          position_effect: 'OPEN',
+          stop_price: '52.00',
+          symbol: 'TSLA',
+          trailing_offset: '2.00',
+          trailing_offset_type: 'PRICE',
         },
       ],
     });
