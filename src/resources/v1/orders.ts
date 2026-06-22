@@ -135,24 +135,9 @@ export class Orders extends APIResource {
    * const response = await client.v1.orders.submitOrders(0, {
    *   orders: [
    *     {
-   *       legs: [
-   *         {
-   *           ratio: 'ratio',
-   *           security: '0193bb84-447a-706f-996f-097254663f02',
-   *           side: 'BUY',
-   *         },
-   *         {
-   *           ratio: 'ratio',
-   *           security: '0193bb84-4db4-78ec-b4fd-cba8be61cf8a',
-   *           side: 'SELL',
-   *         },
-   *         {
-   *           ratio: 'ratio',
-   *           security: '0193bb84-5264-7f20-8fd3-35df82cd6ef0',
-   *           side: 'BUY',
-   *         },
-   *       ],
    *       order_type: 'LIMIT',
+   *       quantity: '1',
+   *       side: 'BUY',
    *       time_in_force: 'DAY',
    *     },
    *   ],
@@ -308,8 +293,8 @@ export interface NewOrderRequest {
   stop_price?: string | null;
 
   /**
-   * Trading symbol. For equities, use the ticker symbol (e.g., "AAPL"). For options,
-   * use the OSI symbol (e.g., "AAPL 250117C00190000"). Either `symbol` or
+   * Trading symbol. For equities, use the ticker symbol (e.g., "TSLA"). For options,
+   * use the OSI symbol (e.g., "TSLA 250117C00190000"). Either `symbol` or
    * `instrument_id` must be provided.
    */
   symbol?: string | null;

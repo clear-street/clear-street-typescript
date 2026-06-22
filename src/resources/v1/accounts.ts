@@ -40,7 +40,13 @@ export class Accounts extends APIResource {
   }
 
   /**
-   * List accounts the authenticated user has permission to access
+   * List accounts the authenticated user has permission to access.
+   *
+   * Results can be narrowed with the optional `account_id` and `account_name`
+   * filters. `account_id` is a lexicographic prefix match on the decimal account id
+   * (e.g. `100` matches `100345` and `100567`); `account_name` is a case-insensitive
+   * substring match on the account's full name. When both are supplied an account
+   * must match both. When neither is supplied every accessible account is returned.
    *
    * @example
    * ```ts
@@ -574,6 +580,18 @@ export interface AccountGetAccountBalancesParams {
 }
 
 export interface AccountGetAccountsParams {
+  /**
+   * Filter to accounts whose id starts with this value (lexicographic prefix match
+   * on the decimal id, e.g. `100` matches `100345`).
+   */
+  account_id?: string;
+
+  /**
+   * Filter to accounts whose full name contains this value (case-insensitive
+   * substring match).
+   */
+  account_name?: string;
+
   /**
    * The number of items to return per page. Only used when page_token is not
    * provided.

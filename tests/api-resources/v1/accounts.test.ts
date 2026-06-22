@@ -56,7 +56,12 @@ describe('resource accounts', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.accounts.getAccounts(
-        { page_size: 1, page_token: 'U3RhaW5sZXNzIHJvY2tz' },
+        {
+          account_id: 'account_id',
+          account_name: 'account_name',
+          page_size: 1,
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);
