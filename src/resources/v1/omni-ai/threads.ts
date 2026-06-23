@@ -331,7 +331,7 @@ export interface ThreadGetThreadResponseResponse extends Shared.BaseResponse {
   /**
    * Dynamic pollable response.
    */
-  data: ResponsesAPI.Response;
+  data: ResponsesAPI.Response | null;
 }
 
 export interface ThreadGetThreadsResponse extends Shared.BaseResponse {
