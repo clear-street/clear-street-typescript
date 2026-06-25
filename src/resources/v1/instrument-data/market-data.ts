@@ -229,19 +229,10 @@ export interface SnapshotLastTrade {
  */
 export interface SnapshotQuote {
   /**
-   * Current best ask.
+   * Current best ask. Absent when no ask is available (one-sided quote). When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
-  ask: string;
-
-  /**
-   * Current best bid.
-   */
-  bid: string;
-
-  /**
-   * Midpoint of bid and ask.
-   */
-  midpoint: string;
+  ask?: string | null;
 
   /**
    * Size at the best ask, in shares. When a null/undefined value is observed, it
@@ -250,10 +241,22 @@ export interface SnapshotQuote {
   ask_size?: number | null;
 
   /**
+   * Current best bid. Absent when no bid is available (one-sided quote). When a
+   * null/undefined value is observed, it indicates that there is no available data.
+   */
+  bid?: string | null;
+
+  /**
    * Size at the best bid, in shares. When a null/undefined value is observed, it
    * indicates that there is no available data.
    */
   bid_size?: number | null;
+
+  /**
+   * Midpoint of bid and ask. Absent when either side is missing. When a
+   * null/undefined value is observed, it indicates that there is no available data.
+   */
+  midpoint?: string | null;
 }
 
 /**
