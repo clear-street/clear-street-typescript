@@ -395,7 +395,7 @@ export type PositionList = Array<Position>;
 /**
  * Position type classification
  */
-export type PositionType = 'LONG' | 'SHORT' | 'LONG_CALL' | 'SHORT_CALL' | 'LONG_PUT' | 'SHORT_PUT';
+export type PositionType = 'LONG' | 'SHORT';
 
 export interface PositionCancelPositionInstructionResponse extends Shared.BaseResponse {
   /**
