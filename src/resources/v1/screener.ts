@@ -288,11 +288,6 @@ export interface ScreenerEntry {
    */
   columns?: Array<FieldRef> | null;
 
-  /**
-   * @deprecated Deprecated: use `columns` instead. Mirrors `columns`.
-   */
-  field_filter?: Array<FieldRef> | null;
-
   sorts?: Array<SortSpec> | null;
 }
 
@@ -428,12 +423,6 @@ export interface ScreenerCreateScreenerParams {
   columns?: Array<FieldRef> | null;
 
   /**
-   * @deprecated Deprecated: use `columns` instead. Ignored when `columns` is
-   * provided.
-   */
-  field_filter?: Array<FieldRef> | null;
-
-  /**
    * Structured search filter criteria
    */
   filters?: Array<SearchFilter> | null;
@@ -456,12 +445,6 @@ export interface ScreenerReplaceScreenerParams {
   columns?: Array<FieldRef> | null;
 
   /**
-   * @deprecated Deprecated: use `columns` instead. Ignored when `columns` is
-   * provided.
-   */
-  field_filter?: Array<FieldRef> | null;
-
-  /**
    * Structured search filter criteria
    */
   filters?: Array<SearchFilter> | null;
@@ -482,12 +465,6 @@ export interface ScreenerSearchScreenerParams {
    * Subset of fields to include in the response.
    */
   columns?: Array<FieldRef> | null;
-
-  /**
-   * @deprecated Deprecated: use `columns` instead. Ignored when `columns` is
-   * provided.
-   */
-  field_filter?: Array<FieldRef> | null;
 
   /**
    * Filter conditions to apply.
