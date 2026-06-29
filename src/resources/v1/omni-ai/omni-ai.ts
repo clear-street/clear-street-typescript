@@ -269,11 +269,6 @@ export interface OpenScreenerAction {
   columns?: Array<string> | null;
 
   /**
-   * @deprecated Deprecated: use `columns` instead. Mirrors `columns`.
-   */
-  field_filter?: Array<string> | null;
-
-  /**
    * Optional page size. When a null/undefined value is observed, it indicates it
    * does not apply.
    */
