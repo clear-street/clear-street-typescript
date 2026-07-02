@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as OrdersAPI from './orders';
 import * as Shared from '../shared';
 import * as V1API from './v1';
 import { APIPromise } from '../../core/api-promise';
@@ -809,77 +808,7 @@ export interface OrderReplaceOrderParams {
 }
 
 export interface OrderSubmitOrdersParams {
-  orders: Array<OrderSubmitOrdersParams.NewOrderMultilegRequest | NewOrderRequest>;
-}
-
-export namespace OrderSubmitOrdersParams {
-  /**
-   * Multileg strategy order request
-   */
-  export interface NewOrderMultilegRequest {
-    /**
-     * Legs that compose the strategy.
-     */
-    legs: Array<NewOrderMultilegRequest.Leg>;
-
-    /**
-     * Type of order (currently MARKET or LIMIT for multileg strategy submission)
-     */
-    order_type: OrdersAPI.RequestOrderType;
-
-    /**
-     * Time in force
-     */
-    time_in_force: OrdersAPI.RequestTimeInForce;
-
-    /**
-     * Optional client-provided unique ID (idempotency). Required to be unique per
-     * account.
-     */
-    id?: string | null;
-
-    /**
-     * Strategy price, required for LIMIT orders.
-     */
-    limit_price?: string | null;
-
-    /**
-     * Optional strategy-level quantity. Multiplies leg quantities. Defaults to 1.
-     */
-    quantity?: string;
-  }
-
-  export namespace NewOrderMultilegRequest {
-    /**
-     * A single leg in a multileg strategy request.
-     */
-    export interface Leg {
-      /**
-       * Ratio for the leg.
-       */
-      ratio: string;
-
-      /**
-       * Trading symbol (e.g. "AAPL" or OSI symbol for options)
-       */
-      security: string;
-
-      /**
-       * Leg side.
-       */
-      side: OrdersAPI.Side;
-
-      /**
-       * Optional leg reference identifier.
-       */
-      id?: string | null;
-
-      /**
-       * Optional leg position effect.
-       */
-      position_effect?: OrdersAPI.PositionEffect | null;
-    }
-  }
+  orders: Array<NewOrderRequest>;
 }
 
 export declare namespace Orders {
