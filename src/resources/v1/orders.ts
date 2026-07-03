@@ -678,10 +678,11 @@ export interface OrderGetExecutionsParams {
   from?: string;
 
   /**
-   * Optional instrument to filter by. Accepts either a symbol (e.g. `AAPL`) or an
-   * instrument identifier.
+   * Comma-separated instrument identifiers (UUIDs) or symbols (e.g. `AAPL`) to
+   * filter by. When provided, only executions for any of the listed instruments are
+   * returned.
    */
-  instrument_id?: InstrumentIDOrSymbol;
+  instrument_ids?: Array<string>;
 
   /**
    * The number of items to return per page. Only used when page_token is not
