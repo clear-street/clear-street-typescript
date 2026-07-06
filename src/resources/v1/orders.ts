@@ -282,11 +282,6 @@ export interface NewOrderRequest {
   limit_price?: string | null;
 
   /**
-   * Required for options. Specifies whether the order opens or closes a position.
-   */
-  position_effect?: PositionEffect;
-
-  /**
    * Stop price (required for STOP and STOP_LIMIT orders)
    */
   stop_price?: string | null;
@@ -530,11 +525,6 @@ export type OrderType =
   | 'TRAILING_STOP'
   | 'TRAILING_STOP_LIMIT'
   | 'OTHER';
-
-/**
- * Position effect for options orders
- */
-export type PositionEffect = 'OPEN' | 'CLOSE';
 
 /**
  * Parent order queue or hold state.
@@ -823,7 +813,6 @@ export declare namespace Orders {
     type OrderList as OrderList,
     type OrderStatus as OrderStatus,
     type OrderType as OrderType,
-    type PositionEffect as PositionEffect,
     type QueueState as QueueState,
     type RequestOrderType as RequestOrderType,
     type RequestTimeInForce as RequestTimeInForce,
