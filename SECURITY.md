@@ -20,7 +20,7 @@ or products provided by Clear Street, please follow the respective company's sec
 
 ### Clear Street Terms and Policies
 
-Please contact support@clearstreet.io for any questions or concerns regarding the security of our services.
+Please contact concierge@clearstreet.com for any questions or concerns regarding the security of our services.
 
 ---
 
