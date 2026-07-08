@@ -54,13 +54,16 @@ export class MarketData extends APIResource {
  * Daily aggregate (OHLV) summary for a single instrument.
  *
  * Returned by `GET /market-data/daily-summary`. Every field except `instrument_id`
- * is `Option`:
+ * and `not_applicable` is `Option`:
  *
  * - Unresolvable `instrument_id` → all other fields `None` (including `symbol`).
  * - Resolvable `instrument_id` with no realtime cache entry → `symbol` populated,
  *   OHLV/`trade_date` `None`.
  * - `trade_date` reflects the session the OHLV represents (today during trading
  *   hours, the last trading date during weekends/holidays).
+ * - `not_applicable` is a non-optional `bool`, always serialized: `true` for
+ *   instrument types with no daily summary by definition (e.g. an index, whose
+ *   OHLV/`trade_date` are `None`), `false` otherwise.
  */
 export interface DailySummary {
   /**
@@ -79,6 +82,13 @@ export interface DailySummary {
    * no available data.
    */
   low?: string | null;
+
+  /**
+   * `true` when the instrument type has no daily summary by definition (e.g. an
+   * index). Distinguishes an intentional N/A from OHLV that is merely not loaded
+   * yet. `false` for instruments that can have a summary.
+   */
+  not_applicable?: boolean;
 
   /**
    * Opening price for the session. When a null/undefined value is observed, it
@@ -211,15 +221,21 @@ export interface SnapshotGreeks {
 
 /**
  * Last-trade fields for a market data snapshot.
+ *
+ * For index instruments this carries the current index _level_ — a computed value,
+ * not a trade: `price` is the level and `size` is always `0` (no contract changes
+ * hands).
  */
 export interface SnapshotLastTrade {
   /**
-   * Most recent last-sale eligible trade price.
+   * Most recent last-sale eligible trade price. For index instruments, the current
+   * index level.
    */
   price: string;
 
   /**
-   * Share quantity of the most recent last-sale eligible trade.
+   * Share quantity of the most recent last-sale eligible trade. Always `0` for index
+   * instruments, whose level is computed rather than traded.
    */
   size: number;
 }

@@ -68,7 +68,7 @@ describe('resource orders', () => {
         0,
         {
           from: '2019-12-27T18:11:19.117Z',
-          instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          instrument_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
           page_size: 1,
           page_token: 'U3RhaW5sZXNzIHJvY2tz',
           to: '2019-12-27T18:11:19.117Z',
@@ -181,7 +181,6 @@ describe('resource orders', () => {
           instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           limit_offset: '0.50',
           limit_price: '48.00',
-          position_effect: 'OPEN',
           stop_price: '52.00',
           symbol: 'TSLA',
           trailing_offset: '2.00',

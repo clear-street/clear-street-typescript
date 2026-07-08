@@ -1,4 +1,4 @@
 configured_endpoints: 61
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/clear-street/clear-street-778aab5bcb35ad542557833d9198158fff69771421393843317778f90be2c9f6.yml
-openapi_spec_hash: b5584a424c4072680789ee9f9b09d531
-config_hash: 3823311a3577c4e3cd71a1ea4ace533d
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/clear-street/clear-street-40da7e94732744170cdab22def04b1cf89b31a63e710c0df24423cc3e66d5f93.yml
+openapi_spec_hash: fb28d57a4a93cafbc03dcad0195ec9cc
+config_hash: b8709be7e90af8b662c266c55ba83ec3
