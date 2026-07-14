@@ -29,11 +29,13 @@ export class Calendar extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.calendar.getMarketHoursCalendar();
+   *   await client.v1.calendar.getMarketHoursCalendar({
+   *     date: 'date',
+   *   });
    * ```
    */
   getMarketHoursCalendar(
-    query: CalendarGetMarketHoursCalendarParams | null | undefined = {},
+    query: CalendarGetMarketHoursCalendarParams,
     options?: RequestOptions,
   ): APIPromise<CalendarGetMarketHoursCalendarResponse> {
     return this._client.get('/v1/calendars/market-hours', { query, ...options });
@@ -198,7 +200,7 @@ export interface CalendarGetMarketHoursCalendarParams {
   /**
    * The date to query market hours for (YYYY-MM-DD). Defaults to today.
    */
-  date?: string;
+  date: string;
 
   /**
    * Market type to query (us_equities, us_options). If omitted, returns all markets.
