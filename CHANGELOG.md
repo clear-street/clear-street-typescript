@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.84.1 (2026-07-11)
+
+Full Changelog: [v0.84.0...v0.84.1](https://github.com/clear-street/clear-street-typescript/compare/v0.84.0...v0.84.1)
+
+### Bug Fixes
+
+* **ci:** bump @arethetypeswrong/cli to ^0.18.0 and run CI workflows on Node 24 ([8edeeb0](https://github.com/clear-street/clear-street-typescript/commit/8edeeb0d647b9b6439e455fdcbeba4bd93b0da27))
+
 ## 0.84.0 (2026-07-08)
 
 Full Changelog: [v0.83.0...v0.84.0](https://github.com/clear-street/clear-street-typescript/compare/v0.83.0...v0.84.0)
