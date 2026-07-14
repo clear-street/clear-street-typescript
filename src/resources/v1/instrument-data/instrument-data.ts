@@ -1452,11 +1452,10 @@ export interface InstrumentDataGetAllInstrumentEventsParams {
   from_date?: string;
 
   /**
-   * Filter by instrument. Comma-separated instrument IDs (UUID) or symbols (equity
-   * tickers or OSI option symbols). Example:
-   * `instrument_ids=550e8400-e29b-41d4-a716-446655440000,AAPL`.
+   * Filter by instrument ID(s). Comma-delimited list of UUIDs. Example:
+   * `instrument_ids=550e8400-e29b-41d4-a716-446655440000`.
    */
-  instrument_ids?: Array<OrdersAPI.InstrumentIDOrSymbol>;
+  instrument_ids?: Array<string>;
 
   /**
    * The end date for the query range, inclusive (YYYY-MM-DD).

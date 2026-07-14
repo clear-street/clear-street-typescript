@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as OrdersAPI from '../orders';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
@@ -313,10 +312,9 @@ export interface MarketDataGetDailySummariesParams {
 
 export interface MarketDataGetSnapshotsParams {
   /**
-   * Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
-   * symbols).
+   * Comma-separated instrument identifiers.
    */
-  instrument_ids?: Array<OrdersAPI.InstrumentIDOrSymbol>;
+  instrument_ids?: Array<string>;
 }
 
 export declare namespace MarketData {
