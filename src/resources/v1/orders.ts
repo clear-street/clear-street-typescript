@@ -706,9 +706,10 @@ export interface OrderGetOrdersParams {
   from?: string;
 
   /**
-   * Comma-separated instrument identifiers
+   * Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+   * symbols).
    */
-  instrument_ids?: Array<string>;
+  instrument_ids?: Array<InstrumentIDOrSymbol>;
 
   /**
    * Instrument type filter (e.g., COMMON_STOCK, OPTION)
@@ -765,10 +766,11 @@ export interface OrderGetOrdersParams {
   to?: string;
 
   /**
-   * Comma-separated instrument identifiers. Matches options orders whose resolved
-   * underlier is any of the given IDs.
+   * Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+   * symbols). Matches options orders whose resolved underlier is any of the given
+   * instruments.
    */
-  underlying_instrument_ids?: Array<string>;
+  underlying_instrument_ids?: Array<InstrumentIDOrSymbol>;
 }
 
 export interface OrderReplaceOrderParams {
