@@ -408,6 +408,11 @@ export interface OptionsContract {
   is_marginable: boolean;
 
   /**
+   * Whether the contract is tradable
+   */
+  is_tradable: boolean;
+
+  /**
    * Listing type
    */
   listing_type: ListingType;
