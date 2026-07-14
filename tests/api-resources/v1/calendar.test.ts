@@ -19,8 +19,8 @@ describe('resource calendar', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getMarketHoursCalendar: only required params', async () => {
-    const responsePromise = client.v1.calendar.getMarketHoursCalendar({ date: 'date' });
+  test('getMarketHoursCalendar', async () => {
+    const responsePromise = client.v1.calendar.getMarketHoursCalendar();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,7 +30,13 @@ describe('resource calendar', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getMarketHoursCalendar: required and optional params', async () => {
-    const response = await client.v1.calendar.getMarketHoursCalendar({ date: 'date', market: 'us_equities' });
+  test('getMarketHoursCalendar: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.calendar.getMarketHoursCalendar(
+        { date: 'date', market: 'us_equities' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 });
