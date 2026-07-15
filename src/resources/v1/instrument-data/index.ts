@@ -23,6 +23,7 @@ export {
   type InstrumentIncomeStatementList,
   type InstrumentSplitEvent,
   type PriceTarget,
+  type ReportTime,
   type InstrumentDataGetAllInstrumentEventsResponse,
   type InstrumentDataGetInstrumentAnalystConsensusResponse,
   type InstrumentDataGetInstrumentBalanceSheetStatementsResponse,

@@ -104,6 +104,7 @@ Types:
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentIncomeStatementList</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentSplitEvent</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">PriceTarget</a></code>
+- <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">ReportTime</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentDataGetAllInstrumentEventsResponse</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentDataGetInstrumentAnalystConsensusResponse</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentDataGetInstrumentBalanceSheetStatementsResponse</a></code>
