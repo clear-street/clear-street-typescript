@@ -893,6 +893,12 @@ export interface InstrumentEarnings {
   eps_surprise_percent?: string | null;
 
   /**
+   * Report timing: before market open or after market close When a null/undefined
+   * value is observed, it indicates that there is no available data.
+   */
+  report_time?: ReportTime | null;
+
+  /**
    * The actual total revenue for the period When a null/undefined value is observed,
    * it indicates that there is no available data.
    */
@@ -1399,6 +1405,11 @@ export interface PriceTarget {
   low: string;
 }
 
+/**
+ * Earnings report timing: before market open or after market close
+ */
+export type ReportTime = 'BMO' | 'AMC';
+
 export interface InstrumentDataGetAllInstrumentEventsResponse extends Shared.BaseResponse {
   /**
    * All-events payload grouped by date.
@@ -1586,6 +1597,7 @@ export declare namespace InstrumentData {
     type InstrumentIncomeStatementList as InstrumentIncomeStatementList,
     type InstrumentSplitEvent as InstrumentSplitEvent,
     type PriceTarget as PriceTarget,
+    type ReportTime as ReportTime,
     type InstrumentDataGetAllInstrumentEventsResponse as InstrumentDataGetAllInstrumentEventsResponse,
     type InstrumentDataGetInstrumentAnalystConsensusResponse as InstrumentDataGetInstrumentAnalystConsensusResponse,
     type InstrumentDataGetInstrumentBalanceSheetStatementsResponse as InstrumentDataGetInstrumentBalanceSheetStatementsResponse,

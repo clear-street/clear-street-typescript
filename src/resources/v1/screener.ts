@@ -137,7 +137,7 @@ export type FieldLookback =
 /**
  * Reporting period for financial data fields.
  */
-export type FieldPeriod = 'QUARTER' | 'TRAILING_TWELVE_MONTHS';
+export type FieldPeriod = 'QUARTER' | 'TRAILING_TWELVE_MONTHS' | 'ANNUAL';
 
 /**
  * A reference to a screener field.

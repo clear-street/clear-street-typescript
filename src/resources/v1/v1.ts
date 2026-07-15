@@ -211,6 +211,7 @@ import {
   InstrumentIncomeStatementList,
   InstrumentSplitEvent,
   PriceTarget,
+  ReportTime,
 } from './instrument-data/instrument-data';
 import * as OmniAIAPI from './omni-ai/omni-ai';
 import {
@@ -351,6 +352,7 @@ export declare namespace V1 {
     type InstrumentIncomeStatementList as InstrumentIncomeStatementList,
     type InstrumentSplitEvent as InstrumentSplitEvent,
     type PriceTarget as PriceTarget,
+    type ReportTime as ReportTime,
     type InstrumentDataGetAllInstrumentEventsResponse as InstrumentDataGetAllInstrumentEventsResponse,
     type InstrumentDataGetInstrumentAnalystConsensusResponse as InstrumentDataGetInstrumentAnalystConsensusResponse,
     type InstrumentDataGetInstrumentBalanceSheetStatementsResponse as InstrumentDataGetInstrumentBalanceSheetStatementsResponse,
