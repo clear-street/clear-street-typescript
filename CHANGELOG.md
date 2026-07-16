@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.88.0 (2026-07-16)
+
+Full Changelog: [v0.87.0...v0.88.0](https://github.com/clear-street/clear-street-typescript/compare/v0.87.0...v0.88.0)
+
+### Features
+
+* **api:** api update ([5504267](https://github.com/clear-street/clear-street-typescript/commit/5504267c206b4e28d647fd9492ca3dfe8b902d10))
+
 ## 0.87.0 (2026-07-15)
 
 Full Changelog: [v0.86.0...v0.87.0](https://github.com/clear-street/clear-street-typescript/compare/v0.86.0...v0.87.0)
