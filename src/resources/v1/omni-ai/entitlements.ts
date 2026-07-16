@@ -109,8 +109,6 @@ export interface EntitlementAgreementResource {
 export type EntitlementAgreementResourceList = Array<EntitlementAgreementResource>;
 
 export interface EntitlementResource {
-  account_id: number;
-
   agreement_id: string;
 
   /**
@@ -121,6 +119,8 @@ export interface EntitlementResource {
   entitlement_id: string;
 
   granted_at: string;
+
+  trading_account_id: number;
 }
 
 export type EntitlementResourceList = Array<EntitlementResource>;
@@ -150,7 +150,7 @@ export interface EntitlementCreateEntitlementsParams {
 }
 
 export interface EntitlementGetEntitlementsParams {
-  account_id?: number;
+  trading_account_id?: number;
 }
 
 export declare namespace Entitlements {
