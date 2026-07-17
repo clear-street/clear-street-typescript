@@ -257,7 +257,7 @@ export class V1 extends APIResource {
 /**
  * Security type
  */
-export type SecurityType = 'COMMON_STOCK' | 'OPTION' | 'CASH';
+export type SecurityType = 'COMMON_STOCK' | 'INDEX' | 'OPTION' | 'CASH';
 
 /**
  * Sort direction sorted results

@@ -488,7 +488,7 @@ export interface InstrumentGetInstrumentsParams {
   /**
    * Filter by instrument type (e.g. COMMON_STOCK, OPTION)
    */
-  instrument_type?: 'COMMON_STOCK' | 'OPTION' | 'CASH';
+  instrument_type?: 'COMMON_STOCK' | 'INDEX' | 'OPTION' | 'CASH';
 
   /**
    * Filter by liquidation only status
