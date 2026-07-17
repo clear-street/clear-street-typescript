@@ -181,11 +181,6 @@ export interface Execution {
   id: string;
 
   /**
-   * Unique instrument identifier.
-   */
-  instrument_id: string;
-
-  /**
    * Identifier of the order this execution belongs to.
    */
   order_id: string;
@@ -206,14 +201,22 @@ export interface Execution {
   side: Side;
 
   /**
-   * Trading symbol.
-   */
-  symbol: string;
-
-  /**
    * Transaction timestamp in nanosecond precision (UTC).
    */
   transaction_time: string;
+
+  /**
+   * Unique instrument identifier. `null` when this fill has no single resolvable
+   * instrument. When a null/undefined value is observed, it indicates it does not
+   * apply.
+   */
+  instrument_id?: string | null;
+
+  /**
+   * Trading symbol. `null` when this fill has no single resolvable instrument. When
+   * a null/undefined value is observed, it indicates it does not apply.
+   */
+  symbol?: string | null;
 }
 
 export type ExecutionList = Array<Execution>;
@@ -338,16 +341,6 @@ export interface Order {
   filled_quantity: string;
 
   /**
-   * Instrument identifier for the traded instrument.
-   */
-  instrument_id: string;
-
-  /**
-   * Type of security
-   */
-  instrument_type: V1API.SecurityType;
-
-  /**
    * Remaining unfilled quantity
    */
   leaves_quantity: string;
@@ -371,11 +364,6 @@ export interface Order {
    * Current status of the order
    */
   status: OrderStatus;
-
-  /**
-   * Trading symbol
-   */
-  symbol: string;
 
   /**
    * Time in force instruction
@@ -416,6 +404,19 @@ export interface Order {
   extended_hours?: boolean | null;
 
   /**
+   * Instrument identifier for the traded instrument. `null` when the order has no
+   * single resolvable instrument. When a null/undefined value is observed, it
+   * indicates it does not apply.
+   */
+  instrument_id?: string | null;
+
+  /**
+   * Type of security. `null` when the order has no single resolvable instrument.
+   * When a null/undefined value is observed, it indicates it does not apply.
+   */
+  instrument_type?: V1API.SecurityType | null;
+
+  /**
    * Limit offset for trailing stop-limit orders (signed) When a null/undefined value
    * is observed, it indicates it does not apply.
    */
@@ -445,6 +446,12 @@ export interface Order {
    * observed, it indicates it does not apply.
    */
   stop_price?: string | null;
+
+  /**
+   * Trading symbol. `null` when the order has no single resolvable instrument. When
+   * a null/undefined value is observed, it indicates it does not apply.
+   */
+  symbol?: string | null;
 
   /**
    * Current trailing limit price computed by the trailing strategy When a
