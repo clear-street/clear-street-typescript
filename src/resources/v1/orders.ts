@@ -641,9 +641,10 @@ export interface OrderSubmitOrdersResponse extends Shared.BaseResponse {
 
 export interface OrderCancelAllOpenOrdersParams {
   /**
-   * Comma-separated instrument identifiers
+   * Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+   * symbols).
    */
-  instrument_ids?: Array<string>;
+  instrument_ids?: Array<InstrumentIDOrSymbol>;
 
   /**
    * Filter by instrument type (e.g., COMMON_STOCK, OPTION)
