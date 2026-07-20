@@ -539,6 +539,28 @@ export type OrderType =
 export type QueueState = 'AWAITING_RELEASE' | 'RELEASED';
 
 /**
+ * Request to replace (modify) an existing order
+ *
+ * At least one field must be provided.
+ */
+export interface ReplaceOrderRequest {
+  /**
+   * New limit price for the order
+   */
+  limit_price?: string | null;
+
+  /**
+   * New quantity for the order
+   */
+  quantity?: string | null;
+
+  /**
+   * New stop price for the order
+   */
+  stop_price?: string | null;
+}
+
+/**
  * Strict order-type enum for order submission/replacement requests.
  */
 export type RequestOrderType =
@@ -550,7 +572,7 @@ export type RequestOrderType =
   | 'TRAILING_STOP_LIMIT';
 
 /**
- * Strict time-in-force enum for order submission/replacement requests.
+ * Strict time-in-force enum for order submission requests.
  */
 export type RequestTimeInForce =
   | 'DAY'
@@ -801,11 +823,6 @@ export interface OrderReplaceOrderParams {
    * Body param: New stop price for the order
    */
   stop_price?: string | null;
-
-  /**
-   * Body param: New time in force for the order
-   */
-  time_in_force?: RequestTimeInForce;
 }
 
 export interface OrderSubmitOrdersParams {
@@ -824,6 +841,7 @@ export declare namespace Orders {
     type OrderStatus as OrderStatus,
     type OrderType as OrderType,
     type QueueState as QueueState,
+    type ReplaceOrderRequest as ReplaceOrderRequest,
     type RequestOrderType as RequestOrderType,
     type RequestTimeInForce as RequestTimeInForce,
     type Side as Side,
