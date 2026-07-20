@@ -41,6 +41,8 @@ export {
   type OpenEntitlementConsentAction,
   type OpenScreenerAction,
   type PrefillCancelOrderAction,
+  type PrefillModifyOrderAction,
+  type PrefillModifyOrderRequest,
   type PrefillNewOrderAction,
   type PrefillOrderAction,
   type PromptButtonAction,

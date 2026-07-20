@@ -143,7 +143,6 @@ describe('resource orders', () => {
       limit_price: '49.00',
       quantity: '1',
       stop_price: '52.00',
-      time_in_force: 'DAY',
     });
   });
 
