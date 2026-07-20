@@ -179,12 +179,6 @@ export interface Instrument {
   adv?: string | null;
 
   /**
-   * @deprecated Deprecated. Always null. When a null/undefined value is observed, it
-   * indicates it does not apply.
-   */
-  expiry?: string | null;
-
-  /**
    * The type of security (e.g., Common Stock, ETF) When a null/undefined value is
    * observed, it indicates that there is no available data.
    */
@@ -226,12 +220,6 @@ export interface Instrument {
    * null/undefined value is observed, it indicates that there is no available data.
    */
   short_margin_rate?: string | null;
-
-  /**
-   * @deprecated Deprecated. Always null. When a null/undefined value is observed, it
-   * indicates it does not apply.
-   */
-  strike_price?: string | null;
 }
 
 export interface InstrumentCore {
@@ -308,12 +296,6 @@ export interface InstrumentCore {
   adv?: string | null;
 
   /**
-   * @deprecated Deprecated. Always null. When a null/undefined value is observed, it
-   * indicates it does not apply.
-   */
-  expiry?: string | null;
-
-  /**
    * The type of security (e.g., Common Stock, ETF) When a null/undefined value is
    * observed, it indicates that there is no available data.
    */
@@ -348,12 +330,6 @@ export interface InstrumentCore {
    * null/undefined value is observed, it indicates that there is no available data.
    */
   short_margin_rate?: string | null;
-
-  /**
-   * @deprecated Deprecated. Always null. When a null/undefined value is observed, it
-   * indicates it does not apply.
-   */
-  strike_price?: string | null;
 }
 
 export type InstrumentCoreList = Array<InstrumentCore>;
