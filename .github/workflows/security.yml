@@ -1,0 +1,15 @@
+---
+name: CodeQL Scanning
+
+on:
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 8 * * 6"
+  workflow_dispatch:
+
+jobs:
+  orchestrator:
+    uses: clear-street-internal/actions/.github/workflows/run-codeql-scan.yml@v1
+    secrets: inherit
