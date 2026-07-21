@@ -1,0 +1,3 @@
+# Security-managed files — changes require Privacy & Security review.
+.github/workflows/security.yml @clear-street-internal/privsec
+CODEOWNERS                     @clear-street-internal/privsec
