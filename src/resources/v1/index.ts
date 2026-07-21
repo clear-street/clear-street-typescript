@@ -11,6 +11,8 @@ export {
   type AccountStatus,
   type AccountSubtype,
   type AccountType,
+  type AccountWithPersonalDetails,
+  type Address,
   type MarginDetails,
   type MarginDetailsUsage,
   type MarginSessionDetails,

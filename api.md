@@ -25,6 +25,8 @@ Types:
 - <code><a href="./src/resources/v1/accounts.ts">AccountStatus</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountSubtype</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountType</a></code>
+- <code><a href="./src/resources/v1/accounts.ts">AccountWithPersonalDetails</a></code>
+- <code><a href="./src/resources/v1/accounts.ts">Address</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginDetails</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginDetailsUsage</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginSessionDetails</a></code>
