@@ -28,7 +28,8 @@ export class Accounts extends APIResource {
   }
 
   /**
-   * Fetch account details by ID
+   * Fetch account details by ID, including the mailing address, date of birth, phone
+   * number, and country of tax residency of the account-holder entity when on file.
    *
    * @example
    * ```ts
@@ -349,6 +350,127 @@ export type AccountSubtype = 'CASH' | 'MARGIN' | 'OTHER';
  */
 export type AccountType = 'CUSTOMER' | 'OTHER';
 
+/**
+ * Represents a trading account
+ */
+export interface AccountWithPersonalDetails {
+  /**
+   * The unique identifier for the account
+   */
+  id: number;
+
+  /**
+   * The account holder entity identifier
+   */
+  account_holder_entity_id: number;
+
+  /**
+   * The full legal name of the account
+   */
+  full_name: string;
+
+  /**
+   * The date the account was opened
+   */
+  open_date: string;
+
+  /**
+   * The options level of the account
+   */
+  options_level: number;
+
+  /**
+   * The short name of the account
+   */
+  short_name: string;
+
+  /**
+   * The current status of the account
+   */
+  status: AccountStatus;
+
+  /**
+   * The sub-type of account
+   */
+  subtype: AccountSubtype;
+
+  /**
+   * The type of account
+   */
+  type: AccountType;
+
+  /**
+   * The date the account was closed, if applicable When a null/undefined value is
+   * observed, it indicates it does not apply.
+   */
+  close_date?: string | null;
+
+  /**
+   * The country of tax residency of the account-holder entity. `null` when not on
+   * file or entity reference data is unavailable. When a null/undefined value is
+   * observed, it indicates that there is no available data.
+   */
+  country_of_tax_residency?: string | null;
+
+  /**
+   * The date of birth of the account holder's primary contact. `null` when not on
+   * file or entity reference data is unavailable. When a null/undefined value is
+   * observed, it indicates that there is no available data.
+   */
+  date_of_birth?: string | null;
+
+  /**
+   * The mailing address of the account-holder entity. `null` when no mailing address
+   * is on file or entity reference data is unavailable. When a null/undefined value
+   * is observed, it indicates that there is no available data.
+   */
+  mailing_address?: Address | null;
+
+  /**
+   * The phone number of the account holder's primary contact. `null` when not on
+   * file or entity reference data is unavailable. When a null/undefined value is
+   * observed, it indicates that there is no available data.
+   */
+  phone_number?: string | null;
+}
+
+/**
+ * A postal address.
+ */
+export interface Address {
+  /**
+   * City
+   */
+  city: string;
+
+  /**
+   * Country
+   */
+  country: string;
+
+  /**
+   * First street address line
+   */
+  line1: string;
+
+  /**
+   * Postal code
+   */
+  postal_code: string;
+
+  /**
+   * Second street address line When a null/undefined value is observed, it indicates
+   * it does not apply.
+   */
+  line2?: string | null;
+
+  /**
+   * State or province When a null/undefined value is observed, it indicates it does
+   * not apply.
+   */
+  state?: string | null;
+}
+
 export interface MarginDetails {
   /**
    * @deprecated The number of day trades executed over the 5 most recent trading
@@ -557,7 +679,7 @@ export interface AccountGetAccountByIDResponse extends Shared.BaseResponse {
   /**
    * Represents a trading account
    */
-  data: Account;
+  data: AccountWithPersonalDetails;
 }
 
 export interface AccountGetAccountsResponse extends Shared.BaseResponse {
@@ -634,6 +756,8 @@ export declare namespace Accounts {
     type AccountStatus as AccountStatus,
     type AccountSubtype as AccountSubtype,
     type AccountType as AccountType,
+    type AccountWithPersonalDetails as AccountWithPersonalDetails,
+    type Address as Address,
     type MarginDetails as MarginDetails,
     type MarginDetailsUsage as MarginDetailsUsage,
     type MarginSessionDetails as MarginSessionDetails,
