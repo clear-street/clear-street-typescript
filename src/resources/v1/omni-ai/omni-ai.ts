@@ -298,6 +298,48 @@ export interface PrefillCancelOrderAction {
 }
 
 /**
+ * Modify-order prefill action.
+ */
+export interface PrefillModifyOrderAction {
+  /**
+   * Modification targets and deltas needed to construct replace-order API requests.
+   */
+  orders: Array<PrefillModifyOrderRequest>;
+}
+
+/**
+ * Request to replace (modify) an existing order
+ *
+ * At least one field must be provided.
+ */
+export interface PrefillModifyOrderRequest {
+  /**
+   * Account ID that owns the order.
+   */
+  account_id?: number;
+
+  /**
+   * New limit price for the order
+   */
+  limit_price?: string | null;
+
+  /**
+   * Order ID to modify.
+   */
+  order_id?: string;
+
+  /**
+   * New quantity for the order
+   */
+  quantity?: string | null;
+
+  /**
+   * New stop price for the order
+   */
+  stop_price?: string | null;
+}
+
+/**
  * New-order prefill action.
  */
 export interface PrefillNewOrderAction {
@@ -316,7 +358,8 @@ export interface PrefillNewOrderAction {
  */
 export type PrefillOrderAction =
   | PrefillOrderAction.PrefillNewOrderAction
-  | PrefillOrderAction.PrefillCancelOrderAction;
+  | PrefillOrderAction.PrefillCancelOrderAction
+  | PrefillOrderAction.PrefillModifyOrderAction;
 
 export namespace PrefillOrderAction {
   /**
@@ -331,6 +374,13 @@ export namespace PrefillOrderAction {
    */
   export interface PrefillCancelOrderAction extends OmniAIAPI.PrefillCancelOrderAction {
     action_type: 'CANCEL';
+  }
+
+  /**
+   * Modify one or more existing orders.
+   */
+  export interface PrefillModifyOrderAction extends OmniAIAPI.PrefillModifyOrderAction {
+    action_type: 'MODIFY';
   }
 }
 
@@ -443,6 +493,8 @@ export declare namespace OmniAI {
     type OpenEntitlementConsentAction as OpenEntitlementConsentAction,
     type OpenScreenerAction as OpenScreenerAction,
     type PrefillCancelOrderAction as PrefillCancelOrderAction,
+    type PrefillModifyOrderAction as PrefillModifyOrderAction,
+    type PrefillModifyOrderRequest as PrefillModifyOrderRequest,
     type PrefillNewOrderAction as PrefillNewOrderAction,
     type PrefillOrderAction as PrefillOrderAction,
     type PromptButtonAction as PromptButtonAction,

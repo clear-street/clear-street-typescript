@@ -25,6 +25,8 @@ Types:
 - <code><a href="./src/resources/v1/accounts.ts">AccountStatus</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountSubtype</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountType</a></code>
+- <code><a href="./src/resources/v1/accounts.ts">AccountWithPersonalDetails</a></code>
+- <code><a href="./src/resources/v1/accounts.ts">Address</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginDetails</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginDetailsUsage</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginSessionDetails</a></code>
@@ -202,6 +204,8 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenEntitlementConsentAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">OpenScreenerAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillCancelOrderAction</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillModifyOrderAction</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillModifyOrderRequest</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillNewOrderAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PrefillOrderAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">PromptButtonAction</a></code>
@@ -305,6 +309,7 @@ Types:
 - <code><a href="./src/resources/v1/orders.ts">OrderStatus</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderType</a></code>
 - <code><a href="./src/resources/v1/orders.ts">QueueState</a></code>
+- <code><a href="./src/resources/v1/orders.ts">ReplaceOrderRequest</a></code>
 - <code><a href="./src/resources/v1/orders.ts">RequestOrderType</a></code>
 - <code><a href="./src/resources/v1/orders.ts">RequestTimeInForce</a></code>
 - <code><a href="./src/resources/v1/orders.ts">Side</a></code>

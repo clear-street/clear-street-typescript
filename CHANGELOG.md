@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.91.0 (2026-07-21)
+
+Full Changelog: [v0.90.0...v0.91.0](https://github.com/clear-street/clear-street-typescript/compare/v0.90.0...v0.91.0)
+
+### Features
+
+* **api:** api update ([55473b0](https://github.com/clear-street/clear-street-typescript/commit/55473b0b72135d93a4f9c7b8ba14e2c32e870b0e))
+* **api:** api update ([88395bc](https://github.com/clear-street/clear-street-typescript/commit/88395bc2dc4728f6b183d9d606b3643ee34351e6))
+* **api:** api update ([f730618](https://github.com/clear-street/clear-street-typescript/commit/f7306189cdaf7a15a2589fd83235e2a4e82052e6))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([5088880](https://github.com/clear-street/clear-street-typescript/commit/5088880724d3e38e89b5cfdb1be9a51cfd4a265b))
+
 ## 0.90.0 (2026-07-17)
 
 Full Changelog: [v0.89.0...v0.90.0](https://github.com/clear-street/clear-street-typescript/compare/v0.89.0...v0.90.0)
