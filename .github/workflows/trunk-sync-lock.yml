@@ -1,0 +1,67 @@
+name: Trunk sync lock
+
+# OPTIONAL: copy into .github/workflows/ if your production repo takes community PRs
+# or if custom-code PRs merge on staging during release windows. This workflow posts
+# a `trunk-synced` status to open PRs against staging main.
+#
+# Make it a required check on staging. It gates PRs only; the back-sync pushes staging main directly.
+#
+# Never route the back-sync through a PR gated by this check or it deadlocks.
+# First-run: a check counts as "required" only after it reports once, so trigger this workflow once before marking trunk-synced required.
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+  workflow_run:
+    workflows: ['Sync SDK repos']
+    types: [completed]
+  repository_dispatch:
+    types: [prod-released]
+  workflow_dispatch: {}
+  schedule:
+    - cron: '*/30 * * * *'
+
+permissions:
+  contents: read
+  statuses: write
+  pull-requests: read
+
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+    if: github.repository == 'clear-street-internal/clear-street-active-typescript-staging'
+    env:
+      PRODUCTION_REPO: clear-street/clear-street-typescript
+    steps:
+      - uses: actions/create-github-app-token@v3
+        id: production-token
+        with:
+          client-id: ${{ secrets.STLC_CLIENT_ID_PROD }}
+          private-key: ${{ secrets.STLC_CLIENT_PRIVATE_KEY_PROD }}
+          owner: clear-street
+          repositories: clear-street-typescript
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Evaluate sync state and post status to open main PRs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PRODUCTION_TOKEN: ${{ steps.production-token.outputs.token }}
+        run: |
+          set -euo pipefail
+          git remote add production "https://x-access-token:${PRODUCTION_TOKEN}@github.com/${PRODUCTION_REPO}.git"
+          git fetch --no-tags production main
+          if git merge-base --is-ancestor production/main HEAD; then
+            state=success; desc="staging main is in sync with production"
+          else
+            state=failure; desc="production is ahead — wait for the back-sync before merging"
+          fi
+          echo "trunk-synced => $state ($desc)"
+          shas=$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --state open --json headRefOid --jq '.[].headRefOid')
+          if [ -z "$shas" ]; then echo "no open PRs targeting main"; exit 0; fi
+          for sha in $shas; do
+            gh api -X POST "repos/$GITHUB_REPOSITORY/statuses/$sha" \
+              -f state="$state" -f context="trunk-synced" -f description="$desc" >/dev/null
+            echo "posted trunk-synced=$state to $sha"
+          done

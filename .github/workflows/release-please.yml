@@ -1,0 +1,27 @@
+name: Release Please
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    if: github.repository == 'clear-street/clear-street-typescript'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/create-github-app-token@v3
+        id: production-token
+        with:
+          client-id: ${{ secrets.STLC_CLIENT_ID_PROD }}
+          private-key: ${{ secrets.STLC_CLIENT_PRIVATE_KEY_PROD }}
+          owner: clear-street
+          repositories: clear-street-typescript
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ steps.production-token.outputs.token }}
