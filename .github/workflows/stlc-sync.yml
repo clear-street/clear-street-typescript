@@ -68,10 +68,18 @@ jobs:
             echo "behind=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - uses: actions/create-github-app-token@v3
+        id: staging-token
+        if: steps.diff.outputs.behind == 'true'
+        with:
+          client-id: ${{ secrets.STLC_CLIENT_ID }}
+          private-key: ${{ secrets.STLC_PRIVATE_KEY }}
+          owner: clear-street-internal
+
       - name: Sync production to staging (fast-forward)
         if: steps.diff.outputs.behind == 'true'
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ steps.staging-token.outputs.token }}
         run: |
           # Refuse unless staging is an ancestor of production: otherwise the
           # trunks have forked and a fast-forward would be unsafe.
@@ -79,7 +87,7 @@ jobs:
             echo "::error title=Back-sync blocked::staging main is not an ancestor of production/main."
             exit 1
           fi
-          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git push origin production/main:refs/heads/main
           echo "Fast-forwarded staging/main to production/main."
 
