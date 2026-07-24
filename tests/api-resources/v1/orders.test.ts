@@ -25,7 +25,7 @@ describe('resource orders', () => {
       client.v1.orders.cancelAllOpenOrders(
         0,
         {
-          instrument_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+          instrument_ids: ['x'],
           instrument_type: 'COMMON_STOCK',
           side: 'BUY',
           type: 'MARKET',
@@ -68,7 +68,7 @@ describe('resource orders', () => {
         0,
         {
           from: '2019-12-27T18:11:19.117Z',
-          instrument_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+          instrument_ids: ['x'],
           page_size: 1,
           page_token: 'U3RhaW5sZXNzIHJvY2tz',
           to: '2019-12-27T18:11:19.117Z',
@@ -111,7 +111,7 @@ describe('resource orders', () => {
         0,
         {
           from: '2019-12-27T18:11:19.117Z',
-          instrument_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+          instrument_ids: ['x'],
           instrument_type: 'COMMON_STOCK',
           order_ids: ['string'],
           page_size: 1,
@@ -119,7 +119,7 @@ describe('resource orders', () => {
           status: ['PENDING_NEW'],
           symbol: 'symbol',
           to: '2019-12-27T18:11:19.117Z',
-          underlying_instrument_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+          underlying_instrument_ids: ['x'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -177,7 +177,7 @@ describe('resource orders', () => {
           id: 'my-ref-id-20251001-002',
           expires_at: '2025-10-15T16:00:00.000000000Z',
           extended_hours: true,
-          instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          instrument_id: 'x',
           limit_offset: '0.50',
           limit_price: '48.00',
           stop_price: '52.00',

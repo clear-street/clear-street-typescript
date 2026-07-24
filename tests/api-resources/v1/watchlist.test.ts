@@ -10,7 +10,7 @@ const client = new ClearStreet({
 describe('resource watchlist', () => {
   test('addWatchlistItem: only required params', async () => {
     const responsePromise = client.v1.watchlist.addWatchlistItem('550e8400-e29b-41d4-a716-446655440000', {
-      instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      instrument_id: 'x',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -23,7 +23,7 @@ describe('resource watchlist', () => {
 
   test('addWatchlistItem: required and optional params', async () => {
     const response = await client.v1.watchlist.addWatchlistItem('550e8400-e29b-41d4-a716-446655440000', {
-      instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      instrument_id: 'x',
     });
   });
 

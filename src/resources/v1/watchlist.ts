@@ -19,7 +19,7 @@ export class Watchlist extends APIResource {
    * ```ts
    * const response = await client.v1.watchlist.addWatchlistItem(
    *   '550e8400-e29b-41d4-a716-446655440000',
-   *   { instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+   *   { instrument_id: 'x' },
    * );
    * ```
    */
@@ -240,7 +240,7 @@ export interface WatchlistGetWatchlistsResponse extends Shared.BaseResponse {
 
 export interface WatchlistAddWatchlistItemParams {
   /**
-   * Instrument identifier
+   * Instrument ID (UUID) or symbol (equity ticker or OSI option symbol).
    */
   instrument_id: OrdersAPI.InstrumentIDOrSymbol;
 }

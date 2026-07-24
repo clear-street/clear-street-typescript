@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
-import * as OrdersAPI from './orders';
 import * as V1API from './v1';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -18,13 +17,11 @@ export class Instruments extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.instruments.getInstrumentByID(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   );
+   *   await client.v1.instruments.getInstrumentByID('x');
    * ```
    */
   getInstrumentByID(
-    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
+    instrumentID: string,
     query: InstrumentGetInstrumentByIDParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstrumentGetInstrumentByIDResponse> {
@@ -508,7 +505,7 @@ export interface InstrumentGetOptionContractsParams {
   /**
    * Filter by contract type: CALL or PUT
    */
-  contract_type?: ContractType;
+  contract_type?: 'CALL' | 'PUT';
 
   /**
    * Filter to contracts expiring on this date (YYYY-MM-DD)
@@ -535,7 +532,7 @@ export interface InstrumentGetOptionContractsParams {
   /**
    * Instrument identifier or symbol of the underlying equity/index
    */
-  underlying_instrument_id?: OrdersAPI.InstrumentIDOrSymbol;
+  underlying_instrument_id?: string;
 }
 
 export interface InstrumentSearchInstrumentsParams {

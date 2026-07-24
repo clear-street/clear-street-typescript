@@ -9,7 +9,7 @@ const client = new ClearStreet({
 
 describe('resource instruments', () => {
   test('getInstrumentByID', async () => {
-    const responsePromise = client.v1.instruments.getInstrumentByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+    const responsePromise = client.v1.instruments.getInstrumentByID('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource instruments', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instruments.getInstrumentByID(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        'x',
         { include_options_expiry_dates: true },
         { path: '/_stainless_unknown_path' },
       ),
@@ -47,7 +47,7 @@ describe('resource instruments', () => {
       client.v1.instruments.getInstruments(
         {
           easy_to_borrow: true,
-          instrument_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+          instrument_ids: ['x'],
           instrument_type: 'COMMON_STOCK',
           is_liquidation_only: true,
           is_marginable: true,
@@ -83,7 +83,7 @@ describe('resource instruments', () => {
           page_size: 1,
           page_token: 'U3RhaW5sZXNzIHJvY2tz',
           underlier: 'underlier',
-          underlying_instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          underlying_instrument_id: 'x',
         },
         { path: '/_stainless_unknown_path' },
       ),

@@ -26,7 +26,7 @@ describe('resource instrumentData', () => {
         {
           event_types: ['EARNINGS'],
           from_date: 'from_date',
-          instrument_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+          instrument_ids: ['x'],
           to_date: 'to_date',
         },
         { path: '/_stainless_unknown_path' },
@@ -35,9 +35,7 @@ describe('resource instrumentData', () => {
   });
 
   test('getInstrumentAnalystConsensus', async () => {
-    const responsePromise = client.v1.instrumentData.getInstrumentAnalystConsensus(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    );
+    const responsePromise = client.v1.instrumentData.getInstrumentAnalystConsensus('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,7 +49,7 @@ describe('resource instrumentData', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.getInstrumentAnalystConsensus(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        'x',
         { from: '2019-12-27', to: '2019-12-27' },
         { path: '/_stainless_unknown_path' },
       ),
@@ -59,9 +57,7 @@ describe('resource instrumentData', () => {
   });
 
   test('getInstrumentBalanceSheetStatements', async () => {
-    const responsePromise = client.v1.instrumentData.getInstrumentBalanceSheetStatements(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    );
+    const responsePromise = client.v1.instrumentData.getInstrumentBalanceSheetStatements('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -75,7 +71,7 @@ describe('resource instrumentData', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.getInstrumentBalanceSheetStatements(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        'x',
         {
           from_date: 'from_date',
           page_size: 1,
@@ -88,9 +84,7 @@ describe('resource instrumentData', () => {
   });
 
   test('getInstrumentCashFlowStatements', async () => {
-    const responsePromise = client.v1.instrumentData.getInstrumentCashFlowStatements(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    );
+    const responsePromise = client.v1.instrumentData.getInstrumentCashFlowStatements('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -104,7 +98,7 @@ describe('resource instrumentData', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.getInstrumentCashFlowStatements(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        'x',
         {
           from_date: 'from_date',
           page_size: 1,
@@ -117,9 +111,7 @@ describe('resource instrumentData', () => {
   });
 
   test('getInstrumentEvents', async () => {
-    const responsePromise = client.v1.instrumentData.getInstrumentEvents(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    );
+    const responsePromise = client.v1.instrumentData.getInstrumentEvents('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -133,7 +125,7 @@ describe('resource instrumentData', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.getInstrumentEvents(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        'x',
         { from_date: 'from_date', to_date: 'to_date' },
         { path: '/_stainless_unknown_path' },
       ),
@@ -141,9 +133,7 @@ describe('resource instrumentData', () => {
   });
 
   test('getInstrumentFundamentals', async () => {
-    const responsePromise = client.v1.instrumentData.getInstrumentFundamentals(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    );
+    const responsePromise = client.v1.instrumentData.getInstrumentFundamentals('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -154,9 +144,7 @@ describe('resource instrumentData', () => {
   });
 
   test('getInstrumentIncomeStatements', async () => {
-    const responsePromise = client.v1.instrumentData.getInstrumentIncomeStatements(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    );
+    const responsePromise = client.v1.instrumentData.getInstrumentIncomeStatements('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -170,7 +158,7 @@ describe('resource instrumentData', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.getInstrumentIncomeStatements(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        'x',
         {
           from_date: 'from_date',
           page_size: 1,

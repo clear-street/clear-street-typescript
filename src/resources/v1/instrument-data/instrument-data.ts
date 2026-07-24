@@ -71,12 +71,12 @@ export class InstrumentData extends APIResource {
    * ```ts
    * const response =
    *   await client.v1.instrumentData.getInstrumentAnalystConsensus(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'x',
    *   );
    * ```
    */
   getInstrumentAnalystConsensus(
-    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
+    instrumentID: string,
     query: InstrumentDataGetInstrumentAnalystConsensusParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstrumentDataGetInstrumentAnalystConsensusResponse> {
@@ -98,12 +98,12 @@ export class InstrumentData extends APIResource {
    * ```ts
    * const response =
    *   await client.v1.instrumentData.getInstrumentBalanceSheetStatements(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'x',
    *   );
    * ```
    */
   getInstrumentBalanceSheetStatements(
-    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
+    instrumentID: string,
     query: InstrumentDataGetInstrumentBalanceSheetStatementsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstrumentDataGetInstrumentBalanceSheetStatementsResponse> {
@@ -121,12 +121,12 @@ export class InstrumentData extends APIResource {
    * ```ts
    * const response =
    *   await client.v1.instrumentData.getInstrumentCashFlowStatements(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'x',
    *   );
    * ```
    */
   getInstrumentCashFlowStatements(
-    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
+    instrumentID: string,
     query: InstrumentDataGetInstrumentCashFlowStatementsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstrumentDataGetInstrumentCashFlowStatementsResponse> {
@@ -148,13 +148,11 @@ export class InstrumentData extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.v1.instrumentData.getInstrumentEvents(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   );
+   *   await client.v1.instrumentData.getInstrumentEvents('x');
    * ```
    */
   getInstrumentEvents(
-    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
+    instrumentID: string,
     query: InstrumentDataGetInstrumentEventsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstrumentDataGetInstrumentEventsResponse> {
@@ -168,12 +166,12 @@ export class InstrumentData extends APIResource {
    * ```ts
    * const response =
    *   await client.v1.instrumentData.getInstrumentFundamentals(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'x',
    *   );
    * ```
    */
   getInstrumentFundamentals(
-    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
+    instrumentID: string,
     options?: RequestOptions,
   ): APIPromise<InstrumentDataGetInstrumentFundamentalsResponse> {
     return this._client.get(path`/v1/instruments/${instrumentID}/fundamentals`, options);
@@ -192,12 +190,12 @@ export class InstrumentData extends APIResource {
    * ```ts
    * const response =
    *   await client.v1.instrumentData.getInstrumentIncomeStatements(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'x',
    *   );
    * ```
    */
   getInstrumentIncomeStatements(
-    instrumentID: OrdersAPI.InstrumentIDOrSymbol,
+    instrumentID: string,
     query: InstrumentDataGetInstrumentIncomeStatementsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstrumentDataGetInstrumentIncomeStatementsResponse> {

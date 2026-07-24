@@ -203,7 +203,7 @@ export interface CalendarGetMarketHoursCalendarParams {
   /**
    * Market type to query (us_equities, us_options). If omitted, returns all markets.
    */
-  market?: MarketType;
+  market?: 'us_equities' | 'us_options';
 }
 
 export declare namespace Calendar {

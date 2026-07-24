@@ -30,9 +30,7 @@ describe('resource positions', () => {
   });
 
   test('closePosition: only required params', async () => {
-    const responsePromise = client.v1.positions.closePosition('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
-    });
+    const responsePromise = client.v1.positions.closePosition('x', { account_id: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -43,10 +41,7 @@ describe('resource positions', () => {
   });
 
   test('closePosition: required and optional params', async () => {
-    const response = await client.v1.positions.closePosition('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
-      cancel_orders: false,
-    });
+    const response = await client.v1.positions.closePosition('x', { account_id: 0, cancel_orders: false });
   });
 
   test('closePositions', async () => {
@@ -83,7 +78,7 @@ describe('resource positions', () => {
     await expect(
       client.v1.positions.getPositionInstructions(
         0,
-        { instrument_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+        { instrument_id: 'x' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);

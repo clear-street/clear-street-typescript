@@ -222,7 +222,8 @@ export interface Execution {
 export type ExecutionList = Array<Execution>;
 
 /**
- * Instrument identifier
+ * Instrument identifier: either an instrument UUID or a symbol (symbol for
+ * equities, OSI for options). Non-UUID inputs are resolved server-side.
  */
 export type InstrumentIDOrSymbol = string;
 
@@ -270,7 +271,8 @@ export interface NewOrderRequest {
   extended_hours?: boolean | null;
 
   /**
-   * Instrument identifier
+   * Instrument ID (UUID) or symbol (equity ticker or OSI option symbol). Either
+   * `symbol` or `instrument_id` must be provided.
    */
   instrument_id?: InstrumentIDOrSymbol | null;
 
