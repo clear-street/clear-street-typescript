@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.92.0](https://github.com/clear-street/clear-street-typescript/compare/v0.91.0...v0.92.0) (2026-07-27)
+
+
+### Features
+
+* `stlc` automation ([e640820](https://github.com/clear-street/clear-street-typescript/commit/e640820896f4955c46b6aa322fe4c38d835d37bb))
+* `stlc` automation ([47c020e](https://github.com/clear-street/clear-street-typescript/commit/47c020e68949459daf58d361727ae5a97da3811e))
+* `stlc` automation ([8f68c81](https://github.com/clear-street/clear-street-typescript/commit/8f68c81d4cace291d229d0a87233f78dd0b4811c))
+* **api:** api update ([45cdabf](https://github.com/clear-street/clear-street-typescript/commit/45cdabfa338bafcb116173836bb1de4e83ae86b3))
+* **api:** api update ([5fe85be](https://github.com/clear-street/clear-street-typescript/commit/5fe85be90b804f8b1d7828d12efadeb1b42fbb87))
+* **api:** api update ([61d7fc5](https://github.com/clear-street/clear-street-typescript/commit/61d7fc5b924e1a7f1cc49eab91b4d3f5a82dbaf0))
+
+
+### Bug Fixes
+
+* fmt security.yml ([50cb7ec](https://github.com/clear-street/clear-street-typescript/commit/50cb7eccc646a466504496916db8d3d592c24973))
+* Use GitHub App token for staging sync ([0a66c2e](https://github.com/clear-street/clear-street-typescript/commit/0a66c2ed63034e27e137e8bc9587b550a49378f9))
+
+
+### Chores
+
+* add .github/workflows/security.yml (secure-by-default bootstrap) ([48fdc3e](https://github.com/clear-street/clear-street-typescript/commit/48fdc3ea8a92935dd05a32bd9f694a2ac178af72))
+* add CODEOWNERS (secure-by-default bootstrap) ([5f9a215](https://github.com/clear-street/clear-street-typescript/commit/5f9a2153f5ca1baa30c6f9e714588342766da303))
+
 ## 0.91.0 (2026-07-21)
 
 Full Changelog: [v0.90.0...v0.91.0](https://github.com/clear-street/clear-street-typescript/compare/v0.90.0...v0.91.0)
