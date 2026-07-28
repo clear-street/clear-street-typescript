@@ -186,11 +186,6 @@ export interface Execution {
   order_id: string;
 
   /**
-   * Fill price.
-   */
-  price: string;
-
-  /**
    * Filled quantity.
    */
   quantity: string;
@@ -211,6 +206,12 @@ export interface Execution {
    * apply.
    */
   instrument_id?: string | null;
+
+  /**
+   * Fill price. `null` for multileg fills, whose price lives only at the leg level.
+   * When a null/undefined value is observed, it indicates it does not apply.
+   */
+  price?: string | null;
 
   /**
    * Trading symbol. `null` when this fill has no single resolvable instrument. When
