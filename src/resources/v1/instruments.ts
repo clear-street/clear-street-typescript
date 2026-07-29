@@ -406,6 +406,18 @@ export interface OptionsContract {
   symbol: string;
 
   /**
+   * Whether the option settles on the opening price (AM settlement), if known When a
+   * null/undefined value is observed, it indicates that there is no available data.
+   */
+  is_settle_on_open?: boolean | null;
+
+  /**
+   * Last moment the option can trade (UTC), if known When a null/undefined value is
+   * observed, it indicates that there is no available data.
+   */
+  last_trade_cutoff?: string | null;
+
+  /**
    * Open interest (number of outstanding contracts), if available When a
    * null/undefined value is observed, it indicates that there is no available data.
    */
