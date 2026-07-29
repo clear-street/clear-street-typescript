@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.92.1 (2026-07-29)
+
+Full Changelog: [v0.92.0...v0.92.1](https://github.com/clear-street/clear-street-typescript/compare/v0.92.0...v0.92.1)
+
+### Chores
+
+* **internal:** codegen related update ([05e5af0](https://github.com/clear-street/clear-street-typescript/commit/05e5af0d8c6b734284e580b4e73e1478ba56be50))
+
 ## [0.92.0](https://github.com/clear-street/clear-street-typescript/compare/v0.91.0...v0.92.0) (2026-07-27)
 
 
