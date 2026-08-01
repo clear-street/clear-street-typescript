@@ -384,8 +384,11 @@ export interface Order {
   venue: string;
 
   /**
-   * Average fill price across all executions When a null/undefined value is
-   * observed, it indicates that there is no available data.
+   * Average fill price across all executions. For multileg orders this is the
+   * venue's strategy-level average when reported, else the signed net package price
+   * derived from the leg averages: net debit positive, net credit negative, zero
+   * possible. When a null/undefined value is observed, it indicates that there is no
+   * available data.
    */
   average_fill_price?: string | null;
 
