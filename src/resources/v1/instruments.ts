@@ -176,6 +176,13 @@ export interface Instrument {
   adv?: string | null;
 
   /**
+   * Corporate-action-adjusted last close; present only when an adjustment exists for
+   * the previous_close date. When a null/undefined value is observed, it indicates
+   * that there is no available data.
+   */
+  cax_adjusted_previous_close?: string | null;
+
+  /**
    * The type of security (e.g., Common Stock, ETF) When a null/undefined value is
    * observed, it indicates that there is no available data.
    */
@@ -194,8 +201,9 @@ export interface Instrument {
   name?: string | null;
 
   /**
-   * Notional average daily volume (ADV multiplied by previous close price). When a
-   * null/undefined value is observed, it indicates that there is no available data.
+   * Notional average daily volume (ADV multiplied by the cax-adjusted close when
+   * present, the raw previous close otherwise). When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   notional_adv?: string | null;
 
@@ -293,6 +301,13 @@ export interface InstrumentCore {
   adv?: string | null;
 
   /**
+   * Corporate-action-adjusted last close; present only when an adjustment exists for
+   * the previous_close date. When a null/undefined value is observed, it indicates
+   * that there is no available data.
+   */
+  cax_adjusted_previous_close?: string | null;
+
+  /**
    * The type of security (e.g., Common Stock, ETF) When a null/undefined value is
    * observed, it indicates that there is no available data.
    */
@@ -311,8 +326,9 @@ export interface InstrumentCore {
   name?: string | null;
 
   /**
-   * Notional average daily volume (ADV multiplied by previous close price). When a
-   * null/undefined value is observed, it indicates that there is no available data.
+   * Notional average daily volume (ADV multiplied by the cax-adjusted close when
+   * present, the raw previous close otherwise). When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   notional_adv?: string | null;
 
