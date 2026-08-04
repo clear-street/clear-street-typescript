@@ -62,9 +62,11 @@ else
   TAG="latest"
 fi
 
-# Install OIDC compatible npm version
-npm install --prefix ../oidc/ npm@11.6.2
+# Install OIDC compatible npm version; always fetch it from the public npm
+# registry, even when publishing elsewhere (e.g. GitHub Packages).
+npm install --prefix ../oidc/ npm@11.6.2 --registry='https://registry.npmjs.org'
 
-# Publish with the appropriate tag
-export npm_config_registry='https://registry.npmjs.org'
+# Publish with the appropriate tag, defaulting to the public npm registry but
+# respecting an npm_config_registry override from the caller.
+export npm_config_registry="${npm_config_registry:-https://registry.npmjs.org}"
 ../oidc/node_modules/.bin/npm publish --tag "$TAG"
