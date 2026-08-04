@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.93.0](https://github.com/clear-street/clear-street-typescript/compare/v0.92.1...v0.93.0) (2026-08-04)
+
+
+### Features
+
+* **api:** api update ([ac85b23](https://github.com/clear-street/clear-street-typescript/commit/ac85b2354cfc0715338fcd19bc8a29d93c69b661))
+* **api:** api update ([2725e3c](https://github.com/clear-street/clear-street-typescript/commit/2725e3c353c5a6c9c456943035bfaa02e4798dbc))
+* **api:** api update ([ef4cb18](https://github.com/clear-street/clear-street-typescript/commit/ef4cb180f71f6f752e9d7474adbb6945c172f61e))
+* **api:** api update ([cd3a813](https://github.com/clear-street/clear-street-typescript/commit/cd3a81307890023f8cd136abf2b93e1b7a006cd3))
+
+
+### Bug Fixes
+
+* out-of-sync git trees ([477bd74](https://github.com/clear-street/clear-street-typescript/commit/477bd74bbe995feaf4168cb599ea2a9150b4446c))
+
+
+### Chores
+
+* **ci:** Use OIDC instead of token based n[m auth ([b804864](https://github.com/clear-street/clear-street-typescript/commit/b80486431c2537154ff1a00911d49ad3b1c2f141))
+
 ## 0.92.1 (2026-07-29)
 
 Full Changelog: [v0.92.0...v0.92.1](https://github.com/clear-street/clear-street-typescript/compare/v0.92.0...v0.92.1)
