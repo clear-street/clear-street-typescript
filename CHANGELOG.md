@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.93.1](https://github.com/clear-street/clear-street-typescript/compare/v0.93.0...v0.93.1) (2026-08-04)
+
+
+### Bug Fixes
+
+* **ci:** fix publish to gh registry after oidc change ([c719a47](https://github.com/clear-street/clear-street-typescript/commit/c719a47a0612896e2cd4fc1cc41edc9d27600a73))
+
+
+### Chores
+
+* release-please marks releases correctly ([c33daa2](https://github.com/clear-street/clear-street-typescript/commit/c33daa20276f0da26355d49111f243c2dbd6b393))
+
 ## [0.93.0](https://github.com/clear-street/clear-street-typescript/compare/v0.92.1...v0.93.0) (2026-08-04)
 
 
