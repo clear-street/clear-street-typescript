@@ -190,11 +190,6 @@ export interface AccountBalances {
   daily_realized_pnl: string;
 
   /**
-   * Total profit or loss since start of day.
-   */
-  daily_total_pnl: string;
-
-  /**
    * Total unrealized profit or loss across all positions relative to prior close.
    */
   daily_unrealized_pnl: string;
@@ -299,12 +294,6 @@ export interface AccountBalancesSod {
    * it indicates that there is no available data.
    */
   asof?: string | null;
-
-  /**
-   * @deprecated Start-of-day day-trade buying power. When a null/undefined value is
-   * observed, it indicates it does not apply.
-   */
-  day_trade_buying_power?: string | null;
 
   /**
    * Start-of-day maintenance margin excess. When a null/undefined value is observed,
@@ -473,12 +462,6 @@ export interface Address {
 
 export interface MarginDetails {
   /**
-   * @deprecated The number of day trades executed over the 5 most recent trading
-   * days.
-   */
-  day_trade_count: number;
-
-  /**
    * Initial margin excess for trade-date balances.
    */
   initial_margin_excess: string;
@@ -507,19 +490,6 @@ export interface MarginDetails {
    * Overnight session margin calculation details.
    */
   overnight_details: MarginSessionDetails;
-
-  /**
-   * @deprecated `true` if the account is currently flagged as a PDT, otherwise
-   * `false`.
-   */
-  pattern_day_trader: boolean;
-
-  /**
-   * @deprecated The amount of day-trade buying power used during the current trading
-   * day. When null/undefined, the value should be assumed to be zero. The field is
-   * omitted to simplify the response.
-   */
-  day_trade_buying_power_usage?: string | null;
 
   /**
    * Optional top margin contributors, returned only when explicitly requested.
@@ -558,12 +528,6 @@ export interface MarginSessionDetails {
 }
 
 export interface MarginTopContributor {
-  /**
-   * @deprecated Day-trade buying power consumed by fills against this underlying on
-   * the current trade date. Populated only for pattern day trader accounts.
-   */
-  day_trade_buying_power_usage: string;
-
   /**
    * Initial margin requirement attributable to this underlying.
    */
