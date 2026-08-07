@@ -41,13 +41,15 @@ export class InstrumentData extends APIResource {
   news: NewsAPI.News = new NewsAPI.News(this._client);
 
   /**
-   * List instrument events across all securities, grouped by date.
+   * List instrument events across all securities, grouped by date. Results are
+   * paginated via `page_size` / `page_token`; a date's events may span two pages.
    *
    * Date range defaults (anchored on the current trading day, or the next trading
    * day if today is a weekend or US market holiday):
    *
    * - Unfiltered (no `instrument_ids`): a single trading day (`from_date` =
-   *   `to_date` = anchor); the requested span is capped at 6 days.
+   *   `to_date` = anchor). If only one bound is given, the other defaults to 6 days
+   *   from it; there is no maximum span once both bounds are given.
    * - Filtered (with `instrument_ids`): a 30-day lookback ending on the anchor
    *   (`from_date` = anchor − 30 days, `to_date` = anchor).
    *
@@ -137,8 +139,8 @@ export class InstrumentData extends APIResource {
   }
 
   /**
-   * Retrieves corporate events (dividends, splits, etc.) for an instrument, grouped
-   * by event type.
+   * Retrieves corporate events (earnings, dividends, splits, IPO) for an instrument,
+   * grouped by event type. Filter to specific types via `event_types`.
    *
    * Date range defaults:
    *
@@ -1060,6 +1062,11 @@ export interface InstrumentEventsData {
   instrument_id: string;
 
   /**
+   * IPO events
+   */
+  ipos: Array<InstrumentIpoEvent>;
+
+  /**
    * Stock split events
    */
   splits: Array<InstrumentSplitEvent>;
@@ -1360,6 +1367,58 @@ export interface InstrumentIncomeStatement {
 export type InstrumentIncomeStatementList = Array<InstrumentIncomeStatement>;
 
 /**
+ * Represents an IPO event for an instrument
+ */
+export interface InstrumentIpoEvent {
+  /**
+   * The date of the IPO
+   */
+  date: string;
+
+  /**
+   * IPO action. When a null/undefined value is observed, it indicates that there is
+   * no available data.
+   */
+  actions?: string | null;
+
+  /**
+   * IPO announced timestamp. When a null/undefined value is observed, it indicates
+   * that there is no available data.
+   */
+  announced_at?: string | null;
+
+  /**
+   * IPO company name. When a null/undefined value is observed, it indicates that
+   * there is no available data.
+   */
+  company?: string | null;
+
+  /**
+   * IPO exchange. When a null/undefined value is observed, it indicates that there
+   * is no available data.
+   */
+  exchange?: string | null;
+
+  /**
+   * IPO market cap. When a null/undefined value is observed, it indicates that there
+   * is no available data.
+   */
+  market_cap?: string | null;
+
+  /**
+   * IPO price range. When a null/undefined value is observed, it indicates that
+   * there is no available data.
+   */
+  price_range?: string | null;
+
+  /**
+   * IPO shares offered. When a null/undefined value is observed, it indicates that
+   * there is no available data.
+   */
+  shares?: string | null;
+}
+
+/**
  * Represents a stock split event for an instrument
  */
 export interface InstrumentSplitEvent {
@@ -1474,6 +1533,18 @@ export interface InstrumentDataGetAllInstrumentEventsParams {
   instrument_ids?: Array<OrdersAPI.InstrumentIDOrSymbol>;
 
   /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
+  page_size?: number;
+
+  /**
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
+   */
+  page_token?: string;
+
+  /**
    * The end date for the query range, inclusive (YYYY-MM-DD).
    */
   to_date?: string;
@@ -1541,6 +1612,12 @@ export interface InstrumentDataGetInstrumentCashFlowStatementsParams {
 
 export interface InstrumentDataGetInstrumentEventsParams {
   /**
+   * Filter by event type(s). Comma-delimited list. Example:
+   * `event_types=EARNINGS,IPO`.
+   */
+  event_types?: Array<AllEventsEventType>;
+
+  /**
    * The start date for the query range, inclusive (YYYY-MM-DD).
    */
   from_date?: string;
@@ -1599,6 +1676,7 @@ export declare namespace InstrumentData {
     type InstrumentFundamentals as InstrumentFundamentals,
     type InstrumentIncomeStatement as InstrumentIncomeStatement,
     type InstrumentIncomeStatementList as InstrumentIncomeStatementList,
+    type InstrumentIpoEvent as InstrumentIpoEvent,
     type InstrumentSplitEvent as InstrumentSplitEvent,
     type PriceTarget as PriceTarget,
     type ReportTime as ReportTime,

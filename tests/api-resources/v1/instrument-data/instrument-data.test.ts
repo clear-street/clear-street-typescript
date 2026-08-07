@@ -27,6 +27,8 @@ describe('resource instrumentData', () => {
           event_types: ['EARNINGS'],
           from_date: 'from_date',
           instrument_ids: ['x'],
+          page_size: 1,
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
           to_date: 'to_date',
         },
         { path: '/_stainless_unknown_path' },
@@ -126,7 +128,11 @@ describe('resource instrumentData', () => {
     await expect(
       client.v1.instrumentData.getInstrumentEvents(
         'x',
-        { from_date: 'from_date', to_date: 'to_date' },
+        {
+          event_types: ['EARNINGS'],
+          from_date: 'from_date',
+          to_date: 'to_date',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);

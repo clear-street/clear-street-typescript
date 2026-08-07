@@ -67,6 +67,7 @@ export {
   type InstrumentFundamentals,
   type InstrumentIncomeStatement,
   type InstrumentIncomeStatementList,
+  type InstrumentIpoEvent,
   type InstrumentSplitEvent,
   type PriceTarget,
   type ReportTime,
