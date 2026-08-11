@@ -69,9 +69,11 @@ describe('resource orders', () => {
         {
           from: '2019-12-27T18:11:19.117Z',
           instrument_ids: ['x'],
+          order_ids: ['string'],
           page_size: 1,
           page_token: 'U3RhaW5sZXNzIHJvY2tz',
           to: '2019-12-27T18:11:19.117Z',
+          underlying_instrument_ids: ['x'],
         },
         { path: '/_stainless_unknown_path' },
       ),

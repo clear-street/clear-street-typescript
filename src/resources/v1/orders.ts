@@ -222,6 +222,22 @@ export interface Execution {
    * a null/undefined value is observed, it indicates it does not apply.
    */
   symbol?: string | null;
+
+  /**
+   * Underlying instrument identifier for a derivative fill. `null` for a
+   * non-derivative fill, when the underlier could not be resolved, or when a
+   * multileg fill's legs resolve to different underliers. When a null/undefined
+   * value is observed, it indicates it does not apply.
+   */
+  underlying_instrument_id?: string | null;
+
+  /**
+   * Venue where this fill occurred, as reported by that venue. Distinct from an
+   * order's `venue`, which is the routing destination. Codes are not normalized, so
+   * the format varies by venue. When a null/undefined value is observed, it
+   * indicates that there is no available data.
+   */
+  venue?: string | null;
 }
 
 export type ExecutionList = Array<Execution>;
@@ -715,6 +731,12 @@ export interface OrderGetExecutionsParams {
   instrument_ids?: Array<string>;
 
   /**
+   * Comma-separated order IDs to filter by. When provided, only executions belonging
+   * to an order in this set are returned.
+   */
+  order_ids?: Array<string>;
+
+  /**
    * The number of items to return per page. Only used when page_token is not
    * provided.
    */
@@ -730,6 +752,13 @@ export interface OrderGetExecutionsParams {
    * The end date and time for the query range, inclusive (ISO 8601 format)
    */
   to?: string;
+
+  /**
+   * Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+   * symbols). Matches option fills whose resolved underlier is any of the given
+   * instruments.
+   */
+  underlying_instrument_ids?: Array<string>;
 }
 
 export interface OrderGetOrderByIDParams {
