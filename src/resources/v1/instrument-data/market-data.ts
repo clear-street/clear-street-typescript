@@ -300,9 +300,19 @@ export interface SnapshotSession {
   change_percent: string;
 
   /**
-   * Previous session close price.
+   * Previous session close price. Corporate-action-adjusted (stock dividends, cash
+   * dividends, and forward/reverse splits) when an adjustment exists for the close
+   * date; the raw close otherwise.
    */
   previous_close: string;
+
+  /**
+   * Unadjusted (raw) previous session close. Present only when a corporate-action
+   * adjustment exists for the previous close date; when no adjustment exists,
+   * `previous_close` is the raw close and this field is omitted. When a
+   * null/undefined value is observed, it indicates that there is no available data.
+   */
+  previous_close_unadjusted?: string | null;
 }
 
 export interface MarketDataGetDailySummariesResponse extends Shared.BaseResponse {
