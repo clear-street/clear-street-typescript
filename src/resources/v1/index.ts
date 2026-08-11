@@ -93,6 +93,7 @@ export {
   type InstrumentCore,
   type InstrumentCoreList,
   type ListingType,
+  type OptionExpiryDate,
   type OptionsContract,
   type OptionsContractList,
   type InstrumentGetInstrumentByIDResponse,

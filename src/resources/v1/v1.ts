@@ -67,6 +67,7 @@ import {
   InstrumentSearchInstrumentsResponse,
   Instruments,
   ListingType,
+  OptionExpiryDate,
   OptionsContract,
   OptionsContractList,
 } from './instruments';
@@ -385,6 +386,7 @@ export declare namespace V1 {
     type InstrumentCore as InstrumentCore,
     type InstrumentCoreList as InstrumentCoreList,
     type ListingType as ListingType,
+    type OptionExpiryDate as OptionExpiryDate,
     type OptionsContract as OptionsContract,
     type OptionsContractList as OptionsContractList,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,

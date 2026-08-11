@@ -211,9 +211,20 @@ export interface Instrument {
   notional_adv?: string | null;
 
   /**
-   * Available options expiration dates for this instrument. Present only when
+   * Available options expiration dates for this instrument, each annotated with
+   * which settlement cycles have listed contracts on it. Present only when
    * `include_options_expiry_dates=true` in the request. When a null/undefined value
    * is observed, it indicates it does not apply.
+   */
+  options_contract_expiry_dates?: Array<OptionExpiryDate> | null;
+
+  /**
+   * @deprecated Available options expiration dates for this instrument. Present only
+   * when `include_options_expiry_dates=true` in the request.
+   *
+   * Deprecated: use `options_contract_expiry_dates`, which carries the same dates
+   * annotated with settlement-cycle information. When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   options_expiry_dates?: Array<string> | null;
 
@@ -354,6 +365,29 @@ export type InstrumentCoreList = Array<InstrumentCore>;
  * The listing type of an options contract
  */
 export type ListingType = 'STANDARD' | 'FLEX' | 'OTC';
+
+/**
+ * An options expiry date, annotated with which settlement cycles have listed
+ * contracts on it.
+ */
+export interface OptionExpiryDate {
+  /**
+   * The expiration date.
+   */
+  date: string;
+
+  /**
+   * Whether this date has at least one listed contract that settles at the close (PM
+   * settlement) -- the standard cycle.
+   */
+  has_settles_on_close: boolean;
+
+  /**
+   * Whether this date has at least one listed contract that settles on the opening
+   * print (AM settlement).
+   */
+  has_settles_on_open: boolean;
+}
 
 /**
  * An options contract with options-specific metadata
@@ -551,6 +585,12 @@ export interface InstrumentGetOptionContractsParams {
   expiry?: string;
 
   /**
+   * Filter by settlement cycle: true for early-settling (AM, settle-on-open)
+   * contracts, false for normal (PM) contracts. Omit to return both.
+   */
+  is_settle_on_open?: boolean;
+
+  /**
    * The number of items to return per page. Only used when page_token is not
    * provided.
    */
@@ -629,6 +669,7 @@ export declare namespace Instruments {
     type InstrumentCore as InstrumentCore,
     type InstrumentCoreList as InstrumentCoreList,
     type ListingType as ListingType,
+    type OptionExpiryDate as OptionExpiryDate,
     type OptionsContract as OptionsContract,
     type OptionsContractList as OptionsContractList,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,

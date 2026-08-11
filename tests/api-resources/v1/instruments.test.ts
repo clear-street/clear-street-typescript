@@ -81,6 +81,7 @@ describe('resource instruments', () => {
           contract_ids: ['x'],
           contract_type: 'CALL',
           expiry: '2019-12-27',
+          is_settle_on_open: true,
           page_size: 1,
           page_token: 'U3RhaW5sZXNzIHJvY2tz',
           underlier: 'underlier',
