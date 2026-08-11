@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
+import * as OrdersAPI from './orders';
 import * as V1API from './v1';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -47,8 +48,10 @@ export class Instruments extends APIResource {
   /**
    * List options contracts.
    *
-   * Returns options contracts for a given underlier with options-specific metadata.
-   * Exactly one underlier identifier must be provided.
+   * Returns options contracts with options-specific metadata. Exactly one identifier
+   * must be provided: `underlier`/`underlying_instrument_id` (list all contracts for
+   * that underlier) or `contract_ids` (look up specific contracts directly).
+   * `expiry`/`contract_type` apply as filters in either case.
    *
    * @example
    * ```ts
@@ -530,6 +533,13 @@ export interface InstrumentGetInstrumentsParams {
 }
 
 export interface InstrumentGetOptionContractsParams {
+  /**
+   * Comma-separated contract instrument IDs (UUID) or OSI option symbols to look up
+   * directly, bypassing underlier expansion. Mutually exclusive with
+   * underlier/underlying_instrument_id; up to 100 values.
+   */
+  contract_ids?: Array<OrdersAPI.InstrumentIDOrSymbol>;
+
   /**
    * Filter by contract type: CALL or PUT
    */

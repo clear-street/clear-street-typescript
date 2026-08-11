@@ -78,6 +78,7 @@ describe('resource instruments', () => {
     await expect(
       client.v1.instruments.getOptionContracts(
         {
+          contract_ids: ['x'],
           contract_type: 'CALL',
           expiry: '2019-12-27',
           page_size: 1,
