@@ -49,6 +49,28 @@ Methods:
 - <code title="get /v1/accounts/{account_id}/portfolio-history">client.v1.accounts.<a href="./src/resources/v1/accounts.ts">getPortfolioHistory</a>(accountID, { ...params }) -> AccountGetPortfolioHistoryResponse</code>
 - <code title="patch /v1/accounts/{account_id}">client.v1.accounts.<a href="./src/resources/v1/accounts.ts">patchAccountByID</a>(accountID, { ...params }) -> AccountPatchAccountByIDResponse</code>
 
+## Alerts
+
+Types:
+
+- <code><a href="./src/resources/v1/alerts.ts">Alert</a></code>
+- <code><a href="./src/resources/v1/alerts.ts">AlertList</a></code>
+- <code><a href="./src/resources/v1/alerts.ts">AlertSource</a></code>
+- <code><a href="./src/resources/v1/alerts.ts">AlertStatus</a></code>
+- <code><a href="./src/resources/v1/alerts.ts">CreateAlertResponse</a></code>
+- <code><a href="./src/resources/v1/alerts.ts">Schedule</a></code>
+- <code><a href="./src/resources/v1/alerts.ts">TriggerMode</a></code>
+- <code><a href="./src/resources/v1/alerts.ts">AlertCreateAlertResponse</a></code>
+- <code><a href="./src/resources/v1/alerts.ts">AlertGetAlertByIDResponse</a></code>
+- <code><a href="./src/resources/v1/alerts.ts">AlertGetAlertsResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/alerts">client.v1.alerts.<a href="./src/resources/v1/alerts.ts">createAlert</a>({ ...params }) -> AlertCreateAlertResponse</code>
+- <code title="delete /v1/alerts/{alert_id}">client.v1.alerts.<a href="./src/resources/v1/alerts.ts">deleteAlert</a>(alertID) -> void</code>
+- <code title="get /v1/alerts/{alert_id}">client.v1.alerts.<a href="./src/resources/v1/alerts.ts">getAlertByID</a>(alertID) -> AlertGetAlertByIDResponse</code>
+- <code title="get /v1/alerts">client.v1.alerts.<a href="./src/resources/v1/alerts.ts">getAlerts</a>({ ...params }) -> AlertGetAlertsResponse</code>
+
 ## APIVersion
 
 Types:
