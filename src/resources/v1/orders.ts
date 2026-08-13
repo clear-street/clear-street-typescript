@@ -571,6 +571,11 @@ export type QueueState = 'AWAITING_RELEASE' | 'RELEASED';
  */
 export interface ReplaceOrderRequest {
   /**
+   * New limit offset for trailing stop-limit orders (signed)
+   */
+  limit_offset?: string | null;
+
+  /**
    * New limit price for the order
    */
   limit_price?: string | null;
@@ -584,6 +589,16 @@ export interface ReplaceOrderRequest {
    * New stop price for the order
    */
   stop_price?: string | null;
+
+  /**
+   * New trailing offset for trailing orders
+   */
+  trailing_offset?: string | null;
+
+  /**
+   * New trailing offset type (PRICE or BPS)
+   */
+  trailing_offset_type?: TrailingOffsetType | null;
 }
 
 /**
@@ -607,10 +622,7 @@ export type RequestTimeInForce =
   | 'FILL_OR_KILL'
   | 'GOOD_TILL_DATE'
   | 'AT_THE_OPENING'
-  | 'AT_THE_CLOSE'
-  | 'GOOD_TILL_CROSSING'
-  | 'GOOD_THROUGH_CROSSING'
-  | 'AT_CROSSING';
+  | 'AT_THE_CLOSE';
 
 /**
  * Side of an order
@@ -628,9 +640,6 @@ export type TimeInForce =
   | 'GOOD_TILL_DATE'
   | 'AT_THE_OPENING'
   | 'AT_THE_CLOSE'
-  | 'GOOD_TILL_CROSSING'
-  | 'GOOD_THROUGH_CROSSING'
-  | 'AT_CROSSING'
   | 'OTHER';
 
 /**
@@ -850,6 +859,11 @@ export interface OrderReplaceOrderParams {
   account_id: number;
 
   /**
+   * Body param: New limit offset for trailing stop-limit orders (signed)
+   */
+  limit_offset?: string | null;
+
+  /**
    * Body param: New limit price for the order
    */
   limit_price?: string | null;
@@ -863,6 +877,16 @@ export interface OrderReplaceOrderParams {
    * Body param: New stop price for the order
    */
   stop_price?: string | null;
+
+  /**
+   * Body param: New trailing offset for trailing orders
+   */
+  trailing_offset?: string | null;
+
+  /**
+   * Body param: New trailing offset type (PRICE or BPS)
+   */
+  trailing_offset_type?: TrailingOffsetType | null;
 }
 
 export interface OrderSubmitOrdersParams {

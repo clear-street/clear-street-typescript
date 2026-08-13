@@ -142,9 +142,12 @@ describe('resource orders', () => {
   test('replaceOrder: required and optional params', async () => {
     const response = await client.v1.orders.replaceOrder('order_id', {
       account_id: 0,
+      limit_offset: '0.50',
       limit_price: '49.00',
       quantity: '1',
       stop_price: '52.00',
+      trailing_offset: '2.00',
+      trailing_offset_type: 'PRICE',
     });
   });
 
