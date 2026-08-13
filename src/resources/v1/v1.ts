@@ -32,22 +32,6 @@ import {
   PortfolioHistorySegment,
   RiskSettings,
 } from './accounts';
-import * as AlertsAPI from './alerts';
-import {
-  Alert,
-  AlertCreateAlertParams,
-  AlertCreateAlertResponse,
-  AlertGetAlertByIDResponse,
-  AlertGetAlertsParams,
-  AlertGetAlertsResponse,
-  AlertList,
-  AlertSource,
-  AlertStatus,
-  Alerts,
-  CreateAlertResponse,
-  Schedule,
-  TriggerMode,
-} from './alerts';
 import * as APIVersionAPI from './api-version';
 import { APIVersion, APIVersionGetVersionResponse, Version } from './api-version';
 import * as CalendarAPI from './calendar';
@@ -266,7 +250,6 @@ import {
 
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
-  alerts: AlertsAPI.Alerts = new AlertsAPI.Alerts(this._client);
   apiVersion: APIVersionAPI.APIVersion = new APIVersionAPI.APIVersion(this._client);
   calendar: CalendarAPI.Calendar = new CalendarAPI.Calendar(this._client);
   instrumentData: InstrumentDataAPI.InstrumentData = new InstrumentDataAPI.InstrumentData(this._client);
@@ -289,7 +272,6 @@ export type SecurityType = 'COMMON_STOCK' | 'INDEX' | 'OPTION' | 'CASH';
 export type SortDirection = 'ASC' | 'DESC';
 
 V1.Accounts = Accounts;
-V1.Alerts = Alerts;
 V1.APIVersion = APIVersion;
 V1.Calendar = Calendar;
 V1.InstrumentData = InstrumentData;
@@ -332,22 +314,6 @@ export declare namespace V1 {
     type AccountGetAccountsParams as AccountGetAccountsParams,
     type AccountGetPortfolioHistoryParams as AccountGetPortfolioHistoryParams,
     type AccountPatchAccountByIDParams as AccountPatchAccountByIDParams,
-  };
-
-  export {
-    Alerts as Alerts,
-    type Alert as Alert,
-    type AlertList as AlertList,
-    type AlertSource as AlertSource,
-    type AlertStatus as AlertStatus,
-    type CreateAlertResponse as CreateAlertResponse,
-    type Schedule as Schedule,
-    type TriggerMode as TriggerMode,
-    type AlertCreateAlertResponse as AlertCreateAlertResponse,
-    type AlertGetAlertByIDResponse as AlertGetAlertByIDResponse,
-    type AlertGetAlertsResponse as AlertGetAlertsResponse,
-    type AlertCreateAlertParams as AlertCreateAlertParams,
-    type AlertGetAlertsParams as AlertGetAlertsParams,
   };
 
   export {

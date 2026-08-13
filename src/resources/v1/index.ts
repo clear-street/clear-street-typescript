@@ -32,21 +32,6 @@ export {
   type AccountPatchAccountByIDParams,
 } from './accounts';
 export {
-  Alerts,
-  type Alert,
-  type AlertList,
-  type AlertSource,
-  type AlertStatus,
-  type CreateAlertResponse,
-  type Schedule,
-  type TriggerMode,
-  type AlertCreateAlertResponse,
-  type AlertGetAlertByIDResponse,
-  type AlertGetAlertsResponse,
-  type AlertCreateAlertParams,
-  type AlertGetAlertsParams,
-} from './alerts';
-export {
   Calendar,
   type ClockDetail,
   type DayType,
