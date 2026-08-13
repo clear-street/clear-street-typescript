@@ -248,6 +248,22 @@ export interface SnapshotLastTrade {
    * instruments, whose level is computed rather than traded.
    */
   size: number;
+
+  /**
+   * Exchange timestamp of the most recent last-sale eligible trade. For index
+   * instruments, the time the index level was computed. Absent when the trade
+   * carries no timestamp. When a null/undefined value is observed, it indicates that
+   * there is no available data.
+   */
+  timestamp?: string | null;
+
+  /**
+   * ISO 10383 Market Identifier Code (MIC) of the venue where the most recent
+   * last-sale eligible trade took place. Absent when the trade carries no venue;
+   * index levels are computed rather than traded and have no venue. When a
+   * null/undefined value is observed, it indicates that there is no available data.
+   */
+  venue?: string | null;
 }
 
 /**
@@ -267,6 +283,20 @@ export interface SnapshotQuote {
   ask_size?: number | null;
 
   /**
+   * Exchange timestamp of the best ask. Absent when the ask side carries no
+   * timestamp. When a null/undefined value is observed, it indicates that there is
+   * no available data.
+   */
+  ask_timestamp?: string | null;
+
+  /**
+   * ISO 10383 Market Identifier Code (MIC) of the venue currently holding the
+   * national best offer (NBBO). Absent when the ask side carries no venue. When a
+   * null/undefined value is observed, it indicates that there is no available data.
+   */
+  ask_venue?: string | null;
+
+  /**
    * Current best bid. Absent when no bid is available (one-sided quote). When a
    * null/undefined value is observed, it indicates that there is no available data.
    */
@@ -277,6 +307,20 @@ export interface SnapshotQuote {
    * indicates that there is no available data.
    */
   bid_size?: number | null;
+
+  /**
+   * Exchange timestamp of the best bid. Absent when the bid side carries no
+   * timestamp. When a null/undefined value is observed, it indicates that there is
+   * no available data.
+   */
+  bid_timestamp?: string | null;
+
+  /**
+   * ISO 10383 Market Identifier Code (MIC) of the venue currently holding the
+   * national best bid (NBBO). Absent when the bid side carries no venue. When a
+   * null/undefined value is observed, it indicates that there is no available data.
+   */
+  bid_venue?: string | null;
 
   /**
    * Midpoint of bid and ask. Absent when either side is missing. When a
