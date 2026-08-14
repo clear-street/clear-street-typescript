@@ -124,9 +124,11 @@ export {
   type OpenEntitlementConsentAction,
   type OpenScreenerAction,
   type PrefillCancelOrderAction,
+  type PrefillCancelOrderRequest,
   type PrefillModifyOrderAction,
   type PrefillModifyOrderRequest,
   type PrefillNewOrderAction,
+  type PrefillNewOrderRequest,
   type PrefillOrderAction,
   type PromptButtonAction,
   type StructuredAction,
@@ -135,7 +137,6 @@ export {
 } from './omni-ai/index';
 export {
   Orders,
-  type CancelOrderRequest,
   type Execution,
   type ExecutionList,
   type InstrumentIDOrSymbol,

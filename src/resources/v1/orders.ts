@@ -158,24 +158,6 @@ export class Orders extends APIResource {
 }
 
 /**
- * Request to cancel an existing order
- *
- * Note: In the API, order cancellation is done via DELETE request without a body.
- * The order_id and account_id come from the URL path parameters.
- */
-export interface CancelOrderRequest {
-  /**
-   * Account ID (from path parameter)
-   */
-  account_id: number;
-
-  /**
-   * Order ID to cancel (from path parameter)
-   */
-  order_id: string;
-}
-
-/**
  * Represents a single fill of an order for an account.
  */
 export interface Execution {
@@ -895,7 +877,6 @@ export interface OrderSubmitOrdersParams {
 
 export declare namespace Orders {
   export {
-    type CancelOrderRequest as CancelOrderRequest,
     type Execution as Execution,
     type ExecutionList as ExecutionList,
     type InstrumentIDOrSymbol as InstrumentIDOrSymbol,

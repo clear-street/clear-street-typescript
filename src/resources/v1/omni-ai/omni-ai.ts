@@ -91,6 +91,13 @@ export interface ActionButton {
   label: string;
 
   /**
+   * Interaction-tracking identity. Absent on messages created before tracking. When
+   * a null/undefined value is observed, it indicates that there is no available
+   * data.
+   */
+  itemId?: string | null;
+
+  /**
    * Follow-up prompt to submit as the next user message. When a null/undefined value
    * is observed, it indicates it does not apply.
    */
@@ -113,6 +120,11 @@ export interface ChartPayload {
   chartId: string;
 
   /**
+   * Whether the current user clicked this chart.
+   */
+  clicked: boolean;
+
+  /**
    * Buttons associated with this chart.
    */
   actionButtons?: Array<ActionButton>;
@@ -122,6 +134,13 @@ export interface ChartPayload {
    * observed, it indicates it does not apply.
    */
   dataChart?: DataChart | null;
+
+  /**
+   * Interaction-tracking identity. Absent on messages created before tracking. When
+   * a null/undefined value is observed, it indicates that there is no available
+   * data.
+   */
+  itemId?: string | null;
 }
 
 /**
@@ -172,6 +191,23 @@ export interface ContentPartStructuredActionPayload {
   action: StructuredAction;
 
   action_id: string;
+
+  /**
+   * Whether the current user clicked this action.
+   */
+  clicked: boolean;
+
+  /**
+   * IDs of nested items clicked by the current user.
+   */
+  clicked_item_ids?: Array<string>;
+
+  /**
+   * Interaction-tracking identity. Absent on messages created before tracking. When
+   * a null/undefined value is observed, it indicates that there is no available
+   * data.
+   */
+  item_id?: string | null;
 }
 
 /**
@@ -231,6 +267,13 @@ export interface OpenChartAction {
   extras?: unknown;
 
   /**
+   * Interaction-tracking identity. Absent on messages created before tracking. When
+   * a null/undefined value is observed, it indicates that there is no available
+   * data.
+   */
+  item_id?: string | null;
+
+  /**
    * Chart timeframe (e.g., "1D", "1W", "1M", "3M", "1Y", "5Y") When a null/undefined
    * value is observed, it indicates it does not apply.
    */
@@ -251,6 +294,13 @@ export interface OpenEntitlementConsentAction {
   entitlement_codes: Array<EntitlementCode>;
 
   reason: string;
+
+  /**
+   * Interaction-tracking identity. Absent on messages created before tracking. When
+   * a null/undefined value is observed, it indicates that there is no available
+   * data.
+   */
+  item_id?: string | null;
 }
 
 /**
@@ -267,6 +317,13 @@ export interface OpenScreenerAction {
    * value is observed, it indicates it does not apply.
    */
   columns?: Array<string> | null;
+
+  /**
+   * Interaction-tracking identity. Absent on messages created before tracking. When
+   * a null/undefined value is observed, it indicates that there is no available
+   * data.
+   */
+  item_id?: string | null;
 
   /**
    * Optional page size. When a null/undefined value is observed, it indicates it
@@ -294,7 +351,32 @@ export interface PrefillCancelOrderAction {
   /**
    * Orders to cancel using the same identifiers required by the cancel-order API.
    */
-  orders: Array<OrdersAPI.CancelOrderRequest>;
+  orders: Array<PrefillCancelOrderRequest>;
+}
+
+/**
+ * Request to cancel an existing order
+ *
+ * Note: In the API, order cancellation is done via DELETE request without a body.
+ * The order_id and account_id come from the URL path parameters.
+ */
+export interface PrefillCancelOrderRequest {
+  /**
+   * Account ID (from path parameter)
+   */
+  account_id: number;
+
+  /**
+   * Order ID to cancel (from path parameter)
+   */
+  order_id: string;
+
+  /**
+   * Interaction-tracking identity. Absent on messages created before tracking. When
+   * a null/undefined value is observed, it indicates that there is no available
+   * data.
+   */
+  item_id?: string | null;
 }
 
 /**
@@ -317,6 +399,13 @@ export interface PrefillModifyOrderRequest {
    * Account ID that owns the order.
    */
   account_id?: number;
+
+  /**
+   * Interaction-tracking identity. Absent on messages created before tracking. When
+   * a null/undefined value is observed, it indicates that there is no available
+   * data.
+   */
+  item_id?: string | null;
 
   /**
    * New limit offset for trailing stop-limit orders (signed)
@@ -361,7 +450,96 @@ export interface PrefillNewOrderAction {
   /**
    * Orders to prefill using the same shape accepted by the orders API.
    */
-  orders: Array<OrdersAPI.NewOrderRequest>;
+  orders: Array<PrefillNewOrderRequest>;
+}
+
+/**
+ * Request to submit a new order (PlaceOrderRequest from spec)
+ */
+export interface PrefillNewOrderRequest {
+  /**
+   * Type of order
+   */
+  order_type: OrdersAPI.RequestOrderType;
+
+  /**
+   * Quantity to trade. For COMMON_STOCK: shares (may be fractional if supported).
+   * For OPTION (single-leg): contracts (must be an integer)
+   */
+  quantity: string;
+
+  /**
+   * Side of the order
+   */
+  side: OrdersAPI.Side;
+
+  /**
+   * Time in force
+   */
+  time_in_force: OrdersAPI.RequestTimeInForce;
+
+  /**
+   * Optional client-provided unique ID (idempotency). Required to be unique per
+   * account.
+   */
+  id?: string | null;
+
+  /**
+   * The timestamp when the order should expire (UTC). Required when time_in_force is
+   * GOOD_TILL_DATE.
+   */
+  expires_at?: string | null;
+
+  /**
+   * Allow trading outside regular trading hours. Some brokers disallow options
+   * outside RTH.
+   */
+  extended_hours?: boolean | null;
+
+  /**
+   * Instrument ID (UUID) or symbol (equity ticker or OSI option symbol). Either
+   * `symbol` or `instrument_id` must be provided.
+   */
+  instrument_id?: OrdersAPI.InstrumentIDOrSymbol | null;
+
+  /**
+   * Interaction-tracking identity. Absent on messages created before tracking. When
+   * a null/undefined value is observed, it indicates that there is no available
+   * data.
+   */
+  item_id?: string | null;
+
+  /**
+   * Limit offset for trailing stop-limit orders (signed)
+   */
+  limit_offset?: string | null;
+
+  /**
+   * Limit price (required for LIMIT and STOP_LIMIT orders)
+   */
+  limit_price?: string | null;
+
+  /**
+   * Stop price (required for STOP and STOP_LIMIT orders)
+   */
+  stop_price?: string | null;
+
+  /**
+   * Trading symbol. For equities, use the ticker symbol (e.g., "TSLA"). For options,
+   * use the OSI symbol (e.g., "TSLA 250117C00190000"). Either `symbol` or
+   * `instrument_id` must be provided.
+   */
+  symbol?: string | null;
+
+  /**
+   * Trailing offset amount (required for trailing orders)
+   */
+  trailing_offset?: string | null;
+
+  /**
+   * Trailing offset type (PRICE or PERCENT_BPS)
+   */
+  trailing_offset_type?: OrdersAPI.TrailingOffsetType | null;
 }
 
 /**
@@ -482,6 +660,11 @@ export interface SuggestedActionsPayload {
    * Ordered message-level buttons.
    */
   actionButtons?: Array<ActionButton>;
+
+  /**
+   * IDs of buttons clicked by the current user.
+   */
+  clickedItemIds?: Array<string>;
 }
 
 OmniAI.Entitlements = Entitlements;
@@ -508,9 +691,11 @@ export declare namespace OmniAI {
     type OpenEntitlementConsentAction as OpenEntitlementConsentAction,
     type OpenScreenerAction as OpenScreenerAction,
     type PrefillCancelOrderAction as PrefillCancelOrderAction,
+    type PrefillCancelOrderRequest as PrefillCancelOrderRequest,
     type PrefillModifyOrderAction as PrefillModifyOrderAction,
     type PrefillModifyOrderRequest as PrefillModifyOrderRequest,
     type PrefillNewOrderAction as PrefillNewOrderAction,
+    type PrefillNewOrderRequest as PrefillNewOrderRequest,
     type PrefillOrderAction as PrefillOrderAction,
     type PromptButtonAction as PromptButtonAction,
     type StructuredAction as StructuredAction,

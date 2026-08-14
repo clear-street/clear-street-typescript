@@ -73,7 +73,6 @@ import {
 } from './instruments';
 import * as OrdersAPI from './orders';
 import {
-  CancelOrderRequest,
   Execution,
   ExecutionList,
   InstrumentIDOrSymbol,
@@ -238,9 +237,11 @@ import {
   OpenEntitlementConsentAction,
   OpenScreenerAction,
   PrefillCancelOrderAction,
+  PrefillCancelOrderRequest,
   PrefillModifyOrderAction,
   PrefillModifyOrderRequest,
   PrefillNewOrderAction,
+  PrefillNewOrderRequest,
   PrefillOrderAction,
   PromptButtonAction,
   StructuredAction,
@@ -422,9 +423,11 @@ export declare namespace V1 {
     type OpenEntitlementConsentAction as OpenEntitlementConsentAction,
     type OpenScreenerAction as OpenScreenerAction,
     type PrefillCancelOrderAction as PrefillCancelOrderAction,
+    type PrefillCancelOrderRequest as PrefillCancelOrderRequest,
     type PrefillModifyOrderAction as PrefillModifyOrderAction,
     type PrefillModifyOrderRequest as PrefillModifyOrderRequest,
     type PrefillNewOrderAction as PrefillNewOrderAction,
+    type PrefillNewOrderRequest as PrefillNewOrderRequest,
     type PrefillOrderAction as PrefillOrderAction,
     type PromptButtonAction as PromptButtonAction,
     type StructuredAction as StructuredAction,
@@ -434,7 +437,6 @@ export declare namespace V1 {
 
   export {
     Orders as Orders,
-    type CancelOrderRequest as CancelOrderRequest,
     type Execution as Execution,
     type ExecutionList as ExecutionList,
     type InstrumentIDOrSymbol as InstrumentIDOrSymbol,
