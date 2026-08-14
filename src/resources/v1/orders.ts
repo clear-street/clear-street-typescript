@@ -206,10 +206,10 @@ export interface Execution {
   symbol?: string | null;
 
   /**
-   * Underlying instrument identifier for a derivative fill. `null` for a
-   * non-derivative fill, when the underlier could not be resolved, or when a
-   * multileg fill's legs resolve to different underliers. When a null/undefined
-   * value is observed, it indicates it does not apply.
+   * Underlying instrument identifier for an option fill. Omitted for a
+   * non-derivative fill, when the underlier could not be resolved, or for a multileg
+   * fill (per-leg underliers live in `legs[]`). When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   underlying_instrument_id?: string | null;
 
