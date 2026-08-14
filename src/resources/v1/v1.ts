@@ -247,6 +247,8 @@ import {
   StructuredActionButtonAction,
   SuggestedActionsPayload,
 } from './omni-ai/omni-ai';
+import * as PrivateMarketsAPI from './private-markets/private-markets';
+import { PrivateMarkets } from './private-markets/private-markets';
 
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
@@ -257,6 +259,7 @@ export class V1 extends APIResource {
   omniAI: OmniAIAPI.OmniAI = new OmniAIAPI.OmniAI(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
   positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
+  privateMarkets: PrivateMarketsAPI.PrivateMarkets = new PrivateMarketsAPI.PrivateMarkets(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   watchlist: WatchlistAPI.Watchlist = new WatchlistAPI.Watchlist(this._client);
 }
@@ -279,6 +282,7 @@ V1.Instruments = Instruments;
 V1.OmniAI = OmniAI;
 V1.Orders = Orders;
 V1.Positions = Positions;
+V1.PrivateMarkets = PrivateMarkets;
 V1.Screener = Screener;
 V1.Watchlist = Watchlist;
 
@@ -484,6 +488,8 @@ export declare namespace V1 {
     type PositionGetPositionsParams as PositionGetPositionsParams,
     type PositionSubmitPositionInstructionsParams as PositionSubmitPositionInstructionsParams,
   };
+
+  export { PrivateMarkets as PrivateMarkets };
 
   export {
     Screener as Screener,

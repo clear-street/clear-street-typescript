@@ -165,7 +165,10 @@ export interface AccountBalances {
   account_id: number;
 
   /**
-   * The total buying power available in the account.
+   * The total buying power available in the account: base buying power plus the open
+   * order adjustment, where base buying power is maintenance margin excess times the
+   * multiplier for intraday and initial margin excess times the multiplier for
+   * overnight.
    */
   buying_power: string;
 
@@ -195,7 +198,8 @@ export interface AccountBalances {
   daily_unrealized_pnl: string;
 
   /**
-   * The total equity in the account.
+   * The total equity in the account: cash plus long market value plus short market
+   * value, where short market value is negative.
    */
   equity: string;
 
@@ -210,7 +214,9 @@ export interface AccountBalances {
   margin_type: MarginType;
 
   /**
-   * Signed buying-power correction from open orders.
+   * Buying power correction from open orders, computed as projected buying power
+   * minus actual buying power. A negative value means open orders are consuming
+   * buying power.
    */
   open_order_adjustment: string;
 
@@ -256,7 +262,8 @@ export interface AccountBalances {
   margin_details?: MarginDetails | null;
 
   /**
-   * Applied multiplier for margin calculations. When a null/undefined value is
+   * Margin multiplier: 4 during intraday sessions (pre-market, regular, and
+   * after-hours) and 2 during the overnight session. When a null/undefined value is
    * observed, it indicates it does not apply.
    */
   multiplier?: string | null;
@@ -296,14 +303,16 @@ export interface AccountBalancesSod {
   asof?: string | null;
 
   /**
-   * Start-of-day maintenance margin excess. When a null/undefined value is observed,
-   * it indicates it does not apply.
+   * Start-of-day maintenance margin excess: the difference between equity and the
+   * maintenance margin requirement. When a null/undefined value is observed, it
+   * indicates it does not apply.
    */
   maintenance_margin_excess?: string | null;
 
   /**
-   * Start-of-day maintenance margin requirement. When a null/undefined value is
-   * observed, it indicates it does not apply.
+   * Start-of-day maintenance margin requirement: the amount of equity required to
+   * maintain current positions. When a null/undefined value is observed, it
+   * indicates it does not apply.
    */
   maintenance_margin_requirement?: string | null;
 
@@ -462,12 +471,12 @@ export interface Address {
 
 export interface MarginDetails {
   /**
-   * Initial margin excess for trade-date balances.
+   * The difference between equity and the initial margin requirement.
    */
   initial_margin_excess: string;
 
   /**
-   * Initial margin requirement for trade-date balances.
+   * The amount of equity required to open new positions.
    */
   initial_margin_requirement: string;
 
@@ -477,12 +486,12 @@ export interface MarginDetails {
   intraday_details: MarginSessionDetails;
 
   /**
-   * Maintenance margin excess for trade-date balances.
+   * The difference between equity and the maintenance margin requirement.
    */
   maintenance_margin_excess: string;
 
   /**
-   * Maintenance margin requirement for trade-date balances.
+   * The amount of equity required to maintain current positions.
    */
   maintenance_margin_requirement: string;
 
@@ -517,12 +526,16 @@ export interface MarginDetailsUsage {
 
 export interface MarginSessionDetails {
   /**
-   * Maximum buying power available in the account during the session.
+   * Maximum buying power available in the account during the session: base buying
+   * power plus the open order adjustment, where base buying power is maintenance
+   * margin excess times the multiplier for intraday and initial margin excess times
+   * the multiplier for overnight.
    */
   buying_power: string;
 
   /**
-   * Effective multiplier for margin calculations during the session.
+   * Margin multiplier for the session: 4 during intraday sessions (pre-market,
+   * regular, and after-hours) and 2 during the overnight session.
    */
   multiplier?: string | null;
 }

@@ -362,6 +362,37 @@ Methods:
 - <code title="get /v1/accounts/{account_id}/positions">client.v1.positions.<a href="./src/resources/v1/positions.ts">getPositions</a>(accountID, { ...params }) -> PositionGetPositionsResponse</code>
 - <code title="post /v1/accounts/{account_id}/positions/instructions">client.v1.positions.<a href="./src/resources/v1/positions.ts">submitPositionInstructions</a>(accountID, [ ...instructions ]) -> PositionSubmitPositionInstructionsResponse</code>
 
+## PrivateMarkets
+
+### Offerings
+
+Types:
+
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">Currency</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">MetricUnit</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">MetricValueType</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingCard</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingCardList</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingClass</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingCompany</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingDetail</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingDocumentResource</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingDocumentType</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingHighlight</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingKeyRisk</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingParticipantResource</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingSpv</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">ParticipantRole</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">SpvStatus</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">ValuationBasis</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingGetOfferingByIDResponse</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingGetOfferingsResponse</a></code>
+
+Methods:
+
+- <code title="get /v1/private-markets/offerings/{offering_id}">client.v1.privateMarkets.offerings.<a href="./src/resources/v1/private-markets/offerings.ts">getOfferingByID</a>(offeringID, { ...params }) -> OfferingGetOfferingByIDResponse</code>
+- <code title="get /v1/private-markets/offerings">client.v1.privateMarkets.offerings.<a href="./src/resources/v1/private-markets/offerings.ts">getOfferings</a>({ ...params }) -> OfferingGetOfferingsResponse</code>
+
 ## Screener
 
 Types:

@@ -109,6 +109,9 @@ export class Screener extends APIResource {
    * Use `columns` to select which columns appear in each row. When omitted, the
    * default field set is returned.
    *
+   * Due to the volatility of screener responses we recommend reconciling page
+   * results since results can shuffle between calls.
+   *
    * @example
    * ```ts
    * const response = await client.v1.screener.searchScreener();

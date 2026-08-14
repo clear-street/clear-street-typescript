@@ -188,6 +188,7 @@ export {
   type PositionGetPositionsParams,
   type PositionSubmitPositionInstructionsParams,
 } from './positions';
+export { PrivateMarkets } from './private-markets/index';
 export {
   Screener,
   type FieldLookback,
