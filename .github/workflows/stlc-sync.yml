@@ -52,7 +52,19 @@ jobs:
           PRODUCTION_TOKEN: ${{ steps.production-token.outputs.token }}
         run: |
           git remote add production "https://x-access-token:${PRODUCTION_TOKEN}@github.com/${PRODUCTION_REPO}.git"
-          git fetch production main
+          # GitHub occasionally 404s this transiently (e.g. a just-minted App
+          # token not yet propagated) — retry with backoff before failing.
+          for attempt in 1 2 3 4; do
+            if git fetch production main; then
+              break
+            fi
+            if [ "$attempt" = 4 ]; then
+              echo "::error title=Fetch production main failed::giving up after 4 attempts"
+              exit 1
+            fi
+            echo "fetch failed (attempt $attempt/4) — retrying in $((10 * attempt))s"
+            sleep $((10 * attempt))
+          done
 
       - name: Check whether production has content staging lacks
         id: diff
