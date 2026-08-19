@@ -100,7 +100,9 @@ jobs:
           msg="stlc back-sync (sync from production) failed in ${{ github.repository }}. A stalled back-sync lets custom-code tracking drift, which later builds refuse on — investigate before the next build. Run: $run_url"
           echo "::error title=stlc workflow failed::$msg"
           { echo "### ⚠️ stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
-          if [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "Skipping Slack alert: failure is on $GITHUB_REF, not main."
+          elif [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
             curl -sS -X POST -H 'Content-Type: application/json' \
               -d "$(jq -n --arg text "$msg" '{text:$text}')" "$ALERT_WEBHOOK_URL" \
               || echo "::warning::Alert webhook POST failed"
@@ -226,7 +228,9 @@ jobs:
           msg="stlc seal-dispatch failed in ${{ github.repository }} — the config repo was NOT notified to re-seal. The config repo's scheduled sync is the backstop. Run: $run_url"
           echo "::error title=stlc workflow failed::$msg"
           { echo "### ⚠️ stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
-          if [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "Skipping Slack alert: failure is on $GITHUB_REF, not main."
+          elif [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
             curl -sS -X POST -H 'Content-Type: application/json' \
               -d "$(jq -n --arg text "$msg" '{text:$text}')" "$ALERT_WEBHOOK_URL" \
               || echo "::warning::Alert webhook POST failed"
