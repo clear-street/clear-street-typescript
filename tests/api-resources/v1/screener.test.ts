@@ -41,6 +41,17 @@ describe('resource screener', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
+  test('getScreenerCatalog', async () => {
+    const responsePromise = client.v1.screener.getScreenerCatalog();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
   test('getScreeners', async () => {
     const responsePromise = client.v1.screener.getScreeners();
     const rawResponse = await responsePromise.asResponse();

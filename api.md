@@ -314,6 +314,7 @@ Types:
 - <code><a href="./src/resources/v1/orders.ts">QueueState</a></code>
 - <code><a href="./src/resources/v1/orders.ts">ReplaceOrderRequest</a></code>
 - <code><a href="./src/resources/v1/orders.ts">RequestOrderType</a></code>
+- <code><a href="./src/resources/v1/orders.ts">RequestPositionEffect</a></code>
 - <code><a href="./src/resources/v1/orders.ts">RequestTimeInForce</a></code>
 - <code><a href="./src/resources/v1/orders.ts">Side</a></code>
 - <code><a href="./src/resources/v1/orders.ts">TimeInForce</a></code>
@@ -398,6 +399,11 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/screener.ts">Catalog</a></code>
+- <code><a href="./src/resources/v1/screener.ts">Combination</a></code>
+- <code><a href="./src/resources/v1/screener.ts">Enums</a></code>
+- <code><a href="./src/resources/v1/screener.ts">FieldColumns</a></code>
+- <code><a href="./src/resources/v1/screener.ts">FieldKind</a></code>
 - <code><a href="./src/resources/v1/screener.ts">FieldLookback</a></code>
 - <code><a href="./src/resources/v1/screener.ts">FieldPeriod</a></code>
 - <code><a href="./src/resources/v1/screener.ts">FieldRef</a></code>
@@ -406,8 +412,11 @@ Types:
 - <code><a href="./src/resources/v1/screener.ts">FilterOperator</a></code>
 - <code><a href="./src/resources/v1/screener.ts">FilterValue</a></code>
 - <code><a href="./src/resources/v1/screener.ts">Modifier</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ModifierArg</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ModifierDef</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ModifierOp</a></code>
 - <code><a href="./src/resources/v1/screener.ts">OperatorArg</a></code>
+- <code><a href="./src/resources/v1/screener.ts">Rules</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerColumn</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerEntry</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerEntryList</a></code>
@@ -417,8 +426,10 @@ Types:
 - <code><a href="./src/resources/v1/screener.ts">SearchFilter</a></code>
 - <code><a href="./src/resources/v1/screener.ts">SortSpec</a></code>
 - <code><a href="./src/resources/v1/screener.ts">Variable</a></code>
+- <code><a href="./src/resources/v1/screener.ts">VariableDef</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerCreateScreenerResponse</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerGetScreenerByIDResponse</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerGetScreenerCatalogResponse</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerGetScreenersResponse</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerReplaceScreenerResponse</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerSearchScreenerResponse</a></code>
@@ -428,6 +439,7 @@ Methods:
 - <code title="post /v1/saved-screeners">client.v1.screener.<a href="./src/resources/v1/screener.ts">createScreener</a>({ ...params }) -> ScreenerCreateScreenerResponse</code>
 - <code title="delete /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/resources/v1/screener.ts">deleteScreener</a>(screenerID) -> void</code>
 - <code title="get /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/resources/v1/screener.ts">getScreenerByID</a>(screenerID) -> ScreenerGetScreenerByIDResponse</code>
+- <code title="get /v1/screener/catalog">client.v1.screener.<a href="./src/resources/v1/screener.ts">getScreenerCatalog</a>() -> ScreenerGetScreenerCatalogResponse</code>
 - <code title="get /v1/saved-screeners">client.v1.screener.<a href="./src/resources/v1/screener.ts">getScreeners</a>() -> ScreenerGetScreenersResponse</code>
 - <code title="put /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/resources/v1/screener.ts">replaceScreener</a>(screenerID, { ...params }) -> ScreenerReplaceScreenerResponse</code>
 - <code title="post /v1/screener">client.v1.screener.<a href="./src/resources/v1/screener.ts">searchScreener</a>({ ...params }) -> ScreenerSearchScreenerResponse</code>

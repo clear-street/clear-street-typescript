@@ -290,6 +290,12 @@ export interface NewOrderRequest {
   limit_price?: string | null;
 
   /**
+   * Optional open/close intent for this order. When omitted, the platform determines
+   * the position effect.
+   */
+  position_intent?: RequestPositionEffect | null;
+
+  /**
    * Stop price (required for STOP and STOP_LIMIT orders)
    */
   stop_price?: string | null;
@@ -361,7 +367,7 @@ export interface Order {
   quantity: string;
 
   /**
-   * Side of the order (BUY, SELL, SELL_SHORT)
+   * Side of the order (BUY or SELL)
    */
   side: Side;
 
@@ -595,6 +601,12 @@ export type RequestOrderType =
   | 'TRAILING_STOP_LIMIT';
 
 /**
+ * Position effect for a multileg strategy leg: client-attested open/close intent.
+ * Required on every leg of a multileg order submission.
+ */
+export type RequestPositionEffect = 'OPEN' | 'CLOSE';
+
+/**
  * Strict time-in-force enum for order submission requests.
  */
 export type RequestTimeInForce =
@@ -607,9 +619,9 @@ export type RequestTimeInForce =
   | 'AT_THE_CLOSE';
 
 /**
- * Side of an order
+ * Side of the order (BUY or SELL).
  */
-export type Side = 'BUY' | 'SELL' | 'SELL_SHORT' | 'OTHER';
+export type Side = 'BUY' | 'SELL';
 
 /**
  * Time in force
@@ -693,7 +705,7 @@ export interface OrderCancelAllOpenOrdersParams {
   /**
    * Filter by order side (BUY or SELL)
    */
-  side?: 'BUY' | 'SELL' | 'SELL_SHORT' | 'OTHER';
+  side?: 'BUY' | 'SELL';
 
   /**
    * Filter by order type (e.g., MARKET, LIMIT)
@@ -888,6 +900,7 @@ export declare namespace Orders {
     type QueueState as QueueState,
     type ReplaceOrderRequest as ReplaceOrderRequest,
     type RequestOrderType as RequestOrderType,
+    type RequestPositionEffect as RequestPositionEffect,
     type RequestTimeInForce as RequestTimeInForce,
     type Side as Side,
     type TimeInForce as TimeInForce,

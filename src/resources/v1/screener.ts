@@ -65,6 +65,24 @@ export class Screener extends APIResource {
   }
 
   /**
+   * Returns the complete screener field catalog: the field `kinds`, the per-field
+   * data, the enum universes, the request-side `rules`, the built-in variables and
+   * modifiers, and the `POST /screener` default response fields.
+   *
+   * `POST /screener` field references are validated against this catalog; its
+   * `rules` object documents how to compose a valid request.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.screener.getScreenerCatalog();
+   * ```
+   */
+  getScreenerCatalog(options?: RequestOptions): APIPromise<ScreenerGetScreenerCatalogResponse> {
+    return this._client.get('/v1/screener/catalog', options);
+  }
+
+  /**
    * List saved screener configurations.
    *
    * Returns all screener configurations for the authenticated user.
@@ -102,12 +120,19 @@ export class Screener extends APIResource {
   /**
    * Search instruments using structured filters.
    *
-   * Returns a columnar response where each row is an array of column objects. Each
-   * column contains a human-readable name, a field reference, an optional type hint
-   * (e.g. `CURR_USD`, `PERCENT`), and the value.
+   * Compose a request with `filters`, plus optional `sorts`, `columns`, and
+   * `page_size`/`page_token` for pagination. Each filter pairs a field reference
+   * (`left`) with an operator (`op`, e.g. `GREATER_OR_EQUAL`, `BETWEEN`) and
+   * comparison values (`right`), which can be literals or date variables such as
+   * `today` with a modifier. Field names, periods, and lookbacks come from the
+   * screener field catalog. `sorts` order results; `columns` selects which fields
+   * appear in each row (the default field set when omitted).
    *
-   * Use `columns` to select which columns appear in each row. When omitted, the
-   * default field set is returned.
+   * The response is a paginated, columnar list of matching instruments. Each row is
+   * an array of column objects, each with a display `name`, the `field` reference,
+   * an optional value `type` hint (e.g. `CURR_USD`, `PERCENT`), and the `value`. An
+   * `instrument_id` column is always prepended. Metadata carries `total_items`,
+   * `total_pages`, and `next_page_token` for paging.
    *
    * Due to the volatility of screener responses we recommend reconciling page
    * results since results can shuffle between calls.
@@ -123,6 +148,194 @@ export class Screener extends APIResource {
   ): APIPromise<ScreenerSearchScreenerResponse> {
     return this._client.post('/v1/screener', { body, ...options });
   }
+}
+
+/**
+ * The complete screener field catalog, serialized as the `data` payload of
+ * `GET /screener/catalog`.
+ */
+export interface Catalog {
+  /**
+   * The `api_name`s that resolve to the POST default column set when `columns` is
+   * omitted.
+   */
+  default_response_fields: Array<string>;
+
+  /**
+   * The enum universes every other section's values are drawn from.
+   */
+  enums: Enums;
+
+  /**
+   * Struct-of-arrays of the remaining per-field scalars.
+   */
+  fields: FieldColumns;
+
+  /**
+   * The deduplicated
+   * `(category, format, value_type, combinations, default combination)` tuples;
+   * `fields.kind[i]` indexes into this.
+   */
+  kinds: Array<FieldKind>;
+
+  /**
+   * The modifier operations and their legal `args` forms.
+   */
+  modifiers: Array<ModifierDef>;
+
+  /**
+   * `value_type` -> canonically-ordered valid operators.
+   */
+  operators_by_value_type: { [key: string]: Array<string> };
+
+  /**
+   * Request-side semantics for turning the data into a valid call.
+   */
+  rules: Rules;
+
+  /**
+   * Axis token -> abbreviation, for every token in use in `kinds`.
+   */
+  suffixes: { [key: string]: string };
+
+  /**
+   * The built-in variables accepted in `filters[].right[].variable`.
+   */
+  variables: Array<VariableDef>;
+}
+
+/**
+ * A single combination, expressed with the API's own parameter names.
+ *
+ * At most one of `period` / `lookback` is set; a combination with neither selects
+ * the field's current or most recent value.
+ */
+export interface Combination {
+  /**
+   * The lookback, a member of `enums.lookback`.
+   */
+  lookback?: string | null;
+
+  /**
+   * The period, a member of `enums.period`.
+   */
+  period?: string | null;
+}
+
+/**
+ * The enum universes every other section's values are drawn from.
+ */
+export interface Enums {
+  /**
+   * The built-in variable names, e.g. `"today"`, `"start_of_year"`.
+   */
+  builtin_variable: Array<string>;
+
+  /**
+   * `FieldCategory` variants, e.g. `"PROFILE"`, `"VALUATION"`.
+   */
+  category: Array<string>;
+
+  /**
+   * The modifier date units, e.g. `"DAY"`, `"YEAR"`.
+   */
+  date_unit: Array<string>;
+
+  /**
+   * `FieldFormat` variants, e.g. `"CURRENCY"`, `"PERCENT"`.
+   */
+  format: Array<string>;
+
+  /**
+   * `FieldLookback` variants, e.g. `"ONE_WEEK"`, `"YEAR_TO_DATE"`.
+   */
+  lookback: Array<string>;
+
+  /**
+   * The modifier operation names, `"ADD"` and `"SUBTRACT"`.
+   */
+  modifier_op: Array<string>;
+
+  /**
+   * `FilterOperator` variants, e.g. `"BETWEEN"`, `"ONE_OF"`.
+   */
+  operator: Array<string>;
+
+  /**
+   * The modifier arg forms, e.g. `"LEFT_INCLUSIVE"`.
+   */
+  operator_arg: Array<string>;
+
+  /**
+   * `FieldPeriod` variants, e.g. `"QUARTER"`, `"ANNUAL"`.
+   */
+  period: Array<string>;
+
+  /**
+   * `FieldValueType` variants, e.g. `"DECIMAL"`, `"DATE"`.
+   */
+  value_type: Array<string>;
+}
+
+/**
+ * Struct-of-arrays: all four fields are the same length, index `i` is one field.
+ */
+export interface FieldColumns {
+  /**
+   * A human-readable description of the field.
+   */
+  description: Array<string>;
+
+  /**
+   * The display name of the column when no `period` / `lookback` is set.
+   */
+  display_name: Array<string>;
+
+  /**
+   * Index into `Catalog::kinds`.
+   */
+  kind: Array<number>;
+
+  /**
+   * The base field name, as accepted in a request's `left.name` / `right[].variable`
+   * field reference.
+   */
+  name: Array<string>;
+}
+
+/**
+ * One deduplicated
+ * `(category, format, value_type, combinations, default combination)` tuple;
+ * `fields.kind[i]` indexes into `Catalog::kinds`.
+ */
+export interface FieldKind {
+  /**
+   * The field's category, a member of `enums.category`.
+   */
+  category: string;
+
+  /**
+   * Ordered, in declaration order. The empty combination is the current or most
+   * recent value.
+   */
+  combinations: Array<Combination>;
+
+  /**
+   * The combination a bare field reference resolves to: the field's current or most
+   * recent value when the kind offers it, otherwise the kind's default `period` /
+   * `lookback`.
+   */
+  default_combination: Combination;
+
+  /**
+   * The field's format, a member of `enums.format`.
+   */
+  format: string;
+
+  /**
+   * The field's value type, a member of `enums.value_type`.
+   */
+  value_type: string;
 }
 
 /**
@@ -235,6 +448,56 @@ export interface Modifier {
 }
 
 /**
+ * One positional `modifier.args` slot.
+ */
+export interface ModifierArg {
+  /**
+   * `"NUMBER"` or `"ENUM"`.
+   */
+  kind: string;
+
+  /**
+   * The arg's meaning and constraints.
+   */
+  note: string;
+
+  /**
+   * Zero-based position in the `args` array.
+   */
+  position: number;
+
+  /**
+   * Whether the arg must be present in every modifier use.
+   */
+  required: boolean;
+
+  /**
+   * For optional args: the value used when the arg is omitted.
+   */
+  default?: string | null;
+
+  /**
+   * For `"ENUM"` args: the `enums` list the value must be a member of.
+   */
+  ref?: string | null;
+}
+
+/**
+ * A modifier operation and the positional `args` each context accepts.
+ */
+export interface ModifierDef {
+  /**
+   * The positional `args` slots, in order.
+   */
+  args: Array<ModifierArg>;
+
+  /**
+   * `"ADD"` or `"SUBTRACT"`.
+   */
+  name: string;
+}
+
+/**
  * Modifier operation applied to a variable.
  */
 export type ModifierOp = 'ADD' | 'SUBTRACT';
@@ -248,6 +511,47 @@ export type OperatorArg =
   | 'LEFT_EXCLUSIVE'
   | 'RIGHT_EXCLUSIVE'
   | 'CASE_INSENSITIVE';
+
+/**
+ * Request-side semantics: how to turn the catalog data into a valid
+ * `POST /screener` call.
+ */
+export interface Rules {
+  /**
+   * Requests and response `field` objects use the same reference shape: base name
+   * plus at most one of `period` / `lookback`; `default_response_fields` (the POST
+   * default column set when `columns` is omitted) carries api_names, each decoding
+   * via `suffixes`.
+   */
+  api_name_composition: string;
+
+  /**
+   * At most one of `period` / `lookback`; the empty combination selects the field's
+   * current or most recent value.
+   */
+  axes: string;
+
+  /**
+   * Omitting both is always valid; it resolves to the field's current or most recent
+   * value when the kind offers it, otherwise to `default_combination`.
+   */
+  defaults: string;
+
+  /**
+   * Where `modifier` is legal, its `args` forms, and unit semantics.
+   */
+  modifiers: string;
+
+  /**
+   * Filter operator value counts for the `right` array.
+   */
+  operators: string;
+
+  /**
+   * Built-in variables and field references in `right[].variable`.
+   */
+  variables: string;
+}
 
 /**
  * A single column in the screener search response.
@@ -283,6 +587,11 @@ export interface ScreenerEntry {
   filters: Array<SearchFilter>;
 
   name: string;
+
+  /**
+   * Whether any user may fetch this screener by id.
+   */
+  shared: boolean;
 
   updated_at: string;
 
@@ -390,6 +699,26 @@ export interface Variable {
   period?: FieldPeriod | null;
 }
 
+/**
+ * A built-in variable, as accepted in `filters[].right[].variable`.
+ */
+export interface VariableDef {
+  /**
+   * A human-readable description of what the variable resolves to.
+   */
+  description: string;
+
+  /**
+   * The variable name as accepted in `filters[].right[].variable`.
+   */
+  name: string;
+
+  /**
+   * What the variable resolves to at call time (`DATE` for all built-ins).
+   */
+  resolves_to: string;
+}
+
 export interface ScreenerCreateScreenerResponse extends Shared.BaseResponse {
   /**
    * A saved screener configuration entry
@@ -402,6 +731,14 @@ export interface ScreenerGetScreenerByIDResponse extends Shared.BaseResponse {
    * A saved screener configuration entry
    */
   data: ScreenerEntry;
+}
+
+export interface ScreenerGetScreenerCatalogResponse extends Shared.BaseResponse {
+  /**
+   * The complete screener field catalog, serialized as the `data` payload of
+   * `GET /screener/catalog`.
+   */
+  data: Catalog;
 }
 
 export interface ScreenerGetScreenersResponse extends Shared.BaseResponse {
@@ -436,6 +773,12 @@ export interface ScreenerCreateScreenerParams {
   name?: string | null;
 
   /**
+   * Whether any user may fetch this screener by id. Omit to leave the existing value
+   * unchanged (defaults to `false` when creating).
+   */
+  shared?: boolean | null;
+
+  /**
    * Multi-field sort specifications
    */
   sorts?: Array<SortSpec> | null;
@@ -456,6 +799,12 @@ export interface ScreenerReplaceScreenerParams {
    * The name for this screener configuration
    */
   name?: string | null;
+
+  /**
+   * Whether any user may fetch this screener by id. Omit to leave the existing value
+   * unchanged (defaults to `false` when creating).
+   */
+  shared?: boolean | null;
 
   /**
    * Multi-field sort specifications
@@ -499,6 +848,11 @@ export interface ScreenerSearchScreenerParams {
 
 export declare namespace Screener {
   export {
+    type Catalog as Catalog,
+    type Combination as Combination,
+    type Enums as Enums,
+    type FieldColumns as FieldColumns,
+    type FieldKind as FieldKind,
     type FieldLookback as FieldLookback,
     type FieldPeriod as FieldPeriod,
     type FieldRef as FieldRef,
@@ -507,8 +861,11 @@ export declare namespace Screener {
     type FilterOperator as FilterOperator,
     type FilterValue as FilterValue,
     type Modifier as Modifier,
+    type ModifierArg as ModifierArg,
+    type ModifierDef as ModifierDef,
     type ModifierOp as ModifierOp,
     type OperatorArg as OperatorArg,
+    type Rules as Rules,
     type ScreenerColumn as ScreenerColumn,
     type ScreenerEntry as ScreenerEntry,
     type ScreenerEntryList as ScreenerEntryList,
@@ -518,8 +875,10 @@ export declare namespace Screener {
     type SearchFilter as SearchFilter,
     type SortSpec as SortSpec,
     type Variable as Variable,
+    type VariableDef as VariableDef,
     type ScreenerCreateScreenerResponse as ScreenerCreateScreenerResponse,
     type ScreenerGetScreenerByIDResponse as ScreenerGetScreenerByIDResponse,
+    type ScreenerGetScreenerCatalogResponse as ScreenerGetScreenerCatalogResponse,
     type ScreenerGetScreenersResponse as ScreenerGetScreenersResponse,
     type ScreenerReplaceScreenerResponse as ScreenerReplaceScreenerResponse,
     type ScreenerSearchScreenerResponse as ScreenerSearchScreenerResponse,

@@ -185,6 +185,7 @@ describe('resource orders', () => {
           instrument_id: 'x',
           limit_offset: '0.50',
           limit_price: '48.00',
+          position_intent: 'OPEN',
           stop_price: '52.00',
           symbol: 'TSLA',
           trailing_offset: '2.00',

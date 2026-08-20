@@ -520,6 +520,12 @@ export interface PrefillNewOrderRequest {
   limit_price?: string | null;
 
   /**
+   * Optional open/close intent for this order. When omitted, the platform determines
+   * the position effect.
+   */
+  position_intent?: OrdersAPI.RequestPositionEffect | null;
+
+  /**
    * Stop price (required for STOP and STOP_LIMIT orders)
    */
   stop_price?: string | null;
