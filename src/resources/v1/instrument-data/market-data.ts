@@ -346,7 +346,8 @@ export interface SnapshotSession {
   /**
    * Previous session close price. Corporate-action-adjusted (stock dividends, cash
    * dividends, and forward/reverse splits) when an adjustment exists for the close
-   * date; the raw close otherwise.
+   * date; the raw close otherwise. An adjustment can carry the price beyond 2
+   * decimal places.
    */
   previous_close: string;
 
