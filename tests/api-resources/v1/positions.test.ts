@@ -138,7 +138,7 @@ describe('resource positions', () => {
           instruction_type: 'EXERCISE',
           instrument_id: '0195f6d0-a1b2-7c3d-8e4f-5a6b7c8d9e02',
           quantity: '1',
-          instruction_id: 'ui-20260424-001',
+          client_instruction_id: 'ui-20260424-001',
         },
       ],
     });

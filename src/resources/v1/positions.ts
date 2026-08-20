@@ -139,8 +139,8 @@ export class Positions extends APIResource {
    *   cause: `409` when every row was a duplicate, `400` for validation failures
    *   like DNE/CEA on a non-expiry day, `503` if the clearing service is
    *   unavailable. `data` still contains every row carrying `status = REJECTED` and
-   *   `rejection_reason` so callers can attribute failures by `instruction_id`; the
-   *   top-level `error` summarizes the batch.
+   *   `rejection_reason` so callers can attribute failures by
+   *   `client_instruction_id`; the top-level `error` summarizes the batch.
    *
    * @example
    * ```ts
@@ -303,7 +303,7 @@ export interface PositionInstruction {
    * Caller-supplied idempotency key echoed from the submit request; the
    * server-assigned fallback when none was supplied.
    */
-  instruction_id: string;
+  client_instruction_id: string;
 
   /**
    * The action this instruction requests.
@@ -367,9 +367,9 @@ export type PositionInstructionList = Array<PositionInstruction>;
  * - `ACCEPTED`: terminal — accepted by the clearing venue.
  * - `REJECTED`: terminal rejection; `rejection_reason` carries the detail. Covers
  *   both venue-reported rejections and rejections raised before the instruction
- *   reached the clearing venue (e.g. duplicate `instruction_id`, `DO_NOT_EXERCISE`
- *   / `CONTRARY_EXERCISE` submitted on a non-expiry day, insufficient position, or
- *   an instrument that does not resolve).
+ *   reached the clearing venue (e.g. duplicate `client_instruction_id`,
+ *   `DO_NOT_EXERCISE` / `CONTRARY_EXERCISE` submitted on a non-expiry day,
+ *   insufficient position, or an instrument that does not resolve).
  * - `CANCEL_REQUESTED`: cancel accepted; final cancel state pending.
  * - `CANCELLED`: terminal — cancel completed.
  * - `CANCEL_FAILED`: cancel could not be completed; operator attention required.
@@ -528,7 +528,7 @@ export namespace PositionSubmitPositionInstructionsParams {
      * Caller-supplied idempotency key. Echoed on the response. The server generates a
      * unique id when omitted.
      */
-    instruction_id?: string | null;
+    client_instruction_id?: string | null;
   }
 }
 
