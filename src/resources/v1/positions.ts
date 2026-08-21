@@ -352,6 +352,12 @@ export interface PositionInstruction {
   rejection_reason?: string | null;
 
   /**
+   * Identifier of the underlying instrument, when available. When a null/undefined
+   * value is observed, it indicates it does not apply.
+   */
+  underlying_instrument_id?: string | null;
+
+  /**
    * When the instruction's lifecycle state last changed. When a null/undefined value
    * is observed, it indicates that there is no available data.
    */
@@ -458,6 +464,13 @@ export interface PositionGetPositionInstructionsParams {
    * ticker or OSI option symbol).
    */
   instrument_id?: OrdersAPI.InstrumentIDOrSymbol;
+
+  /**
+   * Limit results to instructions whose contract has this underlier. Instrument ID
+   * (UUID) or symbol (equity ticker or OSI option symbol). Combined with
+   * `instrument_id` as a logical AND when both are supplied.
+   */
+  underlying_instrument_id?: OrdersAPI.InstrumentIDOrSymbol;
 }
 
 export interface PositionGetPositionsParams {

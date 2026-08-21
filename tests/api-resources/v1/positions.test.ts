@@ -78,7 +78,7 @@ describe('resource positions', () => {
     await expect(
       client.v1.positions.getPositionInstructions(
         0,
-        { instrument_id: 'x' },
+        { instrument_id: 'x', underlying_instrument_id: 'x' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);
