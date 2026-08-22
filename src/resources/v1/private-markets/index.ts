@@ -1,6 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  Companies,
+  type CompanyCategory,
+  type CompanyCitation,
+  type CompanyCustomer,
+  type CompanyDetail,
+  type CompanyDocumentPreview,
+  type CompanyDocumentRelation,
+  type CompanyDocumentResource,
+  type CompanyDocumentType,
+  type CompanyHeadquarters,
+  type CompanyLegalEntity,
+  type CompanyMetricPoint,
+  type CompanyMetricSeries,
+  type CompanyNarrativeSection,
+  type CompanyPerson,
+  type CompanyPersonRole,
+  type CompanyProfileResource,
+  type CompanySocialLink,
+  type CompanySocialType,
+  type MetricFrequency,
+  type MetricKey,
+} from './companies';
+export {
   Iois,
   type IoiCompanyResource,
   type IoiListingResource,
@@ -37,10 +60,22 @@ export {
 export {
   PrivateMarkets,
   type PrivateMarketCreateIoiResponse,
+  type PrivateMarketGetCompanyByIDResponse,
   type PrivateMarketGetIoisResponse,
+  type PrivateMarketGetSpvByIDResponse,
   type PrivateMarketUpdateIoiResponse,
   type PrivateMarketCreateIoiParams,
   type PrivateMarketDeleteIoiParams,
+  type PrivateMarketGetCompanyByIDParams,
   type PrivateMarketGetIoisParams,
+  type PrivateMarketGetSpvByIDParams,
   type PrivateMarketUpdateIoiParams,
 } from './private-markets';
+export {
+  Spvs,
+  type ChargedBy,
+  type FeeFrequency,
+  type FeeType,
+  type SpvDetail,
+  type SpvFeeTermResource,
+} from './spvs';

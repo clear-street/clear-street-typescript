@@ -369,15 +369,44 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v1/private-markets/private-markets.ts">PrivateMarketCreateIoiResponse</a></code>
+- <code><a href="./src/resources/v1/private-markets/private-markets.ts">PrivateMarketGetCompanyByIDResponse</a></code>
 - <code><a href="./src/resources/v1/private-markets/private-markets.ts">PrivateMarketGetIoisResponse</a></code>
+- <code><a href="./src/resources/v1/private-markets/private-markets.ts">PrivateMarketGetSpvByIDResponse</a></code>
 - <code><a href="./src/resources/v1/private-markets/private-markets.ts">PrivateMarketUpdateIoiResponse</a></code>
 
 Methods:
 
 - <code title="post /v1/private-markets/iois">client.v1.privateMarkets.<a href="./src/resources/v1/private-markets/private-markets.ts">createIoi</a>({ ...params }) -> PrivateMarketCreateIoiResponse</code>
 - <code title="delete /v1/private-markets/iois/{ioi_id}">client.v1.privateMarkets.<a href="./src/resources/v1/private-markets/private-markets.ts">deleteIoi</a>(ioiID, { ...params }) -> void</code>
+- <code title="get /v1/private-markets/companies/{company_id}">client.v1.privateMarkets.<a href="./src/resources/v1/private-markets/private-markets.ts">getCompanyByID</a>(companyID, { ...params }) -> PrivateMarketGetCompanyByIDResponse</code>
 - <code title="get /v1/private-markets/iois">client.v1.privateMarkets.<a href="./src/resources/v1/private-markets/private-markets.ts">getIois</a>({ ...params }) -> PrivateMarketGetIoisResponse</code>
+- <code title="get /v1/private-markets/spvs/{spv_id}">client.v1.privateMarkets.<a href="./src/resources/v1/private-markets/private-markets.ts">getSpvByID</a>(spvID, { ...params }) -> PrivateMarketGetSpvByIDResponse</code>
 - <code title="patch /v1/private-markets/iois/{ioi_id}">client.v1.privateMarkets.<a href="./src/resources/v1/private-markets/private-markets.ts">updateIoi</a>(ioiID, { ...params }) -> PrivateMarketUpdateIoiResponse</code>
+
+### Companies
+
+Types:
+
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyCategory</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyCitation</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyCustomer</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyDetail</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyDocumentPreview</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyDocumentRelation</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyDocumentResource</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyDocumentType</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyHeadquarters</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyLegalEntity</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyMetricPoint</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyMetricSeries</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyNarrativeSection</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyPerson</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyPersonRole</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanyProfileResource</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanySocialLink</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">CompanySocialType</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">MetricFrequency</a></code>
+- <code><a href="./src/resources/v1/private-markets/companies.ts">MetricKey</a></code>
 
 ### Iois
 
@@ -419,6 +448,16 @@ Methods:
 
 - <code title="get /v1/private-markets/offerings/{offering_id}">client.v1.privateMarkets.offerings.<a href="./src/resources/v1/private-markets/offerings.ts">getOfferingByID</a>(offeringID, { ...params }) -> OfferingGetOfferingByIDResponse</code>
 - <code title="get /v1/private-markets/offerings">client.v1.privateMarkets.offerings.<a href="./src/resources/v1/private-markets/offerings.ts">getOfferings</a>({ ...params }) -> OfferingGetOfferingsResponse</code>
+
+### Spvs
+
+Types:
+
+- <code><a href="./src/resources/v1/private-markets/spvs.ts">ChargedBy</a></code>
+- <code><a href="./src/resources/v1/private-markets/spvs.ts">FeeFrequency</a></code>
+- <code><a href="./src/resources/v1/private-markets/spvs.ts">FeeType</a></code>
+- <code><a href="./src/resources/v1/private-markets/spvs.ts">SpvDetail</a></code>
+- <code><a href="./src/resources/v1/private-markets/spvs.ts">SpvFeeTermResource</a></code>
 
 ## Screener
 

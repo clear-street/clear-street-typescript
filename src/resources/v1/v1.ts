@@ -264,8 +264,12 @@ import {
   PrivateMarketCreateIoiParams,
   PrivateMarketCreateIoiResponse,
   PrivateMarketDeleteIoiParams,
+  PrivateMarketGetCompanyByIDParams,
+  PrivateMarketGetCompanyByIDResponse,
   PrivateMarketGetIoisParams,
   PrivateMarketGetIoisResponse,
+  PrivateMarketGetSpvByIDParams,
+  PrivateMarketGetSpvByIDResponse,
   PrivateMarketUpdateIoiParams,
   PrivateMarketUpdateIoiResponse,
   PrivateMarkets,
@@ -515,11 +519,15 @@ export declare namespace V1 {
   export {
     PrivateMarkets as PrivateMarkets,
     type PrivateMarketCreateIoiResponse as PrivateMarketCreateIoiResponse,
+    type PrivateMarketGetCompanyByIDResponse as PrivateMarketGetCompanyByIDResponse,
     type PrivateMarketGetIoisResponse as PrivateMarketGetIoisResponse,
+    type PrivateMarketGetSpvByIDResponse as PrivateMarketGetSpvByIDResponse,
     type PrivateMarketUpdateIoiResponse as PrivateMarketUpdateIoiResponse,
     type PrivateMarketCreateIoiParams as PrivateMarketCreateIoiParams,
     type PrivateMarketDeleteIoiParams as PrivateMarketDeleteIoiParams,
+    type PrivateMarketGetCompanyByIDParams as PrivateMarketGetCompanyByIDParams,
     type PrivateMarketGetIoisParams as PrivateMarketGetIoisParams,
+    type PrivateMarketGetSpvByIDParams as PrivateMarketGetSpvByIDParams,
     type PrivateMarketUpdateIoiParams as PrivateMarketUpdateIoiParams,
   };
 

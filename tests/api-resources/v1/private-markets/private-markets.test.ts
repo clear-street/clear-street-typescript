@@ -55,6 +55,25 @@ describe('resource privateMarkets', () => {
     });
   });
 
+  test('getCompanyByID: only required params', async () => {
+    const responsePromise = client.v1.privateMarkets.getCompanyByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 0,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getCompanyByID: required and optional params', async () => {
+    const response = await client.v1.privateMarkets.getCompanyByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 0,
+    });
+  });
+
   test('getIois: only required params', async () => {
     const responsePromise = client.v1.privateMarkets.getIois({ account_id: 0 });
     const rawResponse = await responsePromise.asResponse();
@@ -68,6 +87,25 @@ describe('resource privateMarkets', () => {
 
   test('getIois: required and optional params', async () => {
     const response = await client.v1.privateMarkets.getIois({ account_id: 0 });
+  });
+
+  test('getSpvByID: only required params', async () => {
+    const responsePromise = client.v1.privateMarkets.getSpvByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 0,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getSpvByID: required and optional params', async () => {
+    const response = await client.v1.privateMarkets.getSpvByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 0,
+    });
   });
 
   test('updateIoi: only required params', async () => {
