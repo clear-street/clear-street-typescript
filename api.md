@@ -366,6 +366,30 @@ Methods:
 
 ## PrivateMarkets
 
+Types:
+
+- <code><a href="./src/resources/v1/private-markets/private-markets.ts">PrivateMarketCreateIoiResponse</a></code>
+- <code><a href="./src/resources/v1/private-markets/private-markets.ts">PrivateMarketGetIoisResponse</a></code>
+- <code><a href="./src/resources/v1/private-markets/private-markets.ts">PrivateMarketUpdateIoiResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/private-markets/iois">client.v1.privateMarkets.<a href="./src/resources/v1/private-markets/private-markets.ts">createIoi</a>({ ...params }) -> PrivateMarketCreateIoiResponse</code>
+- <code title="delete /v1/private-markets/iois/{ioi_id}">client.v1.privateMarkets.<a href="./src/resources/v1/private-markets/private-markets.ts">deleteIoi</a>(ioiID, { ...params }) -> void</code>
+- <code title="get /v1/private-markets/iois">client.v1.privateMarkets.<a href="./src/resources/v1/private-markets/private-markets.ts">getIois</a>({ ...params }) -> PrivateMarketGetIoisResponse</code>
+- <code title="patch /v1/private-markets/iois/{ioi_id}">client.v1.privateMarkets.<a href="./src/resources/v1/private-markets/private-markets.ts">updateIoi</a>(ioiID, { ...params }) -> PrivateMarketUpdateIoiResponse</code>
+
+### Iois
+
+Types:
+
+- <code><a href="./src/resources/v1/private-markets/iois.ts">IoiCompanyResource</a></code>
+- <code><a href="./src/resources/v1/private-markets/iois.ts">IoiListingResource</a></code>
+- <code><a href="./src/resources/v1/private-markets/iois.ts">IoiListingResourceList</a></code>
+- <code><a href="./src/resources/v1/private-markets/iois.ts">IoiOfferingResource</a></code>
+- <code><a href="./src/resources/v1/private-markets/iois.ts">IoiResource</a></code>
+- <code><a href="./src/resources/v1/private-markets/iois.ts">NdaAcceptanceResource</a></code>
+
 ### Offerings
 
 Types:
@@ -373,6 +397,7 @@ Types:
 - <code><a href="./src/resources/v1/private-markets/offerings.ts">Currency</a></code>
 - <code><a href="./src/resources/v1/private-markets/offerings.ts">MetricUnit</a></code>
 - <code><a href="./src/resources/v1/private-markets/offerings.ts">MetricValueType</a></code>
+- <code><a href="./src/resources/v1/private-markets/offerings.ts">NdaAgreementResource</a></code>
 - <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingCard</a></code>
 - <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingCardList</a></code>
 - <code><a href="./src/resources/v1/private-markets/offerings.ts">OfferingClass</a></code>

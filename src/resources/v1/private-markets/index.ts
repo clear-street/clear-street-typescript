@@ -1,10 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  Iois,
+  type IoiCompanyResource,
+  type IoiListingResource,
+  type IoiListingResourceList,
+  type IoiOfferingResource,
+  type IoiResource,
+  type NdaAcceptanceResource,
+} from './iois';
+export {
   Offerings,
   type Currency,
   type MetricUnit,
   type MetricValueType,
+  type NdaAgreementResource,
   type OfferingCard,
   type OfferingCardList,
   type OfferingClass,
@@ -24,4 +34,13 @@ export {
   type OfferingGetOfferingByIDParams,
   type OfferingGetOfferingsParams,
 } from './offerings';
-export { PrivateMarkets } from './private-markets';
+export {
+  PrivateMarkets,
+  type PrivateMarketCreateIoiResponse,
+  type PrivateMarketGetIoisResponse,
+  type PrivateMarketUpdateIoiResponse,
+  type PrivateMarketCreateIoiParams,
+  type PrivateMarketDeleteIoiParams,
+  type PrivateMarketGetIoisParams,
+  type PrivateMarketUpdateIoiParams,
+} from './private-markets';

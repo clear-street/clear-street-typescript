@@ -69,6 +69,46 @@ export type MetricUnit = 'USD' | 'PERCENT' | 'COUNT' | 'RANK';
 export type MetricValueType = 'HISTORICAL' | 'ESTIMATED';
 
 /**
+ * Current NDA agreement for an SPV-backed deal.
+ */
+export interface NdaAgreementResource {
+  /**
+   * Exact assent and authority representation shown to the signer.
+   */
+  acceptance_text: string;
+
+  /**
+   * Version of the acceptance representation.
+   */
+  acceptance_text_version: number;
+
+  /**
+   * Stable agreement identifier submitted with an IOI acceptance.
+   */
+  agreement_id: string;
+
+  /**
+   * Durable reference to the immutable NDA artifact.
+   */
+  document_reference: string;
+
+  /**
+   * Lowercase SHA-256 digest of the artifact bytes.
+   */
+  document_sha256: string;
+
+  /**
+   * Time this version became effective.
+   */
+  effective_at: string;
+
+  /**
+   * Strictly increasing SPV-local agreement version.
+   */
+  version: number;
+}
+
+/**
  * One offering as it appears in a list: its derived class, indicative terms, a
  * company identity summary, and any attached SPV.
  */
@@ -398,6 +438,11 @@ export interface OfferingSpv {
   manager_name?: string | null;
 
   /**
+   * Current NDA agreement. Absent when this SPV does not require one.
+   */
+  nda_agreement?: NdaAgreementResource | null;
+
+  /**
    * Underlying share class, when specified.
    */
   share_class?: string | null;
@@ -455,6 +500,7 @@ export declare namespace Offerings {
     type Currency as Currency,
     type MetricUnit as MetricUnit,
     type MetricValueType as MetricValueType,
+    type NdaAgreementResource as NdaAgreementResource,
     type OfferingCard as OfferingCard,
     type OfferingCardList as OfferingCardList,
     type OfferingClass as OfferingClass,

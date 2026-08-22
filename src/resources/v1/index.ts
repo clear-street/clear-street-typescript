@@ -190,7 +190,16 @@ export {
   type PositionGetPositionsParams,
   type PositionSubmitPositionInstructionsParams,
 } from './positions';
-export { PrivateMarkets } from './private-markets/index';
+export {
+  PrivateMarkets,
+  type PrivateMarketCreateIoiResponse,
+  type PrivateMarketGetIoisResponse,
+  type PrivateMarketUpdateIoiResponse,
+  type PrivateMarketCreateIoiParams,
+  type PrivateMarketDeleteIoiParams,
+  type PrivateMarketGetIoisParams,
+  type PrivateMarketUpdateIoiParams,
+} from './private-markets/index';
 export {
   Screener,
   type Catalog,

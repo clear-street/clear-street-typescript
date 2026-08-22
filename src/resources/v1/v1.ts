@@ -260,7 +260,16 @@ import {
   SuggestedActionsPayload,
 } from './omni-ai/omni-ai';
 import * as PrivateMarketsAPI from './private-markets/private-markets';
-import { PrivateMarkets } from './private-markets/private-markets';
+import {
+  PrivateMarketCreateIoiParams,
+  PrivateMarketCreateIoiResponse,
+  PrivateMarketDeleteIoiParams,
+  PrivateMarketGetIoisParams,
+  PrivateMarketGetIoisResponse,
+  PrivateMarketUpdateIoiParams,
+  PrivateMarketUpdateIoiResponse,
+  PrivateMarkets,
+} from './private-markets/private-markets';
 
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
@@ -503,7 +512,16 @@ export declare namespace V1 {
     type PositionSubmitPositionInstructionsParams as PositionSubmitPositionInstructionsParams,
   };
 
-  export { PrivateMarkets as PrivateMarkets };
+  export {
+    PrivateMarkets as PrivateMarkets,
+    type PrivateMarketCreateIoiResponse as PrivateMarketCreateIoiResponse,
+    type PrivateMarketGetIoisResponse as PrivateMarketGetIoisResponse,
+    type PrivateMarketUpdateIoiResponse as PrivateMarketUpdateIoiResponse,
+    type PrivateMarketCreateIoiParams as PrivateMarketCreateIoiParams,
+    type PrivateMarketDeleteIoiParams as PrivateMarketDeleteIoiParams,
+    type PrivateMarketGetIoisParams as PrivateMarketGetIoisParams,
+    type PrivateMarketUpdateIoiParams as PrivateMarketUpdateIoiParams,
+  };
 
   export {
     Screener as Screener,
