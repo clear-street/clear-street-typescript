@@ -520,6 +520,8 @@ export type OrderList = Array<Order>;
  */
 export type OrderStatus =
   | 'PENDING_NEW'
+  | 'QUEUED'
+  | 'PENDING_TRIGGER'
   | 'NEW'
   | 'PARTIALLY_FILLED'
   | 'FILLED'
@@ -615,8 +617,8 @@ export type RequestTimeInForce =
   | 'IMMEDIATE_OR_CANCEL'
   | 'FILL_OR_KILL'
   | 'GOOD_TILL_DATE'
-  | 'AT_THE_OPENING'
-  | 'AT_THE_CLOSE';
+  | 'AT_OPEN'
+  | 'AT_CLOSE';
 
 /**
  * Side of the order (BUY or SELL).
@@ -632,8 +634,8 @@ export type TimeInForce =
   | 'IMMEDIATE_OR_CANCEL'
   | 'FILL_OR_KILL'
   | 'GOOD_TILL_DATE'
-  | 'AT_THE_OPENING'
-  | 'AT_THE_CLOSE'
+  | 'AT_OPEN'
+  | 'AT_CLOSE'
   | 'OTHER';
 
 /**
@@ -812,6 +814,8 @@ export interface OrderGetOrdersParams {
    */
   status?: Array<
     | 'PENDING_NEW'
+    | 'QUEUED'
+    | 'PENDING_TRIGGER'
     | 'NEW'
     | 'PARTIALLY_FILLED'
     | 'FILLED'
