@@ -122,6 +122,12 @@ describe('resource orders', () => {
           symbol: 'symbol',
           to: '2019-12-27T18:11:19.117Z',
           underlying_instrument_ids: ['x'],
+          updated_at: {
+            gt: '2019-12-27T18:11:19.117Z',
+            gte: '2019-12-27T18:11:19.117Z',
+            lt: '2019-12-27T18:11:19.117Z',
+            lte: '2019-12-27T18:11:19.117Z',
+          },
         },
         { path: '/_stainless_unknown_path' },
       ),

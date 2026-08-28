@@ -848,6 +848,20 @@ export interface OrderGetOrdersParams {
    * instruments.
    */
   underlying_instrument_ids?: Array<InstrumentIDOrSymbol>;
+
+  updated_at?: OrderGetOrdersParams.UpdatedAt;
+}
+
+export namespace OrderGetOrdersParams {
+  export interface UpdatedAt {
+    gt?: string;
+
+    gte?: string;
+
+    lt?: string;
+
+    lte?: string;
+  }
 }
 
 export interface OrderReplaceOrderParams {
