@@ -114,6 +114,11 @@ export interface Account {
   account_holder_entity_id: number;
 
   /**
+   * Whether the account holder is a natural person or a legal entity.
+   */
+  account_holder_entity_kind: AccountHolderEntityKind;
+
+  /**
    * The full legal name of the account
    */
   full_name: string;
@@ -323,6 +328,11 @@ export interface AccountBalancesSod {
   trade_cash?: string | null;
 }
 
+/**
+ * Whether an account holder is a natural person or a legal entity.
+ */
+export type AccountHolderEntityKind = 'NATURAL_PERSON' | 'LEGAL_ENTITY' | 'OTHER';
+
 export type AccountList = Array<Account>;
 
 export interface AccountSettings {
@@ -361,6 +371,11 @@ export interface AccountWithPersonalDetails {
    * The account holder entity identifier
    */
   account_holder_entity_id: number;
+
+  /**
+   * Whether the account holder is a natural person or a legal entity.
+   */
+  account_holder_entity_kind: AccountHolderEntityKind;
 
   /**
    * The full legal name of the account
@@ -728,6 +743,7 @@ export declare namespace Accounts {
     type Account as Account,
     type AccountBalances as AccountBalances,
     type AccountBalancesSod as AccountBalancesSod,
+    type AccountHolderEntityKind as AccountHolderEntityKind,
     type AccountList as AccountList,
     type AccountSettings as AccountSettings,
     type AccountStatus as AccountStatus,

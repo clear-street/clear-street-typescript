@@ -6,6 +6,7 @@ export {
   type Account,
   type AccountBalances,
   type AccountBalancesSod,
+  type AccountHolderEntityKind,
   type AccountList,
   type AccountSettings,
   type AccountStatus,
