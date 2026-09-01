@@ -383,8 +383,11 @@ export interface OptionExpiryDate {
   has_settles_on_close: boolean;
 
   /**
-   * Whether this date has at least one listed contract that settles on the opening
-   * print (AM settlement).
+   * Whether this date has at least one contract that settles on the opening print
+   * (AM settlement) and can still be traded. AM-settled contracts stop trading at
+   * the close of the business day before settlement, so this turns false before the
+   * expiration date arrives. A date leaves the list once no contract on it can be
+   * traded in either settlement cycle.
    */
   has_settles_on_open: boolean;
 }
