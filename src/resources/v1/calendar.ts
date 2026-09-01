@@ -105,7 +105,7 @@ export type MarketHoursDetailList = Array<MarketHoursDetail>;
 /**
  * Session type for market hours
  */
-export type MarketSessionType = 'pre_market' | 'regular' | 'after_hours';
+export type MarketSessionType = 'overnight' | 'pre_market' | 'regular' | 'after_hours';
 
 /**
  * Market status information
@@ -169,6 +169,13 @@ export interface TradingSessions {
    * is observed, it indicates it does not apply.
    */
   after_hours?: SessionSchedule | null;
+
+  /**
+   * Overnight session schedule (prior evening through early morning), null if not
+   * available When a null/undefined value is observed, it indicates it does not
+   * apply.
+   */
+  overnight?: SessionSchedule | null;
 
   /**
    * Pre-market session schedule, null if not available When a null/undefined value
