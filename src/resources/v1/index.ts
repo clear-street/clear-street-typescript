@@ -137,6 +137,17 @@ export {
   type SuggestedActionsPayload,
 } from './omni-ai/index';
 export {
+  OmniFeed,
+  type FeedItem,
+  type FeedItemKind,
+  type FeedItemMetric,
+  type FeedMetricType,
+  type FeedPage,
+  type OmniFeedGetFeedResponse,
+  type OmniFeedGetFeedParams,
+  type OmniFeedPostFeedEventParams,
+} from './omni-feed';
+export {
   Orders,
   type Execution,
   type ExecutionList,

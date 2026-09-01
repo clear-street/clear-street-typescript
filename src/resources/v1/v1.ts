@@ -72,6 +72,18 @@ import {
   OptionsContract,
   OptionsContractList,
 } from './instruments';
+import * as OmniFeedAPI from './omni-feed';
+import {
+  FeedItem,
+  FeedItemKind,
+  FeedItemMetric,
+  FeedMetricType,
+  FeedPage,
+  OmniFeed,
+  OmniFeedGetFeedParams,
+  OmniFeedGetFeedResponse,
+  OmniFeedPostFeedEventParams,
+} from './omni-feed';
 import * as OrdersAPI from './orders';
 import {
   Execution,
@@ -268,6 +280,7 @@ export class V1 extends APIResource {
   instrumentData: InstrumentDataAPI.InstrumentData = new InstrumentDataAPI.InstrumentData(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
   omniAI: OmniAIAPI.OmniAI = new OmniAIAPI.OmniAI(this._client);
+  omniFeed: OmniFeedAPI.OmniFeed = new OmniFeedAPI.OmniFeed(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
   positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
@@ -290,6 +303,7 @@ V1.Calendar = Calendar;
 V1.InstrumentData = InstrumentData;
 V1.Instruments = Instruments;
 V1.OmniAI = OmniAI;
+V1.OmniFeed = OmniFeed;
 V1.Orders = Orders;
 V1.Positions = Positions;
 V1.Screener = Screener;
@@ -442,6 +456,18 @@ export declare namespace V1 {
     type StructuredAction as StructuredAction,
     type StructuredActionButtonAction as StructuredActionButtonAction,
     type SuggestedActionsPayload as SuggestedActionsPayload,
+  };
+
+  export {
+    OmniFeed as OmniFeed,
+    type FeedItem as FeedItem,
+    type FeedItemKind as FeedItemKind,
+    type FeedItemMetric as FeedItemMetric,
+    type FeedMetricType as FeedMetricType,
+    type FeedPage as FeedPage,
+    type OmniFeedGetFeedResponse as OmniFeedGetFeedResponse,
+    type OmniFeedGetFeedParams as OmniFeedGetFeedParams,
+    type OmniFeedPostFeedEventParams as OmniFeedPostFeedEventParams,
   };
 
   export {

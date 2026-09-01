@@ -300,6 +300,22 @@ Methods:
 - <code title="get /v1/omni-ai/threads/{thread_id}/response">client.v1.omniAI.threads.<a href="./src/resources/v1/omni-ai/threads.ts">getThreadResponse</a>(threadID, { ...params }) -> ThreadGetThreadResponseResponse</code>
 - <code title="get /v1/omni-ai/threads">client.v1.omniAI.threads.<a href="./src/resources/v1/omni-ai/threads.ts">getThreads</a>({ ...params }) -> ThreadGetThreadsResponse</code>
 
+## OmniFeed
+
+Types:
+
+- <code><a href="./src/resources/v1/omni-feed.ts">FeedItem</a></code>
+- <code><a href="./src/resources/v1/omni-feed.ts">FeedItemKind</a></code>
+- <code><a href="./src/resources/v1/omni-feed.ts">FeedItemMetric</a></code>
+- <code><a href="./src/resources/v1/omni-feed.ts">FeedMetricType</a></code>
+- <code><a href="./src/resources/v1/omni-feed.ts">FeedPage</a></code>
+- <code><a href="./src/resources/v1/omni-feed.ts">OmniFeedGetFeedResponse</a></code>
+
+Methods:
+
+- <code title="get /v1/omni-ai/feed">client.v1.omniFeed.<a href="./src/resources/v1/omni-feed.ts">getFeed</a>({ ...params }) -> OmniFeedGetFeedResponse</code>
+- <code title="post /v1/omni-ai/feed/events">client.v1.omniFeed.<a href="./src/resources/v1/omni-feed.ts">postFeedEvent</a>({ ...params }) -> void</code>
+
 ## Orders
 
 Types:
