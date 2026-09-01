@@ -854,12 +854,28 @@ export interface OrderGetOrdersParams {
 
 export namespace OrderGetOrdersParams {
   export interface UpdatedAt {
+    /**
+     * > **Alpha** — this parameter is experimental and may change or be removed at any
+     * > time.
+     */
     gt?: string;
 
+    /**
+     * > **Alpha** — this parameter is experimental and may change or be removed at any
+     * > time.
+     */
     gte?: string;
 
+    /**
+     * > **Alpha** — this parameter is experimental and may change or be removed at any
+     * > time.
+     */
     lt?: string;
 
+    /**
+     * > **Alpha** — this parameter is experimental and may change or be removed at any
+     * > time.
+     */
     lte?: string;
   }
 }
