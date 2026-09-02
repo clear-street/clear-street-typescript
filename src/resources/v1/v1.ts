@@ -272,6 +272,21 @@ import {
   StructuredActionButtonAction,
   SuggestedActionsPayload,
 } from './omni-ai/omni-ai';
+import * as PrivateMarketsAPI from './private-markets/private-markets';
+import {
+  PrivateMarketCreateIoiParams,
+  PrivateMarketCreateIoiResponse,
+  PrivateMarketDeleteIoiParams,
+  PrivateMarketGetCompanyByIDParams,
+  PrivateMarketGetCompanyByIDResponse,
+  PrivateMarketGetIoisParams,
+  PrivateMarketGetIoisResponse,
+  PrivateMarketGetSpvByIDParams,
+  PrivateMarketGetSpvByIDResponse,
+  PrivateMarketUpdateIoiParams,
+  PrivateMarketUpdateIoiResponse,
+  PrivateMarkets,
+} from './private-markets/private-markets';
 
 export class V1 extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
@@ -283,6 +298,7 @@ export class V1 extends APIResource {
   omniFeed: OmniFeedAPI.OmniFeed = new OmniFeedAPI.OmniFeed(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
   positions: PositionsAPI.Positions = new PositionsAPI.Positions(this._client);
+  privateMarkets: PrivateMarketsAPI.PrivateMarkets = new PrivateMarketsAPI.PrivateMarkets(this._client);
   screener: ScreenerAPI.Screener = new ScreenerAPI.Screener(this._client);
   watchlist: WatchlistAPI.Watchlist = new WatchlistAPI.Watchlist(this._client);
 }
@@ -306,6 +322,7 @@ V1.OmniAI = OmniAI;
 V1.OmniFeed = OmniFeed;
 V1.Orders = Orders;
 V1.Positions = Positions;
+V1.PrivateMarkets = PrivateMarkets;
 V1.Screener = Screener;
 V1.Watchlist = Watchlist;
 
@@ -525,6 +542,21 @@ export declare namespace V1 {
     type PositionGetPositionInstructionsParams as PositionGetPositionInstructionsParams,
     type PositionGetPositionsParams as PositionGetPositionsParams,
     type PositionSubmitPositionInstructionsParams as PositionSubmitPositionInstructionsParams,
+  };
+
+  export {
+    PrivateMarkets as PrivateMarkets,
+    type PrivateMarketCreateIoiResponse as PrivateMarketCreateIoiResponse,
+    type PrivateMarketGetCompanyByIDResponse as PrivateMarketGetCompanyByIDResponse,
+    type PrivateMarketGetIoisResponse as PrivateMarketGetIoisResponse,
+    type PrivateMarketGetSpvByIDResponse as PrivateMarketGetSpvByIDResponse,
+    type PrivateMarketUpdateIoiResponse as PrivateMarketUpdateIoiResponse,
+    type PrivateMarketCreateIoiParams as PrivateMarketCreateIoiParams,
+    type PrivateMarketDeleteIoiParams as PrivateMarketDeleteIoiParams,
+    type PrivateMarketGetCompanyByIDParams as PrivateMarketGetCompanyByIDParams,
+    type PrivateMarketGetIoisParams as PrivateMarketGetIoisParams,
+    type PrivateMarketGetSpvByIDParams as PrivateMarketGetSpvByIDParams,
+    type PrivateMarketUpdateIoiParams as PrivateMarketUpdateIoiParams,
   };
 
   export {
