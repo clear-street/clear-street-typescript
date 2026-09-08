@@ -512,6 +512,7 @@ Types:
 - <code><a href="./src/resources/v1/screener.ts">ScreenerGetScreenerByIDResponse</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerGetScreenerCatalogResponse</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerGetScreenersResponse</a></code>
+- <code><a href="./src/resources/v1/screener.ts">ScreenerPatchScreenerResponse</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerReplaceScreenerResponse</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerSearchScreenerResponse</a></code>
 
@@ -522,6 +523,7 @@ Methods:
 - <code title="get /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/resources/v1/screener.ts">getScreenerByID</a>(screenerID) -> ScreenerGetScreenerByIDResponse</code>
 - <code title="get /v1/screener/catalog">client.v1.screener.<a href="./src/resources/v1/screener.ts">getScreenerCatalog</a>() -> ScreenerGetScreenerCatalogResponse</code>
 - <code title="get /v1/saved-screeners">client.v1.screener.<a href="./src/resources/v1/screener.ts">getScreeners</a>() -> ScreenerGetScreenersResponse</code>
+- <code title="patch /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/resources/v1/screener.ts">patchScreener</a>(screenerID, { ...params }) -> ScreenerPatchScreenerResponse</code>
 - <code title="put /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/resources/v1/screener.ts">replaceScreener</a>(screenerID, { ...params }) -> ScreenerReplaceScreenerResponse</code>
 - <code title="post /v1/screener">client.v1.screener.<a href="./src/resources/v1/screener.ts">searchScreener</a>({ ...params }) -> ScreenerSearchScreenerResponse</code>
 

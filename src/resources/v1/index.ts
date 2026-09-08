@@ -250,9 +250,11 @@ export {
   type ScreenerGetScreenerByIDResponse,
   type ScreenerGetScreenerCatalogResponse,
   type ScreenerGetScreenersResponse,
+  type ScreenerPatchScreenerResponse,
   type ScreenerReplaceScreenerResponse,
   type ScreenerSearchScreenerResponse,
   type ScreenerCreateScreenerParams,
+  type ScreenerPatchScreenerParams,
   type ScreenerReplaceScreenerParams,
   type ScreenerSearchScreenerParams,
 } from './screener';

@@ -63,6 +63,17 @@ describe('resource screener', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
+  test('patchScreener', async () => {
+    const responsePromise = client.v1.screener.patchScreener('550e8400-e29b-41d4-a716-446655440000', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
   test('replaceScreener', async () => {
     const responsePromise = client.v1.screener.replaceScreener('550e8400-e29b-41d4-a716-446655440000', {});
     const rawResponse = await responsePromise.asResponse();

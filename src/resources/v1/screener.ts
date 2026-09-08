@@ -97,17 +97,41 @@ export class Screener extends APIResource {
   }
 
   /**
+   * Partially update a saved screener configuration.
+   *
+   * Every field is optional. Omitting a field, or sending it as `null`, leaves the
+   * stored value unchanged. Sending a field's empty value clears it: `columns: []`
+   * clears the stored columns, `sorts: []` clears the stored sort, and `filters: []`
+   * clears the stored filters. `name: ""` is rejected -- a screener's name cannot be
+   * cleared. `shared: false` sets it to `false`; it is a value, not a clear.
+   *
+   * Unknown fields are rejected with a 422.
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.screener.patchScreener(
+   *   '550e8400-e29b-41d4-a716-446655440000',
+   * );
+   * ```
+   */
+  patchScreener(
+    screenerID: string,
+    body: ScreenerPatchScreenerParams,
+    options?: RequestOptions,
+  ): APIPromise<ScreenerPatchScreenerResponse> {
+    return this._client.patch(path`/v1/saved-screeners/${screenerID}`, { body, ...options });
+  }
+
+  /**
    * Update a saved screener configuration.
    *
    * Replaces the screener configuration for the authenticated user. If `name` is
    * null, the existing name is preserved.
    *
-   * @example
-   * ```ts
-   * const response = await client.v1.screener.replaceScreener(
-   *   '550e8400-e29b-41d4-a716-446655440000',
-   * );
-   * ```
+   * Deprecated -- use `PATCH /saved-screeners/{screener_id}`; PUT replaces omitted
+   * `columns`, `filters` and `sorts` with empty values.
+   *
+   * @deprecated
    */
   replaceScreener(
     screenerID: string,
@@ -745,6 +769,13 @@ export interface ScreenerGetScreenersResponse extends Shared.BaseResponse {
   data: ScreenerEntryList;
 }
 
+export interface ScreenerPatchScreenerResponse extends Shared.BaseResponse {
+  /**
+   * A saved screener configuration entry
+   */
+  data: ScreenerEntry;
+}
+
 export interface ScreenerReplaceScreenerResponse extends Shared.BaseResponse {
   /**
    * A saved screener configuration entry
@@ -780,6 +811,38 @@ export interface ScreenerCreateScreenerParams {
 
   /**
    * Multi-field sort specifications
+   */
+  sorts?: Array<SortSpec> | null;
+}
+
+export interface ScreenerPatchScreenerParams {
+  /**
+   * Structured field references to include when running this screener. Omit or send
+   * `null` to leave unchanged; `[]` clears the stored columns.
+   */
+  columns?: Array<FieldRef> | null;
+
+  /**
+   * Structured search filter criteria. Omit or send `null` to leave unchanged; `[]`
+   * clears the stored filters.
+   */
+  filters?: Array<SearchFilter> | null;
+
+  /**
+   * The name for this screener configuration. Omit or send `null` to leave
+   * unchanged. Cannot be set to an empty string.
+   */
+  name?: string | null;
+
+  /**
+   * Whether any user may fetch this screener by id. Omit or send `null` to leave
+   * unchanged. `false` is a value, not a clear.
+   */
+  shared?: boolean | null;
+
+  /**
+   * Multi-field sort specifications. Omit or send `null` to leave unchanged; `[]`
+   * clears the stored sort.
    */
   sorts?: Array<SortSpec> | null;
 }
@@ -880,9 +943,11 @@ export declare namespace Screener {
     type ScreenerGetScreenerByIDResponse as ScreenerGetScreenerByIDResponse,
     type ScreenerGetScreenerCatalogResponse as ScreenerGetScreenerCatalogResponse,
     type ScreenerGetScreenersResponse as ScreenerGetScreenersResponse,
+    type ScreenerPatchScreenerResponse as ScreenerPatchScreenerResponse,
     type ScreenerReplaceScreenerResponse as ScreenerReplaceScreenerResponse,
     type ScreenerSearchScreenerResponse as ScreenerSearchScreenerResponse,
     type ScreenerCreateScreenerParams as ScreenerCreateScreenerParams,
+    type ScreenerPatchScreenerParams as ScreenerPatchScreenerParams,
     type ScreenerReplaceScreenerParams as ScreenerReplaceScreenerParams,
     type ScreenerSearchScreenerParams as ScreenerSearchScreenerParams,
   };
