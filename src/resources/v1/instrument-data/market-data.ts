@@ -163,8 +163,10 @@ export interface MarketDataSnapshot {
   last_quote?: SnapshotQuote | null;
 
   /**
-   * Most recent last-sale trade if available. When a null/undefined value is
-   * observed, it indicates that there is no available data.
+   * Most recent last-sale-eligible trade if available. Omitted when the most recent
+   * known print is ineligible (e.g. an odd lot or an out-of-sequence report) rather
+   * than showing that print's price. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   last_trade?: SnapshotLastTrade | null;
 
@@ -335,12 +337,12 @@ export interface SnapshotQuote {
  */
 export interface SnapshotSession {
   /**
-   * Absolute change from previous close to last trade.
+   * Absolute change from previous close to the most recent last-sale-eligible trade.
    */
   change: string;
 
   /**
-   * Percent change from previous close to last trade.
+   * Percent change from previous close to the most recent last-sale-eligible trade.
    */
   change_percent: string;
 
