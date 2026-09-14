@@ -361,6 +361,7 @@ Types:
 - <code><a href="./src/resources/v1/positions.ts">Position</a></code>
 - <code><a href="./src/resources/v1/positions.ts">PositionInstruction</a></code>
 - <code><a href="./src/resources/v1/positions.ts">PositionInstructionList</a></code>
+- <code><a href="./src/resources/v1/positions.ts">PositionInstructionRejection</a></code>
 - <code><a href="./src/resources/v1/positions.ts">PositionInstructionStatus</a></code>
 - <code><a href="./src/resources/v1/positions.ts">PositionInstructionType</a></code>
 - <code><a href="./src/resources/v1/positions.ts">PositionList</a></code>

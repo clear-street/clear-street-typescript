@@ -185,6 +185,7 @@ export {
   type Position,
   type PositionInstruction,
   type PositionInstructionList,
+  type PositionInstructionRejection,
   type PositionInstructionStatus,
   type PositionInstructionType,
   type PositionList,

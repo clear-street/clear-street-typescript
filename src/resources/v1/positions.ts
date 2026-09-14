@@ -344,6 +344,15 @@ export interface PositionInstruction {
   created_at?: string | null;
 
   /**
+   * Machine-readable counterpart to `rejection_reason`: a stable reason code plus
+   * params, populated on the submit and cancel responses for a row rejected with a
+   * structured reason. Branch on `rejection.reason` instead of parsing
+   * `rejection_reason`. Absent when listing historical instructions. When a
+   * null/undefined value is observed, it indicates it does not apply.
+   */
+  rejection?: PositionInstructionRejection | null;
+
+  /**
    * Human-readable explanation populated on any non-success terminal status —
    * `REJECTED` or `CANCEL_FAILED`. On a `207 Multi-Status` batch submit the
    * top-level `error` field summarizes the batch; per-row detail continues to live
@@ -365,6 +374,36 @@ export interface PositionInstruction {
 }
 
 export type PositionInstructionList = Array<PositionInstruction>;
+
+/**
+ * Machine-readable detail for a rejected position instruction.
+ *
+ * Populated on the submit and cancel responses for a row rejected with a
+ * structured reason. Branch on `reason` for programmatic handling and render your
+ * own copy; `rejection_reason` remains the human-readable fallback and is the
+ * field to use when listing historical instructions.
+ */
+export interface PositionInstructionRejection {
+  /**
+   * Namespacing domain of the `reason` code — `com.clearstreet.oems.exercise` for
+   * reasons OEMS validates, `com.clearstreet.oems.clearing` for clearing-owned
+   * reasons.
+   */
+  domain: string;
+
+  /**
+   * Reason-specific parameters as string key/value pairs (e.g. `available` /
+   * `requested`, `expiry` / `business_date`, `required_level` / `account_level`).
+   * May be empty.
+   */
+  metadata: unknown;
+
+  /**
+   * Stable, machine-readable reason code, e.g. `DNE_NOT_ON_EXPIRY`,
+   * `INSUFFICIENT_POSITION`, `OPTIONS_LEVEL_EXCEEDED`, `EXERCISE_PAST_CUTOFF`.
+   */
+  reason: string;
+}
 
 /**
  * Lifecycle status of a position instruction.
@@ -550,6 +589,7 @@ export declare namespace Positions {
     type Position as Position,
     type PositionInstruction as PositionInstruction,
     type PositionInstructionList as PositionInstructionList,
+    type PositionInstructionRejection as PositionInstructionRejection,
     type PositionInstructionStatus as PositionInstructionStatus,
     type PositionInstructionType as PositionInstructionType,
     type PositionList as PositionList,
