@@ -345,10 +345,11 @@ export interface PositionInstruction {
 
   /**
    * Machine-readable counterpart to `rejection_reason`: a stable reason code plus
-   * params, populated on the submit and cancel responses for a row rejected with a
-   * structured reason. Branch on `rejection.reason` instead of parsing
-   * `rejection_reason`. Absent when listing historical instructions. When a
-   * null/undefined value is observed, it indicates it does not apply.
+   * params, present on every rejected row that has a `rejection_reason` — on submit,
+   * cancel, get, and list alike. Branch on `rejection.reason` instead of parsing
+   * `rejection_reason`. Forward-only: instructions rejected before this field
+   * shipped may carry only `rejection_reason`. When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   rejection?: PositionInstructionRejection | null;
 
@@ -378,10 +379,11 @@ export type PositionInstructionList = Array<PositionInstruction>;
 /**
  * Machine-readable detail for a rejected position instruction.
  *
- * Populated on the submit and cancel responses for a row rejected with a
- * structured reason. Branch on `reason` for programmatic handling and render your
- * own copy; `rejection_reason` remains the human-readable fallback and is the
- * field to use when listing historical instructions.
+ * Present on every rejected row that carries a `rejection_reason`, across the full
+ * lifecycle — submit, cancel, get, and list. Branch on `reason` for programmatic
+ * handling and template your own copy from `metadata`; `rejection_reason` remains
+ * the human-readable fallback. Forward-only: instructions rejected before this
+ * field shipped may carry only `rejection_reason`.
  */
 export interface PositionInstructionRejection {
   /**
@@ -392,11 +394,18 @@ export interface PositionInstructionRejection {
   domain: string;
 
   /**
-   * Reason-specific parameters as string key/value pairs (e.g. `available` /
-   * `requested`, `expiry` / `business_date`, `required_level` / `account_level`).
-   * May be empty.
+   * Reason-specific parameters as a string→string map. Which keys are present
+   * depends on `reason`:
+   *
+   * - `INSUFFICIENT_POSITION` → `available`, `requested`
+   * - `DNE_NOT_ON_EXPIRY` / `CEA_NOT_ON_EXPIRY` → `expiry`, `business_date`
+   * - `EXERCISE_PAST_CUTOFF` → `cutoff_time`
+   * - `DUPLICATE_INSTRUCTION` → `existing_id`
+   *
+   * Empty for reasons that carry no parameters. New keys may be added over time, so
+   * treat unknown keys leniently.
    */
-  metadata: unknown;
+  metadata: { [key: string]: string };
 
   /**
    * Stable, machine-readable reason code, e.g. `DNE_NOT_ON_EXPIRY`,
