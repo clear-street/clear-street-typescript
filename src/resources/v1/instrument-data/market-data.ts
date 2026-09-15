@@ -11,6 +11,10 @@ import { RequestOptions } from '../../../internal/request-options';
  */
 export class MarketData extends APIResource {
   /**
+   * **Deprecated**: use `GET /market-data/snapshot` instead, which now reports the
+   * same open/high/low/volume/open-interest fields under `session` and top-level
+   * `open_interest`.
+   *
    * Returns the most recent open, high, low, volume (OHLV) and current price for the
    * requested instruments.
    *
@@ -20,13 +24,7 @@ export class MarketData extends APIResource {
    * fail to resolve are omitted from `data` and reported in `error` instead (see the
    * 207/404 responses below).
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.v1.instrumentData.marketData.getDailySummaries(
-   *     { instrument_ids: 'instrument_ids' },
-   *   );
-   * ```
+   * @deprecated
    */
   getDailySummaries(
     query: MarketDataGetDailySummariesParams,
@@ -138,14 +136,23 @@ export interface MarketDataSnapshot {
   instrument_id: string;
 
   /**
+   * Session-level pricing and OHLV metrics. Always present; each inner field is
+   * independently nullable.
+   */
+  session: SnapshotSession;
+
+  /**
    * Display symbol for the security.
    */
   symbol: string;
 
   /**
-   * Cumulative traded volume reported on the most recent trade, in shares for
-   * equities or contracts for options. Absent when no trade is available. When a
-   * null/undefined value is observed, it indicates that there is no available data.
+   * @deprecated Cumulative traded volume reported on the most recent trade, in
+   * shares for equities or contracts for options. Absent when no trade is available.
+   *
+   * Deprecated: use `session.cumulative_volume`, the same value from the same
+   * source. When a null/undefined value is observed, it indicates that there is no
+   * available data.
    */
   cumulative_volume?: number | null;
 
@@ -177,11 +184,11 @@ export interface MarketDataSnapshot {
   name?: string | null;
 
   /**
-   * Session metrics computed from previous close and last trade, if available. When
-   * a null/undefined value is observed, it indicates that there is no available
-   * data.
+   * Open interest (outstanding contracts) as of the most recent OPRA Refresh.
+   * Populated for options only; absent for equities and indices. When a
+   * null/undefined value is observed, it indicates that there is no available data.
    */
-  session?: SnapshotSession | null;
+  open_interest?: number | null;
 }
 
 export type MarketDataSnapshotList = Array<MarketDataSnapshot>;
@@ -333,26 +340,78 @@ export interface SnapshotQuote {
 }
 
 /**
- * Session-level pricing metrics for a market data snapshot.
+ * Session-level pricing and OHLV metrics for a market data snapshot. Always
+ * present on the snapshot row; every field here is independently nullable except
+ * `ohlv_applicable`.
  */
 export interface SnapshotSession {
   /**
-   * Absolute change from previous close to the most recent last-sale-eligible trade.
+   * `false` only for instrument types with no OHLV by definition (e.g. an index
+   * instrument, whose price is a computed level rather than a traded security) --
+   * `open`/`high`/`low`/`ohlv_date`/`cumulative_volume` are then always absent.
+   * `true` otherwise, even when those fields simply haven't loaded yet. Always
+   * serialized.
    */
-  change: string;
+  ohlv_applicable: boolean;
+
+  /**
+   * Absolute change from previous close to the most recent last-sale-eligible trade.
+   * Absent when either side of the computation is unavailable. When a null/undefined
+   * value is observed, it indicates that there is no available data.
+   */
+  change?: string | null;
 
   /**
    * Percent change from previous close to the most recent last-sale-eligible trade.
+   * Absent under the same conditions as `change`. When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
-  change_percent: string;
+  change_percent?: string | null;
+
+  /**
+   * Cumulative traded volume for the current session, in shares for equities or
+   * contracts for options. Always reflects the current session, even when
+   * `ohlv_date` trails it. Absent when `ohlv_applicable` is `false`, or when no
+   * trade is available. When a null/undefined value is observed, it indicates that
+   * there is no available data.
+   */
+  cumulative_volume?: number | null;
+
+  /**
+   * Session high. When a null/undefined value is observed, it indicates that there
+   * is no available data.
+   */
+  high?: string | null;
+
+  /**
+   * Session low. When a null/undefined value is observed, it indicates that there is
+   * no available data.
+   */
+  low?: string | null;
+
+  /**
+   * Session date the open/high/low values represent, US/Eastern. May trail the
+   * current session until the upstream feed rolls. When a null/undefined value is
+   * observed, it indicates that there is no available data.
+   */
+  ohlv_date?: string | null;
+
+  /**
+   * Session opening price, from the day's OHLC bar. Absent when `ohlv_applicable` is
+   * `false`, or when the bar has not loaded yet. When a null/undefined value is
+   * observed, it indicates that there is no available data.
+   */
+  open?: string | null;
 
   /**
    * Previous session close price. Corporate-action-adjusted (stock dividends, cash
    * dividends, and forward/reverse splits) when an adjustment exists for the close
    * date; the raw close otherwise. An adjustment can carry the price beyond 2
-   * decimal places.
+   * decimal places. Absent when no previous close is on record (e.g. an instrument's
+   * first session). When a null/undefined value is observed, it indicates that there
+   * is no available data.
    */
-  previous_close: string;
+  previous_close?: string | null;
 
   /**
    * Unadjusted (raw) previous session close. Present only when a corporate-action
@@ -381,7 +440,8 @@ export interface MarketDataGetDailySummariesParams {
 export interface MarketDataGetSnapshotsParams {
   /**
    * Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
-   * symbols).
+   * symbols). Required; accepts 1 to 100 IDs. Duplicate resolved ids collapse to a
+   * single row.
    */
   instrument_ids?: Array<OrdersAPI.InstrumentIDOrSymbol>;
 }
