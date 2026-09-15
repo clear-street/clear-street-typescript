@@ -214,6 +214,12 @@ export interface Execution {
   underlying_instrument_id?: string | null;
 
   /**
+   * Type of the underlying instrument, alongside `underlying_instrument_id`. When a
+   * null/undefined value is observed, it indicates it does not apply.
+   */
+  underlying_instrument_type?: V1API.SecurityType | null;
+
+  /**
    * Venue where this fill occurred, as reported by that venue. Distinct from an
    * order's `venue`, which is the routing destination. Codes are not normalized, so
    * the format varies by venue. When a null/undefined value is observed, it
@@ -511,6 +517,12 @@ export interface Order {
    * apply.
    */
   underlying_instrument_id?: string | null;
+
+  /**
+   * Type of the underlying instrument, alongside `underlying_instrument_id`. When a
+   * null/undefined value is observed, it indicates it does not apply.
+   */
+  underlying_instrument_type?: V1API.SecurityType | null;
 }
 
 export type OrderList = Array<Order>;

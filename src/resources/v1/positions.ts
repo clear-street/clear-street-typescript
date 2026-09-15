@@ -271,6 +271,12 @@ export interface Position {
   underlying_instrument_id?: string | null;
 
   /**
+   * Type of the underlying instrument, alongside `underlying_instrument_id` When a
+   * null/undefined value is observed, it indicates it does not apply.
+   */
+  underlying_instrument_type?: V1API.SecurityType | null;
+
+  /**
    * The total unrealized profit or loss for this position based on current market
    * value When a null/undefined value is observed, it indicates that there is no
    * available data.
