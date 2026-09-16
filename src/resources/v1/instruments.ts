@@ -148,7 +148,9 @@ export interface Instrument {
   is_ptp: boolean;
 
   /**
-   * Indicates if short selling is prohibited for the instrument
+   * Indicates if short selling is prohibited for the instrument. This is a standing
+   * property of the security. For the live Rule 201 circuit breaker, see `rule_201`
+   * on the market-data snapshot.
    */
   is_short_prohibited: boolean;
 
@@ -291,7 +293,9 @@ export interface InstrumentCore {
   is_ptp: boolean;
 
   /**
-   * Indicates if short selling is prohibited for the instrument
+   * Indicates if short selling is prohibited for the instrument. This is a standing
+   * property of the security. For the live Rule 201 circuit breaker, see `rule_201`
+   * on the market-data snapshot.
    */
   is_short_prohibited: boolean;
 
