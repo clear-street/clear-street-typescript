@@ -239,6 +239,13 @@ export interface Instrument {
    * null/undefined value is observed, it indicates that there is no available data.
    */
   short_margin_rate?: string | null;
+
+  /**
+   * Price bands this instrument quotes on, ascending. Absent when we have no
+   * schedule for it, which includes an option whose penny-program status our
+   * reference data never supplied.
+   */
+  tick_rules?: Array<TickRule>;
 }
 
 export interface InstrumentCore {
@@ -357,6 +364,13 @@ export interface InstrumentCore {
    * null/undefined value is observed, it indicates that there is no available data.
    */
   short_margin_rate?: string | null;
+
+  /**
+   * Price bands this instrument quotes on, ascending. Absent when we have no
+   * schedule for it, which includes an option whose penny-program status our
+   * reference data never supplied.
+   */
+  tick_rules?: Array<TickRule>;
 }
 
 export type InstrumentCoreList = Array<InstrumentCore>;
@@ -480,6 +494,12 @@ export interface OptionsContract {
   open_interest?: number | null;
 
   /**
+   * Price bands this contract quotes on, ascending. Absent when our reference data
+   * never supplied the contract's penny-program status.
+   */
+  tick_rules?: Array<TickRule>;
+
+  /**
    * Instrument ID of the underlying instrument, when available When a null/undefined
    * value is observed, it indicates that there is no available data.
    */
@@ -487,6 +507,30 @@ export interface OptionsContract {
 }
 
 export type OptionsContractList = Array<OptionsContract>;
+
+/**
+ * One band of an instrument's tick schedule. A price in the band is valid only if
+ * it is a whole multiple of `tick_size`. Bands describe the instrument itself: on
+ * an equity they say nothing about that equity's option chain.
+ */
+export interface TickRule {
+  /**
+   * Lowest price in the band, inclusive.
+   */
+  start_price: string;
+
+  /**
+   * Minimum price increment within the band.
+   */
+  tick_size: string;
+
+  /**
+   * Upper bound of the band, exclusive. Absent on the last band, which runs to
+   * infinity. When a null/undefined value is observed, it indicates it does not
+   * apply.
+   */
+  end_price?: string | null;
+}
 
 export interface InstrumentGetInstrumentByIDResponse extends Shared.BaseResponse {
   /**
@@ -675,6 +719,7 @@ export declare namespace Instruments {
     type OptionExpiryDate as OptionExpiryDate,
     type OptionsContract as OptionsContract,
     type OptionsContractList as OptionsContractList,
+    type TickRule as TickRule,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
     type InstrumentGetOptionContractsResponse as InstrumentGetOptionContractsResponse,

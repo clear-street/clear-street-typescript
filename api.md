@@ -174,6 +174,7 @@ Types:
 - <code><a href="./src/resources/v1/instruments.ts">OptionExpiryDate</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">OptionsContract</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">OptionsContractList</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">TickRule</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">InstrumentGetInstrumentByIDResponse</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">InstrumentGetInstrumentsResponse</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">InstrumentGetOptionContractsResponse</a></code>

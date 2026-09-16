@@ -71,6 +71,7 @@ import {
   OptionExpiryDate,
   OptionsContract,
   OptionsContractList,
+  TickRule,
 } from './instruments';
 import * as OmniFeedAPI from './omni-feed';
 import {
@@ -437,6 +438,7 @@ export declare namespace V1 {
     type OptionExpiryDate as OptionExpiryDate,
     type OptionsContract as OptionsContract,
     type OptionsContractList as OptionsContractList,
+    type TickRule as TickRule,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
     type InstrumentGetOptionContractsResponse as InstrumentGetOptionContractsResponse,
