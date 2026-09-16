@@ -14,11 +14,9 @@ import {
   MarketDataGetSnapshotsResponse,
   MarketDataSnapshot,
   MarketDataSnapshotList,
-  Rule201State,
   SnapshotGreeks,
   SnapshotLastTrade,
   SnapshotQuote,
-  SnapshotRule201,
   SnapshotSession,
 } from './market-data';
 import * as NewsAPI from './news';
@@ -1715,11 +1713,9 @@ export declare namespace InstrumentData {
     type DailySummaryList as DailySummaryList,
     type MarketDataSnapshot as MarketDataSnapshot,
     type MarketDataSnapshotList as MarketDataSnapshotList,
-    type Rule201State as Rule201State,
     type SnapshotGreeks as SnapshotGreeks,
     type SnapshotLastTrade as SnapshotLastTrade,
     type SnapshotQuote as SnapshotQuote,
-    type SnapshotRule201 as SnapshotRule201,
     type SnapshotSession as SnapshotSession,
     type MarketDataGetDailySummariesResponse as MarketDataGetDailySummariesResponse,
     type MarketDataGetSnapshotsResponse as MarketDataGetSnapshotsResponse,

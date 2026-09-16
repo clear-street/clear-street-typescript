@@ -136,21 +136,28 @@ export interface MarketDataSnapshot {
   instrument_id: string;
 
   /**
-   * Live SEC Rule 201 short-sale price test state, from the trading-status feed.
-   * Always present.
-   *
-   * This is the current market condition, not a statement about whether Clear Street
-   * will reject your order. It is also distinct from `is_short_prohibited` on the
-   * instrument endpoints, which is a standing property of the security rather than a
-   * live circuit breaker.
-   */
-  rule_201: SnapshotRule201;
-
-  /**
    * Session-level pricing and OHLV metrics. Always present; each inner field is
    * independently nullable.
    */
   session: SnapshotSession;
+
+  /**
+   * Whether the SEC Rule 201 short-sale price test is currently restricting short
+   * sales in this security, from the trading-status feed.
+   *
+   * `true` restricts non-exempt short sales at or below the national best bid.
+   * `null` means we have no answer, either because no trading status has been seen
+   * for this security yet or because Rule 201 does not cover this security type. A
+   * `null` is not a statement that short selling is unrestricted, and must not be
+   * treated as clear to short.
+   *
+   * This is the current market condition, not a statement about whether Clear Street
+   * will reject your order. It is also distinct from `is_short_prohibited` on the
+   * instrument endpoints, which is a standing property of the security rather than a
+   * live circuit breaker. When a null/undefined value is observed, it indicates that
+   * there is no available data.
+   */
+  short_sale_restricted: boolean | null;
 
   /**
    * Display symbol for the security.
@@ -203,11 +210,6 @@ export interface MarketDataSnapshot {
 }
 
 export type MarketDataSnapshotList = Array<MarketDataSnapshot>;
-
-/**
- * Whether Rule 201 is currently restricting short sales in a security.
- */
-export type Rule201State = 'RESTRICTED' | 'NOT_RESTRICTED' | 'UNKNOWN' | 'NOT_APPLICABLE';
 
 /**
  * Theoretical price and Greeks for an options snapshot. All values are **per
@@ -356,20 +358,6 @@ export interface SnapshotQuote {
 }
 
 /**
- * Live SEC Rule 201 short-sale price test state for a single security.
- *
- * Rule 201 triggers when a security falls 10% below the previous close, and then
- * restricts non-exempt short sales at or below the national best bid for the rest
- * of that day and all of the next trading day.
- */
-export interface SnapshotRule201 {
-  /**
-   * Current price test state for this security.
-   */
-  state: Rule201State;
-}
-
-/**
  * Session-level pricing and OHLV metrics for a market data snapshot. Always
  * present on the snapshot row; every field here is independently nullable except
  * `ohlv_applicable`.
@@ -482,11 +470,9 @@ export declare namespace MarketData {
     type DailySummaryList as DailySummaryList,
     type MarketDataSnapshot as MarketDataSnapshot,
     type MarketDataSnapshotList as MarketDataSnapshotList,
-    type Rule201State as Rule201State,
     type SnapshotGreeks as SnapshotGreeks,
     type SnapshotLastTrade as SnapshotLastTrade,
     type SnapshotQuote as SnapshotQuote,
-    type SnapshotRule201 as SnapshotRule201,
     type SnapshotSession as SnapshotSession,
     type MarketDataGetDailySummariesResponse as MarketDataGetDailySummariesResponse,
     type MarketDataGetSnapshotsResponse as MarketDataGetSnapshotsResponse,
