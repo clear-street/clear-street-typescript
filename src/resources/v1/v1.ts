@@ -312,7 +312,7 @@ export class V1 extends APIResource {
 export type SecurityType = 'COMMON_STOCK' | 'INDEX' | 'OPTION' | 'CASH';
 
 /**
- * Sort direction sorted results
+ * Sort direction for sorted results
  */
 export type SortDirection = 'ASC' | 'DESC';
 

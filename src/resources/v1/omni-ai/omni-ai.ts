@@ -454,7 +454,7 @@ export interface PrefillNewOrderAction {
 }
 
 /**
- * Request to submit a new order (PlaceOrderRequest from spec)
+ * Request to submit a new order
  */
 export interface PrefillNewOrderRequest {
   /**

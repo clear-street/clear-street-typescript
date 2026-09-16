@@ -237,7 +237,7 @@ export type ExecutionList = Array<Execution>;
 export type InstrumentIDOrSymbol = string;
 
 /**
- * Request to submit a new order (PlaceOrderRequest from spec)
+ * Request to submit a new order
  */
 export interface NewOrderRequest {
   /**
@@ -498,14 +498,18 @@ export interface Order {
   trailing_stop_px?: string | null;
 
   /**
-   * Trailing watermark price for trailing orders When a null/undefined value is
-   * observed, it indicates it does not apply.
+   * Trailing watermark price for trailing orders. Strategy-computed, so it is absent
+   * on the order-submission acknowledgement and only appears once fetched via the
+   * order fetch or list endpoints. When a null/undefined value is observed, it
+   * indicates it does not apply.
    */
   trailing_watermark_px?: string | null;
 
   /**
-   * Trailing watermark timestamp for trailing orders When a null/undefined value is
-   * observed, it indicates it does not apply.
+   * Trailing watermark timestamp for trailing orders. Strategy-computed, so it is
+   * absent on the order-submission acknowledgement and only appears once fetched via
+   * the order fetch or list endpoints. When a null/undefined value is observed, it
+   * indicates it does not apply.
    */
   trailing_watermark_ts?: string | null;
 
@@ -615,8 +619,7 @@ export type RequestOrderType =
   | 'TRAILING_STOP_LIMIT';
 
 /**
- * Position effect for a multileg strategy leg: client-attested open/close intent.
- * Required on every leg of a multileg order submission.
+ * Client-attested open/close intent for an order.
  */
 export type RequestPositionEffect = 'OPEN' | 'CLOSE';
 

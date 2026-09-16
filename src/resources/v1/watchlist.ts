@@ -136,12 +136,12 @@ export interface AddWatchlistItemData {
  */
 export interface WatchlistDetail {
   /**
-   * Watchlist ID
+   * The unique identifier for the watchlist.
    */
   id: string;
 
   /**
-   * Creation timestamp
+   * The timestamp when the watchlist was created.
    */
   created_at: string;
 
@@ -151,7 +151,7 @@ export interface WatchlistDetail {
   items: Array<WatchlistItemEntry>;
 
   /**
-   * Watchlist name
+   * The user-provided watchlist name.
    */
   name: string;
 }
