@@ -533,6 +533,13 @@ export interface PrefillNewOrderRequest {
   stop_price?: string | null;
 
   /**
+   * Optional execution strategy. Omit to use standard routing. One of `SOR`, `VWAP`,
+   * or `TWAP`. Supported only on `MARKET` and `LIMIT` orders with `DAY`
+   * time-in-force, and not supported on OTC common-stock orders.
+   */
+  strategy?: OrdersAPI.OrderStrategy | null;
+
+  /**
    * Trading symbol. For equities, use the ticker symbol (e.g., "TSLA"). For options,
    * use the OSI symbol (e.g., "TSLA 250117C00190000"). Either `symbol` or
    * `instrument_id` must be provided.

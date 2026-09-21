@@ -193,6 +193,7 @@ describe('resource orders', () => {
           limit_price: '48.00',
           position_intent: 'OPEN',
           stop_price: '52.00',
+          strategy: { type: 'SOR' },
           symbol: 'TSLA',
           trailing_offset: '2.00',
           trailing_offset_type: 'PRICE',

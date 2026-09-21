@@ -307,6 +307,13 @@ export interface NewOrderRequest {
   stop_price?: string | null;
 
   /**
+   * Optional execution strategy. Omit to use standard routing. One of `SOR`, `VWAP`,
+   * or `TWAP`. Supported only on `MARKET` and `LIMIT` orders with `DAY`
+   * time-in-force, and not supported on OTC common-stock orders.
+   */
+  strategy?: OrderStrategy | null;
+
+  /**
    * Trading symbol. For equities, use the ticker symbol (e.g., "TSLA"). For options,
    * use the OSI symbol (e.g., "TSLA 250117C00190000"). Either `symbol` or
    * `instrument_id` must be provided.
@@ -468,6 +475,11 @@ export interface Order {
   stop_price?: string | null;
 
   /**
+   * The execution strategy the order was submitted with, if any.
+   */
+  strategy?: Order.Strategy;
+
+  /**
    * Trading symbol. `null` when the order has no single resolvable instrument. When
    * a null/undefined value is observed, it indicates it does not apply.
    */
@@ -529,6 +541,30 @@ export interface Order {
   underlying_instrument_type?: V1API.SecurityType | null;
 }
 
+export namespace Order {
+  /**
+   * The execution strategy the order was submitted with, if any.
+   */
+  export interface Strategy {
+    /**
+     * Execution strategy type.
+     */
+    type: string;
+
+    /**
+     * UTC timestamp (RFC 3339) at which execution ends.
+     */
+    end_at?: string;
+
+    /**
+     * UTC timestamp (RFC 3339) at which execution begins.
+     */
+    start_at?: string;
+
+    [k: string]: unknown;
+  }
+}
+
 export type OrderList = Array<Order>;
 
 /**
@@ -552,6 +588,70 @@ export type OrderStatus =
   | 'SUSPENDED'
   | 'CALCULATED'
   | 'OTHER';
+
+/**
+ * Optional execution strategy controlling how the order is worked in the market.
+ * Omit to use standard routing. One of `SOR`, `VWAP`, or `TWAP`.
+ */
+export type OrderStrategy = OrderStrategy.Type | OrderStrategy.UnionMember1 | OrderStrategy.UnionMember2;
+
+export namespace OrderStrategy {
+  /**
+   * Smart Order Router. Routes the order to the best available venue(s).
+   */
+  export interface Type {
+    /**
+     * Execution strategy type.
+     */
+    type: 'SOR';
+  }
+
+  /**
+   * Volume-Weighted Average Price. Works the order to track the volume-weighted
+   * average price over the execution window.
+   */
+  export interface UnionMember1 {
+    /**
+     * Execution strategy type.
+     */
+    type: 'VWAP';
+
+    /**
+     * UTC timestamp (RFC 3339) by which to finish working the order. Defaults to
+     * market close.
+     */
+    end_at?: string;
+
+    /**
+     * UTC timestamp (RFC 3339) at which to begin working the order. Defaults to the
+     * time the order is received.
+     */
+    start_at?: string;
+  }
+
+  /**
+   * Time-Weighted Average Price. Spreads execution evenly across the execution
+   * window.
+   */
+  export interface UnionMember2 {
+    /**
+     * Execution strategy type.
+     */
+    type: 'TWAP';
+
+    /**
+     * UTC timestamp (RFC 3339) by which to finish working the order. Defaults to
+     * market close.
+     */
+    end_at?: string;
+
+    /**
+     * UTC timestamp (RFC 3339) at which to begin working the order. Defaults to the
+     * time the order is received.
+     */
+    start_at?: string;
+  }
+}
 
 /**
  * Order type
@@ -945,6 +1045,7 @@ export declare namespace Orders {
     type Order as Order,
     type OrderList as OrderList,
     type OrderStatus as OrderStatus,
+    type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
     type QueueState as QueueState,
     type ReplaceOrderRequest as ReplaceOrderRequest,

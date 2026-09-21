@@ -157,6 +157,7 @@ export {
   type Order,
   type OrderList,
   type OrderStatus,
+  type OrderStrategy,
   type OrderType,
   type QueueState,
   type ReplaceOrderRequest,
