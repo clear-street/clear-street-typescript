@@ -275,6 +275,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/omni-ai/threads.ts">ContextItem</a></code>
 - <code><a href="./src/resources/v1/omni-ai/threads.ts">CreateMessageResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/threads.ts">CreateThreadResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/threads.ts">Message</a></code>
@@ -285,6 +286,7 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/threads.ts">MessageRole</a></code>
 - <code><a href="./src/resources/v1/omni-ai/threads.ts">Thread</a></code>
 - <code><a href="./src/resources/v1/omni-ai/threads.ts">ThreadList</a></code>
+- <code><a href="./src/resources/v1/omni-ai/threads.ts">TurnContext</a></code>
 - <code><a href="./src/resources/v1/omni-ai/threads.ts">ThreadCreateMessageResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/threads.ts">ThreadCreateThreadResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/threads.ts">ThreadGetMessagesResponse</a></code>

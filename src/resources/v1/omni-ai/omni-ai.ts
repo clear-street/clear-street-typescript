@@ -44,6 +44,7 @@ import {
 } from './responses';
 import * as ThreadsAPI from './threads';
 import {
+  ContextItem,
   CreateMessageResponse,
   CreateThreadResponse,
   Message,
@@ -67,6 +68,7 @@ import {
   ThreadGetThreadsResponse,
   ThreadList,
   Threads,
+  TurnContext,
 } from './threads';
 
 export class OmniAI extends APIResource {
@@ -749,6 +751,7 @@ export declare namespace OmniAI {
 
   export {
     Threads as Threads,
+    type ContextItem as ContextItem,
     type CreateMessageResponse as CreateMessageResponse,
     type CreateThreadResponse as CreateThreadResponse,
     type Message as Message,
@@ -759,6 +762,7 @@ export declare namespace OmniAI {
     type MessageRole as MessageRole,
     type Thread as Thread,
     type ThreadList as ThreadList,
+    type TurnContext as TurnContext,
     type ThreadCreateMessageResponse as ThreadCreateMessageResponse,
     type ThreadCreateThreadResponse as ThreadCreateThreadResponse,
     type ThreadGetMessagesResponse as ThreadGetMessagesResponse,

@@ -8,11 +8,8 @@ const client = new ClearStreet({
 });
 
 describe('resource responses', () => {
-  test('cancelResponse: only required params', async () => {
-    const responsePromise = client.v1.omniAI.responses.cancelResponse(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
-    );
+  test('cancelResponse', async () => {
+    const responsePromise = client.v1.omniAI.responses.cancelResponse('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,16 +19,20 @@ describe('resource responses', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('cancelResponse: required and optional params', async () => {
-    const response = await client.v1.omniAI.responses.cancelResponse('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
-    });
+  test('cancelResponse: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.omniAI.responses.cancelResponse(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        { account_id: 1 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  test('getResponseByID: only required params', async () => {
+  test('getResponseByID', async () => {
     const responsePromise = client.v1.omniAI.responses.getResponseByID(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -42,10 +43,14 @@ describe('resource responses', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getResponseByID: required and optional params', async () => {
-    const response = await client.v1.omniAI.responses.getResponseByID(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
-    );
+  test('getResponseByID: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.omniAI.responses.getResponseByID(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        { account_id: 1 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 });

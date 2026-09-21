@@ -67,6 +67,7 @@ export {
 } from './responses';
 export {
   Threads,
+  type ContextItem,
   type CreateMessageResponse,
   type CreateThreadResponse,
   type Message,
@@ -77,6 +78,7 @@ export {
   type MessageRole,
   type Thread,
   type ThreadList,
+  type TurnContext,
   type ThreadCreateMessageResponse,
   type ThreadCreateThreadResponse,
   type ThreadGetMessagesResponse,

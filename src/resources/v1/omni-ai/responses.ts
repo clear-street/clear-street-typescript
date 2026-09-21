@@ -12,28 +12,26 @@ import { path } from '../../../internal/utils/path';
  */
 export class Responses extends APIResource {
   /**
-   * Cancel a response.
+   * Cancel a queued or running response. Cancellation is idempotent after the
+   * response becomes terminal. A canceled turn still produces a finalized assistant
+   * message with outcome `canceled` in the thread history.
    *
-   * Requests cancellation of a queued or running response. If the response has
-   * already reached a terminal status, this is an idempotent success. A canceled
-   * turn still produces a final assistant message with outcome `canceled` in the
-   * thread history.
+   * Authorization uses the linked account before any cancellation.
    *
    * @example
    * ```ts
    * const response =
    *   await client.v1.omniAI.responses.cancelResponse(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 0 },
    *   );
    * ```
    */
   cancelResponse(
     responseID: string,
-    params: ResponseCancelResponseParams,
+    params: ResponseCancelResponseParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ResponseCancelResponseResponse> {
-    const { account_id } = params;
+    const { account_id } = params ?? {};
     return this._client.delete(path`/v1/omni-ai/responses/${responseID}`, {
       query: { account_id },
       ...options,
@@ -41,28 +39,26 @@ export class Responses extends APIResource {
   }
 
   /**
-   * Poll a response for assistant output.
+   * Poll the current snapshot of an in-progress or completed assistant response.
+   * While its status is `queued` or `running`, content may be partial and include
+   * thinking parts. Continue polling until it becomes `succeeded`, `failed`, or
+   * `canceled`.
    *
-   * Returns the current snapshot of an in-progress or completed response. While the
-   * status is `queued` or `running`, the content may be partial and may include
-   * `thinking` parts. Poll this endpoint periodically until the status reaches a
-   * terminal value (`succeeded`, `failed`, or `canceled`).
-   *
-   * Once terminal, the finalized assistant message is available in thread history
-   * via `GET /omni-ai/threads/{thread_id}/messages`.
+   * Once terminal, the finalized message is available through
+   * `GET /omni-ai/threads/{thread_id}/messages`. Authorization uses the current
+   * parent thread account, including for responses created before the account link.
    *
    * @example
    * ```ts
    * const response =
    *   await client.v1.omniAI.responses.getResponseByID(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 0 },
    *   );
    * ```
    */
   getResponseByID(
     responseID: string,
-    query: ResponseGetResponseByIDParams,
+    query: ResponseGetResponseByIDParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ResponseGetResponseByIDResponse> {
     return this._client.get(path`/v1/omni-ai/responses/${responseID}`, { query, ...options });
@@ -199,16 +195,20 @@ export interface ResponseGetResponseByIDResponse extends Shared.BaseResponse {
 
 export interface ResponseCancelResponseParams {
   /**
-   * Account ID for the request
+   * Lists only conversations for this account, or unlinked conversations when
+   * omitted. Other reads authorize the resource's linked account. Omit when no
+   * account is selected; empty values and the string null are invalid.
    */
-  account_id: number;
+  account_id?: number;
 }
 
 export interface ResponseGetResponseByIDParams {
   /**
-   * Account ID for the request
+   * Lists only conversations for this account, or unlinked conversations when
+   * omitted. Other reads authorize the resource's linked account. Omit when no
+   * account is selected; empty values and the string null are invalid.
    */
-  account_id: number;
+  account_id?: number;
 }
 
 export declare namespace Responses {

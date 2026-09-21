@@ -10,7 +10,6 @@ const client = new ClearStreet({
 describe('resource threads', () => {
   test('createMessage: only required params', async () => {
     const responsePromise = client.v1.omniAI.threads.createMessage('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 19816,
       text: 'Compare that to AMD.',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,14 +23,28 @@ describe('resource threads', () => {
 
   test('createMessage: required and optional params', async () => {
     const response = await client.v1.omniAI.threads.createMessage('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 19816,
       text: 'Compare that to AMD.',
+      account_id: 19816,
       capabilities: ['PREFILL_ORDER'],
+      context: {
+        items: [
+          {
+            data: {
+              change_pct: 'bar',
+              range: 'bar',
+              ticker: 'bar',
+            },
+            kind: 'chart',
+            label: 'NVDA intraday performance',
+            captured_at: '2019-12-27T18:11:19.117Z',
+          },
+        ],
+      },
     });
   });
 
   test('createThread: only required params', async () => {
-    const responsePromise = client.v1.omniAI.threads.createThread({ account_id: 19816, type: 'instant' });
+    const responsePromise = client.v1.omniAI.threads.createThread({ type: 'instant' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -43,19 +56,31 @@ describe('resource threads', () => {
 
   test('createThread: required and optional params', async () => {
     const response = await client.v1.omniAI.threads.createThread({
-      account_id: 19816,
       type: 'instant',
+      account_id: 19816,
       capabilities: ['PREFILL_ORDER'],
+      context: {
+        items: [
+          {
+            data: {
+              change_pct: 'bar',
+              range: 'bar',
+              ticker: 'bar',
+            },
+            kind: 'chart',
+            label: 'NVDA intraday performance',
+            captured_at: '2019-12-27T18:11:19.117Z',
+          },
+        ],
+      },
       target: { ticker: 'ticker', type: 'ticker' },
       text: 'What changed in NVDA today?',
       thesis: 'thesis',
     });
   });
 
-  test('getMessages: only required params', async () => {
-    const responsePromise = client.v1.omniAI.threads.getMessages('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
-    });
+  test('getMessages', async () => {
+    const responsePromise = client.v1.omniAI.threads.getMessages('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,18 +90,23 @@ describe('resource threads', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getMessages: required and optional params', async () => {
-    const response = await client.v1.omniAI.threads.getMessages('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
-      page_size: 1,
-      page_token: 'U3RhaW5sZXNzIHJvY2tz',
-    });
+  test('getMessages: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.omniAI.threads.getMessages(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        {
+          account_id: 1,
+          page_size: 1,
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  test('getThreadByID: only required params', async () => {
-    const responsePromise = client.v1.omniAI.threads.getThreadByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
-    });
+  test('getThreadByID', async () => {
+    const responsePromise = client.v1.omniAI.threads.getThreadByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -86,16 +116,20 @@ describe('resource threads', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getThreadByID: required and optional params', async () => {
-    const response = await client.v1.omniAI.threads.getThreadByID('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 0,
-    });
+  test('getThreadByID: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.omniAI.threads.getThreadByID(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        { account_id: 1 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  test('getThreadResponse: only required params', async () => {
+  test('getThreadResponse', async () => {
     const responsePromise = client.v1.omniAI.threads.getThreadResponse(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -106,15 +140,19 @@ describe('resource threads', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getThreadResponse: required and optional params', async () => {
-    const response = await client.v1.omniAI.threads.getThreadResponse(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 0 },
-    );
+  test('getThreadResponse: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.omniAI.threads.getThreadResponse(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        { account_id: 1 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
-  test('getThreads: only required params', async () => {
-    const responsePromise = client.v1.omniAI.threads.getThreads({ account_id: 0 });
+  test('getThreads', async () => {
+    const responsePromise = client.v1.omniAI.threads.getThreads();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -124,11 +162,17 @@ describe('resource threads', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('getThreads: required and optional params', async () => {
-    const response = await client.v1.omniAI.threads.getThreads({
-      account_id: 0,
-      page_size: 1,
-      page_token: 'U3RhaW5sZXNzIHJvY2tz',
-    });
+  test('getThreads: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.omniAI.threads.getThreads(
+        {
+          account_id: 1,
+          page_size: 1,
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 });

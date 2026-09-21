@@ -12,42 +12,40 @@ import { path } from '../../../internal/utils/path';
  */
 export class Messages extends APIResource {
   /**
-   * Get a finalized message by ID.
-   *
-   * Returns a single finalized message. Returns **404** if the message belongs to an
-   * in-progress assistant turn (use the response endpoint for live output). Once the
-   * turn completes, the message becomes available here.
+   * Read a finalized message using its parent thread for ownership and
+   * linked-account authorization. In-progress assistant messages are not available
+   * here; use the response polling endpoint instead.
    *
    * @example
    * ```ts
    * const response =
    *   await client.v1.omniAI.messages.getMessageByID(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 0 },
    *   );
    * ```
    */
   getMessageByID(
     messageID: string,
-    query: MessageGetMessageByIDParams,
+    query: MessageGetMessageByIDParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MessageGetMessageByIDResponse> {
     return this._client.get(path`/v1/omni-ai/messages/${messageID}`, { query, ...options });
   }
 
   /**
-   * Submit feedback on a finalized assistant message.
-   *
-   * Attaches a score and optional comment to a finalized assistant message. Feedback
+   * Attach a score and optional comment to a finalized assistant message. Feedback
    * is only valid for messages with role `ASSISTANT` that have reached a terminal
    * outcome.
+   *
+   * The current thread account governs access even when the message predates its
+   * account link.
    *
    * @example
    * ```ts
    * const response =
    *   await client.v1.omniAI.messages.submitFeedback(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 0, score: 0 },
+   *     { score: 0 },
    *   );
    * ```
    */
@@ -83,21 +81,23 @@ export interface MessageSubmitFeedbackResponse extends Shared.BaseResponse {
 
 export interface MessageGetMessageByIDParams {
   /**
-   * Account ID for the request
+   * Lists only conversations for this account, or unlinked conversations when
+   * omitted. Other reads authorize the resource's linked account. Omit when no
+   * account is selected; empty values and the string null are invalid.
    */
-  account_id: number;
+  account_id?: number;
 }
 
 export interface MessageSubmitFeedbackParams {
   /**
-   * Account ID for the request
-   */
-  account_id: number;
-
-  /**
-   * Feedback score (-1, 0, +1 or 1-5)
+   * Feedback score (-1, 0, +1 or 1-5).
    */
   score: number;
+
+  /**
+   * Optional selection. Feedback always uses the thread's linked account.
+   */
+  account_id?: number | null;
 
   /**
    * Optional feedback comment

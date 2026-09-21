@@ -13,22 +13,23 @@ import { path } from '../../../internal/utils/path';
  */
 export class Threads extends APIResource {
   /**
-   * Continue an existing conversation thread.
-   *
-   * Appends a new user message to the thread and starts an assistant response. Only
-   * one response may be active per thread at a time — if the previous turn is still
-   * in progress, this endpoint returns **409 Conflict**. Wait for the active
-   * response to reach a terminal status before submitting the next turn.
-   *
+   * Append a user message to an existing thread and start an assistant response.
    * Poll the returned `response_id` via `GET /omni-ai/responses/{response_id}` for
    * assistant output.
+   *
+   * Only one response may be active per thread. Wait for it to reach a terminal
+   * status before submitting another turn; otherwise this endpoint returns 409.
+   *
+   * The first accepted selected-account message links an unlinked thread. A linked
+   * thread keeps its account regardless of omission or another selection. A changed
+   * scope also returns 409 without accepting a turn.
    *
    * @example
    * ```ts
    * const response =
    *   await client.v1.omniAI.threads.createMessage(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 19816, text: 'Compare that to AMD.' },
+   *     { text: 'Compare that to AMD.' },
    *   );
    * ```
    */
@@ -41,23 +42,21 @@ export class Threads extends APIResource {
   }
 
   /**
-   * Create a new conversation thread.
+   * Atomically create a conversation and submit its first user turn. Use `instant`
+   * with `text` for a prompt, or `deep_insights` with a ticker `target` and optional
+   * `thesis` for long-form research.
    *
-   * Atomically creates a new thread and submits the first user turn. The response
-   * contains a `response_id` that should be polled via
-   * `GET /omni-ai/responses/{response_id}` for assistant output.
+   * Poll the returned `response_id` via `GET /omni-ai/responses/{response_id}` for
+   * assistant output.
    *
-   * Two creation modes are supported:
-   *
-   * - **instant** — provide `text` with a natural-language prompt.
-   * - **deep_insights** — provide a `target` ticker and optional `thesis` for
-   *   long-form research.
+   * Omit `account_id` to start without an account. The first accepted turn with a
+   * selected account links that account permanently. Reuse `Idempotency-Key` only
+   * for an identical request.
    *
    * @example
    * ```ts
    * const response =
    *   await client.v1.omniAI.threads.createThread({
-   *     account_id: 19816,
    *     type: 'instant',
    *   });
    * ```
@@ -70,100 +69,120 @@ export class Threads extends APIResource {
   }
 
   /**
-   * List finalized messages in a thread.
+   * List finalized messages, including messages created before the account link.
+   * Return the latest page by default, in chronological order within each page. Use
+   * the returned page token to navigate history.
    *
-   * Returns the latest page of **finalized** messages by default, with messages
-   * within each page ordered chronologically. Messages from in-progress assistant
-   * turns are excluded — use `GET /omni-ai/threads/{thread_id}/response` or
-   * `GET /omni-ai/responses/{response_id}` for live output.
-   *
-   * If the last finalized message has role `USER`, an active response likely exists
-   * and should be polled separately.
+   * In-progress assistant output is not included. Poll
+   * `GET /omni-ai/responses/{response_id}` until the response reaches a terminal
+   * status, then read its finalized message here.
    *
    * @example
    * ```ts
    * const response = await client.v1.omniAI.threads.getMessages(
    *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   { account_id: 0 },
    * );
    * ```
    */
   getMessages(
     threadID: string,
-    query: ThreadGetMessagesParams,
+    query: ThreadGetMessagesParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ThreadGetMessagesResponse> {
     return this._client.get(path`/v1/omni-ai/threads/${threadID}/messages`, { query, ...options });
   }
 
   /**
-   * Get a specific thread.
+   * Read an owned thread's metadata. Use `GET /omni-ai/threads/{thread_id}/messages`
+   * for conversation history.
    *
-   * Returns metadata (title, timestamps) for a single thread. Does not include
-   * messages — use `GET /omni-ai/threads/{thread_id}/messages` for conversation
-   * history.
+   * Omission or another account selection does not change authorization.
    *
    * @example
    * ```ts
    * const response =
    *   await client.v1.omniAI.threads.getThreadByID(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 0 },
    *   );
    * ```
    */
   getThreadByID(
     threadID: string,
-    query: ThreadGetThreadByIDParams,
+    query: ThreadGetThreadByIDParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ThreadGetThreadByIDResponse> {
     return this._client.get(path`/v1/omni-ai/threads/${threadID}`, { query, ...options });
   }
 
   /**
-   * Get the active response for a thread.
+   * Look up the currently active response without knowing its `response_id`. Use
+   * this endpoint when reopening a thread whose assistant turn may still be in
+   * progress.
    *
-   * Convenience endpoint to look up the currently active response for a thread
-   * without knowing the `response_id`. Useful when reloading a thread whose last
-   * finalized message is a `USER` message — this indicates an assistant turn is
-   * likely in progress.
-   *
-   * Returns **404** if no active response exists (the thread is idle).
+   * An idle owned thread returns HTTP 200 with `data: null`.
    *
    * @example
    * ```ts
    * const response =
    *   await client.v1.omniAI.threads.getThreadResponse(
    *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 0 },
    *   );
    * ```
    */
   getThreadResponse(
     threadID: string,
-    query: ThreadGetThreadResponseParams,
+    query: ThreadGetThreadResponseParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ThreadGetThreadResponseResponse> {
     return this._client.get(path`/v1/omni-ai/threads/${threadID}/response`, { query, ...options });
   }
 
   /**
-   * List conversation threads.
+   * List authorized conversation metadata, newest first. Use `page_size` and
+   * `page_token` for pagination, and the messages endpoint for conversation history.
    *
-   * Returns thread metadata ordered by most recently created first. Use `page_size`
-   * and `page_token` for pagination. Thread objects contain only metadata (title,
-   * timestamps) — use the messages endpoint for conversation history.
+   * With `account_id`, list only conversations linked to that account and require
+   * current account access. Without it, list only conversations with no linked
+   * account.
    *
    * @example
    * ```ts
-   * const response = await client.v1.omniAI.threads.getThreads({
-   *   account_id: 0,
-   * });
+   * const response =
+   *   await client.v1.omniAI.threads.getThreads();
    * ```
    */
-  getThreads(query: ThreadGetThreadsParams, options?: RequestOptions): APIPromise<ThreadGetThreadsResponse> {
+  getThreads(
+    query: ThreadGetThreadsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ThreadGetThreadsResponse> {
     return this._client.get('/v1/omni-ai/threads', { query, ...options });
   }
+}
+
+/**
+ * A snapshot of the widget the user asks about.
+ */
+export interface ContextItem {
+  /**
+   * Relevant widget data, selections, and units. Use strings for exact decimals and
+   * large IDs.
+   */
+  data: { [key: string]: unknown };
+
+  /**
+   * Nonblank descriptive kind. New kinds do not require a backend release.
+   */
+  kind: string;
+
+  /**
+   * Nonblank attachment label for conversation rendering.
+   */
+  label: string;
+
+  /**
+   * Client-reported snapshot time. Omit when unknown.
+   */
+  captured_at?: string | null;
 }
 
 /**
@@ -214,6 +233,13 @@ export interface Message {
   seq: number;
 
   thread_id: string;
+
+  /**
+   * Immutable snapshots attached to this user message. Omitted when none were
+   * supplied. When a null/undefined value is observed, it indicates that there is no
+   * available data.
+   */
+  context?: TurnContext | null;
 
   /**
    * When a null/undefined value is observed, it indicates it does not apply.
@@ -288,7 +314,7 @@ export type MessageOutcome = 'completed' | 'errored' | 'canceled';
 export type MessageRole = 'USER' | 'ASSISTANT';
 
 /**
- * Thread metadata returned by list/get thread endpoints.
+ * Thread metadata.
  */
 export interface Thread {
   id: string;
@@ -301,6 +327,20 @@ export interface Thread {
 }
 
 export type ThreadList = Array<Thread>;
+
+/**
+ * Client snapshots attached to one instant-chat user message.
+ *
+ * Context is separate from visible message text and does not grant account access.
+ * The compact JSON representation must not exceed 64 KiB.
+ */
+export interface TurnContext {
+  /**
+   * One to four snapshots. Each snapshot's data may contain at most 32 levels of
+   * nesting.
+   */
+  items: Array<ContextItem>;
+}
 
 export interface ThreadCreateMessageResponse extends Shared.BaseResponse {
   /**
@@ -322,7 +362,7 @@ export interface ThreadGetMessagesResponse extends Shared.BaseResponse {
 
 export interface ThreadGetThreadByIDResponse extends Shared.BaseResponse {
   /**
-   * Thread metadata returned by list/get thread endpoints.
+   * Thread metadata.
    */
   data: Thread;
 }
@@ -339,22 +379,43 @@ export interface ThreadGetThreadsResponse extends Shared.BaseResponse {
 }
 
 export interface ThreadCreateMessageParams {
-  account_id: number;
-
   text: string;
 
+  /**
+   * Selected account for creation or the first account-linked turn. Omit for an
+   * unlinked conversation. An existing account link remains authoritative even when
+   * another account is selected.
+   */
+  account_id?: number | null;
+
   capabilities?: Array<'PREFILL_ORDER' | 'OPEN_CHART' | 'OPEN_SCREENER' | 'OPEN_ENTITLEMENT_CONSENT'>;
+
+  /**
+   * Snapshots for this instant-chat message. Omission does not remove earlier
+   * attachments.
+   */
+  context?: TurnContext | null;
 }
 
 export interface ThreadCreateThreadParams {
-  account_id: number;
-
   /**
    * Thread creation mode.
    */
   type: 'instant' | 'deep_insights';
 
+  /**
+   * Selected account for creation or the first account-linked turn. Omit for an
+   * unlinked conversation. An existing account link remains authoritative even when
+   * another account is selected.
+   */
+  account_id?: number | null;
+
   capabilities?: Array<'PREFILL_ORDER' | 'OPEN_CHART' | 'OPEN_SCREENER' | 'OPEN_ENTITLEMENT_CONSENT'>;
+
+  /**
+   * Snapshots for the first instant-chat message. Omit to attach no new context.
+   */
+  context?: TurnContext | null;
 
   /**
    * Deep-insights target payload.
@@ -382,9 +443,11 @@ export namespace ThreadCreateThreadParams {
 
 export interface ThreadGetMessagesParams {
   /**
-   * Account ID for the request
+   * Lists only conversations for this account, or unlinked conversations when
+   * omitted. Other reads authorize the resource's linked account. Omit when no
+   * account is selected; empty values and the string null are invalid.
    */
-  account_id: number;
+  account_id?: number;
 
   /**
    * The number of items to return per page. Only used when page_token is not
@@ -401,23 +464,29 @@ export interface ThreadGetMessagesParams {
 
 export interface ThreadGetThreadByIDParams {
   /**
-   * Account ID for the request
+   * Lists only conversations for this account, or unlinked conversations when
+   * omitted. Other reads authorize the resource's linked account. Omit when no
+   * account is selected; empty values and the string null are invalid.
    */
-  account_id: number;
+  account_id?: number;
 }
 
 export interface ThreadGetThreadResponseParams {
   /**
-   * Account ID for the request
+   * Lists only conversations for this account, or unlinked conversations when
+   * omitted. Other reads authorize the resource's linked account. Omit when no
+   * account is selected; empty values and the string null are invalid.
    */
-  account_id: number;
+  account_id?: number;
 }
 
 export interface ThreadGetThreadsParams {
   /**
-   * Account ID for the request
+   * Lists only conversations for this account, or unlinked conversations when
+   * omitted. Other reads authorize the resource's linked account. Omit when no
+   * account is selected; empty values and the string null are invalid.
    */
-  account_id: number;
+  account_id?: number;
 
   /**
    * The number of items to return per page. Only used when page_token is not
@@ -434,6 +503,7 @@ export interface ThreadGetThreadsParams {
 
 export declare namespace Threads {
   export {
+    type ContextItem as ContextItem,
     type CreateMessageResponse as CreateMessageResponse,
     type CreateThreadResponse as CreateThreadResponse,
     type Message as Message,
@@ -444,6 +514,7 @@ export declare namespace Threads {
     type MessageRole as MessageRole,
     type Thread as Thread,
     type ThreadList as ThreadList,
+    type TurnContext as TurnContext,
     type ThreadCreateMessageResponse as ThreadCreateMessageResponse,
     type ThreadCreateThreadResponse as ThreadCreateThreadResponse,
     type ThreadGetMessagesResponse as ThreadGetMessagesResponse,
