@@ -350,12 +350,11 @@ export interface PositionInstruction {
   created_at?: string | null;
 
   /**
-   * Machine-readable counterpart to `rejection_reason`: a stable reason code plus
-   * params, present on every rejected row that has a `rejection_reason` — on submit,
-   * cancel, get, and list alike. Branch on `rejection.reason` instead of parsing
-   * `rejection_reason`. Forward-only: instructions rejected before this field
-   * shipped may carry only `rejection_reason`. When a null/undefined value is
-   * observed, it indicates it does not apply.
+   * Machine-readable counterpart to `rejection_reason`: a stable reason code,
+   * human-readable `description`, and params, present on every rejected row — on
+   * submit, cancel, get, and list alike. Branch on `rejection.reason` and read
+   * `rejection.description` instead of the top-level `rejection_reason`. When a
+   * null/undefined value is observed, it indicates it does not apply.
    */
   rejection?: PositionInstructionRejection | null;
 
@@ -385,13 +384,17 @@ export type PositionInstructionList = Array<PositionInstruction>;
 /**
  * Machine-readable detail for a rejected position instruction.
  *
- * Present on every rejected row that carries a `rejection_reason`, across the full
- * lifecycle — submit, cancel, get, and list. Branch on `reason` for programmatic
- * handling and template your own copy from `metadata`; `rejection_reason` remains
- * the human-readable fallback. Forward-only: instructions rejected before this
- * field shipped may carry only `rejection_reason`.
+ * Present on every rejected row, across the full lifecycle — submit, cancel, get,
+ * and list. Branch on `reason` for programmatic handling and template your own
+ * copy from `metadata`, or show `description` directly.
  */
 export interface PositionInstructionRejection {
+  /**
+   * Human-readable explanation of the rejection. Duplicates the top-level
+   * `rejection_reason`; prefer this field.
+   */
+  description: string;
+
   /**
    * Namespacing domain of the `reason` code — `com.clearstreet.oems.exercise` for
    * reasons OEMS validates, `com.clearstreet.oems.clearing` for clearing-owned
