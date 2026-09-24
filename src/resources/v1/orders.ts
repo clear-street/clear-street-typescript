@@ -307,9 +307,9 @@ export interface NewOrderRequest {
   stop_price?: string | null;
 
   /**
-   * Optional execution strategy. Omit to use standard routing. One of `SOR`, `VWAP`,
-   * or `TWAP`. Supported only on `MARKET` and `LIMIT` orders with `DAY`
-   * time-in-force, and not supported on OTC common-stock orders.
+   * Optional execution strategy. One of `SOR`, `VWAP`, or `TWAP`. Defaults to `SOR`.
+   * `VWAP` and `TWAP` are supported only on `MARKET` and `LIMIT` orders with `DAY`
+   * time-in-force, and are not supported on OTC common-stock orders.
    */
   strategy?: OrderStrategy | null;
 
