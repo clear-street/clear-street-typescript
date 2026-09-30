@@ -172,7 +172,8 @@ export interface Execution {
   order_id: string;
 
   /**
-   * Filled quantity.
+   * Filled quantity. For a strategy-level multileg fill this is the net strategy
+   * quantity, not a per-leg quantity.
    */
   quantity: string;
 
@@ -187,9 +188,9 @@ export interface Execution {
   transaction_time: string;
 
   /**
-   * Unique instrument identifier. `null` when this fill has no single resolvable
-   * instrument. When a null/undefined value is observed, it indicates it does not
-   * apply.
+   * Unique instrument identifier. `null` when this is a strategy-level multileg fill
+   * whose legs are reported individually in `legs[]`. When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   instrument_id?: string | null;
 
@@ -200,8 +201,9 @@ export interface Execution {
   price?: string | null;
 
   /**
-   * Trading symbol. `null` when this fill has no single resolvable instrument. When
-   * a null/undefined value is observed, it indicates it does not apply.
+   * Trading symbol. `null` when this is a strategy-level multileg fill whose legs
+   * are reported individually in `legs[]`. When a null/undefined value is observed,
+   * it indicates it does not apply.
    */
   symbol?: string | null;
 
@@ -431,15 +433,16 @@ export interface Order {
   extended_hours?: boolean | null;
 
   /**
-   * Instrument identifier for the traded instrument. `null` when the order has no
-   * single resolvable instrument. When a null/undefined value is observed, it
-   * indicates it does not apply.
+   * Instrument identifier for the traded instrument. `null` when the order is a
+   * multileg strategy whose legs are reported individually in `legs[]`. When a
+   * null/undefined value is observed, it indicates it does not apply.
    */
   instrument_id?: string | null;
 
   /**
-   * Type of security. `null` when the order has no single resolvable instrument.
-   * When a null/undefined value is observed, it indicates it does not apply.
+   * Type of security. `null` when the order is a multileg strategy whose legs are
+   * reported individually in `legs[]`. When a null/undefined value is observed, it
+   * indicates it does not apply.
    */
   instrument_type?: V1API.SecurityType | null;
 
@@ -480,8 +483,9 @@ export interface Order {
   strategy?: Order.Strategy;
 
   /**
-   * Trading symbol. `null` when the order has no single resolvable instrument. When
-   * a null/undefined value is observed, it indicates it does not apply.
+   * Trading symbol. `null` when the order is a multileg strategy whose legs are
+   * reported individually in `legs[]`. When a null/undefined value is observed, it
+   * indicates it does not apply.
    */
   symbol?: string | null;
 
