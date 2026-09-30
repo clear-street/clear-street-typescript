@@ -19,6 +19,38 @@ describe('resource calendar', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
+  test('getEconomicEventsCalendar', async () => {
+    const responsePromise = client.v1.calendar.getEconomicEventsCalendar();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getEconomicEventsCalendar: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.calendar.getEconomicEventsCalendar(
+        {
+          country: 'country',
+          impact: ['NONE'],
+          page_size: 1,
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
+          timestamp: {
+            gt: 'gt',
+            gte: 'gte',
+            lt: 'lt',
+            lte: 'lte',
+          },
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
+
   test('getMarketHoursCalendar', async () => {
     const responsePromise = client.v1.calendar.getMarketHoursCalendar();
     const rawResponse = await responsePromise.asResponse();

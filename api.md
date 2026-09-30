@@ -67,6 +67,10 @@ Types:
 
 - <code><a href="./src/resources/v1/calendar.ts">ClockDetail</a></code>
 - <code><a href="./src/resources/v1/calendar.ts">DayType</a></code>
+- <code><a href="./src/resources/v1/calendar.ts">EconomicEvent</a></code>
+- <code><a href="./src/resources/v1/calendar.ts">EconomicEventImpact</a></code>
+- <code><a href="./src/resources/v1/calendar.ts">EconomicEventList</a></code>
+- <code><a href="./src/resources/v1/calendar.ts">EconomicEventUnit</a></code>
 - <code><a href="./src/resources/v1/calendar.ts">MarketHoursDetail</a></code>
 - <code><a href="./src/resources/v1/calendar.ts">MarketHoursDetailList</a></code>
 - <code><a href="./src/resources/v1/calendar.ts">MarketSessionType</a></code>
@@ -75,11 +79,13 @@ Types:
 - <code><a href="./src/resources/v1/calendar.ts">SessionSchedule</a></code>
 - <code><a href="./src/resources/v1/calendar.ts">TradingSessions</a></code>
 - <code><a href="./src/resources/v1/calendar.ts">CalendarGetClockResponse</a></code>
+- <code><a href="./src/resources/v1/calendar.ts">CalendarGetEconomicEventsCalendarResponse</a></code>
 - <code><a href="./src/resources/v1/calendar.ts">CalendarGetMarketHoursCalendarResponse</a></code>
 
 Methods:
 
 - <code title="get /v1/clock">client.v1.calendar.<a href="./src/resources/v1/calendar.ts">getClock</a>() -> CalendarGetClockResponse</code>
+- <code title="get /v1/calendars/economic-events">client.v1.calendar.<a href="./src/resources/v1/calendar.ts">getEconomicEventsCalendar</a>({ ...params }) -> CalendarGetEconomicEventsCalendarResponse</code>
 - <code title="get /v1/calendars/market-hours">client.v1.calendar.<a href="./src/resources/v1/calendar.ts">getMarketHoursCalendar</a>({ ...params }) -> CalendarGetMarketHoursCalendarResponse</code>
 
 ## InstrumentData

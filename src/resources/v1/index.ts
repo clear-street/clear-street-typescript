@@ -36,6 +36,10 @@ export {
   Calendar,
   type ClockDetail,
   type DayType,
+  type EconomicEvent,
+  type EconomicEventImpact,
+  type EconomicEventList,
+  type EconomicEventUnit,
   type MarketHoursDetail,
   type MarketHoursDetailList,
   type MarketSessionType,
@@ -44,7 +48,9 @@ export {
   type SessionSchedule,
   type TradingSessions,
   type CalendarGetClockResponse,
+  type CalendarGetEconomicEventsCalendarResponse,
   type CalendarGetMarketHoursCalendarResponse,
+  type CalendarGetEconomicEventsCalendarParams,
   type CalendarGetMarketHoursCalendarParams,
 } from './calendar';
 export {

@@ -22,6 +22,27 @@ export class Calendar extends APIResource {
   }
 
   /**
+   * Retrieves macroeconomic calendar events (e.g. CPI, jobs reports, central bank
+   * rate decisions), optionally filtered by country, impact, and event time range.
+   *
+   * Absent a `timestamp` lower bound, results default to events from the start of
+   * the previous trading day (America/New_York); absent an upper bound, results
+   * default through 7 days from today (America/New_York).
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.calendar.getEconomicEventsCalendar();
+   * ```
+   */
+  getEconomicEventsCalendar(
+    query: CalendarGetEconomicEventsCalendarParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CalendarGetEconomicEventsCalendarResponse> {
+    return this._client.get('/v1/calendars/economic-events', { query, ...options });
+  }
+
+  /**
    * Retrieves comprehensive trading hours including pre-market, regular, and
    * after-hours sessions. Returns market status, session times, and next session
    * schedules.
@@ -54,6 +75,94 @@ export interface ClockDetail {
  * Day type for market hours - indicates the type of trading day
  */
 export type DayType = 'TRADING_DAY' | 'EARLY_CLOSE' | 'HOLIDAY' | 'WEEKEND';
+
+/**
+ * A single economic calendar event.
+ *
+ * Coverage spans roughly 365 days back to 90 days forward. `estimate` and `actual`
+ * are frequently absent for minor releases, speeches, and holidays. The calendar
+ * refreshes daily (around 7am ET), so `actual` can trail the real-world print by
+ * up to a day; a null `actual` before the print is expected, not missing data.
+ */
+export interface EconomicEvent {
+  /**
+   * ISO 3166-1 alpha-2 country code, or `EU`.
+   */
+  country: string;
+
+  /**
+   * Event name as reported by the provider.
+   */
+  name: string;
+
+  /**
+   * UTC instant of the event.
+   */
+  timestamp: string;
+
+  /**
+   * Actual reported value. Null before the print, or if the provider never reports
+   * one for this event. When a null/undefined value is observed, it indicates that
+   * there is no available data.
+   */
+  actual?: string | null;
+
+  /**
+   * Change from the previous value. When a null/undefined value is observed, it
+   * indicates that there is no available data.
+   */
+  change?: string | null;
+
+  /**
+   * Change from the previous value, as a percentage. When a null/undefined value is
+   * observed, it indicates that there is no available data.
+   */
+  change_percentage?: string | null;
+
+  /**
+   * Currency associated with the event, if applicable. When a null/undefined value
+   * is observed, it indicates that there is no available data.
+   */
+  currency?: string | null;
+
+  /**
+   * Analyst-estimated value. When a null/undefined value is observed, it indicates
+   * that there is no available data.
+   */
+  estimate?: string | null;
+
+  /**
+   * Expected market impact, if known. When a null/undefined value is observed, it
+   * indicates that there is no available data.
+   */
+  impact?: EconomicEventImpact | null;
+
+  /**
+   * Previous period's reported value. When a null/undefined value is observed, it
+   * indicates that there is no available data.
+   */
+  previous?: string | null;
+
+  /**
+   * Unit of the numeric value fields, if known. When a null/undefined value is
+   * observed, it indicates that there is no available data.
+   */
+  unit?: EconomicEventUnit | null;
+}
+
+/**
+ * Market impact of an economic calendar event.
+ */
+export type EconomicEventImpact = 'NONE' | 'LOW' | 'MEDIUM' | 'HIGH';
+
+export type EconomicEventList = Array<EconomicEvent>;
+
+/**
+ * Unit of an economic calendar event's numeric values. Known values: `%`, `K`
+ * (thousand), `M` (million), `B` (billion), `T` (trillion), `Points`. Any other
+ * provider-supplied string passes through unchanged.
+ */
+export type EconomicEventUnit = string;
 
 /**
  * Comprehensive market hours information for a specific market and date
@@ -197,8 +306,81 @@ export interface CalendarGetClockResponse extends Shared.BaseResponse {
   data: ClockDetail;
 }
 
+export interface CalendarGetEconomicEventsCalendarResponse extends Shared.BaseResponse {
+  data: EconomicEventList;
+}
+
 export interface CalendarGetMarketHoursCalendarResponse extends Shared.BaseResponse {
   data: MarketHoursDetailList;
+}
+
+export interface CalendarGetEconomicEventsCalendarParams {
+  /**
+   * Comma-separated ISO 3166-1 alpha-2 country codes (or `EU`) to filter by.
+   * Defaults to `US` when omitted.
+   */
+  country?: string;
+
+  /**
+   * Comma-separated impact levels to filter by.
+   */
+  impact?: Array<'NONE' | 'LOW' | 'MEDIUM' | 'HIGH'>;
+
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
+  page_size?: number;
+
+  /**
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
+   */
+  page_token?: string;
+
+  timestamp?: CalendarGetEconomicEventsCalendarParams.Timestamp;
+}
+
+export namespace CalendarGetEconomicEventsCalendarParams {
+  export interface Timestamp {
+    /**
+     * Return only rows where `timestamp` is strictly after the given value. A bare
+     * `YYYY-MM-DD` date expands to the end of that day (UTC), so this matches from the
+     * start of the following day. See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    gt?: string;
+
+    /**
+     * Return only rows where `timestamp` is on or after the given value. A bare
+     * `YYYY-MM-DD` date expands to the start of that day (UTC). See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    gte?: string;
+
+    /**
+     * Return only rows where `timestamp` is strictly before the given value. A bare
+     * `YYYY-MM-DD` date expands to the start of that day (UTC). See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    lt?: string;
+
+    /**
+     * Return only rows where `timestamp` is on or before the given value. A bare
+     * `YYYY-MM-DD` date expands to the end of that day (UTC), so this matches through
+     * the end of that day. See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    lte?: string;
+  }
 }
 
 export interface CalendarGetMarketHoursCalendarParams {
@@ -217,6 +399,10 @@ export declare namespace Calendar {
   export {
     type ClockDetail as ClockDetail,
     type DayType as DayType,
+    type EconomicEvent as EconomicEvent,
+    type EconomicEventImpact as EconomicEventImpact,
+    type EconomicEventList as EconomicEventList,
+    type EconomicEventUnit as EconomicEventUnit,
     type MarketHoursDetail as MarketHoursDetail,
     type MarketHoursDetailList as MarketHoursDetailList,
     type MarketSessionType as MarketSessionType,
@@ -225,7 +411,9 @@ export declare namespace Calendar {
     type SessionSchedule as SessionSchedule,
     type TradingSessions as TradingSessions,
     type CalendarGetClockResponse as CalendarGetClockResponse,
+    type CalendarGetEconomicEventsCalendarResponse as CalendarGetEconomicEventsCalendarResponse,
     type CalendarGetMarketHoursCalendarResponse as CalendarGetMarketHoursCalendarResponse,
+    type CalendarGetEconomicEventsCalendarParams as CalendarGetEconomicEventsCalendarParams,
     type CalendarGetMarketHoursCalendarParams as CalendarGetMarketHoursCalendarParams,
   };
 }
