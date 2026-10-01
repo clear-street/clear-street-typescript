@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.102.0](https://github.com/clear-street/clear-street-typescript/compare/v0.101.0...v0.102.0) (2026-10-01)
+
+
+### Features
+
+* **api:** api update ([9b6237e](https://github.com/clear-street/clear-street-typescript/commit/9b6237e363b092668981be0b3a3b62291282c690))
+* **api:** api update ([6af17d1](https://github.com/clear-street/clear-street-typescript/commit/6af17d167f1669dbc9e123317a2923273567cafa))
+
+
+### Chores
+
+* fix out-of-sync git trees ([4357f37](https://github.com/clear-street/clear-street-typescript/commit/4357f3794be2ba86e80e8aadfc4f364318c4aa40))
+
 ## [0.101.0](https://github.com/clear-street/clear-street-typescript/compare/v0.100.0...v0.101.0) (2026-09-23)
 
 
