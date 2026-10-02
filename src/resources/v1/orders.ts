@@ -309,9 +309,10 @@ export interface NewOrderRequest {
   stop_price?: string | null;
 
   /**
-   * Optional execution strategy. One of `SOR`, `VWAP`, or `TWAP`. Defaults to `SOR`.
-   * `VWAP` and `TWAP` are supported only on `MARKET` and `LIMIT` orders with `DAY`
-   * time-in-force, and are not supported on OTC common-stock orders.
+   * Optional execution strategy. One of `SOR`, `VWAP`, `TWAP`, or `DMA`. Defaults to
+   * `SOR`, the only strategy OTC common-stock orders support. `VWAP` and `TWAP` are
+   * supported only on `MARKET` and `LIMIT` orders, and `DMA` only on `LIMIT` orders;
+   * all three require `DAY` time-in-force.
    */
   strategy?: OrderStrategy | null;
 
@@ -553,7 +554,12 @@ export namespace Order {
     /**
      * Execution strategy type.
      */
-    type: string;
+    type: 'SOR' | 'VWAP' | 'TWAP' | 'DMA';
+
+    /**
+     * Venue code the order is routed to. DMA only.
+     */
+    destination?: string;
 
     /**
      * UTC timestamp (RFC 3339) at which execution ends.
@@ -595,9 +601,13 @@ export type OrderStatus =
 
 /**
  * Optional execution strategy controlling how the order is worked in the market.
- * Omit to use standard routing. One of `SOR`, `VWAP`, or `TWAP`.
+ * Omit to use standard routing. One of `SOR`, `VWAP`, `TWAP`, or `DMA`.
  */
-export type OrderStrategy = OrderStrategy.Type | OrderStrategy.UnionMember1 | OrderStrategy.UnionMember2;
+export type OrderStrategy =
+  | OrderStrategy.Type
+  | OrderStrategy.UnionMember1
+  | OrderStrategy.UnionMember2
+  | OrderStrategy.UnionMember3;
 
 export namespace OrderStrategy {
   /**
@@ -654,6 +664,21 @@ export namespace OrderStrategy {
      * time the order is received.
      */
     start_at?: string;
+  }
+
+  /**
+   * Direct Market Access. Routes the order straight to the named venue.
+   */
+  export interface UnionMember3 {
+    /**
+     * Venue code the order is routed to.
+     */
+    destination: string;
+
+    /**
+     * Execution strategy type.
+     */
+    type: 'DMA';
   }
 }
 

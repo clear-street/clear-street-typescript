@@ -533,9 +533,10 @@ export interface PrefillNewOrderRequest {
   stop_price?: string | null;
 
   /**
-   * Optional execution strategy. One of `SOR`, `VWAP`, or `TWAP`. Defaults to `SOR`.
-   * `VWAP` and `TWAP` are supported only on `MARKET` and `LIMIT` orders with `DAY`
-   * time-in-force, and are not supported on OTC common-stock orders.
+   * Optional execution strategy. One of `SOR`, `VWAP`, `TWAP`, or `DMA`. Defaults to
+   * `SOR`, the only strategy OTC common-stock orders support. `VWAP` and `TWAP` are
+   * supported only on `MARKET` and `LIMIT` orders, and `DMA` only on `LIMIT` orders;
+   * all three require `DAY` time-in-force.
    */
   strategy?: OrdersAPI.OrderStrategy | null;
 
