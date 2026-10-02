@@ -36,6 +36,11 @@ export class MarketData extends APIResource {
   /**
    * Get market data snapshots for one or more securities.
    *
+   * Two targeting modes, mutually exclusive: `instrument_ids` (1-100 ids), or
+   * `underlying_instrument_id` + `expiry` together, which resolves the underlier's
+   * option chain for that expiry and returns a snapshot for every contract in it
+   * (uncapped).
+   *
    * @example
    * ```ts
    * const response =
@@ -457,11 +462,25 @@ export interface MarketDataGetDailySummariesParams {
 
 export interface MarketDataGetSnapshotsParams {
   /**
+   * Filter the option chain to contracts expiring on this date (YYYY-MM-DD). Must be
+   * provided together with `underlying_instrument_id`.
+   */
+  expiry?: string;
+
+  /**
    * Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
-   * symbols). Required; accepts 1 to 100 IDs. Duplicate resolved ids collapse to a
-   * single row.
+   * symbols). Accepts 1 to 100 IDs; duplicate resolved ids collapse to a single row.
+   * Required unless `underlying_instrument_id` and `expiry` are provided; mutually
+   * exclusive with that pair.
    */
   instrument_ids?: Array<OrdersAPI.InstrumentIDOrSymbol>;
+
+  /**
+   * Instrument identifier or symbol of the underlying equity/index for an option
+   * chain. Must be provided together with `expiry`; mutually exclusive with
+   * `instrument_ids`.
+   */
+  underlying_instrument_id?: string;
 }
 
 export declare namespace MarketData {

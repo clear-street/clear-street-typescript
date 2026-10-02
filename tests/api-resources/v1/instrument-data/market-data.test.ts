@@ -42,7 +42,11 @@ describe('resource marketData', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.v1.instrumentData.marketData.getSnapshots(
-        { instrument_ids: ['x'] },
+        {
+          expiry: '2019-12-27',
+          instrument_ids: ['x'],
+          underlying_instrument_id: 'x',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);

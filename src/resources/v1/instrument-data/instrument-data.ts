@@ -1021,10 +1021,20 @@ export interface InstrumentEventIpoItem {
   exchange?: string | null;
 
   /**
-   * IPO market cap. When a null/undefined value is observed, it indicates that there
-   * is no available data.
+   * @deprecated Deprecated: use `offering_amount`, which carries the same value.
+   * This is not a market capitalization. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   market_cap?: string | null;
+
+  /**
+   * IPO maximum aggregate offering value: all offered shares, including
+   * over-allotment (greenshoe) shares, at the top of the price range. This is an
+   * upper bound. It assumes full exercise of the over-allotment option and pricing
+   * at the top of the range. When a null/undefined value is observed, it indicates
+   * that there is no available data.
+   */
+  offering_amount?: string | null;
 
   /**
    * IPO price range. When a null/undefined value is observed, it indicates that
@@ -1412,10 +1422,20 @@ export interface InstrumentIpoEvent {
   exchange?: string | null;
 
   /**
-   * IPO market cap. When a null/undefined value is observed, it indicates that there
-   * is no available data.
+   * @deprecated Deprecated: use `offering_amount`, which carries the same value.
+   * This is not a market capitalization. When a null/undefined value is observed, it
+   * indicates that there is no available data.
    */
   market_cap?: string | null;
+
+  /**
+   * IPO maximum aggregate offering value: all offered shares, including
+   * over-allotment (greenshoe) shares, at the top of the price range. This is an
+   * upper bound. It assumes full exercise of the over-allotment option and pricing
+   * at the top of the range. When a null/undefined value is observed, it indicates
+   * that there is no available data.
+   */
+  offering_amount?: string | null;
 
   /**
    * IPO price range. When a null/undefined value is observed, it indicates that
