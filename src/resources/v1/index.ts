@@ -114,6 +114,15 @@ export {
   type InstrumentSearchInstrumentsParams,
 } from './instruments';
 export {
+  Locates,
+  type LocateRate,
+  type LocateRateResult,
+  type LocateRateResultList,
+  type LocateGetLocateRateByIDResponse,
+  type LocateGetLocateRatesResponse,
+  type LocateGetLocateRatesParams,
+} from './locates';
+export {
   OmniAI,
   type ActionButton,
   type ChartPayload,

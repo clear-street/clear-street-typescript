@@ -79,6 +79,16 @@ import {
   OptionsContractList,
   TickRule,
 } from './instruments';
+import * as LocatesAPI from './locates';
+import {
+  LocateGetLocateRateByIDResponse,
+  LocateGetLocateRatesParams,
+  LocateGetLocateRatesResponse,
+  LocateRate,
+  LocateRateResult,
+  LocateRateResultList,
+  Locates,
+} from './locates';
 import * as OmniFeedAPI from './omni-feed';
 import {
   FeedItem,
@@ -305,6 +315,7 @@ export class V1 extends APIResource {
   calendar: CalendarAPI.Calendar = new CalendarAPI.Calendar(this._client);
   instrumentData: InstrumentDataAPI.InstrumentData = new InstrumentDataAPI.InstrumentData(this._client);
   instruments: InstrumentsAPI.Instruments = new InstrumentsAPI.Instruments(this._client);
+  locates: LocatesAPI.Locates = new LocatesAPI.Locates(this._client);
   omniAI: OmniAIAPI.OmniAI = new OmniAIAPI.OmniAI(this._client);
   omniFeed: OmniFeedAPI.OmniFeed = new OmniFeedAPI.OmniFeed(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
@@ -329,6 +340,7 @@ V1.APIVersion = APIVersion;
 V1.Calendar = Calendar;
 V1.InstrumentData = InstrumentData;
 V1.Instruments = Instruments;
+V1.Locates = Locates;
 V1.OmniAI = OmniAI;
 V1.OmniFeed = OmniFeed;
 V1.Orders = Orders;
@@ -460,6 +472,16 @@ export declare namespace V1 {
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
     type InstrumentGetOptionContractsParams as InstrumentGetOptionContractsParams,
     type InstrumentSearchInstrumentsParams as InstrumentSearchInstrumentsParams,
+  };
+
+  export {
+    Locates as Locates,
+    type LocateRate as LocateRate,
+    type LocateRateResult as LocateRateResult,
+    type LocateRateResultList as LocateRateResultList,
+    type LocateGetLocateRateByIDResponse as LocateGetLocateRateByIDResponse,
+    type LocateGetLocateRatesResponse as LocateGetLocateRatesResponse,
+    type LocateGetLocateRatesParams as LocateGetLocateRatesParams,
   };
 
   export {

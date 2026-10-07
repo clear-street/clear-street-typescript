@@ -773,5 +773,6 @@ export declare namespace ClearStreet {
 
   export type APIError = API.APIError;
   export type BaseResponse = API.BaseResponse;
+  export type ErrorDetails = API.ErrorDetails;
   export type ResponseMetadata = API.ResponseMetadata;
 }

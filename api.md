@@ -4,6 +4,7 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">APIError</a></code>
 - <code><a href="./src/resources/shared.ts">BaseResponse</a></code>
+- <code><a href="./src/resources/shared.ts">ErrorDetails</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseMetadata</a></code>
 
 # V1
@@ -192,6 +193,21 @@ Methods:
 - <code title="get /v1/instruments">client.v1.instruments.<a href="./src/resources/v1/instruments.ts">getInstruments</a>({ ...params }) -> InstrumentGetInstrumentsResponse</code>
 - <code title="get /v1/instruments/options/contracts">client.v1.instruments.<a href="./src/resources/v1/instruments.ts">getOptionContracts</a>({ ...params }) -> InstrumentGetOptionContractsResponse</code>
 - <code title="get /v1/instruments/search">client.v1.instruments.<a href="./src/resources/v1/instruments.ts">searchInstruments</a>({ ...params }) -> InstrumentSearchInstrumentsResponse</code>
+
+## Locates
+
+Types:
+
+- <code><a href="./src/resources/v1/locates.ts">LocateRate</a></code>
+- <code><a href="./src/resources/v1/locates.ts">LocateRateResult</a></code>
+- <code><a href="./src/resources/v1/locates.ts">LocateRateResultList</a></code>
+- <code><a href="./src/resources/v1/locates.ts">LocateGetLocateRateByIDResponse</a></code>
+- <code><a href="./src/resources/v1/locates.ts">LocateGetLocateRatesResponse</a></code>
+
+Methods:
+
+- <code title="get /v1/locates/rates/{instrument_id}">client.v1.locates.<a href="./src/resources/v1/locates.ts">getLocateRateByID</a>(instrumentID) -> LocateGetLocateRateByIDResponse</code>
+- <code title="get /v1/locates/rates">client.v1.locates.<a href="./src/resources/v1/locates.ts">getLocateRates</a>({ ...params }) -> LocateGetLocateRatesResponse</code>
 
 ## OmniAI
 

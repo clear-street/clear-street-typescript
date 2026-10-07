@@ -19,7 +19,7 @@ export interface APIError {
    * Additional error details, if any. This can include structured information such
    * as field violations or error metadata.
    */
-  details?: Array<{ [key: string]: unknown }>;
+  details?: ErrorDetails;
 }
 
 export interface BaseResponse {
@@ -33,6 +33,8 @@ export interface BaseResponse {
    */
   error?: APIError | null;
 }
+
+export type ErrorDetails = Array<{ [key: string]: unknown }>;
 
 /**
  * Metadata for the response. This will always contain a request ID which can be
