@@ -4,7 +4,6 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">APIError</a></code>
 - <code><a href="./src/resources/shared.ts">BaseResponse</a></code>
-- <code><a href="./src/resources/shared.ts">ErrorDetails</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseMetadata</a></code>
 
 # V1
