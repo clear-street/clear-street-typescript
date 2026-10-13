@@ -2,30 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as CompaniesAPI from './companies';
-import {
-  Companies,
-  CompanyCategory,
-  CompanyCitation,
-  CompanyCustomer,
-  CompanyDetail,
-  CompanyDocumentPreview,
-  CompanyDocumentRelation,
-  CompanyDocumentResource,
-  CompanyDocumentType,
-  CompanyHeadquarters,
-  CompanyLegalEntity,
-  CompanyMetricPoint,
-  CompanyMetricSeries,
-  CompanyNarrativeSection,
-  CompanyPerson,
-  CompanyPersonRole,
-  CompanyProfileResource,
-  CompanySocialLink,
-  CompanySocialType,
-  MetricFrequency,
-  MetricKey,
-} from './companies';
 import * as IoisAPI from './iois';
 import {
   IoiCompanyResource,
@@ -34,6 +10,13 @@ import {
   IoiOfferingResource,
   IoiResource,
   Iois,
+  IoisCreateIoiParams,
+  IoisCreateIoiResponse,
+  IoisDeleteIoiParams,
+  IoisGetIoisParams,
+  IoisGetIoisResponse,
+  IoisUpdateIoiParams,
+  IoisUpdateIoiResponse,
   NdaAcceptanceResource,
 } from './iois';
 import * as OfferingsAPI from './offerings';
@@ -62,10 +45,7 @@ import {
   SpvStatus,
   ValuationBasis,
 } from './offerings';
-import * as SpvsAPI from './spvs';
-import { ChargedBy, FeeFrequency, FeeType, SpvDetail, SpvFeeTermResource, Spvs } from './spvs';
 import { APIPromise } from '../../../core/api-promise';
-import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -73,50 +53,8 @@ import { path } from '../../../internal/utils/path';
  * Browse private-market offerings and their indicative terms. Access requires the account holder to hold an accreditation attestation.
  */
 export class PrivateMarkets extends APIResource {
-  companies: CompaniesAPI.Companies = new CompaniesAPI.Companies(this._client);
   iois: IoisAPI.Iois = new IoisAPI.Iois(this._client);
   offerings: OfferingsAPI.Offerings = new OfferingsAPI.Offerings(this._client);
-  spvs: SpvsAPI.Spvs = new SpvsAPI.Spvs(this._client);
-
-  /**
-   * Create an IOI for a visible upcoming offering.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.privateMarkets.createIoi({
-   *   account_id: 0,
-   *   notional_amount: '100000.00',
-   *   offering_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   * });
-   * ```
-   */
-  createIoi(
-    params: PrivateMarketCreateIoiParams,
-    options?: RequestOptions,
-  ): APIPromise<PrivateMarketCreateIoiResponse> {
-    const { account_id, ...body } = params;
-    return this._client.post('/v1/private-markets/iois', { query: { account_id }, body, ...options });
-  }
-
-  /**
-   * Withdraw a live IOI. Repeating a withdrawal returns 404.
-   *
-   * @example
-   * ```ts
-   * await client.v1.privateMarkets.deleteIoi(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   { account_id: 0 },
-   * );
-   * ```
-   */
-  deleteIoi(ioiID: string, params: PrivateMarketDeleteIoiParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
-    return this._client.delete(path`/v1/private-markets/iois/${ioiID}`, {
-      query: { account_id },
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
 
   /**
    * Fetch one published private-market company with its complete versioned profile.
@@ -141,23 +79,6 @@ export class PrivateMarkets extends APIResource {
   }
 
   /**
-   * List every live IOI for the caller's account-holder entity.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.privateMarkets.getIois({
-   *   account_id: 0,
-   * });
-   * ```
-   */
-  getIois(
-    query: PrivateMarketGetIoisParams,
-    options?: RequestOptions,
-  ): APIPromise<PrivateMarketGetIoisResponse> {
-    return this._client.get('/v1/private-markets/iois', { query, ...options });
-  }
-
-  /**
    * Fetch one private-market SPV's complete economics and fee schedule. Requires the
    * account holder to have attested. Returns `404` unless the SPV is `OPEN` and
    * attached to a currently visible `ACTIVE` offering.
@@ -177,110 +98,657 @@ export class PrivateMarkets extends APIResource {
   ): APIPromise<PrivateMarketGetSpvByIDResponse> {
     return this._client.get(path`/v1/private-markets/spvs/${spvID}`, { query, ...options });
   }
-
-  /**
-   * Update an IOI's notional, accepting the current NDA revision when required.
-   *
-   * @example
-   * ```ts
-   * const response = await client.v1.privateMarkets.updateIoi(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   { account_id: 0, notional_amount: '125000.00' },
-   * );
-   * ```
-   */
-  updateIoi(
-    ioiID: string,
-    params: PrivateMarketUpdateIoiParams,
-    options?: RequestOptions,
-  ): APIPromise<PrivateMarketUpdateIoiResponse> {
-    const { account_id, ...body } = params;
-    return this._client.patch(path`/v1/private-markets/iois/${ioiID}`, {
-      query: { account_id },
-      body,
-      ...options,
-    });
-  }
 }
 
-export interface PrivateMarketCreateIoiResponse extends Shared.BaseResponse {
+/**
+ * Party charging a fee.
+ */
+export type ChargedBy = 'FUND_MANAGER' | 'CLEAR_STREET' | 'THIRD_PARTY';
+
+/**
+ * A company category.
+ */
+export interface CompanyCategory {
   /**
-   * IOI list item with the campaign identity needed to render it.
+   * Display name.
    */
-  data: IoisAPI.IoiListingResource;
+  name: string;
+
+  /**
+   * Stable lowercase category slug.
+   */
+  slug: string;
+}
+
+/**
+ * A cited source.
+ */
+export interface CompanyCitation {
+  /**
+   * Stable profile-local citation identifier.
+   */
+  id: string;
+
+  /**
+   * Source publisher or provider.
+   */
+  source: string;
+
+  /**
+   * Human-readable source title.
+   */
+  title: string;
+
+  /**
+   * Source URL.
+   */
+  url: string;
+
+  /**
+   * Source publication time, when known.
+   */
+  published_at?: string | null;
+}
+
+/**
+ * A named company customer.
+ */
+export interface CompanyCustomer {
+  /**
+   * Customer name.
+   */
+  name: string;
+
+  /**
+   * Customer logo, when supplied.
+   */
+  logo_url?: string | null;
+}
+
+/**
+ * A company's identity and its complete published profile.
+ */
+export interface CompanyDetail {
+  /**
+   * Stable company identifier.
+   */
+  id: string;
+
+  /**
+   * Display name.
+   */
+  name: string;
+
+  /**
+   * The complete versioned company profile.
+   */
+  profile: CompanyProfileResource;
+
+  /**
+   * Profile schema version discriminator.
+   */
+  profile_schema_version: number;
+
+  /**
+   * Short card/search description.
+   */
+  short_description: string;
+
+  /**
+   * Lowercase URL slug.
+   */
+  slug: string;
+
+  /**
+   * Company logo URL, when known.
+   */
+  logo_url?: string | null;
+
+  /**
+   * Canonical lowercase domain, when known.
+   */
+  primary_domain?: string | null;
+
+  /**
+   * Publication time.
+   */
+  published_at?: string | null;
+}
+
+/**
+ * Optional document card preview.
+ */
+export interface CompanyDocumentPreview {
+  /**
+   * Preview description.
+   */
+  description?: string | null;
+
+  /**
+   * Preview image URL.
+   */
+  image_url?: string | null;
+}
+
+/**
+ * How a document relates to the company.
+ */
+export type CompanyDocumentRelation = 'SUBJECT' | 'CONNECTED';
+
+/**
+ * A company-level research or source document.
+ */
+export interface CompanyDocumentResource {
+  /**
+   * Typed document kind.
+   */
+  document_type: CompanyDocumentType;
+
+  /**
+   * Relationship to this company.
+   */
+  relation: CompanyDocumentRelation;
+
+  /**
+   * Display title.
+   */
+  title: string;
+
+  /**
+   * Document URL.
+   */
+  url: string;
+
+  /**
+   * Optional source identifier retained for reconciliation.
+   */
+  external_id?: string | null;
+
+  /**
+   * Optional card preview.
+   */
+  preview?: CompanyDocumentPreview | null;
+
+  /**
+   * Publication time, when known.
+   */
+  published_at?: string | null;
+}
+
+/**
+ * Company document kind.
+ */
+export type CompanyDocumentType =
+  | 'COMPANY_PROFILE'
+  | 'MARKET_RESEARCH'
+  | 'INTERVIEW'
+  | 'DEAL_SHEET'
+  | 'PRESS_RELEASE'
+  | 'NEWS'
+  | 'OTHER';
+
+/**
+ * Company headquarters.
+ */
+export interface CompanyHeadquarters {
+  /**
+   * City.
+   */
+  city: string;
+
+  /**
+   * Country.
+   */
+  country: string;
+}
+
+/**
+ * A legal entity associated with the company.
+ */
+export interface CompanyLegalEntity {
+  /**
+   * Country name or ISO country code supplied by the source.
+   */
+  country: string;
+
+  /**
+   * Legal name.
+   */
+  name: string;
+}
+
+/**
+ * One metric observation.
+ */
+export interface CompanyMetricPoint {
+  /**
+   * Observation time.
+   */
+  observed_at: string;
+
+  /**
+   * Exact decimal value, serialized as a string.
+   */
+  value: string;
+
+  /**
+   * Historical or estimated classification.
+   */
+  value_type: OfferingsAPI.MetricValueType;
+
+  /**
+   * Profile-local citation ids supporting this point.
+   */
+  citation_ids?: Array<string>;
+
+  /**
+   * Optional source event identifier.
+   */
+  source_event_id?: string | null;
+
+  /**
+   * Optional provider reconciliation metadata.
+   */
+  source_metadata?: { [key: string]: string } | null;
+}
+
+/**
+ * A historical or estimated company metric series.
+ */
+export interface CompanyMetricSeries {
+  /**
+   * Observation cadence.
+   */
+  frequency: MetricFrequency;
+
+  /**
+   * Display label.
+   */
+  label: string;
+
+  /**
+   * Canonical metric key.
+   */
+  metric_key: MetricKey;
+
+  /**
+   * Publisher/provider name.
+   */
+  source: string;
+
+  /**
+   * Value unit.
+   */
+  unit: OfferingsAPI.MetricUnit;
+
+  /**
+   * Optional source identifier retained for reconciliation.
+   */
+  external_id?: string | null;
+
+  /**
+   * Ordered observations.
+   */
+  points?: Array<CompanyMetricPoint>;
+
+  /**
+   * Source URL, when available.
+   */
+  source_url?: string | null;
+}
+
+/**
+ * One ordered durable narrative block.
+ */
+export interface CompanyNarrativeSection {
+  /**
+   * Plain-text section body.
+   */
+  body: string;
+
+  /**
+   * Stable display position within the profile.
+   */
+  display_order: number;
+
+  /**
+   * Section heading.
+   */
+  title: string;
+
+  /**
+   * Profile-local citation ids supporting this block.
+   */
+  citation_ids?: Array<string>;
+}
+
+/**
+ * A key person associated with the company.
+ */
+export interface CompanyPerson {
+  /**
+   * Display name.
+   */
+  name: string;
+
+  /**
+   * Optional source identifier retained for reconciliation.
+   */
+  external_id?: string | null;
+
+  /**
+   * One or more curated company roles.
+   */
+  roles?: Array<CompanyPersonRole>;
+}
+
+/**
+ * A key person's relationship to the company.
+ */
+export type CompanyPersonRole = 'FOUNDER' | 'CEO' | 'OTHER';
+
+/**
+ * The complete versioned company profile (schema version one).
+ */
+export interface CompanyProfileResource {
+  /**
+   * Company categories.
+   */
+  categories?: Array<CompanyCategory>;
+
+  /**
+   * Sources referenced by narrative sections and metrics.
+   */
+  citations?: Array<CompanyCitation>;
+
+  /**
+   * Named customers evidenced by the source material.
+   */
+  customers?: Array<CompanyCustomer>;
+
+  /**
+   * Company-level research and source documents.
+   */
+  documents?: Array<CompanyDocumentResource>;
+
+  /**
+   * Company headquarters, when known.
+   */
+  headquarters?: CompanyHeadquarters | null;
+
+  /**
+   * Known legal entities associated with the company.
+   */
+  legal_entities?: Array<CompanyLegalEntity>;
+
+  /**
+   * Historical and estimated metric series.
+   */
+  metric_series?: Array<CompanyMetricSeries>;
+
+  /**
+   * Ordered durable company fact and thesis blocks.
+   */
+  narrative_sections?: Array<CompanyNarrativeSection>;
+
+  /**
+   * Long company overview.
+   */
+  overview?: string | null;
+
+  /**
+   * Key people and their roles.
+   */
+  people?: Array<CompanyPerson>;
+
+  /**
+   * Social/profile links.
+   */
+  social?: Array<CompanySocialLink>;
+
+  /**
+   * Short durable positioning line used with the company name.
+   */
+  tagline?: string | null;
+}
+
+/**
+ * A company social/profile link.
+ */
+export interface CompanySocialLink {
+  /**
+   * Link type.
+   */
+  type: CompanySocialType;
+
+  /**
+   * Link URL.
+   */
+  url: string;
+}
+
+/**
+ * Kind of company social/profile link.
+ */
+export type CompanySocialType = 'WEBSITE' | 'LINKEDIN' | 'X' | 'FACEBOOK' | 'OTHER';
+
+/**
+ * Fee timing/cadence.
+ */
+export type FeeFrequency = 'ONE_TIME' | 'ANNUAL' | 'AT_EXIT' | 'PASS_THROUGH';
+
+/**
+ * Kind of SPV fee.
+ */
+export type FeeType = 'MANAGEMENT' | 'CARRY' | 'PLACEMENT' | 'ADMINISTRATIVE' | 'OTHER';
+
+/**
+ * Observation cadence for a metric series.
+ */
+export type MetricFrequency = 'YEAR' | 'QUARTER' | 'MONTH' | 'POINT_IN_TIME';
+
+/**
+ * Canonical company metric key.
+ */
+export type MetricKey =
+  | 'ANNUALIZED_REVENUE'
+  | 'REVENUE_GROWTH'
+  | 'VALUATION'
+  | 'ISSUE_PRICE'
+  | 'PRICE_PER_SHARE'
+  | 'AMOUNT_RAISED'
+  | 'ORDER_VOLUME'
+  | 'PIPELINE_VALUE'
+  | 'GROSS_MARGIN'
+  | 'EBIT_MARGIN'
+  | 'FCF_CONVERSION'
+  | 'CONTRACTED_REVENUE_PERCENT'
+  | 'NET_REVENUE_RETENTION'
+  | 'CUSTOMER_COUNT'
+  | 'MARKET_POSITION';
+
+/**
+ * An OPEN SPV's identity, exact economics, and typed fee schedule.
+ */
+export interface SpvDetail {
+  /**
+   * Stable SPV identifier.
+   */
+  id: string;
+
+  /**
+   * Company whose shares the vehicle holds.
+   */
+  company_id: string;
+
+  /**
+   * Terms currency.
+   */
+  currency: OfferingsAPI.Currency;
+
+  /**
+   * Legal/display name.
+   */
+  name: string;
+
+  /**
+   * Lifecycle state.
+   */
+  status: OfferingsAPI.SpvStatus;
+
+  /**
+   * Price per share including fees.
+   */
+  all_in_price_per_share?: string | null;
+
+  /**
+   * Custodian.
+   */
+  custodian_name?: string | null;
+
+  /**
+   * Per-share fee.
+   */
+  fee_per_share?: string | null;
+
+  /**
+   * Typed fee schedule.
+   */
+  fee_terms?: Array<SpvFeeTermResource>;
+
+  /**
+   * Percentage of dollar allocation funded, derived from the allocation pair.
+   */
+  funded_percent?: string | null;
+
+  /**
+   * Funding deadline.
+   */
+  funding_deadline?: string | null;
+
+  /**
+   * SPV manager.
+   */
+  manager_name?: string | null;
+
+  /**
+   * Minimum investment amount.
+   */
+  minimum_investment_amount?: string | null;
+
+  /**
+   * Time the vehicle opened.
+   */
+  opened_at?: string | null;
+
+  /**
+   * Price per share excluding fees.
+   */
+  price_per_share?: string | null;
+
+  /**
+   * Remaining dollar allocation.
+   */
+  remaining_allocation_amount?: string | null;
+
+  /**
+   * Remaining share allocation.
+   */
+  remaining_share_allocation?: string | null;
+
+  /**
+   * Underlying share class, when specified.
+   */
+  share_class?: string | null;
+
+  /**
+   * Plain-text vehicle structure.
+   */
+  structure_description?: string | null;
+
+  /**
+   * Total dollar allocation.
+   */
+  total_allocation_amount?: string | null;
+
+  /**
+   * Total share allocation.
+   */
+  total_share_allocation?: string | null;
+
+  /**
+   * Exact company valuation.
+   */
+  valuation?: string | null;
+
+  /**
+   * Meaning of `valuation`.
+   */
+  valuation_basis?: OfferingsAPI.ValuationBasis | null;
+}
+
+/**
+ * One typed SPV fee term.
+ */
+export interface SpvFeeTermResource {
+  /**
+   * Charging party.
+   */
+  charged_by: ChargedBy;
+
+  /**
+   * Terms currency.
+   */
+  currency: OfferingsAPI.Currency;
+
+  /**
+   * Plain-text fee disclosure.
+   */
+  description: string;
+
+  /**
+   * Fee kind.
+   */
+  fee_type: FeeType;
+
+  /**
+   * Timing/cadence.
+   */
+  frequency: FeeFrequency;
+
+  /**
+   * Exact fixed amount, when amount-based.
+   */
+  amount?: string | null;
+
+  /**
+   * Charge duration in years, when specified.
+   */
+  duration_years?: string | null;
+
+  /**
+   * Carry hurdle as a decimal fraction, when specified.
+   */
+  hurdle_rate?: string | null;
+
+  /**
+   * Decimal fraction between zero and one, when percentage-based.
+   */
+  rate?: string | null;
 }
 
 export interface PrivateMarketGetCompanyByIDResponse extends Shared.BaseResponse {
   /**
    * A company's identity and its complete published profile.
    */
-  data: CompaniesAPI.CompanyDetail;
-}
-
-export interface PrivateMarketGetIoisResponse extends Shared.BaseResponse {
-  data: IoisAPI.IoiListingResourceList;
+  data: CompanyDetail;
 }
 
 export interface PrivateMarketGetSpvByIDResponse extends Shared.BaseResponse {
   /**
    * An OPEN SPV's identity, exact economics, and typed fee schedule.
    */
-  data: SpvsAPI.SpvDetail;
-}
-
-export interface PrivateMarketUpdateIoiResponse extends Shared.BaseResponse {
-  /**
-   * IOI list item with the campaign identity needed to render it.
-   */
-  data: IoisAPI.IoiListingResource;
-}
-
-export interface PrivateMarketCreateIoiParams {
-  /**
-   * Query param
-   */
-  account_id: number;
-
-  /**
-   * Body param
-   */
-  notional_amount: string;
-
-  /**
-   * Body param
-   */
-  offering_id: string;
-
-  /**
-   * Body param: Required only when the offering's attached SPV has an NDA agreement.
-   */
-  nda_acceptance?: PrivateMarketCreateIoiParams.NdaAcceptance | null;
-}
-
-export namespace PrivateMarketCreateIoiParams {
-  /**
-   * Required only when the offering's attached SPV has an NDA agreement.
-   */
-  export interface NdaAcceptance {
-    /**
-     * Must be true; confirms affirmative assent.
-     */
-    accepted: boolean;
-
-    /**
-     * Exact agreement id returned by offering detail.
-     */
-    agreement_id: string;
-
-    /**
-     * Must be true; confirms the signer may bind the account-holder entity.
-     */
-    authority_confirmed: boolean;
-  }
-}
-
-export interface PrivateMarketDeleteIoiParams {
-  account_id: number;
+  data: SpvDetail;
 }
 
 export interface PrivateMarketGetCompanyByIDParams {
@@ -288,10 +756,6 @@ export interface PrivateMarketGetCompanyByIDParams {
    * Account whose account-holder entity must hold an accreditation attestation to
    * browse private-market offerings.
    */
-  account_id: number;
-}
-
-export interface PrivateMarketGetIoisParams {
   account_id: number;
 }
 
@@ -303,69 +767,12 @@ export interface PrivateMarketGetSpvByIDParams {
   account_id: number;
 }
 
-export interface PrivateMarketUpdateIoiParams {
-  /**
-   * Query param
-   */
-  account_id: number;
-
-  /**
-   * Body param
-   */
-  notional_amount: string;
-
-  /**
-   * Body param: Required when the SPV's current NDA version is newer than the IOI's
-   * latest acceptance. Irrelevant acceptances are rejected.
-   */
-  nda_acceptance?: PrivateMarketUpdateIoiParams.NdaAcceptance | null;
-}
-
-export namespace PrivateMarketUpdateIoiParams {
-  /**
-   * Required when the SPV's current NDA version is newer than the IOI's latest
-   * acceptance. Irrelevant acceptances are rejected.
-   */
-  export interface NdaAcceptance {
-    /**
-     * Must be true; confirms affirmative assent.
-     */
-    accepted: boolean;
-
-    /**
-     * Exact agreement id returned by offering detail.
-     */
-    agreement_id: string;
-
-    /**
-     * Must be true; confirms the signer may bind the account-holder entity.
-     */
-    authority_confirmed: boolean;
-  }
-}
-
-PrivateMarkets.Companies = Companies;
 PrivateMarkets.Iois = Iois;
 PrivateMarkets.Offerings = Offerings;
-PrivateMarkets.Spvs = Spvs;
 
 export declare namespace PrivateMarkets {
   export {
-    type PrivateMarketCreateIoiResponse as PrivateMarketCreateIoiResponse,
-    type PrivateMarketGetCompanyByIDResponse as PrivateMarketGetCompanyByIDResponse,
-    type PrivateMarketGetIoisResponse as PrivateMarketGetIoisResponse,
-    type PrivateMarketGetSpvByIDResponse as PrivateMarketGetSpvByIDResponse,
-    type PrivateMarketUpdateIoiResponse as PrivateMarketUpdateIoiResponse,
-    type PrivateMarketCreateIoiParams as PrivateMarketCreateIoiParams,
-    type PrivateMarketDeleteIoiParams as PrivateMarketDeleteIoiParams,
-    type PrivateMarketGetCompanyByIDParams as PrivateMarketGetCompanyByIDParams,
-    type PrivateMarketGetIoisParams as PrivateMarketGetIoisParams,
-    type PrivateMarketGetSpvByIDParams as PrivateMarketGetSpvByIDParams,
-    type PrivateMarketUpdateIoiParams as PrivateMarketUpdateIoiParams,
-  };
-
-  export {
-    Companies as Companies,
+    type ChargedBy as ChargedBy,
     type CompanyCategory as CompanyCategory,
     type CompanyCitation as CompanyCitation,
     type CompanyCustomer as CompanyCustomer,
@@ -384,8 +791,16 @@ export declare namespace PrivateMarkets {
     type CompanyProfileResource as CompanyProfileResource,
     type CompanySocialLink as CompanySocialLink,
     type CompanySocialType as CompanySocialType,
+    type FeeFrequency as FeeFrequency,
+    type FeeType as FeeType,
     type MetricFrequency as MetricFrequency,
     type MetricKey as MetricKey,
+    type SpvDetail as SpvDetail,
+    type SpvFeeTermResource as SpvFeeTermResource,
+    type PrivateMarketGetCompanyByIDResponse as PrivateMarketGetCompanyByIDResponse,
+    type PrivateMarketGetSpvByIDResponse as PrivateMarketGetSpvByIDResponse,
+    type PrivateMarketGetCompanyByIDParams as PrivateMarketGetCompanyByIDParams,
+    type PrivateMarketGetSpvByIDParams as PrivateMarketGetSpvByIDParams,
   };
 
   export {
@@ -396,6 +811,13 @@ export declare namespace PrivateMarkets {
     type IoiOfferingResource as IoiOfferingResource,
     type IoiResource as IoiResource,
     type NdaAcceptanceResource as NdaAcceptanceResource,
+    type IoisCreateIoiResponse as IoisCreateIoiResponse,
+    type IoisGetIoisResponse as IoisGetIoisResponse,
+    type IoisUpdateIoiResponse as IoisUpdateIoiResponse,
+    type IoisCreateIoiParams as IoisCreateIoiParams,
+    type IoisDeleteIoiParams as IoisDeleteIoiParams,
+    type IoisGetIoisParams as IoisGetIoisParams,
+    type IoisUpdateIoiParams as IoisUpdateIoiParams,
   };
 
   export {
@@ -422,14 +844,5 @@ export declare namespace PrivateMarkets {
     type OfferingGetOfferingsResponse as OfferingGetOfferingsResponse,
     type OfferingGetOfferingByIDParams as OfferingGetOfferingByIDParams,
     type OfferingGetOfferingsParams as OfferingGetOfferingsParams,
-  };
-
-  export {
-    Spvs as Spvs,
-    type ChargedBy as ChargedBy,
-    type FeeFrequency as FeeFrequency,
-    type FeeType as FeeType,
-    type SpvDetail as SpvDetail,
-    type SpvFeeTermResource as SpvFeeTermResource,
   };
 }
