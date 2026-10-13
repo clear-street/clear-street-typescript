@@ -232,7 +232,8 @@ export interface SnapshotGreeks {
   gamma: string;
 
   /**
-   * Implied volatility, annualized (`0.20` == 20%).
+   * Implied volatility. Temporarily withheld: always `0`. Do not use this value; it
+   * is not a market implied volatility.
    */
   iv: string;
 
