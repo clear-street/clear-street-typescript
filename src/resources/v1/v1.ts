@@ -81,12 +81,19 @@ import {
 } from './instruments';
 import * as LocatesAPI from './locates';
 import {
+  Locate,
+  LocateGetLocateByIDParams,
+  LocateGetLocateByIDResponse,
   LocateGetLocateRateByIDResponse,
   LocateGetLocateRatesParams,
   LocateGetLocateRatesResponse,
+  LocateGetLocatesParams,
+  LocateGetLocatesResponse,
+  LocateList,
   LocateRate,
   LocateRateResult,
   LocateRateResultList,
+  LocateStatus,
   Locates,
 } from './locates';
 import * as OmniFeedAPI from './omni-feed';
@@ -494,12 +501,19 @@ export declare namespace V1 {
 
   export {
     Locates as Locates,
+    type Locate as Locate,
+    type LocateList as LocateList,
     type LocateRate as LocateRate,
     type LocateRateResult as LocateRateResult,
     type LocateRateResultList as LocateRateResultList,
+    type LocateStatus as LocateStatus,
+    type LocateGetLocateByIDResponse as LocateGetLocateByIDResponse,
     type LocateGetLocateRateByIDResponse as LocateGetLocateRateByIDResponse,
     type LocateGetLocateRatesResponse as LocateGetLocateRatesResponse,
+    type LocateGetLocatesResponse as LocateGetLocatesResponse,
+    type LocateGetLocateByIDParams as LocateGetLocateByIDParams,
     type LocateGetLocateRatesParams as LocateGetLocateRatesParams,
+    type LocateGetLocatesParams as LocateGetLocatesParams,
   };
 
   export {

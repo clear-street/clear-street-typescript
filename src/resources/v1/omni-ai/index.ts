@@ -7,12 +7,18 @@ export {
   type EntitlementAgreementResourceList,
   type EntitlementResource,
   type EntitlementResourceList,
+  type EntitlementStatusResource,
+  type EntitlementStatusResourceList,
   type EntitlementCreateEntitlementsResponse,
   type EntitlementDeleteEntitlementResponse,
   type EntitlementGetEntitlementAgreementsResponse,
+  type EntitlementGetEntitlementStatusResponse,
   type EntitlementGetEntitlementsResponse,
+  type EntitlementOptOutEntitlementsResponse,
   type EntitlementCreateEntitlementsParams,
+  type EntitlementGetEntitlementStatusParams,
   type EntitlementGetEntitlementsParams,
+  type EntitlementOptOutEntitlementsParams,
 } from './entitlements';
 export {
   Messages,

@@ -115,12 +115,19 @@ export {
 } from './instruments';
 export {
   Locates,
+  type Locate,
+  type LocateList,
   type LocateRate,
   type LocateRateResult,
   type LocateRateResultList,
+  type LocateStatus,
+  type LocateGetLocateByIDResponse,
   type LocateGetLocateRateByIDResponse,
   type LocateGetLocateRatesResponse,
+  type LocateGetLocatesResponse,
+  type LocateGetLocateByIDParams,
   type LocateGetLocateRatesParams,
+  type LocateGetLocatesParams,
 } from './locates';
 export {
   OmniAI,

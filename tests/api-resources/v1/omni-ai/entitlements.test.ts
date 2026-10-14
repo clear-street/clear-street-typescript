@@ -53,6 +53,27 @@ describe('resource entitlements', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
+  test('getEntitlementStatus', async () => {
+    const responsePromise = client.v1.omniAI.entitlements.getEntitlementStatus();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getEntitlementStatus: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.omniAI.entitlements.getEntitlementStatus(
+        { account_id: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
+
   test('getEntitlements', async () => {
     const responsePromise = client.v1.omniAI.entitlements.getEntitlements();
     const rawResponse = await responsePromise.asResponse();
@@ -69,5 +90,26 @@ describe('resource entitlements', () => {
     await expect(
       client.v1.omniAI.entitlements.getEntitlements({ account_id: 0 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
+
+  test('optOutEntitlements: only required params', async () => {
+    const responsePromise = client.v1.omniAI.entitlements.optOutEntitlements({
+      account_ids: [100019, 100021],
+      entitlement_codes: ['omni.account_data'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('optOutEntitlements: required and optional params', async () => {
+    const response = await client.v1.omniAI.entitlements.optOutEntitlements({
+      account_ids: [100019, 100021],
+      entitlement_codes: ['omni.account_data'],
+    });
   });
 });

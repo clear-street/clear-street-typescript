@@ -197,16 +197,23 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/locates.ts">Locate</a></code>
+- <code><a href="./src/resources/v1/locates.ts">LocateList</a></code>
 - <code><a href="./src/resources/v1/locates.ts">LocateRate</a></code>
 - <code><a href="./src/resources/v1/locates.ts">LocateRateResult</a></code>
 - <code><a href="./src/resources/v1/locates.ts">LocateRateResultList</a></code>
+- <code><a href="./src/resources/v1/locates.ts">LocateStatus</a></code>
+- <code><a href="./src/resources/v1/locates.ts">LocateGetLocateByIDResponse</a></code>
 - <code><a href="./src/resources/v1/locates.ts">LocateGetLocateRateByIDResponse</a></code>
 - <code><a href="./src/resources/v1/locates.ts">LocateGetLocateRatesResponse</a></code>
+- <code><a href="./src/resources/v1/locates.ts">LocateGetLocatesResponse</a></code>
 
 Methods:
 
+- <code title="get /v1/accounts/{account_id}/locates/{id}">client.v1.locates.<a href="./src/resources/v1/locates.ts">getLocateByID</a>(id, { ...params }) -> LocateGetLocateByIDResponse</code>
 - <code title="get /v1/locates/rates/{instrument_id}">client.v1.locates.<a href="./src/resources/v1/locates.ts">getLocateRateByID</a>(instrumentID) -> LocateGetLocateRateByIDResponse</code>
 - <code title="get /v1/locates/rates">client.v1.locates.<a href="./src/resources/v1/locates.ts">getLocateRates</a>({ ...params }) -> LocateGetLocateRatesResponse</code>
+- <code title="get /v1/accounts/{account_id}/locates">client.v1.locates.<a href="./src/resources/v1/locates.ts">getLocates</a>(accountID, { ...params }) -> LocateGetLocatesResponse</code>
 
 ## OmniAI
 
@@ -249,17 +256,23 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementAgreementResourceList</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementResource</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementResourceList</a></code>
+- <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementStatusResource</a></code>
+- <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementStatusResourceList</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementCreateEntitlementsResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementDeleteEntitlementResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementGetEntitlementAgreementsResponse</a></code>
+- <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementGetEntitlementStatusResponse</a></code>
 - <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementGetEntitlementsResponse</a></code>
+- <code><a href="./src/resources/v1/omni-ai/entitlements.ts">EntitlementOptOutEntitlementsResponse</a></code>
 
 Methods:
 
 - <code title="post /v1/omni-ai/entitlements">client.v1.omniAI.entitlements.<a href="./src/resources/v1/omni-ai/entitlements.ts">createEntitlements</a>({ ...params }) -> EntitlementCreateEntitlementsResponse</code>
 - <code title="delete /v1/omni-ai/entitlements/{entitlement_id}">client.v1.omniAI.entitlements.<a href="./src/resources/v1/omni-ai/entitlements.ts">deleteEntitlement</a>(entitlementID) -> EntitlementDeleteEntitlementResponse</code>
 - <code title="get /v1/omni-ai/entitlement-agreements">client.v1.omniAI.entitlements.<a href="./src/resources/v1/omni-ai/entitlements.ts">getEntitlementAgreements</a>() -> EntitlementGetEntitlementAgreementsResponse</code>
+- <code title="get /v1/omni-ai/entitlement-status">client.v1.omniAI.entitlements.<a href="./src/resources/v1/omni-ai/entitlements.ts">getEntitlementStatus</a>({ ...params }) -> EntitlementGetEntitlementStatusResponse</code>
 - <code title="get /v1/omni-ai/entitlements">client.v1.omniAI.entitlements.<a href="./src/resources/v1/omni-ai/entitlements.ts">getEntitlements</a>({ ...params }) -> EntitlementGetEntitlementsResponse</code>
+- <code title="post /v1/omni-ai/entitlements/opt-out">client.v1.omniAI.entitlements.<a href="./src/resources/v1/omni-ai/entitlements.ts">optOutEntitlements</a>({ ...params }) -> EntitlementOptOutEntitlementsResponse</code>
 
 ### Messages
 

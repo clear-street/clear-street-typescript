@@ -13,10 +13,16 @@ import {
   EntitlementCreateEntitlementsResponse,
   EntitlementDeleteEntitlementResponse,
   EntitlementGetEntitlementAgreementsResponse,
+  EntitlementGetEntitlementStatusParams,
+  EntitlementGetEntitlementStatusResponse,
   EntitlementGetEntitlementsParams,
   EntitlementGetEntitlementsResponse,
+  EntitlementOptOutEntitlementsParams,
+  EntitlementOptOutEntitlementsResponse,
   EntitlementResource,
   EntitlementResourceList,
+  EntitlementStatusResource,
+  EntitlementStatusResourceList,
   Entitlements,
 } from './entitlements';
 import * as MessagesAPI from './messages';
@@ -726,12 +732,18 @@ export declare namespace OmniAI {
     type EntitlementAgreementResourceList as EntitlementAgreementResourceList,
     type EntitlementResource as EntitlementResource,
     type EntitlementResourceList as EntitlementResourceList,
+    type EntitlementStatusResource as EntitlementStatusResource,
+    type EntitlementStatusResourceList as EntitlementStatusResourceList,
     type EntitlementCreateEntitlementsResponse as EntitlementCreateEntitlementsResponse,
     type EntitlementDeleteEntitlementResponse as EntitlementDeleteEntitlementResponse,
     type EntitlementGetEntitlementAgreementsResponse as EntitlementGetEntitlementAgreementsResponse,
+    type EntitlementGetEntitlementStatusResponse as EntitlementGetEntitlementStatusResponse,
     type EntitlementGetEntitlementsResponse as EntitlementGetEntitlementsResponse,
+    type EntitlementOptOutEntitlementsResponse as EntitlementOptOutEntitlementsResponse,
     type EntitlementCreateEntitlementsParams as EntitlementCreateEntitlementsParams,
+    type EntitlementGetEntitlementStatusParams as EntitlementGetEntitlementStatusParams,
     type EntitlementGetEntitlementsParams as EntitlementGetEntitlementsParams,
+    type EntitlementOptOutEntitlementsParams as EntitlementOptOutEntitlementsParams,
   };
 
   export {

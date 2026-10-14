@@ -8,6 +8,21 @@ const client = new ClearStreet({
 });
 
 describe('resource locates', () => {
+  test('getLocateByID: only required params', async () => {
+    const responsePromise = client.v1.locates.getLocateByID('id', { account_id: 0 });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getLocateByID: required and optional params', async () => {
+    const response = await client.v1.locates.getLocateByID('id', { account_id: 0 });
+  });
+
   test('getLocateRateByID', async () => {
     const responsePromise = client.v1.locates.getLocateRateByID('x');
     const rawResponse = await responsePromise.asResponse();
@@ -32,5 +47,31 @@ describe('resource locates', () => {
 
   test('getLocateRates: required and optional params', async () => {
     const response = await client.v1.locates.getLocateRates({ instrument_ids: ['x'] });
+  });
+
+  test('getLocates', async () => {
+    const responsePromise = client.v1.locates.getLocates(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getLocates: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.locates.getLocates(
+        0,
+        {
+          effective_date: '2019-12-27',
+          instrument_ids: ['x'],
+          status: ['REQUESTED'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 });
