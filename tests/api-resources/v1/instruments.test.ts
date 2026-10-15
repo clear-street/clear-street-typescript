@@ -84,6 +84,7 @@ describe('resource instruments', () => {
           is_settle_on_open: true,
           page_size: 1,
           page_token: 'U3RhaW5sZXNzIHJvY2tz',
+          root: 'root',
           underlier: 'underlier',
           underlying_instrument_id: 'x',
         },

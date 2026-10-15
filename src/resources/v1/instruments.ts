@@ -49,8 +49,8 @@ export class Instruments extends APIResource {
    * List options contracts.
    *
    * Returns options contracts with options-specific metadata. Exactly one identifier
-   * must be provided: `underlier`/`underlying_instrument_id` (list all contracts for
-   * that underlier) or `contract_ids` (look up specific contracts directly).
+   * must be provided: `root`/`underlying_instrument_id` (list all contracts for that
+   * underlier) or `contract_ids` (look up specific contracts directly).
    * `expiry`/`contract_type` apply as filters in either case.
    *
    * @example
@@ -621,7 +621,7 @@ export interface InstrumentGetOptionContractsParams {
   /**
    * Comma-separated contract instrument IDs (UUID) or OSI option symbols to look up
    * directly, bypassing underlier expansion. Mutually exclusive with
-   * underlier/underlying_instrument_id; up to 100 values.
+   * root/underlying_instrument_id; up to 100 values.
    */
   contract_ids?: Array<OrdersAPI.InstrumentIDOrSymbol>;
 
@@ -654,7 +654,13 @@ export interface InstrumentGetOptionContractsParams {
   page_token?: string;
 
   /**
-   * Underlier symbol (e.g., AAPL, SPX)
+   * OSI option root symbol (e.g., AAPL, SPXW). Index roots also include their weekly
+   * series (e.g., SPX includes SPXW).
+   */
+  root?: string;
+
+  /**
+   * Deprecated: use `root`. If both are sent, the values must match.
    */
   underlier?: string;
 
