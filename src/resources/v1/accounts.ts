@@ -172,7 +172,7 @@ export interface AccountBalances {
   /**
    * The total buying power available in the account: base buying power plus the open
    * order adjustment, where base buying power is maintenance margin excess times the
-   * multiplier for intraday and initial margin excess times the multiplier for
+   * multiplier for intraday and overnight margin excess times the multiplier for
    * overnight.
    */
   buying_power: string;
@@ -516,6 +516,16 @@ export interface MarginDetails {
   overnight_details: MarginSessionDetails;
 
   /**
+   * The difference between equity and the overnight margin requirement.
+   */
+  overnight_margin_excess: string;
+
+  /**
+   * The amount of equity required to hold current positions overnight.
+   */
+  overnight_margin_requirement: string;
+
+  /**
    * Optional top margin contributors, returned only when explicitly requested.
    */
   top_contributors?: Array<MarginTopContributor>;
@@ -543,8 +553,8 @@ export interface MarginSessionDetails {
   /**
    * Maximum buying power available in the account during the session: base buying
    * power plus the open order adjustment, where base buying power is maintenance
-   * margin excess times the multiplier for intraday and initial margin excess times
-   * the multiplier for overnight.
+   * margin excess times the multiplier for intraday and overnight margin excess
+   * times the multiplier for overnight.
    */
   buying_power: string;
 
@@ -570,6 +580,11 @@ export interface MarginTopContributor {
    * Net market value attributable to this underlying.
    */
   market_value: string;
+
+  /**
+   * Overnight margin requirement attributable to this underlying.
+   */
+  overnight_margin_requirement: string;
 
   /**
    * UUID of the underlying security contributing to margin requirement.
