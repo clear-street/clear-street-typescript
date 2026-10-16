@@ -148,6 +148,39 @@ export class InstrumentData extends APIResource {
   }
 
   /**
+   * Retrieves earnings call transcripts for a specific instrument, newest fiscal
+   * period first.
+   *
+   * Defaults: `page_size` is 1 and is capped at 5, because each transcript is large.
+   * Send `event_date` with the `date` of an earnings event from the events endpoints
+   * to fetch that event's transcript. The `date.gt`, `date.gte`, `date.lt`, and
+   * `date.lte` filters compare the call date itself. An instrument without
+   * transcripts returns an empty list.
+   *
+   * Pagination metadata does not include `total_items` or `total_pages` for this
+   * endpoint. Use `next_page_token` to detect whether more results exist. The token
+   * does not carry filters: send the same filters with every page request.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.instrumentData.getInstrumentEarningsTranscripts(
+   *     'x',
+   *   );
+   * ```
+   */
+  getInstrumentEarningsTranscripts(
+    instrumentID: string,
+    query: InstrumentDataGetInstrumentEarningsTranscriptsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<InstrumentDataGetInstrumentEarningsTranscriptsResponse> {
+    return this._client.get(path`/v1/instruments/${instrumentID}/earnings-transcripts`, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
    * Retrieves corporate events (earnings, dividends, splits, IPO) for an instrument,
    * grouped by event type. Filter to specific types via `event_types`.
    *
@@ -261,6 +294,11 @@ export type AnalystRating = 'STRONG_BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG_SEL
  * Fiscal period type for earnings reports
  */
 export type FiscalPeriodType = 'QUARTERLY' | 'ANNUAL' | 'TTM' | 'BIANNUAL';
+
+/**
+ * Fiscal quarter of a reporting period
+ */
+export type FiscalQuarter = 'Q1' | 'Q2' | 'Q3' | 'Q4';
 
 /**
  * All-events payload grouped by date.
@@ -893,6 +931,13 @@ export interface InstrumentEarnings {
   date: string;
 
   /**
+   * True when an earnings call transcript exists for this event. Fetch it with
+   * `GET /v1/instruments/{instrument_id}/earnings-transcripts?event_date=<date>`,
+   * where `<date>` is this event's `date`.
+   */
+  transcript_available: boolean;
+
+  /**
    * The actual earnings per share (EPS) for the period When a null/undefined value
    * is observed, it indicates that there is no available data.
    */
@@ -934,6 +979,38 @@ export interface InstrumentEarnings {
    */
   revenue_surprise_percent?: string | null;
 }
+
+/**
+ * An earnings call transcript for one fiscal quarter.
+ */
+export interface InstrumentEarningsTranscript {
+  /**
+   * The full text of the transcript
+   */
+  content: string;
+
+  /**
+   * The date of the earnings call
+   */
+  date: string;
+
+  /**
+   * The fiscal quarter of the call
+   */
+  period: FiscalQuarter;
+
+  /**
+   * The type of fiscal period. Always `QUARTERLY`.
+   */
+  period_type: FiscalPeriodType;
+
+  /**
+   * The fiscal year of the call
+   */
+  year: number;
+}
+
+export type InstrumentEarningsTranscriptList = Array<InstrumentEarningsTranscript>;
 
 /**
  * Unified envelope for the all-events response.
@@ -1527,6 +1604,10 @@ export interface InstrumentDataGetInstrumentCashFlowStatementsResponse extends S
   data: InstrumentCashFlowStatementList;
 }
 
+export interface InstrumentDataGetInstrumentEarningsTranscriptsResponse extends Shared.BaseResponse {
+  data: InstrumentEarningsTranscriptList;
+}
+
 export interface InstrumentDataGetInstrumentEventsResponse extends Shared.BaseResponse {
   /**
    * Grouped instrument events by type
@@ -1642,6 +1723,80 @@ export interface InstrumentDataGetInstrumentCashFlowStatementsParams {
   to_date?: string;
 }
 
+export interface InstrumentDataGetInstrumentEarningsTranscriptsParams {
+  date?: InstrumentDataGetInstrumentEarningsTranscriptsParams.Date;
+
+  /**
+   * Return only transcripts whose call date is within one day of this earnings event
+   * date (`YYYY-MM-DD`). Use an event's `date` to fetch that event's transcript.
+   */
+  event_date?: string;
+
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
+  page_size?: number;
+
+  /**
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
+   */
+  page_token?: string;
+
+  /**
+   * Only return the transcript for this fiscal quarter.
+   */
+  period?: 'Q1' | 'Q2' | 'Q3' | 'Q4';
+
+  /**
+   * Only return the transcript for this fiscal year.
+   */
+  year?: number;
+}
+
+export namespace InstrumentDataGetInstrumentEarningsTranscriptsParams {
+  export interface Date {
+    /**
+     * Return only rows where `date` is strictly after the given value. A bare
+     * `YYYY-MM-DD` date expands to the end of that day (UTC), so this matches from the
+     * start of the following day. See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    gt?: string;
+
+    /**
+     * Return only rows where `date` is on or after the given value. A bare
+     * `YYYY-MM-DD` date expands to the start of that day (UTC). See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    gte?: string;
+
+    /**
+     * Return only rows where `date` is strictly before the given value. A bare
+     * `YYYY-MM-DD` date expands to the start of that day (UTC). See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    lt?: string;
+
+    /**
+     * Return only rows where `date` is on or before the given value. A bare
+     * `YYYY-MM-DD` date expands to the end of that day (UTC), so this matches through
+     * the end of that day. See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    lte?: string;
+  }
+}
+
 export interface InstrumentDataGetInstrumentEventsParams {
   /**
    * Filter by event type(s). Comma-delimited list. Example:
@@ -1693,6 +1848,7 @@ export declare namespace InstrumentData {
     type AnalystDistribution as AnalystDistribution,
     type AnalystRating as AnalystRating,
     type FiscalPeriodType as FiscalPeriodType,
+    type FiscalQuarter as FiscalQuarter,
     type InstrumentAllEventsData as InstrumentAllEventsData,
     type InstrumentAnalystConsensus as InstrumentAnalystConsensus,
     type InstrumentBalanceSheetStatement as InstrumentBalanceSheetStatement,
@@ -1701,6 +1857,8 @@ export declare namespace InstrumentData {
     type InstrumentCashFlowStatementList as InstrumentCashFlowStatementList,
     type InstrumentDividendEvent as InstrumentDividendEvent,
     type InstrumentEarnings as InstrumentEarnings,
+    type InstrumentEarningsTranscript as InstrumentEarningsTranscript,
+    type InstrumentEarningsTranscriptList as InstrumentEarningsTranscriptList,
     type InstrumentEventEnvelope as InstrumentEventEnvelope,
     type InstrumentEventIpoItem as InstrumentEventIpoItem,
     type InstrumentEventsByDate as InstrumentEventsByDate,
@@ -1716,6 +1874,7 @@ export declare namespace InstrumentData {
     type InstrumentDataGetInstrumentAnalystConsensusResponse as InstrumentDataGetInstrumentAnalystConsensusResponse,
     type InstrumentDataGetInstrumentBalanceSheetStatementsResponse as InstrumentDataGetInstrumentBalanceSheetStatementsResponse,
     type InstrumentDataGetInstrumentCashFlowStatementsResponse as InstrumentDataGetInstrumentCashFlowStatementsResponse,
+    type InstrumentDataGetInstrumentEarningsTranscriptsResponse as InstrumentDataGetInstrumentEarningsTranscriptsResponse,
     type InstrumentDataGetInstrumentEventsResponse as InstrumentDataGetInstrumentEventsResponse,
     type InstrumentDataGetInstrumentFundamentalsResponse as InstrumentDataGetInstrumentFundamentalsResponse,
     type InstrumentDataGetInstrumentIncomeStatementsResponse as InstrumentDataGetInstrumentIncomeStatementsResponse,
@@ -1723,6 +1882,7 @@ export declare namespace InstrumentData {
     type InstrumentDataGetInstrumentAnalystConsensusParams as InstrumentDataGetInstrumentAnalystConsensusParams,
     type InstrumentDataGetInstrumentBalanceSheetStatementsParams as InstrumentDataGetInstrumentBalanceSheetStatementsParams,
     type InstrumentDataGetInstrumentCashFlowStatementsParams as InstrumentDataGetInstrumentCashFlowStatementsParams,
+    type InstrumentDataGetInstrumentEarningsTranscriptsParams as InstrumentDataGetInstrumentEarningsTranscriptsParams,
     type InstrumentDataGetInstrumentEventsParams as InstrumentDataGetInstrumentEventsParams,
     type InstrumentDataGetInstrumentIncomeStatementsParams as InstrumentDataGetInstrumentIncomeStatementsParams,
   };

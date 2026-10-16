@@ -96,6 +96,7 @@ Types:
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">AnalystDistribution</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">AnalystRating</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">FiscalPeriodType</a></code>
+- <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">FiscalQuarter</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentAllEventsData</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentAnalystConsensus</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentBalanceSheetStatement</a></code>
@@ -104,6 +105,8 @@ Types:
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentCashFlowStatementList</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentDividendEvent</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentEarnings</a></code>
+- <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentEarningsTranscript</a></code>
+- <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentEarningsTranscriptList</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentEventEnvelope</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentEventIpoItem</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentEventsByDate</a></code>
@@ -119,6 +122,7 @@ Types:
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentDataGetInstrumentAnalystConsensusResponse</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentDataGetInstrumentBalanceSheetStatementsResponse</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentDataGetInstrumentCashFlowStatementsResponse</a></code>
+- <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentDataGetInstrumentEarningsTranscriptsResponse</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentDataGetInstrumentEventsResponse</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentDataGetInstrumentFundamentalsResponse</a></code>
 - <code><a href="./src/resources/v1/instrument-data/instrument-data.ts">InstrumentDataGetInstrumentIncomeStatementsResponse</a></code>
@@ -129,6 +133,7 @@ Methods:
 - <code title="get /v1/instruments/{instrument_id}/analyst-reporting">client.v1.instrumentData.<a href="./src/resources/v1/instrument-data/instrument-data.ts">getInstrumentAnalystConsensus</a>(instrumentID, { ...params }) -> InstrumentDataGetInstrumentAnalystConsensusResponse</code>
 - <code title="get /v1/instruments/{instrument_id}/balance-sheets">client.v1.instrumentData.<a href="./src/resources/v1/instrument-data/instrument-data.ts">getInstrumentBalanceSheetStatements</a>(instrumentID, { ...params }) -> InstrumentDataGetInstrumentBalanceSheetStatementsResponse</code>
 - <code title="get /v1/instruments/{instrument_id}/cash-flow-statements">client.v1.instrumentData.<a href="./src/resources/v1/instrument-data/instrument-data.ts">getInstrumentCashFlowStatements</a>(instrumentID, { ...params }) -> InstrumentDataGetInstrumentCashFlowStatementsResponse</code>
+- <code title="get /v1/instruments/{instrument_id}/earnings-transcripts">client.v1.instrumentData.<a href="./src/resources/v1/instrument-data/instrument-data.ts">getInstrumentEarningsTranscripts</a>(instrumentID, { ...params }) -> InstrumentDataGetInstrumentEarningsTranscriptsResponse</code>
 - <code title="get /v1/instruments/{instrument_id}/events">client.v1.instrumentData.<a href="./src/resources/v1/instrument-data/instrument-data.ts">getInstrumentEvents</a>(instrumentID, { ...params }) -> InstrumentDataGetInstrumentEventsResponse</code>
 - <code title="get /v1/instruments/{instrument_id}/fundamentals">client.v1.instrumentData.<a href="./src/resources/v1/instrument-data/instrument-data.ts">getInstrumentFundamentals</a>(instrumentID) -> InstrumentDataGetInstrumentFundamentalsResponse</code>
 - <code title="get /v1/instruments/{instrument_id}/income-statements">client.v1.instrumentData.<a href="./src/resources/v1/instrument-data/instrument-data.ts">getInstrumentIncomeStatements</a>(instrumentID, { ...params }) -> InstrumentDataGetInstrumentIncomeStatementsResponse</code>

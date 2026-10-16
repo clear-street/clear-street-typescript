@@ -112,6 +112,40 @@ describe('resource instrumentData', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
+  test('getInstrumentEarningsTranscripts', async () => {
+    const responsePromise = client.v1.instrumentData.getInstrumentEarningsTranscripts('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getInstrumentEarningsTranscripts: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.instrumentData.getInstrumentEarningsTranscripts(
+        'x',
+        {
+          date: {
+            gt: 'gt',
+            gte: 'gte',
+            lt: 'lt',
+            lte: 'lte',
+          },
+          event_date: '2019-12-27',
+          page_size: 1,
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
+          period: 'Q1',
+          year: 0,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
+
   test('getInstrumentEvents', async () => {
     const responsePromise = client.v1.instrumentData.getInstrumentEvents('x');
     const rawResponse = await responsePromise.asResponse();
