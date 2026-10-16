@@ -243,6 +243,16 @@ export interface Instrument {
   short_margin_rate?: string | null;
 
   /**
+   * How readily the instrument can be shorted: `EASY_TO_BORROW`, `HARD_TO_BORROW`,
+   * or `NOT_SHORTABLE`. Easy-to-borrow instruments can be shorted without a locate.
+   * A hard-to-borrow instrument is not easy to borrow but has locate inventory
+   * remaining and a float at or above the minimum for short sales; anything else is
+   * not shortable. Omitted for instruments that are not tradable equities. When a
+   * null/undefined value is observed, it indicates it does not apply.
+   */
+  shortable_attribute?: ShortableAttribute | null;
+
+  /**
    * Price bands this instrument quotes on, ascending. Absent when we have no
    * schedule for it, which includes an option whose penny-program status our
    * reference data never supplied.
@@ -368,6 +378,16 @@ export interface InstrumentCore {
    * null/undefined value is observed, it indicates that there is no available data.
    */
   short_margin_rate?: string | null;
+
+  /**
+   * How readily the instrument can be shorted: `EASY_TO_BORROW`, `HARD_TO_BORROW`,
+   * or `NOT_SHORTABLE`. Easy-to-borrow instruments can be shorted without a locate.
+   * A hard-to-borrow instrument is not easy to borrow but has locate inventory
+   * remaining and a float at or above the minimum for short sales; anything else is
+   * not shortable. Omitted for instruments that are not tradable equities. When a
+   * null/undefined value is observed, it indicates it does not apply.
+   */
+  shortable_attribute?: ShortableAttribute | null;
 
   /**
    * Price bands this instrument quotes on, ascending. Absent when we have no
@@ -511,6 +531,11 @@ export interface OptionsContract {
 }
 
 export type OptionsContractList = Array<OptionsContract>;
+
+/**
+ * How readily a tradable equity can be shorted.
+ */
+export type ShortableAttribute = 'EASY_TO_BORROW' | 'HARD_TO_BORROW' | 'NOT_SHORTABLE';
 
 /**
  * One band of an instrument's tick schedule. A price in the band is valid only if
@@ -729,6 +754,7 @@ export declare namespace Instruments {
     type OptionExpiryDate as OptionExpiryDate,
     type OptionsContract as OptionsContract,
     type OptionsContractList as OptionsContractList,
+    type ShortableAttribute as ShortableAttribute,
     type TickRule as TickRule,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,

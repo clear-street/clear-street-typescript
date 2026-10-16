@@ -77,6 +77,7 @@ import {
   OptionExpiryDate,
   OptionsContract,
   OptionsContractList,
+  ShortableAttribute,
   TickRule,
 } from './instruments';
 import * as LocatesAPI from './locates';
@@ -498,6 +499,7 @@ export declare namespace V1 {
     type OptionExpiryDate as OptionExpiryDate,
     type OptionsContract as OptionsContract,
     type OptionsContractList as OptionsContractList,
+    type ShortableAttribute as ShortableAttribute,
     type TickRule as TickRule,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,

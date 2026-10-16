@@ -108,6 +108,7 @@ export {
   type OptionExpiryDate,
   type OptionsContract,
   type OptionsContractList,
+  type ShortableAttribute,
   type TickRule,
   type InstrumentGetInstrumentByIDResponse,
   type InstrumentGetInstrumentsResponse,
