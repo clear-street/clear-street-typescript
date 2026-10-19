@@ -240,7 +240,7 @@ export interface MarketStatus {
 /**
  * Market type for market hours calendar endpoint
  */
-export type MarketType = 'us_equities' | 'us_options';
+export type MarketType = 'us_equities' | 'us_options' | 'us_event_contracts';
 
 /**
  * Session schedule with open and close timestamps
@@ -278,6 +278,13 @@ export interface TradingSessions {
    * is observed, it indicates it does not apply.
    */
   after_hours?: SessionSchedule | null;
+
+  /**
+   * Scheduled maintenance window. The market is closed inside it, even when it falls
+   * within another session. Null if none is scheduled for the day. When a
+   * null/undefined value is observed, it indicates it does not apply.
+   */
+  maintenance?: SessionSchedule | null;
 
   /**
    * Overnight session schedule (prior evening through early morning), null if not
@@ -390,9 +397,10 @@ export interface CalendarGetMarketHoursCalendarParams {
   date?: string;
 
   /**
-   * Market type to query (us_equities, us_options). If omitted, returns all markets.
+   * Market type to query (us_equities, us_options, us_event_contracts). If omitted,
+   * returns us_equities and us_options.
    */
-  market?: 'us_equities' | 'us_options';
+  market?: 'us_equities' | 'us_options' | 'us_event_contracts';
 }
 
 export declare namespace Calendar {
