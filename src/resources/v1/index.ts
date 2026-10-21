@@ -105,6 +105,7 @@ export {
   type InstrumentCore,
   type InstrumentCoreList,
   type ListingType,
+  type NotShortableReason,
   type OptionExpiryDate,
   type OptionsContract,
   type OptionsContractList,

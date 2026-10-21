@@ -206,6 +206,14 @@ export interface Instrument {
   name?: string | null;
 
   /**
+   * Why the instrument is `NOT_SHORTABLE`: every reason that applies, using the same
+   * codes as the `type` of the equivalent order-preview errors. Omitted unless
+   * `shortable_attribute` is `NOT_SHORTABLE`. When a null/undefined value is
+   * observed, it indicates it does not apply.
+   */
+  not_shortable_reasons?: Array<NotShortableReason> | null;
+
+  /**
    * Notional average daily volume (ADV multiplied by the cax-adjusted close when
    * present, the raw previous close otherwise). When a null/undefined value is
    * observed, it indicates that there is no available data.
@@ -246,9 +254,9 @@ export interface Instrument {
    * How readily the instrument can be shorted: `EASY_TO_BORROW`, `HARD_TO_BORROW`,
    * or `NOT_SHORTABLE`. Easy-to-borrow instruments can be shorted without a locate.
    * A hard-to-borrow instrument is not easy to borrow but has locate inventory
-   * remaining and a float at or above the minimum for short sales; anything else is
-   * not shortable. Omitted for instruments that are not tradable equities. When a
-   * null/undefined value is observed, it indicates it does not apply.
+   * remaining and supports short selling; anything else is not shortable. Omitted
+   * for instruments that are not tradable equities. When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   shortable_attribute?: ShortableAttribute | null;
 
@@ -361,6 +369,14 @@ export interface InstrumentCore {
   name?: string | null;
 
   /**
+   * Why the instrument is `NOT_SHORTABLE`: every reason that applies, using the same
+   * codes as the `type` of the equivalent order-preview errors. Omitted unless
+   * `shortable_attribute` is `NOT_SHORTABLE`. When a null/undefined value is
+   * observed, it indicates it does not apply.
+   */
+  not_shortable_reasons?: Array<NotShortableReason> | null;
+
+  /**
    * Notional average daily volume (ADV multiplied by the cax-adjusted close when
    * present, the raw previous close otherwise). When a null/undefined value is
    * observed, it indicates that there is no available data.
@@ -383,9 +399,9 @@ export interface InstrumentCore {
    * How readily the instrument can be shorted: `EASY_TO_BORROW`, `HARD_TO_BORROW`,
    * or `NOT_SHORTABLE`. Easy-to-borrow instruments can be shorted without a locate.
    * A hard-to-borrow instrument is not easy to borrow but has locate inventory
-   * remaining and a float at or above the minimum for short sales; anything else is
-   * not shortable. Omitted for instruments that are not tradable equities. When a
-   * null/undefined value is observed, it indicates it does not apply.
+   * remaining and supports short selling; anything else is not shortable. Omitted
+   * for instruments that are not tradable equities. When a null/undefined value is
+   * observed, it indicates it does not apply.
    */
   shortable_attribute?: ShortableAttribute | null;
 
@@ -403,6 +419,11 @@ export type InstrumentCoreList = Array<InstrumentCore>;
  * The listing type of an options contract
  */
 export type ListingType = 'STANDARD' | 'FLEX' | 'OTC';
+
+/**
+ * Why an instrument cannot be shorted.
+ */
+export type NotShortableReason = 'INSUFFICIENT_LOCATE_INVENTORY' | 'UNSUPPORTED_SECURITY';
 
 /**
  * An options expiry date, annotated with which settlement cycles have listed
@@ -751,6 +772,7 @@ export declare namespace Instruments {
     type InstrumentCore as InstrumentCore,
     type InstrumentCoreList as InstrumentCoreList,
     type ListingType as ListingType,
+    type NotShortableReason as NotShortableReason,
     type OptionExpiryDate as OptionExpiryDate,
     type OptionsContract as OptionsContract,
     type OptionsContractList as OptionsContractList,

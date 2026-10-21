@@ -182,6 +182,7 @@ Types:
 - <code><a href="./src/resources/v1/instruments.ts">InstrumentCore</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">InstrumentCoreList</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">ListingType</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">NotShortableReason</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">OptionExpiryDate</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">OptionsContract</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">OptionsContractList</a></code>
