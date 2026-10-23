@@ -549,6 +549,12 @@ export interface OptionsContract {
    * value is observed, it indicates that there is no available data.
    */
   underlying_instrument_id?: string | null;
+
+  /**
+   * Type of the underlying instrument, alongside `underlying_instrument_id` When a
+   * null/undefined value is observed, it indicates that there is no available data.
+   */
+  underlying_instrument_type?: V1API.SecurityType | null;
 }
 
 export type OptionsContractList = Array<OptionsContract>;
