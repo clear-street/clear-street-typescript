@@ -370,6 +370,15 @@ Types:
 - <code><a href="./src/resources/v1/orders.ts">NewOrderRequest</a></code>
 - <code><a href="./src/resources/v1/orders.ts">Order</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderList</a></code>
+- <code><a href="./src/resources/v1/orders.ts">OrderPreview</a></code>
+- <code><a href="./src/resources/v1/orders.ts">OrderPreviewAmount</a></code>
+- <code><a href="./src/resources/v1/orders.ts">OrderPreviewDelta</a></code>
+- <code><a href="./src/resources/v1/orders.ts">OrderPreviewEntry</a></code>
+- <code><a href="./src/resources/v1/orders.ts">OrderPreviewEntryList</a></code>
+- <code><a href="./src/resources/v1/orders.ts">OrderPreviewError</a></code>
+- <code><a href="./src/resources/v1/orders.ts">OrderPreviewMarginDetails</a></code>
+- <code><a href="./src/resources/v1/orders.ts">OrderPreviewOutcome</a></code>
+- <code><a href="./src/resources/v1/orders.ts">OrderPreviewPosition</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderStatus</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderStrategy</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderType</a></code>
@@ -386,6 +395,7 @@ Types:
 - <code><a href="./src/resources/v1/orders.ts">OrderGetExecutionsResponse</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderGetOrderByIDResponse</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderGetOrdersResponse</a></code>
+- <code><a href="./src/resources/v1/orders.ts">OrderPreviewOrdersResponse</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderReplaceOrderResponse</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderSubmitOrdersResponse</a></code>
 
@@ -396,6 +406,7 @@ Methods:
 - <code title="get /v1/accounts/{account_id}/executions">client.v1.orders.<a href="./src/resources/v1/orders.ts">getExecutions</a>(accountID, { ...params }) -> OrderGetExecutionsResponse</code>
 - <code title="get /v1/accounts/{account_id}/orders/{order_id}">client.v1.orders.<a href="./src/resources/v1/orders.ts">getOrderByID</a>(orderID, { ...params }) -> OrderGetOrderByIDResponse</code>
 - <code title="get /v1/accounts/{account_id}/orders">client.v1.orders.<a href="./src/resources/v1/orders.ts">getOrders</a>(accountID, { ...params }) -> OrderGetOrdersResponse</code>
+- <code title="post /v1/accounts/{account_id}/orders/preview">client.v1.orders.<a href="./src/resources/v1/orders.ts">previewOrders</a>(accountID, [ ...preview ]) -> OrderPreviewOrdersResponse</code>
 - <code title="patch /v1/accounts/{account_id}/orders/{order_id}">client.v1.orders.<a href="./src/resources/v1/orders.ts">replaceOrder</a>(orderID, { ...params }) -> OrderReplaceOrderResponse</code>
 - <code title="post /v1/accounts/{account_id}/orders">client.v1.orders.<a href="./src/resources/v1/orders.ts">submitOrders</a>(accountID, [ ...orders ]) -> OrderSubmitOrdersResponse</code>
 

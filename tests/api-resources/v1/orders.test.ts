@@ -134,6 +134,75 @@ describe('resource orders', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
+  test('previewOrders: only required params', async () => {
+    const responsePromise = client.v1.orders.previewOrders(0, {
+      preview: [
+        {
+          order_type: 'LIMIT',
+          quantity: '100',
+          side: 'BUY',
+          time_in_force: 'DAY',
+        },
+        {
+          order_type: 'LIMIT',
+          quantity: '10',
+          side: 'BUY',
+          time_in_force: 'DAY',
+        },
+      ],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('previewOrders: required and optional params', async () => {
+    const response = await client.v1.orders.previewOrders(0, {
+      preview: [
+        {
+          order_type: 'LIMIT',
+          quantity: '100',
+          side: 'BUY',
+          time_in_force: 'DAY',
+          id: 'preview-1',
+          expires_at: '2025-10-15T16:00:00.000000000Z',
+          extended_hours: true,
+          instrument_id: 'x',
+          limit_offset: '0.50',
+          limit_price: '100.00',
+          position_intent: 'OPEN',
+          stop_price: '52.00',
+          strategy: { type: 'SOR' },
+          symbol: 'AAPL',
+          trailing_offset: '2.00',
+          trailing_offset_type: 'PRICE',
+        },
+        {
+          order_type: 'LIMIT',
+          quantity: '10',
+          side: 'BUY',
+          time_in_force: 'DAY',
+          id: 'preview-2',
+          expires_at: '2025-10-15T16:00:00.000000000Z',
+          extended_hours: true,
+          instrument_id: 'x',
+          limit_offset: '0.50',
+          limit_price: '250.00',
+          position_intent: 'OPEN',
+          stop_price: '52.00',
+          strategy: { type: 'SOR' },
+          symbol: 'TSLA',
+          trailing_offset: '2.00',
+          trailing_offset_type: 'PRICE',
+        },
+      ],
+    });
+  });
+
   test('replaceOrder: only required params', async () => {
     const responsePromise = client.v1.orders.replaceOrder('order_id', { account_id: 0 });
     const rawResponse = await responsePromise.asResponse();

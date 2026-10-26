@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as OrdersAPI from './orders';
 import * as Shared from '../shared';
 import * as V1API from './v1';
 import { APIPromise } from '../../core/api-promise';
@@ -108,6 +109,51 @@ export class Orders extends APIResource {
     options?: RequestOptions,
   ): APIPromise<OrderGetOrdersResponse> {
     return this._client.get(path`/v1/accounts/${accountID}/orders`, { query, ...options });
+  }
+
+  /**
+   * Preview the impact of orders without submitting them. For each order the engine
+   * evaluates every pre-trade risk check and projects the account's balances and
+   * positions as if the order were fully filled — at the limit price for limit
+   * orders and at the current reference price for market orders. Orders are
+   * evaluated independently: they do not see each other's projected fills. Nothing
+   * is submitted and no account state changes.
+   *
+   * The response carries one result per requested order, in request order. When the
+   * request contains more than one order, every order must carry a unique `id`,
+   * which is echoed on its result. An order that cannot be previewed gets an `error`
+   * on its own result without affecting the rest of the batch; the response is still
+   * `200 OK` — per-order outcomes live only in the rows, and non-2xx statuses are
+   * reserved for request-level failures (invalid batch, authorization, engine
+   * unavailable).
+   *
+   * @example
+   * ```ts
+   * const response = await client.v1.orders.previewOrders(0, {
+   *   preview: [
+   *     {
+   *       order_type: 'LIMIT',
+   *       quantity: '100',
+   *       side: 'BUY',
+   *       time_in_force: 'DAY',
+   *     },
+   *     {
+   *       order_type: 'LIMIT',
+   *       quantity: '10',
+   *       side: 'BUY',
+   *       time_in_force: 'DAY',
+   *     },
+   *   ],
+   * });
+   * ```
+   */
+  previewOrders(
+    accountID: number,
+    params: OrderPreviewOrdersParams,
+    options?: RequestOptions,
+  ): APIPromise<OrderPreviewOrdersResponse> {
+    const { preview } = params;
+    return this._client.post(path`/v1/accounts/${accountID}/orders/preview`, { body: preview, ...options });
   }
 
   /**
@@ -579,6 +625,239 @@ export namespace Order {
 export type OrderList = Array<Order>;
 
 /**
+ * The projected impact of an order, as if it were submitted and fully filled.
+ */
+export interface OrderPreview {
+  /**
+   * The account the order was previewed for.
+   */
+  account_id: number;
+
+  /**
+   * Monetary size of the previewed order.
+   */
+  amount: OrderPreviewAmount;
+
+  /**
+   * Buying power before and after the order.
+   */
+  buying_power: OrderPreviewDelta;
+
+  /**
+   * Currency for all monetary values.
+   */
+  currency: string;
+
+  /**
+   * Account equity before and after the order.
+   */
+  equity: OrderPreviewDelta;
+
+  /**
+   * Risk-check errors that would prevent the order from being accepted. Empty when
+   * the order would pass every pre-trade risk check.
+   */
+  errors: Array<OrderPreviewError>;
+
+  /**
+   * Margin requirements and excess before and after the order.
+   */
+  margin_details: OrderPreviewMarginDetails;
+
+  /**
+   * Positions in the traded instruments before and after the order.
+   */
+  positions: Array<OrderPreviewPosition>;
+}
+
+/**
+ * Monetary size of the previewed order.
+ */
+export interface OrderPreviewAmount {
+  /**
+   * Total cash impact of the order before estimated fees and commissions.
+   */
+  gross_amount: string;
+
+  /**
+   * Total cash impact of the order after estimated fees and commissions.
+   */
+  net_amount: string;
+}
+
+/**
+ * Before/after values for one metric, as if the previewed order fully filled.
+ */
+export interface OrderPreviewDelta {
+  /**
+   * The value with the previewed order also fully filled.
+   */
+  after: string;
+
+  /**
+   * The value before the order, as the risk engine evaluates it: the account's open
+   * orders are projected as filled.
+   */
+  before: string;
+
+  /**
+   * The previewed order's isolated impact: `after - before`.
+   */
+  change: string;
+}
+
+/**
+ * One requested order's entry in the batch response.
+ */
+export type OrderPreviewEntry = OrderPreviewEntry.UnionMember0 | OrderPreviewEntry.UnionMember1;
+
+export namespace OrderPreviewEntry {
+  /**
+   * The order was previewed successfully.
+   */
+  export interface UnionMember0 {
+    /**
+     * The projected impact of the order.
+     */
+    preview: OrdersAPI.OrderPreview;
+
+    /**
+     * The client-provided `id` of the order this entry belongs to, echoed from the
+     * request. Always present when the request contains more than one order, since ids
+     * are required there.
+     */
+    id?: string | null;
+  }
+
+  /**
+   * The order could not be previewed. Shaped exactly like the top-level `error`
+   * object on rejected submissions.
+   */
+  export interface UnionMember1 {
+    /**
+     * Why this order's preview failed.
+     */
+    error: Shared.APIError;
+
+    /**
+     * The client-provided `id` of the order this entry belongs to, echoed from the
+     * request. Always present when the request contains more than one order, since ids
+     * are required there.
+     */
+    id?: string | null;
+  }
+}
+
+export type OrderPreviewEntryList = Array<OrderPreviewEntry>;
+
+/**
+ * One pre-trade risk-check error the order would trigger, shaped like the
+ * violation entries in `ApiError.details[]` on rejected submissions.
+ */
+export interface OrderPreviewError {
+  /**
+   * Human-readable description of the error.
+   */
+  description: string;
+
+  /**
+   * Structured details for the error (stringified values), e.g. required and
+   * available amounts, and `leg_index`/`leg_symbol` for multileg leg errors.
+   */
+  metadata: { [key: string]: string };
+
+  /**
+   * Stable error code.
+   */
+  type: string;
+}
+
+/**
+ * Margin requirements and excess before and after the previewed order.
+ */
+export interface OrderPreviewMarginDetails {
+  /**
+   * Initial margin excess.
+   */
+  initial_margin_excess: OrderPreviewDelta;
+
+  /**
+   * Initial margin requirement.
+   */
+  initial_margin_requirement: OrderPreviewDelta;
+
+  /**
+   * Maintenance margin excess.
+   */
+  maintenance_margin_excess: OrderPreviewDelta;
+
+  /**
+   * Maintenance margin requirement.
+   */
+  maintenance_margin_requirement: OrderPreviewDelta;
+
+  /**
+   * Overnight margin excess.
+   */
+  overnight_margin_excess: OrderPreviewDelta;
+
+  /**
+   * Overnight margin requirement.
+   */
+  overnight_margin_requirement: OrderPreviewDelta;
+}
+
+/**
+ * Either a successful preview or the error that prevented one, for a single order
+ * in the batch.
+ */
+export type OrderPreviewOutcome = OrderPreviewOutcome.Preview | OrderPreviewOutcome.Error;
+
+export namespace OrderPreviewOutcome {
+  /**
+   * The order was previewed successfully.
+   */
+  export interface Preview {
+    /**
+     * The projected impact of the order.
+     */
+    preview: OrdersAPI.OrderPreview;
+  }
+
+  /**
+   * The order could not be previewed. Shaped exactly like the top-level `error`
+   * object on rejected submissions.
+   */
+  export interface Error {
+    /**
+     * Why this order's preview failed.
+     */
+    error: Shared.APIError;
+  }
+}
+
+/**
+ * One instrument's position before and after the previewed order. Only the traded
+ * instruments appear; cash effects are carried by the monetary fields.
+ */
+export interface OrderPreviewPosition {
+  /**
+   * The instrument's identifier.
+   */
+  instrument_id: string;
+
+  /**
+   * Net position quantity before and after the order.
+   */
+  quantity: OrderPreviewDelta;
+
+  /**
+   * The instrument's symbol.
+   */
+  symbol: string;
+}
+
+/**
  * Order status
  */
 export type OrderStatus =
@@ -822,6 +1101,10 @@ export interface OrderGetOrdersResponse extends Shared.BaseResponse {
   data: OrderList;
 }
 
+export interface OrderPreviewOrdersResponse extends Shared.BaseResponse {
+  data: OrderPreviewEntryList;
+}
+
 export interface OrderReplaceOrderResponse extends Shared.BaseResponse {
   /**
    * A trading order with its current state and execution details.
@@ -1039,6 +1322,10 @@ export namespace OrderGetOrdersParams {
   }
 }
 
+export interface OrderPreviewOrdersParams {
+  preview: Array<NewOrderRequest>;
+}
+
 export interface OrderReplaceOrderParams {
   /**
    * Path param: Account identifier
@@ -1088,6 +1375,15 @@ export declare namespace Orders {
     type NewOrderRequest as NewOrderRequest,
     type Order as Order,
     type OrderList as OrderList,
+    type OrderPreview as OrderPreview,
+    type OrderPreviewAmount as OrderPreviewAmount,
+    type OrderPreviewDelta as OrderPreviewDelta,
+    type OrderPreviewEntry as OrderPreviewEntry,
+    type OrderPreviewEntryList as OrderPreviewEntryList,
+    type OrderPreviewError as OrderPreviewError,
+    type OrderPreviewMarginDetails as OrderPreviewMarginDetails,
+    type OrderPreviewOutcome as OrderPreviewOutcome,
+    type OrderPreviewPosition as OrderPreviewPosition,
     type OrderStatus as OrderStatus,
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
@@ -1104,6 +1400,7 @@ export declare namespace Orders {
     type OrderGetExecutionsResponse as OrderGetExecutionsResponse,
     type OrderGetOrderByIDResponse as OrderGetOrderByIDResponse,
     type OrderGetOrdersResponse as OrderGetOrdersResponse,
+    type OrderPreviewOrdersResponse as OrderPreviewOrdersResponse,
     type OrderReplaceOrderResponse as OrderReplaceOrderResponse,
     type OrderSubmitOrdersResponse as OrderSubmitOrdersResponse,
     type OrderCancelAllOpenOrdersParams as OrderCancelAllOpenOrdersParams,
@@ -1111,6 +1408,7 @@ export declare namespace Orders {
     type OrderGetExecutionsParams as OrderGetExecutionsParams,
     type OrderGetOrderByIDParams as OrderGetOrderByIDParams,
     type OrderGetOrdersParams as OrderGetOrdersParams,
+    type OrderPreviewOrdersParams as OrderPreviewOrdersParams,
     type OrderReplaceOrderParams as OrderReplaceOrderParams,
     type OrderSubmitOrdersParams as OrderSubmitOrdersParams,
   };

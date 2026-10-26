@@ -12,8 +12,6 @@ import { path } from '../../internal/utils/path';
  */
 export class Locates extends APIResource {
   /**
-   * > **Beta** — this endpoint may change before general availability.
-   *
    * Fetch one locate by id, matched against the locate request id, locate id, and
    * client request id, across all days in force.
    *
@@ -35,8 +33,6 @@ export class Locates extends APIResource {
   }
 
   /**
-   * > **Beta** — this endpoint may change before general availability.
-   *
    * Fetch the cached locate borrow rate for one instrument. Rates refresh
    * periodically; `404` means no rate is currently cached for the instrument.
    *
@@ -55,8 +51,6 @@ export class Locates extends APIResource {
   }
 
   /**
-   * > **Beta** — this endpoint may change before general availability.
-   *
    * Fetch the cached locate borrow rates for up to 1,000 instruments. The response
    * returns one row per requested instrument, in request order. Each row carries
    * either the `rate` or an `error` — a `404` when the instrument is unknown or has
@@ -78,8 +72,6 @@ export class Locates extends APIResource {
   }
 
   /**
-   * > **Beta** — this endpoint may change before general availability.
-   *
    * List locates for the account on one effective date, which defaults to today's
    * New York calendar date. Filter by comma-separated statuses and instrument ids or
    * symbols.
