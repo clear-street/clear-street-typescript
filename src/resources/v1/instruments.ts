@@ -261,9 +261,9 @@ export interface Instrument {
   shortable_attribute?: ShortableAttribute | null;
 
   /**
-   * Price bands this instrument quotes on, ascending. Absent when we have no
-   * schedule for it, which includes an option whose penny-program status our
-   * reference data never supplied.
+   * Price bands this instrument quotes on, ascending. A price outside every band is
+   * not valid. Absent when we have no schedule for it, which includes an option
+   * whose penny-program status our reference data never supplied.
    */
   tick_rules?: Array<TickRule>;
 }
@@ -406,9 +406,9 @@ export interface InstrumentCore {
   shortable_attribute?: ShortableAttribute | null;
 
   /**
-   * Price bands this instrument quotes on, ascending. Absent when we have no
-   * schedule for it, which includes an option whose penny-program status our
-   * reference data never supplied.
+   * Price bands this instrument quotes on, ascending. A price outside every band is
+   * not valid. Absent when we have no schedule for it, which includes an option
+   * whose penny-program status our reference data never supplied.
    */
   tick_rules?: Array<TickRule>;
 }
@@ -581,9 +581,8 @@ export interface TickRule {
   tick_size: string;
 
   /**
-   * Upper bound of the band, exclusive. Absent on the last band, which runs to
-   * infinity. When a null/undefined value is observed, it indicates it does not
-   * apply.
+   * Upper bound of the band, exclusive. Absent when the band runs to infinity. When
+   * a null/undefined value is observed, it indicates it does not apply.
    */
   end_price?: string | null;
 }
