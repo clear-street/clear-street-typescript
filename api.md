@@ -382,7 +382,6 @@ Types:
 - <code><a href="./src/resources/v1/orders.ts">OrderStatus</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderStrategy</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderType</a></code>
-- <code><a href="./src/resources/v1/orders.ts">QueueState</a></code>
 - <code><a href="./src/resources/v1/orders.ts">ReplaceOrderRequest</a></code>
 - <code><a href="./src/resources/v1/orders.ts">RequestOrderType</a></code>
 - <code><a href="./src/resources/v1/orders.ts">RequestPositionEffect</a></code>

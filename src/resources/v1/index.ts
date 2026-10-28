@@ -197,7 +197,6 @@ export {
   type OrderStatus,
   type OrderStrategy,
   type OrderType,
-  type QueueState,
   type ReplaceOrderRequest,
   type RequestOrderType,
   type RequestPositionEffect,

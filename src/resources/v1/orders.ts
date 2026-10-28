@@ -507,13 +507,6 @@ export interface Order {
   limit_price?: string | null;
 
   /**
-   * Parent order queue state, present when the order is awaiting release or
-   * released. When a null/undefined value is observed, it indicates it does not
-   * apply.
-   */
-  queue_state?: QueueState | null;
-
-  /**
    * Scheduled release time for orders awaiting release. When a null/undefined value
    * is observed, it indicates it does not apply.
    */
@@ -975,11 +968,6 @@ export type OrderType =
   | 'OTHER';
 
 /**
- * Parent order queue or hold state.
- */
-export type QueueState = 'AWAITING_RELEASE' | 'RELEASED';
-
-/**
  * Request to replace (modify) an existing order
  *
  * At least one field must be provided.
@@ -1387,7 +1375,6 @@ export declare namespace Orders {
     type OrderStatus as OrderStatus,
     type OrderStrategy as OrderStrategy,
     type OrderType as OrderType,
-    type QueueState as QueueState,
     type ReplaceOrderRequest as ReplaceOrderRequest,
     type RequestOrderType as RequestOrderType,
     type RequestPositionEffect as RequestPositionEffect,
