@@ -2,9 +2,13 @@ name: Promote SDKs
 
 # Promote staging to production by fast-forwarding production main up to staging,
 # preserving SHAs so the trunks stay identical and linear (nothing to heal on the
-# next stlc build). Manual dispatch by design: a maintainer promotes the accumulated
-# batch to cut a release; release-please then opens its version PR on production.
+# next stlc build). Runs automatically on every push to staging main so production
+# main (and its release-please PR) always reflects current staging; release-please
+# opens or updates its version PR on production. workflow_dispatch stays as a manual
+# fallback. If the trunks have forked the promote refuses and alerts; it never forces.
 on:
+  push:
+    branches: [main]
   workflow_dispatch: {}
 
 permissions:
@@ -13,6 +17,11 @@ permissions:
 jobs:
   promote:
     runs-on: ubuntu-latest
+    # Serialize runs without cancelling one mid-push; a queued run promotes the
+    # latest staging main, so skipped intermediate runs lose nothing.
+    concurrency:
+      group: stlc-promote
+      cancel-in-progress: false
     if: github.repository == 'clear-street-internal/clear-street-active-typescript-staging'
     # Optional gate: add required reviewers to this environment to approve each
     # promote. With none it only scopes secrets and adds no gate. Remove if unused.
