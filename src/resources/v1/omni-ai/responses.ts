@@ -12,9 +12,14 @@ import { path } from '../../../internal/utils/path';
  */
 export class Responses extends APIResource {
   /**
-   * Cancel a queued or running response. Cancellation is idempotent after the
-   * response becomes terminal. A canceled turn still produces a finalized assistant
-   * message with outcome `canceled` in the thread history.
+   * Cancel a queued or running response. Canceling a running response (Stop) also
+   * cancels every queued response in the thread that answers a user message.
+   * Canceling a queued response (withdraw) cancels only that response; the running
+   * response and other queued responses continue. Cancellation is idempotent after
+   * the response becomes terminal. Each canceled response still produces a finalized
+   * assistant message with outcome `canceled` in the thread history. Canceling a
+   * response that ended `steered` or `merged` stops the response that continues its
+   * work, with the same effect as Stop.
    *
    * Authorization uses the linked account before any cancellation.
    *
@@ -41,12 +46,15 @@ export class Responses extends APIResource {
   /**
    * Poll the current snapshot of an in-progress or completed assistant response.
    * While its status is `queued` or `running`, content may be partial and include
-   * thinking parts. Continue polling until it becomes `succeeded`, `failed`, or
-   * `canceled`.
+   * thinking parts. Continue polling until it becomes `succeeded`, `failed`,
+   * `canceled`, `steered`, or `merged`. Treat an unknown status as terminal. On
+   * `steered` or `merged`, poll `GET /omni-ai/threads/{thread_id}/response` at once
+   * for the response that continues the work.
    *
    * Once terminal, the finalized message is available through
-   * `GET /omni-ai/threads/{thread_id}/messages`. Authorization uses the current
-   * parent thread account, including for responses created before the account link.
+   * `GET /omni-ai/threads/{thread_id}/messages`; refresh messages when a response
+   * ends. Authorization uses the current parent thread account, including for
+   * responses created before the account link.
    *
    * @example
    * ```ts
@@ -73,6 +81,10 @@ export interface CancelResponsePayload {
  * Shared sanitized error payload.
  */
 export interface ErrorStatus {
+  /**
+   * `FAILED`, or `execution_interrupted` when Omni lost the worker running the
+   * response; partial content is kept; send the message again.
+   */
   code: string;
 
   message: string;
@@ -91,12 +103,16 @@ export interface Response {
 
   /**
    * Dynamic lifecycle status for a pollable response.
+   *
+   * `succeeded`, `failed`, `canceled`, `steered` and `merged` are terminal.
+   * `steered`: the response ended as written because the user sent a newer message,
+   * and a later response in the thread continues the work. `merged`: the response
+   * ended without text, and a later response answers its message. Treat an unknown
+   * status as terminal.
    */
   status: ResponseStatus;
 
   thread_id: string;
-
-  user_message_id: string;
 
   /**
    * When a null/undefined value is observed, it indicates that there is no available
@@ -113,6 +129,14 @@ export interface Response {
    * When a null/undefined value is observed, it indicates it does not apply.
    */
   output_message_id?: string | null;
+
+  /**
+   * The user message this response answers. Omitted when the response presents a
+   * background result, such as a subagent's report, and answers no user message; its
+   * output message then appears in the thread without a preceding request. When a
+   * null/undefined value is observed, it indicates it does not apply.
+   */
+  user_message_id?: string | null;
 }
 
 /**
@@ -179,8 +203,21 @@ export namespace ResponseContentPart {
 
 /**
  * Dynamic lifecycle status for a pollable response.
+ *
+ * `succeeded`, `failed`, `canceled`, `steered` and `merged` are terminal.
+ * `steered`: the response ended as written because the user sent a newer message,
+ * and a later response in the thread continues the work. `merged`: the response
+ * ended without text, and a later response answers its message. Treat an unknown
+ * status as terminal.
  */
-export type ResponseStatus = 'queued' | 'running' | 'succeeded' | 'failed' | 'canceled';
+export type ResponseStatus =
+  | 'queued'
+  | 'running'
+  | 'succeeded'
+  | 'failed'
+  | 'canceled'
+  | 'steered'
+  | 'merged';
 
 export interface ResponseCancelResponseResponse extends Shared.BaseResponse {
   data: CancelResponsePayload;
