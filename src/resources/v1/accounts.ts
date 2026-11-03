@@ -669,8 +669,9 @@ export interface PortfolioHistorySegment {
  */
 export interface RiskSettings {
   /**
-   * The maximum notional value available to the account When a null/undefined value
-   * is observed, it indicates that there is no available data.
+   * The maximum notional value available to the account. On update, a value must be
+   * 0 or greater, and `null` clears the limit. When a null/undefined value is
+   * observed, it indicates that there is no available data.
    */
   max_notional?: string | null;
 }
