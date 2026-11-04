@@ -18,8 +18,8 @@ export class Responses extends APIResource {
    * response and other queued responses continue. Cancellation is idempotent after
    * the response becomes terminal. Each canceled response still produces a finalized
    * assistant message with outcome `canceled` in the thread history. Canceling a
-   * response that ended `steered` or `merged` stops the response that continues its
-   * work, with the same effect as Stop.
+   * response that ended `steered` or `merged` follows its `continued_in_response_id`
+   * and stops the response that continues its work, with the same effect as Stop.
    *
    * Authorization uses the linked account before any cancellation.
    *
@@ -48,8 +48,8 @@ export class Responses extends APIResource {
    * While its status is `queued` or `running`, content may be partial and include
    * thinking parts. Continue polling until it becomes `succeeded`, `failed`,
    * `canceled`, `steered`, or `merged`. Treat an unknown status as terminal. On
-   * `steered` or `merged`, poll `GET /omni-ai/threads/{thread_id}/response` at once
-   * for the response that continues the work.
+   * `steered` or `merged`, poll the response in `continued_in_response_id` at once:
+   * it continues the work.
    *
    * Once terminal, the finalized message is available through
    * `GET /omni-ai/threads/{thread_id}/messages`; refresh messages when a response
@@ -121,6 +121,14 @@ export interface Response {
   content?: ResponseContent | null;
 
   /**
+   * The response that continues the work of this response. Present only when
+   * `status` is `steered` or `merged`. Follow it to keep showing the answer. To stop
+   * that work, cancel it, or cancel this response: the server follows the link. When
+   * a null/undefined value is observed, it indicates it does not apply.
+   */
+  continued_in_response_id?: string | null;
+
+  /**
    * When a null/undefined value is observed, it indicates it does not apply.
    */
   error?: ErrorStatus | null;
@@ -129,6 +137,14 @@ export interface Response {
    * When a null/undefined value is observed, it indicates it does not apply.
    */
   output_message_id?: string | null;
+
+  /**
+   * The `seq` the output message has in the thread's message list. Present once the
+   * output message exists. Omitted while the response is `queued`. Use it to place a
+   * response that is still in progress among the listed messages. When a
+   * null/undefined value is observed, it indicates it does not apply.
+   */
+  output_message_seq?: number | null;
 
   /**
    * The user message this response answers. Omitted when the response presents a
