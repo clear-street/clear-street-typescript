@@ -19,6 +19,7 @@ Types:
 
 - <code><a href="./src/resources/v1/accounts.ts">Account</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountBalances</a></code>
+- <code><a href="./src/resources/v1/accounts.ts">AccountBalancesSma</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountBalancesSod</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountHolderEntityKind</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountList</a></code>

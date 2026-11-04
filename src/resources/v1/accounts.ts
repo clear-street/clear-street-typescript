@@ -278,6 +278,33 @@ export interface AccountBalances {
    * should be assumed to be zero. The field is omitted to simplify the response.
    */
   short_market_value?: string | null;
+
+  /**
+   * The intraday special memorandum account (SMA) of the account holder. Omitted
+   * when no SMA is available for the current trade date, or when the account holder
+   * has more than one open account. When a null/undefined value is observed, it
+   * indicates that there is no available data.
+   */
+  sma?: AccountBalancesSma | null;
+}
+
+/**
+ * The intraday special memorandum account (SMA) of an account holder.
+ *
+ * The SMA belongs to the account holder, not to one account. The API returns it
+ * only when the account holder has a single open account.
+ */
+export interface AccountBalancesSma {
+  /**
+   * The time the SMA was calculated as of (UTC). During a trade date the API returns
+   * the last published value, so use this time to judge how current the value is.
+   */
+  asof: string;
+
+  /**
+   * The SMA amount in the account currency. The value can be negative.
+   */
+  value: string;
 }
 
 export interface AccountBalancesSod {
@@ -758,6 +785,7 @@ export declare namespace Accounts {
   export {
     type Account as Account,
     type AccountBalances as AccountBalances,
+    type AccountBalancesSma as AccountBalancesSma,
     type AccountBalancesSod as AccountBalancesSod,
     type AccountHolderEntityKind as AccountHolderEntityKind,
     type AccountList as AccountList,

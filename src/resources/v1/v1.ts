@@ -5,6 +5,7 @@ import * as AccountsAPI from './accounts';
 import {
   Account,
   AccountBalances,
+  AccountBalancesSma,
   AccountBalancesSod,
   AccountGetAccountBalancesParams,
   AccountGetAccountBalancesResponse,
@@ -398,6 +399,7 @@ export declare namespace V1 {
     Accounts as Accounts,
     type Account as Account,
     type AccountBalances as AccountBalances,
+    type AccountBalancesSma as AccountBalancesSma,
     type AccountBalancesSod as AccountBalancesSod,
     type AccountHolderEntityKind as AccountHolderEntityKind,
     type AccountList as AccountList,
