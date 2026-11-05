@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.114.1](https://github.com/clear-street/clear-street-typescript/compare/v0.114.0...v0.114.1) (2026-11-05)
+
+
+### Bug Fixes
+
+* **api:** codegen update ([8e32f15](https://github.com/clear-street/clear-street-typescript/commit/8e32f15932d00aaa8d3e28e1ea531ac1f587f976))
+
 ## [0.114.0](https://github.com/clear-street/clear-street-typescript/compare/v0.113.0...v0.114.0) (2026-11-05)
 
 
