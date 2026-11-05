@@ -102,6 +102,7 @@ describe('resource positions', () => {
         0,
         {
           instrument_ids: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+          instrument_type: 'COMMON_STOCK',
           page_size: 1,
           page_token: 'U3RhaW5sZXNzIHJvY2tz',
           sort_by: 'SYMBOL',

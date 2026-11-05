@@ -537,6 +537,11 @@ export interface PositionGetPositionsParams {
   instrument_ids?: Array<string>;
 
   /**
+   * Instrument type filter (e.g., COMMON_STOCK, OPTION)
+   */
+  instrument_type?: 'COMMON_STOCK' | 'INDEX' | 'OPTION' | 'CASH';
+
+  /**
    * The number of items to return per page. Only used when page_token is not
    * provided.
    */
