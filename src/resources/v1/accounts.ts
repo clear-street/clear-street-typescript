@@ -274,6 +274,11 @@ export interface AccountBalances {
   multiplier?: string | null;
 
   /**
+   * Prediction-market buying power in the same currency as the account balances.
+   */
+  prediction_market?: PredictionMarketBalances;
+
+  /**
    * The total market value of all short positions. When null/undefined, the value
    * should be assumed to be zero. The field is omitted to simplify the response.
    */
@@ -692,6 +697,18 @@ export interface PortfolioHistorySegment {
 }
 
 /**
+ * Prediction-market buying power in the same currency as the account balances.
+ */
+export interface PredictionMarketBalances {
+  /**
+   * Unlevered prediction-market buying power from the shared cash pool, after order
+   * and withdrawal holds. This draws on the same funds as Securities buying power;
+   * the two values must not be added together.
+   */
+  buying_power: string;
+}
+
+/**
  * Risk settings for an account
  */
 export interface RiskSettings {
@@ -802,6 +819,7 @@ export declare namespace Accounts {
     type MarginType as MarginType,
     type PortfolioHistoryResponse as PortfolioHistoryResponse,
     type PortfolioHistorySegment as PortfolioHistorySegment,
+    type PredictionMarketBalances as PredictionMarketBalances,
     type RiskSettings as RiskSettings,
     type AccountGetAccountBalancesResponse as AccountGetAccountBalancesResponse,
     type AccountGetAccountByIDResponse as AccountGetAccountByIDResponse,

@@ -67,6 +67,140 @@ export class Instruments extends APIResource {
   }
 
   /**
+   * > **Alpha** — this endpoint is experimental and may change or be removed at any
+   * > time.
+   *
+   * Lists the distinct categories, sorted alphabetically, of every prediction market
+   * contract that can currently be listed: contracts that are initialized or active
+   * and have not yet closed.
+   *
+   * The list refreshes every 15 minutes. Returns `503` until the categories first
+   * load after a restart.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.instruments.getPredictionCategories();
+   * ```
+   */
+  getPredictionCategories(options?: RequestOptions): APIPromise<InstrumentGetPredictionCategoriesResponse> {
+    return this._client.get('/v1/instruments/predictions/categories', options);
+  }
+
+  /**
+   * > **Alpha** — this endpoint is experimental and may change or be removed at any
+   * > time.
+   *
+   * Lists the prediction market events that have at least one market that can
+   * currently be listed: initialized or active and not yet closed. A market that is
+   * paused does not count, so an event whose markets are all paused is not listed.
+   *
+   * Events are ordered by code unless `sort_by` names another key or `search` is
+   * set; ties break on code ascending. `series_codes` and `categories` keep events
+   * of those series or with a listable market in those categories, ignoring case.
+   *
+   * `search` keeps events whose code, series code, or a market's question or title
+   * contains every word of the text. Words match by prefix and English stem,
+   * ignoring case and punctuation; text with no searchable word, such as `the`,
+   * matches nothing. A word of four or more letters that matches nothing is replaced
+   * by up to three close spellings. Without `sort_by`, the best match comes first,
+   * closest spellings first. Search covers listable events unless
+   * `include_settled=true`.
+   *
+   * With `include_settled=true`, settled and expired events are listed too: every
+   * market counts as listable for `categories`, `title`, `open_at.*`, `close_at.*`,
+   * `search`, and `sort_by`. Such a request that takes longer than 30 seconds fails
+   * with `504`; narrow `search` or the filters and try again.
+   *
+   * `open_at.*` and `close_at.*` bound an event's open and close time, which are the
+   * earliest across its listable markets, and `sort_by` uses the same times.
+   *
+   * An event's `title` is the question of its first listable market by symbol, and
+   * its `categories` are those of its listable markets.
+   *
+   * With `include_markets=true`, each event carries `markets`: a summary of every
+   * market of the event, ordered by symbol, in any status. This includes paused
+   * markets of a listed event and settled markets. Pages carry no totals: follow
+   * `next_page_token` until it is absent.
+   *
+   * `market_ids` (1-100 market ids or tickers, in any status) keeps the events those
+   * markets belong to, each once, and the other filters still apply. Ids that match
+   * no market are reported: `207` with the events found and the missing ids in
+   * `error.details`, or `404` when none matched.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.instruments.getPredictionEvents();
+   * ```
+   */
+  getPredictionEvents(
+    query: InstrumentGetPredictionEventsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<InstrumentGetPredictionEventsResponse> {
+    return this._client.get('/v1/instruments/predictions/events', { query, ...options });
+  }
+
+  /**
+   * > **Alpha** — this endpoint is experimental and may change or be removed at any
+   * > time.
+   *
+   * Looks up prediction markets in any status, by `market_ids` (1-100 market ids or
+   * tickers) or by `event_code`. Exactly one of the two is required. Markets are
+   * ordered by symbol.
+   *
+   * `statuses` keeps markets in any listed status. It defaults to `OPEN` with
+   * `event_code` and to every status with `market_ids`.
+   *
+   * With `event_code`, pages carry no totals: follow `next_page_token` until it is
+   * absent. `market_ids` lookups are not paginated and ignore page parameters.
+   *
+   * With `market_ids`, ids that match no market are reported: `207` with the markets
+   * found and the missing ids in `error.details`, or `404` when none matched. A
+   * market removed only by `statuses` is not reported as missing.
+   *
+   * Each market trades one YES-denominated instrument; there is no NO instrument.
+   * Prices, including those from `/market-data/snapshot`, are YES prices in dollars,
+   * and `no_price = 1 - yes_price`. A negative position quantity is NO exposure.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.instruments.getPredictionMarkets();
+   * ```
+   */
+  getPredictionMarkets(
+    query: InstrumentGetPredictionMarketsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<InstrumentGetPredictionMarketsResponse> {
+    return this._client.get('/v1/instruments/predictions/markets', { query, ...options });
+  }
+
+  /**
+   * > **Alpha** — this endpoint is experimental and may change or be removed at any
+   * > time.
+   *
+   * Lists the distinct series codes of prediction markets that can currently be
+   * listed: markets that are initialized or active and have not yet closed. Series
+   * are ordered by code.
+   *
+   * `categories` keeps series with a market in any listed category, ignoring case.
+   * Pages carry no totals: follow `next_page_token` until it is absent.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.instruments.getPredictionSeries();
+   * ```
+   */
+  getPredictionSeries(
+    query: InstrumentGetPredictionSeriesParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<InstrumentGetPredictionSeriesResponse> {
+    return this._client.get('/v1/instruments/predictions/series', { query, ...options });
+  }
+
+  /**
    * Search instruments by symbol, alternate identifier, or company name.
    *
    * The `q` parameter is case-insensitive and supports ticker symbols, alternate
@@ -255,8 +389,7 @@ export interface Instrument {
    * or `NOT_SHORTABLE`. Easy-to-borrow instruments can be shorted without a locate.
    * A hard-to-borrow instrument is not easy to borrow but has locate inventory
    * remaining and supports short selling; anything else is not shortable. Omitted
-   * for instruments that are neither tradable equities nor event contracts. Event
-   * contracts are always `NOT_SHORTABLE`. When a null/undefined value is observed,
+   * for instruments it does not apply to. When a null/undefined value is observed,
    * it indicates it does not apply.
    */
   shortable_attribute?: ShortableAttribute | null;
@@ -401,8 +534,7 @@ export interface InstrumentCore {
    * or `NOT_SHORTABLE`. Easy-to-borrow instruments can be shorted without a locate.
    * A hard-to-borrow instrument is not easy to borrow but has locate inventory
    * remaining and supports short selling; anything else is not shortable. Omitted
-   * for instruments that are neither tradable equities nor event contracts. Event
-   * contracts are always `NOT_SHORTABLE`. When a null/undefined value is observed,
+   * for instruments it does not apply to. When a null/undefined value is observed,
    * it indicates it does not apply.
    */
   shortable_attribute?: ShortableAttribute | null;
@@ -562,6 +694,267 @@ export interface OptionsContract {
 export type OptionsContractList = Array<OptionsContract>;
 
 /**
+ * Categories of the prediction market contracts that can currently be listed.
+ */
+export interface PredictionCategories {
+  /**
+   * Distinct categories, sorted alphabetically.
+   */
+  categories: Array<string>;
+}
+
+/**
+ * A prediction market event: a set of related markets that resolve together.
+ */
+export interface PredictionEvent {
+  /**
+   * Distinct categories of the event's listable markets, sorted alphabetically.
+   */
+  categories: Array<string>;
+
+  /**
+   * Event code.
+   */
+  code: string;
+
+  /**
+   * Every market of the event in any status, ordered by symbol. Present only when
+   * `include_markets` is `true`.
+   */
+  markets?: Array<PredictionMarketSummary> | null;
+
+  /**
+   * The question of the event's first listable market, by symbol.
+   */
+  title?: string | null;
+}
+
+/**
+ * Prediction market events with at least one market that can currently be listed.
+ */
+export interface PredictionEvents {
+  /**
+   * Events in the requested order.
+   */
+  events: Array<PredictionEvent>;
+}
+
+/**
+ * A prediction market.
+ */
+export interface PredictionMarket {
+  /**
+   * Instrument id of the market.
+   */
+  id: string;
+
+  /**
+   * Whether the market may close before `close_at`.
+   */
+  can_close_early: boolean;
+
+  /**
+   * Categories of the market.
+   */
+  categories: Array<string>;
+
+  /**
+   * Code of the event the market belongs to.
+   */
+  event_code: string;
+
+  /**
+   * Whether only orders that reduce a position are accepted.
+   */
+  is_liquidation_only: boolean;
+
+  /**
+   * Whether the market accepts orders now.
+   */
+  is_tradable: boolean;
+
+  /**
+   * Trading restrictions of the market.
+   */
+  restrictions: Array<string>;
+
+  /**
+   * Code of the series the market belongs to.
+   */
+  series_code: string;
+
+  /**
+   * Current status of the market.
+   */
+  status: PredictionMarketStatus;
+
+  /**
+   * Market ticker.
+   */
+  symbol: string;
+
+  /**
+   * When trading is scheduled to close.
+   */
+  close_at?: string | null;
+
+  /**
+   * Link to the contract terms document.
+   */
+  contract_terms_url?: string | null;
+
+  /**
+   * Condition under which the market closes early.
+   */
+  early_close_condition?: string | null;
+
+  /**
+   * When settlement is expected after the market closes.
+   */
+  expected_settlement_at?: string | null;
+
+  /**
+   * Full title of the market, event and market together.
+   */
+  full_title?: string | null;
+
+  /**
+   * When trading opens.
+   */
+  open_at?: string | null;
+
+  /**
+   * Winning side. Set only when `status` is `SETTLED` and the market resolved `YES`
+   * or `NO`. Absent otherwise, including for voided and scalar markets.
+   */
+  outcome?: PredictionMarketOutcome | null;
+
+  /**
+   * The question the market resolves.
+   */
+  predicate?: string | null;
+
+  /**
+   * Primary rules of the market.
+   */
+  rules_primary?: string | null;
+
+  /**
+   * Secondary rules of the market.
+   */
+  rules_secondary?: string | null;
+
+  /**
+   * Settlement value of the YES side, in dollars per contract. Set only when
+   * `status` is `SETTLED`, and absent otherwise.
+   */
+  settlement_price?: string | null;
+
+  /**
+   * Short title of the market, for example the name of the candidate.
+   */
+  title?: string | null;
+}
+
+/**
+ * Winning side of a settled prediction market.
+ */
+export type PredictionMarketOutcome = 'YES' | 'NO';
+
+/**
+ * Coarse status of a prediction market.
+ */
+export type PredictionMarketStatus = 'OPEN' | 'UNOPENED' | 'PAUSED' | 'CLOSED' | 'SETTLED';
+
+/**
+ * Summary of a prediction market inside an event listing. Request the market by
+ * `id` or `symbol` for its full detail.
+ */
+export interface PredictionMarketSummary {
+  /**
+   * Instrument id of the market.
+   */
+  id: string;
+
+  /**
+   * Whether only orders that reduce a position are accepted.
+   */
+  is_liquidation_only: boolean;
+
+  /**
+   * Whether the market accepts orders now.
+   */
+  is_tradable: boolean;
+
+  /**
+   * Current status of the market.
+   */
+  status: PredictionMarketStatus;
+
+  /**
+   * Market ticker.
+   */
+  symbol: string;
+
+  /**
+   * When trading is scheduled to close.
+   */
+  close_at?: string | null;
+
+  /**
+   * When trading opens.
+   */
+  open_at?: string | null;
+
+  /**
+   * Winning side. Set only when `status` is `SETTLED` and the market resolved `YES`
+   * or `NO`. Absent otherwise, including for voided and scalar markets.
+   */
+  outcome?: PredictionMarketOutcome | null;
+
+  /**
+   * Settlement value of the YES side, in dollars per contract. Set only when
+   * `status` is `SETTLED`, and absent otherwise.
+   */
+  settlement_price?: string | null;
+
+  /**
+   * Short title of the market, for example the name of the candidate.
+   */
+  title?: string | null;
+}
+
+/**
+ * Prediction markets matching the request.
+ */
+export interface PredictionMarkets {
+  /**
+   * Markets ordered by symbol.
+   */
+  markets: Array<PredictionMarket>;
+}
+
+/**
+ * A prediction market series: a family of related markets that share a code.
+ */
+export interface PredictionSeries {
+  /**
+   * Series code, shared by the markets in the family.
+   */
+  code: string;
+}
+
+/**
+ * Prediction market series with at least one market that can currently be listed.
+ */
+export interface PredictionSeriesList {
+  /**
+   * Series ordered by code.
+   */
+  series: Array<PredictionSeries>;
+}
+
+/**
  * How readily a tradable equity can be shorted.
  */
 export type ShortableAttribute = 'EASY_TO_BORROW' | 'HARD_TO_BORROW' | 'NOT_SHORTABLE';
@@ -604,6 +997,34 @@ export interface InstrumentGetOptionContractsResponse extends Shared.BaseRespons
   data: OptionsContractList;
 }
 
+export interface InstrumentGetPredictionCategoriesResponse extends Shared.BaseResponse {
+  /**
+   * Categories of the prediction market contracts that can currently be listed.
+   */
+  data: PredictionCategories;
+}
+
+export interface InstrumentGetPredictionEventsResponse extends Shared.BaseResponse {
+  /**
+   * Prediction market events with at least one market that can currently be listed.
+   */
+  data: PredictionEvents;
+}
+
+export interface InstrumentGetPredictionMarketsResponse extends Shared.BaseResponse {
+  /**
+   * Prediction markets matching the request.
+   */
+  data: PredictionMarkets;
+}
+
+export interface InstrumentGetPredictionSeriesResponse extends Shared.BaseResponse {
+  /**
+   * Prediction market series with at least one market that can currently be listed.
+   */
+  data: PredictionSeriesList;
+}
+
 export interface InstrumentSearchInstrumentsResponse extends Shared.BaseResponse {
   data: InstrumentCoreList;
 }
@@ -630,7 +1051,7 @@ export interface InstrumentGetInstrumentsParams {
   /**
    * Filter by instrument type (e.g. COMMON_STOCK, OPTION)
    */
-  instrument_type?: 'COMMON_STOCK' | 'INDEX' | 'OPTION' | 'CASH';
+  instrument_type?: 'COMMON_STOCK' | 'INDEX' | 'OPTION' | 'CASH' | 'EVENT_CONTRACT';
 
   /**
    * Filter by liquidation only status
@@ -723,6 +1144,211 @@ export interface InstrumentGetOptionContractsParams {
   underlying_instrument_id?: string;
 }
 
+export interface InstrumentGetPredictionEventsParams {
+  /**
+   * Comma-separated categories. Keeps events with a listable market in any of them,
+   * ignoring case.
+   */
+  categories?: string;
+
+  close_at?: InstrumentGetPredictionEventsParams.CloseAt;
+
+  /**
+   * Embed a summary of every market of each event, in any status. Default false.
+   */
+  include_markets?: boolean;
+
+  /**
+   * Also list settled and expired events, not only events with a listable market.
+   * Every market then counts as listable for the other filters, `title`,
+   * `categories`, and the open and close times. Default false. A request that takes
+   * longer than 30 seconds fails with `504`; narrow `search` or the filters and try
+   * again.
+   */
+  include_settled?: boolean;
+
+  /**
+   * Comma-separated market ids (UUID) or tickers, 1-100. Keeps events of those
+   * markets, in any status; the other filters still apply. Ids that match no market
+   * are reported: `207`, or `404` when none match.
+   */
+  market_ids?: string;
+
+  open_at?: InstrumentGetPredictionEventsParams.OpenAt;
+
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
+  page_size?: number;
+
+  /**
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
+   */
+  page_token?: string;
+
+  /**
+   * Keeps events whose code, series code, or a market's question or title contains
+   * every word, matched by prefix and English stem, ignoring case. Searches listable
+   * events, or every event with `include_settled`. A word of four or more letters
+   * that matches nothing is replaced by up to three close spellings. Without
+   * `sort_by`, orders by relevance, closest spellings first.
+   */
+  search?: string;
+
+  /**
+   * Comma-separated series codes. Keeps events of those series, ignoring case.
+   */
+  series_codes?: string;
+
+  /**
+   * Sort key. Defaults to relevance when `search` is set, else the event code. Ties
+   * break on event code ascending.
+   */
+  sort_by?: 'OPEN_AT' | 'CLOSE_AT';
+
+  /**
+   * Sort direction. Defaults to ascending. Ignored when sorting by relevance.
+   */
+  sort_direction?: 'ASC' | 'DESC';
+}
+
+export namespace InstrumentGetPredictionEventsParams {
+  export interface CloseAt {
+    /**
+     * Return only rows where `close_at` is strictly after the given value. A bare
+     * `YYYY-MM-DD` date expands to the end of that day (UTC), so this matches from the
+     * start of the following day. See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    gt?: string;
+
+    /**
+     * Return only rows where `close_at` is on or after the given value. A bare
+     * `YYYY-MM-DD` date expands to the start of that day (UTC). See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    gte?: string;
+
+    /**
+     * Return only rows where `close_at` is strictly before the given value. A bare
+     * `YYYY-MM-DD` date expands to the start of that day (UTC). See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    lt?: string;
+
+    /**
+     * Return only rows where `close_at` is on or before the given value. A bare
+     * `YYYY-MM-DD` date expands to the end of that day (UTC), so this matches through
+     * the end of that day. See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    lte?: string;
+  }
+
+  export interface OpenAt {
+    /**
+     * Return only rows where `open_at` is strictly after the given value. A bare
+     * `YYYY-MM-DD` date expands to the end of that day (UTC), so this matches from the
+     * start of the following day. See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    gt?: string;
+
+    /**
+     * Return only rows where `open_at` is on or after the given value. A bare
+     * `YYYY-MM-DD` date expands to the start of that day (UTC). See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    gte?: string;
+
+    /**
+     * Return only rows where `open_at` is strictly before the given value. A bare
+     * `YYYY-MM-DD` date expands to the start of that day (UTC). See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    lt?: string;
+
+    /**
+     * Return only rows where `open_at` is on or before the given value. A bare
+     * `YYYY-MM-DD` date expands to the end of that day (UTC), so this matches through
+     * the end of that day. See
+     * [Range filters](https://docs.clearstreet.com/guides/api-fundamentals#range-filters)
+     * for accepted formats, bare-date expansion, and combining bounds. Returns 400 if
+     * the resulting range is inverted.
+     */
+    lte?: string;
+  }
+}
+
+export interface InstrumentGetPredictionMarketsParams {
+  /**
+   * Event code; returns the markets of the event. Mutually exclusive with
+   * `market_ids`.
+   */
+  event_code?: string;
+
+  /**
+   * Comma-separated market ids (UUID) or tickers, 1-100, in any status. Mutually
+   * exclusive with `event_code`.
+   */
+  market_ids?: string;
+
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
+  page_size?: number;
+
+  /**
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
+   */
+  page_token?: string;
+
+  /**
+   * Comma-separated statuses to keep: `OPEN`, `UNOPENED`, `PAUSED`, `CLOSED`,
+   * `SETTLED`. Defaults to `OPEN` with `event_code` and to every status with
+   * `market_ids`. Unrecognized values are ignored.
+   */
+  statuses?: string;
+}
+
+export interface InstrumentGetPredictionSeriesParams {
+  /**
+   * Comma-separated categories. Keeps series with a market in any of them, ignoring
+   * case.
+   */
+  categories?: string;
+
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
+  page_size?: number;
+
+  /**
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
+   */
+  page_token?: string;
+}
+
 export interface InstrumentSearchInstrumentsParams {
   /**
    * Search term applied case-insensitively to ticker symbols, alternate identifiers
@@ -783,15 +1409,32 @@ export declare namespace Instruments {
     type OptionExpiryDate as OptionExpiryDate,
     type OptionsContract as OptionsContract,
     type OptionsContractList as OptionsContractList,
+    type PredictionCategories as PredictionCategories,
+    type PredictionEvent as PredictionEvent,
+    type PredictionEvents as PredictionEvents,
+    type PredictionMarket as PredictionMarket,
+    type PredictionMarketOutcome as PredictionMarketOutcome,
+    type PredictionMarketStatus as PredictionMarketStatus,
+    type PredictionMarketSummary as PredictionMarketSummary,
+    type PredictionMarkets as PredictionMarkets,
+    type PredictionSeries as PredictionSeries,
+    type PredictionSeriesList as PredictionSeriesList,
     type ShortableAttribute as ShortableAttribute,
     type TickRule as TickRule,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
     type InstrumentGetOptionContractsResponse as InstrumentGetOptionContractsResponse,
+    type InstrumentGetPredictionCategoriesResponse as InstrumentGetPredictionCategoriesResponse,
+    type InstrumentGetPredictionEventsResponse as InstrumentGetPredictionEventsResponse,
+    type InstrumentGetPredictionMarketsResponse as InstrumentGetPredictionMarketsResponse,
+    type InstrumentGetPredictionSeriesResponse as InstrumentGetPredictionSeriesResponse,
     type InstrumentSearchInstrumentsResponse as InstrumentSearchInstrumentsResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
     type InstrumentGetOptionContractsParams as InstrumentGetOptionContractsParams,
+    type InstrumentGetPredictionEventsParams as InstrumentGetPredictionEventsParams,
+    type InstrumentGetPredictionMarketsParams as InstrumentGetPredictionMarketsParams,
+    type InstrumentGetPredictionSeriesParams as InstrumentGetPredictionSeriesParams,
     type InstrumentSearchInstrumentsParams as InstrumentSearchInstrumentsParams,
   };
 }

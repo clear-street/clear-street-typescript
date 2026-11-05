@@ -36,6 +36,7 @@ Types:
 - <code><a href="./src/resources/v1/accounts.ts">MarginType</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">PortfolioHistoryResponse</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">PortfolioHistorySegment</a></code>
+- <code><a href="./src/resources/v1/accounts.ts">PredictionMarketBalances</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">RiskSettings</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountGetAccountBalancesResponse</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountGetAccountByIDResponse</a></code>
@@ -187,11 +188,25 @@ Types:
 - <code><a href="./src/resources/v1/instruments.ts">OptionExpiryDate</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">OptionsContract</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">OptionsContractList</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">PredictionCategories</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">PredictionEvent</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">PredictionEvents</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">PredictionMarket</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">PredictionMarketOutcome</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">PredictionMarketStatus</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">PredictionMarketSummary</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">PredictionMarkets</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">PredictionSeries</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">PredictionSeriesList</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">ShortableAttribute</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">TickRule</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">InstrumentGetInstrumentByIDResponse</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">InstrumentGetInstrumentsResponse</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">InstrumentGetOptionContractsResponse</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">InstrumentGetPredictionCategoriesResponse</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">InstrumentGetPredictionEventsResponse</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">InstrumentGetPredictionMarketsResponse</a></code>
+- <code><a href="./src/resources/v1/instruments.ts">InstrumentGetPredictionSeriesResponse</a></code>
 - <code><a href="./src/resources/v1/instruments.ts">InstrumentSearchInstrumentsResponse</a></code>
 
 Methods:
@@ -199,6 +214,10 @@ Methods:
 - <code title="get /v1/instruments/{instrument_id}">client.v1.instruments.<a href="./src/resources/v1/instruments.ts">getInstrumentByID</a>(instrumentID, { ...params }) -> InstrumentGetInstrumentByIDResponse</code>
 - <code title="get /v1/instruments">client.v1.instruments.<a href="./src/resources/v1/instruments.ts">getInstruments</a>({ ...params }) -> InstrumentGetInstrumentsResponse</code>
 - <code title="get /v1/instruments/options/contracts">client.v1.instruments.<a href="./src/resources/v1/instruments.ts">getOptionContracts</a>({ ...params }) -> InstrumentGetOptionContractsResponse</code>
+- <code title="get /v1/instruments/predictions/categories">client.v1.instruments.<a href="./src/resources/v1/instruments.ts">getPredictionCategories</a>() -> InstrumentGetPredictionCategoriesResponse</code>
+- <code title="get /v1/instruments/predictions/events">client.v1.instruments.<a href="./src/resources/v1/instruments.ts">getPredictionEvents</a>({ ...params }) -> InstrumentGetPredictionEventsResponse</code>
+- <code title="get /v1/instruments/predictions/markets">client.v1.instruments.<a href="./src/resources/v1/instruments.ts">getPredictionMarkets</a>({ ...params }) -> InstrumentGetPredictionMarketsResponse</code>
+- <code title="get /v1/instruments/predictions/series">client.v1.instruments.<a href="./src/resources/v1/instruments.ts">getPredictionSeries</a>({ ...params }) -> InstrumentGetPredictionSeriesResponse</code>
 - <code title="get /v1/instruments/search">client.v1.instruments.<a href="./src/resources/v1/instruments.ts">searchInstruments</a>({ ...params }) -> InstrumentSearchInstrumentsResponse</code>
 
 ## Locates

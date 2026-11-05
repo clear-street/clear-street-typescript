@@ -32,6 +32,7 @@ import {
   MarginType,
   PortfolioHistoryResponse,
   PortfolioHistorySegment,
+  PredictionMarketBalances,
   RiskSettings,
 } from './accounts';
 import * as APIVersionAPI from './api-version';
@@ -71,6 +72,13 @@ import {
   InstrumentGetInstrumentsResponse,
   InstrumentGetOptionContractsParams,
   InstrumentGetOptionContractsResponse,
+  InstrumentGetPredictionCategoriesResponse,
+  InstrumentGetPredictionEventsParams,
+  InstrumentGetPredictionEventsResponse,
+  InstrumentGetPredictionMarketsParams,
+  InstrumentGetPredictionMarketsResponse,
+  InstrumentGetPredictionSeriesParams,
+  InstrumentGetPredictionSeriesResponse,
   InstrumentSearchInstrumentsParams,
   InstrumentSearchInstrumentsResponse,
   Instruments,
@@ -79,6 +87,16 @@ import {
   OptionExpiryDate,
   OptionsContract,
   OptionsContractList,
+  PredictionCategories,
+  PredictionEvent,
+  PredictionEvents,
+  PredictionMarket,
+  PredictionMarketOutcome,
+  PredictionMarketStatus,
+  PredictionMarketSummary,
+  PredictionMarkets,
+  PredictionSeries,
+  PredictionSeriesList,
   ShortableAttribute,
   TickRule,
 } from './instruments';
@@ -371,7 +389,7 @@ export class V1 extends APIResource {
 /**
  * Security type
  */
-export type SecurityType = 'COMMON_STOCK' | 'INDEX' | 'OPTION' | 'CASH';
+export type SecurityType = 'COMMON_STOCK' | 'INDEX' | 'OPTION' | 'CASH' | 'EVENT_CONTRACT';
 
 /**
  * Sort direction for sorted results
@@ -416,6 +434,7 @@ export declare namespace V1 {
     type MarginType as MarginType,
     type PortfolioHistoryResponse as PortfolioHistoryResponse,
     type PortfolioHistorySegment as PortfolioHistorySegment,
+    type PredictionMarketBalances as PredictionMarketBalances,
     type RiskSettings as RiskSettings,
     type AccountGetAccountBalancesResponse as AccountGetAccountBalancesResponse,
     type AccountGetAccountByIDResponse as AccountGetAccountByIDResponse,
@@ -513,15 +532,32 @@ export declare namespace V1 {
     type OptionExpiryDate as OptionExpiryDate,
     type OptionsContract as OptionsContract,
     type OptionsContractList as OptionsContractList,
+    type PredictionCategories as PredictionCategories,
+    type PredictionEvent as PredictionEvent,
+    type PredictionEvents as PredictionEvents,
+    type PredictionMarket as PredictionMarket,
+    type PredictionMarketOutcome as PredictionMarketOutcome,
+    type PredictionMarketStatus as PredictionMarketStatus,
+    type PredictionMarketSummary as PredictionMarketSummary,
+    type PredictionMarkets as PredictionMarkets,
+    type PredictionSeries as PredictionSeries,
+    type PredictionSeriesList as PredictionSeriesList,
     type ShortableAttribute as ShortableAttribute,
     type TickRule as TickRule,
     type InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
     type InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse,
     type InstrumentGetOptionContractsResponse as InstrumentGetOptionContractsResponse,
+    type InstrumentGetPredictionCategoriesResponse as InstrumentGetPredictionCategoriesResponse,
+    type InstrumentGetPredictionEventsResponse as InstrumentGetPredictionEventsResponse,
+    type InstrumentGetPredictionMarketsResponse as InstrumentGetPredictionMarketsResponse,
+    type InstrumentGetPredictionSeriesResponse as InstrumentGetPredictionSeriesResponse,
     type InstrumentSearchInstrumentsResponse as InstrumentSearchInstrumentsResponse,
     type InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
     type InstrumentGetInstrumentsParams as InstrumentGetInstrumentsParams,
     type InstrumentGetOptionContractsParams as InstrumentGetOptionContractsParams,
+    type InstrumentGetPredictionEventsParams as InstrumentGetPredictionEventsParams,
+    type InstrumentGetPredictionMarketsParams as InstrumentGetPredictionMarketsParams,
+    type InstrumentGetPredictionSeriesParams as InstrumentGetPredictionSeriesParams,
     type InstrumentSearchInstrumentsParams as InstrumentSearchInstrumentsParams,
   };
 

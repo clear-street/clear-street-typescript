@@ -93,6 +93,113 @@ describe('resource instruments', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
+  test('getPredictionCategories', async () => {
+    const responsePromise = client.v1.instruments.getPredictionCategories();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getPredictionEvents', async () => {
+    const responsePromise = client.v1.instruments.getPredictionEvents();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getPredictionEvents: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.instruments.getPredictionEvents(
+        {
+          categories: 'categories',
+          close_at: {
+            gt: 'gt',
+            gte: 'gte',
+            lt: 'lt',
+            lte: 'lte',
+          },
+          include_markets: true,
+          include_settled: true,
+          market_ids: 'market_ids',
+          open_at: {
+            gt: 'gt',
+            gte: 'gte',
+            lt: 'lt',
+            lte: 'lte',
+          },
+          page_size: 1,
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
+          search: 'search',
+          series_codes: 'series_codes',
+          sort_by: 'OPEN_AT',
+          sort_direction: 'ASC',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
+
+  test('getPredictionMarkets', async () => {
+    const responsePromise = client.v1.instruments.getPredictionMarkets();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getPredictionMarkets: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.instruments.getPredictionMarkets(
+        {
+          event_code: 'event_code',
+          market_ids: 'market_ids',
+          page_size: 1,
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
+          statuses: 'statuses',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
+
+  test('getPredictionSeries', async () => {
+    const responsePromise = client.v1.instruments.getPredictionSeries();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getPredictionSeries: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.instruments.getPredictionSeries(
+        {
+          categories: 'categories',
+          page_size: 1,
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
+
   test('searchInstruments: only required params', async () => {
     const responsePromise = client.v1.instruments.searchInstruments({ q: 'q' });
     const rawResponse = await responsePromise.asResponse();

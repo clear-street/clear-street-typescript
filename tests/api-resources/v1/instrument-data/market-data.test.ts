@@ -43,6 +43,7 @@ describe('resource marketData', () => {
     await expect(
       client.v1.instrumentData.marketData.getSnapshots(
         {
+          event_codes: ['string'],
           expiry: '2019-12-27',
           instrument_ids: ['x'],
           underlying_instrument_id: 'x',

@@ -397,8 +397,7 @@ export interface CalendarGetMarketHoursCalendarParams {
   date?: string;
 
   /**
-   * Market type to query (us_equities, us_options, us_event_contracts). If omitted,
-   * returns us_equities and us_options.
+   * Market type to query. If omitted, returns us_equities and us_options.
    */
   market?: 'us_equities' | 'us_options' | 'us_event_contracts';
 }

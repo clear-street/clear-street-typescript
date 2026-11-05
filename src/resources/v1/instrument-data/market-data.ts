@@ -36,12 +36,10 @@ export class MarketData extends APIResource {
   /**
    * Get market data snapshots for one or more securities.
    *
-   * Three targeting modes, mutually exclusive: `instrument_ids` (1-100 ids),
+   * Targeting modes are mutually exclusive: `instrument_ids` (1-100 ids), or
    * `underlying_instrument_id` + `expiry` together, which resolves the underlier's
    * option chain for that expiry and returns a snapshot for every contract in it
-   * (uncapped), or `event_codes` (1-100 event tickers), which returns a snapshot for
-   * every market in those events in any status (uncapped). Unknown event codes are
-   * ignored.
+   * (uncapped).
    *
    * @example
    * ```ts
@@ -464,6 +462,17 @@ export interface MarketDataGetDailySummariesParams {
 }
 
 export interface MarketDataGetSnapshotsParams {
+  /**
+   * > **Alpha** — this parameter is experimental and may change or be removed at any
+   * > time.
+   *
+   * Comma-separated event tickers. Returns a snapshot for every market in those
+   * events, in any status, with no cap on the number of markets. Accepts 1 to 100
+   * codes; unknown codes are ignored. Mutually exclusive with `instrument_ids` and
+   * with `underlying_instrument_id` and `expiry`.
+   */
+  event_codes?: Array<string>;
+
   /**
    * Filter the option chain to contracts expiring on this date (YYYY-MM-DD). Must be
    * provided together with `underlying_instrument_id`.
