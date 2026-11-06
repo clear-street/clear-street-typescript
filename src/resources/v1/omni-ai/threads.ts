@@ -207,6 +207,13 @@ export interface CreateMessageResponse {
   thread_id: string;
 
   user_message_id: string;
+
+  /**
+   * The `seq` the user message has in the thread's message list. Always present. Use
+   * it to place the sent prompt among the listed messages before a list refresh
+   * includes it.
+   */
+  user_message_seq: number;
 }
 
 /**
@@ -218,6 +225,13 @@ export interface CreateThreadResponse {
   thread_id: string;
 
   user_message_id: string;
+
+  /**
+   * The `seq` the user message has in the thread's message list. Always present. Use
+   * it to place the sent prompt among the listed messages before a list refresh
+   * includes it.
+   */
+  user_message_seq: number;
 }
 
 /**
