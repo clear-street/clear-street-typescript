@@ -67,6 +67,28 @@ describe('resource accounts', () => {
     ).rejects.toThrow(ClearStreet.NotFoundError);
   });
 
+  test('getNonTradeActivities', async () => {
+    const responsePromise = client.v1.accounts.getNonTradeActivities(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getNonTradeActivities: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.v1.accounts.getNonTradeActivities(
+        0,
+        { page_size: 1, page_token: 'U3RhaW5sZXNzIHJvY2tz' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ClearStreet.NotFoundError);
+  });
+
   test('getPortfolioHistory: only required params', async () => {
     const responsePromise = client.v1.accounts.getPortfolioHistory(0, { start_date: '2019-12-27' });
     const rawResponse = await responsePromise.asResponse();

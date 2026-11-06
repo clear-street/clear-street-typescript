@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
+import * as V1API from './v1';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -59,6 +60,23 @@ export class Accounts extends APIResource {
     options?: RequestOptions,
   ): APIPromise<AccountGetAccountsResponse> {
     return this._client.get('/v1/accounts', { query, ...options });
+  }
+
+  /**
+   * Results are paginated.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.v1.accounts.getNonTradeActivities(0);
+   * ```
+   */
+  getNonTradeActivities(
+    accountID: number,
+    query: AccountGetNonTradeActivitiesParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AccountGetNonTradeActivitiesResponse> {
+    return this._client.get(path`/v1/accounts/${accountID}/non-trade-activities`, { query, ...options });
   }
 
   /**
@@ -480,6 +498,26 @@ export interface AccountWithPersonalDetails {
 }
 
 /**
+ * The states exposed by this endpoint.
+ */
+export type ActivityState = 'settled' | 'cancelled';
+
+/**
+ * Type of an activity.
+ */
+export type ActivityType =
+  | 'money_movement'
+  | 'interest'
+  | 'fee'
+  | 'dividend'
+  | 'option_event'
+  | 'transfer'
+  | 'corporate_action'
+  | 'tax_withholding'
+  | 'adjustment'
+  | 'other';
+
+/**
  * A postal address.
  */
 export interface Address {
@@ -638,6 +676,96 @@ export type MarginType =
   | 'FUTURES_NLV'
   | 'FUTURES_TOT_EQ';
 
+export interface NonTradeActivity {
+  /**
+   * ID for the activity, in UUID-v7 format.
+   */
+  id: string;
+
+  /**
+   * Account ID
+   */
+  account_id: string;
+
+  /**
+   * Subtype within its `activity_type`.
+   */
+  activity_subtype: string;
+
+  /**
+   * Categorization for the activity.
+   */
+  activity_type: ActivityType;
+
+  /**
+   * Cash amount change.
+   */
+  amount: string;
+
+  /**
+   * The creation time at UTC, when this activity became part of the ledger
+   */
+  created_at: string;
+
+  /**
+   * Currency of the cash amount. Always USD for now.
+   */
+  currency: string;
+
+  /**
+   * Effective date for the activity
+   */
+  effective_date: string;
+
+  /**
+   * The security type.
+   */
+  instrument_type: V1API.SecurityType;
+
+  /**
+   * Memo
+   */
+  memo: string;
+
+  /**
+   * Quantity change in the instrument.
+   */
+  qty: string;
+
+  /**
+   * State for this activity.
+   */
+  state: ActivityState;
+
+  /**
+   * Reference ID for the record that is being cancelled. Present only on records
+   * where the activity state is 'cancelled'. The contents of this fields points at
+   * the reference_id of the original record that is being cancelled by this record.
+   */
+  cancelled_reference_id?: string | null;
+
+  /**
+   * Instrument identifier. Omitted when the activity has no single resolvable
+   * instrument.
+   */
+  instrument_id?: string | null;
+
+  /**
+   * Reference ID for the activity, in ULID format. Present only on records where
+   * activity state is 'settled'. When a activity is cancelled, the cancelation
+   * record is pointing at this reference_id.
+   */
+  reference_id?: string | null;
+
+  /**
+   * Symbol of the instrument. Omitted when the activity has no single resolvable
+   * instrument.
+   */
+  symbol?: string | null;
+}
+
+export type NonTradeActivityList = Array<NonTradeActivity>;
+
 export interface PortfolioHistoryResponse {
   segments: Array<PortfolioHistorySegment>;
 }
@@ -738,6 +866,10 @@ export interface AccountGetAccountsResponse extends Shared.BaseResponse {
   data: AccountList;
 }
 
+export interface AccountGetNonTradeActivitiesResponse extends Shared.BaseResponse {
+  data: NonTradeActivityList;
+}
+
 export interface AccountGetPortfolioHistoryResponse extends Shared.BaseResponse {
   data: PortfolioHistoryResponse;
 }
@@ -766,6 +898,20 @@ export interface AccountGetAccountsParams {
    */
   account_name?: string;
 
+  /**
+   * The number of items to return per page. Only used when page_token is not
+   * provided.
+   */
+  page_size?: number;
+
+  /**
+   * Token for retrieving the next or previous page of results. Contains encoded
+   * pagination state; when provided, page_size is ignored.
+   */
+  page_token?: string;
+}
+
+export interface AccountGetNonTradeActivitiesParams {
   /**
    * The number of items to return per page. Only used when page_token is not
    * provided.
@@ -811,12 +957,16 @@ export declare namespace Accounts {
     type AccountSubtype as AccountSubtype,
     type AccountType as AccountType,
     type AccountWithPersonalDetails as AccountWithPersonalDetails,
+    type ActivityState as ActivityState,
+    type ActivityType as ActivityType,
     type Address as Address,
     type MarginDetails as MarginDetails,
     type MarginDetailsUsage as MarginDetailsUsage,
     type MarginSessionDetails as MarginSessionDetails,
     type MarginTopContributor as MarginTopContributor,
     type MarginType as MarginType,
+    type NonTradeActivity as NonTradeActivity,
+    type NonTradeActivityList as NonTradeActivityList,
     type PortfolioHistoryResponse as PortfolioHistoryResponse,
     type PortfolioHistorySegment as PortfolioHistorySegment,
     type PredictionMarketBalances as PredictionMarketBalances,
@@ -824,10 +974,12 @@ export declare namespace Accounts {
     type AccountGetAccountBalancesResponse as AccountGetAccountBalancesResponse,
     type AccountGetAccountByIDResponse as AccountGetAccountByIDResponse,
     type AccountGetAccountsResponse as AccountGetAccountsResponse,
+    type AccountGetNonTradeActivitiesResponse as AccountGetNonTradeActivitiesResponse,
     type AccountGetPortfolioHistoryResponse as AccountGetPortfolioHistoryResponse,
     type AccountPatchAccountByIDResponse as AccountPatchAccountByIDResponse,
     type AccountGetAccountBalancesParams as AccountGetAccountBalancesParams,
     type AccountGetAccountsParams as AccountGetAccountsParams,
+    type AccountGetNonTradeActivitiesParams as AccountGetNonTradeActivitiesParams,
     type AccountGetPortfolioHistoryParams as AccountGetPortfolioHistoryParams,
     type AccountPatchAccountByIDParams as AccountPatchAccountByIDParams,
   };

@@ -28,12 +28,16 @@ Types:
 - <code><a href="./src/resources/v1/accounts.ts">AccountSubtype</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountType</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountWithPersonalDetails</a></code>
+- <code><a href="./src/resources/v1/accounts.ts">ActivityState</a></code>
+- <code><a href="./src/resources/v1/accounts.ts">ActivityType</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">Address</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginDetails</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginDetailsUsage</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginSessionDetails</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginTopContributor</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginType</a></code>
+- <code><a href="./src/resources/v1/accounts.ts">NonTradeActivity</a></code>
+- <code><a href="./src/resources/v1/accounts.ts">NonTradeActivityList</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">PortfolioHistoryResponse</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">PortfolioHistorySegment</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">PredictionMarketBalances</a></code>
@@ -41,6 +45,7 @@ Types:
 - <code><a href="./src/resources/v1/accounts.ts">AccountGetAccountBalancesResponse</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountGetAccountByIDResponse</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountGetAccountsResponse</a></code>
+- <code><a href="./src/resources/v1/accounts.ts">AccountGetNonTradeActivitiesResponse</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountGetPortfolioHistoryResponse</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">AccountPatchAccountByIDResponse</a></code>
 
@@ -49,6 +54,7 @@ Methods:
 - <code title="get /v1/accounts/{account_id}/balances">client.v1.accounts.<a href="./src/resources/v1/accounts.ts">getAccountBalances</a>(accountID, { ...params }) -> AccountGetAccountBalancesResponse</code>
 - <code title="get /v1/accounts/{account_id}">client.v1.accounts.<a href="./src/resources/v1/accounts.ts">getAccountByID</a>(accountID) -> AccountGetAccountByIDResponse</code>
 - <code title="get /v1/accounts">client.v1.accounts.<a href="./src/resources/v1/accounts.ts">getAccounts</a>({ ...params }) -> AccountGetAccountsResponse</code>
+- <code title="get /v1/accounts/{account_id}/non-trade-activities">client.v1.accounts.<a href="./src/resources/v1/accounts.ts">getNonTradeActivities</a>(accountID, { ...params }) -> AccountGetNonTradeActivitiesResponse</code>
 - <code title="get /v1/accounts/{account_id}/portfolio-history">client.v1.accounts.<a href="./src/resources/v1/accounts.ts">getPortfolioHistory</a>(accountID, { ...params }) -> AccountGetPortfolioHistoryResponse</code>
 - <code title="patch /v1/accounts/{account_id}">client.v1.accounts.<a href="./src/resources/v1/accounts.ts">patchAccountByID</a>(accountID, { ...params }) -> AccountPatchAccountByIDResponse</code>
 
