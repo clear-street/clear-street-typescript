@@ -33,6 +33,7 @@ Types:
 - <code><a href="./src/resources/v1/accounts.ts">Address</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginDetails</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginDetailsUsage</a></code>
+- <code><a href="./src/resources/v1/accounts.ts">MarginSession</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginSessionDetails</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginTopContributor</a></code>
 - <code><a href="./src/resources/v1/accounts.ts">MarginType</a></code>

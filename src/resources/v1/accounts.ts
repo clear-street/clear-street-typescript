@@ -201,6 +201,13 @@ export interface AccountBalances {
   currency: string;
 
   /**
+   * The session whose values the engine is applying to these balances.
+   * `buying_power`, `multiplier`, and `margin_details.usage` reflect this session. A
+   * closed market reports `overnight`.
+   */
+  current_session: MarginSession;
+
+  /**
    * Difference between current equity and start-of-day equity.
    */
   daily_change: string;
@@ -619,6 +626,11 @@ export interface MarginDetailsUsage {
   used: string;
 }
 
+/**
+ * The margin session applied to an account's balances.
+ */
+export type MarginSession = 'intraday' | 'overnight';
+
 export interface MarginSessionDetails {
   /**
    * Maximum buying power available in the account during the session: base buying
@@ -962,6 +974,7 @@ export declare namespace Accounts {
     type Address as Address,
     type MarginDetails as MarginDetails,
     type MarginDetailsUsage as MarginDetailsUsage,
+    type MarginSession as MarginSession,
     type MarginSessionDetails as MarginSessionDetails,
     type MarginTopContributor as MarginTopContributor,
     type MarginType as MarginType,

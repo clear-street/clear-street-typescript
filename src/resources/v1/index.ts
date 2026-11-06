@@ -19,6 +19,7 @@ export {
   type Address,
   type MarginDetails,
   type MarginDetailsUsage,
+  type MarginSession,
   type MarginSessionDetails,
   type MarginTopContributor,
   type MarginType,
