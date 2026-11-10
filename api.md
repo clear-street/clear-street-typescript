@@ -577,7 +577,6 @@ Types:
 - <code><a href="./src/resources/v1/screener.ts">ScreenerColumn</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerEntry</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerEntryList</a></code>
-- <code><a href="./src/resources/v1/screener.ts">ScreenerFilter</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerRow</a></code>
 - <code><a href="./src/resources/v1/screener.ts">ScreenerRowList</a></code>
 - <code><a href="./src/resources/v1/screener.ts">SearchFilter</a></code>

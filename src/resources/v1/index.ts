@@ -325,7 +325,6 @@ export {
   type ScreenerColumn,
   type ScreenerEntry,
   type ScreenerEntryList,
-  type ScreenerFilter,
   type ScreenerRow,
   type ScreenerRowList,
   type SearchFilter,

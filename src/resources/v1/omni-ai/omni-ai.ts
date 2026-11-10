@@ -313,18 +313,23 @@ export interface OpenEntitlementConsentAction {
 
 /**
  * Action to open a stock screener with filters.
+ *
+ * `filters`, `sorts` and `columns` use the same shapes as the
+ * `POST /saved-screeners` request body, so a client can save the screener the user
+ * is looking at by forwarding them unchanged.
  */
 export interface OpenScreenerAction {
   /**
-   * Filter criteria for the screener
+   * Filter criteria for the screener.
    */
-  filters: Array<ScreenerAPI.ScreenerFilter>;
+  filters: Array<ScreenerAPI.SearchFilter>;
 
   /**
-   * Optional field/column selection for screener results. When a null/undefined
-   * value is observed, it indicates it does not apply.
+   * Optional field/column selection for screener results. Absent means the default
+   * column set. When a null/undefined value is observed, it indicates it does not
+   * apply.
    */
-  columns?: Array<string> | null;
+  columns?: Array<ScreenerAPI.FieldRef> | null;
 
   /**
    * Interaction-tracking identity. Absent on messages created before tracking. When
@@ -340,16 +345,10 @@ export interface OpenScreenerAction {
   page_size?: number | null;
 
   /**
-   * Optional sort field for screener rows. When a null/undefined value is observed,
-   * it indicates it does not apply.
+   * Optional sort specification. Absent means the screener's default order. When a
+   * null/undefined value is observed, it indicates it does not apply.
    */
-  sort_by?: string | null;
-
-  /**
-   * Optional sort direction (`ASC` or `DESC`). When a null/undefined value is
-   * observed, it indicates it does not apply.
-   */
-  sort_direction?: string | null;
+  sorts?: Array<ScreenerAPI.SortSpec> | null;
 }
 
 /**

@@ -630,26 +630,6 @@ export interface ScreenerEntry {
 export type ScreenerEntryList = Array<ScreenerEntry>;
 
 /**
- * A single filter criterion for the screener.
- */
-export interface ScreenerFilter {
-  /**
-   * Field to filter on (e.g., "market_cap", "sector", "price")
-   */
-  field: string;
-
-  /**
-   * Comparison operator (e.g., "eq", "gte", "lte", "in")
-   */
-  operator: string;
-
-  /**
-   * Filter value
-   */
-  value: unknown;
-}
-
-/**
  * A single row of screener columns for one instrument.
  */
 export type ScreenerRow = Array<ScreenerColumn>;
@@ -932,7 +912,6 @@ export declare namespace Screener {
     type ScreenerColumn as ScreenerColumn,
     type ScreenerEntry as ScreenerEntry,
     type ScreenerEntryList as ScreenerEntryList,
-    type ScreenerFilter as ScreenerFilter,
     type ScreenerRow as ScreenerRow,
     type ScreenerRowList as ScreenerRowList,
     type SearchFilter as SearchFilter,
