@@ -139,6 +139,7 @@ import {
 import * as OrdersAPI from './orders';
 import {
   Execution,
+  ExecutionLeg,
   ExecutionList,
   InstrumentIDOrSymbol,
   NewOrderRequest,
@@ -153,6 +154,7 @@ import {
   OrderGetOrderByIDResponse,
   OrderGetOrdersParams,
   OrderGetOrdersResponse,
+  OrderLeg,
   OrderList,
   OrderPreview,
   OrderPreviewAmount,
@@ -637,10 +639,12 @@ export declare namespace V1 {
   export {
     Orders as Orders,
     type Execution as Execution,
+    type ExecutionLeg as ExecutionLeg,
     type ExecutionList as ExecutionList,
     type InstrumentIDOrSymbol as InstrumentIDOrSymbol,
     type NewOrderRequest as NewOrderRequest,
     type Order as Order,
+    type OrderLeg as OrderLeg,
     type OrderList as OrderList,
     type OrderPreview as OrderPreview,
     type OrderPreviewAmount as OrderPreviewAmount,

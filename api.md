@@ -392,10 +392,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/v1/orders.ts">Execution</a></code>
+- <code><a href="./src/resources/v1/orders.ts">ExecutionLeg</a></code>
 - <code><a href="./src/resources/v1/orders.ts">ExecutionList</a></code>
 - <code><a href="./src/resources/v1/orders.ts">InstrumentIDOrSymbol</a></code>
 - <code><a href="./src/resources/v1/orders.ts">NewOrderRequest</a></code>
 - <code><a href="./src/resources/v1/orders.ts">Order</a></code>
+- <code><a href="./src/resources/v1/orders.ts">OrderLeg</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderList</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderPreview</a></code>
 - <code><a href="./src/resources/v1/orders.ts">OrderPreviewAmount</a></code>

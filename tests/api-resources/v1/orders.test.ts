@@ -115,6 +115,7 @@ describe('resource orders', () => {
           from: '2019-12-27T18:11:19.117Z',
           instrument_ids: ['x'],
           instrument_type: 'COMMON_STOCK',
+          is_multi_leg: true,
           order_ids: ['string'],
           page_size: 1,
           page_token: 'U3RhaW5sZXNzIHJvY2tz',

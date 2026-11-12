@@ -241,6 +241,15 @@ export interface Execution {
   instrument_id?: string | null;
 
   /**
+   * > **Alpha** — this field is experimental and may change or be removed at any
+   * > time.
+   *
+   * Individual legs of a strategy-level multileg fill. Omitted for single-security
+   * and individual-leg fills.
+   */
+  legs?: Array<ExecutionLeg>;
+
+  /**
    * Fill price. `null` for multileg fills, whose price lives only at the leg level.
    * When a null/undefined value is observed, it indicates it does not apply.
    */
@@ -272,6 +281,66 @@ export interface Execution {
    * order's `venue`, which is the routing destination. Codes are not normalized, so
    * the format varies by venue. When a null/undefined value is observed, it
    * indicates that there is no available data.
+   */
+  venue?: string | null;
+}
+
+/**
+ * One leg of a strategy-level multileg execution.
+ */
+export interface ExecutionLeg {
+  /**
+   * Fill price for this leg.
+   */
+  price: string;
+
+  /**
+   * This leg's ratio quantity within the strategy.
+   */
+  ratio: string;
+
+  /**
+   * Side of this leg's fill.
+   */
+  side: Side;
+
+  /**
+   * Trading symbol for this leg.
+   */
+  symbol: string;
+
+  /**
+   * Instrument identifier for this leg. `null` when the leg's instrument could not
+   * be resolved from its reported symbol. When a null/undefined value is observed,
+   * it indicates it does not apply.
+   */
+  instrument_id?: string | null;
+
+  /**
+   * Type of security for this leg. `null` when the leg's instrument could not be
+   * resolved from its reported symbol. When a null/undefined value is observed, it
+   * indicates it does not apply.
+   */
+  instrument_type?: V1API.SecurityType | null;
+
+  /**
+   * Underlying instrument identifier for this leg. `null` when the leg is not an
+   * option, or its underlier could not be resolved. When a null/undefined value is
+   * observed, it indicates it does not apply.
+   */
+  underlying_instrument_id?: string | null;
+
+  /**
+   * Type of this leg's underlying instrument, alongside `underlying_instrument_id`.
+   * When a null/undefined value is observed, it indicates it does not apply.
+   */
+  underlying_instrument_type?: V1API.SecurityType | null;
+
+  /**
+   * Venue where this leg's fill occurred, as reported by that venue. Lives per-leg
+   * rather than only at the top level (see [`Execution::venue`]) because a
+   * strategy's legs can each fill on a different venue. When a null/undefined value
+   * is observed, it indicates that there is no available data.
    */
   venue?: string | null;
 }
@@ -495,6 +564,14 @@ export interface Order {
   instrument_type?: V1API.SecurityType | null;
 
   /**
+   * > **Alpha** — this field is experimental and may change or be removed at any
+   * > time.
+   *
+   * Individual legs of a multileg strategy order. Omitted for single-leg orders.
+   */
+  legs?: Array<OrderLeg>;
+
+  /**
    * Limit offset for trailing stop-limit orders (signed) When a null/undefined value
    * is observed, it indicates it does not apply.
    */
@@ -613,6 +690,68 @@ export namespace Order {
 
     [k: string]: unknown;
   }
+}
+
+/**
+ * One leg of a multileg strategy order.
+ */
+export interface OrderLeg {
+  /**
+   * This leg's ratio quantity within the strategy.
+   */
+  ratio: string;
+
+  /**
+   * Side of this leg (BUY or SELL).
+   */
+  side: Side;
+
+  /**
+   * Average fill price for this leg across its executions, as reported by the venue
+   * (FIX 6 on an individual-leg 442=2 execution report). `null` when the leg has no
+   * fills (no data), not `0`. When a null/undefined value is observed, it indicates
+   * that there is no available data.
+   */
+  average_fill_price?: string | null;
+
+  /**
+   * Instrument identifier for this leg. `null` when the leg's instrument could not
+   * be resolved. When a null/undefined value is observed, it indicates it does not
+   * apply.
+   */
+  instrument_id?: string | null;
+
+  /**
+   * Type of security for this leg. `null` when the leg's instrument could not be
+   * resolved. When a null/undefined value is observed, it indicates it does not
+   * apply.
+   */
+  instrument_type?: V1API.SecurityType | null;
+
+  /**
+   * Client-attested open/close intent for this leg. When a null/undefined value is
+   * observed, it indicates it does not apply.
+   */
+  position_effect?: RequestPositionEffect | null;
+
+  /**
+   * Trading symbol for this leg. `null` when the leg's instrument could not be
+   * resolved. When a null/undefined value is observed, it indicates it does not
+   * apply.
+   */
+  symbol?: string | null;
+
+  /**
+   * Instrument ID of this leg's underlying instrument. Populated only for option
+   * legs. When a null/undefined value is observed, it indicates it does not apply.
+   */
+  underlying_instrument_id?: string | null;
+
+  /**
+   * Type of this leg's underlying instrument, alongside `underlying_instrument_id`.
+   * When a null/undefined value is observed, it indicates it does not apply.
+   */
+  underlying_instrument_type?: V1API.SecurityType | null;
 }
 
 export type OrderList = Array<Order>;
@@ -1207,6 +1346,15 @@ export interface OrderGetOrdersParams {
   instrument_type?: 'COMMON_STOCK' | 'INDEX' | 'OPTION' | 'CASH' | 'EVENT_CONTRACT';
 
   /**
+   * > **Alpha** — this parameter is experimental and may change or be removed at any
+   * > time.
+   *
+   * Filter by whether the order is a multileg strategy. Omitted returns all orders;
+   * true returns only multileg orders; false excludes them.
+   */
+  is_multi_leg?: boolean;
+
+  /**
    * Comma-separated list of order identifiers. Each value may be an order's `id` or
    * its `client_order_id`; only orders matching one of the given identifiers are
    * returned.
@@ -1311,7 +1459,77 @@ export namespace OrderGetOrdersParams {
 }
 
 export interface OrderPreviewOrdersParams {
-  preview: Array<NewOrderRequest>;
+  preview: Array<OrderPreviewOrdersParams.NewOrderMultilegRequest | NewOrderRequest>;
+}
+
+export namespace OrderPreviewOrdersParams {
+  /**
+   * Request to submit a new multileg order strategy.
+   */
+  export interface NewOrderMultilegRequest {
+    /**
+     * Legs that compose the strategy.
+     */
+    legs: Array<NewOrderMultilegRequest.Leg>;
+
+    /**
+     * Type of order (currently MARKET or LIMIT for multileg strategy submission)
+     */
+    order_type: OrdersAPI.RequestOrderType;
+
+    /**
+     * Time in force
+     */
+    time_in_force: OrdersAPI.RequestTimeInForce;
+
+    /**
+     * Optional client-provided unique ID (idempotency). Required to be unique per
+     * account.
+     */
+    id?: string | null;
+
+    /**
+     * Strategy price, required for LIMIT orders.
+     */
+    limit_price?: string | null;
+
+    /**
+     * Optional strategy-level quantity. Multiplies leg quantities. Defaults to 1.
+     */
+    quantity?: string;
+  }
+
+  export namespace NewOrderMultilegRequest {
+    /**
+     * A single leg in a multileg strategy request.
+     */
+    export interface Leg {
+      /**
+       * Ratio for the leg.
+       */
+      ratio: string;
+
+      /**
+       * Leg side (BUY or SELL).
+       */
+      side: OrdersAPI.Side;
+
+      /**
+       * Optional leg reference identifier.
+       */
+      id?: string | null;
+
+      /**
+       * Trading symbol (e.g. "AAPL" or OSI symbol for options)
+       */
+      instrument_id?: string | null;
+
+      /**
+       * Required. Open/close intent for this leg.
+       */
+      position_intent?: OrdersAPI.RequestPositionEffect | null;
+    }
+  }
 }
 
 export interface OrderReplaceOrderParams {
@@ -1352,16 +1570,88 @@ export interface OrderReplaceOrderParams {
 }
 
 export interface OrderSubmitOrdersParams {
-  orders: Array<NewOrderRequest>;
+  orders: Array<OrderSubmitOrdersParams.NewOrderMultilegRequest | NewOrderRequest>;
+}
+
+export namespace OrderSubmitOrdersParams {
+  /**
+   * Request to submit a new multileg order strategy.
+   */
+  export interface NewOrderMultilegRequest {
+    /**
+     * Legs that compose the strategy.
+     */
+    legs: Array<NewOrderMultilegRequest.Leg>;
+
+    /**
+     * Type of order (currently MARKET or LIMIT for multileg strategy submission)
+     */
+    order_type: OrdersAPI.RequestOrderType;
+
+    /**
+     * Time in force
+     */
+    time_in_force: OrdersAPI.RequestTimeInForce;
+
+    /**
+     * Optional client-provided unique ID (idempotency). Required to be unique per
+     * account.
+     */
+    id?: string | null;
+
+    /**
+     * Strategy price, required for LIMIT orders.
+     */
+    limit_price?: string | null;
+
+    /**
+     * Optional strategy-level quantity. Multiplies leg quantities. Defaults to 1.
+     */
+    quantity?: string;
+  }
+
+  export namespace NewOrderMultilegRequest {
+    /**
+     * A single leg in a multileg strategy request.
+     */
+    export interface Leg {
+      /**
+       * Ratio for the leg.
+       */
+      ratio: string;
+
+      /**
+       * Leg side (BUY or SELL).
+       */
+      side: OrdersAPI.Side;
+
+      /**
+       * Optional leg reference identifier.
+       */
+      id?: string | null;
+
+      /**
+       * Trading symbol (e.g. "AAPL" or OSI symbol for options)
+       */
+      instrument_id?: string | null;
+
+      /**
+       * Required. Open/close intent for this leg.
+       */
+      position_intent?: OrdersAPI.RequestPositionEffect | null;
+    }
+  }
 }
 
 export declare namespace Orders {
   export {
     type Execution as Execution,
+    type ExecutionLeg as ExecutionLeg,
     type ExecutionList as ExecutionList,
     type InstrumentIDOrSymbol as InstrumentIDOrSymbol,
     type NewOrderRequest as NewOrderRequest,
     type Order as Order,
+    type OrderLeg as OrderLeg,
     type OrderList as OrderList,
     type OrderPreview as OrderPreview,
     type OrderPreviewAmount as OrderPreviewAmount,

@@ -206,10 +206,12 @@ export {
 export {
   Orders,
   type Execution,
+  type ExecutionLeg,
   type ExecutionList,
   type InstrumentIDOrSymbol,
   type NewOrderRequest,
   type Order,
+  type OrderLeg,
   type OrderList,
   type OrderPreview,
   type OrderPreviewAmount,
