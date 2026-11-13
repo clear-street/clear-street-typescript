@@ -394,6 +394,7 @@ Types:
 - <code><a href="./src/resources/v1/orders.ts">Execution</a></code>
 - <code><a href="./src/resources/v1/orders.ts">ExecutionLeg</a></code>
 - <code><a href="./src/resources/v1/orders.ts">ExecutionList</a></code>
+- <code><a href="./src/resources/v1/orders.ts">Fees</a></code>
 - <code><a href="./src/resources/v1/orders.ts">InstrumentIDOrSymbol</a></code>
 - <code><a href="./src/resources/v1/orders.ts">NewOrderRequest</a></code>
 - <code><a href="./src/resources/v1/orders.ts">Order</a></code>

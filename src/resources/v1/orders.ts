@@ -234,6 +234,17 @@ export interface Execution {
   transaction_time: string;
 
   /**
+   * Fees charged to the account, broken out by kind.
+   *
+   * Amounts are in the instrument's currency, at the full precision the venue
+   * reports. Statements round each fill's fee to the cent, so they can differ by a
+   * fraction of a cent. A positive amount is charged to the account; a negative
+   * amount is a rebate. New kinds of fee are added as new optional fields, and
+   * `total` always includes them.
+   */
+  fees?: Fees;
+
+  /**
    * Unique instrument identifier. `null` when this is a strategy-level multileg fill
    * whose legs are reported individually in `legs[]`. When a null/undefined value is
    * observed, it indicates it does not apply.
@@ -346,6 +357,28 @@ export interface ExecutionLeg {
 }
 
 export type ExecutionList = Array<Execution>;
+
+/**
+ * Fees charged to the account, broken out by kind.
+ *
+ * Amounts are in the instrument's currency, at the full precision the venue
+ * reports. Statements round each fill's fee to the cent, so they can differ by a
+ * fraction of a cent. A positive amount is charged to the account; a negative
+ * amount is a rebate. New kinds of fee are added as new optional fields, and
+ * `total` always includes them.
+ */
+export interface Fees {
+  /**
+   * Sum of every fee component, including kinds this API version does not break out.
+   */
+  total: string;
+
+  /**
+   * Fee charged by the execution venue. When a null/undefined value is observed, it
+   * indicates it does not apply.
+   */
+  exchange_fee?: string | null;
+}
 
 /**
  * Instrument identifier: either an instrument UUID or a symbol (symbol for
@@ -548,6 +581,17 @@ export interface Order {
    * Whether the order is eligible for extended-hours trading.
    */
   extended_hours?: boolean | null;
+
+  /**
+   * Fees charged to the account, broken out by kind.
+   *
+   * Amounts are in the instrument's currency, at the full precision the venue
+   * reports. Statements round each fill's fee to the cent, so they can differ by a
+   * fraction of a cent. A positive amount is charged to the account; a negative
+   * amount is a rebate. New kinds of fee are added as new optional fields, and
+   * `total` always includes them.
+   */
+  fees?: Fees;
 
   /**
    * Instrument identifier for the traded instrument. `null` when the order is a
@@ -1648,6 +1692,7 @@ export declare namespace Orders {
     type Execution as Execution,
     type ExecutionLeg as ExecutionLeg,
     type ExecutionList as ExecutionList,
+    type Fees as Fees,
     type InstrumentIDOrSymbol as InstrumentIDOrSymbol,
     type NewOrderRequest as NewOrderRequest,
     type Order as Order,

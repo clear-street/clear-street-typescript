@@ -208,6 +208,7 @@ export {
   type Execution,
   type ExecutionLeg,
   type ExecutionList,
+  type Fees,
   type InstrumentIDOrSymbol,
   type NewOrderRequest,
   type Order,
