@@ -276,6 +276,13 @@ export interface Instrument {
   is_marginable: boolean;
 
   /**
+   * Indicates if the instrument is a new issue (e.g. an IPO) that may not yet have a
+   * quote, trade or previous close. See `indicative_price` on the market data
+   * snapshot.
+   */
+  is_new_issue: boolean;
+
+  /**
    * Indicates if the instrument is a publicly traded partnership (PTP). PTP sales
    * are subject to a 10% withholding tax for non-US tax residents.
    */
@@ -437,6 +444,13 @@ export interface InstrumentCore {
    * Indicates if the instrument is marginable
    */
   is_marginable: boolean;
+
+  /**
+   * Indicates if the instrument is a new issue (e.g. an IPO) that may not yet have a
+   * quote, trade or previous close. See `indicative_price` on the market data
+   * snapshot.
+   */
+  is_new_issue: boolean;
 
   /**
    * Indicates if the instrument is a publicly traded partnership (PTP). PTP sales

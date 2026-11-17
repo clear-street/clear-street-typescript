@@ -190,6 +190,13 @@ export interface MarketDataSnapshot {
   greeks?: SnapshotGreeks | null;
 
   /**
+   * Indicative price for a new issue, in USD. Present only while the instrument is a
+   * new issue with no quote, trade or previous close. When a null/undefined value is
+   * observed, it indicates that there is no available data.
+   */
+  indicative_price?: string | null;
+
+  /**
    * Most recent quote if available. When a null/undefined value is observed, it
    * indicates that there is no available data.
    */
