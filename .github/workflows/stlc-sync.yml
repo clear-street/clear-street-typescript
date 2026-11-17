@@ -124,9 +124,7 @@ jobs:
     # On a published release, tell staging to back-sync now instead of waiting for
     # the poll. Dispatch-only: it cannot write production or staging contents.
     runs-on: ubuntu-latest
-    if: >-
-      github.repository == 'clear-street/clear-street-typescript' &&
-      (github.event_name == 'release' || github.event_name == 'workflow_dispatch')
+    if: false # disabled: STLC_CLIENT_ID/STLC_PRIVATE_KEY not set in production; back-sync polls instead
     permissions:
       contents: read
     env:
