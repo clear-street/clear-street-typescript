@@ -571,7 +571,10 @@ export type ListingType = 'STANDARD' | 'FLEX' | 'OTC';
 /**
  * Why an instrument cannot be shorted.
  */
-export type NotShortableReason = 'INSUFFICIENT_LOCATE_INVENTORY' | 'UNSUPPORTED_SECURITY';
+export type NotShortableReason =
+  | 'INSUFFICIENT_LOCATE_INVENTORY'
+  | 'UNSUPPORTED_SECURITY'
+  | 'INSTRUMENT_NOT_SHORTABLE';
 
 /**
  * An options expiry date, annotated with which settlement cycles have listed
