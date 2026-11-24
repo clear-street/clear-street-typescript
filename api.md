@@ -263,6 +263,7 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ContentPartSuggestedActionsPayload</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ContentPartTextPayload</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ContentPartThinkingPayload</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">ContentPartUiPayload</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">DataChart</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">EntitlementAgreementKey</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">EntitlementCode</a></code>
@@ -280,6 +281,8 @@ Types:
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">StructuredAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">StructuredActionButtonAction</a></code>
 - <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">SuggestedActionsPayload</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">UiNode</a></code>
+- <code><a href="./src/resources/v1/omni-ai/omni-ai.ts">UiPayload</a></code>
 
 ### Entitlements
 

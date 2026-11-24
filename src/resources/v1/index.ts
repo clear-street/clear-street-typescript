@@ -174,6 +174,7 @@ export {
   type ContentPartSuggestedActionsPayload,
   type ContentPartTextPayload,
   type ContentPartThinkingPayload,
+  type ContentPartUiPayload,
   type DataChart,
   type EntitlementAgreementKey,
   type EntitlementCode,
@@ -191,6 +192,8 @@ export {
   type StructuredAction,
   type StructuredActionButtonAction,
   type SuggestedActionsPayload,
+  type UiNode,
+  type UiPayload,
 } from './omni-ai/index';
 export {
   OmniFeed,

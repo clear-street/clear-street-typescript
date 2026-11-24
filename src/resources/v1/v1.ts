@@ -326,6 +326,7 @@ import {
   ContentPartSuggestedActionsPayload,
   ContentPartTextPayload,
   ContentPartThinkingPayload,
+  ContentPartUiPayload,
   DataChart,
   EntitlementAgreementKey,
   EntitlementCode,
@@ -344,6 +345,8 @@ import {
   StructuredAction,
   StructuredActionButtonAction,
   SuggestedActionsPayload,
+  UiNode,
+  UiPayload,
 } from './omni-ai/omni-ai';
 import * as PrivateMarketsAPI from './private-markets/private-markets';
 import {
@@ -606,6 +609,7 @@ export declare namespace V1 {
     type ContentPartSuggestedActionsPayload as ContentPartSuggestedActionsPayload,
     type ContentPartTextPayload as ContentPartTextPayload,
     type ContentPartThinkingPayload as ContentPartThinkingPayload,
+    type ContentPartUiPayload as ContentPartUiPayload,
     type DataChart as DataChart,
     type EntitlementAgreementKey as EntitlementAgreementKey,
     type EntitlementCode as EntitlementCode,
@@ -623,6 +627,8 @@ export declare namespace V1 {
     type StructuredAction as StructuredAction,
     type StructuredActionButtonAction as StructuredActionButtonAction,
     type SuggestedActionsPayload as SuggestedActionsPayload,
+    type UiNode as UiNode,
+    type UiPayload as UiPayload,
   };
 
   export {

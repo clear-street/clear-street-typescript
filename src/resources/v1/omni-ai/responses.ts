@@ -178,6 +178,7 @@ export type ResponseContentPart =
   | ResponseContentPart.ContentPartThinking
   | ResponseContentPart.ContentPartStructuredAction
   | ResponseContentPart.ContentPartChart
+  | ResponseContentPart.ContentPartUi
   | ResponseContentPart.ContentPartSuggestedActions
   | ResponseContentPart.ContentPartCustom;
 
@@ -208,6 +209,14 @@ export namespace ResponseContentPart {
    */
   export interface ContentPartChart extends OmniAIAPI.ContentPartChartPayload {
     type: 'chart';
+  }
+
+  /**
+   * > **Alpha** — this variant is experimental and may change or be removed at any
+   * > time.
+   */
+  export interface ContentPartUi extends OmniAIAPI.ContentPartUiPayload {
+    type: 'ui';
   }
 
   /**

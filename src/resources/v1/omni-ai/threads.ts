@@ -292,6 +292,7 @@ export type MessageContentPart =
   | MessageContentPart.ContentPartText
   | MessageContentPart.ContentPartStructuredAction
   | MessageContentPart.ContentPartChart
+  | MessageContentPart.ContentPartUi
   | MessageContentPart.ContentPartSuggestedActions
   | MessageContentPart.ContentPartCustom;
 
@@ -315,6 +316,14 @@ export namespace MessageContentPart {
    */
   export interface ContentPartChart extends OmniAIAPI.ContentPartChartPayload {
     type: 'chart';
+  }
+
+  /**
+   * > **Alpha** — this variant is experimental and may change or be removed at any
+   * > time.
+   */
+  export interface ContentPartUi extends OmniAIAPI.ContentPartUiPayload {
+    type: 'ui';
   }
 
   /**
@@ -427,7 +436,9 @@ export interface ThreadCreateMessageParams {
    */
   account_id?: number | null;
 
-  capabilities?: Array<'PREFILL_ORDER' | 'OPEN_CHART' | 'OPEN_SCREENER' | 'OPEN_ENTITLEMENT_CONSENT'>;
+  capabilities?: Array<
+    'PREFILL_ORDER' | 'OPEN_CHART' | 'OPEN_SCREENER' | 'OPEN_ENTITLEMENT_CONSENT' | 'RENDER_UI'
+  >;
 
   /**
    * Snapshots for this instant-chat message. Omission does not remove earlier
@@ -449,7 +460,9 @@ export interface ThreadCreateThreadParams {
    */
   account_id?: number | null;
 
-  capabilities?: Array<'PREFILL_ORDER' | 'OPEN_CHART' | 'OPEN_SCREENER' | 'OPEN_ENTITLEMENT_CONSENT'>;
+  capabilities?: Array<
+    'PREFILL_ORDER' | 'OPEN_CHART' | 'OPEN_SCREENER' | 'OPEN_ENTITLEMENT_CONSENT' | 'RENDER_UI'
+  >;
 
   /**
    * Snapshots for the first instant-chat message. Omit to attach no new context.

@@ -243,6 +243,16 @@ export interface ContentPartThinkingPayload {
 }
 
 /**
+ * Model-composed UI content part. Present only when the turn declared `RENDER_UI`.
+ */
+export interface ContentPartUiPayload {
+  /**
+   * Model-composed UI, built only from Omni's built-in component catalog.
+   */
+  payload: UiPayload;
+}
+
+/**
  * Chart represented by explicit data series.
  */
 export interface DataChart {
@@ -689,6 +699,44 @@ export interface SuggestedActionsPayload {
   clickedItemIds?: Array<string>;
 }
 
+/**
+ * One node of a composed UI tree.
+ */
+export interface UiNode {
+  /**
+   * Catalog component name.
+   */
+  type: string;
+
+  /**
+   * Nested nodes (each shaped like this one), only where the component's `children`
+   * allows them. Typed as generic objects so the schema is not self-referential,
+   * which SDK generators handle poorly.
+   */
+  children?: Array<unknown>;
+
+  /**
+   * Props that satisfy the component's `props_schema`. Omitted when the component
+   * has none.
+   */
+  props?: unknown;
+}
+
+/**
+ * Model-composed UI, built only from Omni's built-in component catalog.
+ */
+export interface UiPayload {
+  /**
+   * Root of the component tree.
+   */
+  root: UiNode;
+
+  /**
+   * Stable identifier of this UI within the message.
+   */
+  ui_id: string;
+}
+
 OmniAI.Entitlements = Entitlements;
 OmniAI.Messages = Messages;
 OmniAI.Responses = Responses;
@@ -706,6 +754,7 @@ export declare namespace OmniAI {
     type ContentPartSuggestedActionsPayload as ContentPartSuggestedActionsPayload,
     type ContentPartTextPayload as ContentPartTextPayload,
     type ContentPartThinkingPayload as ContentPartThinkingPayload,
+    type ContentPartUiPayload as ContentPartUiPayload,
     type DataChart as DataChart,
     type EntitlementAgreementKey as EntitlementAgreementKey,
     type EntitlementCode as EntitlementCode,
@@ -723,6 +772,8 @@ export declare namespace OmniAI {
     type StructuredAction as StructuredAction,
     type StructuredActionButtonAction as StructuredActionButtonAction,
     type SuggestedActionsPayload as SuggestedActionsPayload,
+    type UiNode as UiNode,
+    type UiPayload as UiPayload,
   };
 
   export {
