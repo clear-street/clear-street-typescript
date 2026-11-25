@@ -394,6 +394,9 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/v1/orders.ts">EventContractExecution</a></code>
+- <code><a href="./src/resources/v1/orders.ts">EventContractOrder</a></code>
+- <code><a href="./src/resources/v1/orders.ts">EventContractSide</a></code>
 - <code><a href="./src/resources/v1/orders.ts">Execution</a></code>
 - <code><a href="./src/resources/v1/orders.ts">ExecutionLeg</a></code>
 - <code><a href="./src/resources/v1/orders.ts">ExecutionList</a></code>

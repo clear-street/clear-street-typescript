@@ -138,6 +138,9 @@ import {
 } from './omni-feed';
 import * as OrdersAPI from './orders';
 import {
+  EventContractExecution,
+  EventContractOrder,
+  EventContractSide,
   Execution,
   ExecutionLeg,
   ExecutionList,
@@ -645,6 +648,9 @@ export declare namespace V1 {
 
   export {
     Orders as Orders,
+    type EventContractExecution as EventContractExecution,
+    type EventContractOrder as EventContractOrder,
+    type EventContractSide as EventContractSide,
     type Execution as Execution,
     type ExecutionLeg as ExecutionLeg,
     type ExecutionList as ExecutionList,

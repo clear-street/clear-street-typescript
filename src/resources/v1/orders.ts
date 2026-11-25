@@ -204,6 +204,65 @@ export class Orders extends APIResource {
 }
 
 /**
+ * Effective action inherited from the parent order, with a NO-relative fill price.
+ * This is the order's classification, not a per-fill open/close accounting
+ * attribution.
+ */
+export interface EventContractExecution {
+  /**
+   * BUY or SELL of `contract_side`, inherited from the parent classification.
+   */
+  action: Side;
+
+  /**
+   * Contract the parent order's effective action buys or sells.
+   */
+  contract_side: EventContractSide;
+
+  /**
+   * Contract payout minus the existing YES fill price. Omitted when payout data is
+   * unavailable. When a null/undefined value is observed, it indicates that there is
+   * no available data.
+   */
+  no_price?: string | null;
+}
+
+/**
+ * Effective action from the recorded order classification, with NO-relative
+ * prices. Existing top-level side and prices retain their YES-based meaning.
+ */
+export interface EventContractOrder {
+  /**
+   * BUY or SELL of `contract_side`, recorded when the order was classified.
+   */
+  action: Side;
+
+  /**
+   * Contract the effective action buys or sells.
+   */
+  contract_side: EventContractSide;
+
+  /**
+   * Contract payout minus the existing YES average fill price. Omitted before any
+   * fill or when payout data is unavailable. When a null/undefined value is
+   * observed, it indicates that there is no available data.
+   */
+  no_average_fill_price?: string | null;
+
+  /**
+   * Contract payout minus the existing YES limit price. Omitted for market orders or
+   * when payout data is unavailable. When a null/undefined value is observed, it
+   * indicates that there is no available data.
+   */
+  no_limit_price?: string | null;
+}
+
+/**
+ * Contract represented by the recorded order action.
+ */
+export type EventContractSide = 'YES' | 'NO';
+
+/**
  * Represents a single fill of an order for an account.
  */
 export interface Execution {
@@ -232,6 +291,13 @@ export interface Execution {
    * Transaction timestamp in nanosecond precision (UTC).
    */
   transaction_time: string;
+
+  /**
+   * Effective action inherited from the parent order, with a NO-relative fill price.
+   * This is the order's classification, not a per-fill open/close accounting
+   * attribution.
+   */
+  event_contract?: EventContractExecution;
 
   /**
    * Fees charged to the account, broken out by kind.
@@ -569,6 +635,12 @@ export interface Order {
    * Contains execution, rejection or cancellation details, if any
    */
   details?: Array<string>;
+
+  /**
+   * Effective action from the recorded order classification, with NO-relative
+   * prices. Existing top-level side and prices retain their YES-based meaning.
+   */
+  event_contract?: EventContractOrder;
 
   /**
    * Timestamp when the order will expire (UTC). Present when time_in_force is
@@ -1701,6 +1773,9 @@ export namespace OrderSubmitOrdersParams {
 
 export declare namespace Orders {
   export {
+    type EventContractExecution as EventContractExecution,
+    type EventContractOrder as EventContractOrder,
+    type EventContractSide as EventContractSide,
     type Execution as Execution,
     type ExecutionLeg as ExecutionLeg,
     type ExecutionList as ExecutionList,

@@ -208,6 +208,9 @@ export {
 } from './omni-feed';
 export {
   Orders,
+  type EventContractExecution,
+  type EventContractOrder,
+  type EventContractSide,
   type Execution,
   type ExecutionLeg,
   type ExecutionList,
