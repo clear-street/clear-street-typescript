@@ -926,6 +926,28 @@ export interface AccountGetAccountsParams {
 
 export interface AccountGetNonTradeActivitiesParams {
   /**
+   * Filter by activity type(s). Comma-delimited list. Example:
+   * `activity_type=dividend,fee`.
+   */
+  activity_type?: Array<
+    | 'money_movement'
+    | 'interest'
+    | 'fee'
+    | 'dividend'
+    | 'option_event'
+    | 'transfer'
+    | 'corporate_action'
+    | 'tax_withholding'
+    | 'adjustment'
+    | 'other'
+  >;
+
+  /**
+   * The start date and time for the query range, inclusive (ISO 8601 format)
+   */
+  from?: string;
+
+  /**
    * The number of items to return per page. Only used when page_token is not
    * provided.
    */
@@ -936,6 +958,11 @@ export interface AccountGetNonTradeActivitiesParams {
    * pagination state; when provided, page_size is ignored.
    */
   page_token?: string;
+
+  /**
+   * The end date and time for the query range, inclusive (ISO 8601 format)
+   */
+  to?: string;
 }
 
 export interface AccountGetPortfolioHistoryParams {

@@ -83,7 +83,13 @@ describe('resource accounts', () => {
     await expect(
       client.v1.accounts.getNonTradeActivities(
         0,
-        { page_size: 1, page_token: 'U3RhaW5sZXNzIHJvY2tz' },
+        {
+          activity_type: ['money_movement'],
+          from: '2019-12-27T18:11:19.117Z',
+          page_size: 1,
+          page_token: 'U3RhaW5sZXNzIHJvY2tz',
+          to: '2019-12-27T18:11:19.117Z',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(ClearStreet.NotFoundError);
