@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as AccountsAPI from './accounts';
 import * as Shared from '../shared';
 import * as V1API from './v1';
 import { APIPromise } from '../../core/api-promise';
@@ -627,6 +628,11 @@ export interface MarginDetailsUsage {
 }
 
 /**
+ * The leverage of a Reg T margin account.
+ */
+export type MarginMultiplier = '1' | '4';
+
+/**
  * The margin session applied to an account's balances.
  */
 export type MarginSession = 'intraday' | 'overnight';
@@ -853,6 +859,12 @@ export interface PredictionMarketBalances {
  */
 export interface RiskSettings {
   /**
+   * When a null/undefined value is observed, it indicates that there is no available
+   * data.
+   */
+  margin_multiplier?: MarginMultiplier | null;
+
+  /**
    * The maximum notional value available to the account. On update, a value must be
    * 0 or greater, `null` clears the limit, and omitting the field leaves the limit
    * unchanged. When a null/undefined value is observed, it indicates that there is
@@ -983,7 +995,28 @@ export interface AccountPatchAccountByIDParams {
   /**
    * Risk settings for the account
    */
-  risk?: RiskSettings | null;
+  risk?: AccountPatchAccountByIDParams.Risk | null;
+}
+
+export namespace AccountPatchAccountByIDParams {
+  /**
+   * Risk settings for the account
+   */
+  export interface Risk {
+    /**
+     * The margin multiplier of a Reg T margin account: `"1"` for cash only, `"4"` for
+     * full Reg T margin. Only a Reg T margin account may set it. `"4"` replaces a
+     * `"1"` the account chose, never a limit Clear Street set, so the response can
+     * give `"1"` after a request for `"4"`. It cannot be `null`.
+     */
+    margin_multiplier?: AccountsAPI.MarginMultiplier;
+
+    /**
+     * The maximum notional value available to the account: 0 or greater. `null` clears
+     * the limit.
+     */
+    max_notional?: string | null;
+  }
 }
 
 export declare namespace Accounts {
@@ -1004,6 +1037,7 @@ export declare namespace Accounts {
     type Address as Address,
     type MarginDetails as MarginDetails,
     type MarginDetailsUsage as MarginDetailsUsage,
+    type MarginMultiplier as MarginMultiplier,
     type MarginSession as MarginSession,
     type MarginSessionDetails as MarginSessionDetails,
     type MarginTopContributor as MarginTopContributor,
