@@ -1097,7 +1097,8 @@ export interface InstrumentGetInstrumentsParams {
 
   /**
    * The number of items to return per page. Only used when page_token is not
-   * provided.
+   * provided. A value of 0 is rejected; a value above the maximum is treated as the
+   * maximum.
    */
   page_size?: number;
 
@@ -1134,7 +1135,8 @@ export interface InstrumentGetOptionContractsParams {
 
   /**
    * The number of items to return per page. Only used when page_token is not
-   * provided.
+   * provided. A value of 0 is rejected; a value above the maximum is treated as the
+   * maximum.
    */
   page_size?: number;
 
@@ -1195,7 +1197,8 @@ export interface InstrumentGetPredictionEventsParams {
 
   /**
    * The number of items to return per page. Only used when page_token is not
-   * provided.
+   * provided. A value of 0 is rejected; a value above the maximum is treated as the
+   * maximum.
    */
   page_size?: number;
 
@@ -1328,7 +1331,8 @@ export interface InstrumentGetPredictionMarketsParams {
 
   /**
    * The number of items to return per page. Only used when page_token is not
-   * provided.
+   * provided. A value of 0 is rejected; a value above the maximum is treated as the
+   * maximum.
    */
   page_size?: number;
 
@@ -1355,7 +1359,8 @@ export interface InstrumentGetPredictionSeriesParams {
 
   /**
    * The number of items to return per page. Only used when page_token is not
-   * provided.
+   * provided. A value of 0 is rejected; a value above the maximum is treated as the
+   * maximum.
    */
   page_size?: number;
 
@@ -1403,7 +1408,7 @@ export interface InstrumentSearchInstrumentsParams {
 
   /**
    * The number of items to return per page. Only used when page_token is not
-   * provided.
+   * provided. A value of 0 or above the maximum is rejected.
    */
   page_size?: number;
 

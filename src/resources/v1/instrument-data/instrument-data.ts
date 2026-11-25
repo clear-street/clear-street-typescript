@@ -1647,7 +1647,8 @@ export interface InstrumentDataGetAllInstrumentEventsParams {
 
   /**
    * The number of items to return per page. Only used when page_token is not
-   * provided.
+   * provided. A value of 0 is rejected; a value above the maximum is treated as the
+   * maximum.
    */
   page_size?: number;
 
@@ -1683,7 +1684,8 @@ export interface InstrumentDataGetInstrumentBalanceSheetStatementsParams {
 
   /**
    * The number of items to return per page. Only used when page_token is not
-   * provided.
+   * provided. A value of 0 is rejected; a value above the maximum is treated as the
+   * maximum.
    */
   page_size?: number;
 
@@ -1707,7 +1709,8 @@ export interface InstrumentDataGetInstrumentCashFlowStatementsParams {
 
   /**
    * The number of items to return per page. Only used when page_token is not
-   * provided.
+   * provided. A value of 0 is rejected; a value above the maximum is treated as the
+   * maximum.
    */
   page_size?: number;
 
@@ -1734,7 +1737,8 @@ export interface InstrumentDataGetInstrumentEarningsTranscriptsParams {
 
   /**
    * The number of items to return per page. Only used when page_token is not
-   * provided.
+   * provided. A value of 0 is rejected; a value above the maximum is treated as the
+   * maximum.
    */
   page_size?: number;
 
@@ -1823,7 +1827,8 @@ export interface InstrumentDataGetInstrumentIncomeStatementsParams {
 
   /**
    * The number of items to return per page. Only used when page_token is not
-   * provided.
+   * provided. A value of 0 is rejected; a value above the maximum is treated as the
+   * maximum.
    */
   page_size?: number;
 
