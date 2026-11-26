@@ -142,6 +142,7 @@ describe('resource instruments', () => {
           series_codes: 'series_codes',
           sort_by: 'OPEN_AT',
           sort_direction: 'ASC',
+          statuses: 'statuses',
         },
         { path: '/_stainless_unknown_path' },
       ),
