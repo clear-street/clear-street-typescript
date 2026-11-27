@@ -508,22 +508,22 @@ export interface AccountWithPersonalDetails {
 /**
  * The states exposed by this endpoint.
  */
-export type ActivityState = 'settled' | 'cancelled';
+export type ActivityState = 'SETTLED' | 'CANCELLED';
 
 /**
  * Type of an activity.
  */
 export type ActivityType =
-  | 'money_movement'
-  | 'interest'
-  | 'fee'
-  | 'dividend'
-  | 'option_event'
-  | 'transfer'
-  | 'corporate_action'
-  | 'tax_withholding'
-  | 'adjustment'
-  | 'other';
+  | 'MONEY_MOVEMENT'
+  | 'INTEREST'
+  | 'FEE'
+  | 'DIVIDEND'
+  | 'OPTION_EVENT'
+  | 'TRANSFER'
+  | 'CORPORATE_ACTION'
+  | 'TAX_WITHHOLDING'
+  | 'ADJUSTMENT'
+  | 'OTHER';
 
 /**
  * A postal address.
@@ -943,16 +943,16 @@ export interface AccountGetNonTradeActivitiesParams {
    * `activity_type=dividend,fee`.
    */
   activity_type?: Array<
-    | 'money_movement'
-    | 'interest'
-    | 'fee'
-    | 'dividend'
-    | 'option_event'
-    | 'transfer'
-    | 'corporate_action'
-    | 'tax_withholding'
-    | 'adjustment'
-    | 'other'
+    | 'MONEY_MOVEMENT'
+    | 'INTEREST'
+    | 'FEE'
+    | 'DIVIDEND'
+    | 'OPTION_EVENT'
+    | 'TRANSFER'
+    | 'CORPORATE_ACTION'
+    | 'TAX_WITHHOLDING'
+    | 'ADJUSTMENT'
+    | 'OTHER'
   >;
 
   /**

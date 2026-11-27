@@ -84,7 +84,7 @@ describe('resource accounts', () => {
       client.v1.accounts.getNonTradeActivities(
         0,
         {
-          activity_type: ['money_movement'],
+          activity_type: ['MONEY_MOVEMENT'],
           from: '2019-12-27T18:11:19.117Z',
           page_size: 1,
           page_token: 'U3RhaW5sZXNzIHJvY2tz',
