@@ -929,7 +929,8 @@ export interface OrderPreviewAmount {
 
   /**
    * Total cash impact of the order after estimated fees and commissions:
-   * `gross_amount` with `fees.total` applied.
+   * `gross_amount` with `fees.total` applied. For an order that receives cash, a
+   * negative value means its estimated fees exceed what it receives.
    */
   net_amount: string;
 
