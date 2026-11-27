@@ -57,7 +57,9 @@ export interface NewsInstrument {
  */
 export interface NewsItem {
   /**
-   * Instruments associated with this news item.
+   * Instruments associated with this news item. The requested instrument is listed
+   * too when the item matched it through another share class or cross-listing of the
+   * same issuer.
    */
   instruments: Array<NewsInstrument>;
 
@@ -135,7 +137,8 @@ export interface NewsGetNewsParams {
   include_publishers?: string;
 
   /**
-   * Comma-delimited instrument identifiers to filter by.
+   * Comma-delimited instrument identifiers to filter by. Matches include news tagged
+   * to the other share classes and cross-listings of the same issuer.
    */
   instrument_ids?: Array<string>;
 
